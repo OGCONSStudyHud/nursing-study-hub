@@ -249,6 +249,20 @@ function openBiology() {
 }
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+    const SUPABASE_URL =
+        "https://bvetmmvpdotifusjkywd.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
+</script>
 </body>
 </html>
