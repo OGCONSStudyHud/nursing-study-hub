@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGCONS Study Hub - Admin</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: #0b5ed7;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 6px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd3df;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 13px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #0b5ed7;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .logout {
+            background: #dc3545;
+            float: right;
+            margin-top: -45px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏥 OGCONS Study Hub</h1>
+    <p>Admin Dashboard</p>
+    <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>➕ Add New Question</h2>
+
+        <label>Subject</label>
+        <select id="subject">
+            <option value="Biology">Biology</option>
+            <option value="Anatomy">Anatomy</option>
+            <option value="Physiology">Physiology</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Microbiology">Microbiology</option>
+            <option value="Pharmacology">Pharmacology</option>
+            <option value="Nursing Practice">Nursing Practice</option>
+        </select>
+
+        <label>Question</label>
+        <textarea id="question" placeholder="Enter your question"></textarea>
+
+        <label>Option A</label>
+        <input id="option_a" type="text" placeholder="Enter option A">
+
+        <label>Option B</label>
+        <input id="option_b" type="text" placeholder="Enter option B">
+
+        <label>Option C</label>
+        <input id="option_c" type="text" placeholder="Enter option C">
+
+        <label>Option D</label>
+        <input id="option_d" type="text" placeholder="Enter option D">
+
+        <label>Correct Answer</label>
+        <select id="correct_answer">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+
+        <label>Explanation</label>
+        <textarea id="explanation" placeholder="Enter explanation for the answer"></textarea>
+
+        <button onclick="addQuestion()">➕ Add Question</button>
+
+        <div id="message"></div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    const SUPABASE_URL =
+        "https://bvetmmvpdotifusjkywd.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
+
+
+    async function addQuestion() {
+
+        const subject =
+            document.getElementById("subject").value;
+
+        const question =
+            document.getElementById("question").value.trim();
+
+        const option_a =
+            document.getElementById("option_a").value.trim();
+
+        const option_b =
+            document.getElementById("option_b").value.trim();
+
+        const option_c =
+            document.getElementById("option_c").value.trim();
+
+        const option_d =
+            document.getElementById("option_d").value.trim();
+
+        const correct_answer =
+            document.getElementById("correct_answer").value;
+
+        const explanation =
+            document.getElementById("explanation").value.trim();
+
+
+        if (!question || !option_a || !option_b ||
+            !option_c || !option_d) {
+
+            document.getElementById("message").textContent =
+                "Please fill in all the question fields.";
+
+            return;
+        }
+
+
+        const { data, error } =
+            await supabaseClient
+                .from("questions")
+                .insert([
+                    {
+                        subject: subject,
+                        question: question,
+                        option_a: option_a,
+                        option_b: option_b,
+                        option_c: option_c,
+                        option_d: option_d,
+                        correct_answer: correct_answer,
+                        explanation: explanation
+                    }
+                ]);
+
+
+        if (error) {
+
+            document.getElementById("message").textContent =
+                "Error: " + error.message;
+
+            return;
+        }
+
+
+        document.getElementById("message").textContent =
+            "✅ Question added successfully!";
+
+
+        document.getElementById("question").value = "";
+        document.getElementById("option_a").value = "";
+        document.getElementById("option_b").value = "";
+        document.getElementById("option_c").value = "";
+        document.getElementById("option_d").value = "";
+        document.getElementById("explanation").value = "";
+    }
+
+
+    async function logout() {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
