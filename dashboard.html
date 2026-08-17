@@ -1,14 +1,19 @@
+```html id="7c4m0p"
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>OGCONS Study Hub - Dashboard</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -18,12 +23,25 @@
         body {
             font-family: Arial, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #e8fff2, #e8f4ff, #f5eaff);
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
+
             color: #163020;
         }
 
         header {
-            background: linear-gradient(135deg, #18a058, #2eb7a0);
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
+
             color: white;
             padding: 25px;
         }
@@ -31,9 +49,11 @@
         .header-content {
             max-width: 1100px;
             margin: auto;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             gap: 20px;
         }
 
@@ -45,24 +65,41 @@
         .logout {
             background: white;
             color: #18a058;
+
             border: none;
+
             padding: 10px 18px;
+
             border-radius: 20px;
+
             font-weight: bold;
+
             cursor: pointer;
+        }
+
+        .logout:hover {
+            background: #f0f0f0;
         }
 
         .container {
             max-width: 1100px;
+
             margin: auto;
+
             padding: 35px 20px;
         }
 
         .welcome {
             background: white;
+
             padding: 30px;
+
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
+
             margin-bottom: 30px;
         }
 
@@ -76,25 +113,42 @@
 
         .section-title {
             margin: 30px 0 18px;
+
             font-size: 24px;
         }
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 20px;
         }
 
         .card {
             background: white;
+
             padding: 25px;
+
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
+
             text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+
+            transition: 0.2s;
         }
 
         .icon {
             font-size: 42px;
+
             margin-bottom: 12px;
         }
 
@@ -104,16 +158,25 @@
 
         .card p {
             color: #617568;
+
             margin-bottom: 18px;
+
+            line-height: 1.5;
         }
 
         .card button {
             border: none;
+
             background: #18a058;
+
             color: white;
+
             padding: 11px 18px;
+
             border-radius: 20px;
+
             font-weight: bold;
+
             cursor: pointer;
         }
 
@@ -121,20 +184,32 @@
             background: #117d45;
         }
 
+        .coming-soon {
+            background: #9aa6a0 !important;
+
+            cursor: not-allowed !important;
+        }
+
         .stat {
             font-size: 32px;
+
             font-weight: bold;
+
             color: #18a058;
+
             margin: 10px 0;
         }
 
         .loading {
             text-align: center;
+
             padding: 50px;
+
             font-size: 18px;
         }
 
         @media (max-width: 750px) {
+
             .cards {
                 grid-template-columns: 1fr;
             }
@@ -142,11 +217,16 @@
             .header-content {
                 flex-direction: column;
             }
+
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -156,8 +236,12 @@
             🩺 OGCONS Study Hub
         </div>
 
-        <button class="logout" onclick="logout()">
+        <button
+            class="logout"
+            onclick="logout()">
+
             🚪 Logout
+
         </button>
 
     </div>
@@ -165,284 +249,494 @@
 </header>
 
 
-<div id="loading" class="loading">
+
+<div
+    id="loading"
+    class="loading">
+
     Checking your account...
+
 </div>
 
 
-<div id="dashboard" class="container" style="display:none;">
+
+<div
+    id="dashboard"
+    class="container"
+    style="display:none;">
+
+
+    <!-- WELCOME -->
 
     <div class="welcome">
 
         <h1>
-            Welcome, <span id="studentName">Student</span> 👋
+
+            Welcome,
+            <span id="studentName">
+                Student
+            </span>
+            👋
+
         </h1>
 
         <p>
-            Welcome to your personal OGCONS Study Hub.
-            Continue learning and prepare for your exams.
+
+            Welcome to your personal
+            OGCONS Study Hub.
+
+            Continue learning and
+            prepare for your exams.
+
         </p>
 
     </div>
 
 
+
+    <!-- COURSES -->
+
     <h2 class="section-title">
-        📚 My Courses 
+
+        📚 My Courses
+
     </h2>
+
 
     <div class="cards">
 
+
+        <!-- MICROBIOLOGY -->
+
         <div class="card">
 
-            <div class="icon">🧬</div>
+            <div class="icon">
+                🦠
+            </div>
 
-            <h3>Biology</h3>
+            <h3>
+                Microbiology
+            </h3>
 
             <p>
-                Review biology concepts with interactive flashcards.
+
+                Study microorganisms,
+                infectious diseases and
+                important microbiology
+                concepts.
+
             </p>
 
-            <button onclick="openBiology()">
-                Study Biology
+            <button
+                onclick="openMicrobiology()">
+
+                Open Course
+
             </button>
 
         </div>
 
 
+
+        <!-- ANATOMY & PHYSIOLOGY -->
+
         <div class="card">
 
-            <div class="icon">🫀</div>
+            <div class="icon">
+                🫀
+            </div>
 
-            <h3>Anatomy</h3>
+            <h3>
+                Anatomy & Physiology
+            </h3>
 
             <p>
-                Learn body structures and organs.
+
+                Study body structures,
+                organs and how the
+                human body functions.
+
             </p>
 
-            <button>
+            <button
+                class="coming-soon">
+
                 Coming Soon
+
             </button>
 
         </div>
 
+
+
+        <!-- PHARMACOLOGY -->
 
         <div class="card">
 
-            <div class="icon">🫁</div>
+            <div class="icon">
+                💊
+            </div>
 
-            <h3>Physiology</h3>
+            <h3>
+                Pharmacology
+            </h3>
 
             <p>
-                Understand how the body functions.
+
+                Study medications,
+                drug classifications,
+                actions and uses.
+
             </p>
 
-            <button>
+            <button
+                class="coming-soon">
+
                 Coming Soon
+
             </button>
 
         </div>
 
+
+
+        <!-- MEDICAL SURGICAL -->
 
         <div class="card">
 
-            <div class="icon">💊</div>
+            <div class="icon">
+                🏥
+            </div>
 
-            <h3>Pharmacology</h3>
+            <h3>
+                Medical-Surgical Nursing
+            </h3>
 
             <p>
-                Study medications, actions and classifications.
+
+                Study common medical
+                and surgical conditions
+                and nursing care.
+
             </p>
 
-            <button>
+            <button
+                class="coming-soon">
+
                 Coming Soon
+
             </button>
 
         </div>
 
+
+
+        <!-- NUTRITION -->
 
         <div class="card">
 
-            <div class="icon">🦠</div>
+            <div class="icon">
+                🥗
+            </div>
 
-            <h3>Microbiology</h3>
+            <h3>
+                Nutrition
+            </h3>
 
             <p>
-                Study microorganisms and infectious diseases.
+
+                Review nutrients,
+                food, diet and
+                healthy living.
+
             </p>
 
-            <button>
+            <button
+                class="coming-soon">
+
                 Coming Soon
+
             </button>
 
         </div>
 
+
+
+        <!-- NURSING PRACTICE -->
 
         <div class="card">
 
-            <div class="icon">🥗</div>
+            <div class="icon">
+                👩‍⚕️
+            </div>
 
-            <h3>Nutrition</h3>
+            <h3>
+                Nursing Practice
+            </h3>
 
             <p>
-                Review nutrients, food and healthy living.
+
+                Practice important
+                nursing procedures,
+                skills and principles.
+
             </p>
 
-            <button>
+            <button
+                class="coming-soon">
+
                 Coming Soon
+
             </button>
 
         </div>
+
 
     </div>
 
 
+
+    <!-- PROGRESS -->
+
     <h2 class="section-title">
+
         📊 My Progress
+
     </h2>
 
 
     <div class="cards">
 
+
         <div class="card">
 
-            <div class="icon">📝</div>
+            <div class="icon">
+                📝
+            </div>
 
-            <h3>Quizzes Completed</h3>
+            <h3>
+                Quizzes Completed
+            </h3>
 
-            <div class="stat">0</div>
+            <div
+                class="stat"
+                id="quizCount">
+
+                0
+
+            </div>
 
             <p>
-                Your completed quizzes will appear here.
+
+                Your completed quizzes
+                will appear here.
+
             </p>
 
         </div>
 
 
+
         <div class="card">
 
-            <div class="icon">⭐</div>
+            <div class="icon">
+                ⭐
+            </div>
 
-            <h3>Average Score</h3>
+            <h3>
+                Average Score
+            </h3>
 
-            <div class="stat">0%</div>
+            <div
+                class="stat"
+                id="averageScore">
+
+                0%
+
+            </div>
 
             <p>
-                Your quiz average will appear here.
+
+                Your quiz average
+                will appear here.
+
             </p>
 
         </div>
 
 
+
         <div class="card">
 
-            <div class="icon">🏆</div>
+            <div class="icon">
+                🏆
+            </div>
 
-            <h3>Leaderboard</h3>
+            <h3>
+                Leaderboard
+            </h3>
 
             <p>
-                See your position among your classmates.
+
+                See your position
+                among your classmates.
+
             </p>
 
-            <button>
+            <button
+                class="coming-soon">
+
                 Coming Soon
+
             </button>
 
         </div>
 
+
     </div>
+
 
 </div>
 
 
+
 <script>
 
-    // ==========================================
-    // SUPABASE CONNECTION
-    // ==========================================
 
-    const SUPABASE_URL =
-        "https://bvetmmvpdotifusjkywd.supabase.co";
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
 
-    const SUPABASE_PUBLISHABLE_KEY =
-        "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
 
 
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
-        );
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
 
-    // ==========================================
-    // CHECK LOGIN
-    // ==========================================
+const supabaseClient =
+    window.supabase.createClient(
 
-    async function checkUser() {
+        SUPABASE_URL,
 
-        const {
-            data: { user }
-        } = await supabaseClient.auth.getUser();
+        SUPABASE_PUBLISHABLE_KEY
+
+    );
 
 
-        if (!user) {
 
-            window.location.href = "login.html";
+// ==========================================
+// CHECK LOGIN
+// ==========================================
 
-            return;
+async function checkUser() {
+
+
+    const {
+
+        data: {
+            user
+
         }
 
-
-        const name =
-            user.user_metadata?.full_name ||
-            user.email?.split("@")[0] ||
-            "Student";
-
-
-        document.getElementById("studentName")
-            .textContent = name;
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
 
 
-        document.getElementById("loading")
-            .style.display = "none";
 
+    if (!user) {
 
-        document.getElementById("dashboard")
-            .style.display = "block";
-
-    }
-
-
-    // ==========================================
-    // OPEN BIOLOGY
-    // ==========================================
-
-    function openBiology() {
 
         window.location.href =
-            "biology-flashcards.html";
+            "index.html";
+
+
+        return;
 
     }
 
 
-    // ==========================================
-    // LOGOUT
-    // ==========================================
 
-    async function logout() {
+    const name =
 
-        await supabaseClient.auth.signOut();
+        user.user_metadata?.full_name ||
 
-        window.location.href = "login.html";
+        user.email?.split("@")[0] ||
 
-    }
+        "Student";
 
 
-    // CHECK USER WHEN PAGE LOADS
 
-    checkUser();
+    document
+        .getElementById("studentName")
+        .textContent = name;
+
+
+
+    document
+        .getElementById("loading")
+        .style.display = "none";
+
+
+
+    document
+        .getElementById("dashboard")
+        .style.display = "block";
+
+
+}
+
+
+
+// ==========================================
+// OPEN MICROBIOLOGY
+// ==========================================
+
+function openMicrobiology() {
+
+
+    window.location.href =
+        "microbiology-flashcards.html";
+
+
+}
+
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+async function logout() {
+
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+
+    window.location.href =
+        "index.html";
+
+
+}
+
+
+
+// ==========================================
+// START
+// ==========================================
+
+checkUser();
+
 
 </script>
 
+
 </body>
+
 </html>
+```
