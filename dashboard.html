@@ -729,9 +729,95 @@ async function logout() {
 // ==========================================
 // START
 // ==========================================
+// ==========================================
+// LOAD QUIZ PROGRESS
+// ==========================================
 
+async function loadQuizProgress() {
+
+    const {
+        data: {
+            user
+        }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("quiz_results")
+        .select("percentage")
+        .eq("user_id", user.id);
+
+
+    if (error) {
+
+        console.error(
+            "Unable to load quiz progress:",
+            error.message
+        );
+
+        return;
+    }
+
+
+    const results = data || [];
+
+
+    // Number of quizzes completed
+
+    document
+        .getElementById("quizCount")
+        .textContent =
+        results.length;
+
+
+    // Average score
+
+    if (results.length === 0) {
+
+        document
+            .getElementById("averageScore")
+            .textContent =
+            "0%";
+
+        return;
+    }
+
+
+    const totalPercentage =
+        results.reduce(
+            function(total, result) {
+
+                return total +
+                    Number(result.percentage || 0);
+
+            },
+            0
+        );
+
+
+    const average =
+        Math.round(
+            totalPercentage /
+            results.length
+        );
+
+
+    document
+        .getElementById("averageScore")
+        .textContent =
+        average + "%";
+
+}
 checkUser();
-
+loadQuizProgress();
 
 </script>
 
