@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OGCONS Study Hub</title>
+<title>OGCONS Study Hub - Register</title>
 
 <style>
 * {
@@ -18,118 +19,154 @@ body {
     min-height: 100vh;
     background: linear-gradient(135deg, #e8fff2, #e8f4ff, #f5eaff);
     color: #163020;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
     background: linear-gradient(135deg, #18a058, #2eb7a0);
     color: white;
     text-align: center;
-    padding: 45px 20px;
-}
-
-header h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 18px;
-}
-
-.container {
-    max-width: 1100px;
-    margin: auto;
     padding: 35px 20px;
 }
 
-.welcome {
-    text-align: center;
-    margin-bottom: 35px;
-}
-
-.welcome h2 {
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
-.welcome p {
-    color: #527060;
-}
-
-.section-title {
-    margin: 30px 0 18px;
-    font-size: 24px;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.icon {
-    font-size: 45px;
-    margin-bottom: 12px;
-}
-
-.card h3 {
+header h1 {
+    font-size: 38px;
     margin-bottom: 8px;
 }
 
-.card p {
-    color: #617568;
-    margin-bottom: 18px;
+header p {
+    font-size: 17px;
 }
 
-button {
+.container {
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.auth-card {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 28px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #617568;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccd8d0;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #18a058;
+}
+
+.main-button {
+    width: 100%;
     border: none;
     background: #18a058;
     color: white;
-    padding: 12px 20px;
-    border-radius: 25px;
+    padding: 14px;
+    border-radius: 10px;
     font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
+    margin-top: 24px;
 }
 
-button:hover {
+.main-button:hover {
     background: #117d45;
 }
 
-.login {
-    background: #163020;
-    color: white;
+.switch {
+    text-align: center;
+    margin-top: 20px;
+    color: #617568;
 }
 
-.login:hover {
-    background: #244d35;
+.switch button {
+    border: none;
+    background: none;
+    color: #18a058;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.message {
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.success {
+    background: #e8fff2;
+    color: #117d45;
+}
+
+.error {
+    background: #fff0f0;
+    color: #c62828;
+}
+
+.features {
+    margin-top: 25px;
+    display: grid;
+    gap: 10px;
+}
+
+.feature {
+    background: #f7faf8;
+    padding: 12px;
+    border-radius: 9px;
+    text-align: center;
+    color: #527060;
 }
 
 footer {
     text-align: center;
-    padding: 30px;
+    padding: 25px;
     color: #527060;
 }
 
-@media (max-width: 750px) {
-    .cards {
-        grid-template-columns: 1fr;
+.hidden {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 30px;
     }
 
-    header h1 {
-        font-size: 32px;
+    .auth-card {
+        padding: 25px;
     }
 }
 </style>
@@ -144,94 +181,129 @@ footer {
 
 <div class="container">
 
-    <div class="welcome">
-        <h2>Welcome to OGCONS Study Hub 👋</h2>
-        <p>
-            Study smarter, practice more, and prepare better for your exams.
+    <!-- REGISTRATION -->
+    <div class="auth-card" id="registerCard">
+
+        <h2>👋 Create Your Account</h2>
+
+        <p class="subtitle">
+            Join OGCONS Study Hub and start preparing for your exams.
         </p>
-    </div>
 
-    <h2 class="section-title">📚 Subjects</h2>
+        <label for="fullName">Full Name</label>
 
-    <div class="cards">
-        <div class="icon">🦠</div>
-    <h3>Microbiology</h3>
-    <p>Study microorganisms and test your knowledge.</p>
-    <button onclick="openMicrobiology()">Open Microbiology</button>
+        <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your full name"
+        >
+
+        <label for="registerEmail">Email Address</label>
+
+        <input
+            type="email"
+            id="registerEmail"
+            placeholder="Enter your email"
+        >
+
+        <label for="registerPassword">Password</label>
+
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Create a password"
+        >
+
+        <label for="confirmPassword">Confirm Password</label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm your password"
+        >
+
+        <button
+            class="main-button"
+            onclick="registerUser()">
+            Create Account
+        </button>
+
+        <div
+            id="registerMessage"
+            class="message">
         </div>
 
-        <div class="card">
-            <div class="icon">🫀</div>
-            <h3>Anatomy</h3>
-            <p>Learn about body structures and organs.</p>
-            <button>Coming Soon</button>
+        <div class="switch">
+            Already have an account?
+            <button onclick="showLogin()">
+                Login
+            </button>
         </div>
 
-        <div class="card">
-            <div class="icon">🫁</div>
-            <h3>Physiology</h3>
-            <p>Understand how the human body functions.</p>
-            <button>Coming Soon</button>
-        </div>
+        <div class="features">
 
-        <div class="card">
-            <div class="icon">💊</div>
-            <h3>Pharmacology</h3>
-            <p>Practice drugs, classifications and actions.</p>
-            <button>Coming Soon</button>
-        </div>
+            <div class="feature">
+                📚 Access your courses
+            </div>
 
-        <div class="card">
-            <div class="icon">🦠</div>
-            <h3>Microbiology</h3>
-            <p>Study microorganisms and infectious diseases.</p>
-            <button>Coming Soon</button>
-        </div>
+            <div class="feature">
+                📝 Practice questions and quizzes
+            </div>
 
-        <div class="card">
-            <div class="icon">🥗</div>
-            <h3>Nutrition</h3>
-            <p>Review nutrients, food and healthy living.</p>
-            <button>Coming Soon</button>
-        </div>
+            <div class="feature">
+                📊 Track your learning progress
+            </div>
 
-    </div>
-
-    <h2 class="section-title">🧠 Learning Tools</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="icon">🃏</div>
-            <h3>Flashcards</h3>
-            <p>Review important topics using interactive cards.</p>
-            <button onclick="openMicrobiology()">Start Studying</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">📝</div>
-            <h3>Quizzes</h3>
-            <p>Test yourself with practice questions.</p>
-            <button>Coming Soon</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">🏆</div>
-            <h3>Leaderboard</h3>
-            <p>See how you perform compared with your classmates.</p>
-            <button>Coming Soon</button>
         </div>
 
     </div>
 
-    <h2 class="section-title">🔐 Student Account</h2>
 
-    <div class="card">
-        <h3>Want to track your progress?</h3>
-        <p>Create an account and keep your scores in one place.</p>
-        <button class="login" onclick="window.location.href='login.html'">
-    Login / Register
-</button>
+    <!-- LOGIN -->
+    <div
+        class="auth-card hidden"
+        id="loginCard">
+
+        <h2>🔐 Welcome Back</h2>
+
+        <p class="subtitle">
+            Login to continue your studies.
+        </p>
+
+        <label for="loginEmail">Email Address</label>
+
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+        >
+
+        <label for="loginPassword">Password</label>
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+        >
+
+        <button
+            class="main-button"
+            onclick="loginUser()">
+            Login
+        </button>
+
+        <div
+            id="loginMessage"
+            class="message">
+        </div>
+
+        <div class="switch">
+            Don't have an account?
+            <button onclick="showRegister()">
+                Create Account
+            </button>
+        </div>
+
     </div>
 
 </div>
@@ -240,27 +312,275 @@ footer {
     © 2026 OGCONS Study Hub • Built for students
 </footer>
 
-<script>
 
-function  openMicrobiology() {
-    window.location.href = "microbiology-flashcards.html";
-}
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-    const SUPABASE_URL =
-        "https://bvetmmvpdotifusjkywd.supabase.co";
 
-    const SUPABASE_PUBLISHABLE_KEY =
-        "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
 
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+// Check whether the student is already logged in
+
+async function checkExistingLogin() {
+
+    const {
+        data: {
+            session
+        }
+    } = await supabaseClient.auth.getSession();
+
+    if (session) {
+
+        window.location.href = "dashboard.html";
+
+    }
+
+}
+
+checkExistingLogin();
+
+
+// Show registration
+
+function showRegister() {
+
+    document
+        .getElementById("registerCard")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("loginCard")
+        .classList.add("hidden");
+
+}
+
+
+// Show login
+
+function showLogin() {
+
+    document
+        .getElementById("registerCard")
+        .classList.add("hidden");
+
+    document
+        .getElementById("loginCard")
+        .classList.remove("hidden");
+
+}
+
+
+// Display message
+
+function showMessage(elementId, message, type) {
+
+    const element =
+        document.getElementById(elementId);
+
+    element.textContent = message;
+
+    element.className =
+        "message " + type;
+
+    element.style.display = "block";
+
+}
+
+
+// Register student
+
+async function registerUser() {
+
+    const fullName =
+        document
+            .getElementById("fullName")
+            .value
+            .trim();
+
+    const email =
+        document
+            .getElementById("registerEmail")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("registerPassword")
+            .value;
+
+    const confirmPassword =
+        document
+            .getElementById("confirmPassword")
+            .value;
+
+
+    if (!fullName || !email || !password || !confirmPassword) {
+
+        showMessage(
+            "registerMessage",
+            "Please fill in all fields.",
+            "error"
         );
+
+        return;
+    }
+
+
+    if (password.length < 6) {
+
+        showMessage(
+            "registerMessage",
+            "Password must be at least 6 characters.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (password !== confirmPassword) {
+
+        showMessage(
+            "registerMessage",
+            "Passwords do not match.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "registerMessage",
+        "Creating your account...",
+        "success"
+    );
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+
+                data: {
+                    full_name: fullName
+                },
+
+                emailRedirectTo:
+                    window.location.origin +
+                    "/dashboard.html"
+
+            }
+
+        });
+
+
+    if (error) {
+
+        showMessage(
+            "registerMessage",
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "registerMessage",
+        "Account created successfully! Please check your email and click the verification link.",
+        "success"
+    );
+
+}
+
+
+// Login student
+
+async function loginUser() {
+
+    const email =
+        document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+
+    if (!email || !password) {
+
+        showMessage(
+            "loginMessage",
+            "Please enter your email and password.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "loginMessage",
+        "Logging you in...",
+        "success"
+    );
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+    if (error) {
+
+        showMessage(
+            "loginMessage",
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
 </script>
+
 </body>
 </html>
+```
