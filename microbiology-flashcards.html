@@ -1244,20 +1244,17 @@ function previousQuestion() {
 // SHOW RESULT
 // ==========================================
 
-function showResult() {
-
+async function showResult() {
 
     document
         .getElementById("quizCard")
         .style.display =
         "none";
 
-
     document
         .getElementById("result")
         .style.display =
         "block";
-
 
 
     const total =
@@ -1270,7 +1267,6 @@ function showResult() {
         );
 
 
-
     document
         .getElementById("finalScore")
         .textContent =
@@ -1280,7 +1276,6 @@ function showResult() {
         total;
 
 
-
     document
         .getElementById("percentage")
         .textContent =
@@ -1288,6 +1283,68 @@ function showResult() {
         "Your score: " +
         percentage +
         "%";
+
+
+    // ==========================================
+    // GET CURRENT STUDENT
+    // ==========================================
+
+    const {
+        data: {
+            user
+        }
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        console.log(
+            "Student is not logged in."
+        );
+
+        return;
+    }
+
+
+    // ==========================================
+    // SAVE QUIZ RESULT TO SUPABASE
+    // ==========================================
+
+    const {
+        error: saveError
+    } =
+        await supabaseClient
+            .from("quiz_results")
+            .insert({
+
+                user_id: user.id,
+
+                course: "Microbiology",
+
+                score: score,
+
+                total_questions: total,
+
+                percentage: percentage
+
+            });
+
+
+    if (saveError) {
+
+        console.error(
+            "Could not save quiz result:",
+            saveError.message
+        );
+
+    } else {
+
+        console.log(
+            "Quiz result saved successfully."
+        );
+
+    }
 
 }
 
