@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,6 +121,17 @@
             margin-bottom: 20px;
 
             font-weight: bold;
+        }
+
+
+        .topic-name {
+            text-align: center;
+
+            color: #198754;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
         }
 
 
@@ -410,10 +420,10 @@
 
 
     <a
-        href="dashboard.html"
+        href="microbiology-topics.html"
         class="back">
 
-        ← Back to Courses
+        ← Back to Microbiology Topics
 
     </a>
 
@@ -422,7 +432,7 @@
     <div
         id="loading">
 
-        Loading Microbiology questions...
+        Loading questions...
 
     </div>
 
@@ -443,9 +453,9 @@
             No questions available yet.
         </h2>
 
-        <p>
-            Your lecturer/admin has not added
-            Microbiology questions.
+        <p id="emptyMessage">
+            Your lecturer/admin has not added questions
+            for this topic yet.
         </p>
 
     </div>
@@ -470,6 +480,13 @@
                 Test your knowledge
             </p>
 
+        </div>
+
+
+
+        <div
+            class="topic-name"
+            id="topicName">
         </div>
 
 
@@ -659,7 +676,10 @@
 
         <p>
             You have completed the
-            Microbiology quiz.
+            <span id="resultTopic">
+                Microbiology
+            </span>
+            quiz.
         </p>
 
 
@@ -689,10 +709,10 @@
 
 
         <button
-            onclick="window.location.href='dashboard.html'"
+            onclick="window.location.href='microbiology-topics.html'"
             style="background:#6c757d;">
 
-            ← Back to Courses
+            ← Back to Topics
 
         </button>
 
@@ -755,6 +775,21 @@ let score = 0;
 let answered = false;
 
 
+// ==========================================
+// GET SELECTED TOPIC FROM URL
+// ==========================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const selectedTopic =
+    urlParams.get("topic") ||
+    "Introduction to Microbiology";
+
+
 
 // ==========================================
 // LOAD QUESTIONS
@@ -780,6 +815,21 @@ async function loadQuestions() {
 
 
 
+    document
+        .getElementById("topicName")
+        .textContent =
+        "Topic: " +
+        selectedTopic;
+
+
+
+    document
+        .getElementById("resultTopic")
+        .textContent =
+        selectedTopic;
+
+
+
     const {
 
         data: {
@@ -797,7 +847,7 @@ async function loadQuestions() {
     if (!user) {
 
         window.location.href =
-            "index.html";
+            "login.html";
 
         return;
 
@@ -818,6 +868,8 @@ async function loadQuestions() {
             .select("*")
 
             .eq("course", "Microbiology")
+
+            .eq("topic", selectedTopic)
 
             .order("created_at", {
                 ascending: true
@@ -855,6 +907,17 @@ async function loadQuestions() {
 
         empty.style.display =
             "block";
+
+
+        document
+            .getElementById("emptyMessage")
+            .textContent =
+
+            "There are currently no " +
+            selectedTopic +
+            " questions available. " +
+            "Your lecturer/admin can add them from the Admin Dashboard.";
+
 
         return;
 
@@ -1116,9 +1179,13 @@ function selectAnswer(selected) {
         );
 
 
-        correctButton.classList.add(
-            "correct"
-        );
+        if (correctButton) {
+
+            correctButton.classList.add(
+                "correct"
+            );
+
+        }
 
 
         const feedback =
@@ -1246,10 +1313,12 @@ function previousQuestion() {
 
 async function showResult() {
 
+
     document
         .getElementById("quizCard")
         .style.display =
         "none";
+
 
     document
         .getElementById("result")
@@ -1294,7 +1363,9 @@ async function showResult() {
             user
         }
     } =
-        await supabaseClient.auth.getUser();
+        await supabaseClient
+            .auth
+            .getUser();
 
 
     if (!user) {
@@ -1304,18 +1375,21 @@ async function showResult() {
         );
 
         return;
+
     }
 
 
     // ==========================================
-    // SAVE QUIZ RESULT TO SUPABASE
+    // SAVE QUIZ RESULT
     // ==========================================
 
     const {
         error: saveError
     } =
         await supabaseClient
+
             .from("quiz_results")
+
             .insert({
 
                 user_id: user.id,
@@ -1338,7 +1412,9 @@ async function showResult() {
             saveError.message
         );
 
-    } else {
+    }
+
+    else {
 
         console.log(
             "Quiz result saved successfully."
@@ -1395,4 +1471,3 @@ loadQuestions();
 </body>
 
 </html>
-```
