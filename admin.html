@@ -425,7 +425,214 @@
         <!-- ADD QUESTION -->
 
         <button
-            onclick="addQuestion()">
+            onclick="async function addQuestion() {
+
+    const message =
+        document.getElementById("message");
+
+    // ==========================================
+    // CHECK IF ADMIN IS LOGGED IN
+    // ==========================================
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !user) {
+
+        message.textContent =
+            "❌ You must be logged in before adding questions.";
+
+        message.style.color =
+            "#dc3545";
+
+        setTimeout(function() {
+
+            window.location.href = "login.html";
+
+        }, 1500);
+
+        return;
+    }
+
+
+    // ==========================================
+    // GET FORM VALUES
+    // ==========================================
+
+    const course =
+        document
+            .getElementById("course")
+            .value;
+
+
+    const topic =
+        document
+            .getElementById("topic")
+            .value;
+
+
+    const question =
+        document
+            .getElementById("question")
+            .value
+            .trim();
+
+
+    const option_a =
+        document
+            .getElementById("option_a")
+            .value
+            .trim();
+
+
+    const option_b =
+        document
+            .getElementById("option_b")
+            .value
+            .trim();
+
+
+    const option_c =
+        document
+            .getElementById("option_c")
+            .value
+            .trim();
+
+
+    const option_d =
+        document
+            .getElementById("option_d")
+            .value
+            .trim();
+
+
+    const correct_answer =
+        document
+            .getElementById("correct_answer")
+            .value;
+
+
+    const explanation =
+        document
+            .getElementById("explanation")
+            .value
+            .trim();
+
+
+    // ==========================================
+    // VALIDATION
+    // ==========================================
+
+    if (
+        !question ||
+        !option_a ||
+        !option_b ||
+        !option_c ||
+        !option_d
+    ) {
+
+        message.textContent =
+            "⚠️ Please fill in all the question fields.";
+
+        message.style.color =
+            "#dc3545";
+
+        return;
+    }
+
+
+    // ==========================================
+    // INSERT QUESTION
+    // ==========================================
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("questions")
+            .insert([
+
+                {
+                    course: course,
+                    topic: topic,
+                    question: question,
+                    option_a: option_a,
+                    option_b: option_b,
+                    option_c: option_c,
+                    option_d: option_d,
+                    correct_answer: correct_answer,
+                    explanation: explanation
+                }
+
+            ]);
+
+
+    // ==========================================
+    // HANDLE ERROR
+    // ==========================================
+
+    if (error) {
+
+        console.error(
+            "Question insert error:",
+            error
+        );
+
+        message.textContent =
+            "❌ Error: " +
+            error.message;
+
+        message.style.color =
+            "#dc3545";
+
+        return;
+    }
+
+
+    // ==========================================
+    // SUCCESS
+    // ==========================================
+
+    message.textContent =
+        "✅ Question added successfully!";
+
+    message.style.color =
+        "#198754";
+
+
+    // ==========================================
+    // CLEAR FORM
+    // ==========================================
+
+    document
+        .getElementById("question")
+        .value = "";
+
+    document
+        .getElementById("option_a")
+        .value = "";
+
+    document
+        .getElementById("option_b")
+        .value = "";
+
+    document
+        .getElementById("option_c")
+        .value = "";
+
+    document
+        .getElementById("option_d")
+        .value = "";
+
+    document
+        .getElementById("explanation")
+        .value = "";
+
+}">
 
             ➕ Add Question
 
