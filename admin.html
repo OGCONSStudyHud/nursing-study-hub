@@ -352,7 +352,92 @@ const supabaseClient =
         SUPABASE_PUBLISHABLE_KEY
     );
 
+// ==========================================
+// CHECK ADMIN ACCESS
+// ==========================================
 
+async function checkAdminAccess() {
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    // User is not logged in
+    if (userError || !user) {
+
+        window.location.href = "index.html";
+
+        return false;
+
+    }
+
+
+    // Check if user's ID exists in admins table
+    const {
+        data: admin,
+        error: adminError
+    } = await supabaseClient
+        .from("admins")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+
+    // Database error
+    if (adminError) {
+
+        console.error(
+            "Admin check error:",
+            adminError.message
+        );
+
+        document.body.innerHTML = `
+            <div style="
+                text-align:center;
+                padding:60px 20px;
+                font-family:Arial;
+            ">
+                <h2>⚠️ Unable to verify admin access</h2>
+                <p>Please try again later.</p>
+            </div>
+        `;
+
+        return false;
+
+    }
+
+
+    // User is not an admin
+    if (!admin) {
+
+        document.body.innerHTML = `
+            <div style="
+                text-align:center;
+                padding:60px 20px;
+                font-family:Arial;
+            ">
+                <h2>🚫 Access Denied</h2>
+                <p>You do not have permission to access the Admin Dashboard.</p>
+                <br>
+                <a href="dashboard.html">
+                    ← Return to Dashboard
+                </a>
+            </div>
+        `;
+
+        return false;
+
+    }
+
+
+    // User is an admin
+    console.log("✅ Admin access granted.");
+
+    return true;
+
+}
 // ==========================================
 // ADD QUESTION
 // ==========================================
@@ -579,7 +664,11 @@ async function addQuestion() {
 // LOGOUT
 // ==========================================
 
-async function logout() {
+async function // ==========================================
+// START ADMIN DASHBOARD
+// ==========================================
+
+checkAdminAccess(); logout() {
 
     await supabaseClient
         .auth
