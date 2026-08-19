@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,14 +6,9 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        OGCONS Study Hub - Admin
-    </title>
-
+    <title>OGCONS Study Hub - Admin</title>
 
     <style>
 
@@ -20,176 +16,112 @@
             box-sizing: border-box;
         }
 
-
         body {
             margin: 0;
-
             font-family: Arial, sans-serif;
-
             background: #f4f7fb;
-
             color: #172033;
         }
 
-
         header {
             background: #0b5ed7;
-
             color: white;
-
             padding: 20px;
         }
 
-
         header h1 {
             margin: 0;
-
             font-size: 24px;
         }
-
 
         header p {
             margin: 6px 0 0;
         }
 
-
         .container {
             max-width: 900px;
-
             margin: 30px auto;
-
             padding: 20px;
         }
 
-
         .card {
             background: white;
-
             padding: 25px;
-
             border-radius: 14px;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
-
 
         label {
             display: block;
-
             font-weight: bold;
-
             margin-top: 15px;
-
             margin-bottom: 6px;
         }
-
 
         input,
         textarea,
         select {
-
             width: 100%;
-
             padding: 12px;
-
-            border:
-                1px solid #ccd3df;
-
+            border: 1px solid #ccd3df;
             border-radius: 8px;
-
             font-size: 15px;
-
         }
-
 
         textarea {
-
             min-height: 100px;
-
             resize: vertical;
-
         }
-
 
         button {
-
             margin-top: 20px;
-
             padding: 13px 22px;
-
             border: none;
-
             border-radius: 8px;
-
             background: #0b5ed7;
-
             color: white;
-
             font-size: 16px;
-
             font-weight: bold;
-
             cursor: pointer;
-
         }
-
 
         button:hover {
-
             opacity: 0.9;
-
         }
 
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
 
         #message {
-
             margin-top: 15px;
-
             font-weight: bold;
-
         }
-
 
         .logout {
-
             background: #dc3545;
-
             float: right;
-
             margin-top: -45px;
-
         }
 
-
         .topic-help {
-
             margin-top: 6px;
-
             color: #6c757d;
-
             font-size: 13px;
-
         }
 
     </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
-    <h1>
-        🏥 OGCONS Study Hub
-    </h1>
+    <h1>🏥 OGCONS Study Hub</h1>
 
-    <p>
-        Admin Dashboard
-    </p>
+    <p>Admin Dashboard</p>
 
     <button
         class="logout"
@@ -202,24 +134,16 @@
 </header>
 
 
-
 <div class="container">
-
 
     <div class="card">
 
-
-        <h2>
-            ➕ Add New Question
-        </h2>
+        <h2>➕ Add New Question</h2>
 
 
         <!-- COURSE -->
 
-        <label>
-            Course
-        </label>
-
+        <label>Course</label>
 
         <select id="course">
 
@@ -258,13 +182,9 @@
         </select>
 
 
-
         <!-- TOPIC -->
 
-        <label>
-            Topic
-        </label>
-
+        <label>Topic</label>
 
         <select id="topic">
 
@@ -310,21 +230,14 @@
 
         </select>
 
-
         <div class="topic-help">
-
             Select the topic where this question belongs.
-
         </div>
-
 
 
         <!-- QUESTION -->
 
-        <label>
-            Question
-        </label>
-
+        <label>Question</label>
 
         <textarea
             id="question"
@@ -332,12 +245,9 @@
         </textarea>
 
 
+        <!-- OPTION A -->
 
-        <!-- OPTIONS -->
-
-        <label>
-            Option A
-        </label>
+        <label>Option A</label>
 
         <input
             id="option_a"
@@ -345,10 +255,9 @@
             placeholder="Enter option A">
 
 
+        <!-- OPTION B -->
 
-        <label>
-            Option B
-        </label>
+        <label>Option B</label>
 
         <input
             id="option_b"
@@ -356,10 +265,9 @@
             placeholder="Enter option B">
 
 
+        <!-- OPTION C -->
 
-        <label>
-            Option C
-        </label>
+        <label>Option C</label>
 
         <input
             id="option_c"
@@ -367,10 +275,9 @@
             placeholder="Enter option C">
 
 
+        <!-- OPTION D -->
 
-        <label>
-            Option D
-        </label>
+        <label>Option D</label>
 
         <input
             id="option_d"
@@ -378,42 +285,26 @@
             placeholder="Enter option D">
 
 
-
         <!-- CORRECT ANSWER -->
 
-        <label>
-            Correct Answer
-        </label>
-
+        <label>Correct Answer</label>
 
         <select id="correct_answer">
 
-            <option value="A">
-                A
-            </option>
+            <option value="A">A</option>
 
-            <option value="B">
-                B
-            </option>
+            <option value="B">B</option>
 
-            <option value="C">
-                C
-            </option>
+            <option value="C">C</option>
 
-            <option value="D">
-                D
-            </option>
+            <option value="D">D</option>
 
         </select>
 
 
-
         <!-- EXPLANATION -->
 
-        <label>
-            Explanation
-        </label>
-
+        <label>Explanation</label>
 
         <textarea
             id="explanation"
@@ -421,23 +312,69 @@
         </textarea>
 
 
-
-        <!-- ADD QUESTION -->
+        <!-- ADD QUESTION BUTTON -->
 
         <button
-            onclick="async function addQuestion() {
+            id="addQuestionButton"
+            onclick="addQuestion()">
+
+            ➕ Add Question
+
+        </button>
+
+
+        <div id="message"></div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
+
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+// ==========================================
+// ADD QUESTION
+// ==========================================
+
+async function addQuestion() {
 
     const message =
         document.getElementById("message");
 
+    const button =
+        document.getElementById("addQuestionButton");
+
+
     // ==========================================
-    // CHECK IF ADMIN IS LOGGED IN
+    // CHECK LOGIN
     // ==========================================
 
     const {
         data: { user },
         error: userError
-    } = await supabaseClient.auth.getUser();
+    } =
+        await supabaseClient.auth.getUser();
 
 
     if (userError || !user) {
@@ -448,31 +385,19 @@
         message.style.color =
             "#dc3545";
 
-        setTimeout(function() {
-
-            window.location.href = "login.html";
-
-        }, 1500);
-
         return;
     }
 
 
     // ==========================================
-    // GET FORM VALUES
+    // GET VALUES
     // ==========================================
 
     const course =
-        document
-            .getElementById("course")
-            .value;
-
+        document.getElementById("course").value;
 
     const topic =
-        document
-            .getElementById("topic")
-            .value;
-
+        document.getElementById("topic").value;
 
     const question =
         document
@@ -480,13 +405,11 @@
             .value
             .trim();
 
-
     const option_a =
         document
             .getElementById("option_a")
             .value
             .trim();
-
 
     const option_b =
         document
@@ -494,13 +417,11 @@
             .value
             .trim();
 
-
     const option_c =
         document
             .getElementById("option_c")
             .value
             .trim();
-
 
     const option_d =
         document
@@ -508,12 +429,10 @@
             .value
             .trim();
 
-
     const correct_answer =
         document
             .getElementById("correct_answer")
             .value;
-
 
     const explanation =
         document
@@ -545,11 +464,20 @@
 
 
     // ==========================================
-    // INSERT QUESTION
+    // PREVENT DOUBLE CLICK
+    // ==========================================
+
+    button.disabled = true;
+
+    button.textContent =
+        "Saving question...";
+
+
+    // ==========================================
+    // INSERT INTO SUPABASE
     // ==========================================
 
     const {
-        data,
         error
     } =
         await supabaseClient
@@ -558,14 +486,23 @@
 
                 {
                     course: course,
+
                     topic: topic,
+
                     question: question,
+
                     option_a: option_a,
+
                     option_b: option_b,
+
                     option_c: option_c,
+
                     option_d: option_d,
+
                     correct_answer: correct_answer,
+
                     explanation: explanation
+
                 }
 
             ]);
@@ -589,6 +526,11 @@
         message.style.color =
             "#dc3545";
 
+        button.disabled = false;
+
+        button.textContent =
+            "➕ Add Question";
+
         return;
     }
 
@@ -608,282 +550,29 @@
     // CLEAR FORM
     // ==========================================
 
-    document
-        .getElementById("question")
-        .value = "";
+    document.getElementById("question").value = "";
 
-    document
-        .getElementById("option_a")
-        .value = "";
+    document.getElementById("option_a").value = "";
 
-    document
-        .getElementById("option_b")
-        .value = "";
+    document.getElementById("option_b").value = "";
 
-    document
-        .getElementById("option_c")
-        .value = "";
+    document.getElementById("option_c").value = "";
 
-    document
-        .getElementById("option_d")
-        .value = "";
+    document.getElementById("option_d").value = "";
 
-    document
-        .getElementById("explanation")
-        .value = "";
-
-}">
-
-            ➕ Add Question
-
-        </button>
-
-
-        <div id="message"></div>
-
-
-    </div>
-
-</div>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
-
-
-<script>
-
-
-// ==========================================
-// SUPABASE CONNECTION
-// ==========================================
-
-const SUPABASE_URL =
-    "https://bvetmmvpdotifusjkywd.supabase.co";
-
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
-
-
-const supabaseClient =
-    window.supabase.createClient(
-
-        SUPABASE_URL,
-
-        SUPABASE_PUBLISHABLE_KEY
-
-    );
-
-
-
-// ==========================================
-// ADD QUESTION
-// ==========================================
-
-async function addQuestion() {
-
-
-    const course =
-        document
-            .getElementById("course")
-            .value;
-
-
-    const topic =
-        document
-            .getElementById("topic")
-            .value;
-
-
-    const question =
-        document
-            .getElementById("question")
-            .value
-            .trim();
-
-
-    const option_a =
-        document
-            .getElementById("option_a")
-            .value
-            .trim();
-
-
-    const option_b =
-        document
-            .getElementById("option_b")
-            .value
-            .trim();
-
-
-    const option_c =
-        document
-            .getElementById("option_c")
-            .value
-            .trim();
-
-
-    const option_d =
-        document
-            .getElementById("option_d")
-            .value
-            .trim();
-
-
-    const correct_answer =
-        document
-            .getElementById("correct_answer")
-            .value;
-
-
-    const explanation =
-        document
-            .getElementById("explanation")
-            .value
-            .trim();
-
-
-    const message =
-        document
-            .getElementById("message");
-
+    document.getElementById("explanation").value = "";
 
 
     // ==========================================
-    // VALIDATION
+    // RESTORE BUTTON
     // ==========================================
 
-    if (
-        !question ||
-        !option_a ||
-        !option_b ||
-        !option_c ||
-        !option_d
-    ) {
+    button.disabled = false;
 
-        message.textContent =
-            "⚠️ Please fill in all the question fields.";
-
-        message.style.color =
-            "#dc3545";
-
-        return;
-
-    }
-
-
-
-    // ==========================================
-    // SAVE TO SUPABASE
-    // ==========================================
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-
-            .from("questions")
-
-            .insert([
-
-                {
-
-                    course: course,
-
-                    topic: topic,
-
-                    question: question,
-
-                    option_a: option_a,
-
-                    option_b: option_b,
-
-                    option_c: option_c,
-
-                    option_d: option_d,
-
-                    correct_answer:
-                        correct_answer,
-
-                    explanation:
-                        explanation
-
-                }
-
-            ]);
-
-
-
-    // ==========================================
-    // ERROR
-    // ==========================================
-
-    if (error) {
-
-        message.textContent =
-            "❌ Error: " +
-            error.message;
-
-        message.style.color =
-            "#dc3545";
-
-        return;
-
-    }
-
-
-
-    // ==========================================
-    // SUCCESS
-    // ==========================================
-
-    message.textContent =
-        "✅ Question added successfully!";
-
-
-    message.style.color =
-        "#198754";
-
-
-
-    // ==========================================
-    // CLEAR FORM
-    // ==========================================
-
-    document
-        .getElementById("question")
-        .value = "";
-
-
-    document
-        .getElementById("option_a")
-        .value = "";
-
-
-    document
-        .getElementById("option_b")
-        .value = "";
-
-
-    document
-        .getElementById("option_c")
-        .value = "";
-
-
-    document
-        .getElementById("option_d")
-        .value = "";
-
-
-    document
-        .getElementById("explanation")
-        .value = "";
+    button.textContent =
+        "➕ Add Question";
 
 }
-
 
 
 // ==========================================
@@ -892,17 +581,14 @@ async function addQuestion() {
 
 async function logout() {
 
-
     await supabaseClient
         .auth
         .signOut();
-
 
     window.location.href =
         "index.html";
 
 }
-
 
 </script>
 
@@ -910,3 +596,4 @@ async function logout() {
 </body>
 
 </html>
+```
