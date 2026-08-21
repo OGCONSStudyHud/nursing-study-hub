@@ -5,9 +5,8 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>
         OGCONS Study Hub - Anatomy & Physiology Quiz
@@ -22,11 +21,18 @@
 
 
         body {
+
             margin: 0;
 
             font-family: Arial, sans-serif;
 
-            background: #f4f7fb;
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
 
             color: #172033;
         }
@@ -37,25 +43,35 @@
         ========================================== */
 
         header {
-            background: #0b5ed7;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
 
             color: white;
 
-            padding: 20px;
+            padding: 30px 20px;
 
             text-align: center;
         }
 
 
         header h1 {
+
             margin: 0;
 
-            font-size: 25px;
+            font-size: 28px;
         }
 
 
         header p {
-            margin: 7px 0 0;
+
+            margin: 8px 0 0;
+
+            font-size: 16px;
         }
 
 
@@ -64,6 +80,7 @@
         ========================================== */
 
         .container {
+
             max-width: 850px;
 
             margin: 30px auto;
@@ -77,15 +94,22 @@
         ========================================== */
 
         .back {
+
             display: inline-block;
 
             margin-bottom: 20px;
 
-            color: #0b5ed7;
+            color: #18a058;
 
             text-decoration: none;
 
             font-weight: bold;
+        }
+
+
+        .back:hover {
+
+            text-decoration: underline;
         }
 
 
@@ -94,14 +118,15 @@
         ========================================== */
 
         .card {
+
             background: white;
 
-            border-radius: 16px;
+            border-radius: 18px;
 
             padding: 30px;
 
             box-shadow:
-                0 5px 20px
+                0 8px 25px
                 rgba(0,0,0,0.08);
         }
 
@@ -111,25 +136,44 @@
         ========================================== */
 
         .course-title {
+
             text-align: center;
 
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
 
         .course-title h2 {
-            margin-bottom: 5px;
+
+            margin: 0 0 8px;
+
+            color: #163020;
+        }
+
+
+        .course-title p {
+
+            margin: 0;
+
+            color: #617568;
         }
 
 
         /* ==========================================
-           TOPIC
+           TOPIC NAME
         ========================================== */
 
         .topic-name {
+
             text-align: center;
 
-            color: #198754;
+            background: #e8fff2;
+
+            color: #16834a;
+
+            padding: 12px;
+
+            border-radius: 10px;
 
             font-weight: bold;
 
@@ -142,13 +186,14 @@
         ========================================== */
 
         .counter {
+
             text-align: center;
 
-            color: #666;
-
-            margin-bottom: 20px;
+            color: #667085;
 
             font-weight: bold;
+
+            margin-bottom: 10px;
         }
 
 
@@ -157,13 +202,14 @@
         ========================================== */
 
         .score {
+
             text-align: center;
 
-            color: #0b5ed7;
-
-            margin-bottom: 20px;
+            color: #18a058;
 
             font-weight: bold;
+
+            margin-bottom: 25px;
         }
 
 
@@ -172,7 +218,8 @@
         ========================================== */
 
         .question {
-            font-size: 22px;
+
+            font-size: 21px;
 
             font-weight: bold;
 
@@ -187,6 +234,7 @@
         ========================================== */
 
         .options {
+
             display: grid;
 
             gap: 12px;
@@ -194,6 +242,7 @@
 
 
         .option {
+
             width: 100%;
 
             text-align: left;
@@ -202,7 +251,7 @@
 
             border: 2px solid #d8dee8;
 
-            border-radius: 10px;
+            border-radius: 12px;
 
             padding: 16px;
 
@@ -215,18 +264,21 @@
 
 
         .option:hover {
-            background: #eef6ff;
 
-            border-color: #0b5ed7;
+            background: #eefaf4;
+
+            border-color: #18a058;
         }
 
 
         .option strong {
+
             margin-right: 8px;
         }
 
 
         .option.correct {
+
             background: #d1e7dd;
 
             border-color: #198754;
@@ -236,6 +288,7 @@
 
 
         .option.wrong {
+
             background: #f8d7da;
 
             border-color: #dc3545;
@@ -245,6 +298,7 @@
 
 
         .option.disabled {
+
             cursor: not-allowed;
         }
 
@@ -254,24 +308,29 @@
         ========================================== */
 
         .feedback {
+
             margin-top: 20px;
 
             padding: 18px;
 
-            border-radius: 10px;
+            border-radius: 12px;
 
             display: none;
+
+            font-weight: bold;
         }
 
 
-        .feedback.correct-feedback {
+        .correct-feedback {
+
             background: #d1e7dd;
 
             color: #0f5132;
         }
 
 
-        .feedback.wrong-feedback {
+        .wrong-feedback {
+
             background: #f8d7da;
 
             color: #842029;
@@ -283,21 +342,23 @@
         ========================================== */
 
         .answer {
+
             margin-top: 15px;
 
             padding: 18px;
 
             background: #eef6ff;
 
-            border-radius: 10px;
+            border-radius: 12px;
 
             display: none;
 
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
 
         .answer strong {
+
             color: #0b5ed7;
         }
 
@@ -307,20 +368,22 @@
         ========================================== */
 
         .buttons {
+
             display: flex;
 
             justify-content: space-between;
 
-            gap: 10px;
+            gap: 12px;
 
             margin-top: 25px;
         }
 
 
         button {
+
             border: none;
 
-            border-radius: 9px;
+            border-radius: 10px;
 
             padding: 13px 20px;
 
@@ -333,18 +396,21 @@
 
 
         .primary {
-            background: #0b5ed7;
+
+            background: #18a058;
 
             color: white;
         }
 
 
         .primary:hover {
-            background: #084ca8;
+
+            background: #117d45;
         }
 
 
         .secondary {
+
             background: #e9edf3;
 
             color: #172033;
@@ -352,6 +418,7 @@
 
 
         button:disabled {
+
             opacity: 0.5;
 
             cursor: not-allowed;
@@ -365,13 +432,23 @@
         #loading,
         #error,
         #empty {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
             text-align: center;
 
-            padding: 30px;
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
         }
 
 
         #error {
+
             color: #dc3545;
         }
 
@@ -381,6 +458,7 @@
         ========================================== */
 
         .result {
+
             text-align: center;
 
             display: none;
@@ -388,6 +466,7 @@
 
 
         .result-icon {
+
             font-size: 65px;
 
             margin-bottom: 15px;
@@ -395,31 +474,35 @@
 
 
         .result h2 {
+
             margin-bottom: 10px;
         }
 
 
         .final-score {
+
             font-size: 42px;
 
             font-weight: bold;
 
-            color: #0b5ed7;
+            color: #18a058;
 
             margin: 20px 0;
         }
 
 
         .result button {
-            background: #0b5ed7;
+
+            background: #18a058;
 
             color: white;
 
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
 
-        .result .back-topics {
+        .result .back-topic {
+
             background: #6c757d;
         }
 
@@ -429,11 +512,12 @@
         ========================================== */
 
         footer {
+
             text-align: center;
 
-            padding: 30px;
+            padding: 35px;
 
-            color: #777;
+            color: #527060;
         }
 
 
@@ -444,26 +528,31 @@
         @media (max-width: 600px) {
 
             .container {
+
                 padding: 12px;
             }
 
 
             .card {
+
                 padding: 20px;
             }
 
 
             .question {
+
                 font-size: 19px;
             }
 
 
             .buttons {
+
                 flex-direction: column;
             }
 
 
             button {
+
                 width: 100%;
             }
 
@@ -484,11 +573,11 @@
 <header>
 
     <h1>
-        🏥 OGCONS Study Hub
+        🫀 OGCONS Study Hub
     </h1>
 
     <p>
-        🫀 Anatomy & Physiology Quiz
+        Anatomy & Physiology Quiz
     </p>
 
 </header>
@@ -503,7 +592,7 @@
     ========================================== -->
 
     <a
-        href="anatomy-topics.html"
+        href="anatomy-physiology.html"
         class="back">
 
         ← Back to Anatomy & Physiology Topics
@@ -519,7 +608,13 @@
     <div
         id="loading">
 
-        Loading questions...
+        <h2>
+            🔄 Loading questions...
+        </h2>
+
+        <p>
+            Please wait while we prepare your quiz.
+        </p>
 
     </div>
 
@@ -546,13 +641,13 @@
         style="display:none;">
 
         <h2>
-            No questions available yet.
+            📚 No Questions Yet
         </h2>
 
         <p id="emptyMessage">
 
-            Your lecturer/admin has not added
-            questions for this topic yet.
+            There are currently no questions
+            available for this topic.
 
         </p>
 
@@ -570,8 +665,6 @@
         style="display:none;">
 
 
-        <!-- COURSE -->
-
         <div class="course-title">
 
             <h2>
@@ -586,8 +679,6 @@
 
 
 
-        <!-- TOPIC -->
-
         <div
             class="topic-name"
             id="topicName">
@@ -596,8 +687,6 @@
 
 
 
-        <!-- COUNTER -->
-
         <div
             class="counter"
             id="counter">
@@ -605,8 +694,6 @@
         </div>
 
 
-
-        <!-- SCORE -->
 
         <div
             class="score"
@@ -617,8 +704,6 @@
         </div>
 
 
-
-        <!-- QUESTION -->
 
         <div
             class="question"
@@ -633,81 +718,53 @@
         <div class="options">
 
 
-            <!-- OPTION A -->
-
             <button
                 class="option"
                 id="option_a"
                 onclick="selectAnswer('A')">
 
-                <strong>
-                    A.
-                </strong>
+                <strong>A.</strong>
 
-                <span
-                    id="text_a">
-
-                </span>
+                <span id="text_a"></span>
 
             </button>
 
 
-
-            <!-- OPTION B -->
 
             <button
                 class="option"
                 id="option_b"
                 onclick="selectAnswer('B')">
 
-                <strong>
-                    B.
-                </strong>
+                <strong>B.</strong>
 
-                <span
-                    id="text_b">
-
-                </span>
+                <span id="text_b"></span>
 
             </button>
 
 
-
-            <!-- OPTION C -->
 
             <button
                 class="option"
                 id="option_c"
                 onclick="selectAnswer('C')">
 
-                <strong>
-                    C.
-                </strong>
+                <strong>C.</strong>
 
-                <span
-                    id="text_c">
-
-                </span>
+                <span id="text_c"></span>
 
             </button>
 
 
-
-            <!-- OPTION D -->
 
             <button
                 class="option"
                 id="option_d"
                 onclick="selectAnswer('D')">
 
-                <strong>
-                    D.
-                </strong>
+                <strong>D.</strong>
 
-                <span
-                    id="text_d">
-
-                </span>
+                <span id="text_d"></span>
 
             </button>
 
@@ -716,9 +773,7 @@
 
 
 
-        <!-- ==========================================
-             FEEDBACK
-        ========================================== -->
+        <!-- FEEDBACK -->
 
         <div
             class="feedback"
@@ -728,9 +783,7 @@
 
 
 
-        <!-- ==========================================
-             EXPLANATION
-        ========================================== -->
+        <!-- EXPLANATION -->
 
         <div
             class="answer"
@@ -751,7 +804,8 @@
             </p>
 
 
-            <p style="margin-top:10px;">
+
+            <p>
 
                 <strong>
                     Explanation:
@@ -769,9 +823,7 @@
 
 
 
-        <!-- ==========================================
-             NAVIGATION
-        ========================================== -->
+        <!-- NAVIGATION -->
 
         <div class="buttons">
 
@@ -815,16 +867,12 @@
 
 
         <div class="result-icon">
-
             🏆
-
         </div>
 
 
         <h2>
-
             Quiz Completed!
-
         </h2>
 
 
@@ -854,7 +902,7 @@
 
         <p id="percentage">
 
-            0%
+            Your score: 0%
 
         </p>
 
@@ -872,8 +920,8 @@
 
 
         <button
-            class="back-topics"
-            onclick="window.location.href='anatomy-topics.html'">
+            class="back-topic"
+            onclick="window.location.href='anatomy-physiology.html'">
 
             ← Back to Topics
 
@@ -954,8 +1002,7 @@ const urlParams =
 
 
 const selectedTopic =
-    urlParams.get("topic") ||
-    "Anatomy and Organisation of the Body";
+    urlParams.get("topic");
 
 
 
@@ -983,14 +1030,42 @@ async function loadQuestions() {
 
 
 
-    // Display topic
+    // No topic was selected
+
+    if (!selectedTopic) {
+
+        loading.style.display =
+            "none";
+
+        error.style.display =
+            "block";
+
+        error.innerHTML = `
+
+            <h2>
+                ⚠️ No Topic Selected
+            </h2>
+
+            <p>
+                Please return to Anatomy & Physiology
+                and select a topic.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    // Show topic
 
     document
         .getElementById("topicName")
         .textContent =
         "Topic: " +
         selectedTopic;
-
 
 
     document
@@ -1008,8 +1083,9 @@ async function loadQuestions() {
 
         data: {
             user
+        },
 
-        }
+        error: userError
 
     } =
         await supabaseClient
@@ -1018,7 +1094,7 @@ async function loadQuestions() {
 
 
 
-    if (!user) {
+    if (userError || !user) {
 
         window.location.href =
             "login.html";
@@ -1030,12 +1106,13 @@ async function loadQuestions() {
 
 
     // ==========================================
-    // GET QUESTIONS
+    // GET ANATOMY QUESTIONS
     // ==========================================
 
     const {
 
         data,
+
         error: databaseError
 
     } =
@@ -1070,15 +1147,31 @@ async function loadQuestions() {
 
     if (databaseError) {
 
+        console.error(
+            "Question loading error:",
+            databaseError
+        );
+
+
         loading.style.display =
             "none";
+
 
         error.style.display =
             "block";
 
-        error.textContent =
-            "Unable to load questions: " +
-            databaseError.message;
+
+        error.innerHTML = `
+
+            <h2>
+                ❌ Unable to Load Questions
+            </h2>
+
+            <p>
+                ${databaseError.message}
+            </p>
+
+        `;
 
         return;
 
@@ -1086,9 +1179,7 @@ async function loadQuestions() {
 
 
 
-    questions =
-        data || [];
-
+    questions = data || [];
 
 
     loading.style.display =
@@ -1100,25 +1191,19 @@ async function loadQuestions() {
     // NO QUESTIONS
     // ==========================================
 
-    if (
-        questions.length === 0
-    ) {
+    if (questions.length === 0) {
 
         empty.style.display =
             "block";
 
 
         document
-            .getElementById(
-                "emptyMessage"
-            )
+            .getElementById("emptyMessage")
             .textContent =
 
-            "There are currently no " +
+            "There are currently no questions for " +
             selectedTopic +
-            " questions available. " +
-            "Your lecturer/admin can add them from the Admin Dashboard.";
-
+            ". Add questions from the Admin Dashboard.";
 
         return;
 
@@ -1215,9 +1300,7 @@ function showQuestion() {
 
 
 
-    // ==========================================
-    // RESET OPTIONS
-    // ==========================================
+    // Reset buttons
 
     const options = [
 
@@ -1232,26 +1315,26 @@ function showQuestion() {
     ];
 
 
+    options.forEach(function(option) {
 
-    options.forEach(
-        function(option) {
+        option.classList.remove(
 
-            option.classList.remove(
-                "correct",
-                "wrong",
-                "disabled"
-            );
+            "correct",
 
-            option.disabled = false;
+            "wrong",
 
-        }
-    );
+            "disabled"
+
+        );
 
 
+        option.disabled = false;
 
-    // ==========================================
-    // HIDE FEEDBACK
-    // ==========================================
+    });
+
+
+
+    // Hide feedback
 
     document
         .getElementById("feedback")
@@ -1266,9 +1349,7 @@ function showQuestion() {
 
 
 
-    // ==========================================
-    // DISABLE NEXT
-    // ==========================================
+    // Disable next
 
     document
         .getElementById("nextButton")
@@ -1277,9 +1358,7 @@ function showQuestion() {
 
 
 
-    // ==========================================
-    // PREVIOUS BUTTON
-    // ==========================================
+    // Previous
 
     document
         .getElementById("previousButton")
@@ -1297,8 +1376,6 @@ function showQuestion() {
 function selectAnswer(selected) {
 
 
-    // Prevent answering twice
-
     if (answered) {
 
         return;
@@ -1315,18 +1392,14 @@ function selectAnswer(selected) {
 
 
 
-    // Correct answer
-
     const correct =
         String(
             q.correct_answer
         )
-            .trim()
-            .toUpperCase();
+        .trim()
+        .toUpperCase();
 
 
-
-    // Selected button
 
     const selectedButton =
         document.getElementById(
@@ -1336,8 +1409,6 @@ function selectAnswer(selected) {
 
 
 
-    // Correct button
-
     const correctButton =
         document.getElementById(
             "option_" +
@@ -1346,9 +1417,7 @@ function selectAnswer(selected) {
 
 
 
-    // ==========================================
-    // DISABLE ALL OPTIONS
-    // ==========================================
+    // Disable all options
 
     const options = [
 
@@ -1363,27 +1432,21 @@ function selectAnswer(selected) {
     ];
 
 
-    options.forEach(
-        function(option) {
+    options.forEach(function(option) {
 
-            option.disabled = true;
+        option.disabled = true;
 
-            option.classList.add(
-                "disabled"
-            );
+        option.classList.add("disabled");
 
-        }
-    );
+    });
 
 
 
     // ==========================================
-    // CORRECT ANSWER
+    // CORRECT
     // ==========================================
 
-    if (
-        selected === correct
-    ) {
+    if (selected === correct) {
 
 
         score++;
@@ -1416,7 +1479,7 @@ function selectAnswer(selected) {
 
 
     // ==========================================
-    // WRONG ANSWER
+    // WRONG
     // ==========================================
 
     else {
@@ -1471,14 +1534,12 @@ function selectAnswer(selected) {
         correct;
 
 
-
     document
         .getElementById("explanation")
         .textContent =
 
         q.explanation ||
         "No explanation provided.";
-
 
 
     document
@@ -1518,8 +1579,10 @@ function nextQuestion() {
 
 
     if (
+
         currentQuestion <
         questions.length - 1
+
     ) {
 
 
@@ -1532,7 +1595,6 @@ function nextQuestion() {
 
 
     else {
-
 
         showResult();
 
@@ -1549,13 +1611,9 @@ function nextQuestion() {
 function previousQuestion() {
 
 
-    if (
-        currentQuestion > 0
-    ) {
-
+    if (currentQuestion > 0) {
 
         currentQuestion--;
-
 
         showQuestion();
 
@@ -1591,14 +1649,11 @@ async function showResult() {
 
 
     const percentage =
-
         Math.round(
             (score / total) * 100
         );
 
 
-
-    // Final score
 
     document
         .getElementById("finalScore")
@@ -1609,8 +1664,6 @@ async function showResult() {
         total;
 
 
-
-    // Percentage
 
     document
         .getElementById("percentage")
@@ -1623,14 +1676,13 @@ async function showResult() {
 
 
     // ==========================================
-    // GET CURRENT USER
+    // GET USER
     // ==========================================
 
     const {
 
         data: {
             user
-
         }
 
     } =
@@ -1698,7 +1750,7 @@ async function showResult() {
     else {
 
         console.log(
-            "Anatomy & Physiology quiz result saved successfully."
+            "Anatomy quiz result saved."
         );
 
     }
@@ -1708,7 +1760,7 @@ async function showResult() {
 
 
 // ==========================================
-// RESTART QUIZ
+// RESTART
 // ==========================================
 
 function restartQuiz() {
@@ -1719,7 +1771,6 @@ function restartQuiz() {
     score = 0;
 
     answered = false;
-
 
 
     document
