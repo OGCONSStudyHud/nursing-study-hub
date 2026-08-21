@@ -1,6 +1,6 @@
-```html id="7c4m0p"
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -23,6 +23,7 @@
         body {
             font-family: Arial, sans-serif;
             min-height: 100vh;
+
             background:
                 linear-gradient(
                     135deg,
@@ -109,6 +110,8 @@
 
         .welcome p {
             color: #617568;
+
+            line-height: 1.5;
         }
 
         .section-title {
@@ -138,12 +141,12 @@
                 rgba(0,0,0,0.08);
 
             text-align: center;
+
+            transition: 0.2s;
         }
 
         .card:hover {
             transform: translateY(-3px);
-
-            transition: 0.2s;
         }
 
         .icon {
@@ -266,7 +269,9 @@
     style="display:none;">
 
 
-    <!-- WELCOME -->
+    <!-- ==========================================
+         WELCOME
+    ========================================== -->
 
     <div class="welcome">
 
@@ -294,7 +299,9 @@
 
 
 
-    <!-- COURSES -->
+    <!-- ==========================================
+         COURSES
+    ========================================== -->
 
     <h2 class="section-title">
 
@@ -306,7 +313,9 @@
     <div class="cards">
 
 
-        <!-- MICROBIOLOGY -->
+        <!-- ==========================================
+             MICROBIOLOGY
+        ========================================== -->
 
         <div class="card">
 
@@ -338,7 +347,9 @@
 
 
 
-        <!-- ANATOMY & PHYSIOLOGY -->
+        <!-- ==========================================
+             ANATOMY & PHYSIOLOGY
+        ========================================== -->
 
         <div class="card">
 
@@ -359,9 +370,9 @@
             </p>
 
             <button
-                class="coming-soon">
+                onclick="openAnatomy()">
 
-                Coming Soon
+                Open Course
 
             </button>
 
@@ -369,7 +380,9 @@
 
 
 
-        <!-- PHARMACOLOGY -->
+        <!-- ==========================================
+             PHARMACOLOGY
+        ========================================== -->
 
         <div class="card">
 
@@ -400,7 +413,9 @@
 
 
 
-        <!-- MEDICAL SURGICAL -->
+        <!-- ==========================================
+             MEDICAL SURGICAL
+        ========================================== -->
 
         <div class="card">
 
@@ -431,7 +446,9 @@
 
 
 
-        <!-- NUTRITION -->
+        <!-- ==========================================
+             NUTRITION
+        ========================================== -->
 
         <div class="card">
 
@@ -462,7 +479,9 @@
 
 
 
-        <!-- NURSING PRACTICE -->
+        <!-- ==========================================
+             NURSING PRACTICE
+        ========================================== -->
 
         <div class="card">
 
@@ -496,7 +515,9 @@
 
 
 
-    <!-- PROGRESS -->
+    <!-- ==========================================
+         PROGRESS
+    ========================================== -->
 
     <h2 class="section-title">
 
@@ -507,6 +528,8 @@
 
     <div class="cards">
 
+
+        <!-- QUIZZES COMPLETED -->
 
         <div class="card">
 
@@ -537,6 +560,8 @@
 
 
 
+        <!-- AVERAGE SCORE -->
+
         <div class="card">
 
             <div class="icon">
@@ -565,6 +590,8 @@
         </div>
 
 
+
+        <!-- LEADERBOARD -->
 
         <div class="card">
 
@@ -627,7 +654,7 @@ const supabaseClient =
 
 
 // ==========================================
-// CHECK LOGIN
+// CHECK USER
 // ==========================================
 
 async function checkUser() {
@@ -649,10 +676,8 @@ async function checkUser() {
 
     if (!user) {
 
-
         window.location.href =
             "index.html";
-
 
         return;
 
@@ -686,7 +711,6 @@ async function checkUser() {
         .getElementById("dashboard")
         .style.display = "block";
 
-
 }
 
 
@@ -697,10 +721,21 @@ async function checkUser() {
 
 function openMicrobiology() {
 
-
     window.location.href =
         "microbiology-topics.html";
 
+}
+
+
+
+// ==========================================
+// OPEN ANATOMY & PHYSIOLOGY
+// ==========================================
+
+function openAnatomy() {
+
+    window.location.href =
+        "anatomy-topics.html";
 
 }
 
@@ -712,7 +747,6 @@ function openMicrobiology() {
 
 async function logout() {
 
-
     await supabaseClient
         .auth
         .signOut();
@@ -721,39 +755,55 @@ async function logout() {
     window.location.href =
         "index.html";
 
-
 }
 
 
 
-// ==========================================
-// START
-// ==========================================
 // ==========================================
 // LOAD QUIZ PROGRESS
 // ==========================================
 
 async function loadQuizProgress() {
 
+
     const {
+
         data: {
             user
+
         }
-    } = await supabaseClient.auth.getUser();
+
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
 
 
     if (!user) {
+
         return;
+
     }
 
 
+
     const {
+
         data,
         error
-    } = await supabaseClient
-        .from("quiz_results")
-        .select("percentage")
-        .eq("user_id", user.id);
+
+    } =
+        await supabaseClient
+
+            .from("quiz_results")
+
+            .select("percentage")
+
+            .eq(
+                "user_id",
+                user.id
+            );
+
 
 
     if (error) {
@@ -764,10 +814,14 @@ async function loadQuizProgress() {
         );
 
         return;
+
     }
 
 
-    const results = data || [];
+
+    const results =
+        data || [];
+
 
 
     // Number of quizzes completed
@@ -778,9 +832,12 @@ async function loadQuizProgress() {
         results.length;
 
 
+
     // Average score
 
-    if (results.length === 0) {
+    if (
+        results.length === 0
+    ) {
 
         document
             .getElementById("averageScore")
@@ -788,26 +845,34 @@ async function loadQuizProgress() {
             "0%";
 
         return;
+
     }
 
 
+
     const totalPercentage =
+
         results.reduce(
             function(total, result) {
 
                 return total +
-                    Number(result.percentage || 0);
+                    Number(
+                        result.percentage || 0
+                    );
 
             },
             0
         );
 
 
+
     const average =
+
         Math.round(
             totalPercentage /
             results.length
         );
+
 
 
     document
@@ -816,8 +881,17 @@ async function loadQuizProgress() {
         average + "%";
 
 }
+
+
+
+// ==========================================
+// START
+// ==========================================
+
 checkUser();
+
 loadQuizProgress();
+
 
 </script>
 
@@ -825,4 +899,3 @@ loadQuizProgress();
 </body>
 
 </html>
-```
