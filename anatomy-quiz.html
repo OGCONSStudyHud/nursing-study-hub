@@ -400,9 +400,21 @@
         }
 
 
+        #loading h2 {
+
+            color: #18a058;
+        }
+
+
         #error {
 
             color: #dc3545;
+        }
+
+
+        #error button {
+
+            margin-top: 15px;
         }
 
 
@@ -534,19 +546,28 @@
 
 
 
+    <!-- ==================================================
+         LOADING
+    ================================================== -->
+
     <div id="loading">
 
         <h2>
-            🔄 Loading questions...
+            🤖 Preparing Your Quiz...
         </h2>
 
         <p>
-            Please wait while we prepare your quiz.
+            Please wait while AI prepares
+            your Anatomy & Physiology questions.
         </p>
 
     </div>
 
 
+
+    <!-- ==================================================
+         ERROR
+    ================================================== -->
 
     <div
         id="error"
@@ -555,12 +576,16 @@
 
 
 
+    <!-- ==================================================
+         EMPTY
+    ================================================== -->
+
     <div
         id="empty"
         style="display:none;">
 
         <h2>
-            📚 No Questions Yet
+            📚 No Questions Available
         </h2>
 
         <p id="emptyMessage">
@@ -574,7 +599,9 @@
 
 
 
-    <!-- QUIZ CARD -->
+    <!-- ==================================================
+         QUIZ CARD
+    ================================================== -->
 
     <div
         class="card"
@@ -589,7 +616,7 @@
             </h2>
 
             <p>
-                Test your knowledge
+                AI-Powered Quiz
             </p>
 
         </div>
@@ -626,6 +653,8 @@
         </div>
 
 
+
+        <!-- OPTIONS -->
 
         <div class="options">
 
@@ -694,7 +723,7 @@
 
 
 
-        <!-- ANSWER / EXPLANATION -->
+        <!-- ANSWER -->
 
         <div
             class="answer"
@@ -732,6 +761,8 @@
 
 
 
+        <!-- BUTTONS -->
+
         <div class="buttons">
 
 
@@ -764,7 +795,9 @@
 
 
 
-    <!-- RESULT -->
+    <!-- ==================================================
+         RESULT
+    ================================================== -->
 
     <div
         class="card result"
@@ -816,7 +849,7 @@
         <button
             onclick="restartQuiz()">
 
-            🔄 Try Again
+            🔄 Generate New Questions
 
         </button>
 
@@ -849,14 +882,19 @@
 
 
 
+<!-- ======================================================
+     SUPABASE
+====================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 
 <script>
 
 
 // ======================================================
-// SUPABASE
+// SUPABASE CONNECTION
 // ======================================================
 
 const SUPABASE_URL =
@@ -885,40 +923,12 @@ let currentQuestion = 0;
 
 let score = 0;
 
-
-/*
-=========================================================
-IMPORTANT
-
-This array remembers the answer given to every question.
-
-Example:
-
-answers[0] = {
-    answered: true,
-    selected: "B",
-    correct: "B",
-    isCorrect: true
-};
-
-answers[1] = {
-    answered: true,
-    selected: "A",
-    correct: "C",
-    isCorrect: false
-};
-
-This prevents a student from answering a question
-again when they click Previous.
-=========================================================
-*/
-
 let answers = [];
 
 
 
 // ======================================================
-// GET TOPIC
+// GET TOPIC FROM URL
 // ======================================================
 
 const urlParams =
@@ -933,7 +943,7 @@ const selectedTopic =
 
 
 // ======================================================
-// LOAD QUESTIONS
+// LOAD QUESTIONS FROM AI
 // ======================================================
 
 async function loadQuestions() {
@@ -947,14 +957,17 @@ async function loadQuestions() {
         document.getElementById("quizCard");
 
 
-    const empty =
-        document.getElementById("empty");
-
-
     const error =
         document.getElementById("error");
 
 
+    const empty =
+        document.getElementById("empty");
+
+
+    // ==================================================
+    // CHECK TOPIC
+    // ==================================================
 
     if (!selectedTopic) {
 
@@ -971,24 +984,25 @@ async function loadQuestions() {
             </h2>
 
             <p>
-                Please return to Anatomy & Physiology
-                and select a topic.
+                Please return to Anatomy &
+                Physiology and select a topic.
             </p>
 
         `;
 
         return;
-
     }
 
 
 
+    // ==================================================
+    // SHOW TOPIC
+    // ==================================================
+
     document
         .getElementById("topicName")
         .textContent =
-        "Topic: " +
-        selectedTopic;
-
+        "Topic: " + selectedTopic;
 
 
     document
@@ -1011,64 +1025,249 @@ async function loadQuestions() {
             .getUser();
 
 
-
-    if (userError || !user) {
+    if (
+        userError ||
+        !user
+    ) {
 
         window.location.href =
             "login.html";
 
         return;
-
     }
 
 
 
     // ==================================================
-    // GET QUESTIONS
+    // SHOW AI LOADING
     // ==================================================
 
-    const {
-        data,
-        error: databaseError
-    } =
-        await supabaseClient
+    loading.style.display =
+        "block";
 
-            .from("questions")
 
-            .select("*")
+    loading.innerHTML = `
 
-            .eq(
-                "course",
-                "Anatomy & Physiology"
-            )
+        <h2>
+            🤖 Generating Questions...
+        </h2>
 
-            .ilike(
-                "topic",
-                selectedTopic
-            )
+        <p>
+            AI is preparing 10 fresh
+            Anatomy & Physiology questions
+            for:
+        </p>
 
-            .order(
-                "created_at",
-                {
-                    ascending: true
+        <strong>
+            ${escapeHTML(selectedTopic)}
+        </strong>
+
+        <p>
+            Please wait...
+        </p>
+
+    `;
+
+
+
+    // ==================================================
+    // CALL EDGE FUNCTION
+    // ==================================================
+
+    try {
+
+
+        const {
+            data,
+            error: functionError
+        } =
+
+            await supabaseClient
+                .functions
+                .invoke(
+                    "generate-anatomy-questions",
+                    {
+                        body: {
+
+                            topic:
+                                selectedTopic,
+
+                            numberOfQuestions:
+                                10
+
+                        }
+                    }
+                );
+
+
+
+        // ==============================================
+        // FUNCTION ERROR
+        // ==============================================
+
+        if (functionError) {
+
+            console.error(
+                "Edge Function Error:",
+                functionError
+            );
+
+            throw new Error(
+                functionError.message ||
+                "Unable to contact the AI."
+            );
+        }
+
+
+
+        // ==============================================
+        // CHECK AI RESPONSE
+        // ==============================================
+
+        if (
+            !data ||
+            data.success !== true
+        ) {
+
+            console.error(
+                "AI Response:",
+                data
+            );
+
+            throw new Error(
+
+                data?.error ||
+
+                "The AI could not generate questions."
+
+            );
+        }
+
+
+
+        // ==============================================
+        // CHECK QUESTIONS
+        // ==============================================
+
+        if (
+            !Array.isArray(
+                data.questions
+            ) ||
+            data.questions.length === 0
+        ) {
+
+            throw new Error(
+                "The AI returned no questions."
+            );
+        }
+
+
+
+        // ==============================================
+        // STORE QUESTIONS
+        // ==============================================
+
+        questions =
+            data.questions;
+
+
+
+        // ==============================================
+        // CREATE ANSWER MEMORY
+        // ==============================================
+
+        answers =
+            questions.map(
+                function() {
+
+                    return {
+
+                        answered: false,
+
+                        selected: null,
+
+                        correct: null,
+
+                        isCorrect: false
+
+                    };
+
                 }
             );
 
 
 
-    // ==================================================
-    // DATABASE ERROR
-    // ==================================================
+        // ==============================================
+        // RESET QUIZ
+        // ==============================================
 
-    if (databaseError) {
+        currentQuestion =
+            0;
+
+        score =
+            0;
+
+
+
+        // ==============================================
+        // HIDE LOADING
+        // ==============================================
+
+        loading.style.display =
+            "none";
+
+
+
+        // ==============================================
+        // HIDE ERROR
+        // ==============================================
+
+        error.style.display =
+            "none";
+
+
+
+        // ==============================================
+        // HIDE EMPTY
+        // ==============================================
+
+        empty.style.display =
+            "none";
+
+
+
+        // ==============================================
+        // SHOW QUIZ
+        // ==============================================
+
+        quizCard.style.display =
+            "block";
+
+
+
+        // ==============================================
+        // SHOW FIRST QUESTION
+        // ==============================================
+
+        showQuestion();
+
+
+    }
+
+    catch (err) {
+
 
         console.error(
-            "Question loading error:",
-            databaseError
+            "Question generation failed:",
+            err
         );
 
 
         loading.style.display =
+            "none";
+
+
+        quizCard.style.display =
             "none";
 
 
@@ -1079,94 +1278,27 @@ async function loadQuestions() {
         error.innerHTML = `
 
             <h2>
-                ❌ Unable to Load Questions
+                ❌ Unable to Generate Questions
             </h2>
 
             <p>
                 ${escapeHTML(
-                    databaseError.message
+                    err.message ||
+                    "Something went wrong."
                 )}
             </p>
 
+            <button
+                class="primary"
+                onclick="loadQuestions()">
+
+                🔄 Try Again
+
+            </button>
+
         `;
 
-        return;
-
     }
-
-
-
-    questions =
-        data || [];
-
-
-
-    loading.style.display =
-        "none";
-
-
-
-    // ==================================================
-    // NO QUESTIONS
-    // ==================================================
-
-    if (questions.length === 0) {
-
-        empty.style.display =
-            "block";
-
-
-        document
-            .getElementById("emptyMessage")
-            .textContent =
-
-            "There are currently no questions for " +
-            selectedTopic +
-            ". Add questions from the Admin Dashboard.";
-
-        return;
-
-    }
-
-
-
-    // ==================================================
-    // CREATE ANSWER MEMORY
-    // ==================================================
-
-    /*
-     * One empty answer record is created for
-     * every question.
-     */
-
-    answers =
-        questions.map(function() {
-
-            return {
-
-                answered: false,
-
-                selected: null,
-
-                correct: null,
-
-                isCorrect: false
-
-            };
-
-        });
-
-
-
-    // ==================================================
-    // SHOW QUIZ
-    // ==================================================
-
-    quizCard.style.display =
-        "block";
-
-
-    showQuestion();
 
 }
 
@@ -1187,7 +1319,6 @@ function showQuestion() {
         answers[currentQuestion];
 
 
-
     if (!q) {
 
         return;
@@ -1197,7 +1328,7 @@ function showQuestion() {
 
 
     // ==================================================
-    // QUESTION INFORMATION
+    // COUNTER
     // ==================================================
 
     document
@@ -1211,6 +1342,10 @@ function showQuestion() {
 
 
 
+    // ==================================================
+    // SCORE
+    // ==================================================
+
     document
         .getElementById("score")
         .textContent =
@@ -1220,6 +1355,10 @@ function showQuestion() {
 
 
 
+    // ==================================================
+    // QUESTION
+    // ==================================================
+
     document
         .getElementById("question")
         .textContent =
@@ -1227,11 +1366,14 @@ function showQuestion() {
 
 
 
+    // ==================================================
+    // OPTIONS
+    // ==================================================
+
     document
         .getElementById("text_a")
         .textContent =
         q.option_a;
-
 
 
     document
@@ -1240,12 +1382,10 @@ function showQuestion() {
         q.option_b;
 
 
-
     document
         .getElementById("text_c")
         .textContent =
         q.option_c;
-
 
 
     document
@@ -1256,7 +1396,7 @@ function showQuestion() {
 
 
     // ==================================================
-    // GET OPTIONS
+    // OPTION BUTTONS
     // ==================================================
 
     const options = [
@@ -1277,17 +1417,20 @@ function showQuestion() {
     // RESET OPTIONS
     // ==================================================
 
-    options.forEach(function(option) {
+    options.forEach(
+        function(option) {
 
-        option.classList.remove(
-            "correct",
-            "wrong",
-            "disabled"
-        );
+            option.disabled =
+                false;
 
-        option.disabled = false;
+            option.classList.remove(
+                "correct",
+                "wrong",
+                "disabled"
+            );
 
-    });
+        }
+    );
 
 
 
@@ -1308,10 +1451,15 @@ function showQuestion() {
     feedback.className =
         "feedback";
 
+
     feedback.textContent =
         "";
 
 
+
+    // ==================================================
+    // RESET ANSWER
+    // ==================================================
 
     document
         .getElementById("answer")
@@ -1321,7 +1469,7 @@ function showQuestion() {
 
 
     // ==================================================
-    // QUESTION HAS ALREADY BEEN ANSWERED
+    // ALREADY ANSWERED?
     // ==================================================
 
     if (
@@ -1329,28 +1477,14 @@ function showQuestion() {
         savedAnswer.answered
     ) {
 
-
-        /*
-         * This question has already been answered.
-         *
-         * We show the previous answer instead of
-         * allowing the student to answer again.
-         */
-
         showPreviousAnswer(
             q,
             savedAnswer
         );
 
-
     }
 
     else {
-
-
-        /*
-         * Question has not been answered yet.
-         */
 
         document
             .getElementById("nextButton")
@@ -1375,7 +1509,7 @@ function showQuestion() {
 
 
 // ======================================================
-// SHOW PREVIOUSLY ANSWERED QUESTION
+// SHOW PREVIOUS ANSWER
 // ======================================================
 
 function showPreviousAnswer(
@@ -1387,16 +1521,17 @@ function showPreviousAnswer(
     const selectedButton =
         document.getElementById(
             "option_" +
-            savedAnswer.selected.toLowerCase()
+            savedAnswer.selected
+                .toLowerCase()
         );
 
 
     const correctButton =
         document.getElementById(
             "option_" +
-            savedAnswer.correct.toLowerCase()
+            savedAnswer.correct
+                .toLowerCase()
         );
-
 
 
     const options = [
@@ -1414,23 +1549,26 @@ function showPreviousAnswer(
 
 
     // ==================================================
-    // LOCK ALL OPTIONS
+    // LOCK OPTIONS
     // ==================================================
 
-    options.forEach(function(option) {
+    options.forEach(
+        function(option) {
 
-        option.disabled = true;
+            option.disabled =
+                true;
 
-        option.classList.add(
-            "disabled"
-        );
+            option.classList.add(
+                "disabled"
+            );
 
-    });
+        }
+    );
 
 
 
     // ==================================================
-    // SHOW SELECTED ANSWER
+    // SELECTED ANSWER
     // ==================================================
 
     if (selectedButton) {
@@ -1458,7 +1596,7 @@ function showPreviousAnswer(
 
 
     // ==================================================
-    // SHOW CORRECT ANSWER
+    // CORRECT ANSWER
     // ==================================================
 
     if (
@@ -1514,13 +1652,14 @@ function showPreviousAnswer(
 
 
     // ==================================================
-    // SHOW ANSWER AND EXPLANATION
+    // ANSWER
     // ==================================================
 
     document
         .getElementById("correct_answer")
         .textContent =
         savedAnswer.correct;
+
 
 
     document
@@ -1565,12 +1704,9 @@ function selectAnswer(
 
 
 
-    /*
-     * VERY IMPORTANT:
-     *
-     * If this question has already been answered,
-     * do absolutely nothing.
-     */
+    // ==================================================
+    // PREVENT RE-ANSWERING
+    // ==================================================
 
     if (
         savedAnswer &&
@@ -1604,7 +1740,6 @@ function selectAnswer(
         );
 
 
-
     const correctButton =
         document.getElementById(
             "option_" +
@@ -1614,7 +1749,7 @@ function selectAnswer(
 
 
     // ==================================================
-    // DETERMINE RESULT
+    // CHECK
     // ==================================================
 
     const isCorrect =
@@ -1660,20 +1795,23 @@ function selectAnswer(
     ];
 
 
-    options.forEach(function(option) {
+    options.forEach(
+        function(option) {
 
-        option.disabled = true;
+            option.disabled =
+                true;
 
-        option.classList.add(
-            "disabled"
-        );
+            option.classList.add(
+                "disabled"
+            );
 
-    });
+        }
+    );
 
 
 
     // ==================================================
-    // CORRECT ANSWER
+    // CORRECT
     // ==================================================
 
     if (isCorrect) {
@@ -1709,7 +1847,7 @@ function selectAnswer(
 
 
     // ==================================================
-    // WRONG ANSWER
+    // WRONG
     // ==================================================
 
     else {
@@ -1755,7 +1893,7 @@ function selectAnswer(
 
 
     // ==================================================
-    // SHOW CORRECT ANSWER
+    // CORRECT ANSWER
     // ==================================================
 
     document
@@ -1766,7 +1904,7 @@ function selectAnswer(
 
 
     // ==================================================
-    // SHOW EXPLANATION
+    // EXPLANATION
     // ==================================================
 
     document
@@ -1817,11 +1955,6 @@ function selectAnswer(
 function nextQuestion() {
 
 
-    /*
-     * The current question must already be answered
-     * before moving forward.
-     */
-
     if (
         !answers[currentQuestion] ||
         !answers[currentQuestion].answered
@@ -1838,16 +1971,13 @@ function nextQuestion() {
         questions.length - 1
     ) {
 
-
         currentQuestion++;
-
 
         showQuestion();
 
     }
 
     else {
-
 
         showResult();
 
@@ -1868,15 +1998,7 @@ function previousQuestion() {
         currentQuestion > 0
     ) {
 
-
         currentQuestion--;
-
-
-        /*
-         * showQuestion() will check the saved answer
-         * and automatically lock the question if it
-         * was already answered.
-         */
 
         showQuestion();
 
@@ -1922,6 +2044,10 @@ async function showResult() {
 
 
 
+    // ==================================================
+    // FINAL SCORE
+    // ==================================================
+
     document
         .getElementById("finalScore")
         .textContent =
@@ -1943,7 +2069,7 @@ async function showResult() {
 
 
     // ==================================================
-    // GET CURRENT USER
+    // GET USER
     // ==================================================
 
     const {
@@ -1968,7 +2094,7 @@ async function showResult() {
 
 
     // ==================================================
-    // SAVE QUIZ RESULT
+    // SAVE RESULT
     // ==================================================
 
     const {
@@ -2013,41 +2139,15 @@ async function showResult() {
 
 
 // ======================================================
-// RESTART QUIZ
+// TRY AGAIN
 // ======================================================
 
-function restartQuiz() {
+async function restartQuiz() {
 
 
-    /*
-     * A new attempt starts here.
-     *
-     * Therefore all previous answers are cleared.
-     */
-
-    currentQuestion = 0;
-
-    score = 0;
-
-    answers = questions.map(
-        function() {
-
-            return {
-
-                answered: false,
-
-                selected: null,
-
-                correct: null,
-
-                isCorrect: false
-
-            };
-
-        }
-    );
-
-
+    // ==================================================
+    // HIDE RESULT
+    // ==================================================
 
     document
         .getElementById("result")
@@ -2055,13 +2155,48 @@ function restartQuiz() {
         "none";
 
 
+    // ==================================================
+    // HIDE QUIZ
+    // ==================================================
+
     document
         .getElementById("quizCard")
         .style.display =
+        "none";
+
+
+    // ==================================================
+    // SHOW LOADING
+    // ==================================================
+
+    const loading =
+        document.getElementById("loading");
+
+
+    loading.style.display =
         "block";
 
 
-    showQuestion();
+    loading.innerHTML = `
+
+        <h2>
+            🤖 Generating New Questions...
+        </h2>
+
+        <p>
+            AI is preparing a different
+            set of questions for you.
+        </p>
+
+    `;
+
+
+
+    // ==================================================
+    // GENERATE AGAIN
+    // ==================================================
+
+    await loadQuestions();
 
 }
 
@@ -2082,7 +2217,6 @@ function escapeHTML(
     ) {
 
         return "";
-
     }
 
 
