@@ -5,8 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>
         OGCONS Study Hub - Anatomy & Physiology Quiz
@@ -37,10 +38,6 @@
             color: #172033;
         }
 
-
-        /* ==========================================
-           HEADER
-        ========================================== */
 
         header {
 
@@ -75,10 +72,6 @@
         }
 
 
-        /* ==========================================
-           CONTAINER
-        ========================================== */
-
         .container {
 
             max-width: 850px;
@@ -88,10 +81,6 @@
             padding: 20px;
         }
 
-
-        /* ==========================================
-           BACK BUTTON
-        ========================================== */
 
         .back {
 
@@ -113,10 +102,6 @@
         }
 
 
-        /* ==========================================
-           CARD
-        ========================================== */
-
         .card {
 
             background: white;
@@ -130,10 +115,6 @@
                 rgba(0,0,0,0.08);
         }
 
-
-        /* ==========================================
-           COURSE TITLE
-        ========================================== */
 
         .course-title {
 
@@ -159,10 +140,6 @@
         }
 
 
-        /* ==========================================
-           TOPIC NAME
-        ========================================== */
-
         .topic-name {
 
             text-align: center;
@@ -181,10 +158,6 @@
         }
 
 
-        /* ==========================================
-           COUNTER
-        ========================================== */
-
         .counter {
 
             text-align: center;
@@ -196,10 +169,6 @@
             margin-bottom: 10px;
         }
 
-
-        /* ==========================================
-           SCORE
-        ========================================== */
 
         .score {
 
@@ -213,10 +182,6 @@
         }
 
 
-        /* ==========================================
-           QUESTION
-        ========================================== */
-
         .question {
 
             font-size: 21px;
@@ -228,10 +193,6 @@
             margin-bottom: 25px;
         }
 
-
-        /* ==========================================
-           OPTIONS
-        ========================================== */
 
         .options {
 
@@ -303,10 +264,6 @@
         }
 
 
-        /* ==========================================
-           FEEDBACK
-        ========================================== */
-
         .feedback {
 
             margin-top: 20px;
@@ -337,10 +294,6 @@
         }
 
 
-        /* ==========================================
-           ANSWER / EXPLANATION
-        ========================================== */
-
         .answer {
 
             margin-top: 15px;
@@ -362,10 +315,6 @@
             color: #0b5ed7;
         }
 
-
-        /* ==========================================
-           NAVIGATION BUTTONS
-        ========================================== */
 
         .buttons {
 
@@ -425,10 +374,6 @@
         }
 
 
-        /* ==========================================
-           LOADING / ERROR / EMPTY
-        ========================================== */
-
         #loading,
         #error,
         #empty {
@@ -452,10 +397,6 @@
             color: #dc3545;
         }
 
-
-        /* ==========================================
-           RESULT
-        ========================================== */
 
         .result {
 
@@ -507,10 +448,6 @@
         }
 
 
-        /* ==========================================
-           FOOTER
-        ========================================== */
-
         footer {
 
             text-align: center;
@@ -520,10 +457,6 @@
             color: #527060;
         }
 
-
-        /* ==========================================
-           MOBILE
-        ========================================== */
 
         @media (max-width: 600px) {
 
@@ -566,10 +499,6 @@
 <body>
 
 
-<!-- ==========================================
-     HEADER
-========================================== -->
-
 <header>
 
     <h1>
@@ -587,10 +516,6 @@
 <div class="container">
 
 
-    <!-- ==========================================
-         BACK
-    ========================================== -->
-
     <a
         href="anatomy-physiology.html"
         class="back">
@@ -601,12 +526,7 @@
 
 
 
-    <!-- ==========================================
-         LOADING
-    ========================================== -->
-
-    <div
-        id="loading">
+    <div id="loading">
 
         <h2>
             🔄 Loading questions...
@@ -620,21 +540,12 @@
 
 
 
-    <!-- ==========================================
-         ERROR
-    ========================================== -->
-
     <div
         id="error"
         style="display:none;">
-
     </div>
 
 
-
-    <!-- ==========================================
-         EMPTY
-    ========================================== -->
 
     <div
         id="empty"
@@ -654,10 +565,6 @@
     </div>
 
 
-
-    <!-- ==========================================
-         QUIZ CARD
-    ========================================== -->
 
     <div
         class="card"
@@ -682,7 +589,6 @@
         <div
             class="topic-name"
             id="topicName">
-
         </div>
 
 
@@ -690,7 +596,6 @@
         <div
             class="counter"
             id="counter">
-
         </div>
 
 
@@ -708,12 +613,9 @@
         <div
             class="question"
             id="question">
-
         </div>
 
 
-
-        <!-- OPTIONS -->
 
         <div class="options">
 
@@ -773,17 +675,12 @@
 
 
 
-        <!-- FEEDBACK -->
-
         <div
             class="feedback"
             id="feedback">
-
         </div>
 
 
-
-        <!-- EXPLANATION -->
 
         <div
             class="answer"
@@ -798,7 +695,6 @@
 
                 <span
                     id="correct_answer">
-
                 </span>
 
             </p>
@@ -813,7 +709,6 @@
 
                 <span
                     id="explanation">
-
                 </span>
 
             </p>
@@ -822,8 +717,6 @@
         </div>
 
 
-
-        <!-- NAVIGATION -->
 
         <div class="buttons">
 
@@ -856,10 +749,6 @@
     </div>
 
 
-
-    <!-- ==========================================
-         RESULT
-    ========================================== -->
 
     <div
         class="card result"
@@ -944,19 +833,15 @@
 
 
 
-<!-- ==========================================
-     SUPABASE
-========================================== -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
 
-// ==========================================
-// SUPABASE CONNECTION
-// ==========================================
+// ======================================================
+// SUPABASE
+// ======================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -968,18 +853,15 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 const supabaseClient =
     window.supabase.createClient(
-
         SUPABASE_URL,
-
         SUPABASE_PUBLISHABLE_KEY
-
     );
 
 
 
-// ==========================================
+// ======================================================
 // QUIZ VARIABLES
-// ==========================================
+// ======================================================
 
 let questions = [];
 
@@ -991,9 +873,9 @@ let answered = false;
 
 
 
-// ==========================================
-// GET TOPIC FROM URL
-// ==========================================
+// ======================================================
+// GET TOPIC
+// ======================================================
 
 const urlParams =
     new URLSearchParams(
@@ -1006,39 +888,30 @@ const selectedTopic =
 
 
 
-// ==========================================
+// ======================================================
 // LOAD QUESTIONS
-// ==========================================
+// ======================================================
 
 async function loadQuestions() {
-
 
     const loading =
         document.getElementById("loading");
 
-
     const quizCard =
         document.getElementById("quizCard");
 
-
     const empty =
         document.getElementById("empty");
-
 
     const error =
         document.getElementById("error");
 
 
-
-    // No topic was selected
-
     if (!selectedTopic) {
 
-        loading.style.display =
-            "none";
+        loading.style.display = "none";
 
-        error.style.display =
-            "block";
+        error.style.display = "block";
 
         error.innerHTML = `
 
@@ -1058,14 +931,10 @@ async function loadQuestions() {
     }
 
 
-
-    // Show topic
-
     document
         .getElementById("topicName")
         .textContent =
-        "Topic: " +
-        selectedTopic;
+        "Topic: " + selectedTopic;
 
 
     document
@@ -1075,23 +944,17 @@ async function loadQuestions() {
 
 
 
-    // ==========================================
+    // ==================================================
     // CHECK LOGIN
-    // ==========================================
+    // ==================================================
 
     const {
-
-        data: {
-            user
-        },
-
+        data: { user },
         error: userError
-
     } =
         await supabaseClient
             .auth
             .getUser();
-
 
 
     if (userError || !user) {
@@ -1105,16 +968,30 @@ async function loadQuestions() {
 
 
 
-    // ==========================================
-    // GET ANATOMY QUESTIONS
-    // ==========================================
+    // ==================================================
+    // GET QUESTIONS
+    // ==================================================
+
+    /*
+     * IMPORTANT FIX:
+     *
+     * ilike() makes the topic comparison
+     * case-insensitive.
+     *
+     * This means:
+     *
+     * "The Blood"
+     *
+     * and
+     *
+     * "The blood"
+     *
+     * will match.
+     */
 
     const {
-
         data,
-
         error: databaseError
-
     } =
         await supabaseClient
 
@@ -1127,7 +1004,7 @@ async function loadQuestions() {
                 "Anatomy & Physiology"
             )
 
-            .eq(
+            .ilike(
                 "topic",
                 selectedTopic
             )
@@ -1141,9 +1018,9 @@ async function loadQuestions() {
 
 
 
-    // ==========================================
+    // ==================================================
     // DATABASE ERROR
-    // ==========================================
+    // ==================================================
 
     if (databaseError) {
 
@@ -1178,8 +1055,8 @@ async function loadQuestions() {
     }
 
 
-
-    questions = data || [];
+    questions =
+        data || [];
 
 
     loading.style.display =
@@ -1187,9 +1064,9 @@ async function loadQuestions() {
 
 
 
-    // ==========================================
+    // ==================================================
     // NO QUESTIONS
-    // ==========================================
+    // ==================================================
 
     if (questions.length === 0) {
 
@@ -1211,9 +1088,9 @@ async function loadQuestions() {
 
 
 
-    // ==========================================
+    // ==================================================
     // SHOW QUIZ
-    // ==========================================
+    // ==================================================
 
     quizCard.style.display =
         "block";
@@ -1225,12 +1102,11 @@ async function loadQuestions() {
 
 
 
-// ==========================================
+// ======================================================
 // SHOW QUESTION
-// ==========================================
+// ======================================================
 
 function showQuestion() {
-
 
     const q =
         questions[currentQuestion];
@@ -1238,9 +1114,6 @@ function showQuestion() {
 
     answered = false;
 
-
-
-    // Counter
 
     document
         .getElementById("counter")
@@ -1252,9 +1125,6 @@ function showQuestion() {
         questions.length;
 
 
-
-    // Score
-
     document
         .getElementById("score")
         .textContent =
@@ -1263,17 +1133,11 @@ function showQuestion() {
         score;
 
 
-
-    // Question
-
     document
         .getElementById("question")
         .textContent =
         q.question;
 
-
-
-    // Options
 
     document
         .getElementById("text_a")
@@ -1300,8 +1164,6 @@ function showQuestion() {
 
 
 
-    // Reset buttons
-
     const options = [
 
         document.getElementById("option_a"),
@@ -1318,23 +1180,16 @@ function showQuestion() {
     options.forEach(function(option) {
 
         option.classList.remove(
-
             "correct",
-
             "wrong",
-
             "disabled"
-
         );
-
 
         option.disabled = false;
 
     });
 
 
-
-    // Hide feedback
 
     document
         .getElementById("feedback")
@@ -1348,17 +1203,11 @@ function showQuestion() {
         "none";
 
 
-
-    // Disable next
-
     document
         .getElementById("nextButton")
         .disabled =
         true;
 
-
-
-    // Previous
 
     document
         .getElementById("previousButton")
@@ -1369,27 +1218,22 @@ function showQuestion() {
 
 
 
-// ==========================================
+// ======================================================
 // SELECT ANSWER
-// ==========================================
+// ======================================================
 
 function selectAnswer(selected) {
 
-
     if (answered) {
-
         return;
-
     }
 
 
     answered = true;
 
 
-
     const q =
         questions[currentQuestion];
-
 
 
     const correct =
@@ -1400,13 +1244,11 @@ function selectAnswer(selected) {
         .toUpperCase();
 
 
-
     const selectedButton =
         document.getElementById(
             "option_" +
             selected.toLowerCase()
         );
-
 
 
     const correctButton =
@@ -1415,9 +1257,6 @@ function selectAnswer(selected) {
             correct.toLowerCase()
         );
 
-
-
-    // Disable all options
 
     const options = [
 
@@ -1442,12 +1281,7 @@ function selectAnswer(selected) {
 
 
 
-    // ==========================================
-    // CORRECT
-    // ==========================================
-
     if (selected === correct) {
-
 
         score++;
 
@@ -1477,13 +1311,7 @@ function selectAnswer(selected) {
     }
 
 
-
-    // ==========================================
-    // WRONG
-    // ==========================================
-
     else {
-
 
         selectedButton.classList.add(
             "wrong"
@@ -1524,10 +1352,6 @@ function selectAnswer(selected) {
 
 
 
-    // ==========================================
-    // SHOW EXPLANATION
-    // ==========================================
-
     document
         .getElementById("correct_answer")
         .textContent =
@@ -1548,9 +1372,6 @@ function selectAnswer(selected) {
         "block";
 
 
-
-    // Update score
-
     document
         .getElementById("score")
         .textContent =
@@ -1558,9 +1379,6 @@ function selectAnswer(selected) {
         "Score: " +
         score;
 
-
-
-    // Enable next
 
     document
         .getElementById("nextButton")
@@ -1571,28 +1389,22 @@ function selectAnswer(selected) {
 
 
 
-// ==========================================
-// NEXT QUESTION
-// ==========================================
+// ======================================================
+// NEXT
+// ======================================================
 
 function nextQuestion() {
 
-
     if (
-
         currentQuestion <
         questions.length - 1
-
     ) {
 
-
         currentQuestion++;
-
 
         showQuestion();
 
     }
-
 
     else {
 
@@ -1604,12 +1416,11 @@ function nextQuestion() {
 
 
 
-// ==========================================
-// PREVIOUS QUESTION
-// ==========================================
+// ======================================================
+// PREVIOUS
+// ======================================================
 
 function previousQuestion() {
-
 
     if (currentQuestion > 0) {
 
@@ -1623,12 +1434,11 @@ function previousQuestion() {
 
 
 
-// ==========================================
-// SHOW RESULT
-// ==========================================
+// ======================================================
+// RESULT
+// ======================================================
 
 async function showResult() {
-
 
     document
         .getElementById("quizCard")
@@ -1642,17 +1452,14 @@ async function showResult() {
         "block";
 
 
-
     const total =
         questions.length;
-
 
 
     const percentage =
         Math.round(
             (score / total) * 100
         );
-
 
 
     document
@@ -1664,7 +1471,6 @@ async function showResult() {
         total;
 
 
-
     document
         .getElementById("percentage")
         .textContent =
@@ -1674,22 +1480,12 @@ async function showResult() {
         "%";
 
 
-
-    // ==========================================
-    // GET USER
-    // ==========================================
-
     const {
-
-        data: {
-            user
-        }
-
+        data: { user }
     } =
         await supabaseClient
             .auth
             .getUser();
-
 
 
     if (!user) {
@@ -1703,15 +1499,8 @@ async function showResult() {
     }
 
 
-
-    // ==========================================
-    // SAVE RESULT
-    // ==========================================
-
     const {
-
         error: saveError
-
     } =
         await supabaseClient
 
@@ -1737,7 +1526,6 @@ async function showResult() {
             });
 
 
-
     if (saveError) {
 
         console.error(
@@ -1747,24 +1535,15 @@ async function showResult() {
 
     }
 
-    else {
-
-        console.log(
-            "Anatomy quiz result saved."
-        );
-
-    }
-
 }
 
 
 
-// ==========================================
+// ======================================================
 // RESTART
-// ==========================================
+// ======================================================
 
 function restartQuiz() {
-
 
     currentQuestion = 0;
 
@@ -1791,12 +1570,11 @@ function restartQuiz() {
 
 
 
-// ==========================================
+// ======================================================
 // START
-// ==========================================
+// ======================================================
 
 loadQuestions();
-
 
 </script>
 
