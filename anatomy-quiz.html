@@ -224,7 +224,7 @@
         }
 
 
-        .option:hover {
+        .option:hover:not(:disabled) {
 
             background: #eefaf4;
 
@@ -291,6 +291,14 @@
             background: #f8d7da;
 
             color: #842029;
+        }
+
+
+        .review-feedback {
+
+            background: #fff3cd;
+
+            color: #664d03;
         }
 
 
@@ -566,6 +574,8 @@
 
 
 
+    <!-- QUIZ CARD -->
+
     <div
         class="card"
         id="quizCard"
@@ -675,12 +685,16 @@
 
 
 
+        <!-- FEEDBACK -->
+
         <div
             class="feedback"
             id="feedback">
         </div>
 
 
+
+        <!-- ANSWER / EXPLANATION -->
 
         <div
             class="answer"
@@ -749,6 +763,8 @@
     </div>
 
 
+
+    <!-- RESULT -->
 
     <div
         class="card result"
@@ -869,7 +885,35 @@ let currentQuestion = 0;
 
 let score = 0;
 
-let answered = false;
+
+/*
+=========================================================
+IMPORTANT
+
+This array remembers the answer given to every question.
+
+Example:
+
+answers[0] = {
+    answered: true,
+    selected: "B",
+    correct: "B",
+    isCorrect: true
+};
+
+answers[1] = {
+    answered: true,
+    selected: "A",
+    correct: "C",
+    isCorrect: false
+};
+
+This prevents a student from answering a question
+again when they click Previous.
+=========================================================
+*/
+
+let answers = [];
 
 
 
@@ -894,24 +938,31 @@ const selectedTopic =
 
 async function loadQuestions() {
 
+
     const loading =
         document.getElementById("loading");
+
 
     const quizCard =
         document.getElementById("quizCard");
 
+
     const empty =
         document.getElementById("empty");
+
 
     const error =
         document.getElementById("error");
 
 
+
     if (!selectedTopic) {
 
-        loading.style.display = "none";
+        loading.style.display =
+            "none";
 
-        error.style.display = "block";
+        error.style.display =
+            "block";
 
         error.innerHTML = `
 
@@ -931,10 +982,13 @@ async function loadQuestions() {
     }
 
 
+
     document
         .getElementById("topicName")
         .textContent =
-        "Topic: " + selectedTopic;
+        "Topic: " +
+        selectedTopic;
+
 
 
     document
@@ -957,6 +1011,7 @@ async function loadQuestions() {
             .getUser();
 
 
+
     if (userError || !user) {
 
         window.location.href =
@@ -971,23 +1026,6 @@ async function loadQuestions() {
     // ==================================================
     // GET QUESTIONS
     // ==================================================
-
-    /*
-     * IMPORTANT FIX:
-     *
-     * ilike() makes the topic comparison
-     * case-insensitive.
-     *
-     * This means:
-     *
-     * "The Blood"
-     *
-     * and
-     *
-     * "The blood"
-     *
-     * will match.
-     */
 
     const {
         data,
@@ -1045,7 +1083,9 @@ async function loadQuestions() {
             </h2>
 
             <p>
-                ${databaseError.message}
+                ${escapeHTML(
+                    databaseError.message
+                )}
             </p>
 
         `;
@@ -1055,8 +1095,10 @@ async function loadQuestions() {
     }
 
 
+
     questions =
         data || [];
+
 
 
     loading.style.display =
@@ -1089,6 +1131,34 @@ async function loadQuestions() {
 
 
     // ==================================================
+    // CREATE ANSWER MEMORY
+    // ==================================================
+
+    /*
+     * One empty answer record is created for
+     * every question.
+     */
+
+    answers =
+        questions.map(function() {
+
+            return {
+
+                answered: false,
+
+                selected: null,
+
+                correct: null,
+
+                isCorrect: false
+
+            };
+
+        });
+
+
+
+    // ==================================================
     // SHOW QUIZ
     // ==================================================
 
@@ -1108,12 +1178,27 @@ async function loadQuestions() {
 
 function showQuestion() {
 
+
     const q =
         questions[currentQuestion];
 
 
-    answered = false;
+    const savedAnswer =
+        answers[currentQuestion];
 
+
+
+    if (!q) {
+
+        return;
+
+    }
+
+
+
+    // ==================================================
+    // QUESTION INFORMATION
+    // ==================================================
 
     document
         .getElementById("counter")
@@ -1125,6 +1210,7 @@ function showQuestion() {
         questions.length;
 
 
+
     document
         .getElementById("score")
         .textContent =
@@ -1133,10 +1219,12 @@ function showQuestion() {
         score;
 
 
+
     document
         .getElementById("question")
         .textContent =
         q.question;
+
 
 
     document
@@ -1145,10 +1233,12 @@ function showQuestion() {
         q.option_a;
 
 
+
     document
         .getElementById("text_b")
         .textContent =
         q.option_b;
+
 
 
     document
@@ -1157,10 +1247,155 @@ function showQuestion() {
         q.option_c;
 
 
+
     document
         .getElementById("text_d")
         .textContent =
         q.option_d;
+
+
+
+    // ==================================================
+    // GET OPTIONS
+    // ==================================================
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+
+    // ==================================================
+    // RESET OPTIONS
+    // ==================================================
+
+    options.forEach(function(option) {
+
+        option.classList.remove(
+            "correct",
+            "wrong",
+            "disabled"
+        );
+
+        option.disabled = false;
+
+    });
+
+
+
+    // ==================================================
+    // RESET FEEDBACK
+    // ==================================================
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.style.display =
+        "none";
+
+
+    feedback.className =
+        "feedback";
+
+    feedback.textContent =
+        "";
+
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "none";
+
+
+
+    // ==================================================
+    // QUESTION HAS ALREADY BEEN ANSWERED
+    // ==================================================
+
+    if (
+        savedAnswer &&
+        savedAnswer.answered
+    ) {
+
+
+        /*
+         * This question has already been answered.
+         *
+         * We show the previous answer instead of
+         * allowing the student to answer again.
+         */
+
+        showPreviousAnswer(
+            q,
+            savedAnswer
+        );
+
+
+    }
+
+    else {
+
+
+        /*
+         * Question has not been answered yet.
+         */
+
+        document
+            .getElementById("nextButton")
+            .disabled =
+            true;
+
+    }
+
+
+
+    // ==================================================
+    // PREVIOUS BUTTON
+    // ==================================================
+
+    document
+        .getElementById("previousButton")
+        .disabled =
+        currentQuestion === 0;
+
+}
+
+
+
+// ======================================================
+// SHOW PREVIOUSLY ANSWERED QUESTION
+// ======================================================
+
+function showPreviousAnswer(
+    q,
+    savedAnswer
+) {
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            savedAnswer.selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            savedAnswer.correct.toLowerCase()
+        );
 
 
 
@@ -1177,42 +1412,140 @@ function showQuestion() {
     ];
 
 
+
+    // ==================================================
+    // LOCK ALL OPTIONS
+    // ==================================================
+
     options.forEach(function(option) {
 
-        option.classList.remove(
-            "correct",
-            "wrong",
+        option.disabled = true;
+
+        option.classList.add(
             "disabled"
         );
-
-        option.disabled = false;
 
     });
 
 
 
+    // ==================================================
+    // SHOW SELECTED ANSWER
+    // ==================================================
+
+    if (selectedButton) {
+
+        if (
+            savedAnswer.isCorrect
+        ) {
+
+            selectedButton.classList.add(
+                "correct"
+            );
+
+        }
+
+        else {
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+        }
+
+    }
+
+
+
+    // ==================================================
+    // SHOW CORRECT ANSWER
+    // ==================================================
+
+    if (
+        correctButton &&
+        savedAnswer.selected !==
+        savedAnswer.correct
+    ) {
+
+        correctButton.classList.add(
+            "correct"
+        );
+
+    }
+
+
+
+    // ==================================================
+    // FEEDBACK
+    // ==================================================
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    if (
+        savedAnswer.isCorrect
+    ) {
+
+        feedback.textContent =
+            "✅ You already answered this question correctly.";
+
+        feedback.className =
+            "feedback correct-feedback";
+
+    }
+
+    else {
+
+        feedback.textContent =
+            "❌ You already answered this question. Your previous answer cannot be changed.";
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+    }
+
+
+    feedback.style.display =
+        "block";
+
+
+
+    // ==================================================
+    // SHOW ANSWER AND EXPLANATION
+    // ==================================================
+
     document
-        .getElementById("feedback")
-        .style.display =
-        "none";
+        .getElementById("correct_answer")
+        .textContent =
+        savedAnswer.correct;
+
+
+    document
+        .getElementById("explanation")
+        .textContent =
+
+        q.explanation ||
+        "No explanation provided.";
 
 
     document
         .getElementById("answer")
         .style.display =
-        "none";
+        "block";
 
+
+
+    // ==================================================
+    // ENABLE NEXT
+    // ==================================================
 
     document
         .getElementById("nextButton")
         .disabled =
-        true;
-
-
-    document
-        .getElementById("previousButton")
-        .disabled =
-        currentQuestion === 0;
+        false;
 
 }
 
@@ -1222,18 +1555,37 @@ function showQuestion() {
 // SELECT ANSWER
 // ======================================================
 
-function selectAnswer(selected) {
+function selectAnswer(
+    selected
+) {
 
-    if (answered) {
+
+    const savedAnswer =
+        answers[currentQuestion];
+
+
+
+    /*
+     * VERY IMPORTANT:
+     *
+     * If this question has already been answered,
+     * do absolutely nothing.
+     */
+
+    if (
+        savedAnswer &&
+        savedAnswer.answered
+    ) {
+
         return;
+
     }
 
-
-    answered = true;
 
 
     const q =
         questions[currentQuestion];
+
 
 
     const correct =
@@ -1244,11 +1596,13 @@ function selectAnswer(selected) {
         .toUpperCase();
 
 
+
     const selectedButton =
         document.getElementById(
             "option_" +
             selected.toLowerCase()
         );
+
 
 
     const correctButton =
@@ -1257,6 +1611,41 @@ function selectAnswer(selected) {
             correct.toLowerCase()
         );
 
+
+
+    // ==================================================
+    // DETERMINE RESULT
+    // ==================================================
+
+    const isCorrect =
+        selected === correct;
+
+
+
+    // ==================================================
+    // SAVE ANSWER
+    // ==================================================
+
+    answers[currentQuestion] = {
+
+        answered: true,
+
+        selected:
+            selected,
+
+        correct:
+            correct,
+
+        isCorrect:
+            isCorrect
+
+    };
+
+
+
+    // ==================================================
+    // LOCK OPTIONS
+    // ==================================================
 
     const options = [
 
@@ -1275,13 +1664,20 @@ function selectAnswer(selected) {
 
         option.disabled = true;
 
-        option.classList.add("disabled");
+        option.classList.add(
+            "disabled"
+        );
 
     });
 
 
 
-    if (selected === correct) {
+    // ==================================================
+    // CORRECT ANSWER
+    // ==================================================
+
+    if (isCorrect) {
+
 
         score++;
 
@@ -1311,7 +1707,13 @@ function selectAnswer(selected) {
     }
 
 
+
+    // ==================================================
+    // WRONG ANSWER
+    // ==================================================
+
     else {
+
 
         selectedButton.classList.add(
             "wrong"
@@ -1352,11 +1754,20 @@ function selectAnswer(selected) {
 
 
 
+    // ==================================================
+    // SHOW CORRECT ANSWER
+    // ==================================================
+
     document
         .getElementById("correct_answer")
         .textContent =
         correct;
 
+
+
+    // ==================================================
+    // SHOW EXPLANATION
+    // ==================================================
 
     document
         .getElementById("explanation")
@@ -1372,6 +1783,11 @@ function selectAnswer(selected) {
         "block";
 
 
+
+    // ==================================================
+    // UPDATE SCORE
+    // ==================================================
+
     document
         .getElementById("score")
         .textContent =
@@ -1379,6 +1795,11 @@ function selectAnswer(selected) {
         "Score: " +
         score;
 
+
+
+    // ==================================================
+    // ENABLE NEXT
+    // ==================================================
 
     document
         .getElementById("nextButton")
@@ -1390,23 +1811,43 @@ function selectAnswer(selected) {
 
 
 // ======================================================
-// NEXT
+// NEXT QUESTION
 // ======================================================
 
 function nextQuestion() {
+
+
+    /*
+     * The current question must already be answered
+     * before moving forward.
+     */
+
+    if (
+        !answers[currentQuestion] ||
+        !answers[currentQuestion].answered
+    ) {
+
+        return;
+
+    }
+
+
 
     if (
         currentQuestion <
         questions.length - 1
     ) {
 
+
         currentQuestion++;
+
 
         showQuestion();
 
     }
 
     else {
+
 
         showResult();
 
@@ -1417,14 +1858,25 @@ function nextQuestion() {
 
 
 // ======================================================
-// PREVIOUS
+// PREVIOUS QUESTION
 // ======================================================
 
 function previousQuestion() {
 
-    if (currentQuestion > 0) {
+
+    if (
+        currentQuestion > 0
+    ) {
+
 
         currentQuestion--;
+
+
+        /*
+         * showQuestion() will check the saved answer
+         * and automatically lock the question if it
+         * was already answered.
+         */
 
         showQuestion();
 
@@ -1435,10 +1887,11 @@ function previousQuestion() {
 
 
 // ======================================================
-// RESULT
+// SHOW RESULT
 // ======================================================
 
 async function showResult() {
+
 
     document
         .getElementById("quizCard")
@@ -1452,14 +1905,21 @@ async function showResult() {
         "block";
 
 
+
     const total =
         questions.length;
 
 
+
     const percentage =
-        Math.round(
-            (score / total) * 100
-        );
+        total > 0
+
+            ? Math.round(
+                (score / total) * 100
+            )
+
+            : 0;
+
 
 
     document
@@ -1471,6 +1931,7 @@ async function showResult() {
         total;
 
 
+
     document
         .getElementById("percentage")
         .textContent =
@@ -1480,12 +1941,18 @@ async function showResult() {
         "%";
 
 
+
+    // ==================================================
+    // GET CURRENT USER
+    // ==================================================
+
     const {
         data: { user }
     } =
         await supabaseClient
             .auth
             .getUser();
+
 
 
     if (!user) {
@@ -1498,6 +1965,11 @@ async function showResult() {
 
     }
 
+
+
+    // ==================================================
+    // SAVE QUIZ RESULT
+    // ==================================================
 
     const {
         error: saveError
@@ -1526,6 +1998,7 @@ async function showResult() {
             });
 
 
+
     if (saveError) {
 
         console.error(
@@ -1540,16 +2013,40 @@ async function showResult() {
 
 
 // ======================================================
-// RESTART
+// RESTART QUIZ
 // ======================================================
 
 function restartQuiz() {
+
+
+    /*
+     * A new attempt starts here.
+     *
+     * Therefore all previous answers are cleared.
+     */
 
     currentQuestion = 0;
 
     score = 0;
 
-    answered = false;
+    answers = questions.map(
+        function() {
+
+            return {
+
+                answered: false,
+
+                selected: null,
+
+                correct: null,
+
+                isCorrect: false
+
+            };
+
+        }
+    );
+
 
 
     document
@@ -1571,10 +2068,61 @@ function restartQuiz() {
 
 
 // ======================================================
-// START
+// ESCAPE HTML
+// ======================================================
+
+function escapeHTML(
+    value
+) {
+
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+// ======================================================
+// START QUIZ
 // ======================================================
 
 loadQuestions();
+
 
 </script>
 
