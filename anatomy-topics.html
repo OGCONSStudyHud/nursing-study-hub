@@ -5,25 +5,20 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>OGCONS Study Hub - Dashboard</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>OGCONS Study Hub - Anatomy & Physiology</title>
 
     <style>
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
+            margin: 0;
+
             font-family: Arial, sans-serif;
-            min-height: 100vh;
 
             background:
                 linear-gradient(
@@ -37,11 +32,12 @@
         }
 
 
-        /* ==============================
+        /* ==========================================
            HEADER
-        ============================== */
+        ========================================== */
 
         header {
+
             background:
                 linear-gradient(
                     135deg,
@@ -51,112 +47,108 @@
 
             color: white;
 
-            padding: 25px;
-        }
-
-
-        .header-content {
-            max-width: 1100px;
-
-            margin: auto;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            gap: 20px;
-        }
-
-
-        .logo {
-            font-size: 24px;
-
-            font-weight: bold;
-        }
-
-
-        .logout {
-            background: white;
-
-            color: #18a058;
-
-            border: none;
-
-            padding: 10px 18px;
-
-            border-radius: 20px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-
-        .logout:hover {
-            background: #f0f0f0;
-        }
-
-
-        /* ==============================
-           MAIN CONTAINER
-        ============================== */
-
-        .container {
-            max-width: 1100px;
-
-            margin: auto;
+            text-align: center;
 
             padding: 35px 20px;
         }
 
 
-        /* ==============================
-           WELCOME
-        ============================== */
+        header h1 {
 
-        .welcome {
-            background: white;
+            margin: 0;
 
-            padding: 30px;
-
-            border-radius: 20px;
-
-            box-shadow:
-                0 10px 25px
-                rgba(0,0,0,0.08);
-
-            margin-bottom: 30px;
+            font-size: 34px;
         }
 
 
-        .welcome h1 {
+        header p {
+
+            margin-top: 10px;
+
+            font-size: 17px;
+        }
+
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 30px 20px;
+        }
+
+
+        /* ==========================================
+           BACK BUTTON
+        ========================================== */
+
+        .back {
+
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            color: #18a058;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        .back:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ==========================================
+           INTRO
+        ========================================== */
+
+        .intro {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.08);
+        }
+
+
+        .intro h2 {
+
             margin-bottom: 10px;
         }
 
 
-        .welcome p {
+        .intro p {
+
             color: #617568;
+
+            line-height: 1.5;
         }
 
 
-        /* ==============================
-           SECTION TITLE
-        ============================== */
+        /* ==========================================
+           TOPICS GRID
+        ========================================== */
 
-        .section-title {
-            margin: 30px 0 18px;
+        .topics {
 
-            font-size: 24px;
-        }
-
-
-        /* ==============================
-           CARDS
-        ============================== */
-
-        .cards {
             display: grid;
 
             grid-template-columns:
@@ -166,128 +158,147 @@
         }
 
 
-        .card {
+        /* ==========================================
+           TOPIC CARD
+        ========================================== */
+
+        .topic {
+
             background: white;
 
             padding: 25px;
 
-            border-radius: 20px;
-
-            box-shadow:
-                0 10px 25px
-                rgba(0,0,0,0.08);
+            border-radius: 18px;
 
             text-align: center;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.08);
 
             transition: 0.2s;
         }
 
 
-        .card:hover {
+        .topic:hover {
+
             transform:
-                translateY(-3px);
+                translateY(-5px);
         }
 
 
+        /* ==========================================
+           ICON
+        ========================================== */
+
         .icon {
-            font-size: 42px;
+
+            font-size: 45px;
 
             margin-bottom: 12px;
         }
 
 
-        .card h3 {
-            margin-bottom: 8px;
+        /* ==========================================
+           TOPIC TITLE
+        ========================================== */
+
+        .topic h3 {
+
+            margin-bottom: 10px;
+
+            line-height: 1.3;
         }
 
 
-        .card p {
+        /* ==========================================
+           DESCRIPTION
+        ========================================== */
+
+        .topic p {
+
             color: #617568;
 
-            margin-bottom: 18px;
+            min-height: 50px;
 
             line-height: 1.5;
         }
 
 
-        /* ==============================
-           COURSE BUTTON
-        ============================== */
+        /* ==========================================
+           BUTTON
+        ========================================== */
 
-        .card button {
+        .topic button {
+
             border: none;
 
             background: #18a058;
 
             color: white;
 
-            padding: 11px 18px;
+            padding: 12px 20px;
 
-            border-radius: 20px;
+            border-radius: 25px;
 
             font-weight: bold;
 
             cursor: pointer;
+
+            margin-top: 10px;
         }
 
 
-        .card button:hover {
+        .topic button:hover {
+
             background: #117d45;
         }
 
 
-        /* ==============================
-           COMING SOON
-        ============================== */
+        /* ==========================================
+           FOOTER
+        ========================================== */
 
-        .coming-soon {
-            background: #9aa6a0 !important;
+        footer {
 
-            cursor: not-allowed !important;
-        }
-
-
-        /* ==============================
-           STATISTICS
-        ============================== */
-
-        .stat {
-            font-size: 32px;
-
-            font-weight: bold;
-
-            color: #18a058;
-
-            margin: 10px 0;
-        }
-
-
-        /* ==============================
-           LOADING
-        ============================== */
-
-        .loading {
             text-align: center;
 
-            padding: 50px;
+            padding: 35px;
 
-            font-size: 18px;
+            color: #527060;
         }
 
 
-        /* ==============================
+        /* ==========================================
+           TABLET
+        ========================================== */
+
+        @media (max-width: 800px) {
+
+            .topics {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* ==========================================
            MOBILE
-        ============================== */
+        ========================================== */
 
-        @media (max-width: 750px) {
+        @media (max-width: 550px) {
 
-            .cards {
+            .topics {
+
                 grid-template-columns: 1fr;
             }
 
 
-            .header-content {
-                flex-direction: column;
+            header h1 {
+
+                font-size: 28px;
             }
 
         }
@@ -306,79 +317,49 @@
 
 <header>
 
-    <div class="header-content">
+    <h1>
+        🫀 Anatomy & Physiology
+    </h1>
 
-        <div class="logo">
-
-            🩺 OGCONS Study Hub
-
-        </div>
-
-
-        <button
-            class="logout"
-            onclick="logout()">
-
-            🚪 Logout
-
-        </button>
-
-    </div>
+    <p>
+        Choose a topic to begin studying
+    </p>
 
 </header>
 
 
 
-<!-- ==========================================
-     LOADING
-========================================== -->
-
-<div
-    id="loading"
-    class="loading">
-
-    Checking your account...
-
-</div>
+<div class="container">
 
 
+    <!-- ==========================================
+         BACK
+    ========================================== -->
 
-<!-- ==========================================
-     DASHBOARD
-========================================== -->
+    <a
+        href="dashboard.html"
+        class="back">
 
-<div
-    id="dashboard"
-    class="container"
-    style="display:none;">
+        ← Back to Dashboard
+
+    </a>
 
 
-    <!-- ======================================
-         WELCOME
-    ======================================= -->
 
-    <div class="welcome">
+    <!-- ==========================================
+         INTRO
+    ========================================== -->
 
-        <h1>
+    <div class="intro">
 
-            Welcome,
-
-            <span id="studentName">
-                Student
-            </span>
-
-            👋
-
-        </h1>
-
+        <h2>
+            📚 Anatomy & Physiology Topics
+        </h2>
 
         <p>
 
-            Welcome to your personal
-            OGCONS Study Hub.
-
-            Continue learning and
-            prepare for your exams.
+            Select a topic below to study
+            and test your knowledge.
 
         </p>
 
@@ -386,54 +367,34 @@
 
 
 
-    <!-- ======================================
-         COURSES
-    ======================================= -->
+    <!-- ==========================================
+         TOPICS
+    ========================================== -->
 
-    <h2 class="section-title">
-
-        📚 My Courses
-
-    </h2>
+    <div class="topics">
 
 
-    <div class="cards">
+        <!-- 1 -->
 
-
-        <!-- ==================================
-             MICROBIOLOGY
-        =================================== -->
-
-        <div class="card">
+        <div class="topic">
 
             <div class="icon">
-
-                🦠
-
+                🧍
             </div>
 
-
             <h3>
-
-                Microbiology
-
+                Anatomy and Organisation of the Body
             </h3>
 
-
             <p>
-
-                Study microorganisms,
-                infectious diseases and
-                important microbiology
-                concepts.
-
+                Learn how the human body is organised
+                from cells to organs and systems.
             </p>
 
-
             <button
-                onclick="openMicrobiology()">
+                onclick="openTopic('Anatomy and Organisation of the Body')">
 
-                Open Course
+                Start Topic
 
             </button>
 
@@ -441,39 +402,27 @@
 
 
 
-        <!-- ==================================
-             ANATOMY & PHYSIOLOGY
-        =================================== -->
+        <!-- 2 -->
 
-        <div class="card">
+        <div class="topic">
 
             <div class="icon">
-
-                🫀
-
+                🧪
             </div>
 
-
             <h3>
-
-                Anatomy & Physiology
-
+                Physiological Chemistry and Processes
             </h3>
 
-
             <p>
-
-                Study body structures,
-                organs and how the
-                human body functions.
-
+                Study the chemical processes that
+                support normal body functions.
             </p>
 
-
             <button
-                onclick="openAnatomy()">
+                onclick="openTopic('Physiological Chemistry and Processes')">
 
-                Open Course
+                Start Topic
 
             </button>
 
@@ -481,39 +430,27 @@
 
 
 
-        <!-- ==================================
-             PHARMACOLOGY
-        =================================== -->
+        <!-- 3 -->
 
-        <div class="card">
+        <div class="topic">
 
             <div class="icon">
-
-                💊
-
+                🔬
             </div>
 
-
             <h3>
-
-                Pharmacology
-
+                Cells and Tissues
             </h3>
 
-
             <p>
-
-                Study medications,
-                drug classifications,
-                actions and uses.
-
+                Study the basic structural and
+                functional units of the body.
             </p>
 
-
             <button
-                class="coming-soon">
+                onclick="openTopic('Cells and Tissues')">
 
-                Coming Soon
+                Start Topic
 
             </button>
 
@@ -521,39 +458,27 @@
 
 
 
-        <!-- ==================================
-             MEDICAL-SURGICAL NURSING
-        =================================== -->
+        <!-- 4 -->
 
-        <div class="card">
+        <div class="topic">
 
             <div class="icon">
-
-                🏥
-
+                🩸
             </div>
 
-
             <h3>
-
-                Medical-Surgical Nursing
-
+                The Blood
             </h3>
 
-
             <p>
-
-                Study common medical
-                and surgical conditions
-                and nursing care.
-
+                Learn about blood components,
+                functions and blood groups.
             </p>
 
-
             <button
-                class="coming-soon">
+                onclick="openTopic('The Blood')">
 
-                Coming Soon
+                Start Topic
 
             </button>
 
@@ -561,39 +486,195 @@
 
 
 
-        <!-- ==================================
-             NUTRITION
-        =================================== -->
+        <!-- 5 -->
 
-        <div class="card">
+        <div class="topic">
 
             <div class="icon">
+                ❤️
+            </div>
 
+            <h3>
+                The Cardiovascular System
+            </h3>
+
+            <p>
+                Study the heart, blood vessels
+                and circulation.
+            </p>
+
+            <button
+                onclick="openTopic('The Cardiovascular System')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 6 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                The Lymphatic System
+            </h3>
+
+            <p>
+                Learn about lymph, lymph nodes
+                and lymphatic functions.
+            </p>
+
+            <button
+                onclick="openTopic('The Lymphatic System')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 7 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🧠
+            </div>
+
+            <h3>
+                The Nervous System
+            </h3>
+
+            <p>
+                Study the brain, spinal cord,
+                nerves and nervous control.
+            </p>
+
+            <button
+                onclick="openTopic('The Nervous System')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 8 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                👁️
+            </div>
+
+            <h3>
+                The Special Senses
+            </h3>
+
+            <p>
+                Study vision, hearing, smell,
+                taste and balance.
+            </p>
+
+            <button
+                onclick="openTopic('The Special Senses')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 9 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🧬
+            </div>
+
+            <h3>
+                The Endocrine System
+            </h3>
+
+            <p>
+                Learn about hormones and
+                endocrine glands.
+            </p>
+
+            <button
+                onclick="openTopic('The Endocrine System')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 10 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🫁
+            </div>
+
+            <h3>
+                The Respiratory System
+            </h3>
+
+            <p>
+                Study the respiratory organs
+                and the process of breathing.
+            </p>
+
+            <button
+                onclick="openTopic('The Respiratory System')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 11 -->
+
+        <div class="topic">
+
+            <div class="icon">
                 🥗
-
             </div>
 
-
             <h3>
-
-                Nutrition
-
+                Introduction to Nutrition
             </h3>
 
-
             <p>
-
-                Review nutrients,
-                food, diet and
-                healthy living.
-
+                Learn about nutrients, food
+                and basic nutritional principles.
             </p>
 
-
             <button
-                class="coming-soon">
+                onclick="openTopic('Introduction to Nutrition')">
 
-                Coming Soon
+                Start Topic
 
             </button>
 
@@ -601,39 +682,195 @@
 
 
 
-        <!-- ==================================
-             NURSING PRACTICE
-        =================================== -->
+        <!-- 12 -->
 
-        <div class="card">
+        <div class="topic">
 
             <div class="icon">
-
-                👩‍⚕️
-
+                🍽️
             </div>
 
-
             <h3>
-
-                Nursing Practice
-
+                The Digestive System
             </h3>
 
-
             <p>
-
-                Practice important
-                nursing procedures,
-                skills and principles.
-
+                Study the digestive organs
+                and digestion of food.
             </p>
 
+            <button
+                onclick="openTopic('The Digestive System')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 13 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🚽
+            </div>
+
+            <h3>
+                The Urinary System
+            </h3>
+
+            <p>
+                Learn about the kidneys,
+                urine formation and excretion.
+            </p>
 
             <button
-                class="coming-soon">
+                onclick="openTopic('The Urinary System')">
 
-                Coming Soon
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 14 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🖐️
+            </div>
+
+            <h3>
+                The Skin
+            </h3>
+
+            <p>
+                Study the structure and
+                functions of the skin.
+            </p>
+
+            <button
+                onclick="openTopic('The Skin')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 15 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Defence and Immunity
+            </h3>
+
+            <p>
+                Learn how the body protects
+                itself from disease.
+            </p>
+
+            <button
+                onclick="openTopic('Defence and Immunity')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 16 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🦴
+            </div>
+
+            <h3>
+                The Musculoskeletal System
+            </h3>
+
+            <p>
+                Study bones, muscles,
+                joints and movement.
+            </p>
+
+            <button
+                onclick="openTopic('The Musculoskeletal System')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 17 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🧬
+            </div>
+
+            <h3>
+                Genetics and Inheritance
+            </h3>
+
+            <p>
+                Learn about genes, heredity
+                and inheritance.
+            </p>
+
+            <button
+                onclick="openTopic('Genetics and Inheritance')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 18 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                👶
+            </div>
+
+            <h3>
+                The Reproductive Systems
+            </h3>
+
+            <p>
+                Study the male and female
+                reproductive systems.
+            </p>
+
+            <button
+                onclick="openTopic('The Reproductive Systems')">
+
+                Start Topic
 
             </button>
 
@@ -641,458 +878,34 @@
 
 
     </div>
-
-
-
-    <!-- ======================================
-         PROGRESS
-    ======================================= -->
-
-    <h2 class="section-title">
-
-        📊 My Progress
-
-    </h2>
-
-
-    <div class="cards">
-
-
-        <!-- QUIZZES COMPLETED -->
-
-        <div class="card">
-
-            <div class="icon">
-
-                📝
-
-            </div>
-
-
-            <h3>
-
-                Quizzes Completed
-
-            </h3>
-
-
-            <div
-                class="stat"
-                id="quizCount">
-
-                0
-
-            </div>
-
-
-            <p>
-
-                Your completed quizzes
-                will appear here.
-
-            </p>
-
-        </div>
-
-
-
-        <!-- AVERAGE SCORE -->
-
-        <div class="card">
-
-            <div class="icon">
-
-                ⭐
-
-            </div>
-
-
-            <h3>
-
-                Average Score
-
-            </h3>
-
-
-            <div
-                class="stat"
-                id="averageScore">
-
-                0%
-
-            </div>
-
-
-            <p>
-
-                Your quiz average
-                will appear here.
-
-            </p>
-
-        </div>
-
-
-
-        <!-- LEADERBOARD -->
-
-        <div class="card">
-
-            <div class="icon">
-
-                🏆
-
-            </div>
-
-
-            <h3>
-
-                Leaderboard
-
-            </h3>
-
-
-            <p>
-
-                See your position
-                among your classmates.
-
-            </p>
-
-
-            <button
-                class="coming-soon">
-
-                Coming Soon
-
-            </button>
-
-        </div>
-
-
-    </div>
-
 
 </div>
 
 
 
-<!-- ==========================================
-     JAVASCRIPT
-========================================== -->
+<footer>
+
+    © 2026 OGCONS Study Hub
+    • Built for students
+
+</footer>
+
+
 
 <script>
 
 
 // ==========================================
-// SUPABASE CONNECTION
+// OPEN SELECTED TOPIC
 // ==========================================
 
-const SUPABASE_URL =
-    "https://bvetmmvpdotifusjkywd.supabase.co";
-
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
-
-
-const supabaseClient =
-    window.supabase.createClient(
-
-        SUPABASE_URL,
-
-        SUPABASE_PUBLISHABLE_KEY
-
-    );
-
-
-
-// ==========================================
-// CHECK LOGIN
-// ==========================================
-
-async function checkUser() {
-
-
-    const {
-
-        data: {
-            user
-
-        }
-
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
-
-
-
-    // ======================================
-    // USER NOT LOGGED IN
-    // ======================================
-
-    if (!user) {
-
-        window.location.href =
-            "index.html";
-
-        return;
-
-    }
-
-
-
-    // ======================================
-    // GET STUDENT NAME
-    // ======================================
-
-    const name =
-
-        user.user_metadata?.full_name ||
-
-        user.email?.split("@")[0] ||
-
-        "Student";
-
-
-
-    document
-        .getElementById("studentName")
-        .textContent =
-        name;
-
-
-
-    // ======================================
-    // SHOW DASHBOARD
-    // ======================================
-
-    document
-        .getElementById("loading")
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById("dashboard")
-        .style.display =
-        "block";
-
-}
-
-
-
-// ==========================================
-// OPEN MICROBIOLOGY
-// ==========================================
-
-function openMicrobiology() {
+function openTopic(topic) {
 
     window.location.href =
-        "microbiology-topics.html";
+        "anatomy-quiz.html?topic=" +
+        encodeURIComponent(topic);
 
 }
-
-
-
-// ==========================================
-// OPEN ANATOMY & PHYSIOLOGY
-// ==========================================
-
-function openAnatomy() {
-
-    window.location.href =
-        "anatomy-topics.html";
-
-}
-
-
-
-// ==========================================
-// LOGOUT
-// ==========================================
-
-async function logout() {
-
-
-    await supabaseClient
-        .auth
-        .signOut();
-
-
-    window.location.href =
-        "index.html";
-
-}
-
-
-
-// ==========================================
-// LOAD QUIZ PROGRESS
-// ==========================================
-
-async function loadQuizProgress() {
-
-
-    const {
-
-        data: {
-            user
-
-        }
-
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
-
-
-
-    // ======================================
-    // NO USER
-    // ======================================
-
-    if (!user) {
-
-        return;
-
-    }
-
-
-
-    // ======================================
-    // GET QUIZ RESULTS
-    // ======================================
-
-    const {
-
-        data,
-        error
-
-    } =
-        await supabaseClient
-
-            .from("quiz_results")
-
-            .select("percentage")
-
-            .eq(
-                "user_id",
-                user.id
-            );
-
-
-
-    // ======================================
-    // ERROR
-    // ======================================
-
-    if (error) {
-
-        console.error(
-
-            "Unable to load quiz progress:",
-
-            error.message
-
-        );
-
-        return;
-
-    }
-
-
-
-    const results =
-        data || [];
-
-
-
-    // ======================================
-    // QUIZ COUNT
-    // ======================================
-
-    document
-        .getElementById("quizCount")
-        .textContent =
-        results.length;
-
-
-
-    // ======================================
-    // NO RESULTS
-    // ======================================
-
-    if (results.length === 0) {
-
-        document
-            .getElementById("averageScore")
-            .textContent =
-            "0%";
-
-        return;
-
-    }
-
-
-
-    // ======================================
-    // CALCULATE AVERAGE
-    // ======================================
-
-    const totalPercentage =
-
-        results.reduce(
-
-            function(total, result) {
-
-                return total +
-
-                    Number(
-                        result.percentage || 0
-                    );
-
-            },
-
-            0
-
-        );
-
-
-
-    const average =
-
-        Math.round(
-
-            totalPercentage /
-            results.length
-
-        );
-
-
-
-    // ======================================
-    // DISPLAY AVERAGE
-    // ======================================
-
-    document
-        .getElementById("averageScore")
-        .textContent =
-
-        average + "%";
-
-}
-
-
-
-// ==========================================
-// START DASHBOARD
-// ==========================================
-
-checkUser();
-
-loadQuizProgress();
 
 
 </script>
