@@ -1,226 +1,1882 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>OGCONS Study Hub - Anatomy & Physiology Quiz</title>
+    <title>OGCONS Study Hub - Anatomy & Physiology Quiz</title>
 
-<style> * { box-sizing: border-box; } body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient( 135deg, #e8fff2, #e8f4ff, #f5eaff ); color: #172033; } header { background: linear-gradient( 135deg, #18a058, #2eb7a0 ); color: white; padding: 30px 20px; text-align: center; } header h1 { margin: 0; font-size: 28px; } header p { margin: 8px 0 0; font-size: 16px; } .container { max-width: 850px; margin: 30px auto; padding: 20px; } .back { display: inline-block; margin-bottom: 20px; color: #18a058; text-decoration: none; font-weight: bold; } .back:hover { text-decoration: underline; } .card, #loading, #error { background: white; border-radius: 18px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); } .course-title { text-align: center; margin-bottom: 20px; } .course-title h2 { margin: 0 0 8px; color: #163020; } .course-title p { margin: 0; color: #617568; } .topic-name { text-align: center; background: #e8fff2; color: #16834a; padding: 12px; border-radius: 10px; font-weight: bold; margin-bottom: 20px; } .counter { text-align: center; color: #667085; font-weight: bold; margin-bottom: 10px; } .score { text-align: center; color: #18a058; font-weight: bold; margin-bottom: 25px; } .question { font-size: 21px; font-weight: bold; line-height: 1.5; margin-bottom: 25px; } .options { display: grid; gap: 12px; } .option { width: 100%; text-align: left; background: #f7f9fc; border: 2px solid #d8dee8; border-radius: 12px; padding: 16px; font-size: 16px; cursor: pointer; transition: 0.2s; } .option:hover:not(:disabled) { background: #eefaf4; border-color: #18a058; } .option strong { margin-right: 8px; } .option.correct { background: #d1e7dd; border-color: #198754; color: #0f5132; } .option.wrong { background: #f8d7da; border-color: #dc3545; color: #842029; } .option.disabled { cursor: not-allowed; } .feedback { margin-top: 20px; padding: 18px; border-radius: 12px; display: none; font-weight: bold; } .correct-feedback { background: #d1e7dd; color: #0f5132; } .wrong-feedback { background: #f8d7da; color: #842029; } .answer { margin-top: 15px; padding: 18px; background: #eef6ff; border-radius: 12px; display: none; line-height: 1.6; } .answer strong { color: #0b5ed7; } .buttons { display: flex; justify-content: space-between; gap: 12px; margin-top: 25px; } button { border: none; border-radius: 10px; padding: 13px 20px; font-size: 15px; font-weight: bold; cursor: pointer; } .primary { background: #18a058; color: white; } .primary:hover { background: #117d45; } .secondary { background: #e9edf3; color: #172033; } button:disabled { opacity: 0.5; cursor: not-allowed; } #error { display: none; color: #dc3545; text-align: center; } .result { text-align: center; display: none; } .result-icon { font-size: 65px; margin-bottom: 15px; } .result h2 { margin-bottom: 10px; } .final-score { font-size: 42px; font-weight: bold; color: #18a058; margin: 20px 0; } .result button { background: #18a058; color: white; margin-top: 10px; } .result .back-topic { background: #6c757d; } .ai-info { background: #f0f9ff; border: 1px solid #b6e0fe; color: #145374; border-radius: 10px; padding: 12px; margin-bottom: 20px; text-align: center; font-size: 14px; } @media (max-width: 600px) { .container { padding: 12px; } .card, #loading, #error { padding: 20px; } .question { font-size: 19px; } .buttons { flex-direction: column; } button { width: 100%; } } </style>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
+
+            color: #172033;
+        }
+
+        header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
+
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #18a058;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .card,
+        #loading,
+        #error {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+        }
+
+        .course-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .course-title h2 {
+            margin: 0 0 8px;
+            color: #163020;
+        }
+
+        .course-title p {
+            margin: 0;
+            color: #617568;
+        }
+
+        .topic-name {
+            text-align: center;
+            background: #e8fff2;
+            color: #16834a;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .counter {
+            text-align: center;
+            color: #667085;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .score {
+            text-align: center;
+            color: #18a058;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .question {
+            font-size: 21px;
+            font-weight: bold;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            width: 100%;
+            text-align: left;
+
+            background: #f7f9fc;
+            border: 2px solid #d8dee8;
+
+            border-radius: 12px;
+            padding: 16px;
+
+            font-size: 16px;
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .option:hover:not(:disabled) {
+            background: #eefaf4;
+            border-color: #18a058;
+        }
+
+        .option strong {
+            margin-right: 8px;
+        }
+
+        .option.correct {
+            background: #d1e7dd;
+            border-color: #198754;
+            color: #0f5132;
+        }
+
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #842029;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .correct-feedback {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .wrong-feedback {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .answer {
+            margin-top: 15px;
+            padding: 18px;
+            background: #eef6ff;
+            border-radius: 12px;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .answer strong {
+            color: #0b5ed7;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .primary {
+            background: #18a058;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #117d45;
+        }
+
+        .secondary {
+            background: #e9edf3;
+            color: #172033;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #loading {
+            text-align: center;
+        }
+
+        #loading-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        #loading h2 {
+            margin-bottom: 10px;
+        }
+
+        #loading p {
+            color: #667085;
+        }
+
+        #error {
+            display: none;
+            text-align: center;
+            color: #dc3545;
+        }
+
+        .result {
+            text-align: center;
+            display: none;
+        }
+
+        .result-icon {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        .result h2 {
+            margin-bottom: 10px;
+        }
+
+        .final-score {
+            font-size: 42px;
+            font-weight: bold;
+            color: #18a058;
+            margin: 20px 0;
+        }
+
+        .result button {
+            background: #18a058;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .result .back-topic {
+            background: #6c757d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            color: #527060;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 12px;
+            }
+
+            .card,
+            #loading,
+            #error {
+                padding: 20px;
+            }
+
+            .question {
+                font-size: 19px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+    </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
-<h1> 🫀 OGCONS Study Hub </h1>
+    <h1>
+        🫀 OGCONS Study Hub
+    </h1>
 
-<p> Anatomy & Physiology AI Quiz </p>
+    <p>
+        Anatomy & Physiology AI Quiz
+    </p>
 
 </header>
 
+
+
 <div class="container">
 
-<a href="anatomy-physiology.html" class="back">
 
-← Back to Anatomy & Physiology Topics
+    <a
+        href="anatomy-physiology.html"
+        class="back">
 
-</a>
+        ← Back to Anatomy & Physiology Topics
 
-<!-- LOADING -->
+    </a>
 
-<div id="loading">
 
-<h2> 🤖 Preparing Your Quiz... </h2>
 
-<p> Our AI is generating a fresh set of Anatomy & Physiology questions. </p>
+    <!-- ==========================================
+         LOADING
+    =========================================== -->
+
+    <div id="loading">
+
+        <div id="loading-icon">
+            🤖
+        </div>
+
+        <h2>
+            Preparing Your Quiz...
+        </h2>
+
+        <p>
+            Our AI is generating a fresh set of
+            Anatomy & Physiology questions.
+        </p>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         ERROR
+    =========================================== -->
+
+    <div id="error">
+
+        <h2>
+            ❌ Unable to Generate Questions
+        </h2>
+
+        <p id="errorMessage">
+            Something went wrong.
+        </p>
+
+        <button
+            class="primary"
+            onclick="loadAIQuestions()">
+
+            🔄 Try Again
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         QUIZ CARD
+    =========================================== -->
+
+    <div
+        class="card"
+        id="quizCard"
+        style="display:none;">
+
+
+        <div class="course-title">
+
+            <h2>
+                🫀 Anatomy & Physiology
+            </h2>
+
+            <p>
+                AI Generated Practice Quiz
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="topic-name"
+            id="topicName">
+        </div>
+
+
+
+        <div
+            class="counter"
+            id="counter">
+        </div>
+
+
+
+        <div
+            class="score"
+            id="score">
+
+            Score: 0
+
+        </div>
+
+
+
+        <div
+            class="question"
+            id="question">
+        </div>
+
+
+
+        <div class="options">
+
+
+            <button
+                class="option"
+                id="option_a"
+                onclick="selectAnswer('A')">
+
+                <strong>A.</strong>
+
+                <span id="text_a"></span>
+
+            </button>
+
+
+
+            <button
+                class="option"
+                id="option_b"
+                onclick="selectAnswer('B')">
+
+                <strong>B.</strong>
+
+                <span id="text_b"></span>
+
+            </button>
+
+
+
+            <button
+                class="option"
+                id="option_c"
+                onclick="selectAnswer('C')">
+
+                <strong>C.</strong>
+
+                <span id="text_c"></span>
+
+            </button>
+
+
+
+            <button
+                class="option"
+                id="option_d"
+                onclick="selectAnswer('D')">
+
+                <strong>D.</strong>
+
+                <span id="text_d"></span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <div
+            class="feedback"
+            id="feedback">
+        </div>
+
+
+
+        <div
+            class="answer"
+            id="answer">
+
+
+            <p>
+
+                <strong>
+                    Correct Answer:
+                </strong>
+
+                <span id="correct_answer"></span>
+
+            </p>
+
+
+
+            <p>
+
+                <strong>
+                    Explanation:
+                </strong>
+
+                <span id="explanation"></span>
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="buttons">
+
+
+            <button
+                class="secondary"
+                id="previousButton"
+                onclick="previousQuestion()">
+
+                ← Previous
+
+            </button>
+
+
+
+            <button
+                class="primary"
+                id="nextButton"
+                onclick="nextQuestion()"
+                disabled>
+
+                Next →
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==========================================
+         RESULT
+    =========================================== -->
+
+    <div
+        class="card result"
+        id="result">
+
+
+        <div class="result-icon">
+            🏆
+        </div>
+
+
+        <h2>
+            Quiz Completed!
+        </h2>
+
+
+        <p>
+
+            You have completed the
+
+            <span id="resultTopic">
+                Anatomy & Physiology
+            </span>
+
+            quiz.
+
+        </p>
+
+
+
+        <div
+            class="final-score"
+            id="finalScore">
+
+            0 / 0
+
+        </div>
+
+
+
+        <p id="percentage">
+            Your score: 0%
+        </p>
+
+
+
+        <button
+            onclick="restartQuiz()">
+
+            🤖 Generate New Questions
+
+        </button>
+
+
+        <br>
+
+
+        <button
+            class="back-topic"
+            onclick="window.location.href='anatomy-physiology.html'">
+
+            ← Back to Topics
+
+        </button>
+
+
+    </div>
+
 
 </div>
 
-<!-- ERROR -->
 
-<div id="error">
-
-<h2> ❌ Unable to Generate Questions </h2>
-
-<p id="errorMessage"></p>
-
-<button class="primary" onclick="startQuiz()">
-
-🔄 Try Again
-
-</button>
-
-</div>
-
-<!-- QUIZ -->
-
-<div class="card" id="quizCard" style="display:none;">
-
-<div class="course-title">
-
-<h2> 🫀 Anatomy & Physiology </h2>
-
-<p> Test your knowledge </p>
-
-</div>
-
-<div class="ai-info">
-
-🤖 AI-generated questions • A fresh set is created for every attempt
-
-</div>
-
-<div class="topic-name" id="topicName"> </div>
-
-<div class="counter" id="counter"> </div>
-
-<div class="score" id="score">
-
-Score: 0
-
-</div>
-
-<div class="question" id="question"> </div>
-
-<div class="options">
-
-<button class="option" id="option_a" onclick="selectAnswer('A')">
-
-<strong>A.</strong>
-
-<span id="text_a"></span>
-
-</button>
-
-<button class="option" id="option_b" onclick="selectAnswer('B')">
-
-<strong>B.</strong>
-
-<span id="text_b"></span>
-
-</button>
-
-<button class="option" id="option_c" onclick="selectAnswer('C')">
-
-<strong>C.</strong>
-
-<span id="text_c"></span>
-
-</button>
-
-<button class="option" id="option_d" onclick="selectAnswer('D')">
-
-<strong>D.</strong>
-
-<span id="text_d"></span>
-
-</button>
-
-</div>
-
-<div class="feedback" id="feedback"> </div>
-
-<div class="answer" id="answer">
-
-<p>
-
-<strong> Correct Answer: </strong>
-
-<span id="correct_answer"> </span>
-
-</p>
-
-<p>
-
-<strong> Explanation: </strong>
-
-<span id="explanation"> </span>
-
-</p>
-
-</div>
-
-<div class="buttons">
-
-<button class="secondary" id="previousButton" onclick="previousQuestion()">
-
-← Previous
-
-</button>
-
-<button class="primary" id="nextButton" onclick="nextQuestion()" disabled>
-
-Next →
-
-</button>
-
-</div>
-
-</div>
-
-<!-- RESULT -->
-
-<div class="card result" id="result">
-
-<div class="result-icon"> 🏆 </div>
-
-<h2> Quiz Completed! </h2>
-
-<p>
-
-You have completed the
-
-<span id="resultTopic"> Anatomy & Physiology </span>
-
-quiz.
-
-</p>
-
-<div class="final-score" id="finalScore">
-
-0 / 0
-
-</div>
-
-<p id="percentage"> Your score: 0% </p>
-
-<p> Would you like to try another set of questions? </p>
-
-<button onclick="restartQuiz()">
-
-🤖 Generate New Questions
-
-</button>
-
-<br>
-
-<button class="back-topic" onclick="window.location.href='anatomy-physiology.html'">
-
-← Back to Topics
-
-</button>
-
-</div>
-
-</div>
 
 <footer>
 
-© 2026 OGCONS Study Hub
-• Built for students
+    © 2026 OGCONS Study Hub
+    • Built for students
 
 </footer>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script> // ===================================================== // SUPABASE // ===================================================== const SUPABASE_URL = "https://bvetmmvpdotifusjkywd.supabase.co"; const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS"; const supabaseClient = window.supabase.createClient( SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY ); // ===================================================== // QUIZ VARIABLES // ===================================================== let questions = []; let currentQuestion = 0; let score = 0; let answers = []; // ===================================================== // TOPIC // ===================================================== const urlParams = new URLSearchParams( window.location.search ); const selectedTopic = urlParams.get("topic"); // ===================================================== // GET ELEMENTS // ===================================================== const loading = document.getElementById("loading"); const quizCard = document.getElementById("quizCard"); const errorBox = document.getElementById("error"); const errorMessage = document.getElementById("errorMessage"); const result = document.getElementById("result"); // ===================================================== // START QUIZ // ===================================================== async function startQuiz() { // ----------------------------------------------- // CHECK TOPIC // ----------------------------------------------- if (!selectedTopic) { showError( "No topic was selected. Please return to the Anatomy & Physiology topics page and select a topic." ); return; } // ----------------------------------------------- // RESET // ----------------------------------------------- questions = []; currentQuestion = 0; score = 0; answers = []; quizCard.style.display = "none"; result.style.display = "none"; errorBox.style.display = "none"; loading.style.display = "block"; document .getElementById("topicName") .textContent = "Topic: " + selectedTopic; document .getElementById("resultTopic") .textContent = selectedTopic; // ----------------------------------------------- // CHECK LOGIN // ----------------------------------------------- const { data: { user }, error: userError } = await supabaseClient .auth .getUser(); if ( userError || !user ) { window.location.href = "login.html"; return; } // ----------------------------------------------- // CALL EDGE FUNCTION // ----------------------------------------------- try { console.log( "Generating AI questions for:", selectedTopic ); const { data, error } = await supabaseClient .functions .invoke( "generate-anatomy-questions", { body: { topic: selectedTopic, numberOfQuestions: 10 } } ); // ------------------------------------------- // FUNCTION ERROR // ------------------------------------------- if (error) { console.error( "Edge Function error:", error ); let message = error.message || "The AI question generator failed."; /* * Try to read the actual response * from the Edge Function. */ try { if (error.context) { const body = await error.context.json(); message = body.details || body.error || body.message || message; } } catch (readError) { console.error( "Could not read function error:", readError ); } showError( message ); return; } // ------------------------------------------- // CHECK DATA // ------------------------------------------- if ( !data || !data.success || !Array.isArray( data.questions ) ) { console.error( "Invalid AI response:", data ); showError( "The AI returned an invalid question set. Please try again." ); return; } // ------------------------------------------- // SAVE QUESTIONS IN MEMORY // ------------------------------------------- questions = data.questions; // ------------------------------------------- // CREATE ANSWER MEMORY // ------------------------------------------- answers = questions.map( function() { return { answered: false, selected: null, correct: null, isCorrect: false }; } ); // ------------------------------------------- // SHOW QUIZ // ------------------------------------------- loading.style.display = "none"; quizCard.style.display = "block"; showQuestion(); } catch (err) { console.error( "Unexpected error:", err ); showError( err.message || "Something went wrong while generating the quiz." ); } } // ===================================================== // SHOW ERROR // ===================================================== function showError( message ) { loading.style.display = "none"; quizCard.style.display = "none"; result.style.display = "none"; errorBox.style.display = "block"; errorMessage.textContent = message; } // ===================================================== // SHOW QUESTION // ===================================================== function showQuestion() { const q = questions[ currentQuestion ]; if (!q) { return; } const saved = answers[ currentQuestion ]; document .getElementById("counter") .textContent = "Question " + (currentQuestion + 1) + " of " + questions.length; document .getElementById("score") .textContent = "Score: " + score; document .getElementById("question") .textContent = q.question; document .getElementById("text_a") .textContent = q.option_a; document .getElementById("text_b") .textContent = q.option_b; document .getElementById("text_c") .textContent = q.option_c; document .getElementById("text_d") .textContent = q.option_d; const options = [ document.getElementById("option_a"), document.getElementById("option_b"), document.getElementById("option_c"), document.getElementById("option_d") ]; // ----------------------------------------------- // RESET // ----------------------------------------------- options.forEach( function(option) { option.classList.remove( "correct", "wrong", "disabled" ); option.disabled = false; } ); document .getElementById("feedback") .style.display = "none"; document .getElementById("answer") .style.display = "none"; document .getElementById("nextButton") .disabled = true; // ----------------------------------------------- // IF ALREADY ANSWERED // ----------------------------------------------- if ( saved && saved.answered ) { showPreviousAnswer( q, saved ); } // ----------------------------------------------- // PREVIOUS BUTTON // ----------------------------------------------- document .getElementById("previousButton") .disabled = currentQuestion === 0; } // ===================================================== // SHOW PREVIOUS ANSWER // ===================================================== function showPreviousAnswer( q, saved ) { const selectedButton = document.getElementById( "option_" + saved.selected.toLowerCase() ); const correctButton = document.getElementById( "option_" + saved.correct.toLowerCase() ); const options = [ document.getElementById("option_a"), document.getElementById("option_b"), document.getElementById("option_c"), document.getElementById("option_d") ]; options.forEach( function(option) { option.disabled = true; option.classList.add( "disabled" ); } ); if (selectedButton) { selectedButton.classList.add( saved.isCorrect ? "correct" : "wrong" ); } if ( correctButton && saved.selected !== saved.correct ) { correctButton.classList.add( "correct" ); } const feedback = document.getElementById( "feedback" ); if ( saved.isCorrect ) { feedback.textContent = "✅ You already answered this question correctly."; feedback.className = "feedback correct-feedback"; } else { feedback.textContent = "❌ You already answered this question. Your previous answer cannot be changed."; feedback.className = "feedback wrong-feedback"; } feedback.style.display = "block"; document .getElementById("correct_answer") .textContent = saved.correct; document .getElementById("explanation") .textContent = q.explanation || "No explanation provided."; document .getElementById("answer") .style.display = "block"; document .getElementById("nextButton") .disabled = false; } // ===================================================== // SELECT ANSWER // ===================================================== function selectAnswer( selected ) { const saved = answers[ currentQuestion ]; // Already answered if ( saved && saved.answered ) { return; } const q = questions[ currentQuestion ]; if (!q) { return; } const correct = String( q.correct_answer ) .trim() .toUpperCase(); const isCorrect = selected === correct; answers[ currentQuestion ] = { answered: true, selected: selected, correct: correct, isCorrect: isCorrect }; if (isCorrect) { score++; } const options = [ document.getElementById("option_a"), document.getElementById("option_b"), document.getElementById("option_c"), document.getElementById("option_d") ]; options.forEach( function(option) { option.disabled = true; option.classList.add( "disabled" ); } ); const selectedButton = document.getElementById( "option_" + selected.toLowerCase() ); const correctButton = document.getElementById( "option_" + correct.toLowerCase() ); const feedback = document.getElementById( "feedback" ); if (isCorrect) { selectedButton.classList.add( "correct" ); feedback.textContent = "✅ Correct! Well done."; feedback.className = "feedback correct-feedback"; } else { selectedButton.classList.add( "wrong" ); if (correctButton) { correctButton.classList.add( "correct" ); } feedback.textContent = "❌ Wrong answer. The correct answer is " + correct + "."; feedback.className = "feedback wrong-feedback"; } feedback.style.display = "block"; document .getElementById("correct_answer") .textContent = correct; document .getElementById("explanation") .textContent = q.explanation || "No explanation provided."; document .getElementById("answer") .style.display = "block"; document .getElementById("score") .textContent = "Score: " + score; document .getElementById("nextButton") .disabled = false; } // ===================================================== // NEXT QUESTION // ===================================================== function nextQuestion() { const saved = answers[ currentQuestion ]; if ( !saved || !saved.answered ) { return; } if ( currentQuestion < questions.length - 1 ) { currentQuestion++; showQuestion(); } else { showResult(); } } // ===================================================== // PREVIOUS QUESTION // ===================================================== function previousQuestion() { if ( currentQuestion > 0 ) { currentQuestion--; showQuestion(); } } // ===================================================== // SHOW RESULT // ===================================================== async function showResult() { quizCard.style.display = "none"; result.style.display = "block"; const total = questions.length; const percentage = total > 0 ? Math.round( (score / total) * 100 ) : 0; document .getElementById("finalScore") .textContent = score + " / " + total; document .getElementById("percentage") .textContent = "Your score: " + percentage + "%"; // ----------------------------------------------- // SAVE RESULT // ----------------------------------------------- try { const { data: { user } } = await supabaseClient .auth .getUser(); if (!user) { console.log( "No logged-in user." ); return; } const { error } = await supabaseClient .from("quiz_results") .insert({ user_id: user.id, course: "Anatomy & Physiology", score: score, total_questions: total, percentage: percentage }); if (error) { console.error( "Could not save quiz result:", error ); } } catch (err) { console.error( "Result saving error:", err ); } } // ===================================================== // RESTART // ===================================================== function restartQuiz() { /* * IMPORTANT: * * This does NOT simply reset the current * questions. * * It calls the AI Edge Function again. * * Therefore the student receives a fresh * question set. */ startQuiz(); } // ===================================================== // START // ===================================================== startQuiz(); </script>
+
+<script>
+
+
+// ======================================================
+// SUPABASE
+// ======================================================
+
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+
+// ======================================================
+// QUIZ SETTINGS
+// ======================================================
+
+const NUMBER_OF_QUESTIONS = 10;
+
+
+// ======================================================
+// QUIZ VARIABLES
+// ======================================================
+
+let questions = [];
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answers = [];
+
+
+
+// ======================================================
+// GET TOPIC FROM URL
+// ======================================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const selectedTopic =
+    urlParams.get("topic");
+
+
+
+// ======================================================
+// GET CURRENT USER
+// ======================================================
+
+async function getCurrentUser() {
+
+    const {
+        data: { user },
+        error
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+    if (error) {
+
+        console.error(
+            "Authentication error:",
+            error
+        );
+
+        return null;
+
+    }
+
+
+    return user;
+
+}
+
+
+
+// ======================================================
+// LOAD AI QUESTIONS
+// ======================================================
+
+async function loadAIQuestions() {
+
+
+    const loading =
+        document.getElementById("loading");
+
+
+    const errorBox =
+        document.getElementById("error");
+
+
+    const quizCard =
+        document.getElementById("quizCard");
+
+
+    const result =
+        document.getElementById("result");
+
+
+
+    // Reset screen
+
+    loading.style.display =
+        "block";
+
+    errorBox.style.display =
+        "none";
+
+    quizCard.style.display =
+        "none";
+
+    result.style.display =
+        "none";
+
+
+
+    // ==================================================
+    // CHECK TOPIC
+    // ==================================================
+
+    if (!selectedTopic) {
+
+        showError(
+            "No topic was selected. Please return to the Anatomy & Physiology topics page and choose a topic."
+        );
+
+        return;
+
+    }
+
+
+
+    // ==================================================
+    // CHECK LOGIN
+    // ==================================================
+
+    const user =
+        await getCurrentUser();
+
+
+    if (!user) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+
+    // ==================================================
+    // SHOW TOPIC
+    // ==================================================
+
+    document
+        .getElementById("topicName")
+        .textContent =
+        "Topic: " +
+        selectedTopic;
+
+
+    document
+        .getElementById("resultTopic")
+        .textContent =
+        selectedTopic;
+
+
+
+    try {
+
+
+        // ==================================================
+        // CALL EDGE FUNCTION
+        // ==================================================
+
+        console.log(
+            "Calling generate-anatomy-questions..."
+        );
+
+
+        const {
+            data,
+            error: functionError
+        } =
+            await supabaseClient.functions.invoke(
+                "generate-anatomy-questions",
+                {
+
+                    body: {
+
+                        topic:
+                            selectedTopic,
+
+                        numberOfQuestions:
+                            NUMBER_OF_QUESTIONS
+
+                    }
+
+                }
+            );
+
+
+
+        // ==================================================
+        // CHECK FUNCTION ERROR
+        // ==================================================
+
+        if (functionError) {
+
+            console.error(
+                "Edge Function Error:",
+                functionError
+            );
+
+            throw new Error(
+                functionError.message ||
+                "Edge Function returned an error."
+            );
+
+        }
+
+
+
+        console.log(
+            "AI response:",
+            data
+        );
+
+
+
+        // ==================================================
+        // CHECK RESPONSE
+        // ==================================================
+
+        if (!data) {
+
+            throw new Error(
+                "The AI returned an empty response."
+            );
+
+        }
+
+
+        if (data.success !== true) {
+
+            throw new Error(
+                data.error ||
+                "The AI was unable to generate questions."
+            );
+
+        }
+
+
+        if (
+            !Array.isArray(
+                data.questions
+            )
+        ) {
+
+            throw new Error(
+                "The AI response does not contain a questions array."
+            );
+
+        }
+
+
+        if (
+            data.questions.length === 0
+        ) {
+
+            throw new Error(
+                "The AI generated zero questions."
+            );
+
+        }
+
+
+
+        // ==================================================
+        // SAVE QUESTIONS
+        // ==================================================
+
+        questions =
+            data.questions;
+
+
+        currentQuestion = 0;
+
+        score = 0;
+
+
+        answers =
+            questions.map(
+                function() {
+
+                    return {
+
+                        answered: false,
+
+                        selected: null,
+
+                        correct: null,
+
+                        isCorrect: false
+
+                    };
+
+                }
+            );
+
+
+
+        // ==================================================
+        // SHOW QUIZ
+        // ==================================================
+
+        loading.style.display =
+            "none";
+
+
+        quizCard.style.display =
+            "block";
+
+
+        showQuestion();
+
+
+
+    }
+
+    catch (err) {
+
+
+        console.error(
+            "AI Quiz Error:",
+            err
+        );
+
+
+        showError(
+            err.message ||
+            "Unable to generate questions."
+        );
+
+    }
+
+}
+
+
+
+// ======================================================
+// SHOW ERROR
+// ======================================================
+
+function showError(message) {
+
+
+    document
+        .getElementById("loading")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("quizCard")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("result")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("error")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("errorMessage")
+        .textContent =
+        message;
+
+}
+
+
+
+// ======================================================
+// SHOW QUESTION
+// ======================================================
+
+function showQuestion() {
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    const savedAnswer =
+        answers[currentQuestion];
+
+
+
+    if (!q) {
+
+        return;
+
+    }
+
+
+
+    // ==================================================
+    // QUESTION DETAILS
+    // ==================================================
+
+    document
+        .getElementById("counter")
+        .textContent =
+
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document
+        .getElementById("score")
+        .textContent =
+
+        "Score: " +
+        score;
+
+
+    document
+        .getElementById("question")
+        .textContent =
+        q.question;
+
+
+    document
+        .getElementById("text_a")
+        .textContent =
+        q.option_a;
+
+
+    document
+        .getElementById("text_b")
+        .textContent =
+        q.option_b;
+
+
+    document
+        .getElementById("text_c")
+        .textContent =
+        q.option_c;
+
+
+    document
+        .getElementById("text_d")
+        .textContent =
+        q.option_d;
+
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+
+    // ==================================================
+    // RESET
+    // ==================================================
+
+    options.forEach(
+        function(option) {
+
+            option.classList.remove(
+                "correct",
+                "wrong",
+                "disabled"
+            );
+
+            option.disabled =
+                false;
+
+        }
+    );
+
+
+
+    document
+        .getElementById("feedback")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("feedback")
+        .textContent =
+        "";
+
+
+    document
+        .getElementById("feedback")
+        .className =
+        "feedback";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "none";
+
+
+
+    // ==================================================
+    // IF ALREADY ANSWERED
+    // ==================================================
+
+    if (
+        savedAnswer &&
+        savedAnswer.answered
+    ) {
+
+        showPreviousAnswer(
+            q,
+            savedAnswer
+        );
+
+    }
+
+    else {
+
+        document
+            .getElementById("nextButton")
+            .disabled =
+            true;
+
+    }
+
+
+
+    document
+        .getElementById("previousButton")
+        .disabled =
+        currentQuestion === 0;
+
+}
+
+
+
+// ======================================================
+// SHOW PREVIOUS ANSWER
+// ======================================================
+
+function showPreviousAnswer(
+    q,
+    savedAnswer
+) {
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            savedAnswer.selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            savedAnswer.correct.toLowerCase()
+        );
+
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+
+    options.forEach(
+        function(option) {
+
+            option.disabled =
+                true;
+
+            option.classList.add(
+                "disabled"
+            );
+
+        }
+    );
+
+
+
+    if (selectedButton) {
+
+        selectedButton.classList.add(
+
+            savedAnswer.isCorrect
+                ? "correct"
+                : "wrong"
+
+        );
+
+    }
+
+
+
+    if (
+        correctButton &&
+        savedAnswer.selected !==
+        savedAnswer.correct
+    ) {
+
+        correctButton.classList.add(
+            "correct"
+        );
+
+    }
+
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+
+    if (
+        savedAnswer.isCorrect
+    ) {
+
+        feedback.textContent =
+            "✅ You already answered this question correctly.";
+
+        feedback.className =
+            "feedback correct-feedback";
+
+    }
+
+    else {
+
+        feedback.textContent =
+            "❌ You already answered this question. Your previous answer cannot be changed.";
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+    }
+
+
+
+    feedback.style.display =
+        "block";
+
+
+
+    document
+        .getElementById("correct_answer")
+        .textContent =
+        savedAnswer.correct;
+
+
+    document
+        .getElementById("explanation")
+        .textContent =
+
+        q.explanation ||
+        "No explanation provided.";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+
+}
+
+
+
+// ======================================================
+// SELECT ANSWER
+// ======================================================
+
+function selectAnswer(selected) {
+
+
+    const savedAnswer =
+        answers[currentQuestion];
+
+
+
+    // Prevent second attempt on same question
+
+    if (
+        savedAnswer &&
+        savedAnswer.answered
+    ) {
+
+        return;
+
+    }
+
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    if (!q) {
+
+        return;
+
+    }
+
+
+
+    const correct =
+        String(
+            q.correct_answer
+        )
+        .trim()
+        .toUpperCase();
+
+
+
+    const isCorrect =
+        selected === correct;
+
+
+
+    // ==================================================
+    // SAVE ANSWER
+    // ==================================================
+
+    answers[currentQuestion] = {
+
+        answered: true,
+
+        selected:
+            selected,
+
+        correct:
+            correct,
+
+        isCorrect:
+            isCorrect
+
+    };
+
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            correct.toLowerCase()
+        );
+
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+
+    // ==================================================
+    // LOCK OPTIONS
+    // ==================================================
+
+    options.forEach(
+        function(option) {
+
+            option.disabled =
+                true;
+
+            option.classList.add(
+                "disabled"
+            );
+
+        }
+    );
+
+
+
+    // ==================================================
+    // CORRECT
+    // ==================================================
+
+    if (isCorrect) {
+
+
+        score++;
+
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+            "✅ Correct! Well done.";
+
+
+        feedback.className =
+            "feedback correct-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+
+
+    // ==================================================
+    // WRONG
+    // ==================================================
+
+    else {
+
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+
+        if (correctButton) {
+
+            correctButton.classList.add(
+                "correct"
+            );
+
+        }
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+
+            "❌ Wrong answer. " +
+            "The correct answer is " +
+            correct +
+            ".";
+
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+
+
+    // ==================================================
+    // EXPLANATION
+    // ==================================================
+
+    document
+        .getElementById("correct_answer")
+        .textContent =
+        correct;
+
+
+    document
+        .getElementById("explanation")
+        .textContent =
+
+        q.explanation ||
+        "No explanation provided.";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "block";
+
+
+
+    document
+        .getElementById("score")
+        .textContent =
+
+        "Score: " +
+        score;
+
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+
+}
+
+
+
+// ======================================================
+// NEXT QUESTION
+// ======================================================
+
+function nextQuestion() {
+
+
+    if (
+        !answers[currentQuestion] ||
+        !answers[currentQuestion].answered
+    ) {
+
+        return;
+
+    }
+
+
+
+    if (
+        currentQuestion <
+        questions.length - 1
+    ) {
+
+        currentQuestion++;
+
+        showQuestion();
+
+    }
+
+    else {
+
+        showResult();
+
+    }
+
+}
+
+
+
+// ======================================================
+// PREVIOUS QUESTION
+// ======================================================
+
+function previousQuestion() {
+
+
+    if (
+        currentQuestion > 0
+    ) {
+
+        currentQuestion--;
+
+        showQuestion();
+
+    }
+
+}
+
+
+
+// ======================================================
+// SHOW RESULT
+// ======================================================
+
+async function showResult() {
+
+
+    document
+        .getElementById("quizCard")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("result")
+        .style.display =
+        "block";
+
+
+
+    const total =
+        questions.length;
+
+
+
+    const percentage =
+        total > 0
+
+            ? Math.round(
+                (score / total) * 100
+            )
+
+            : 0;
+
+
+
+    document
+        .getElementById("finalScore")
+        .textContent =
+
+        score +
+        " / " +
+        total;
+
+
+
+    document
+        .getElementById("percentage")
+        .textContent =
+
+        "Your score: " +
+        percentage +
+        "%";
+
+
+
+    // ==================================================
+    // SAVE RESULT
+    // ==================================================
+
+    const user =
+        await getCurrentUser();
+
+
+    if (!user) {
+
+        console.log(
+            "Student is not logged in."
+        );
+
+        return;
+
+    }
+
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+
+            .from("quiz_results")
+
+            .insert({
+
+                user_id:
+                    user.id,
+
+                course:
+                    "Anatomy & Physiology",
+
+                score:
+                    score,
+
+                total_questions:
+                    total,
+
+                percentage:
+                    percentage
+
+            });
+
+
+
+    if (error) {
+
+        console.error(
+            "Could not save quiz result:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// ======================================================
+// GENERATE NEW QUIZ
+// ======================================================
+
+function restartQuiz() {
+
+
+    /*
+     * IMPORTANT:
+     *
+     * This does NOT reuse the old questions.
+     *
+     * It calls the AI Edge Function again.
+     *
+     * Therefore the student receives a new
+     * question set.
+     */
+
+    questions = [];
+
+    answers = [];
+
+    currentQuestion = 0;
+
+    score = 0;
+
+
+    loadAIQuestions();
+
+}
+
+
+
+// ======================================================
+// START
+// ======================================================
+
+loadAIQuestions();
+
+
+</script>
+
 
 </body>
 
 </html>
+```
