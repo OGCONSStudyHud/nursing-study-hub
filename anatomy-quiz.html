@@ -3,808 +3,850 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>OGCONS Study Hub - Anatomy & Physiology Quiz</title>
+    <title>
+        OGCONS Study Hub - Anatomy & Physiology Quiz
+    </title>
 
-<style>
 
-* {
-    box-sizing: border-box;
-}
+    <style>
 
-body {
+        * {
+            box-sizing: border-box;
+        }
 
-    margin: 0;
 
-    font-family: Arial, sans-serif;
+        body {
 
-    background:
-        linear-gradient(
-            135deg,
-            #e8fff2,
-            #e8f4ff,
-            #f5eaff
-        );
+            margin: 0;
 
-    color: #172033;
-}
+            font-family: Arial, sans-serif;
 
-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
 
-    background:
-        linear-gradient(
-            135deg,
-            #18a058,
-            #2eb7a0
-        );
+            color: #172033;
+        }
 
-    color: white;
 
-    padding: 30px 20px;
+        header {
 
-    text-align: center;
-}
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
 
-header h1 {
+            color: white;
 
-    margin: 0;
+            padding: 30px 20px;
 
-    font-size: 28px;
-}
+            text-align: center;
+        }
 
-header p {
 
-    margin: 8px 0 0;
+        header h1 {
 
-    font-size: 16px;
-}
+            margin: 0;
 
-.container {
+            font-size: 28px;
+        }
 
-    max-width: 850px;
 
-    margin: 30px auto;
+        header p {
 
-    padding: 20px;
-}
+            margin: 8px 0 0;
 
-.back {
+            font-size: 16px;
+        }
 
-    display: inline-block;
 
-    margin-bottom: 20px;
+        .container {
 
-    color: #18a058;
+            max-width: 850px;
 
-    text-decoration: none;
+            margin: 30px auto;
 
-    font-weight: bold;
-}
+            padding: 20px;
+        }
 
-.back:hover {
 
-    text-decoration: underline;
-}
+        .back {
 
-.card {
+            display: inline-block;
 
-    background: white;
+            margin-bottom: 20px;
 
-    border-radius: 18px;
+            color: #18a058;
 
-    padding: 30px;
+            text-decoration: none;
 
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,0.08);
-}
+            font-weight: bold;
+        }
 
-.course-title {
 
-    text-align: center;
+        .back:hover {
 
-    margin-bottom: 20px;
-}
+            text-decoration: underline;
+        }
 
-.course-title h2 {
 
-    margin: 0 0 8px;
+        .card {
 
-    color: #163020;
-}
+            background: white;
 
-.course-title p {
+            border-radius: 18px;
 
-    margin: 0;
+            padding: 30px;
 
-    color: #617568;
-}
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+        }
 
-.topic-name {
 
-    text-align: center;
+        .course-title {
 
-    background: #e8fff2;
+            text-align: center;
 
-    color: #16834a;
+            margin-bottom: 20px;
+        }
 
-    padding: 12px;
 
-    border-radius: 10px;
+        .course-title h2 {
 
-    font-weight: bold;
+            margin: 0 0 8px;
 
-    margin-bottom: 20px;
-}
+            color: #163020;
+        }
 
-.counter {
 
-    text-align: center;
+        .course-title p {
 
-    color: #667085;
+            margin: 0;
 
-    font-weight: bold;
+            color: #617568;
+        }
 
-    margin-bottom: 10px;
-}
 
-.score {
+        .topic-name {
 
-    text-align: center;
+            text-align: center;
 
-    color: #18a058;
+            background: #e8fff2;
 
-    font-weight: bold;
+            color: #16834a;
 
-    margin-bottom: 25px;
-}
+            padding: 12px;
 
-.question {
+            border-radius: 10px;
 
-    font-size: 21px;
+            font-weight: bold;
 
-    font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    line-height: 1.5;
 
-    margin-bottom: 25px;
-}
+        .counter {
 
-.options {
+            text-align: center;
 
-    display: grid;
+            color: #667085;
 
-    gap: 12px;
-}
+            font-weight: bold;
 
-.option {
+            margin-bottom: 10px;
+        }
 
-    width: 100%;
 
-    text-align: left;
+        .score {
 
-    background: #f7f9fc;
+            text-align: center;
 
-    border: 2px solid #d8dee8;
+            color: #18a058;
 
-    border-radius: 12px;
+            font-weight: bold;
 
-    padding: 16px;
+            margin-bottom: 25px;
+        }
 
-    font-size: 16px;
 
-    cursor: pointer;
+        .question {
 
-    transition: 0.2s;
-}
+            font-size: 21px;
 
-.option:hover:not(:disabled) {
+            font-weight: bold;
 
-    background: #eefaf4;
+            line-height: 1.5;
 
-    border-color: #18a058;
-}
+            margin-bottom: 25px;
+        }
 
-.option strong {
 
-    margin-right: 8px;
-}
+        .options {
 
-.option.correct {
+            display: grid;
 
-    background: #d1e7dd;
+            gap: 12px;
+        }
 
-    border-color: #198754;
 
-    color: #0f5132;
-}
+        .option {
 
-.option.wrong {
+            width: 100%;
 
-    background: #f8d7da;
+            text-align: left;
 
-    border-color: #dc3545;
+            background: #f7f9fc;
 
-    color: #842029;
-}
+            border: 2px solid #d8dee8;
 
-.option.disabled {
+            border-radius: 12px;
 
-    cursor: not-allowed;
-}
+            padding: 16px;
 
-.feedback {
+            font-size: 16px;
 
-    margin-top: 20px;
+            cursor: pointer;
 
-    padding: 18px;
+            transition: 0.2s;
+        }
 
-    border-radius: 12px;
 
-    display: none;
+        .option:hover:not(:disabled) {
 
-    font-weight: bold;
+            background: #eefaf4;
 
-    line-height: 1.5;
-}
+            border-color: #18a058;
+        }
 
-.correct-feedback {
 
-    background: #d1e7dd;
+        .option strong {
 
-    color: #0f5132;
-}
+            margin-right: 8px;
+        }
 
-.wrong-feedback {
 
-    background: #f8d7da;
+        .option.correct {
 
-    color: #842029;
-}
+            background: #d1e7dd;
 
-.error-feedback {
+            border-color: #198754;
 
-    background: #f8d7da;
+            color: #0f5132;
+        }
 
-    color: #842029;
 
-    text-align: left;
-}
+        .option.wrong {
 
-.answer {
+            background: #f8d7da;
 
-    margin-top: 15px;
+            border-color: #dc3545;
 
-    padding: 18px;
+            color: #842029;
+        }
 
-    background: #eef6ff;
 
-    border-radius: 12px;
+        .option.disabled {
 
-    display: none;
+            cursor: not-allowed;
+        }
 
-    line-height: 1.6;
-}
 
-.answer strong {
+        .feedback {
 
-    color: #0b5ed7;
-}
+            margin-top: 20px;
 
-.buttons {
+            padding: 18px;
 
-    display: flex;
+            border-radius: 12px;
 
-    justify-content: space-between;
+            display: none;
 
-    gap: 12px;
+            font-weight: bold;
+        }
 
-    margin-top: 25px;
-}
 
-button {
+        .correct-feedback {
 
-    border: none;
+            background: #d1e7dd;
 
-    border-radius: 10px;
+            color: #0f5132;
+        }
 
-    padding: 13px 20px;
 
-    font-size: 15px;
+        .wrong-feedback {
 
-    font-weight: bold;
+            background: #f8d7da;
 
-    cursor: pointer;
-}
+            color: #842029;
+        }
 
-.primary {
 
-    background: #18a058;
+        .review-feedback {
 
-    color: white;
-}
+            background: #fff3cd;
 
-.primary:hover {
+            color: #664d03;
+        }
 
-    background: #117d45;
-}
 
-.secondary {
+        .answer {
 
-    background: #e9edf3;
+            margin-top: 15px;
 
-    color: #172033;
-}
+            padding: 18px;
 
-button:disabled {
+            background: #eef6ff;
 
-    opacity: 0.5;
+            border-radius: 12px;
 
-    cursor: not-allowed;
-}
+            display: none;
 
-#loading,
-#error,
-#empty {
+            line-height: 1.6;
+        }
 
-    background: white;
 
-    border-radius: 18px;
+        .answer strong {
 
-    padding: 35px;
+            color: #0b5ed7;
+        }
 
-    text-align: center;
 
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,0.08);
-}
+        .buttons {
 
-#loading {
+            display: flex;
 
-    color: #18a058;
-}
+            justify-content: space-between;
 
-#error {
+            gap: 12px;
 
-    color: #dc3545;
+            margin-top: 25px;
+        }
 
-    line-height: 1.6;
-}
 
-#errorDetails {
+        button {
 
-    margin-top: 15px;
+            border: none;
 
-    padding: 15px;
+            border-radius: 10px;
 
-    background: #fff5f5;
+            padding: 13px 20px;
 
-    border-radius: 10px;
+            font-size: 15px;
 
-    text-align: left;
+            font-weight: bold;
 
-    font-family: monospace;
+            cursor: pointer;
+        }
 
-    font-size: 13px;
 
-    white-space: pre-wrap;
+        .primary {
 
-    word-break: break-word;
-}
+            background: #18a058;
 
-.result {
+            color: white;
+        }
 
-    text-align: center;
 
-    display: none;
-}
+        .primary:hover {
 
-.result-icon {
+            background: #117d45;
+        }
 
-    font-size: 65px;
 
-    margin-bottom: 15px;
-}
+        .secondary {
 
-.result h2 {
+            background: #e9edf3;
 
-    margin-bottom: 10px;
-}
+            color: #172033;
+        }
 
-.final-score {
 
-    font-size: 42px;
+        button:disabled {
 
-    font-weight: bold;
+            opacity: 0.5;
 
-    color: #18a058;
+            cursor: not-allowed;
+        }
 
-    margin: 20px 0;
-}
 
-.result button {
+        #loading,
+        #error,
+        #empty {
 
-    background: #18a058;
+            background: white;
 
-    color: white;
+            border-radius: 18px;
 
-    margin-top: 10px;
-}
+            padding: 35px;
 
-.result .back-topic {
+            text-align: center;
 
-    background: #6c757d;
-}
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+        }
 
-.retry-error {
 
-    margin-top: 20px;
+        #error {
 
-    background: #dc3545;
+            color: #dc3545;
+        }
 
-    color: white;
-}
 
-footer {
+        .result {
 
-    text-align: center;
+            text-align: center;
 
-    padding: 35px;
+            display: none;
+        }
 
-    color: #527060;
-}
 
-@media (max-width: 600px) {
+        .result-icon {
 
-    .container {
+            font-size: 65px;
 
-        padding: 12px;
-    }
+            margin-bottom: 15px;
+        }
 
-    .card {
 
-        padding: 20px;
-    }
+        .result h2 {
 
-    .question {
+            margin-bottom: 10px;
+        }
 
-        font-size: 19px;
-    }
 
-    .buttons {
+        .final-score {
 
-        flex-direction: column;
-    }
+            font-size: 42px;
 
-    button {
+            font-weight: bold;
 
-        width: 100%;
-    }
+            color: #18a058;
 
-}
+            margin: 20px 0;
+        }
 
-</style>
+
+        .result button {
+
+            background: #18a058;
+
+            color: white;
+
+            margin-top: 10px;
+        }
+
+
+        .result .back-topic {
+
+            background: #6c757d;
+        }
+
+
+        footer {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #527060;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                padding: 12px;
+            }
+
+
+            .card {
+
+                padding: 20px;
+            }
+
+
+            .question {
+
+                font-size: 19px;
+            }
+
+
+            .buttons {
+
+                flex-direction: column;
+            }
+
+
+            button {
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
-<h1>🫀 OGCONS Study Hub</h1>
+    <h1>
+        🫀 OGCONS Study Hub
+    </h1>
 
-<p>Anatomy & Physiology Quiz</p>
+    <p>
+        Anatomy & Physiology Quiz
+    </p>
 
 </header>
+
 
 
 <div class="container">
 
 
-<a
-    href="anatomy-physiology.html"
-    class="back">
+    <a
+        href="anatomy-physiology.html"
+        class="back">
 
-    ← Back to Anatomy & Physiology Topics
+        ← Back to Anatomy & Physiology Topics
 
-</a>
+    </a>
 
 
-<!-- LOADING -->
 
-<div id="loading">
+    <div id="loading">
 
-    <h2>🤖 Preparing Your Quiz...</h2>
+        <h2>
+            🔄 Loading questions...
+        </h2>
 
-    <p>
-        Our AI is generating a fresh set of
-        Anatomy & Physiology questions.
-    </p>
+        <p>
+            Please wait while we prepare your quiz.
+        </p>
 
-    <p id="loadingTopic"></p>
+    </div>
+
+
+
+    <div
+        id="error"
+        style="display:none;">
+    </div>
+
+
+
+    <div
+        id="empty"
+        style="display:none;">
+
+        <h2>
+            📚 No Questions Yet
+        </h2>
+
+        <p id="emptyMessage">
+
+            There are currently no questions
+            available for this topic.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- QUIZ CARD -->
+
+    <div
+        class="card"
+        id="quizCard"
+        style="display:none;">
+
+
+        <div class="course-title">
+
+            <h2>
+                🫀 Anatomy & Physiology
+            </h2>
+
+            <p>
+                Test your knowledge
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="topic-name"
+            id="topicName">
+        </div>
+
+
+
+        <div
+            class="counter"
+            id="counter">
+        </div>
+
+
+
+        <div
+            class="score"
+            id="score">
+
+            Score: 0
+
+        </div>
+
+
+
+        <div
+            class="question"
+            id="question">
+        </div>
+
+
+
+        <div class="options">
+
+
+            <button
+                class="option"
+                id="option_a"
+                onclick="selectAnswer('A')">
+
+                <strong>A.</strong>
+
+                <span id="text_a"></span>
+
+            </button>
+
+
+
+            <button
+                class="option"
+                id="option_b"
+                onclick="selectAnswer('B')">
+
+                <strong>B.</strong>
+
+                <span id="text_b"></span>
+
+            </button>
+
+
+
+            <button
+                class="option"
+                id="option_c"
+                onclick="selectAnswer('C')">
+
+                <strong>C.</strong>
+
+                <span id="text_c"></span>
+
+            </button>
+
+
+
+            <button
+                class="option"
+                id="option_d"
+                onclick="selectAnswer('D')">
+
+                <strong>D.</strong>
+
+                <span id="text_d"></span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- FEEDBACK -->
+
+        <div
+            class="feedback"
+            id="feedback">
+        </div>
+
+
+
+        <!-- ANSWER / EXPLANATION -->
+
+        <div
+            class="answer"
+            id="answer">
+
+
+            <p>
+
+                <strong>
+                    Correct Answer:
+                </strong>
+
+                <span
+                    id="correct_answer">
+                </span>
+
+            </p>
+
+
+
+            <p>
+
+                <strong>
+                    Explanation:
+                </strong>
+
+                <span
+                    id="explanation">
+                </span>
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="buttons">
+
+
+            <button
+                class="secondary"
+                id="previousButton"
+                onclick="previousQuestion()">
+
+                ← Previous
+
+            </button>
+
+
+
+            <button
+                class="primary"
+                id="nextButton"
+                onclick="nextQuestion()"
+                disabled>
+
+                Next →
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- RESULT -->
+
+    <div
+        class="card result"
+        id="result">
+
+
+        <div class="result-icon">
+            🏆
+        </div>
+
+
+        <h2>
+            Quiz Completed!
+        </h2>
+
+
+        <p>
+
+            You have completed the
+
+            <span id="resultTopic">
+                Anatomy & Physiology
+            </span>
+
+            quiz.
+
+        </p>
+
+
+
+        <div
+            class="final-score"
+            id="finalScore">
+
+            0 / 0
+
+        </div>
+
+
+
+        <p id="percentage">
+
+            Your score: 0%
+
+        </p>
+
+
+
+        <button
+            onclick="restartQuiz()">
+
+            🔄 Try Again
+
+        </button>
+
+
+        <br>
+
+
+        <button
+            class="back-topic"
+            onclick="window.location.href='anatomy-physiology.html'">
+
+            ← Back to Topics
+
+        </button>
+
+
+    </div>
+
 
 </div>
 
-
-<!-- ERROR -->
-
-<div
-    id="error"
-    style="display:none;">
-
-    <h2>
-        ❌ Unable to Generate Questions
-    </h2>
-
-    <p id="errorMessage"></p>
-
-    <div id="errorDetails"></div>
-
-    <button
-        class="retry-error"
-        onclick="startQuiz()">
-
-        🔄 Try Again
-
-    </button>
-
-</div>
-
-
-<!-- NO QUESTIONS -->
-
-<div
-    id="empty"
-    style="display:none;">
-
-    <h2>📚 No Questions Generated</h2>
-
-    <p>
-        The AI did not return any questions.
-    </p>
-
-</div>
-
-
-<!-- QUIZ -->
-
-<div
-    class="card"
-    id="quizCard"
-    style="display:none;">
-
-
-<div class="course-title">
-
-    <h2>🫀 Anatomy & Physiology</h2>
-
-    <p>
-        Test your knowledge
-    </p>
-
-</div>
-
-
-<div
-    class="topic-name"
-    id="topicName">
-</div>
-
-
-<div
-    class="counter"
-    id="counter">
-</div>
-
-
-<div
-    class="score"
-    id="score">
-
-    Score: 0
-
-</div>
-
-
-<div
-    class="question"
-    id="question">
-</div>
-
-
-<div class="options">
-
-
-<button
-    class="option"
-    id="option_a"
-    onclick="selectAnswer('A')">
-
-    <strong>A.</strong>
-
-    <span id="text_a"></span>
-
-</button>
-
-
-<button
-    class="option"
-    id="option_b"
-    onclick="selectAnswer('B')">
-
-    <strong>B.</strong>
-
-    <span id="text_b"></span>
-
-</button>
-
-
-<button
-    class="option"
-    id="option_c"
-    onclick="selectAnswer('C')">
-
-    <strong>C.</strong>
-
-    <span id="text_c"></span>
-
-</button>
-
-
-<button
-    class="option"
-    id="option_d"
-    onclick="selectAnswer('D')">
-
-    <strong>D.</strong>
-
-    <span id="text_d"></span>
-
-</button>
-
-
-</div>
-
-
-<div
-    class="feedback"
-    id="feedback">
-</div>
-
-
-<div
-    class="answer"
-    id="answer">
-
-    <p>
-
-        <strong>
-            Correct Answer:
-        </strong>
-
-        <span id="correct_answer"></span>
-
-    </p>
-
-    <p>
-
-        <strong>
-            Explanation:
-        </strong>
-
-        <span id="explanation"></span>
-
-    </p>
-
-</div>
-
-
-<div class="buttons">
-
-<button
-    class="secondary"
-    id="previousButton"
-    onclick="previousQuestion()">
-
-    ← Previous
-
-</button>
-
-
-<button
-    class="primary"
-    id="nextButton"
-    onclick="nextQuestion()"
-    disabled>
-
-    Next →
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- RESULT -->
-
-<div
-    class="card result"
-    id="result">
-
-
-<div class="result-icon">
-    🏆
-</div>
-
-
-<h2>
-    Quiz Completed!
-</h2>
-
-
-<p>
-
-    You have completed the
-
-    <span id="resultTopic"></span>
-
-    quiz.
-
-</p>
-
-
-<div
-    class="final-score"
-    id="finalScore">
-
-    0 / 0
-
-</div>
-
-
-<p id="percentage">
-    Your score: 0%
-</p>
-
-
-<button onclick="restartQuiz()">
-
-    🔄 Generate New Questions
-
-</button>
-
-
-<br>
-
-
-<button
-    class="back-topic"
-    onclick="window.location.href='anatomy-physiology.html'">
-
-    ← Back to Topics
-
-</button>
-
-
-</div>
-
-
-</div>
 
 
 <footer>
 
-© 2026 OGCONS Study Hub
-• Built for students
+    © 2026 OGCONS Study Hub
+    • Built for students
 
 </footer>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -832,14 +874,6 @@ const supabaseClient =
     );
 
 
-// ======================================================
-// EDGE FUNCTION
-// ======================================================
-
-const EDGE_FUNCTION_URL =
-    SUPABASE_URL +
-    "/functions/v1/generate-anatomy-questions";
-
 
 // ======================================================
 // QUIZ VARIABLES
@@ -851,9 +885,36 @@ let currentQuestion = 0;
 
 let score = 0;
 
+
+/*
+=========================================================
+IMPORTANT
+
+This array remembers the answer given to every question.
+
+Example:
+
+answers[0] = {
+    answered: true,
+    selected: "B",
+    correct: "B",
+    isCorrect: true
+};
+
+answers[1] = {
+    answered: true,
+    selected: "A",
+    correct: "C",
+    isCorrect: false
+};
+
+This prevents a student from answering a question
+again when they click Previous.
+=========================================================
+*/
+
 let answers = [];
 
-let generating = false;
 
 
 // ======================================================
@@ -870,166 +931,79 @@ const selectedTopic =
     urlParams.get("topic");
 
 
-document
-    .getElementById("loadingTopic")
-    .textContent =
-    selectedTopic
-        ? "Topic: " + selectedTopic
-        : "";
-
 
 // ======================================================
-// HTML ESCAPE
+// LOAD QUESTIONS
 // ======================================================
 
-function escapeHTML(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-    return String(value)
-
-        .replace(/&/g, "&amp;")
-
-        .replace(/</g, "&lt;")
-
-        .replace(/>/g, "&gt;")
-
-        .replace(/"/g, "&quot;")
-
-        .replace(/'/g, "&#039;");
-}
+async function loadQuestions() {
 
 
-// ======================================================
-// SHOW ERROR
-// ======================================================
-
-function showError(message, details = "") {
-
-    document
-        .getElementById("loading")
-        .style.display =
-        "none";
-
-    document
-        .getElementById("quizCard")
-        .style.display =
-        "none";
-
-    document
-        .getElementById("result")
-        .style.display =
-        "none";
-
-    document
-        .getElementById("empty")
-        .style.display =
-        "none";
+    const loading =
+        document.getElementById("loading");
 
 
-    document
-        .getElementById("error")
-        .style.display =
-        "block";
+    const quizCard =
+        document.getElementById("quizCard");
 
 
-    document
-        .getElementById("errorMessage")
-        .textContent =
-        message;
+    const empty =
+        document.getElementById("empty");
 
 
-    document
-        .getElementById("errorDetails")
-        .textContent =
-        details || "No additional details.";
-}
+    const error =
+        document.getElementById("error");
 
 
-// ======================================================
-// START QUIZ
-// ======================================================
-
-async function startQuiz() {
-
-
-    if (generating) {
-
-        return;
-
-    }
-
-
-    generating = true;
-
-
-    // Hide everything
-
-    document
-        .getElementById("error")
-        .style.display =
-        "none";
-
-    document
-        .getElementById("quizCard")
-        .style.display =
-        "none";
-
-    document
-        .getElementById("result")
-        .style.display =
-        "none";
-
-    document
-        .getElementById("empty")
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById("loading")
-        .style.display =
-        "block";
-
-
-    document
-        .getElementById("loading")
-        .querySelector("h2")
-        .textContent =
-        "🤖 Preparing Your Quiz...";
-
-
-    // ==================================================
-    // CHECK TOPIC
-    // ==================================================
 
     if (!selectedTopic) {
 
-        generating = false;
+        loading.style.display =
+            "none";
 
-        showError(
-            "No topic was selected.",
-            "Go back to the Anatomy & Physiology topic page and select a topic."
-        );
+        error.style.display =
+            "block";
+
+        error.innerHTML = `
+
+            <h2>
+                ⚠️ No Topic Selected
+            </h2>
+
+            <p>
+                Please return to Anatomy & Physiology
+                and select a topic.
+            </p>
+
+        `;
 
         return;
 
     }
 
 
+
+    document
+        .getElementById("topicName")
+        .textContent =
+        "Topic: " +
+        selectedTopic;
+
+
+
+    document
+        .getElementById("resultTopic")
+        .textContent =
+        selectedTopic;
+
+
+
     // ==================================================
-    // GET USER
+    // CHECK LOGIN
     // ==================================================
 
     const {
-        data: userData,
+        data: { user },
         error: userError
     } =
         await supabaseClient
@@ -1037,9 +1011,8 @@ async function startQuiz() {
             .getUser();
 
 
-    if (userError || !userData.user) {
 
-        generating = false;
+    if (userError || !user) {
 
         window.location.href =
             "login.html";
@@ -1049,357 +1022,154 @@ async function startQuiz() {
     }
 
 
-    const user =
-        userData.user;
-
 
     // ==================================================
-    // GET SESSION
+    // GET QUESTIONS
     // ==================================================
 
     const {
-        data: sessionData,
-        error: sessionError
+        data,
+        error: databaseError
     } =
         await supabaseClient
-            .auth
-            .getSession();
+
+            .from("questions")
+
+            .select("*")
+
+            .eq(
+                "course",
+                "Anatomy & Physiology"
+            )
+
+            .ilike(
+                "topic",
+                selectedTopic
+            )
+
+            .order(
+                "created_at",
+                {
+                    ascending: true
+                }
+            );
 
 
-    if (
-        sessionError ||
-        !sessionData.session
-    ) {
 
-        generating = false;
+    // ==================================================
+    // DATABASE ERROR
+    // ==================================================
 
-        showError(
-            "Your login session has expired.",
-            "Please log in again and then return to the quiz."
+    if (databaseError) {
+
+        console.error(
+            "Question loading error:",
+            databaseError
         );
+
+
+        loading.style.display =
+            "none";
+
+
+        error.style.display =
+            "block";
+
+
+        error.innerHTML = `
+
+            <h2>
+                ❌ Unable to Load Questions
+            </h2>
+
+            <p>
+                ${escapeHTML(
+                    databaseError.message
+                )}
+            </p>
+
+        `;
 
         return;
 
     }
 
 
-    const accessToken =
-        sessionData.session.access_token;
+
+    questions =
+        data || [];
+
+
+
+    loading.style.display =
+        "none";
+
 
 
     // ==================================================
-    // CALL EDGE FUNCTION
+    // NO QUESTIONS
     // ==================================================
 
-    try {
+    if (questions.length === 0) {
 
-
-        const controller =
-            new AbortController();
-
-
-        const timeout =
-            setTimeout(
-                function() {
-
-                    controller.abort();
-
-                },
-                60000
-            );
-
-
-        const response =
-            await fetch(
-                EDGE_FUNCTION_URL,
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Authorization":
-                            "Bearer " +
-                            accessToken,
-
-                        "apikey":
-                            SUPABASE_PUBLISHABLE_KEY
-
-                    },
-
-                    body: JSON.stringify({
-
-                        topic:
-                            selectedTopic,
-
-                        numberOfQuestions:
-                            10
-
-                    }),
-
-                    signal:
-                        controller.signal
-
-                }
-            );
-
-
-        clearTimeout(timeout);
-
-
-        // ==================================================
-        // READ SERVER RESPONSE
-        // ==================================================
-
-        const responseText =
-            await response.text();
-
-
-        let result;
-
-
-        try {
-
-            result =
-                JSON.parse(
-                    responseText
-                );
-
-        }
-
-        catch {
-
-            generating = false;
-
-            showError(
-                "The Edge Function returned an invalid response.",
-                "HTTP Status: " +
-                response.status +
-                "\n\n" +
-                responseText
-            );
-
-            return;
-
-        }
-
-
-        // ==================================================
-        // SERVER ERROR
-        // ==================================================
-
-        if (!response.ok) {
-
-            generating = false;
-
-            const serverMessage =
-                result.error ||
-                "Edge Function returned an error.";
-
-
-            const serverDetails =
-                result.details ||
-                result.message ||
-                "";
-
-
-            showError(
-
-                serverMessage,
-
-                "HTTP Status: " +
-                response.status +
-                "\n\n" +
-                serverDetails
-
-            );
-
-            return;
-
-        }
-
-
-        // ==================================================
-        // CHECK SUCCESS
-        // ==================================================
-
-        if (
-            result.success !== true
-        ) {
-
-            generating = false;
-
-            showError(
-
-                result.error ||
-                "The AI was unable to generate questions.",
-
-                result.details ||
-                JSON.stringify(
-                    result,
-                    null,
-                    2
-                )
-
-            );
-
-            return;
-
-        }
-
-
-        // ==================================================
-        // CHECK QUESTIONS
-        // ==================================================
-
-        if (
-            !Array.isArray(
-                result.questions
-            ) ||
-            result.questions.length === 0
-        ) {
-
-            generating = false;
-
-            showError(
-                "The AI returned no questions.",
-                JSON.stringify(
-                    result,
-                    null,
-                    2
-                )
-            );
-
-            return;
-
-        }
-
-
-        // ==================================================
-        // STORE QUESTIONS
-        // ==================================================
-
-        questions =
-            result.questions;
-
-
-        currentQuestion =
-            0;
-
-
-        score =
-            0;
-
-
-        answers =
-            questions.map(
-                function() {
-
-                    return {
-
-                        answered:
-                            false,
-
-                        selected:
-                            null,
-
-                        correct:
-                            null,
-
-                        isCorrect:
-                            false
-
-                    };
-
-                }
-            );
-
-
-        generating =
-            false;
-
-
-        // ==================================================
-        // SHOW QUIZ
-        // ==================================================
-
-        document
-            .getElementById("loading")
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById("error")
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById("quizCard")
-            .style.display =
+        empty.style.display =
             "block";
 
 
         document
-            .getElementById("topicName")
+            .getElementById("emptyMessage")
             .textContent =
-            "Topic: " +
-            selectedTopic;
 
+            "There are currently no questions for " +
+            selectedTopic +
+            ". Add questions from the Admin Dashboard.";
 
-        document
-            .getElementById("resultTopic")
-            .textContent =
-            selectedTopic;
-
-
-        showQuestion();
-
+        return;
 
     }
 
-    catch(error) {
 
 
-        generating =
-            false;
+    // ==================================================
+    // CREATE ANSWER MEMORY
+    // ==================================================
+
+    /*
+     * One empty answer record is created for
+     * every question.
+     */
+
+    answers =
+        questions.map(function() {
+
+            return {
+
+                answered: false,
+
+                selected: null,
+
+                correct: null,
+
+                isCorrect: false
+
+            };
+
+        });
 
 
-        if (
-            error.name ===
-            "AbortError"
-        ) {
 
-            showError(
+    // ==================================================
+    // SHOW QUIZ
+    // ==================================================
 
-                "The AI took too long to respond.",
+    quizCard.style.display =
+        "block";
 
-                "The request timed out after 60 seconds. Please try again."
 
-            );
-
-        }
-
-        else {
-
-            showError(
-
-                "Unable to connect to the Edge Function.",
-
-                error.message ||
-                String(error)
-
-            );
-
-        }
-
-    }
+    showQuestion();
 
 }
+
 
 
 // ======================================================
@@ -1413,8 +1183,9 @@ function showQuestion() {
         questions[currentQuestion];
 
 
-    const saved =
+    const savedAnswer =
         answers[currentQuestion];
+
 
 
     if (!q) {
@@ -1423,6 +1194,11 @@ function showQuestion() {
 
     }
 
+
+
+    // ==================================================
+    // QUESTION INFORMATION
+    // ==================================================
 
     document
         .getElementById("counter")
@@ -1434,6 +1210,7 @@ function showQuestion() {
         questions.length;
 
 
+
     document
         .getElementById("score")
         .textContent =
@@ -1442,10 +1219,12 @@ function showQuestion() {
         score;
 
 
+
     document
         .getElementById("question")
         .textContent =
         q.question;
+
 
 
     document
@@ -1454,10 +1233,12 @@ function showQuestion() {
         q.option_a;
 
 
+
     document
         .getElementById("text_b")
         .textContent =
         q.option_b;
+
 
 
     document
@@ -1466,11 +1247,17 @@ function showQuestion() {
         q.option_c;
 
 
+
     document
         .getElementById("text_d")
         .textContent =
         q.option_d;
 
+
+
+    // ==================================================
+    // GET OPTIONS
+    // ==================================================
 
     const options = [
 
@@ -1485,26 +1272,45 @@ function showQuestion() {
     ];
 
 
-    options.forEach(
-        function(option) {
 
-            option.disabled =
-                false;
+    // ==================================================
+    // RESET OPTIONS
+    // ==================================================
 
-            option.classList.remove(
-                "correct",
-                "wrong",
-                "disabled"
-            );
+    options.forEach(function(option) {
 
-        }
-    );
+        option.classList.remove(
+            "correct",
+            "wrong",
+            "disabled"
+        );
+
+        option.disabled = false;
+
+    });
 
 
-    document
-        .getElementById("feedback")
-        .style.display =
+
+    // ==================================================
+    // RESET FEEDBACK
+    // ==================================================
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.style.display =
         "none";
+
+
+    feedback.className =
+        "feedback";
+
+    feedback.textContent =
+        "";
+
 
 
     document
@@ -1513,43 +1319,84 @@ function showQuestion() {
         "none";
 
 
-    document
-        .getElementById("nextButton")
-        .disabled =
-        true;
 
+    // ==================================================
+    // QUESTION HAS ALREADY BEEN ANSWERED
+    // ==================================================
+
+    if (
+        savedAnswer &&
+        savedAnswer.answered
+    ) {
+
+
+        /*
+         * This question has already been answered.
+         *
+         * We show the previous answer instead of
+         * allowing the student to answer again.
+         */
+
+        showPreviousAnswer(
+            q,
+            savedAnswer
+        );
+
+
+    }
+
+    else {
+
+
+        /*
+         * Question has not been answered yet.
+         */
+
+        document
+            .getElementById("nextButton")
+            .disabled =
+            true;
+
+    }
+
+
+
+    // ==================================================
+    // PREVIOUS BUTTON
+    // ==================================================
 
     document
         .getElementById("previousButton")
         .disabled =
         currentQuestion === 0;
 
-
-    // Show previous answer if revisiting
-
-    if (
-        saved &&
-        saved.answered
-    ) {
-
-        showPreviousAnswer(
-            q,
-            saved
-        );
-
-    }
-
 }
 
 
+
 // ======================================================
-// SHOW PREVIOUS ANSWER
+// SHOW PREVIOUSLY ANSWERED QUESTION
 // ======================================================
 
 function showPreviousAnswer(
     q,
-    saved
+    savedAnswer
 ) {
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            savedAnswer.selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            savedAnswer.correct.toLowerCase()
+        );
+
 
 
     const options = [
@@ -1565,51 +1412,59 @@ function showPreviousAnswer(
     ];
 
 
-    options.forEach(
-        function(option) {
 
-            option.disabled =
-                true;
+    // ==================================================
+    // LOCK ALL OPTIONS
+    // ==================================================
 
-            option.classList.add(
-                "disabled"
-            );
+    options.forEach(function(option) {
 
-        }
-    );
+        option.disabled = true;
 
-
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            saved.selected.toLowerCase()
+        option.classList.add(
+            "disabled"
         );
 
+    });
 
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            saved.correct.toLowerCase()
-        );
 
+
+    // ==================================================
+    // SHOW SELECTED ANSWER
+    // ==================================================
 
     if (selectedButton) {
 
-        selectedButton.classList.add(
+        if (
+            savedAnswer.isCorrect
+        ) {
 
-            saved.isCorrect
-                ? "correct"
-                : "wrong"
+            selectedButton.classList.add(
+                "correct"
+            );
 
-        );
+        }
+
+        else {
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+        }
 
     }
 
 
+
+    // ==================================================
+    // SHOW CORRECT ANSWER
+    // ==================================================
+
     if (
         correctButton &&
-        saved.selected !==
-        saved.correct
+        savedAnswer.selected !==
+        savedAnswer.correct
     ) {
 
         correctButton.classList.add(
@@ -1619,38 +1474,53 @@ function showPreviousAnswer(
     }
 
 
+
+    // ==================================================
+    // FEEDBACK
+    // ==================================================
+
     const feedback =
         document.getElementById(
             "feedback"
         );
 
 
-    feedback.textContent =
+    if (
+        savedAnswer.isCorrect
+    ) {
 
-        saved.isCorrect
+        feedback.textContent =
+            "✅ You already answered this question correctly.";
 
-            ? "✅ You already answered this question correctly."
+        feedback.className =
+            "feedback correct-feedback";
 
-            : "❌ You already answered this question. Your previous answer cannot be changed.";
+    }
 
-    
-    feedback.className =
+    else {
 
-        saved.isCorrect
+        feedback.textContent =
+            "❌ You already answered this question. Your previous answer cannot be changed.";
 
-            ? "feedback correct-feedback"
+        feedback.className =
+            "feedback wrong-feedback";
 
-            : "feedback wrong-feedback";
+    }
 
 
     feedback.style.display =
         "block";
 
 
+
+    // ==================================================
+    // SHOW ANSWER AND EXPLANATION
+    // ==================================================
+
     document
         .getElementById("correct_answer")
         .textContent =
-        saved.correct;
+        savedAnswer.correct;
 
 
     document
@@ -1667,12 +1537,18 @@ function showPreviousAnswer(
         "block";
 
 
+
+    // ==================================================
+    // ENABLE NEXT
+    // ==================================================
+
     document
         .getElementById("nextButton")
         .disabled =
         false;
 
 }
+
 
 
 // ======================================================
@@ -1684,13 +1560,21 @@ function selectAnswer(
 ) {
 
 
-    const saved =
+    const savedAnswer =
         answers[currentQuestion];
 
 
+
+    /*
+     * VERY IMPORTANT:
+     *
+     * If this question has already been answered,
+     * do absolutely nothing.
+     */
+
     if (
-        saved &&
-        saved.answered
+        savedAnswer &&
+        savedAnswer.answered
     ) {
 
         return;
@@ -1698,15 +1582,10 @@ function selectAnswer(
     }
 
 
+
     const q =
         questions[currentQuestion];
 
-
-    if (!q) {
-
-        return;
-
-    }
 
 
     const correct =
@@ -1717,14 +1596,39 @@ function selectAnswer(
         .toUpperCase();
 
 
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            selected.toLowerCase()
+        );
+
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            correct.toLowerCase()
+        );
+
+
+
+    // ==================================================
+    // DETERMINE RESULT
+    // ==================================================
+
     const isCorrect =
         selected === correct;
 
 
+
+    // ==================================================
+    // SAVE ANSWER
+    // ==================================================
+
     answers[currentQuestion] = {
 
-        answered:
-            true,
+        answered: true,
 
         selected:
             selected,
@@ -1738,12 +1642,10 @@ function selectAnswer(
     };
 
 
-    if (isCorrect) {
 
-        score++;
-
-    }
-
+    // ==================================================
+    // LOCK OPTIONS
+    // ==================================================
 
     const options = [
 
@@ -1758,43 +1660,60 @@ function selectAnswer(
     ];
 
 
-    options.forEach(
-        function(option) {
+    options.forEach(function(option) {
 
-            option.disabled =
-                true;
+        option.disabled = true;
 
-            option.classList.add(
-                "disabled"
-            );
-
-        }
-    );
-
-
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            selected.toLowerCase()
+        option.classList.add(
+            "disabled"
         );
 
+    });
 
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            correct.toLowerCase()
-        );
 
+
+    // ==================================================
+    // CORRECT ANSWER
+    // ==================================================
 
     if (isCorrect) {
+
+
+        score++;
+
 
         selectedButton.classList.add(
             "correct"
         );
 
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+            "✅ Correct! Well done.";
+
+
+        feedback.className =
+            "feedback correct-feedback";
+
+
+        feedback.style.display =
+            "block";
+
     }
 
+
+
+    // ==================================================
+    // WRONG ANSWER
+    // ==================================================
+
     else {
+
 
         selectedButton.classList.add(
             "wrong"
@@ -1809,48 +1728,46 @@ function selectAnswer(
 
         }
 
-    }
 
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
 
-    const feedback =
-        document.getElementById(
-            "feedback"
-        );
-
-
-    if (isCorrect) {
-
-        feedback.textContent =
-            "✅ Correct! Well done.";
-
-        feedback.className =
-            "feedback correct-feedback";
-
-    }
-
-    else {
 
         feedback.textContent =
 
-            "❌ Wrong answer. The correct answer is " +
+            "❌ Wrong answer. " +
+            "The correct answer is " +
             correct +
             ".";
+
 
         feedback.className =
             "feedback wrong-feedback";
 
+
+        feedback.style.display =
+            "block";
+
     }
 
 
-    feedback.style.display =
-        "block";
 
+    // ==================================================
+    // SHOW CORRECT ANSWER
+    // ==================================================
 
     document
         .getElementById("correct_answer")
         .textContent =
         correct;
 
+
+
+    // ==================================================
+    // SHOW EXPLANATION
+    // ==================================================
 
     document
         .getElementById("explanation")
@@ -1866,6 +1783,11 @@ function selectAnswer(
         "block";
 
 
+
+    // ==================================================
+    // UPDATE SCORE
+    // ==================================================
+
     document
         .getElementById("score")
         .textContent =
@@ -1873,6 +1795,11 @@ function selectAnswer(
         "Score: " +
         score;
 
+
+
+    // ==================================================
+    // ENABLE NEXT
+    // ==================================================
 
     document
         .getElementById("nextButton")
@@ -1882,12 +1809,18 @@ function selectAnswer(
 }
 
 
+
 // ======================================================
 // NEXT QUESTION
 // ======================================================
 
 function nextQuestion() {
 
+
+    /*
+     * The current question must already be answered
+     * before moving forward.
+     */
 
     if (
         !answers[currentQuestion] ||
@@ -1899,12 +1832,15 @@ function nextQuestion() {
     }
 
 
+
     if (
         currentQuestion <
         questions.length - 1
     ) {
 
+
         currentQuestion++;
+
 
         showQuestion();
 
@@ -1912,11 +1848,13 @@ function nextQuestion() {
 
     else {
 
+
         showResult();
 
     }
 
 }
+
 
 
 // ======================================================
@@ -1930,13 +1868,22 @@ function previousQuestion() {
         currentQuestion > 0
     ) {
 
+
         currentQuestion--;
+
+
+        /*
+         * showQuestion() will check the saved answer
+         * and automatically lock the question if it
+         * was already answered.
+         */
 
         showQuestion();
 
     }
 
 }
+
 
 
 // ======================================================
@@ -1958,8 +1905,10 @@ async function showResult() {
         "block";
 
 
+
     const total =
         questions.length;
+
 
 
     const percentage =
@@ -1972,6 +1921,7 @@ async function showResult() {
             : 0;
 
 
+
     document
         .getElementById("finalScore")
         .textContent =
@@ -1979,6 +1929,7 @@ async function showResult() {
         score +
         " / " +
         total;
+
 
 
     document
@@ -1990,66 +1941,69 @@ async function showResult() {
         "%";
 
 
-    // Save result
 
-    try {
+    // ==================================================
+    // GET CURRENT USER
+    // ==================================================
 
-        const {
-            data: userData
-        } =
-            await supabaseClient
-                .auth
-                .getUser();
-
-
-        if (
-            userData &&
-            userData.user
-        ) {
-
-            const {
-                error
-            } =
-                await supabaseClient
-                    .from("quiz_results")
-                    .insert({
-
-                        user_id:
-                            userData.user.id,
-
-                        course:
-                            "Anatomy & Physiology",
-
-                        score:
-                            score,
-
-                        total_questions:
-                            total,
-
-                        percentage:
-                            percentage
-
-                    });
+    const {
+        data: { user }
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
 
 
-            if (error) {
 
-                console.error(
-                    "Could not save result:",
-                    error
-                );
+    if (!user) {
 
-            }
+        console.log(
+            "Student is not logged in."
+        );
 
-        }
+        return;
 
     }
 
-    catch(error) {
+
+
+    // ==================================================
+    // SAVE QUIZ RESULT
+    // ==================================================
+
+    const {
+        error: saveError
+    } =
+        await supabaseClient
+
+            .from("quiz_results")
+
+            .insert({
+
+                user_id:
+                    user.id,
+
+                course:
+                    "Anatomy & Physiology",
+
+                score:
+                    score,
+
+                total_questions:
+                    total,
+
+                percentage:
+                    percentage
+
+            });
+
+
+
+    if (saveError) {
 
         console.error(
-            "Result saving error:",
-            error
+            "Could not save quiz result:",
+            saveError.message
         );
 
     }
@@ -2057,20 +2011,42 @@ async function showResult() {
 }
 
 
+
 // ======================================================
-// RESTART
+// RESTART QUIZ
 // ======================================================
 
 function restartQuiz() {
 
 
-    questions = [];
+    /*
+     * A new attempt starts here.
+     *
+     * Therefore all previous answers are cleared.
+     */
 
     currentQuestion = 0;
 
     score = 0;
 
-    answers = [];
+    answers = questions.map(
+        function() {
+
+            return {
+
+                answered: false,
+
+                selected: null,
+
+                correct: null,
+
+                isCorrect: false
+
+            };
+
+        }
+    );
+
 
 
     document
@@ -2079,19 +2055,77 @@ function restartQuiz() {
         "none";
 
 
-    startQuiz();
+    document
+        .getElementById("quizCard")
+        .style.display =
+        "block";
+
+
+    showQuestion();
 
 }
 
 
+
 // ======================================================
-// START
+// ESCAPE HTML
 // ======================================================
 
-startQuiz();
+function escapeHTML(
+    value
+) {
+
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+// ======================================================
+// START QUIZ
+// ======================================================
+
+loadQuestions();
 
 
 </script>
+
 
 </body>
 
