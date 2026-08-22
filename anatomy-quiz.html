@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +8,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>OGCONS Study Hub - Anatomy & Physiology Quiz</title>
+    <title>
+        OGCONS Study Hub - Anatomy & Physiology Quiz
+    </title>
 
     <style>
 
@@ -75,9 +76,13 @@
 
         .card,
         #loading,
-        #error {
+        #error,
+        #empty {
+
             background: white;
+
             border-radius: 18px;
+
             padding: 30px;
 
             box-shadow:
@@ -102,11 +107,17 @@
 
         .topic-name {
             text-align: center;
+
             background: #e8fff2;
+
             color: #16834a;
+
             padding: 12px;
+
             border-radius: 10px;
+
             font-weight: bold;
+
             margin-bottom: 20px;
         }
 
@@ -137,16 +148,21 @@
         }
 
         .option {
+
             width: 100%;
+
             text-align: left;
 
             background: #f7f9fc;
+
             border: 2px solid #d8dee8;
 
             border-radius: 12px;
+
             padding: 16px;
 
             font-size: 16px;
+
             cursor: pointer;
 
             transition: 0.2s;
@@ -178,10 +194,15 @@
         }
 
         .feedback {
+
             margin-top: 20px;
+
             padding: 18px;
+
             border-radius: 12px;
+
             display: none;
+
             font-weight: bold;
         }
 
@@ -196,11 +217,17 @@
         }
 
         .answer {
+
             margin-top: 15px;
+
             padding: 18px;
+
             background: #eef6ff;
+
             border-radius: 12px;
+
             display: none;
+
             line-height: 1.6;
         }
 
@@ -209,18 +236,28 @@
         }
 
         .buttons {
+
             display: flex;
+
             justify-content: space-between;
+
             gap: 12px;
+
             margin-top: 25px;
         }
 
         button {
+
             border: none;
+
             border-radius: 10px;
+
             padding: 13px 20px;
+
             font-size: 15px;
+
             font-weight: bold;
+
             cursor: pointer;
         }
 
@@ -247,8 +284,8 @@
             text-align: center;
         }
 
-        #loading-icon {
-            font-size: 50px;
+        #loading .robot {
+            font-size: 55px;
             margin-bottom: 10px;
         }
 
@@ -262,8 +299,23 @@
 
         #error {
             display: none;
+            color: #842029;
+            background: #f8d7da;
+        }
+
+        #error h2 {
+            margin-top: 0;
+        }
+
+        #error button {
+            background: #dc3545;
+            color: white;
+            margin-top: 15px;
+        }
+
+        #empty {
+            display: none;
             text-align: center;
-            color: #dc3545;
         }
 
         .result {
@@ -281,9 +333,13 @@
         }
 
         .final-score {
+
             font-size: 42px;
+
             font-weight: bold;
+
             color: #18a058;
+
             margin: 20px 0;
         }
 
@@ -295,6 +351,25 @@
 
         .result .back-topic {
             background: #6c757d;
+        }
+
+        .ai-label {
+
+            display: inline-block;
+
+            margin-bottom: 15px;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            background: #eef6ff;
+
+            color: #0b5ed7;
+
+            font-size: 13px;
+
+            font-weight: bold;
         }
 
         footer {
@@ -311,7 +386,8 @@
 
             .card,
             #loading,
-            #error {
+            #error,
+            #empty {
                 padding: 20px;
             }
 
@@ -326,6 +402,7 @@
             button {
                 width: 100%;
             }
+
         }
 
     </style>
@@ -343,11 +420,10 @@
     </h1>
 
     <p>
-        Anatomy & Physiology AI Quiz
+        Anatomy & Physiology Quiz
     </p>
 
 </header>
-
 
 
 <div class="container">
@@ -362,14 +438,13 @@
     </a>
 
 
-
-    <!-- ==========================================
-         LOADING
-    =========================================== -->
+    <!-- =====================================================
+         AI LOADING
+    ====================================================== -->
 
     <div id="loading">
 
-        <div id="loading-icon">
+        <div class="robot">
             🤖
         </div>
 
@@ -382,13 +457,16 @@
             Anatomy & Physiology questions.
         </p>
 
+        <p>
+            Please wait...
+        </p>
+
     </div>
 
 
-
-    <!-- ==========================================
+    <!-- =====================================================
          ERROR
-    =========================================== -->
+    ====================================================== -->
 
     <div id="error">
 
@@ -400,9 +478,31 @@
             Something went wrong.
         </p>
 
+        <button onclick="startQuiz()">
+            🔄 Try Again
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         EMPTY
+    ====================================================== -->
+
+    <div id="empty">
+
+        <h2>
+            📚 No Questions Available
+        </h2>
+
+        <p>
+            The AI could not generate questions
+            for this topic.
+        </p>
+
         <button
             class="primary"
-            onclick="loadAIQuestions()">
+            onclick="startQuiz()">
 
             🔄 Try Again
 
@@ -411,10 +511,9 @@
     </div>
 
 
-
-    <!-- ==========================================
-         QUIZ CARD
-    =========================================== -->
+    <!-- =====================================================
+         QUIZ
+    ====================================================== -->
 
     <div
         class="card"
@@ -424,16 +523,19 @@
 
         <div class="course-title">
 
+            <div class="ai-label">
+                🤖 AI Generated Quiz
+            </div>
+
             <h2>
                 🫀 Anatomy & Physiology
             </h2>
 
             <p>
-                AI Generated Practice Quiz
+                Test your knowledge
             </p>
 
         </div>
-
 
 
         <div
@@ -442,12 +544,10 @@
         </div>
 
 
-
         <div
             class="counter"
             id="counter">
         </div>
-
 
 
         <div
@@ -459,12 +559,10 @@
         </div>
 
 
-
         <div
             class="question"
             id="question">
         </div>
-
 
 
         <div class="options">
@@ -482,7 +580,6 @@
             </button>
 
 
-
             <button
                 class="option"
                 id="option_b"
@@ -495,7 +592,6 @@
             </button>
 
 
-
             <button
                 class="option"
                 id="option_c"
@@ -506,7 +602,6 @@
                 <span id="text_c"></span>
 
             </button>
-
 
 
             <button
@@ -524,6 +619,7 @@
         </div>
 
 
+        <!-- FEEDBACK -->
 
         <div
             class="feedback"
@@ -531,11 +627,11 @@
         </div>
 
 
+        <!-- ANSWER -->
 
         <div
             class="answer"
             id="answer">
-
 
             <p>
 
@@ -543,10 +639,10 @@
                     Correct Answer:
                 </strong>
 
-                <span id="correct_answer"></span>
+                <span id="correct_answer">
+                </span>
 
             </p>
-
 
 
             <p>
@@ -555,13 +651,12 @@
                     Explanation:
                 </strong>
 
-                <span id="explanation"></span>
+                <span id="explanation">
+                </span>
 
             </p>
 
-
         </div>
-
 
 
         <div class="buttons">
@@ -575,7 +670,6 @@
                 ← Previous
 
             </button>
-
 
 
             <button
@@ -595,10 +689,9 @@
     </div>
 
 
-
-    <!-- ==========================================
+    <!-- =====================================================
          RESULT
-    =========================================== -->
+    ====================================================== -->
 
     <div
         class="card result"
@@ -628,7 +721,6 @@
         </p>
 
 
-
         <div
             class="final-score"
             id="finalScore">
@@ -638,17 +730,14 @@
         </div>
 
 
-
         <p id="percentage">
             Your score: 0%
         </p>
 
 
+        <button onclick="restartQuiz()">
 
-        <button
-            onclick="restartQuiz()">
-
-            🤖 Generate New Questions
+            🔄 Generate New Questions
 
         </button>
 
@@ -671,7 +760,6 @@
 </div>
 
 
-
 <footer>
 
     © 2026 OGCONS Study Hub
@@ -680,6 +768,9 @@
 </footer>
 
 
+<!-- =====================================================
+     SUPABASE
+====================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -688,7 +779,7 @@
 
 
 // ======================================================
-// SUPABASE
+// SUPABASE CONFIGURATION
 // ======================================================
 
 const SUPABASE_URL =
@@ -706,6 +797,13 @@ const supabaseClient =
     );
 
 
+// ======================================================
+// EDGE FUNCTION NAME
+// ======================================================
+
+const EDGE_FUNCTION_NAME =
+    "generate-anatomy-questions";
+
 
 // ======================================================
 // QUIZ SETTINGS
@@ -720,12 +818,11 @@ const NUMBER_OF_QUESTIONS = 10;
 
 let questions = [];
 
+let answers = [];
+
 let currentQuestion = 0;
 
 let score = 0;
-
-let answers = [];
-
 
 
 // ======================================================
@@ -742,88 +839,46 @@ const selectedTopic =
     urlParams.get("topic");
 
 
-
 // ======================================================
-// GET CURRENT USER
-// ======================================================
-
-async function getCurrentUser() {
-
-    const {
-        data: { user },
-        error
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
-
-
-    if (error) {
-
-        console.error(
-            "Authentication error:",
-            error
-        );
-
-        return null;
-
-    }
-
-
-    return user;
-
-}
-
-
-
-// ======================================================
-// LOAD AI QUESTIONS
+// START QUIZ
 // ======================================================
 
-async function loadAIQuestions() {
+async function startQuiz() {
 
 
-    const loading =
-        document.getElementById("loading");
+    // ------------------------------------------
+    // RESET PAGE
+    // ------------------------------------------
+
+    document
+        .getElementById("loading")
+        .style.display = "block";
 
 
-    const errorBox =
-        document.getElementById("error");
+    document
+        .getElementById("quizCard")
+        .style.display = "none";
 
 
-    const quizCard =
-        document.getElementById("quizCard");
+    document
+        .getElementById("result")
+        .style.display = "none";
 
 
-    const result =
-        document.getElementById("result");
+    document
+        .getElementById("empty")
+        .style.display = "none";
 
 
+    document
+        .getElementById("error")
+        .style.display = "none";
 
-    // Reset screen
-
-    loading.style.display =
-        "block";
-
-    errorBox.style.display =
-        "none";
-
-    quizCard.style.display =
-        "none";
-
-    result.style.display =
-        "none";
-
-
-
-    // ==================================================
-    // CHECK TOPIC
-    // ==================================================
 
     if (!selectedTopic) {
 
         showError(
-            "No topic was selected. Please return to the Anatomy & Physiology topics page and choose a topic."
+            "No topic was selected. Please go back to the Anatomy & Physiology topics page and select a topic."
         );
 
         return;
@@ -831,29 +886,9 @@ async function loadAIQuestions() {
     }
 
 
-
-    // ==================================================
-    // CHECK LOGIN
-    // ==================================================
-
-    const user =
-        await getCurrentUser();
-
-
-    if (!user) {
-
-        window.location.href =
-            "login.html";
-
-        return;
-
-    }
-
-
-
-    // ==================================================
+    // ------------------------------------------
     // SHOW TOPIC
-    // ==================================================
+    // ------------------------------------------
 
     document
         .getElementById("topicName")
@@ -868,88 +903,240 @@ async function loadAIQuestions() {
         selectedTopic;
 
 
+    // ------------------------------------------
+    // CHECK LOGIN
+    // ------------------------------------------
+
+    let user;
+
 
     try {
 
-
-        // ==================================================
-        // CALL EDGE FUNCTION
-        // ==================================================
-
-        console.log(
-            "Calling generate-anatomy-questions..."
-        );
-
-
         const {
             data,
-            error: functionError
+            error
         } =
-            await supabaseClient.functions.invoke(
-                "generate-anatomy-questions",
-                {
-
-                    body: {
-
-                        topic:
-                            selectedTopic,
-
-                        numberOfQuestions:
-                            NUMBER_OF_QUESTIONS
-
-                    }
-
-                }
-            );
+        await supabaseClient
+            .auth
+            .getUser();
 
 
-
-        // ==================================================
-        // CHECK FUNCTION ERROR
-        // ==================================================
-
-        if (functionError) {
+        if (error) {
 
             console.error(
-                "Edge Function Error:",
-                functionError
-            );
-
-            throw new Error(
-                functionError.message ||
-                "Edge Function returned an error."
+                "Auth error:",
+                error
             );
 
         }
 
 
+        user = data?.user;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Login check failed:",
+            error
+        );
+
+    }
+
+
+    if (!user) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    // ------------------------------------------
+    // GET SESSION
+    // ------------------------------------------
+
+    const {
+        data: sessionData,
+        error: sessionError
+    } =
+    await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (sessionError) {
+
+        showError(
+            "Could not get your login session. Please log in again."
+        );
+
+        return;
+
+    }
+
+
+    const session =
+        sessionData?.session;
+
+
+    if (!session) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    // ------------------------------------------
+    // CALL EDGE FUNCTION
+    // ------------------------------------------
+
+    try {
+
 
         console.log(
-            "AI response:",
+            "Calling Edge Function:",
+            EDGE_FUNCTION_NAME
+        );
+
+
+        console.log(
+            "Topic:",
+            selectedTopic
+        );
+
+
+        const response =
+        await supabaseClient.functions.invoke(
+            EDGE_FUNCTION_NAME,
+            {
+
+                body: {
+
+                    topic:
+                        selectedTopic,
+
+                    numberOfQuestions:
+                        NUMBER_OF_QUESTIONS
+
+                }
+
+            }
+        );
+
+
+        console.log(
+            "Edge Function response:",
+            response
+        );
+
+
+        // --------------------------------------
+        // CHECK FUNCTION ERROR
+        // --------------------------------------
+
+        if (response.error) {
+
+
+            console.error(
+                "Edge Function error:",
+                response.error
+            );
+
+
+            let detailedMessage =
+                response.error.message ||
+                "Edge Function returned an error.";
+
+
+            // Try to read the actual server response
+            try {
+
+                if (
+                    response.error.context
+                ) {
+
+                    const text =
+                        await response.error
+                            .context
+                            .text();
+
+                    if (text) {
+
+                        console.error(
+                            "Server response:",
+                            text
+                        );
+
+                        detailedMessage +=
+                            " | Server: " +
+                            text;
+
+                    }
+
+                }
+
+            }
+
+            catch (readError) {
+
+                console.error(
+                    "Could not read error response:",
+                    readError
+                );
+
+            }
+
+
+            showError(
+                detailedMessage
+            );
+
+
+            return;
+
+        }
+
+
+        // --------------------------------------
+        // GET DATA
+        // --------------------------------------
+
+        const data =
+            response.data;
+
+
+        console.log(
+            "AI data:",
             data
         );
 
 
-
-        // ==================================================
-        // CHECK RESPONSE
-        // ==================================================
-
         if (!data) {
 
-            throw new Error(
-                "The AI returned an empty response."
+            showError(
+                "The Edge Function returned no data."
             );
+
+            return;
 
         }
 
 
         if (data.success !== true) {
 
-            throw new Error(
+            showError(
                 data.error ||
                 "The AI was unable to generate questions."
             );
+
+            return;
 
         }
 
@@ -960,9 +1147,11 @@ async function loadAIQuestions() {
             )
         ) {
 
-            throw new Error(
-                "The AI response does not contain a questions array."
+            showError(
+                "The AI response did not contain a valid question list."
             );
+
+            return;
 
         }
 
@@ -971,25 +1160,37 @@ async function loadAIQuestions() {
             data.questions.length === 0
         ) {
 
-            throw new Error(
-                "The AI generated zero questions."
-            );
+            document
+                .getElementById("loading")
+                .style.display =
+                "none";
+
+
+            document
+                .getElementById("empty")
+                .style.display =
+                "block";
+
+
+            return;
 
         }
 
 
-
-        // ==================================================
+        // --------------------------------------
         // SAVE QUESTIONS
-        // ==================================================
+        // --------------------------------------
 
         questions =
             data.questions;
 
 
-        currentQuestion = 0;
+        currentQuestion =
+            0;
 
-        score = 0;
+
+        score =
+            0;
 
 
         answers =
@@ -1012,43 +1213,44 @@ async function loadAIQuestions() {
             );
 
 
-
-        // ==================================================
+        // --------------------------------------
         // SHOW QUIZ
-        // ==================================================
+        // --------------------------------------
 
-        loading.style.display =
+        document
+            .getElementById("loading")
+            .style.display =
             "none";
 
 
-        quizCard.style.display =
+        document
+            .getElementById("quizCard")
+            .style.display =
             "block";
 
 
         showQuestion();
 
 
-
     }
 
-    catch (err) {
+    catch (error) {
 
 
         console.error(
-            "AI Quiz Error:",
-            err
+            "Unexpected quiz error:",
+            error
         );
 
 
         showError(
-            err.message ||
-            "Unable to generate questions."
+            error.message ||
+            "An unexpected error occurred while generating the quiz."
         );
 
     }
 
 }
-
 
 
 // ======================================================
@@ -1090,7 +1292,6 @@ function showError(message) {
 }
 
 
-
 // ======================================================
 // SHOW QUESTION
 // ======================================================
@@ -1102,11 +1303,6 @@ function showQuestion() {
         questions[currentQuestion];
 
 
-    const savedAnswer =
-        answers[currentQuestion];
-
-
-
     if (!q) {
 
         return;
@@ -1114,10 +1310,13 @@ function showQuestion() {
     }
 
 
+    const savedAnswer =
+        answers[currentQuestion];
 
-    // ==================================================
-    // QUESTION DETAILS
-    // ==================================================
+
+    // ------------------------------------------
+    // QUESTION NUMBER
+    // ------------------------------------------
 
     document
         .getElementById("counter")
@@ -1129,6 +1328,10 @@ function showQuestion() {
         questions.length;
 
 
+    // ------------------------------------------
+    // SCORE
+    // ------------------------------------------
+
     document
         .getElementById("score")
         .textContent =
@@ -1137,11 +1340,19 @@ function showQuestion() {
         score;
 
 
+    // ------------------------------------------
+    // QUESTION
+    // ------------------------------------------
+
     document
         .getElementById("question")
         .textContent =
         q.question;
 
+
+    // ------------------------------------------
+    // OPTIONS
+    // ------------------------------------------
 
     document
         .getElementById("text_a")
@@ -1167,6 +1378,9 @@ function showQuestion() {
         q.option_d;
 
 
+    // ------------------------------------------
+    // OPTION BUTTONS
+    // ------------------------------------------
 
     const options = [
 
@@ -1181,13 +1395,10 @@ function showQuestion() {
     ];
 
 
-
-    // ==================================================
-    // RESET
-    // ==================================================
-
     options.forEach(
         function(option) {
+
+            option.disabled = false;
 
             option.classList.remove(
                 "correct",
@@ -1195,30 +1406,30 @@ function showQuestion() {
                 "disabled"
             );
 
-            option.disabled =
-                false;
-
         }
     );
 
 
+    // ------------------------------------------
+    // CLEAR FEEDBACK
+    // ------------------------------------------
 
-    document
-        .getElementById("feedback")
-        .style.display =
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.style.display =
         "none";
 
 
-    document
-        .getElementById("feedback")
-        .textContent =
-        "";
-
-
-    document
-        .getElementById("feedback")
-        .className =
+    feedback.className =
         "feedback";
+
+
+    feedback.textContent =
+        "";
 
 
     document
@@ -1227,10 +1438,9 @@ function showQuestion() {
         "none";
 
 
-
-    // ==================================================
-    // IF ALREADY ANSWERED
-    // ==================================================
+    // ------------------------------------------
+    // ALREADY ANSWERED?
+    // ------------------------------------------
 
     if (
         savedAnswer &&
@@ -1254,6 +1464,9 @@ function showQuestion() {
     }
 
 
+    // ------------------------------------------
+    // PREVIOUS
+    // ------------------------------------------
 
     document
         .getElementById("previousButton")
@@ -1261,7 +1474,6 @@ function showQuestion() {
         currentQuestion === 0;
 
 }
-
 
 
 // ======================================================
@@ -1288,7 +1500,6 @@ function showPreviousAnswer(
         );
 
 
-
     const options = [
 
         document.getElementById("option_a"),
@@ -1302,12 +1513,14 @@ function showPreviousAnswer(
     ];
 
 
+    // ------------------------------------------
+    // LOCK OPTIONS
+    // ------------------------------------------
 
     options.forEach(
         function(option) {
 
-            option.disabled =
-                true;
+            option.disabled = true;
 
             option.classList.add(
                 "disabled"
@@ -1317,20 +1530,36 @@ function showPreviousAnswer(
     );
 
 
+    // ------------------------------------------
+    // SELECTED ANSWER
+    // ------------------------------------------
 
     if (selectedButton) {
 
-        selectedButton.classList.add(
-
+        if (
             savedAnswer.isCorrect
-                ? "correct"
-                : "wrong"
+        ) {
 
-        );
+            selectedButton.classList.add(
+                "correct"
+            );
+
+        }
+
+        else {
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+        }
 
     }
 
 
+    // ------------------------------------------
+    // CORRECT ANSWER
+    // ------------------------------------------
 
     if (
         correctButton &&
@@ -1345,12 +1574,14 @@ function showPreviousAnswer(
     }
 
 
+    // ------------------------------------------
+    // FEEDBACK
+    // ------------------------------------------
 
     const feedback =
         document.getElementById(
             "feedback"
         );
-
 
 
     if (
@@ -1376,11 +1607,13 @@ function showPreviousAnswer(
     }
 
 
-
     feedback.style.display =
         "block";
 
 
+    // ------------------------------------------
+    // ANSWER
+    // ------------------------------------------
 
     document
         .getElementById("correct_answer")
@@ -1402,13 +1635,16 @@ function showPreviousAnswer(
         "block";
 
 
+    // ------------------------------------------
+    // NEXT
+    // ------------------------------------------
+
     document
         .getElementById("nextButton")
         .disabled =
         false;
 
 }
-
 
 
 // ======================================================
@@ -1422,8 +1658,9 @@ function selectAnswer(selected) {
         answers[currentQuestion];
 
 
-
-    // Prevent second attempt on same question
+    // ------------------------------------------
+    // PREVENT SECOND ANSWER
+    // ------------------------------------------
 
     if (
         savedAnswer &&
@@ -1433,7 +1670,6 @@ function selectAnswer(selected) {
         return;
 
     }
-
 
 
     const q =
@@ -1447,7 +1683,6 @@ function selectAnswer(selected) {
     }
 
 
-
     const correct =
         String(
             q.correct_answer
@@ -1456,15 +1691,13 @@ function selectAnswer(selected) {
         .toUpperCase();
 
 
-
     const isCorrect =
         selected === correct;
 
 
-
-    // ==================================================
+    // ------------------------------------------
     // SAVE ANSWER
-    // ==================================================
+    // ------------------------------------------
 
     answers[currentQuestion] = {
 
@@ -1482,6 +1715,9 @@ function selectAnswer(selected) {
     };
 
 
+    // ------------------------------------------
+    // BUTTONS
+    // ------------------------------------------
 
     const selectedButton =
         document.getElementById(
@@ -1497,7 +1733,6 @@ function selectAnswer(selected) {
         );
 
 
-
     const options = [
 
         document.getElementById("option_a"),
@@ -1511,16 +1746,10 @@ function selectAnswer(selected) {
     ];
 
 
-
-    // ==================================================
-    // LOCK OPTIONS
-    // ==================================================
-
     options.forEach(
         function(option) {
 
-            option.disabled =
-                true;
+            option.disabled = true;
 
             option.classList.add(
                 "disabled"
@@ -1530,13 +1759,11 @@ function selectAnswer(selected) {
     );
 
 
-
-    // ==================================================
+    // ------------------------------------------
     // CORRECT
-    // ==================================================
+    // ------------------------------------------
 
     if (isCorrect) {
-
 
         score++;
 
@@ -1566,13 +1793,11 @@ function selectAnswer(selected) {
     }
 
 
-
-    // ==================================================
+    // ------------------------------------------
     // WRONG
-    // ==================================================
+    // ------------------------------------------
 
     else {
-
 
         selectedButton.classList.add(
             "wrong"
@@ -1596,8 +1821,7 @@ function selectAnswer(selected) {
 
         feedback.textContent =
 
-            "❌ Wrong answer. " +
-            "The correct answer is " +
+            "❌ Wrong answer. The correct answer is " +
             correct +
             ".";
 
@@ -1612,10 +1836,9 @@ function selectAnswer(selected) {
     }
 
 
-
-    // ==================================================
-    // EXPLANATION
-    // ==================================================
+    // ------------------------------------------
+    // ANSWER
+    // ------------------------------------------
 
     document
         .getElementById("correct_answer")
@@ -1637,6 +1860,9 @@ function selectAnswer(selected) {
         "block";
 
 
+    // ------------------------------------------
+    // SCORE
+    // ------------------------------------------
 
     document
         .getElementById("score")
@@ -1646,6 +1872,9 @@ function selectAnswer(selected) {
         score;
 
 
+    // ------------------------------------------
+    // NEXT
+    // ------------------------------------------
 
     document
         .getElementById("nextButton")
@@ -1653,7 +1882,6 @@ function selectAnswer(selected) {
         false;
 
 }
-
 
 
 // ======================================================
@@ -1671,7 +1899,6 @@ function nextQuestion() {
         return;
 
     }
-
 
 
     if (
@@ -1694,7 +1921,6 @@ function nextQuestion() {
 }
 
 
-
 // ======================================================
 // PREVIOUS QUESTION
 // ======================================================
@@ -1713,7 +1939,6 @@ function previousQuestion() {
     }
 
 }
-
 
 
 // ======================================================
@@ -1735,10 +1960,8 @@ async function showResult() {
         "block";
 
 
-
     const total =
         questions.length;
-
 
 
     const percentage =
@@ -1751,7 +1974,6 @@ async function showResult() {
             : 0;
 
 
-
     document
         .getElementById("finalScore")
         .textContent =
@@ -1759,7 +1981,6 @@ async function showResult() {
         score +
         " / " +
         total;
-
 
 
     document
@@ -1771,13 +1992,16 @@ async function showResult() {
         "%";
 
 
+    // ------------------------------------------
+    // GET USER
+    // ------------------------------------------
 
-    // ==================================================
-    // SAVE RESULT
-    // ==================================================
-
-    const user =
-        await getCurrentUser();
+    const {
+        data: { user }
+    } =
+    await supabaseClient
+        .auth
+        .getUser();
 
 
     if (!user) {
@@ -1791,33 +2015,35 @@ async function showResult() {
     }
 
 
+    // ------------------------------------------
+    // SAVE RESULT
+    // ------------------------------------------
 
     const {
         error
     } =
-        await supabaseClient
+    await supabaseClient
 
-            .from("quiz_results")
+        .from("quiz_results")
 
-            .insert({
+        .insert({
 
-                user_id:
-                    user.id,
+            user_id:
+                user.id,
 
-                course:
-                    "Anatomy & Physiology",
+            course:
+                "Anatomy & Physiology",
 
-                score:
-                    score,
+            score:
+                score,
 
-                total_questions:
-                    total,
+            total_questions:
+                total,
 
-                percentage:
-                    percentage
+            percentage:
+                percentage
 
-            });
-
+        });
 
 
     if (error) {
@@ -1832,9 +2058,8 @@ async function showResult() {
 }
 
 
-
 // ======================================================
-// GENERATE NEW QUIZ
+// RESTART
 // ======================================================
 
 function restartQuiz() {
@@ -1843,12 +2068,12 @@ function restartQuiz() {
     /*
      * IMPORTANT:
      *
-     * This does NOT reuse the old questions.
+     * This does NOT reuse the previous questions.
      *
      * It calls the AI Edge Function again.
      *
-     * Therefore the student receives a new
-     * question set.
+     * Therefore the student receives a fresh
+     * question set for the next attempt.
      */
 
     questions = [];
@@ -1860,17 +2085,16 @@ function restartQuiz() {
     score = 0;
 
 
-    loadAIQuestions();
+    startQuiz();
 
 }
-
 
 
 // ======================================================
 // START
 // ======================================================
 
-loadAIQuestions();
+startQuiz();
 
 
 </script>
@@ -1879,4 +2103,3 @@ loadAIQuestions();
 </body>
 
 </html>
-```
