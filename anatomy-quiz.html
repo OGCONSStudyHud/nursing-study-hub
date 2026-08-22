@@ -1,1 +1,2098 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>OGCONS Study Hub - Anatomy & Physiology Quiz</title> <style> * { box-sizing: border-box; } body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient( 135deg, #e8fff2, #e8f4ff, #f5eaff ); color: #172033; } header { background: linear-gradient( 135deg, #18a058, #2eb7a0 ); color: white; padding: 30px 20px; text-align: center; } header h1 { margin: 0; font-size: 28px; } header p { margin: 8px 0 0; font-size: 16px; } .container { max-width: 850px; margin: 30px auto; padding: 20px; } .back { display: inline-block; margin-bottom: 20px; color: #18a058; text-decoration: none; font-weight: bold; } .back:hover { text-decoration: underline; } .card, #loading, #error, #empty { background: white; border-radius: 18px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); } .course-title { text-align: center; margin-bottom: 20px; } .course-title h2 { margin: 0 0 8px; color: #163020; } .course-title p { margin: 0; color: #617568; } .topic-name { text-align: center; background: #e8fff2; color: #16834a; padding: 12px; border-radius: 10px; font-weight: bold; margin-bottom: 20px; } .counter { text-align: center; color: #667085; font-weight: bold; margin-bottom: 10px; } .score { text-align: center; color: #18a058; font-weight: bold; margin-bottom: 25px; } .question { font-size: 21px; font-weight: bold; line-height: 1.5; margin-bottom: 25px; } .options { display: grid; gap: 12px; } .option { width: 100%; text-align: left; background: #f7f9fc; border: 2px solid #d8dee8; border-radius: 12px; padding: 16px; font-size: 16px; cursor: pointer; transition: 0.2s; } .option:hover:not(:disabled) { background: #eefaf4; border-color: #18a058; } .option strong { margin-right: 8px; } .option.correct { background: #d1e7dd; border-color: #198754; color: #0f5132; } .option.wrong { background: #f8d7da; border-color: #dc3545; color: #842029; } .option.disabled { cursor: not-allowed; } .feedback { margin-top: 20px; padding: 18px; border-radius: 12px; display: none; font-weight: bold; } .correct-feedback { background: #d1e7dd; color: #0f5132; } .wrong-feedback { background: #f8d7da; color: #842029; } .answer { margin-top: 15px; padding: 18px; background: #eef6ff; border-radius: 12px; display: none; line-height: 1.6; } .answer strong { color: #0b5ed7; } .buttons { display: flex; justify-content: space-between; gap: 12px; margin-top: 25px; } button { border: none; border-radius: 10px; padding: 13px 20px; font-size: 15px; font-weight: bold; cursor: pointer; } .primary { background: #18a058; color: white; } .primary:hover { background: #117d45; } .secondary { background: #e9edf3; color: #172033; } button:disabled { opacity: 0.5; cursor: not-allowed; } #loading, #error, #empty { text-align: center; } #error { color: #dc3545; } .result { text-align: center; display: none; } .result-icon { font-size: 65px; margin-bottom: 15px; } .result h2 { margin-bottom: 10px; } .final-score { font-size: 42px; font-weight: bold; color: #18a058; margin: 20px 0; } .result button { background: #18a058; color: white; margin-top: 10px; } .result .back-topic { background: #6c757d; } .attempt-info { text-align: center; background: #f1f8f4; color: #28734d; padding: 10px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; } footer { text-align: center; padding: 35px; color: #527060; } @media (max-width: 600px) { .container { padding: 12px; } .card { padding: 20px; } .question { font-size: 19px; } .buttons { flex-direction: column; } button { width: 100%; } } </style> </head> <body> <header> <h1>🫀 OGCONS Study Hub</h1> <p>Anatomy & Physiology Quiz</p> </header> <div class="container"> <a href="anatomy-physiology.html" class="back"> ← Back to Anatomy & Physiology Topics </a> <div id="loading"> <h2>📚 Preparing Your Quiz...</h2> <p> We are selecting a fresh set of questions for you. </p> </div> <div id="error" style="display:none;"></div> <div id="empty" style="display:none;"> <h2>📚 No Questions Yet</h2> <p id="emptyMessage"> There are currently no questions available for this topic. </p> </div> <!-- QUIZ --> <div class="card" id="quizCard" style="display:none;"> <div class="course-title"> <h2>🫀 Anatomy & Physiology</h2> <p>Test your knowledge</p> </div> <div class="topic-name" id="topicName"></div> <div class="attempt-info"> 🎲 Fresh question set for this attempt </div> <div class="counter" id="counter"></div> <div class="score" id="score"> Score: 0 </div> <div class="question" id="question"></div> <div class="options"> <button class="option" id="option_a" onclick="selectAnswer('A')"> <strong>A.</strong> <span id="text_a"></span> </button> <button class="option" id="option_b" onclick="selectAnswer('B')"> <strong>B.</strong> <span id="text_b"></span> </button> <button class="option" id="option_c" onclick="selectAnswer('C')"> <strong>C.</strong> <span id="text_c"></span> </button> <button class="option" id="option_d" onclick="selectAnswer('D')"> <strong>D.</strong> <span id="text_d"></span> </button> </div> <div class="feedback" id="feedback"></div> <div class="answer" id="answer"> <p> <strong>Correct Answer:</strong> <span id="correct_answer"></span> </p> <p> <strong>Explanation:</strong> <span id="explanation"></span> </p> </div> <div class="buttons"> <button class="secondary" id="previousButton" onclick="previousQuestion()"> ← Previous </button> <button class="primary" id="nextButton" onclick="nextQuestion()" disabled> Next → </button> </div> </div> <!-- RESULT --> <div class="card result" id="result"> <div class="result-icon"> 🏆 </div> <h2> Quiz Completed! </h2> <p> You have completed the <span id="resultTopic"> Anatomy & Physiology </span> quiz. </p> <div class="final-score" id="finalScore"> 0 / 0 </div> <p id="percentage"> Your score: 0% </p> <button onclick="restartQuiz()"> 🔄 Try Again </button> <br> <button class="back-topic" onclick="window.location.href='anatomy-physiology.html'"> ← Back to Topics </button> </div> </div> <footer> © 2026 OGCONS Study Hub • Built for students </footer> <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> <script> // ====================================================== // SUPABASE // ====================================================== const SUPABASE_URL = "https://bvetmmvpdotifusjkywd.supabase.co"; const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS"; const supabaseClient = window.supabase.createClient( SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY ); // ====================================================== // QUIZ SETTINGS // ====================================================== const QUESTIONS_PER_ATTEMPT = 10; let allQuestions = []; let questions = []; let currentQuestion = 0; let score = 0; let answers = []; // ====================================================== // GET TOPIC // ====================================================== const urlParams = new URLSearchParams( window.location.search ); const selectedTopic = urlParams.get("topic"); // ====================================================== // SHUFFLE ARRAY // Fisher-Yates shuffle // ====================================================== function shuffleArray(array) { const shuffled = [...array]; for ( let i = shuffled.length - 1; i > 0; i-- ) { const j = Math.floor( Math.random() * (i + 1) ); [ shuffled[i], shuffled[j] ] = [ shuffled[j], shuffled[i] ]; } return shuffled; } // ====================================================== // CREATE ANSWER MEMORY // ====================================================== function createAnswerMemory() { return questions.map(function() { return { answered: false, selected: null, correct: null, isCorrect: false }; }); } // ====================================================== // LOAD QUESTIONS FROM SUPABASE // ====================================================== async function loadQuestions() { const loading = document.getElementById("loading"); const quizCard = document.getElementById("quizCard"); const empty = document.getElementById("empty"); const error = document.getElementById("error"); if (!selectedTopic) { loading.style.display = "none"; error.style.display = "block"; error.innerHTML = ` <h2>⚠️ No Topic Selected</h2> <p> Please return to Anatomy & Physiology and select a topic. </p> `; return; } document .getElementById("topicName") .textContent = "Topic: " + selectedTopic; document .getElementById("resultTopic") .textContent = selectedTopic; // ================================================== // CHECK LOGIN // ================================================== const { data: { user }, error: userError } = await supabaseClient .auth .getUser(); if (userError || !user) { window.location.href = "login.html"; return; } // ================================================== // GET STORED QUESTIONS // ================================================== const { data, error: databaseError } = await supabaseClient .from("questions") .select("*") .eq( "course", "Anatomy & Physiology" ) .ilike( "topic", selectedTopic ); // ================================================== // DATABASE ERROR // ================================================== if (databaseError) { console.error( "Question loading error:", databaseError ); loading.style.display = "none"; error.style.display = "block"; error.innerHTML = ` <h2>❌ Unable to Load Questions</h2> <p> ${escapeHTML( databaseError.message )} </p> `; return; } allQuestions = data || []; loading.style.display = "none"; // ================================================== // NO QUESTIONS // ================================================== if ( allQuestions.length === 0 ) { empty.style.display = "block"; document .getElementById("emptyMessage") .textContent = "There are currently no questions for " + selectedTopic + ". Add questions from the Admin Dashboard."; return; } // ================================================== // START FIRST ATTEMPT // ================================================== startNewAttempt(); } // ====================================================== // START NEW ATTEMPT // ====================================================== function startNewAttempt() { currentQuestion = 0; score = 0; /* * First shuffle ALL questions. */ const shuffled = shuffleArray( allQuestions ); /* * Select 10 questions. * * If there are fewer than 10, * use all available questions. */ questions = shuffled.slice( 0, Math.min( QUESTIONS_PER_ATTEMPT, shuffled.length ) ); /* * Create answer memory. */ answers = createAnswerMemory(); /* * Show quiz. */ document .getElementById("result") .style.display = "none"; document .getElementById("quizCard") .style.display = "block"; document .getElementById("empty") .style.display = "none"; showQuestion(); } // ====================================================== // SHOW QUESTION // ====================================================== function showQuestion() { const q = questions[currentQuestion]; const savedAnswer = answers[currentQuestion]; if (!q) { return; } document .getElementById("counter") .textContent = "Question " + (currentQuestion + 1) + " of " + questions.length; document .getElementById("score") .textContent = "Score: " + score; document .getElementById("question") .textContent = q.question; // ================================================== // PREPARE OPTIONS // ================================================== const optionData = [ { letter: "A", text: q.option_a }, { letter: "B", text: q.option_b }, { letter: "C", text: q.option_c }, { letter: "D", text: q.option_d } ]; /* * IMPORTANT: * * We also shuffle the answer options. * * We must update correct_answer after * shuffling so the correct answer remains correct. */ if ( !q.shuffledOptions ) { const originalCorrect = String( q.correct_answer ) .trim() .toUpperCase(); const originalCorrectText = q[ "option_" + originalCorrect.toLowerCase() ]; const shuffledOptions = shuffleArray( optionData ); q.shuffledOptions = shuffledOptions; q.shuffledCorrect = shuffledOptions.findIndex( function(option) { return ( option.text === originalCorrectText ); } ); } const displayOptions = q.shuffledOptions; const correctIndex = q.shuffledCorrect; // ================================================== // DISPLAY OPTIONS // ================================================== const buttons = [ document.getElementById("option_a"), document.getElementById("option_b"), document.getElementById("option_c"), document.getElementById("option_d") ]; displayOptions.forEach( function(option, index) { const button = buttons[index]; button.querySelector("strong") .textContent = String.fromCharCode( 65 + index ) + "."; button.querySelector("span") .textContent = option.text; button.dataset.correct = index === correctIndex ? "true" : "false"; button.classList.remove( "correct", "wrong", "disabled" ); button.disabled = false; } ); // ================================================== // RESET FEEDBACK // ================================================== const feedback = document.getElementById( "feedback" ); feedback.style.display = "none"; feedback.className = "feedback"; feedback.textContent = ""; document .getElementById("answer") .style.display = "none"; // ================================================== // RESTORE PREVIOUS ANSWER // ================================================== if ( savedAnswer && savedAnswer.answered ) { showPreviousAnswer( savedAnswer, correctIndex ); } else { document .getElementById("nextButton") .disabled = true; } document .getElementById("previousButton") .disabled = currentQuestion === 0; } // ====================================================== // SHOW PREVIOUS ANSWER // ====================================================== function showPreviousAnswer( savedAnswer, correctIndex ) { const buttons = [ document.getElementById("option_a"), document.getElementById("option_b"), document.getElementById("option_c"), document.getElementById("option_d") ]; buttons.forEach( function(button) { button.disabled = true; button.classList.add( "disabled" ); } ); const selectedButton = buttons[ savedAnswer.selectedIndex ]; const correctButton = buttons[ correctIndex ]; if (selectedButton) { selectedButton.classList.add( savedAnswer.isCorrect ? "correct" : "wrong" ); } if ( correctButton && savedAnswer.selectedIndex !== correctIndex ) { correctButton.classList.add( "correct" ); } const feedback = document.getElementById( "feedback" ); if ( savedAnswer.isCorrect ) { feedback.textContent = "✅ You already answered this question correctly."; feedback.className = "feedback correct-feedback"; } else { feedback.textContent = "❌ You already answered this question. Your previous answer cannot be changed."; feedback.className = "feedback wrong-feedback"; } feedback.style.display = "block"; document .getElementById("correct_answer") .textContent = String.fromCharCode( 65 + correctIndex ); document .getElementById("explanation") .textContent = questions[currentQuestion].explanation || "No explanation provided."; document .getElementById("answer") .style.display = "block"; document .getElementById("nextButton") .disabled = false; } // ====================================================== // SELECT ANSWER // ====================================================== function selectAnswer(selectedIndex) { const savedAnswer = answers[currentQuestion]; if ( savedAnswer && savedAnswer.answered ) { return; } const q = questions[currentQuestion]; const buttons = [ document.getElementById("option_a"), document.getElementById("option_b"), document.getElementById("option_c"), document.getElementById("option_d") ]; const selectedButton = buttons[selectedIndex]; const correctIndex = q.shuffledCorrect; const isCorrect = selectedIndex === correctIndex; // ================================================== // SAVE ANSWER // ================================================== answers[currentQuestion] = { answered: true, selectedIndex: selectedIndex, correctIndex: correctIndex, isCorrect: isCorrect }; // ================================================== // LOCK OPTIONS // ================================================== buttons.forEach( function(button) { button.disabled = true; button.classList.add( "disabled" ); } ); // ================================================== // SHOW RESULT // ================================================== if (isCorrect) { score++; selectedButton.classList.add( "correct" ); const feedback = document.getElementById( "feedback" ); feedback.textContent = "✅ Correct! Well done."; feedback.className = "feedback correct-feedback"; feedback.style.display = "block"; } else { selectedButton.classList.add( "wrong" ); buttons[ correctIndex ].classList.add( "correct" ); const feedback = document.getElementById( "feedback" ); feedback.textContent = "❌ Wrong answer. The correct answer is " + String.fromCharCode( 65 + correctIndex ) + "."; feedback.className = "feedback wrong-feedback"; feedback.style.display = "block"; } // ================================================== // SHOW EXPLANATION // ================================================== document .getElementById("correct_answer") .textContent = String.fromCharCode( 65 + correctIndex ); document .getElementById("explanation") .textContent = q.explanation || "No explanation provided."; document .getElementById("answer") .style.display = "block"; document .getElementById("score") .textContent = "Score: " + score; document .getElementById("nextButton") .disabled = false; } // ====================================================== // NEXT QUESTION // ====================================================== function nextQuestion() { if ( !answers[currentQuestion] || !answers[currentQuestion].answered ) { return; } if ( currentQuestion < questions.length - 1 ) { currentQuestion++; showQuestion(); } else { showResult(); } } // ====================================================== // PREVIOUS QUESTION // ====================================================== function previousQuestion() { if ( currentQuestion > 0 ) { currentQuestion--; showQuestion(); } } // ====================================================== // SHOW RESULT // ====================================================== async function showResult() { document .getElementById("quizCard") .style.display = "none"; document .getElementById("result") .style.display = "block"; const total = questions.length; const percentage = total > 0 ? Math.round( (score / total) * 100 ) : 0; document .getElementById("finalScore") .textContent = score + " / " + total; document .getElementById("percentage") .textContent = "Your score: " + percentage + "%"; // ================================================== // SAVE RESULT // ================================================== const { data: { user } } = await supabaseClient .auth .getUser(); if (!user) { return; } const { error: saveError } = await supabaseClient .from("quiz_results") .insert({ user_id: user.id, course: "Anatomy & Physiology", score: score, total_questions: total, percentage: percentage }); if (saveError) { console.error( "Could not save quiz result:", saveError.message ); } } // ====================================================== // RESTART QUIZ // ====================================================== function restartQuiz() { /* * This is a completely NEW attempt. * * Questions are selected again randomly. */ startNewAttempt(); } // ====================================================== // ESCAPE HTML // ====================================================== function escapeHTML(value) { if ( value === null || value === undefined ) { return ""; } return String(value) .replace( /&/g, "&amp;" ) .replace( /</g, "&lt;" ) .replace( />/g, "&gt;" ) .replace( /"/g, "&quot;" ) .replace( /'/g, "&#039;" ); } // ====================================================== // START // ====================================================== loadQuestions(); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>OGCONS Study Hub - Anatomy & Physiology Quiz</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
+
+    color: #172033;
+}
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #18a058,
+            #2eb7a0
+        );
+
+    color: white;
+
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+}
+
+header p {
+
+    margin: 8px 0 0;
+
+    font-size: 16px;
+}
+
+.container {
+
+    max-width: 850px;
+
+    margin: 30px auto;
+
+    padding: 20px;
+}
+
+.back {
+
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    color: #18a058;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.back:hover {
+
+    text-decoration: underline;
+}
+
+.card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+}
+
+.course-title {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.course-title h2 {
+
+    margin: 0 0 8px;
+
+    color: #163020;
+}
+
+.course-title p {
+
+    margin: 0;
+
+    color: #617568;
+}
+
+.topic-name {
+
+    text-align: center;
+
+    background: #e8fff2;
+
+    color: #16834a;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+.counter {
+
+    text-align: center;
+
+    color: #667085;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.score {
+
+    text-align: center;
+
+    color: #18a058;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+.question {
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+}
+
+.options {
+
+    display: grid;
+
+    gap: 12px;
+}
+
+.option {
+
+    width: 100%;
+
+    text-align: left;
+
+    background: #f7f9fc;
+
+    border: 2px solid #d8dee8;
+
+    border-radius: 12px;
+
+    padding: 16px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.option:hover:not(:disabled) {
+
+    background: #eefaf4;
+
+    border-color: #18a058;
+}
+
+.option strong {
+
+    margin-right: 8px;
+}
+
+.option.correct {
+
+    background: #d1e7dd;
+
+    border-color: #198754;
+
+    color: #0f5132;
+}
+
+.option.wrong {
+
+    background: #f8d7da;
+
+    border-color: #dc3545;
+
+    color: #842029;
+}
+
+.option.disabled {
+
+    cursor: not-allowed;
+}
+
+.feedback {
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    display: none;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+.correct-feedback {
+
+    background: #d1e7dd;
+
+    color: #0f5132;
+}
+
+.wrong-feedback {
+
+    background: #f8d7da;
+
+    color: #842029;
+}
+
+.error-feedback {
+
+    background: #f8d7da;
+
+    color: #842029;
+
+    text-align: left;
+}
+
+.answer {
+
+    margin-top: 15px;
+
+    padding: 18px;
+
+    background: #eef6ff;
+
+    border-radius: 12px;
+
+    display: none;
+
+    line-height: 1.6;
+}
+
+.answer strong {
+
+    color: #0b5ed7;
+}
+
+.buttons {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+button {
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 13px 20px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.primary {
+
+    background: #18a058;
+
+    color: white;
+}
+
+.primary:hover {
+
+    background: #117d45;
+}
+
+.secondary {
+
+    background: #e9edf3;
+
+    color: #172033;
+}
+
+button:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+#loading,
+#error,
+#empty {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+}
+
+#loading {
+
+    color: #18a058;
+}
+
+#error {
+
+    color: #dc3545;
+
+    line-height: 1.6;
+}
+
+#errorDetails {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    background: #fff5f5;
+
+    border-radius: 10px;
+
+    text-align: left;
+
+    font-family: monospace;
+
+    font-size: 13px;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+.result {
+
+    text-align: center;
+
+    display: none;
+}
+
+.result-icon {
+
+    font-size: 65px;
+
+    margin-bottom: 15px;
+}
+
+.result h2 {
+
+    margin-bottom: 10px;
+}
+
+.final-score {
+
+    font-size: 42px;
+
+    font-weight: bold;
+
+    color: #18a058;
+
+    margin: 20px 0;
+}
+
+.result button {
+
+    background: #18a058;
+
+    color: white;
+
+    margin-top: 10px;
+}
+
+.result .back-topic {
+
+    background: #6c757d;
+}
+
+.retry-error {
+
+    margin-top: 20px;
+
+    background: #dc3545;
+
+    color: white;
+}
+
+footer {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #527060;
+}
+
+@media (max-width: 600px) {
+
+    .container {
+
+        padding: 12px;
+    }
+
+    .card {
+
+        padding: 20px;
+    }
+
+    .question {
+
+        font-size: 19px;
+    }
+
+    .buttons {
+
+        flex-direction: column;
+    }
+
+    button {
+
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🫀 OGCONS Study Hub</h1>
+
+<p>Anatomy & Physiology Quiz</p>
+
+</header>
+
+
+<div class="container">
+
+
+<a
+    href="anatomy-physiology.html"
+    class="back">
+
+    ← Back to Anatomy & Physiology Topics
+
+</a>
+
+
+<!-- LOADING -->
+
+<div id="loading">
+
+    <h2>🤖 Preparing Your Quiz...</h2>
+
+    <p>
+        Our AI is generating a fresh set of
+        Anatomy & Physiology questions.
+    </p>
+
+    <p id="loadingTopic"></p>
+
+</div>
+
+
+<!-- ERROR -->
+
+<div
+    id="error"
+    style="display:none;">
+
+    <h2>
+        ❌ Unable to Generate Questions
+    </h2>
+
+    <p id="errorMessage"></p>
+
+    <div id="errorDetails"></div>
+
+    <button
+        class="retry-error"
+        onclick="startQuiz()">
+
+        🔄 Try Again
+
+    </button>
+
+</div>
+
+
+<!-- NO QUESTIONS -->
+
+<div
+    id="empty"
+    style="display:none;">
+
+    <h2>📚 No Questions Generated</h2>
+
+    <p>
+        The AI did not return any questions.
+    </p>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div
+    class="card"
+    id="quizCard"
+    style="display:none;">
+
+
+<div class="course-title">
+
+    <h2>🫀 Anatomy & Physiology</h2>
+
+    <p>
+        Test your knowledge
+    </p>
+
+</div>
+
+
+<div
+    class="topic-name"
+    id="topicName">
+</div>
+
+
+<div
+    class="counter"
+    id="counter">
+</div>
+
+
+<div
+    class="score"
+    id="score">
+
+    Score: 0
+
+</div>
+
+
+<div
+    class="question"
+    id="question">
+</div>
+
+
+<div class="options">
+
+
+<button
+    class="option"
+    id="option_a"
+    onclick="selectAnswer('A')">
+
+    <strong>A.</strong>
+
+    <span id="text_a"></span>
+
+</button>
+
+
+<button
+    class="option"
+    id="option_b"
+    onclick="selectAnswer('B')">
+
+    <strong>B.</strong>
+
+    <span id="text_b"></span>
+
+</button>
+
+
+<button
+    class="option"
+    id="option_c"
+    onclick="selectAnswer('C')">
+
+    <strong>C.</strong>
+
+    <span id="text_c"></span>
+
+</button>
+
+
+<button
+    class="option"
+    id="option_d"
+    onclick="selectAnswer('D')">
+
+    <strong>D.</strong>
+
+    <span id="text_d"></span>
+
+</button>
+
+
+</div>
+
+
+<div
+    class="feedback"
+    id="feedback">
+</div>
+
+
+<div
+    class="answer"
+    id="answer">
+
+    <p>
+
+        <strong>
+            Correct Answer:
+        </strong>
+
+        <span id="correct_answer"></span>
+
+    </p>
+
+    <p>
+
+        <strong>
+            Explanation:
+        </strong>
+
+        <span id="explanation"></span>
+
+    </p>
+
+</div>
+
+
+<div class="buttons">
+
+<button
+    class="secondary"
+    id="previousButton"
+    onclick="previousQuestion()">
+
+    ← Previous
+
+</button>
+
+
+<button
+    class="primary"
+    id="nextButton"
+    onclick="nextQuestion()"
+    disabled>
+
+    Next →
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div
+    class="card result"
+    id="result">
+
+
+<div class="result-icon">
+    🏆
+</div>
+
+
+<h2>
+    Quiz Completed!
+</h2>
+
+
+<p>
+
+    You have completed the
+
+    <span id="resultTopic"></span>
+
+    quiz.
+
+</p>
+
+
+<div
+    class="final-score"
+    id="finalScore">
+
+    0 / 0
+
+</div>
+
+
+<p id="percentage">
+    Your score: 0%
+</p>
+
+
+<button onclick="restartQuiz()">
+
+    🔄 Generate New Questions
+
+</button>
+
+
+<br>
+
+
+<button
+    class="back-topic"
+    onclick="window.location.href='anatomy-physiology.html'">
+
+    ← Back to Topics
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+© 2026 OGCONS Study Hub
+• Built for students
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+// ======================================================
+// SUPABASE
+// ======================================================
+
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+// ======================================================
+// EDGE FUNCTION
+// ======================================================
+
+const EDGE_FUNCTION_URL =
+    SUPABASE_URL +
+    "/functions/v1/generate-anatomy-questions";
+
+
+// ======================================================
+// QUIZ VARIABLES
+// ======================================================
+
+let questions = [];
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answers = [];
+
+let generating = false;
+
+
+// ======================================================
+// GET TOPIC
+// ======================================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const selectedTopic =
+    urlParams.get("topic");
+
+
+document
+    .getElementById("loadingTopic")
+    .textContent =
+    selectedTopic
+        ? "Topic: " + selectedTopic
+        : "";
+
+
+// ======================================================
+// HTML ESCAPE
+// ======================================================
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+}
+
+
+// ======================================================
+// SHOW ERROR
+// ======================================================
+
+function showError(message, details = "") {
+
+    document
+        .getElementById("loading")
+        .style.display =
+        "none";
+
+    document
+        .getElementById("quizCard")
+        .style.display =
+        "none";
+
+    document
+        .getElementById("result")
+        .style.display =
+        "none";
+
+    document
+        .getElementById("empty")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("error")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("errorMessage")
+        .textContent =
+        message;
+
+
+    document
+        .getElementById("errorDetails")
+        .textContent =
+        details || "No additional details.";
+}
+
+
+// ======================================================
+// START QUIZ
+// ======================================================
+
+async function startQuiz() {
+
+
+    if (generating) {
+
+        return;
+
+    }
+
+
+    generating = true;
+
+
+    // Hide everything
+
+    document
+        .getElementById("error")
+        .style.display =
+        "none";
+
+    document
+        .getElementById("quizCard")
+        .style.display =
+        "none";
+
+    document
+        .getElementById("result")
+        .style.display =
+        "none";
+
+    document
+        .getElementById("empty")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("loading")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("loading")
+        .querySelector("h2")
+        .textContent =
+        "🤖 Preparing Your Quiz...";
+
+
+    // ==================================================
+    // CHECK TOPIC
+    // ==================================================
+
+    if (!selectedTopic) {
+
+        generating = false;
+
+        showError(
+            "No topic was selected.",
+            "Go back to the Anatomy & Physiology topic page and select a topic."
+        );
+
+        return;
+
+    }
+
+
+    // ==================================================
+    // GET USER
+    // ==================================================
+
+    const {
+        data: userData,
+        error: userError
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+    if (userError || !userData.user) {
+
+        generating = false;
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const user =
+        userData.user;
+
+
+    // ==================================================
+    // GET SESSION
+    // ==================================================
+
+    const {
+        data: sessionData,
+        error: sessionError
+    } =
+        await supabaseClient
+            .auth
+            .getSession();
+
+
+    if (
+        sessionError ||
+        !sessionData.session
+    ) {
+
+        generating = false;
+
+        showError(
+            "Your login session has expired.",
+            "Please log in again and then return to the quiz."
+        );
+
+        return;
+
+    }
+
+
+    const accessToken =
+        sessionData.session.access_token;
+
+
+    // ==================================================
+    // CALL EDGE FUNCTION
+    // ==================================================
+
+    try {
+
+
+        const controller =
+            new AbortController();
+
+
+        const timeout =
+            setTimeout(
+                function() {
+
+                    controller.abort();
+
+                },
+                60000
+            );
+
+
+        const response =
+            await fetch(
+                EDGE_FUNCTION_URL,
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer " +
+                            accessToken,
+
+                        "apikey":
+                            SUPABASE_PUBLISHABLE_KEY
+
+                    },
+
+                    body: JSON.stringify({
+
+                        topic:
+                            selectedTopic,
+
+                        numberOfQuestions:
+                            10
+
+                    }),
+
+                    signal:
+                        controller.signal
+
+                }
+            );
+
+
+        clearTimeout(timeout);
+
+
+        // ==================================================
+        // READ SERVER RESPONSE
+        // ==================================================
+
+        const responseText =
+            await response.text();
+
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(
+                    responseText
+                );
+
+        }
+
+        catch {
+
+            generating = false;
+
+            showError(
+                "The Edge Function returned an invalid response.",
+                "HTTP Status: " +
+                response.status +
+                "\n\n" +
+                responseText
+            );
+
+            return;
+
+        }
+
+
+        // ==================================================
+        // SERVER ERROR
+        // ==================================================
+
+        if (!response.ok) {
+
+            generating = false;
+
+            const serverMessage =
+                result.error ||
+                "Edge Function returned an error.";
+
+
+            const serverDetails =
+                result.details ||
+                result.message ||
+                "";
+
+
+            showError(
+
+                serverMessage,
+
+                "HTTP Status: " +
+                response.status +
+                "\n\n" +
+                serverDetails
+
+            );
+
+            return;
+
+        }
+
+
+        // ==================================================
+        // CHECK SUCCESS
+        // ==================================================
+
+        if (
+            result.success !== true
+        ) {
+
+            generating = false;
+
+            showError(
+
+                result.error ||
+                "The AI was unable to generate questions.",
+
+                result.details ||
+                JSON.stringify(
+                    result,
+                    null,
+                    2
+                )
+
+            );
+
+            return;
+
+        }
+
+
+        // ==================================================
+        // CHECK QUESTIONS
+        // ==================================================
+
+        if (
+            !Array.isArray(
+                result.questions
+            ) ||
+            result.questions.length === 0
+        ) {
+
+            generating = false;
+
+            showError(
+                "The AI returned no questions.",
+                JSON.stringify(
+                    result,
+                    null,
+                    2
+                )
+            );
+
+            return;
+
+        }
+
+
+        // ==================================================
+        // STORE QUESTIONS
+        // ==================================================
+
+        questions =
+            result.questions;
+
+
+        currentQuestion =
+            0;
+
+
+        score =
+            0;
+
+
+        answers =
+            questions.map(
+                function() {
+
+                    return {
+
+                        answered:
+                            false,
+
+                        selected:
+                            null,
+
+                        correct:
+                            null,
+
+                        isCorrect:
+                            false
+
+                    };
+
+                }
+            );
+
+
+        generating =
+            false;
+
+
+        // ==================================================
+        // SHOW QUIZ
+        // ==================================================
+
+        document
+            .getElementById("loading")
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById("error")
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById("quizCard")
+            .style.display =
+            "block";
+
+
+        document
+            .getElementById("topicName")
+            .textContent =
+            "Topic: " +
+            selectedTopic;
+
+
+        document
+            .getElementById("resultTopic")
+            .textContent =
+            selectedTopic;
+
+
+        showQuestion();
+
+
+    }
+
+    catch(error) {
+
+
+        generating =
+            false;
+
+
+        if (
+            error.name ===
+            "AbortError"
+        ) {
+
+            showError(
+
+                "The AI took too long to respond.",
+
+                "The request timed out after 60 seconds. Please try again."
+
+            );
+
+        }
+
+        else {
+
+            showError(
+
+                "Unable to connect to the Edge Function.",
+
+                error.message ||
+                String(error)
+
+            );
+
+        }
+
+    }
+
+}
+
+
+// ======================================================
+// SHOW QUESTION
+// ======================================================
+
+function showQuestion() {
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    const saved =
+        answers[currentQuestion];
+
+
+    if (!q) {
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("counter")
+        .textContent =
+
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document
+        .getElementById("score")
+        .textContent =
+
+        "Score: " +
+        score;
+
+
+    document
+        .getElementById("question")
+        .textContent =
+        q.question;
+
+
+    document
+        .getElementById("text_a")
+        .textContent =
+        q.option_a;
+
+
+    document
+        .getElementById("text_b")
+        .textContent =
+        q.option_b;
+
+
+    document
+        .getElementById("text_c")
+        .textContent =
+        q.option_c;
+
+
+    document
+        .getElementById("text_d")
+        .textContent =
+        q.option_d;
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+    options.forEach(
+        function(option) {
+
+            option.disabled =
+                false;
+
+            option.classList.remove(
+                "correct",
+                "wrong",
+                "disabled"
+            );
+
+        }
+    );
+
+
+    document
+        .getElementById("feedback")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        true;
+
+
+    document
+        .getElementById("previousButton")
+        .disabled =
+        currentQuestion === 0;
+
+
+    // Show previous answer if revisiting
+
+    if (
+        saved &&
+        saved.answered
+    ) {
+
+        showPreviousAnswer(
+            q,
+            saved
+        );
+
+    }
+
+}
+
+
+// ======================================================
+// SHOW PREVIOUS ANSWER
+// ======================================================
+
+function showPreviousAnswer(
+    q,
+    saved
+) {
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+    options.forEach(
+        function(option) {
+
+            option.disabled =
+                true;
+
+            option.classList.add(
+                "disabled"
+            );
+
+        }
+    );
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            saved.selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            saved.correct.toLowerCase()
+        );
+
+
+    if (selectedButton) {
+
+        selectedButton.classList.add(
+
+            saved.isCorrect
+                ? "correct"
+                : "wrong"
+
+        );
+
+    }
+
+
+    if (
+        correctButton &&
+        saved.selected !==
+        saved.correct
+    ) {
+
+        correctButton.classList.add(
+            "correct"
+        );
+
+    }
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.textContent =
+
+        saved.isCorrect
+
+            ? "✅ You already answered this question correctly."
+
+            : "❌ You already answered this question. Your previous answer cannot be changed.";
+
+    
+    feedback.className =
+
+        saved.isCorrect
+
+            ? "feedback correct-feedback"
+
+            : "feedback wrong-feedback";
+
+
+    feedback.style.display =
+        "block";
+
+
+    document
+        .getElementById("correct_answer")
+        .textContent =
+        saved.correct;
+
+
+    document
+        .getElementById("explanation")
+        .textContent =
+
+        q.explanation ||
+        "No explanation provided.";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+
+}
+
+
+// ======================================================
+// SELECT ANSWER
+// ======================================================
+
+function selectAnswer(
+    selected
+) {
+
+
+    const saved =
+        answers[currentQuestion];
+
+
+    if (
+        saved &&
+        saved.answered
+    ) {
+
+        return;
+
+    }
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    if (!q) {
+
+        return;
+
+    }
+
+
+    const correct =
+        String(
+            q.correct_answer
+        )
+        .trim()
+        .toUpperCase();
+
+
+    const isCorrect =
+        selected === correct;
+
+
+    answers[currentQuestion] = {
+
+        answered:
+            true,
+
+        selected:
+            selected,
+
+        correct:
+            correct,
+
+        isCorrect:
+            isCorrect
+
+    };
+
+
+    if (isCorrect) {
+
+        score++;
+
+    }
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+    options.forEach(
+        function(option) {
+
+            option.disabled =
+                true;
+
+            option.classList.add(
+                "disabled"
+            );
+
+        }
+    );
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            correct.toLowerCase()
+        );
+
+
+    if (isCorrect) {
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+    }
+
+    else {
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+
+        if (correctButton) {
+
+            correctButton.classList.add(
+                "correct"
+            );
+
+        }
+
+    }
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    if (isCorrect) {
+
+        feedback.textContent =
+            "✅ Correct! Well done.";
+
+        feedback.className =
+            "feedback correct-feedback";
+
+    }
+
+    else {
+
+        feedback.textContent =
+
+            "❌ Wrong answer. The correct answer is " +
+            correct +
+            ".";
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+    }
+
+
+    feedback.style.display =
+        "block";
+
+
+    document
+        .getElementById("correct_answer")
+        .textContent =
+        correct;
+
+
+    document
+        .getElementById("explanation")
+        .textContent =
+
+        q.explanation ||
+        "No explanation provided.";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("score")
+        .textContent =
+
+        "Score: " +
+        score;
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+
+}
+
+
+// ======================================================
+// NEXT QUESTION
+// ======================================================
+
+function nextQuestion() {
+
+
+    if (
+        !answers[currentQuestion] ||
+        !answers[currentQuestion].answered
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        currentQuestion <
+        questions.length - 1
+    ) {
+
+        currentQuestion++;
+
+        showQuestion();
+
+    }
+
+    else {
+
+        showResult();
+
+    }
+
+}
+
+
+// ======================================================
+// PREVIOUS QUESTION
+// ======================================================
+
+function previousQuestion() {
+
+
+    if (
+        currentQuestion > 0
+    ) {
+
+        currentQuestion--;
+
+        showQuestion();
+
+    }
+
+}
+
+
+// ======================================================
+// SHOW RESULT
+// ======================================================
+
+async function showResult() {
+
+
+    document
+        .getElementById("quizCard")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("result")
+        .style.display =
+        "block";
+
+
+    const total =
+        questions.length;
+
+
+    const percentage =
+        total > 0
+
+            ? Math.round(
+                (score / total) * 100
+            )
+
+            : 0;
+
+
+    document
+        .getElementById("finalScore")
+        .textContent =
+
+        score +
+        " / " +
+        total;
+
+
+    document
+        .getElementById("percentage")
+        .textContent =
+
+        "Your score: " +
+        percentage +
+        "%";
+
+
+    // Save result
+
+    try {
+
+        const {
+            data: userData
+        } =
+            await supabaseClient
+                .auth
+                .getUser();
+
+
+        if (
+            userData &&
+            userData.user
+        ) {
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("quiz_results")
+                    .insert({
+
+                        user_id:
+                            userData.user.id,
+
+                        course:
+                            "Anatomy & Physiology",
+
+                        score:
+                            score,
+
+                        total_questions:
+                            total,
+
+                        percentage:
+                            percentage
+
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    "Could not save result:",
+                    error
+                );
+
+            }
+
+        }
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Result saving error:",
+            error
+        );
+
+    }
+
+}
+
+
+// ======================================================
+// RESTART
+// ======================================================
+
+function restartQuiz() {
+
+
+    questions = [];
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    answers = [];
+
+
+    document
+        .getElementById("result")
+        .style.display =
+        "none";
+
+
+    startQuiz();
+
+}
+
+
+// ======================================================
+// START
+// ======================================================
+
+startQuiz();
+
+
+</script>
+
+</body>
+
+</html>
