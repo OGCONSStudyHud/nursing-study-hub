@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,244 +14,347 @@
         OGCONS Study Hub - Microbiology Quiz
     </title>
 
+
     <style>
 
         * {
             box-sizing: border-box;
         }
 
+
         body {
             margin: 0;
+
             font-family: Arial, sans-serif;
+
             background: #f4f7fb;
+
             color: #172033;
         }
 
+
         header {
             background: #0b5ed7;
+
             color: white;
+
             padding: 20px;
+
             text-align: center;
         }
 
+
         header h1 {
             margin: 0;
+
             font-size: 25px;
         }
+
 
         header p {
             margin: 7px 0 0;
         }
 
+
         .container {
             max-width: 850px;
+
             margin: 30px auto;
+
             padding: 20px;
         }
 
+
         .back {
             display: inline-block;
+
             margin-bottom: 20px;
+
             color: #0b5ed7;
+
             text-decoration: none;
+
             font-weight: bold;
         }
 
+
         .card {
             background: white;
+
             border-radius: 16px;
+
             padding: 30px;
+
             box-shadow:
                 0 5px 20px
                 rgba(0,0,0,0.08);
         }
 
+
         .course-title {
             text-align: center;
+
             margin-bottom: 25px;
         }
+
 
         .course-title h2 {
             margin-bottom: 5px;
         }
 
+
         .counter {
             text-align: center;
+
             color: #666;
+
             margin-bottom: 20px;
+
             font-weight: bold;
         }
+
 
         .score {
             text-align: center;
+
             color: #0b5ed7;
+
             margin-bottom: 20px;
+
             font-weight: bold;
         }
 
-        .topic-name {
-            text-align: center;
-            color: #198754;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
 
         .question {
             font-size: 22px;
+
             font-weight: bold;
+
             line-height: 1.5;
+
             margin-bottom: 25px;
         }
 
+
         .options {
             display: grid;
+
             gap: 12px;
         }
 
+
         .option {
             width: 100%;
+
             text-align: left;
+
             background: #f7f9fc;
+
             border: 2px solid #d8dee8;
+
             border-radius: 10px;
+
             padding: 16px;
+
             font-size: 16px;
+
             cursor: pointer;
+
             transition: 0.2s;
         }
 
-        .option:hover:not(:disabled) {
+
+        .option:hover {
             background: #eef6ff;
+
             border-color: #0b5ed7;
         }
+
 
         .option strong {
             margin-right: 8px;
         }
 
+
         .option.correct {
             background: #d1e7dd;
+
             border-color: #198754;
+
             color: #0f5132;
         }
 
+
         .option.wrong {
             background: #f8d7da;
+
             border-color: #dc3545;
+
             color: #842029;
         }
+
 
         .option.disabled {
             cursor: not-allowed;
         }
 
+
         .feedback {
             margin-top: 20px;
+
             padding: 18px;
+
             border-radius: 10px;
+
             display: none;
         }
+
 
         .feedback.correct-feedback {
             background: #d1e7dd;
+
             color: #0f5132;
         }
 
+
         .feedback.wrong-feedback {
             background: #f8d7da;
+
             color: #842029;
         }
 
+
         .answer {
             margin-top: 15px;
+
             padding: 18px;
+
             background: #eef6ff;
+
             border-radius: 10px;
+
             display: none;
         }
+
 
         .answer strong {
             color: #0b5ed7;
         }
 
+
         .buttons {
             display: flex;
+
             justify-content: space-between;
+
             gap: 10px;
+
             margin-top: 25px;
         }
 
+
         button {
             border: none;
+
             border-radius: 9px;
+
             padding: 13px 20px;
+
             font-size: 15px;
+
             font-weight: bold;
+
             cursor: pointer;
         }
 
+
         .primary {
             background: #0b5ed7;
+
             color: white;
         }
+
 
         .primary:hover {
             background: #084ca8;
         }
 
+
         .secondary {
             background: #e9edf3;
+
             color: #172033;
         }
 
+
         button:disabled {
             opacity: 0.5;
+
             cursor: not-allowed;
         }
+
 
         #loading,
         #error,
         #empty {
             text-align: center;
+
             padding: 30px;
         }
+
 
         #error {
             color: #dc3545;
         }
 
+
         .result {
             text-align: center;
+
             display: none;
         }
 
+
         .result-icon {
             font-size: 65px;
+
             margin-bottom: 15px;
         }
+
 
         .result h2 {
             margin-bottom: 10px;
         }
 
+
         .final-score {
             font-size: 42px;
+
             font-weight: bold;
+
             color: #0b5ed7;
+
             margin: 20px 0;
         }
 
+
         .result button {
             background: #0b5ed7;
+
             color: white;
+
             margin-top: 15px;
         }
 
+
         footer {
             text-align: center;
+
             padding: 30px;
+
             color: #777;
         }
+
 
         @media (max-width: 600px) {
 
@@ -258,17 +362,21 @@
                 padding: 12px;
             }
 
+
             .card {
                 padding: 20px;
             }
+
 
             .question {
                 font-size: 19px;
             }
 
+
             .buttons {
                 flex-direction: column;
             }
+
 
             button {
                 width: 100%;
@@ -297,30 +405,34 @@
 </header>
 
 
+
 <div class="container">
 
 
     <a
-        href="microbiology-topics.html"
+        href="dashboard.html"
         class="back">
 
-        ← Back to Microbiology Topics
+        ← Back to Courses
 
     </a>
+
 
 
     <div
         id="loading">
 
-        Loading questions...
+        Loading Microbiology questions...
 
     </div>
+
 
 
     <div
         id="error"
         style="display:none;">
     </div>
+
 
 
     <div
@@ -331,12 +443,13 @@
             No questions available yet.
         </h2>
 
-        <p id="emptyMessage">
-            Your lecturer/admin has not added questions
-            for this topic yet.
+        <p>
+            Your lecturer/admin has not added
+            Microbiology questions.
         </p>
 
     </div>
+
 
 
     <!-- QUIZ CARD -->
@@ -360,16 +473,12 @@
         </div>
 
 
-        <div
-            class="topic-name"
-            id="topicName">
-        </div>
-
 
         <div
             class="counter"
             id="counter">
         </div>
+
 
 
         <div
@@ -381,10 +490,12 @@
         </div>
 
 
+
         <div
             class="question"
             id="question">
         </div>
+
 
 
         <div class="options">
@@ -397,9 +508,12 @@
 
                 <strong>A.</strong>
 
-                <span id="text_a"></span>
+                <span
+                    id="text_a">
+                </span>
 
             </button>
+
 
 
             <button
@@ -409,9 +523,12 @@
 
                 <strong>B.</strong>
 
-                <span id="text_b"></span>
+                <span
+                    id="text_b">
+                </span>
 
             </button>
+
 
 
             <button
@@ -421,9 +538,12 @@
 
                 <strong>C.</strong>
 
-                <span id="text_c"></span>
+                <span
+                    id="text_c">
+                </span>
 
             </button>
+
 
 
             <button
@@ -433,12 +553,15 @@
 
                 <strong>D.</strong>
 
-                <span id="text_d"></span>
+                <span
+                    id="text_d">
+                </span>
 
             </button>
 
 
         </div>
+
 
 
         <!-- FEEDBACK -->
@@ -447,6 +570,7 @@
             class="feedback"
             id="feedback">
         </div>
+
 
 
         <!-- EXPLANATION -->
@@ -461,7 +585,9 @@
                     Correct Answer:
                 </strong>
 
-                <span id="correct_answer"></span>
+                <span
+                    id="correct_answer">
+                </span>
 
             </p>
 
@@ -472,11 +598,14 @@
                     Explanation:
                 </strong>
 
-                <span id="explanation"></span>
+                <span
+                    id="explanation">
+                </span>
 
             </p>
 
         </div>
+
 
 
         <div class="buttons">
@@ -490,6 +619,7 @@
                 ← Previous
 
             </button>
+
 
 
             <button
@@ -507,6 +637,7 @@
 
 
     </div>
+
 
 
     <!-- RESULT -->
@@ -527,11 +658,10 @@
 
 
         <p>
+
             You have completed the
-            <span id="resultTopic">
-                Microbiology
-            </span>
-            quiz.
+            Microbiology quiz.
+
         </p>
 
 
@@ -549,6 +679,7 @@
         </p>
 
 
+
         <button
             onclick="restartQuiz()">
 
@@ -561,10 +692,10 @@
 
 
         <button
-            onclick="window.location.href='microbiology-topics.html'"
+            onclick="window.location.href='dashboard.html'"
             style="background:#6c757d;">
 
-            ← Back to Topics
+            ← Back to Courses
 
         </button>
 
@@ -575,6 +706,7 @@
 </div>
 
 
+
 <footer>
 
     © 2026 OGCONS Study Hub
@@ -583,15 +715,16 @@
 </footer>
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
 
-// ==========================================
+// ======================================================
 // SUPABASE CONNECTION
-// ==========================================
+// ======================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -603,14 +736,18 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 const supabaseClient =
     window.supabase.createClient(
+
         SUPABASE_URL,
+
         SUPABASE_PUBLISHABLE_KEY
+
     );
 
 
-// ==========================================
+
+// ======================================================
 // QUIZ VARIABLES
-// ==========================================
+// ======================================================
 
 let questions = [];
 
@@ -619,110 +756,123 @@ let currentQuestion = 0;
 let score = 0;
 
 
-// IMPORTANT
-// Stores the answer given to each question.
-//
-// Example:
-//
-// userAnswers[0] = "B"
-// userAnswers[1] = "C"
-// userAnswers[2] = "A"
-//
-// If a question has not been answered,
-// its value is null.
+// This stores the student's answer
+// for every question.
 
-let userAnswers = [];
+let userAnswers = {};
 
 
-// ==========================================
-// GET SELECTED TOPIC
-// ==========================================
 
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
+// ======================================================
+// SHUFFLE FUNCTION
+// ======================================================
 
+function shuffleQuestions(array) {
 
-const selectedTopic =
-    urlParams.get("topic") ||
-    "Introduction to Microbiology";
+    const shuffled =
+        [...array];
 
 
-// ==========================================
+    for (
+        let i = shuffled.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        [
+            shuffled[i],
+            shuffled[j]
+        ] =
+        [
+            shuffled[j],
+            shuffled[i]
+        ];
+
+    }
+
+
+    return shuffled;
+
+}
+
+
+
+// ======================================================
 // LOAD QUESTIONS
-// ==========================================
+// ======================================================
 
 async function loadQuestions() {
+
 
     const loading =
         document.getElementById("loading");
 
+
     const quizCard =
         document.getElementById("quizCard");
 
+
     const empty =
         document.getElementById("empty");
+
 
     const error =
         document.getElementById("error");
 
 
-    document
-        .getElementById("topicName")
-        .textContent =
-        "Topic: " +
-        selectedTopic;
 
-
-    document
-        .getElementById("resultTopic")
-        .textContent =
-        selectedTopic;
-
-
+    // ==================================================
     // CHECK LOGIN
+    // ==================================================
 
     const {
-        data: { user },
-        error: authError
+        data: {
+            user
+        }
     } =
         await supabaseClient
             .auth
             .getUser();
 
 
-    if (authError) {
-
-        console.error(
-            "Authentication error:",
-            authError.message
-        );
-
-    }
-
 
     if (!user) {
 
         window.location.href =
-            "login.html";
+            "index.html";
 
         return;
 
     }
 
 
-    // LOAD QUESTIONS
+
+    // ==================================================
+    // GET QUESTIONS
+    // ==================================================
 
     const {
         data,
         error: databaseError
     } =
         await supabaseClient
+
             .from("questions")
+
             .select("*")
-            .eq("course", "Microbiology")
-            .eq("topic", selectedTopic)
+
+            .eq(
+                "course",
+                "Microbiology"
+            )
+
             .order(
                 "created_at",
                 {
@@ -731,13 +881,12 @@ async function loadQuestions() {
             );
 
 
+
+    // ==================================================
+    // DATABASE ERROR
+    // ==================================================
+
     if (databaseError) {
-
-        console.error(
-            "Database error:",
-            databaseError
-        );
-
 
         loading.style.display =
             "none";
@@ -757,42 +906,60 @@ async function loadQuestions() {
     }
 
 
+
+    // ==================================================
+    // STORE QUESTIONS
+    // ==================================================
+
     questions =
         data || [];
+
 
 
     loading.style.display =
         "none";
 
 
+
+    // ==================================================
+    // NO QUESTIONS
+    // ==================================================
+
     if (questions.length === 0) {
 
         empty.style.display =
             "block";
-
-
-        document
-            .getElementById("emptyMessage")
-            .textContent =
-
-            "There are currently no " +
-            selectedTopic +
-            " questions available. " +
-            "Your lecturer/admin can add them from the Admin Dashboard.";
-
 
         return;
 
     }
 
 
-    // CREATE ANSWER STORAGE
 
-    userAnswers =
-        new Array(
-            questions.length
-        ).fill(null);
+    // ==================================================
+    // SHUFFLE QUESTIONS
+    // ==================================================
 
+    questions =
+        shuffleQuestions(
+            questions
+        );
+
+
+
+    // Reset quiz data
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    userAnswers = {};
+
+
+
+    // ==================================================
+    // SHOW QUIZ
+    // ==================================================
 
     quizCard.style.display =
         "block";
@@ -803,9 +970,10 @@ async function loadQuestions() {
 }
 
 
-// ==========================================
+
+// ======================================================
 // SHOW QUESTION
-// ==========================================
+// ======================================================
 
 function showQuestion() {
 
@@ -815,10 +983,19 @@ function showQuestion() {
 
 
     if (!q) {
-
         return;
-
     }
+
+
+
+    const questionKey =
+        getQuestionKey(q);
+
+
+
+    const savedAnswer =
+        userAnswers[questionKey];
+
 
 
     document
@@ -831,6 +1008,7 @@ function showQuestion() {
         questions.length;
 
 
+
     document
         .getElementById("score")
         .textContent =
@@ -839,10 +1017,12 @@ function showQuestion() {
         score;
 
 
+
     document
         .getElementById("question")
         .textContent =
         q.question;
+
 
 
     document
@@ -851,10 +1031,12 @@ function showQuestion() {
         q.option_a;
 
 
+
     document
         .getElementById("text_b")
         .textContent =
         q.option_b;
+
 
 
     document
@@ -863,11 +1045,17 @@ function showQuestion() {
         q.option_c;
 
 
+
     document
         .getElementById("text_d")
         .textContent =
         q.option_d;
 
+
+
+    // ==================================================
+    // RESET OPTIONS VISUALLY
+    // ==================================================
 
     const options = [
 
@@ -882,7 +1070,6 @@ function showQuestion() {
     ];
 
 
-    // RESET VISUAL STATE
 
     options.forEach(function(option) {
 
@@ -892,15 +1079,34 @@ function showQuestion() {
             "disabled"
         );
 
-        option.disabled = false;
+        option.disabled =
+            false;
 
     });
 
 
-    document
-        .getElementById("feedback")
-        .style.display =
+
+    // ==================================================
+    // RESET FEEDBACK
+    // ==================================================
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.style.display =
         "none";
+
+
+    feedback.textContent =
+        "";
+
+
+    feedback.className =
+        "feedback";
+
 
 
     document
@@ -909,24 +1115,23 @@ function showQuestion() {
         "none";
 
 
-    // CHECK IF THIS QUESTION
-    // WAS ALREADY ANSWERED
 
-    const previousAnswer =
-        userAnswers[currentQuestion];
+    // ==================================================
+    // QUESTION HAS ALREADY BEEN ANSWERED
+    // ==================================================
 
-
-    if (previousAnswer !== null) {
+    if (savedAnswer) {
 
         restoreAnsweredQuestion(
-            previousAnswer
+            q,
+            savedAnswer
         );
 
     }
 
     else {
 
-        // Question has not been answered
+        // New unanswered question
 
         document
             .getElementById("nextButton")
@@ -936,7 +1141,10 @@ function showQuestion() {
     }
 
 
+
+    // ==================================================
     // PREVIOUS BUTTON
+    // ==================================================
 
     document
         .getElementById("previousButton")
@@ -946,179 +1154,58 @@ function showQuestion() {
 }
 
 
-// ==========================================
-// RESTORE PREVIOUS ANSWER
-// ==========================================
 
-function restoreAnsweredQuestion(
-    selected
-) {
+// ======================================================
+// GET UNIQUE QUESTION KEY
+// ======================================================
+
+function getQuestionKey(q) {
+
+
+    // Supabase normally gives each question
+    // a unique id.
+
+    if (q.id) {
+
+        return String(q.id);
+
+    }
+
+
+    // Fallback in case the table has no id.
+
+    return (
+        String(q.question) +
+        "|" +
+        String(q.option_a)
+    );
+
+}
+
+
+
+// ======================================================
+// SELECT ANSWER
+// ======================================================
+
+function selectAnswer(selected) {
 
 
     const q =
         questions[currentQuestion];
 
 
-    const correct =
-        String(q.correct_answer)
-            .trim()
-            .toUpperCase();
+    const questionKey =
+        getQuestionKey(q);
 
 
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            selected.toLowerCase()
-        );
 
-
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            correct.toLowerCase()
-        );
-
-
-    const options = [
-
-        document.getElementById("option_a"),
-
-        document.getElementById("option_b"),
-
-        document.getElementById("option_c"),
-
-        document.getElementById("option_d")
-
-    ];
-
-
-    // DISABLE ALL OPTIONS
-
-    options.forEach(function(option) {
-
-        option.disabled = true;
-
-        option.classList.add(
-            "disabled"
-        );
-
-    });
-
-
-    // SHOW CORRECT ANSWER
-
-    if (correctButton) {
-
-        correctButton.classList.add(
-            "correct"
-        );
-
-    }
-
-
-    // IF USER WAS WRONG
-
-    if (selected !== correct) {
-
-        if (selectedButton) {
-
-            selectedButton.classList.add(
-                "wrong"
-            );
-
-        }
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-            "❌ Wrong answer. The correct answer is " +
-            correct +
-            ".";
-
-
-        feedback.className =
-            "feedback wrong-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-    // IF USER WAS CORRECT
-
-    else {
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-            "✅ Correct! Well done.";
-
-
-        feedback.className =
-            "feedback correct-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-    // SHOW CORRECT ANSWER
-
-    document
-        .getElementById("correct_answer")
-        .textContent =
-        correct;
-
-
-    document
-        .getElementById("explanation")
-        .textContent =
-
-        q.explanation ||
-        "No explanation provided.";
-
-
-    document
-        .getElementById("answer")
-        .style.display =
-        "block";
-
-
-    // ENABLE NEXT
-
-    document
-        .getElementById("nextButton")
-        .disabled =
-        false;
-
-}
-
-
-// ==========================================
-// SELECT ANSWER
-// ==========================================
-
-function selectAnswer(selected) {
-
-
-    // VERY IMPORTANT:
-    // If the question already has an answer,
-    // do absolutely nothing.
+    // ==================================================
+    // PREVENT RE-ANSWERING
+    // ==================================================
 
     if (
-        userAnswers[currentQuestion] !== null
+        userAnswers[questionKey]
     ) {
 
         return;
@@ -1126,21 +1213,50 @@ function selectAnswer(selected) {
     }
 
 
-    const q =
-        questions[currentQuestion];
-
 
     const correct =
-        String(q.correct_answer)
-            .trim()
-            .toUpperCase();
+        String(
+            q.correct_answer
+        )
+        .trim()
+        .toUpperCase();
 
 
-    // SAVE THE ANSWER
 
-    userAnswers[currentQuestion] =
-        selected;
+    // Save the answer immediately
 
+    userAnswers[questionKey] = {
+
+        selected:
+            selected,
+
+        correct:
+            correct,
+
+        isCorrect:
+            selected === correct
+
+    };
+
+
+
+    // ==================================================
+    // UPDATE SCORE ONLY ONCE
+    // ==================================================
+
+    if (
+        selected === correct
+    ) {
+
+        score++;
+
+    }
+
+
+
+    // ==================================================
+    // GET BUTTONS
+    // ==================================================
 
     const selectedButton =
         document.getElementById(
@@ -1156,6 +1272,7 @@ function selectAnswer(selected) {
         );
 
 
+
     const options = [
 
         document.getElementById("option_a"),
@@ -1169,11 +1286,13 @@ function selectAnswer(selected) {
     ];
 
 
-    // DISABLE ALL OPTIONS
+
+    // Disable all options
 
     options.forEach(function(option) {
 
-        option.disabled = true;
+        option.disabled =
+            true;
 
         option.classList.add(
             "disabled"
@@ -1182,12 +1301,14 @@ function selectAnswer(selected) {
     });
 
 
+
+    // ==================================================
     // CORRECT ANSWER
+    // ==================================================
 
-    if (selected === correct) {
-
-
-        score++;
+    if (
+        selected === correct
+    ) {
 
 
         selectedButton.classList.add(
@@ -1215,7 +1336,10 @@ function selectAnswer(selected) {
     }
 
 
+
+    // ==================================================
     // WRONG ANSWER
+    // ==================================================
 
     else {
 
@@ -1241,7 +1365,9 @@ function selectAnswer(selected) {
 
 
         feedback.textContent =
-            "❌ Wrong answer. The correct answer is " +
+
+            "❌ Wrong answer. " +
+            "The correct answer is " +
             correct +
             ".";
 
@@ -1256,7 +1382,10 @@ function selectAnswer(selected) {
     }
 
 
+
+    // ==================================================
     // SHOW EXPLANATION
+    // ==================================================
 
     document
         .getElementById("correct_answer")
@@ -1278,7 +1407,10 @@ function selectAnswer(selected) {
         "block";
 
 
+
+    // ==================================================
     // UPDATE SCORE
+    // ==================================================
 
     document
         .getElementById("score")
@@ -1288,7 +1420,10 @@ function selectAnswer(selected) {
         score;
 
 
+
+    // ==================================================
     // ENABLE NEXT
+    // ==================================================
 
     document
         .getElementById("nextButton")
@@ -1298,15 +1433,208 @@ function selectAnswer(selected) {
 }
 
 
-// ==========================================
+
+// ======================================================
+// RESTORE AN ALREADY ANSWERED QUESTION
+// ======================================================
+
+function restoreAnsweredQuestion(
+    q,
+    savedAnswer
+) {
+
+
+    const selected =
+        savedAnswer.selected;
+
+
+    const correct =
+        savedAnswer.correct;
+
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            correct.toLowerCase()
+        );
+
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+
+    // Disable every option
+
+    options.forEach(function(option) {
+
+        option.disabled =
+            true;
+
+        option.classList.add(
+            "disabled"
+        );
+
+    });
+
+
+
+    // ==================================================
+    // RESTORE CORRECT ANSWER
+    // ==================================================
+
+    if (
+        savedAnswer.isCorrect
+    ) {
+
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+            "✅ Correct! Well done.";
+
+
+        feedback.className =
+            "feedback correct-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+
+
+    // ==================================================
+    // RESTORE WRONG ANSWER
+    // ==================================================
+
+    else {
+
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+
+        if (correctButton) {
+
+            correctButton.classList.add(
+                "correct"
+            );
+
+        }
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+
+            "❌ Wrong answer. " +
+            "The correct answer is " +
+            correct +
+            ".";
+
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+
+
+    // ==================================================
+    // RESTORE EXPLANATION
+    // ==================================================
+
+    document
+        .getElementById("correct_answer")
+        .textContent =
+        correct;
+
+
+    document
+        .getElementById("explanation")
+        .textContent =
+
+        q.explanation ||
+        "No explanation provided.";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "block";
+
+
+
+    // Next remains available
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+
+}
+
+
+
+// ======================================================
 // NEXT QUESTION
-// ==========================================
+// ======================================================
 
 function nextQuestion() {
 
 
+    const q =
+        questions[currentQuestion];
+
+
+    const questionKey =
+        getQuestionKey(q);
+
+
+
+    // Do not allow moving forward
+    // without answering.
+
     if (
-        userAnswers[currentQuestion] === null
+        !userAnswers[questionKey]
     ) {
 
         return;
@@ -1314,18 +1642,22 @@ function nextQuestion() {
     }
 
 
+
     if (
         currentQuestion <
         questions.length - 1
     ) {
 
+
         currentQuestion++;
+
 
         showQuestion();
 
     }
 
     else {
+
 
         showResult();
 
@@ -1334,16 +1666,21 @@ function nextQuestion() {
 }
 
 
-// ==========================================
+
+// ======================================================
 // PREVIOUS QUESTION
-// ==========================================
+// ======================================================
 
 function previousQuestion() {
 
 
-    if (currentQuestion > 0) {
+    if (
+        currentQuestion > 0
+    ) {
+
 
         currentQuestion--;
+
 
         showQuestion();
 
@@ -1352,9 +1689,10 @@ function previousQuestion() {
 }
 
 
-// ==========================================
+
+// ======================================================
 // SHOW RESULT
-// ==========================================
+// ======================================================
 
 async function showResult() {
 
@@ -1371,14 +1709,21 @@ async function showResult() {
         "block";
 
 
+
     const total =
         questions.length;
 
 
+
     const percentage =
-        Math.round(
-            (score / total) * 100
-        );
+        total > 0
+
+            ? Math.round(
+                (score / total) * 100
+            )
+
+            : 0;
+
 
 
     document
@@ -1390,6 +1735,7 @@ async function showResult() {
         total;
 
 
+
     document
         .getElementById("percentage")
         .textContent =
@@ -1399,7 +1745,10 @@ async function showResult() {
         "%";
 
 
+
+    // ==================================================
     // GET CURRENT STUDENT
+    // ==================================================
 
     const {
         data: {
@@ -1409,6 +1758,7 @@ async function showResult() {
         await supabaseClient
             .auth
             .getUser();
+
 
 
     if (!user) {
@@ -1422,13 +1772,18 @@ async function showResult() {
     }
 
 
+
+    // ==================================================
     // SAVE QUIZ RESULT
+    // ==================================================
 
     const {
         error: saveError
     } =
         await supabaseClient
+
             .from("quiz_results")
+
             .insert({
 
                 user_id:
@@ -1447,6 +1802,7 @@ async function showResult() {
                     percentage
 
             });
+
 
 
     if (saveError) {
@@ -1469,25 +1825,40 @@ async function showResult() {
 }
 
 
-// ==========================================
+
+// ======================================================
 // RESTART QUIZ
-// ==========================================
+// ======================================================
 
 function restartQuiz() {
 
+
+    // ==================================================
+    // RESET QUIZ
+    // ==================================================
 
     currentQuestion = 0;
 
     score = 0;
 
+    userAnswers = {};
 
-    // CLEAR ALL PREVIOUS ANSWERS
 
-    userAnswers =
-        new Array(
-            questions.length
-        ).fill(null);
 
+    // ==================================================
+    // SHUFFLE AGAIN
+    // ==================================================
+
+    questions =
+        shuffleQuestions(
+            questions
+        );
+
+
+
+    // ==================================================
+    // HIDE RESULT
+    // ==================================================
 
     document
         .getElementById("result")
@@ -1495,10 +1866,16 @@ function restartQuiz() {
         "none";
 
 
+
+    // ==================================================
+    // SHOW QUIZ
+    // ==================================================
+
     document
         .getElementById("quizCard")
         .style.display =
         "block";
+
 
 
     showQuestion();
@@ -1506,9 +1883,10 @@ function restartQuiz() {
 }
 
 
-// ==========================================
-// START
-// ==========================================
+
+// ======================================================
+// START QUIZ
+// ======================================================
 
 loadQuestions();
 
@@ -1519,3 +1897,4 @@ loadQuestions();
 </body>
 
 </html>
+```
