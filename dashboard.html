@@ -183,11 +183,6 @@
             background: #117d45;
         }
 
-        .coming-soon {
-            background: #9aa6a0 !important;
-            cursor: not-allowed !important;
-        }
-
         .stat {
             font-size: 32px;
 
@@ -309,9 +304,7 @@
     <div class="cards">
 
 
-        <!-- ==========================================
-             MICROBIOLOGY
-        ========================================== -->
+        <!-- MICROBIOLOGY -->
 
         <div class="card">
 
@@ -343,9 +336,7 @@
 
 
 
-        <!-- ==========================================
-             ANATOMY & PHYSIOLOGY
-        ========================================== -->
+        <!-- ANATOMY & PHYSIOLOGY -->
 
         <div class="card">
 
@@ -376,9 +367,7 @@
 
 
 
-        <!-- ==========================================
-             PHARMACOLOGY
-        ========================================== -->
+        <!-- PHARMACOLOGY -->
 
         <div class="card">
 
@@ -398,8 +387,6 @@
 
             </p>
 
-            <!-- FIXED -->
-
             <button
                 onclick="openPharmacology()">
 
@@ -411,9 +398,7 @@
 
 
 
-        <!-- ==========================================
-             MEDICAL SURGICAL
-        ========================================== -->
+        <!-- MEDICAL SURGICAL -->
 
         <div class="card">
 
@@ -434,7 +419,11 @@
             </p>
 
             <button
-                class="coming-soon">
+                style="
+                    background:#9aa6a0;
+                    cursor:not-allowed;
+                "
+                disabled>
 
                 Coming Soon
 
@@ -444,9 +433,7 @@
 
 
 
-        <!-- ==========================================
-             NUTRITION
-        ========================================== -->
+        <!-- NUTRITION -->
 
         <div class="card">
 
@@ -467,7 +454,11 @@
             </p>
 
             <button
-                class="coming-soon">
+                style="
+                    background:#9aa6a0;
+                    cursor:not-allowed;
+                "
+                disabled>
 
                 Coming Soon
 
@@ -477,9 +468,7 @@
 
 
 
-        <!-- ==========================================
-             NURSING PRACTICE
-        ========================================== -->
+        <!-- NURSING PRACTICE -->
 
         <div class="card">
 
@@ -500,7 +489,11 @@
             </p>
 
             <button
-                class="coming-soon">
+                style="
+                    background:#9aa6a0;
+                    cursor:not-allowed;
+                "
+                disabled>
 
                 Coming Soon
 
@@ -610,9 +603,9 @@
             </p>
 
             <button
-                class="coming-soon">
+                onclick="openLeaderboard()">
 
-                Coming Soon
+                View Leaderboard
 
             </button>
 
@@ -658,19 +651,14 @@ const supabaseClient =
 
 async function checkUser() {
 
-
     const {
-
         data: {
             user
-
         }
-
     } =
         await supabaseClient
             .auth
             .getUser();
-
 
 
     if (!user) {
@@ -683,7 +671,6 @@ async function checkUser() {
     }
 
 
-
     const name =
 
         user.user_metadata?.full_name ||
@@ -693,19 +680,16 @@ async function checkUser() {
         "Student";
 
 
-
     document
         .getElementById("studentName")
         .textContent =
         name;
 
 
-
     document
         .getElementById("loading")
         .style.display =
         "none";
-
 
 
     document
@@ -757,6 +741,19 @@ function openPharmacology() {
 
 
 // ==========================================
+// OPEN LEADERBOARD
+// ==========================================
+
+function openLeaderboard() {
+
+    window.location.href =
+        "leaderboard.html";
+
+}
+
+
+
+// ==========================================
 // LOGOUT
 // ==========================================
 
@@ -780,19 +777,14 @@ async function logout() {
 
 async function loadQuizProgress() {
 
-
     const {
-
         data: {
             user
-
         }
-
     } =
         await supabaseClient
             .auth
             .getUser();
-
 
 
     if (!user) {
@@ -802,12 +794,9 @@ async function loadQuizProgress() {
     }
 
 
-
     const {
-
         data,
         error
-
     } =
         await supabaseClient
 
@@ -819,7 +808,6 @@ async function loadQuizProgress() {
                 "user_id",
                 user.id
             );
-
 
 
     if (error) {
@@ -834,26 +822,15 @@ async function loadQuizProgress() {
     }
 
 
-
     const results =
         data || [];
 
-
-
-    // ==========================================
-    // NUMBER OF QUIZZES COMPLETED
-    // ==========================================
 
     document
         .getElementById("quizCount")
         .textContent =
         results.length;
 
-
-
-    // ==========================================
-    // AVERAGE SCORE
-    // ==========================================
 
     if (
         results.length === 0
@@ -867,7 +844,6 @@ async function loadQuizProgress() {
         return;
 
     }
-
 
 
     const totalPercentage =
@@ -885,14 +861,12 @@ async function loadQuizProgress() {
         );
 
 
-
     const average =
 
         Math.round(
             totalPercentage /
             results.length
         );
-
 
 
     document
