@@ -224,7 +224,7 @@
         }
 
 
-        .option:hover {
+        .option:hover:not(:disabled) {
 
             background: #eefaf4;
 
@@ -516,8 +516,10 @@
 <div class="container">
 
 
+    <!-- BACK TO TOPICS -->
+
     <a
-        href="anatomy-physiology.html"
+        href="anatomy-topics.html"
         class="back">
 
         ← Back to Anatomy & Physiology Topics
@@ -525,6 +527,8 @@
     </a>
 
 
+
+    <!-- LOADING -->
 
     <div id="loading">
 
@@ -540,12 +544,16 @@
 
 
 
+    <!-- ERROR -->
+
     <div
         id="error"
         style="display:none;">
     </div>
 
 
+
+    <!-- EMPTY -->
 
     <div
         id="empty"
@@ -566,9 +574,7 @@
 
 
 
-    <!-- ==================================================
-         QUIZ CARD
-         ================================================== -->
+    <!-- QUIZ CARD -->
 
     <div
         class="card"
@@ -620,6 +626,8 @@
         </div>
 
 
+
+        <!-- OPTIONS -->
 
         <div class="options">
 
@@ -679,9 +687,7 @@
 
 
 
-        <!-- ==================================================
-             FEEDBACK
-             ================================================== -->
+        <!-- FEEDBACK -->
 
         <div
             class="feedback"
@@ -690,9 +696,7 @@
 
 
 
-        <!-- ==================================================
-             ANSWER / EXPLANATION
-             ================================================== -->
+        <!-- ANSWER / EXPLANATION -->
 
         <div
             class="answer"
@@ -730,9 +734,7 @@
 
 
 
-        <!-- ==================================================
-             NAVIGATION
-             ================================================== -->
+        <!-- NAVIGATION -->
 
         <div class="buttons">
 
@@ -766,9 +768,7 @@
 
 
 
-    <!-- ==================================================
-         RESULT
-         ================================================== -->
+    <!-- RESULT -->
 
     <div
         class="card result"
@@ -830,7 +830,7 @@
 
         <button
             class="back-topic"
-            onclick="window.location.href='anatomy-physiology.html'">
+            onclick="window.location.href='anatomy-topics.html'">
 
             ← Back to Topics
 
@@ -860,7 +860,7 @@
 
 
 // ======================================================
-// SUPABASE
+// SUPABASE CONNECTION
 // ======================================================
 
 const SUPABASE_URL =
@@ -873,11 +873,8 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 const supabaseClient =
     window.supabase.createClient(
-
         SUPABASE_URL,
-
         SUPABASE_PUBLISHABLE_KEY
-
     );
 
 
@@ -893,19 +890,13 @@ let currentQuestion = 0;
 let score = 0;
 
 
-// ======================================================
-// STORE THE ANSWER FOR EVERY QUESTION
-// ======================================================
+// IMPORTANT:
 //
-// Each question will have:
-//
-// {
-//     selected: "A",
-//     correct: true/false
-// }
+// Instead of one "answered" variable,
+// we keep the answer for EVERY question.
 //
 // This prevents a student from answering
-// the same question again after clicking Previous.
+// a previous question again.
 //
 
 let userAnswers = [];
@@ -913,7 +904,7 @@ let userAnswers = [];
 
 
 // ======================================================
-// GET TOPIC
+// GET SELECTED TOPIC
 // ======================================================
 
 const urlParams =
@@ -933,8 +924,12 @@ const selectedTopic =
 
 function shuffleQuestions(array) {
 
+    const shuffled =
+        [...array];
+
+
     for (
-        let i = array.length - 1;
+        let i = shuffled.length - 1;
         i > 0;
         i--
     ) {
@@ -946,15 +941,18 @@ function shuffleQuestions(array) {
 
 
         [
-            array[i],
-            array[j]
+            shuffled[i],
+            shuffled[j]
         ] =
         [
-            array[j],
-            array[i]
+            shuffled[j],
+            shuffled[i]
         ];
 
     }
+
+
+    return shuffled;
 
 }
 
@@ -966,26 +964,37 @@ function shuffleQuestions(array) {
 
 async function loadQuestions() {
 
+
     const loading =
         document.getElementById("loading");
+
 
     const quizCard =
         document.getElementById("quizCard");
 
+
     const empty =
         document.getElementById("empty");
+
 
     const error =
         document.getElementById("error");
 
+
+
+    // ----------------------------------------------
+    // CHECK TOPIC
+    // ----------------------------------------------
 
     if (!selectedTopic) {
 
         loading.style.display =
             "none";
 
+
         error.style.display =
             "block";
+
 
         error.innerHTML = `
 
@@ -1000,18 +1009,22 @@ async function loadQuestions() {
 
         `;
 
+
         return;
 
     }
 
 
 
+    // ----------------------------------------------
+    // DISPLAY TOPIC
+    // ----------------------------------------------
+
     document
         .getElementById("topicName")
         .textContent =
         "Topic: " +
         selectedTopic;
-
 
 
     document
@@ -1021,29 +1034,20 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // CHECK LOGIN
-    // ==================================================
+    // ----------------------------------------------
 
     const {
-
-        data: {
-            user
-        },
-
+        data: { user },
         error: userError
-
     } =
         await supabaseClient
             .auth
             .getUser();
 
 
-
-    if (
-        userError ||
-        !user
-    ) {
+    if (userError || !user) {
 
         window.location.href =
             "login.html";
@@ -1054,16 +1058,13 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // GET QUESTIONS
-    // ==================================================
+    // ----------------------------------------------
 
     const {
-
         data,
-
         error: databaseError
-
     } =
         await supabaseClient
 
@@ -1090,9 +1091,9 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // DATABASE ERROR
-    // ==================================================
+    // ----------------------------------------------
 
     if (databaseError) {
 
@@ -1122,36 +1123,21 @@ async function loadQuestions() {
 
         `;
 
+
         return;
 
     }
 
 
 
-    questions =
-        data || [];
-
-
-
-    // ==================================================
+    // ----------------------------------------------
     // SHUFFLE QUESTIONS
-    // ==================================================
+    // ----------------------------------------------
 
-    shuffleQuestions(
-        questions
-    );
-
-
-
-    // ==================================================
-    // CREATE ANSWER TRACKING
-    // ==================================================
-
-    userAnswers =
-        new Array(
-            questions.length
-        )
-        .fill(null);
+    questions =
+        shuffleQuestions(
+            data || []
+        );
 
 
 
@@ -1160,22 +1146,18 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // NO QUESTIONS
-    // ==================================================
+    // ----------------------------------------------
 
-    if (
-        questions.length === 0
-    ) {
+    if (questions.length === 0) {
 
         empty.style.display =
             "block";
 
 
         document
-            .getElementById(
-                "emptyMessage"
-            )
+            .getElementById("emptyMessage")
             .textContent =
 
             "There are currently no questions for " +
@@ -1189,9 +1171,20 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
+    // ----------------------------------------------
+    // CREATE ANSWER STORAGE
+    // ----------------------------------------------
+
+    userAnswers =
+        new Array(
+            questions.length
+        ).fill(null);
+
+
+
+    // ----------------------------------------------
     // SHOW QUIZ
-    // ==================================================
+    // ----------------------------------------------
 
     quizCard.style.display =
         "block";
@@ -1209,34 +1202,34 @@ async function loadQuestions() {
 
 function showQuestion() {
 
+
     const q =
-        questions[
-            currentQuestion
-        ];
+        questions[currentQuestion];
 
 
-    if (!q) {
-        return;
-    }
+    const savedAnswer =
+        userAnswers[currentQuestion];
 
 
 
-    // ==================================================
-    // BASIC QUESTION INFORMATION
-    // ==================================================
+    // ----------------------------------------------
+    // QUESTION COUNTER
+    // ----------------------------------------------
 
     document
         .getElementById("counter")
         .textContent =
 
         "Question " +
-        (
-            currentQuestion + 1
-        ) +
+        (currentQuestion + 1) +
         " of " +
         questions.length;
 
 
+
+    // ----------------------------------------------
+    // SCORE
+    // ----------------------------------------------
 
     document
         .getElementById("score")
@@ -1247,6 +1240,10 @@ function showQuestion() {
 
 
 
+    // ----------------------------------------------
+    // QUESTION
+    // ----------------------------------------------
+
     document
         .getElementById("question")
         .textContent =
@@ -1254,11 +1251,14 @@ function showQuestion() {
 
 
 
+    // ----------------------------------------------
+    // OPTIONS
+    // ----------------------------------------------
+
     document
         .getElementById("text_a")
         .textContent =
         q.option_a;
-
 
 
     document
@@ -1267,12 +1267,10 @@ function showQuestion() {
         q.option_b;
 
 
-
     document
         .getElementById("text_c")
         .textContent =
         q.option_c;
-
 
 
     document
@@ -1282,272 +1280,93 @@ function showQuestion() {
 
 
 
-    // ==================================================
-    // GET OPTION BUTTONS
-    // ==================================================
-
     const options = [
 
-        document.getElementById(
-            "option_a"
-        ),
+        document.getElementById("option_a"),
 
-        document.getElementById(
-            "option_b"
-        ),
+        document.getElementById("option_b"),
 
-        document.getElementById(
-            "option_c"
-        ),
+        document.getElementById("option_c"),
 
-        document.getElementById(
-            "option_d"
-        )
+        document.getElementById("option_d")
 
     ];
 
 
 
-    // ==================================================
-    // RESET OPTION STYLES
-    // ==================================================
+    // ----------------------------------------------
+    // RESET OPTION APPEARANCE
+    // ----------------------------------------------
 
-    options.forEach(
-        function(option) {
+    options.forEach(function(option) {
 
-            option.classList.remove(
-                "correct",
-                "wrong",
-                "disabled"
-            );
-
-            option.disabled =
-                false;
-
-        }
-    );
-
-
-
-    // ==================================================
-    // RESET FEEDBACK
-    // ==================================================
-
-    const feedback =
-        document.getElementById(
-            "feedback"
+        option.classList.remove(
+            "correct",
+            "wrong",
+            "disabled"
         );
 
 
-    const answer =
-        document.getElementById(
-            "answer"
-        );
-
-
-    feedback.style.display =
-        "none";
-
-
-    answer.style.display =
-        "none";
-
-
-
-    // ==================================================
-    // CHECK WHETHER THIS QUESTION
-    // HAS ALREADY BEEN ANSWERED
-    // ==================================================
-
-    const previousAnswer =
-        userAnswers[
-            currentQuestion
-        ];
-
-
-
-    if (previousAnswer) {
-
-        // ----------------------------------------------
-        // This question was already answered.
-        // Show the previous result.
-        // ----------------------------------------------
-
-        options.forEach(
-            function(option) {
-
-                option.disabled =
-                    true;
-
-                option.classList.add(
-                    "disabled"
-                );
-
-            }
-        );
-
-
-
-        const selectedButton =
-            document.getElementById(
-                "option_" +
-                previousAnswer.selected
-                    .toLowerCase()
-            );
-
-
-
-        const correctButton =
-            document.getElementById(
-                "option_" +
-                previousAnswer.correctAnswer
-                    .toLowerCase()
-            );
-
-
-
-        // ----------------------------------------------
-        // Show selected answer
-        // ----------------------------------------------
-
-        if (
-            previousAnswer.isCorrect
-        ) {
-
-            selectedButton.classList.add(
-                "correct"
-            );
-
-        }
-
-        else {
-
-            selectedButton.classList.add(
-                "wrong"
-            );
-
-
-            if (
-                correctButton
-            ) {
-
-                correctButton.classList.add(
-                    "correct"
-                );
-
-            }
-
-        }
-
-
-
-        // ----------------------------------------------
-        // Show feedback
-        // ----------------------------------------------
-
-        if (
-            previousAnswer.isCorrect
-        ) {
-
-            feedback.textContent =
-                "✅ Correct! Well done.";
-
-            feedback.className =
-                "feedback correct-feedback";
-
-        }
-
-        else {
-
-            feedback.textContent =
-
-                "❌ Wrong answer. " +
-                "The correct answer is " +
-                previousAnswer.correctAnswer +
-                ".";
-
-            feedback.className =
-                "feedback wrong-feedback";
-
-        }
-
-
-        feedback.style.display =
-            "block";
-
-
-
-        // ----------------------------------------------
-        // Show explanation
-        // ----------------------------------------------
-
-        document
-            .getElementById(
-                "correct_answer"
-            )
-            .textContent =
-            previousAnswer.correctAnswer;
-
-
-
-        document
-            .getElementById(
-                "explanation"
-            )
-            .textContent =
-
-            q.explanation ||
-            "No explanation provided.";
-
-
-
-        answer.style.display =
-            "block";
-
-
-
-        // ----------------------------------------------
-        // Next is available
-        // ----------------------------------------------
-
-        document
-            .getElementById(
-                "nextButton"
-            )
-            .disabled =
+        option.disabled =
             false;
 
-    }
+    });
 
 
 
-    else {
+    // ----------------------------------------------
+    // HIDE FEEDBACK
+    // ----------------------------------------------
 
-        // ==================================================
-        // NEW / UNANSWERED QUESTION
-        // ==================================================
+    document
+        .getElementById("feedback")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "none";
+
+
+
+    // ----------------------------------------------
+    // NO ANSWER YET
+    // ----------------------------------------------
+
+    if (savedAnswer === null) {
+
 
         document
-            .getElementById(
-                "nextButton"
-            )
+            .getElementById("nextButton")
             .disabled =
             true;
 
+
     }
 
 
 
-    // ==================================================
+    // ----------------------------------------------
+    // QUESTION ALREADY ANSWERED
+    // ----------------------------------------------
+
+    else {
+
+        showSavedAnswer();
+
+    }
+
+
+
+    // ----------------------------------------------
     // PREVIOUS BUTTON
-    // ==================================================
+    // ----------------------------------------------
 
     document
-        .getElementById(
-            "previousButton"
-        )
+        .getElementById("previousButton")
         .disabled =
-
         currentQuestion === 0;
 
 }
@@ -1558,19 +1377,15 @@ function showQuestion() {
 // SELECT ANSWER
 // ======================================================
 
-function selectAnswer(
-    selected
-) {
+function selectAnswer(selected) {
 
 
-    // ==================================================
-    // PREVENT SECOND ANSWER
-    // ==================================================
+    // ----------------------------------------------
+    // PREVENT RE-ANSWERING
+    // ----------------------------------------------
 
     if (
-        userAnswers[
-            currentQuestion
-        ]
+        userAnswers[currentQuestion] !== null
     ) {
 
         return;
@@ -1580,9 +1395,80 @@ function selectAnswer(
 
 
     const q =
-        questions[
-            currentQuestion
-        ];
+        questions[currentQuestion];
+
+
+    const correct =
+        String(
+            q.correct_answer
+        )
+        .trim()
+        .toUpperCase();
+
+
+
+    // ----------------------------------------------
+    // SAVE ANSWER
+    // ----------------------------------------------
+
+    userAnswers[currentQuestion] =
+        selected;
+
+
+
+    // ----------------------------------------------
+    // SCORE ONLY ONCE
+    // ----------------------------------------------
+
+    if (selected === correct) {
+
+        score++;
+
+    }
+
+
+
+    // ----------------------------------------------
+    // DISPLAY RESULT
+    // ----------------------------------------------
+
+    showSavedAnswer();
+
+
+
+    // ----------------------------------------------
+    // ENABLE NEXT
+    // ----------------------------------------------
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+
+}
+
+
+
+// ======================================================
+// SHOW SAVED ANSWER
+// ======================================================
+
+function showSavedAnswer() {
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    const selected =
+        userAnswers[currentQuestion];
+
+
+    if (selected === null) {
+
+        return;
+
+    }
 
 
 
@@ -1595,17 +1481,11 @@ function selectAnswer(
 
 
 
-    const isCorrect =
-        selected === correct;
-
-
-
     const selectedButton =
         document.getElementById(
             "option_" +
             selected.toLowerCase()
         );
-
 
 
     const correctButton =
@@ -1616,88 +1496,43 @@ function selectAnswer(
 
 
 
-    // ==================================================
-    // SAVE ANSWER
-    // ==================================================
-
-    userAnswers[
-        currentQuestion
-    ] = {
-
-        selected:
-            selected,
-
-        correctAnswer:
-            correct,
-
-        isCorrect:
-            isCorrect
-
-    };
-
-
-
-    // ==================================================
-    // UPDATE SCORE
-    // ==================================================
-
-    if (
-        isCorrect
-    ) {
-
-        score++;
-
-    }
-
-
-
-    // ==================================================
-    // DISABLE ALL OPTIONS
-    // ==================================================
-
     const options = [
 
-        document.getElementById(
-            "option_a"
-        ),
+        document.getElementById("option_a"),
 
-        document.getElementById(
-            "option_b"
-        ),
+        document.getElementById("option_b"),
 
-        document.getElementById(
-            "option_c"
-        ),
+        document.getElementById("option_c"),
 
-        document.getElementById(
-            "option_d"
-        )
+        document.getElementById("option_d")
 
     ];
 
 
-    options.forEach(
-        function(option) {
 
-            option.disabled =
-                true;
+    // ----------------------------------------------
+    // DISABLE ALL OPTIONS
+    // ----------------------------------------------
 
-            option.classList.add(
-                "disabled"
-            );
+    options.forEach(function(option) {
 
-        }
-    );
+        option.disabled =
+            true;
+
+        option.classList.add(
+            "disabled"
+        );
+
+    });
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // CORRECT ANSWER
-    // ==================================================
+    // ----------------------------------------------
 
-    if (
-        isCorrect
-    ) {
+    if (selected === correct) {
+
 
         selectedButton.classList.add(
             "correct"
@@ -1725,20 +1560,19 @@ function selectAnswer(
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // WRONG ANSWER
-    // ==================================================
+    // ----------------------------------------------
 
     else {
+
 
         selectedButton.classList.add(
             "wrong"
         );
 
 
-        if (
-            correctButton
-        ) {
+        if (correctButton) {
 
             correctButton.classList.add(
                 "correct"
@@ -1772,47 +1606,37 @@ function selectAnswer(
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // SHOW EXPLANATION
-    // ==================================================
+    // ----------------------------------------------
 
     document
-        .getElementById(
-            "correct_answer"
-        )
+        .getElementById("correct_answer")
         .textContent =
         correct;
 
 
-
     document
-        .getElementById(
-            "explanation"
-        )
+        .getElementById("explanation")
         .textContent =
 
         q.explanation ||
         "No explanation provided.";
 
 
-
     document
-        .getElementById(
-            "answer"
-        )
+        .getElementById("answer")
         .style.display =
         "block";
 
 
 
-    // ==================================================
-    // UPDATE SCORE
-    // ==================================================
+    // ----------------------------------------------
+    // SCORE
+    // ----------------------------------------------
 
     document
-        .getElementById(
-            "score"
-        )
+        .getElementById("score")
         .textContent =
 
         "Score: " +
@@ -1820,14 +1644,12 @@ function selectAnswer(
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // ENABLE NEXT
-    // ==================================================
+    // ----------------------------------------------
 
     document
-        .getElementById(
-            "nextButton"
-        )
+        .getElementById("nextButton")
         .disabled =
         false;
 
@@ -1847,13 +1669,43 @@ function nextQuestion() {
         questions.length - 1
     ) {
 
+
         currentQuestion++;
+
 
         showQuestion();
 
+
     }
 
+
     else {
+
+
+        // Make sure every question
+        // has been answered before finishing.
+
+        const unanswered =
+            userAnswers.some(
+                function(answer) {
+
+                    return answer === null;
+
+                }
+            );
+
+
+        if (unanswered) {
+
+            alert(
+                "Please answer all questions before completing the quiz."
+            );
+
+
+            return;
+
+        }
+
 
         showResult();
 
@@ -1874,7 +1726,9 @@ function previousQuestion() {
         currentQuestion > 0
     ) {
 
+
         currentQuestion--;
+
 
         showQuestion();
 
@@ -1892,17 +1746,13 @@ async function showResult() {
 
 
     document
-        .getElementById(
-            "quizCard"
-        )
+        .getElementById("quizCard")
         .style.display =
         "none";
 
 
     document
-        .getElementById(
-            "result"
-        )
+        .getElementById("result")
         .style.display =
         "block";
 
@@ -1912,26 +1762,15 @@ async function showResult() {
         questions.length;
 
 
-
     const percentage =
-        total > 0
-
-            ? Math.round(
-                (
-                    score /
-                    total
-                ) *
-                100
-            )
-
-            : 0;
+        Math.round(
+            (score / total) * 100
+        );
 
 
 
     document
-        .getElementById(
-            "finalScore"
-        )
+        .getElementById("finalScore")
         .textContent =
 
         score +
@@ -1941,9 +1780,7 @@ async function showResult() {
 
 
     document
-        .getElementById(
-            "percentage"
-        )
+        .getElementById("percentage")
         .textContent =
 
         "Your score: " +
@@ -1952,16 +1789,12 @@ async function showResult() {
 
 
 
-    // ==================================================
-    // GET CURRENT STUDENT
-    // ==================================================
+    // ----------------------------------------------
+    // GET STUDENT
+    // ----------------------------------------------
 
     const {
-
-        data: {
-            user
-        }
-
+        data: { user }
     } =
         await supabaseClient
             .auth
@@ -1975,24 +1808,23 @@ async function showResult() {
             "Student is not logged in."
         );
 
+
         return;
 
     }
 
 
 
-    // ==================================================
-    // SAVE QUIZ RESULT
-    // ==================================================
+    // ----------------------------------------------
+    // SAVE RESULT
+    // ----------------------------------------------
 
     const {
         error: saveError
     } =
         await supabaseClient
 
-            .from(
-                "quiz_results"
-            )
+            .from("quiz_results")
 
             .insert({
 
@@ -2015,9 +1847,7 @@ async function showResult() {
 
 
 
-    if (
-        saveError
-    ) {
+    if (saveError) {
 
         console.error(
             "Could not save quiz result:",
@@ -2037,9 +1867,20 @@ async function showResult() {
 function restartQuiz() {
 
 
-    // ==================================================
+    // ----------------------------------------------
+    // SHUFFLE QUESTIONS AGAIN
+    // ----------------------------------------------
+
+    questions =
+        shuffleQuestions(
+            questions
+        );
+
+
+
+    // ----------------------------------------------
     // RESET QUIZ
-    // ==================================================
+    // ----------------------------------------------
 
     currentQuestion =
         0;
@@ -2049,58 +1890,34 @@ function restartQuiz() {
         0;
 
 
-
-    // ==================================================
-    // SHUFFLE AGAIN
-    // ==================================================
-
-    shuffleQuestions(
-        questions
-    );
-
-
-
-    // ==================================================
-    // CLEAR ALL PREVIOUS ANSWERS
-    // ==================================================
-
     userAnswers =
         new Array(
             questions.length
-        )
-        .fill(null);
+        ).fill(null);
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // HIDE RESULT
-    // ==================================================
+    // ----------------------------------------------
 
     document
-        .getElementById(
-            "result"
-        )
+        .getElementById("result")
         .style.display =
         "none";
 
 
 
-    // ==================================================
+    // ----------------------------------------------
     // SHOW QUIZ
-    // ==================================================
+    // ----------------------------------------------
 
     document
-        .getElementById(
-            "quizCard"
-        )
+        .getElementById("quizCard")
         .style.display =
         "block";
 
 
-
-    // ==================================================
-    // SHOW FIRST QUESTION
-    // ==================================================
 
     showQuestion();
 
