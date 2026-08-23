@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>OGCONS Study Hub - Leaderboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
+
+            color: #163020;
+
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
+
+            color: white;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+        }
+
+
+        header h1 {
+
+            margin-bottom: 8px;
+
+            font-size: 32px;
+
+        }
+
+
+        header p {
+
+            font-size: 16px;
+
+        }
+
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            padding: 30px 20px;
+
+        }
+
+
+        /* ==========================================
+           BACK BUTTON
+        ========================================== */
+
+        .back {
+
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            color: #18a058;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        .back:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==========================================
+           INTRO
+        ========================================== */
+
+        .intro {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .intro h2 {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .intro p {
+
+            color: #617568;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ==========================================
+           REFRESH
+        ========================================== */
+
+        .refresh-container {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .refresh-button {
+
+            border: none;
+
+            background: #18a058;
+
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .refresh-button:hover {
+
+            background: #117d45;
+
+        }
+
+
+        /* ==========================================
+           LEADERBOARD
+        ========================================== */
+
+        .leaderboard {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
+
+        }
+
+
+        /* ==========================================
+           ROW
+        ========================================== */
+
+        .student-row {
+
+            display: grid;
+
+            grid-template-columns:
+                70px
+                1fr
+                150px
+                150px;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 18px;
+
+            border-bottom:
+                1px solid #e6ece8;
+
+        }
+
+
+        .student-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .student-row:hover {
+
+            background: #f7fbf8;
+
+        }
+
+
+        /* ==========================================
+           POSITION
+        ========================================== */
+
+        .position {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+        }
+
+
+        /* ==========================================
+           NAME
+        ========================================== */
+
+        .student-name {
+
+            font-weight: bold;
+
+            font-size: 17px;
+
+        }
+
+
+        /* ==========================================
+           QUIZZES
+        ========================================== */
+
+        .quiz-number {
+
+            text-align: center;
+
+            color: #617568;
+
+        }
+
+
+        /* ==========================================
+           SCORE
+        ========================================== */
+
+        .score {
+
+            text-align: center;
+
+            font-weight: bold;
+
+            color: #18a058;
+
+            font-size: 19px;
+
+        }
+
+
+        /* ==========================================
+           TOP THREE
+        ========================================== */
+
+        .first {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff8d8,
+                    white
+                );
+
+            border-radius: 12px;
+
+        }
+
+
+        .second {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f0f3f5,
+                    white
+                );
+
+            border-radius: 12px;
+
+        }
+
+
+        .third {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff0e3,
+                    white
+                );
+
+            border-radius: 12px;
+
+        }
+
+
+        /* ==========================================
+           CURRENT USER
+        ========================================== */
+
+        .current-user {
+
+            border:
+                2px solid #18a058;
+
+            background: #f0fff7;
+
+        }
+
+
+        .you {
+
+            display: inline-block;
+
+            margin-left: 8px;
+
+            background: #18a058;
+
+            color: white;
+
+            padding: 3px 8px;
+
+            border-radius: 12px;
+
+            font-size: 11px;
+
+        }
+
+
+        /* ==========================================
+           EMPTY / LOADING
+        ========================================== */
+
+        .loading {
+
+            text-align: center;
+
+            padding: 50px;
+
+            color: #617568;
+
+        }
+
+
+        .empty {
+
+            text-align: center;
+
+            padding: 50px;
+
+            color: #617568;
+
+        }
+
+
+        .error {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #dc3545;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #527060;
+
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 700px) {
+
+            .student-row {
+
+                grid-template-columns:
+                    50px
+                    1fr
+                    90px;
+
+                gap: 10px;
+
+            }
+
+
+            .quiz-number {
+
+                display: none;
+
+            }
+
+
+            .score {
+
+                font-size: 17px;
+
+            }
+
+
+            header h1 {
+
+                font-size: 27px;
+
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <h1>
+        🏆 OGCONS Study Hub
+    </h1>
+
+    <p>
+        Student Leaderboard
+    </p>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- ==========================================
+         BACK
+    ========================================== -->
+
+    <a
+        href="dashboard.html"
+        class="back">
+
+        ← Back to Dashboard
+
+    </a>
+
+
+
+    <!-- ==========================================
+         INTRO
+    ========================================== -->
+
+    <div class="intro">
+
+        <h2>
+            🏆 Class Leaderboard
+        </h2>
+
+        <p>
+
+            See how students are performing
+            based on their completed quizzes.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         REFRESH
+    ========================================== -->
+
+    <div class="refresh-container">
+
+        <button
+            class="refresh-button"
+            onclick="loadLeaderboard()">
+
+            🔄 Refresh Leaderboard
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         LEADERBOARD
+    ========================================== -->
+
+    <div
+        class="leaderboard"
+        id="leaderboard">
+
+        <div class="loading">
+
+            Loading leaderboard...
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<footer>
+
+    © 2026 OGCONS Study Hub
+    • Built for students
+
+</footer>
+
+
+
+<script>
+
+
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
+
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+
+        SUPABASE_URL,
+
+        SUPABASE_PUBLISHABLE_KEY
+
+    );
+
+
+
+// ==========================================
+// ESCAPE HTML
+// ==========================================
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+// ==========================================
+// GET CURRENT USER
+// ==========================================
+
+async function getCurrentUser() {
+
+    const {
+        data: {
+            user
+        }
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+    return user;
+
+}
+
+
+
+// ==========================================
+// LOAD LEADERBOARD
+// ==========================================
+
+async function loadLeaderboard() {
+
+
+    const leaderboard =
+        document.getElementById(
+            "leaderboard"
+        );
+
+
+    leaderboard.innerHTML = `
+
+        <div class="loading">
+
+            🔄 Loading leaderboard...
+
+        </div>
+
+    `;
+
+
+    // ==========================================
+    // GET CURRENT USER
+    // ==========================================
+
+    const currentUser =
+        await getCurrentUser();
+
+
+
+    if (!currentUser) {
+
+        window.location.href =
+            "index.html";
+
+        return;
+
+    }
+
+
+
+    // ==========================================
+    // GET QUIZ RESULTS
+    // ==========================================
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("quiz_results")
+
+            .select(
+                "user_id, percentage"
+            );
+
+
+
+    if (error) {
+
+        console.error(
+            "Leaderboard error:",
+            error
+        );
+
+
+        leaderboard.innerHTML = `
+
+            <div class="error">
+
+                ❌ Unable to load leaderboard.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    const results =
+        data || [];
+
+
+
+    // ==========================================
+    // NO RESULTS
+    // ==========================================
+
+    if (
+        results.length === 0
+    ) {
+
+        leaderboard.innerHTML = `
+
+            <div class="empty">
+
+                📝 No quiz results yet.
+
+                <br><br>
+
+                Complete a quiz to appear
+                on the leaderboard.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    // ==========================================
+    // GROUP RESULTS BY USER
+    // ==========================================
+
+    const students = {};
+
+
+
+    results.forEach(
+        function(result) {
+
+
+            const userId =
+                result.user_id;
+
+
+            if (!userId) {
+
+                return;
+
+            }
+
+
+
+            if (!students[userId]) {
+
+                students[userId] = {
+
+                    user_id:
+                        userId,
+
+                    total:
+                        0,
+
+                    quizzes:
+                        0,
+
+                    scores:
+                        []
+
+                };
+
+            }
+
+
+
+            const score =
+                Number(
+                    result.percentage || 0
+                );
+
+
+            students[userId].scores.push(
+                score
+            );
+
+
+            students[userId].total +=
+                score;
+
+
+            students[userId].quizzes +=
+                1;
+
+
+        }
+    );
+
+
+
+    // ==========================================
+    // CALCULATE AVERAGES
+    // ==========================================
+
+    const studentList =
+
+        Object.values(
+            students
+        ).map(
+            function(student) {
+
+
+                const average =
+
+                    student.quizzes > 0
+
+                        ? student.total /
+                          student.quizzes
+
+                        : 0;
+
+
+                return {
+
+                    user_id:
+                        student.user_id,
+
+                    quizzes:
+                        student.quizzes,
+
+                    average:
+                        Math.round(
+                            average
+                        )
+
+                };
+
+            }
+        );
+
+
+
+    // ==========================================
+    // SORT BY AVERAGE
+    // ==========================================
+
+    studentList.sort(
+        function(a, b) {
+
+
+            if (
+                b.average !==
+                a.average
+            ) {
+
+                return (
+                    b.average -
+                    a.average
+                );
+
+            }
+
+
+            return (
+                b.quizzes -
+                a.quizzes
+            );
+
+        }
+    );
+
+
+
+    // ==========================================
+    // CREATE ROWS
+    // ==========================================
+
+    let html = `
+
+        <div
+            class="student-row"
+            style="
+                font-weight:bold;
+                color:#617568;
+                background:#f7faf8;
+                border-radius:12px;
+            ">
+
+            <div class="position">
+                #
+            </div>
+
+            <div>
+                Student
+            </div>
+
+            <div class="quiz-number">
+                Quizzes
+            </div>
+
+            <div class="score">
+                Average
+            </div>
+
+        </div>
+
+    `;
+
+
+
+    studentList.forEach(
+        function(student, index) {
+
+
+            const position =
+                index + 1;
+
+
+            let medal =
+                position;
+
+
+            if (
+                position === 1
+            ) {
+
+                medal = "🥇";
+
+            }
+            else if (
+                position === 2
+            ) {
+
+                medal = "🥈";
+
+            }
+            else if (
+                position === 3
+            ) {
+
+                medal = "🥉";
+
+            }
+
+
+
+            let rowClass =
+                "student-row";
+
+
+            if (
+                position === 1
+            ) {
+
+                rowClass +=
+                    " first";
+
+            }
+
+
+            if (
+                position === 2
+            ) {
+
+                rowClass +=
+                    " second";
+
+            }
+
+
+            if (
+                position === 3
+            ) {
+
+                rowClass +=
+                    " third";
+
+            }
+
+
+            if (
+                student.user_id ===
+                currentUser.id
+            ) {
+
+                rowClass +=
+                    " current-user";
+
+            }
+
+
+
+            // ==========================================
+            // STUDENT NAME
+            // ==========================================
+
+            let studentName =
+                "Student";
+
+
+            if (
+                student.user_id ===
+                currentUser.id
+            ) {
+
+                studentName =
+
+                    currentUser
+                        .user_metadata
+                        ?.full_name ||
+
+                    currentUser
+                        .email
+                        ?.split("@")[0] ||
+
+                    "Student";
+
+            }
+            else {
+
+                /*
+                 * Supabase normally does not allow
+                 * reading another user's auth
+                 * metadata directly from the browser.
+                 *
+                 * Therefore other students will
+                 * initially display as "Student".
+                 *
+                 * We will improve this in the next
+                 * step using a profiles table.
+                 */
+
+                studentName =
+                    "Student";
+
+            }
+
+
+
+            let you = "";
+
+            if (
+                student.user_id ===
+                currentUser.id
+            ) {
+
+                you = `
+
+                    <span class="you">
+                        YOU
+                    </span>
+
+                `;
+
+            }
+
+
+
+            html += `
+
+                <div
+                    class="${rowClass}">
+
+                    <div class="position">
+
+                        ${medal}
+
+                    </div>
+
+
+                    <div class="student-name">
+
+                        ${escapeHTML(
+                            studentName
+                        )}
+
+                        ${you}
+
+                    </div>
+
+
+                    <div class="quiz-number">
+
+                        ${student.quizzes}
+
+                    </div>
+
+
+                    <div class="score">
+
+                        ${student.average}%
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+
+    leaderboard.innerHTML =
+        html;
+
+}
+
+
+
+// ==========================================
+// START
+// ==========================================
+
+loadLeaderboard();
+
+
+</script>
+
+
+</body>
+
+</html>
