@@ -9,7 +9,9 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>OGCONS Study Hub - Admin</title>
+    <title>
+        OGCONS Study Hub - Anatomy & Physiology Quiz
+    </title>
 
     <style>
 
@@ -18,256 +20,411 @@
         }
 
         body {
+
             margin: 0;
+
             font-family: Arial, sans-serif;
-            background: #f4f7fb;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
+
             color: #172033;
         }
 
         header {
-            background: #0b5ed7;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
+
             color: white;
-            padding: 20px;
+
+            padding: 30px 20px;
+
+            text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 28px;
         }
 
         header p {
-            margin: 6px 0 0;
+            margin: 8px 0 0;
+            font-size: 16px;
         }
 
         .container {
-            max-width: 1100px;
+
+            max-width: 850px;
+
             margin: 30px auto;
+
             padding: 20px;
+        }
+
+        .back {
+
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            color: #18a058;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
         }
 
         .card {
+
             background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+        }
+
+        .course-title {
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+        .course-title h2 {
+
+            margin: 0 0 8px;
+
+            color: #163020;
+        }
+
+        .course-title p {
+
+            margin: 0;
+
+            color: #617568;
+        }
+
+        .topic-name {
+
+            text-align: center;
+
+            background: #e8fff2;
+
+            color: #16834a;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .counter {
+
+            text-align: center;
+
+            color: #667085;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .score {
+
+            text-align: center;
+
+            color: #18a058;
+
+            font-weight: bold;
+
             margin-bottom: 25px;
         }
 
-        label {
-            display: block;
+        .question {
+
+            font-size: 21px;
+
             font-weight: bold;
-            margin-top: 15px;
-            margin-bottom: 6px;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
         }
 
-        input,
-        textarea,
-        select {
+        .options {
+
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .option {
+
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccd3df;
-            border-radius: 8px;
-            font-size: 15px;
-        }
 
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
+            text-align: left;
 
-        button {
-            margin-top: 20px;
-            padding: 13px 22px;
-            border: none;
-            border-radius: 8px;
-            background: #0b5ed7;
-            color: white;
+            background: #f7f9fc;
+
+            border: 2px solid #d8dee8;
+
+            border-radius: 12px;
+
+            padding: 16px;
+
             font-size: 16px;
-            font-weight: bold;
+
             cursor: pointer;
+
+            transition: 0.2s;
         }
 
-        button:hover {
-            opacity: 0.9;
+        .option:hover:not(:disabled) {
+
+            background: #eefaf4;
+
+            border-color: #18a058;
         }
 
-        button:disabled {
-            opacity: 0.6;
+        .option strong {
+            margin-right: 8px;
+        }
+
+        .option.correct {
+
+            background: #d1e7dd;
+
+            border-color: #198754;
+
+            color: #0f5132;
+        }
+
+        .option.wrong {
+
+            background: #f8d7da;
+
+            border-color: #dc3545;
+
+            color: #842029;
+        }
+
+        .option.disabled {
+
             cursor: not-allowed;
         }
 
-        .logout {
-            background: #dc3545;
-            float: right;
-            margin-top: -45px;
-        }
+        .feedback {
 
-        .topic-help {
-            margin-top: 6px;
-            color: #6c757d;
-            font-size: 13px;
-        }
-
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        .management-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .management-header h2 {
-            margin: 0;
-        }
-
-        .refresh-button {
-            background: #198754;
-            margin-top: 0;
-        }
-
-        .filters {
-            display: grid;
-            grid-template-columns: 1fr 1fr 2fr;
-            gap: 15px;
             margin-top: 20px;
-        }
 
-        .filters label {
-            margin-top: 0;
-        }
+            padding: 18px;
 
-        .question-count {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #0b5ed7;
-        }
-
-        .questions-list {
-            margin-top: 20px;
-        }
-
-        .question-item {
-            border: 1px solid #dce2ea;
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            background: #fafcff;
-        }
 
-        .question-top {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            align-items: flex-start;
-        }
+            display: none;
 
-        .question-number {
-            font-weight: bold;
-            color: #0b5ed7;
-        }
-
-        .question-text {
-            font-size: 17px;
-            font-weight: bold;
-            line-height: 1.5;
-            margin: 10px 0;
-        }
-
-        .question-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 10px 0;
-        }
-
-        .badge {
-            background: #e8f1ff;
-            color: #0b5ed7;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 13px;
             font-weight: bold;
         }
 
-        .options-list {
+        .correct-feedback {
+
+            background: #d1e7dd;
+
+            color: #0f5132;
+        }
+
+        .wrong-feedback {
+
+            background: #f8d7da;
+
+            color: #842029;
+        }
+
+        .answer {
+
             margin-top: 15px;
-            line-height: 1.8;
-        }
 
-        .correct-option {
-            color: #198754;
-            font-weight: bold;
-        }
+            padding: 18px;
 
-        .explanation-box {
             background: #eef6ff;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
-            line-height: 1.5;
+
+            border-radius: 12px;
+
+            display: none;
+
+            line-height: 1.6;
         }
 
-        .question-actions {
+        .answer strong {
+            color: #0b5ed7;
+        }
+
+        .buttons {
+
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin-top: 25px;
         }
 
-        .question-actions button {
-            margin-top: 0;
-            padding: 10px 15px;
-            font-size: 14px;
+        button {
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 13px 20px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
         }
 
-        .edit-button {
-            background: #ffc107;
+        .primary {
+
+            background: #18a058;
+
+            color: white;
+        }
+
+        .primary:hover {
+
+            background: #117d45;
+        }
+
+        .secondary {
+
+            background: #e9edf3;
+
             color: #172033;
         }
 
-        .delete-button {
-            background: #dc3545;
+        button:disabled {
+
+            opacity: 0.5;
+
+            cursor: not-allowed;
         }
 
-        .cancel-button {
+        #loading,
+        #error,
+        #empty {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+        }
+
+        #error {
+            color: #dc3545;
+        }
+
+        .result {
+
+            text-align: center;
+
+            display: none;
+        }
+
+        .result-icon {
+
+            font-size: 65px;
+
+            margin-bottom: 15px;
+        }
+
+        .result h2 {
+            margin-bottom: 10px;
+        }
+
+        .final-score {
+
+            font-size: 42px;
+
+            font-weight: bold;
+
+            color: #18a058;
+
+            margin: 20px 0;
+        }
+
+        .result button {
+
+            background: #18a058;
+
+            color: white;
+
+            margin-top: 10px;
+        }
+
+        .result .back-topic {
+
             background: #6c757d;
         }
 
-        .save-edit-button {
-            background: #198754;
-        }
+        footer {
 
-        .loading-text {
             text-align: center;
-            padding: 30px;
-            color: #6c757d;
+
+            padding: 35px;
+
+            color: #527060;
         }
 
-        .empty-text {
-            text-align: center;
-            padding: 30px;
-            color: #6c757d;
-        }
+        @media (max-width: 600px) {
 
-        .edit-form {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #dce2ea;
-        }
-
-        @media (max-width: 800px) {
-
-            .filters {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 12px;
             }
 
-            .question-top {
+            .card {
+                padding: 20px;
+            }
+
+            .question {
+                font-size: 19px;
+            }
+
+            .buttons {
                 flex-direction: column;
+            }
+
+            button {
+                width: 100%;
             }
 
         }
@@ -283,349 +440,303 @@
 <header>
 
     <h1>
-        🏥 OGCONS Study Hub
+        🫀 OGCONS Study Hub
     </h1>
 
     <p>
-        Admin Dashboard
+        Anatomy & Physiology Quiz
     </p>
 
-    <button
-        class="logout"
-        onclick="logout()">
-
-        Logout
-
-    </button>
-
 </header>
-
 
 
 <div class="container">
 
 
-    <!-- ==================================================
-         ADD QUESTION
-    ================================================== -->
+    <a
+        href="anatomy-topics.html"
+        class="back">
 
-    <div class="card">
+        ← Back to Anatomy & Physiology Topics
+
+    </a>
+
+
+    <div id="loading">
 
         <h2>
-            ➕ Add New Question
+            🔄 Loading questions...
         </h2>
 
-
-        <label>
-            Course
-        </label>
-
-        <select id="course">
-
-            <option value="Microbiology">
-                Microbiology
-            </option>
-
-            <option value="Anatomy & Physiology">
-                Anatomy & Physiology
-            </option>
-
-            <option value="Pharmacology">
-                Pharmacology
-            </option>
-
-            <option value="Medical-Surgical Nursing">
-                Medical-Surgical Nursing
-            </option>
-
-            <option value="Nutrition">
-                Nutrition
-            </option>
-
-            <option value="Psychology">
-                Psychology
-            </option>
-
-            <option value="Nursing Practice">
-                Nursing Practice
-            </option>
-
-            <option value="Chemistry">
-                Chemistry
-            </option>
-
-        </select>
-
-
-
-        <label>
-            Topic
-        </label>
-
-        <select id="topic">
-        </select>
-
-
-        <div class="topic-help">
-
-            Select the topic where this question belongs.
-
-        </div>
-
-
-
-        <label>
-            Question
-        </label>
-
-        <textarea
-            id="question"
-            placeholder="Enter your question">
-        </textarea>
-
-
-
-        <label>
-            Option A
-        </label>
-
-        <input
-            id="option_a"
-            type="text"
-            placeholder="Enter option A">
-
-
-
-        <label>
-            Option B
-        </label>
-
-        <input
-            id="option_b"
-            type="text"
-            placeholder="Enter option B">
-
-
-
-        <label>
-            Option C
-        </label>
-
-        <input
-            id="option_c"
-            type="text"
-            placeholder="Enter option C">
-
-
-
-        <label>
-            Option D
-        </label>
-
-        <input
-            id="option_d"
-            type="text"
-            placeholder="Enter option D">
-
-
-
-        <label>
-            Correct Answer
-        </label>
-
-        <select id="correct_answer">
-
-            <option value="A">
-                A
-            </option>
-
-            <option value="B">
-                B
-            </option>
-
-            <option value="C">
-                C
-            </option>
-
-            <option value="D">
-                D
-            </option>
-
-        </select>
-
-
-
-        <label>
-            Explanation
-        </label>
-
-        <textarea
-            id="explanation"
-            placeholder="Enter explanation for the answer">
-        </textarea>
-
-
-
-        <button
-            id="addQuestionButton"
-            onclick="addQuestion()">
-
-            ➕ Add Question
-
-        </button>
-
-
-        <div id="message"></div>
+        <p>
+            Please wait while we prepare your quiz.
+        </p>
 
     </div>
 
 
+    <div
+        id="error"
+        style="display:none;">
+    </div>
 
-    <!-- ==================================================
-         QUESTION MANAGEMENT
-    ================================================== -->
 
-    <div class="card">
+    <div
+        id="empty"
+        style="display:none;">
 
-        <div class="management-header">
+        <h2>
+            📚 No Questions Yet
+        </h2>
+
+        <p id="emptyMessage">
+
+            There are currently no questions
+            available for this topic.
+
+        </p>
+
+    </div>
+
+
+    <div
+        class="card"
+        id="quizCard"
+        style="display:none;">
+
+
+        <div class="course-title">
 
             <h2>
-                📚 Manage Questions
+                🫀 Anatomy & Physiology
             </h2>
 
-            <button
-                class="refresh-button"
-                onclick="loadQuestions()">
+            <p>
+                Test your knowledge
+            </p>
 
-                🔄 Refresh
+        </div>
+
+
+        <div
+            class="topic-name"
+            id="topicName">
+        </div>
+
+
+        <div
+            class="counter"
+            id="counter">
+        </div>
+
+
+        <div
+            class="score"
+            id="score">
+
+            Score: 0
+
+        </div>
+
+
+        <div
+            class="question"
+            id="question">
+        </div>
+
+
+        <div class="options">
+
+
+            <button
+                class="option"
+                id="option_a"
+                onclick="selectAnswer('A')">
+
+                <strong>A.</strong>
+
+                <span id="text_a"></span>
 
             </button>
 
-        </div>
+
+            <button
+                class="option"
+                id="option_b"
+                onclick="selectAnswer('B')">
+
+                <strong>B.</strong>
+
+                <span id="text_b"></span>
+
+            </button>
 
 
+            <button
+                class="option"
+                id="option_c"
+                onclick="selectAnswer('C')">
 
-        <div class="filters">
+                <strong>C.</strong>
 
+                <span id="text_c"></span>
 
-            <div>
-
-                <label>
-                    Filter by Course
-                </label>
-
-                <select
-                    id="filterCourse"
-                    onchange="updateFilterTopics(); loadQuestions();">
-
-                    <option value="">
-                        All Courses
-                    </option>
-
-                    <option value="Microbiology">
-                        Microbiology
-                    </option>
-
-                    <option value="Anatomy & Physiology">
-                        Anatomy & Physiology
-                    </option>
-
-                    <option value="Pharmacology">
-                        Pharmacology
-                    </option>
-
-                    <option value="Medical-Surgical Nursing">
-                        Medical-Surgical Nursing
-                    </option>
-
-                    <option value="Nutrition">
-                        Nutrition
-                    </option>
-
-                    <option value="Psychology">
-                        Psychology
-                    </option>
-
-                    <option value="Nursing Practice">
-                        Nursing Practice
-                    </option>
-
-                    <option value="Chemistry">
-                        Chemistry
-                    </option>
-
-                </select>
-
-            </div>
+            </button>
 
 
+            <button
+                class="option"
+                id="option_d"
+                onclick="selectAnswer('D')">
 
-            <div>
+                <strong>D.</strong>
 
-                <label>
-                    Filter by Topic
-                </label>
+                <span id="text_d"></span>
 
-                <select
-                    id="filterTopic"
-                    onchange="loadQuestions()">
-
-                    <option value="">
-                        All Topics
-                    </option>
-
-                </select>
-
-            </div>
-
-
-
-            <div>
-
-                <label>
-                    Search
-                </label>
-
-                <input
-                    id="searchInput"
-                    type="text"
-                    placeholder="Search questions..."
-                    oninput="filterQuestions()">
-
-            </div>
+            </button>
 
 
         </div>
-
 
 
         <div
-            class="question-count"
-            id="questionCount">
-
-            Loading questions...
-
+            class="feedback"
+            id="feedback">
         </div>
-
 
 
         <div
-            class="questions-list"
-            id="questionsList">
+            class="answer"
+            id="answer">
 
-            <div class="loading-text">
+            <p>
 
-                Loading questions...
+                <strong>
+                    Correct Answer:
+                </strong>
 
-            </div>
+                <span id="correct_answer"></span>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Explanation:
+                </strong>
+
+                <span id="explanation"></span>
+
+            </p>
 
         </div>
+
+
+        <div class="buttons">
+
+
+            <button
+                class="secondary"
+                id="previousButton"
+                onclick="previousQuestion()">
+
+                ← Previous
+
+            </button>
+
+
+            <button
+                class="primary"
+                id="nextButton"
+                onclick="nextQuestion()"
+                disabled>
+
+                Next →
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div
+        class="card result"
+        id="result">
+
+
+        <div class="result-icon">
+            🏆
+        </div>
+
+
+        <h2>
+            Quiz Completed!
+        </h2>
+
+
+        <p>
+
+            You have completed the
+
+            <span id="resultTopic">
+                Anatomy & Physiology
+            </span>
+
+            quiz.
+
+        </p>
+
+
+        <div
+            class="final-score"
+            id="finalScore">
+
+            0 / 0
+
+        </div>
+
+
+        <p id="percentage">
+            Your score: 0%
+        </p>
+
+
+        <button
+            onclick="restartQuiz()">
+
+            🔄 Try Again
+
+        </button>
+
+
+        <br>
+
+
+        <button
+            class="back-topic"
+            onclick="window.location.href='anatomy-topics.html'">
+
+            ← Back to Topics
+
+        </button>
+
 
     </div>
 
 
 </div>
 
+
+<footer>
+
+    © 2026 OGCONS Study Hub
+    • Built for students
+
+</footer>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -635,7 +746,7 @@
 
 
 // ======================================================
-// SUPABASE CONNECTION
+// SUPABASE
 // ======================================================
 
 const SUPABASE_URL =
@@ -655,276 +766,134 @@ const supabaseClient =
 
 
 // ======================================================
-// COURSE TOPICS
+// QUIZ VARIABLES
 // ======================================================
 
-const courseTopics = {
+let questions = [];
 
+let currentQuestion = 0;
 
-    // ==================================================
-    // MICROBIOLOGY
-    // ==================================================
+let score = 0;
 
-    "Microbiology": [
-
-        "Introduction to Microbiology",
-
-        "Bacteria",
-
-        "Viruses",
-
-        "Fungi",
-
-        "Parasites",
-
-        "Immunology",
-
-        "Sterilization & Disinfection",
-
-        "Healthcare-Associated Infections"
-
-    ],
-
-
-
-    // ==================================================
-    // ANATOMY & PHYSIOLOGY
-    // ==================================================
-
-    "Anatomy & Physiology": [
-
-        "Anatomy and organisation of the body",
-
-        "Physiological chemistry and processes",
-
-        "Cells and tissues",
-
-        "The blood",
-
-        "The cardiovascular system",
-
-        "The lymphatic system",
-
-        "The nervous system",
-
-        "The special senses",
-
-        "The endocrine system",
-
-        "The respiratory system",
-
-        "Introduction to nutrition",
-
-        "The digestive system",
-
-        "The urinary system",
-
-        "The skin",
-
-        "Defence and immunity",
-
-        "The musculoskeletal system",
-
-        "Genetics and inheritance",
-
-        "The reproductive systems"
-
-    ],
-
-
-
-    // ==================================================
-    // PHARMACOLOGY
-    // ==================================================
-
-    "Pharmacology": [
-
-        "Introduction",
-
-        "Sources and Classification of Drugs",
-
-        "Preparation of Drugs",
-
-        "Routes of Drug Administration",
-
-        "Mechanism of Drug Action",
-
-        "National Drug Policy",
-
-        "Drugs used in management of other health conditions",
-
-        "Patient Education and Counseling"
-
-    ],
-
-
-
-    // ==================================================
-    // OTHER COURSES
-    // ==================================================
-
-    "Medical-Surgical Nursing": [
-
-        "General Medical-Surgical Nursing"
-
-    ],
-
-
-    "Nutrition": [
-
-        "Introduction to Nutrition"
-
-    ],
-
-
-    "Psychology": [
-
-        "Introduction to Psychology"
-
-    ],
-
-
-    "Nursing Practice": [
-
-        "Introduction to Nursing Practice"
-
-    ],
-
-
-    "Chemistry": [
-
-        "Introduction to Chemistry"
-
-    ]
-
-};
+// Stores the student's first answer for every question.
+// This prevents answering the same question again.
+let userAnswers = [];
 
 
 
 // ======================================================
-// LOAD TOPICS FOR ADD QUESTION
+// GET TOPIC
 // ======================================================
 
-function loadTopics() {
-
-    const course =
-        document.getElementById("course").value;
-
-    const topicSelect =
-        document.getElementById("topic");
-
-    topicSelect.innerHTML = "";
-
-    const topics =
-        courseTopics[course] || [];
-
-    if (topics.length === 0) {
-
-        const option =
-            document.createElement("option");
-
-        option.value = "";
-
-        option.textContent =
-            "No topics available";
-
-        topicSelect.appendChild(option);
-
-        return;
-    }
-
-    topics.forEach(function(topic) {
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            topic;
-
-        option.textContent =
-            topic;
-
-        topicSelect.appendChild(option);
-
-    });
-
-}
-
-
-
-// ======================================================
-// UPDATE FILTER TOPICS
-// ======================================================
-
-function updateFilterTopics() {
-
-    const course =
-        document.getElementById("filterCourse").value;
-
-    const topicSelect =
-        document.getElementById("filterTopic");
-
-    topicSelect.innerHTML = "";
-
-    const allOption =
-        document.createElement("option");
-
-    allOption.value = "";
-
-    allOption.textContent =
-        "All Topics";
-
-    topicSelect.appendChild(allOption);
-
-
-    if (!course) {
-
-        return;
-
-    }
-
-
-    const topics =
-        courseTopics[course] || [];
-
-
-    topics.forEach(function(topic) {
-
-        const option =
-            document.createElement("option");
-
-        option.value =
-            topic;
-
-        option.textContent =
-            topic;
-
-        topicSelect.appendChild(option);
-
-    });
-
-}
-
-
-
-// ======================================================
-// COURSE CHANGE
-// ======================================================
-
-document
-    .getElementById("course")
-    .addEventListener(
-        "change",
-        loadTopics
+const urlParams =
+    new URLSearchParams(
+        window.location.search
     );
 
 
+const selectedTopic =
+    urlParams.get("topic");
+
+
 
 // ======================================================
-// CHECK ADMIN ACCESS
+// SHUFFLE QUESTIONS
 // ======================================================
 
-async function checkAdminAccess() {
+function shuffleQuestions(array) {
+
+    const shuffled =
+        [...array];
+
+    for (
+        let i = shuffled.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            shuffled[i],
+            shuffled[j]
+        ] =
+        [
+            shuffled[j],
+            shuffled[i]
+        ];
+
+    }
+
+    return shuffled;
+
+}
+
+
+
+// ======================================================
+// LOAD QUESTIONS
+// ======================================================
+
+async function loadQuestions() {
+
+    const loading =
+        document.getElementById("loading");
+
+    const quizCard =
+        document.getElementById("quizCard");
+
+    const empty =
+        document.getElementById("empty");
+
+    const error =
+        document.getElementById("error");
+
+
+    if (!selectedTopic) {
+
+        loading.style.display =
+            "none";
+
+        error.style.display =
+            "block";
+
+        error.innerHTML = `
+
+            <h2>
+                ⚠️ No Topic Selected
+            </h2>
+
+            <p>
+                Please return to Anatomy & Physiology
+                and select a topic.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("topicName")
+        .textContent =
+        "Topic: " + selectedTopic;
+
+
+    document
+        .getElementById("resultTopic")
+        .textContent =
+        selectedTopic;
+
+
+
+    // ==================================================
+    // CHECK LOGIN
+    // ==================================================
 
     const {
         data: { user },
@@ -938,1428 +907,771 @@ async function checkAdminAccess() {
     if (userError || !user) {
 
         window.location.href =
-            "index.html";
+            "login.html";
 
-        return false;
+        return;
 
     }
 
+
+
+    // ==================================================
+    // GET ONLY SELECTED TOPIC
+    // ==================================================
 
     const {
-        data: admin,
-        error: adminError
+        data,
+        error: databaseError
     } =
         await supabaseClient
-            .from("admins")
-            .select("user_id")
-            .eq("user_id", user.id)
-            .maybeSingle();
+
+            .from("questions")
+
+            .select("*")
+
+            .eq(
+                "course",
+                "Anatomy & Physiology"
+            )
+
+            .ilike(
+                "topic",
+                selectedTopic
+            )
+
+            .order(
+                "created_at",
+                {
+                    ascending: true
+                }
+            );
 
 
-    if (adminError) {
+
+    if (databaseError) {
 
         console.error(
-            "Admin check error:",
-            adminError.message
+            "Question loading error:",
+            databaseError
         );
 
-        document.body.innerHTML = `
+        loading.style.display =
+            "none";
 
-            <div style="
-                text-align:center;
-                padding:60px 20px;
-                font-family:Arial;
-            ">
+        error.style.display =
+            "block";
 
-                <h2>
-                    ⚠️ Unable to verify admin access
-                </h2>
+        error.innerHTML = `
 
-                <p>
-                    ${escapeHTML(adminError.message)}
-                </p>
+            <h2>
+                ❌ Unable to Load Questions
+            </h2>
 
-            </div>
+            <p>
+                ${databaseError.message}
+            </p>
 
         `;
 
-        return false;
+        return;
 
     }
 
 
-    if (!admin) {
+    // ==================================================
+    // SHUFFLE
+    // ==================================================
 
-        document.body.innerHTML = `
+    questions =
+        shuffleQuestions(
+            data || []
+        );
 
-            <div style="
-                text-align:center;
-                padding:60px 20px;
-                font-family:Arial;
-            ">
 
-                <h2>
-                    🚫 Access Denied
-                </h2>
+    loading.style.display =
+        "none";
 
-                <p>
-                    You do not have permission
-                    to access the Admin Dashboard.
-                </p>
 
-                <br>
+    if (questions.length === 0) {
 
-                <a href="dashboard.html">
-                    ← Return to Dashboard
-                </a>
+        empty.style.display =
+            "block";
 
-            </div>
+        document
+            .getElementById("emptyMessage")
+            .textContent =
 
-        `;
+            "There are currently no questions for " +
+            selectedTopic +
+            ". Add questions from the Admin Dashboard.";
 
-        return false;
+        return;
 
     }
 
 
-    console.log(
-        "✅ Admin access granted."
-    );
+    // Create answer slots.
+
+    userAnswers =
+        new Array(
+            questions.length
+        ).fill(null);
 
 
-    return true;
+    quizCard.style.display =
+        "block";
+
+
+    showQuestion();
 
 }
 
 
 
 // ======================================================
-// ADD QUESTION
+// SHOW QUESTION
 // ======================================================
 
-async function addQuestion() {
+function showQuestion() {
 
-    const message =
-        document.getElementById("message");
+    const q =
+        questions[currentQuestion];
 
-    const button =
-        document.getElementById(
-            "addQuestionButton"
+
+    document
+        .getElementById("counter")
+        .textContent =
+
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
+        questions.length;
+
+
+    document
+        .getElementById("score")
+        .textContent =
+
+        "Score: " +
+        score;
+
+
+    document
+        .getElementById("question")
+        .textContent =
+        q.question;
+
+
+    document
+        .getElementById("text_a")
+        .textContent =
+        q.option_a;
+
+
+    document
+        .getElementById("text_b")
+        .textContent =
+        q.option_b;
+
+
+    document
+        .getElementById("text_c")
+        .textContent =
+        q.option_c;
+
+
+    document
+        .getElementById("text_d")
+        .textContent =
+        q.option_d;
+
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+    options.forEach(
+        function(option) {
+
+            option.classList.remove(
+                "correct",
+                "wrong",
+                "disabled"
+            );
+
+            option.disabled = false;
+
+        }
+    );
+
+
+
+    const previousAnswer =
+        userAnswers[currentQuestion];
+
+
+
+    // ==================================================
+    // QUESTION ALREADY ANSWERED
+    // ==================================================
+
+    if (previousAnswer) {
+
+        const correct =
+            String(
+                q.correct_answer
+            )
+                .trim()
+                .toUpperCase();
+
+
+        const selectedButton =
+            document.getElementById(
+                "option_" +
+                previousAnswer
+                    .toLowerCase()
+            );
+
+
+        const correctButton =
+            document.getElementById(
+                "option_" +
+                correct.toLowerCase()
+            );
+
+
+        options.forEach(
+            function(option) {
+
+                option.disabled =
+                    true;
+
+                option.classList.add(
+                    "disabled"
+                );
+
+            }
         );
 
 
+        if (
+            previousAnswer ===
+            correct
+        ) {
+
+            selectedButton.classList.add(
+                "correct"
+            );
+
+        }
+
+        else {
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+            if (correctButton) {
+
+                correctButton.classList.add(
+                    "correct"
+                );
+
+            }
+
+        }
+
+
+        showAnswerInformation(
+            q,
+            previousAnswer,
+            correct
+        );
+
+
+        document
+            .getElementById("nextButton")
+            .disabled =
+            false;
+
+        return;
+
+    }
+
+
+
+    // ==================================================
+    // NEW QUESTION
+    // ==================================================
+
+    document
+        .getElementById("feedback")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        true;
+
+
+    document
+        .getElementById("previousButton")
+        .disabled =
+        currentQuestion === 0;
+
+}
+
+
+
+// ======================================================
+// SELECT ANSWER
+// ======================================================
+
+function selectAnswer(selected) {
+
+
+    // Prevent another attempt.
+
+    if (
+        userAnswers[currentQuestion]
+    ) {
+
+        return;
+
+    }
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    const correct =
+        String(
+            q.correct_answer
+        )
+        .trim()
+        .toUpperCase();
+
+
+    // Save the FIRST answer.
+
+    userAnswers[currentQuestion] =
+        selected;
+
+
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            selected.toLowerCase()
+        );
+
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            correct.toLowerCase()
+        );
+
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+    options.forEach(
+        function(option) {
+
+            option.disabled =
+                true;
+
+            option.classList.add(
+                "disabled"
+            );
+
+        }
+    );
+
+
+    if (
+        selected === correct
+    ) {
+
+        score++;
+
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+            "✅ Correct! Well done.";
+
+
+        feedback.className =
+            "feedback correct-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+    else {
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+
+        if (correctButton) {
+
+            correctButton.classList.add(
+                "correct"
+            );
+
+        }
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+
+            "❌ Wrong answer. " +
+            "The correct answer is " +
+            correct +
+            ".";
+
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+
+    showAnswerInformation(
+        q,
+        selected,
+        correct
+    );
+
+
+    document
+        .getElementById("score")
+        .textContent =
+
+        "Score: " +
+        score;
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+
+}
+
+
+
+// ======================================================
+// SHOW ANSWER / EXPLANATION
+// ======================================================
+
+function showAnswerInformation(
+    q,
+    selected,
+    correct
+) {
+
+    document
+        .getElementById("correct_answer")
+        .textContent =
+        correct;
+
+
+    document
+        .getElementById("explanation")
+        .textContent =
+
+        q.explanation ||
+        "No explanation provided.";
+
+
+    document
+        .getElementById("answer")
+        .style.display =
+        "block";
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    if (
+        selected === correct
+    ) {
+
+        feedback.textContent =
+            "✅ Correct! Well done.";
+
+
+        feedback.className =
+            "feedback correct-feedback";
+
+    }
+
+    else {
+
+        feedback.textContent =
+
+            "❌ Wrong answer. " +
+            "The correct answer is " +
+            correct +
+            ".";
+
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+    }
+
+
+    feedback.style.display =
+        "block";
+
+}
+
+
+
+// ======================================================
+// NEXT QUESTION
+// ======================================================
+
+function nextQuestion() {
+
+
+    if (
+        currentQuestion <
+        questions.length - 1
+    ) {
+
+        currentQuestion++;
+
+        showQuestion();
+
+    }
+
+    else {
+
+        showResult();
+
+    }
+
+}
+
+
+
+// ======================================================
+// PREVIOUS QUESTION
+// ======================================================
+
+function previousQuestion() {
+
+
+    if (
+        currentQuestion > 0
+    ) {
+
+        currentQuestion--;
+
+        showQuestion();
+
+    }
+
+}
+
+
+
+// ======================================================
+// RESULT
+// ======================================================
+
+async function showResult() {
+
+    document
+        .getElementById("quizCard")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("result")
+        .style.display =
+        "block";
+
+
+    const total =
+        questions.length;
+
+
+    const percentage =
+        Math.round(
+            (score / total) * 100
+        );
+
+
+    document
+        .getElementById("finalScore")
+        .textContent =
+
+        score +
+        " / " +
+        total;
+
+
+    document
+        .getElementById("percentage")
+        .textContent =
+
+        "Your score: " +
+        percentage +
+        "%";
+
+
     const {
-        data: { user },
-        error: userError
+        data: { user }
     } =
         await supabaseClient
             .auth
             .getUser();
 
 
-    if (userError || !user) {
-
-        message.textContent =
-            "❌ You must be logged in before adding questions.";
-
-        message.style.color =
-            "#dc3545";
+    if (!user) {
 
         return;
 
     }
-
-
-    const course =
-        document
-            .getElementById("course")
-            .value;
-
-
-    const topic =
-        document
-            .getElementById("topic")
-            .value;
-
-
-    const question =
-        document
-            .getElementById("question")
-            .value
-            .trim();
-
-
-    const option_a =
-        document
-            .getElementById("option_a")
-            .value
-            .trim();
-
-
-    const option_b =
-        document
-            .getElementById("option_b")
-            .value
-            .trim();
-
-
-    const option_c =
-        document
-            .getElementById("option_c")
-            .value
-            .trim();
-
-
-    const option_d =
-        document
-            .getElementById("option_d")
-            .value
-            .trim();
-
-
-    const correct_answer =
-        document
-            .getElementById("correct_answer")
-            .value;
-
-
-    const explanation =
-        document
-            .getElementById("explanation")
-            .value
-            .trim();
-
-
-
-    if (
-        !question ||
-        !option_a ||
-        !option_b ||
-        !option_c ||
-        !option_d
-    ) {
-
-        message.textContent =
-            "⚠️ Please fill in all the question fields.";
-
-        message.style.color =
-            "#dc3545";
-
-        return;
-
-    }
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "Saving question...";
 
 
     const {
-        error
+        error: saveError
     } =
         await supabaseClient
-            .from("questions")
-            .insert([
 
-                {
+            .from("quiz_results")
 
-                    course: course,
+            .insert({
 
-                    topic: topic,
+                user_id:
+                    user.id,
 
-                    question: question,
+                course:
+                    "Anatomy & Physiology",
 
-                    option_a: option_a,
+                score:
+                    score,
 
-                    option_b: option_b,
+                total_questions:
+                    total,
 
-                    option_c: option_c,
+                percentage:
+                    percentage
 
-                    option_d: option_d,
-
-                    correct_answer:
-                        correct_answer,
-
-                    explanation:
-                        explanation
-
-                }
-
-            ]);
+            });
 
 
-    if (error) {
+    if (saveError) {
 
         console.error(
-            "Question insert error:",
-            error
+            "Could not save quiz result:",
+            saveError.message
         );
-
-
-        message.textContent =
-            "❌ Error: " +
-            error.message;
-
-
-        message.style.color =
-            "#dc3545";
-
-
-        button.disabled = false;
-
-        button.textContent =
-            "➕ Add Question";
-
-        return;
 
     }
 
-
-    message.textContent =
-        "✅ Question added successfully!";
+}
 
 
-    message.style.color =
-        "#198754";
+
+// ======================================================
+// RESTART
+// ======================================================
+
+function restartQuiz() {
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    userAnswers =
+        new Array(
+            questions.length
+        ).fill(null);
+
+
+    // Shuffle again when restarting.
+
+    questions =
+        shuffleQuestions(
+            questions
+        );
 
 
     document
-        .getElementById("question")
-        .value = "";
+        .getElementById("result")
+        .style.display =
+        "none";
 
 
     document
-        .getElementById("option_a")
-        .value = "";
+        .getElementById("quizCard")
+        .style.display =
+        "block";
 
 
-    document
-        .getElementById("option_b")
-        .value = "";
-
-
-    document
-        .getElementById("option_c")
-        .value = "";
-
-
-    document
-        .getElementById("option_d")
-        .value = "";
-
-
-    document
-        .getElementById("explanation")
-        .value = "";
-
-
-    button.disabled = false;
-
-    button.textContent =
-        "➕ Add Question";
-
-
-    loadQuestions();
-
-}
-
-
-
-// ======================================================
-// LOAD QUESTIONS
-// ======================================================
-
-let allQuestions = [];
-
-
-async function loadQuestions() {
-
-    const list =
-        document.getElementById(
-            "questionsList"
-        );
-
-
-    const count =
-        document.getElementById(
-            "questionCount"
-        );
-
-
-    list.innerHTML = `
-
-        <div class="loading-text">
-            Loading questions...
-        </div>
-
-    `;
-
-
-    const filterCourse =
-        document.getElementById(
-            "filterCourse"
-        ).value;
-
-
-    const filterTopic =
-        document.getElementById(
-            "filterTopic"
-        ).value;
-
-
-    let query =
-        supabaseClient
-            .from("questions")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    if (filterCourse) {
-
-        query =
-            query.eq(
-                "course",
-                filterCourse
-            );
-
-    }
-
-
-    if (filterTopic) {
-
-        query =
-            query.eq(
-                "topic",
-                filterTopic
-            );
-
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await query;
-
-
-    if (error) {
-
-        console.error(
-            "Unable to load questions:",
-            error.message
-        );
-
-
-        list.innerHTML = `
-
-            <div class="empty-text">
-
-                ❌ Unable to load questions.
-
-                <br><br>
-
-                ${escapeHTML(error.message)}
-
-            </div>
-
-        `;
-
-
-        count.textContent =
-            "Unable to load questions.";
-
-        return;
-
-    }
-
-
-    allQuestions =
-        data || [];
-
-
-    displayQuestions(
-        allQuestions
-    );
-
-}
-
-
-
-// ======================================================
-// SEARCH
-// ======================================================
-
-function filterQuestions() {
-
-    const search =
-        document
-            .getElementById("searchInput")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    if (!search) {
-
-        displayQuestions(
-            allQuestions
-        );
-
-        return;
-
-    }
-
-
-    const filtered =
-        allQuestions.filter(
-            function(q) {
-
-                return (
-
-                    String(q.question || "")
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    String(q.course || "")
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    String(q.topic || "")
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    String(q.option_a || "")
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    String(q.option_b || "")
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    String(q.option_c || "")
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    String(q.option_d || "")
-                        .toLowerCase()
-                        .includes(search)
-
-                );
-
-            }
-        );
-
-
-    displayQuestions(
-        filtered
-    );
-
-}
-
-
-
-// ======================================================
-// DISPLAY QUESTIONS
-// ======================================================
-
-function displayQuestions(
-    questions
-) {
-
-    const list =
-        document.getElementById(
-            "questionsList"
-        );
-
-
-    const count =
-        document.getElementById(
-            "questionCount"
-        );
-
-
-    count.textContent =
-        questions.length +
-        " question" +
-        (
-            questions.length === 1
-                ? ""
-                : "s"
-        ) +
-        " found";
-
-
-    if (questions.length === 0) {
-
-        list.innerHTML = `
-
-            <div class="empty-text">
-
-                📭 No questions found.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
-    questions.forEach(
-        function(q, index) {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "question-item";
-
-
-            item.id =
-                "question-" +
-                q.id;
-
-
-            item.innerHTML = `
-
-                <div class="question-top">
-
-                    <div>
-
-                        <div class="question-number">
-
-                            Question ${index + 1}
-
-                        </div>
-
-
-                        <div class="question-meta">
-
-                            <span class="badge">
-
-                                ${escapeHTML(q.course)}
-
-                            </span>
-
-
-                            <span class="badge">
-
-                                ${escapeHTML(q.topic)}
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="question-text">
-
-                    ${escapeHTML(q.question)}
-
-                </div>
-
-
-                <div class="options-list">
-
-                    <div class="${
-                        q.correct_answer === "A"
-                            ? "correct-option"
-                            : ""
-                    }">
-
-                        A. ${escapeHTML(q.option_a)}
-
-                        ${
-                            q.correct_answer === "A"
-                                ? " ✅"
-                                : ""
-                        }
-
-                    </div>
-
-
-                    <div class="${
-                        q.correct_answer === "B"
-                            ? "correct-option"
-                            : ""
-                    }">
-
-                        B. ${escapeHTML(q.option_b)}
-
-                        ${
-                            q.correct_answer === "B"
-                                ? " ✅"
-                                : ""
-                        }
-
-                    </div>
-
-
-                    <div class="${
-                        q.correct_answer === "C"
-                            ? "correct-option"
-                            : ""
-                    }">
-
-                        C. ${escapeHTML(q.option_c)}
-
-                        ${
-                            q.correct_answer === "C"
-                                ? " ✅"
-                                : ""
-                        }
-
-                    </div>
-
-
-                    <div class="${
-                        q.correct_answer === "D"
-                            ? "correct-option"
-                            : ""
-                    }">
-
-                        D. ${escapeHTML(q.option_d)}
-
-                        ${
-                            q.correct_answer === "D"
-                                ? " ✅"
-                                : ""
-                        }
-
-                    </div>
-
-                </div>
-
-
-                <div class="explanation-box">
-
-                    <strong>
-                        Explanation:
-                    </strong>
-
-                    ${escapeHTML(
-                        q.explanation ||
-                        "No explanation provided."
-                    )}
-
-                </div>
-
-
-                <div class="question-actions">
-
-                    <button
-                        class="edit-button"
-                        onclick="editQuestion('${q.id}')">
-
-                        ✏️ Edit
-
-                    </button>
-
-
-                    <button
-                        class="delete-button"
-                        onclick="deleteQuestion('${q.id}')">
-
-                        🗑️ Delete
-
-                    </button>
-
-                </div>
-
-            `;
-
-
-            list.appendChild(item);
-
-        }
-    );
-
-}
-
-
-
-// ======================================================
-// EDIT QUESTION
-// ======================================================
-
-function editQuestion(id) {
-
-    const q =
-        allQuestions.find(
-            function(question) {
-
-                return String(
-                    question.id
-                ) === String(id);
-
-            }
-        );
-
-
-    if (!q) {
-
-        alert(
-            "Question not found."
-        );
-
-        return;
-
-    }
-
-
-    const item =
-        document.getElementById(
-            "question-" + id
-        );
-
-
-    if (!item) {
-
-        return;
-
-    }
-
-
-    item.innerHTML = `
-
-        <div class="edit-form">
-
-            <h3>
-                ✏️ Edit Question
-            </h3>
-
-
-            <label>
-                Course
-            </label>
-
-            <select id="edit_course_${id}">
-
-                ${createCourseOptions(
-                    q.course
-                )}
-
-            </select>
-
-
-            <label>
-                Topic
-            </label>
-
-            <select id="edit_topic_${id}">
-
-            </select>
-
-
-            <label>
-                Question
-            </label>
-
-            <textarea
-                id="edit_question_${id}">${escapeHTML(
-                    q.question
-                )}</textarea>
-
-
-            <label>
-                Option A
-            </label>
-
-            <input
-                id="edit_option_a_${id}"
-                value="${escapeAttribute(
-                    q.option_a
-                )}">
-
-
-            <label>
-                Option B
-            </label>
-
-            <input
-                id="edit_option_b_${id}"
-                value="${escapeAttribute(
-                    q.option_b
-                )}">
-
-
-            <label>
-                Option C
-            </label>
-
-            <input
-                id="edit_option_c_${id}"
-                value="${escapeAttribute(
-                    q.option_c
-                )}">
-
-
-            <label>
-                Option D
-            </label>
-
-            <input
-                id="edit_option_d_${id}"
-                value="${escapeAttribute(
-                    q.option_d
-                )}">
-
-
-            <label>
-                Correct Answer
-            </label>
-
-            <select id="edit_correct_${id}">
-
-                <option value="A"
-                    ${q.correct_answer === "A" ? "selected" : ""}>
-                    A
-                </option>
-
-                <option value="B"
-                    ${q.correct_answer === "B" ? "selected" : ""}>
-                    B
-                </option>
-
-                <option value="C"
-                    ${q.correct_answer === "C" ? "selected" : ""}>
-                    C
-                </option>
-
-                <option value="D"
-                    ${q.correct_answer === "D" ? "selected" : ""}>
-                    D
-                </option>
-
-            </select>
-
-
-            <label>
-                Explanation
-            </label>
-
-            <textarea
-                id="edit_explanation_${id}">${escapeHTML(
-                    q.explanation || ""
-                )}</textarea>
-
-
-            <div class="question-actions">
-
-                <button
-                    class="save-edit-button"
-                    onclick="saveEditedQuestion('${id}')">
-
-                    💾 Save Changes
-
-                </button>
-
-
-                <button
-                    class="cancel-button"
-                    onclick="loadQuestions()">
-
-                    Cancel
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    const editCourse =
-        document.getElementById(
-            "edit_course_" + id
-        );
-
-
-    editCourse.addEventListener(
-        "change",
-        function() {
-
-            loadEditTopics(
-                id,
-                editCourse.value
-            );
-
-        }
-    );
-
-
-    loadEditTopics(
-        id,
-        q.course,
-        q.topic
-    );
-
-}
-
-
-
-// ======================================================
-// CREATE COURSE OPTIONS
-// ======================================================
-
-function createCourseOptions(
-    selectedCourse
-) {
-
-    const courses =
-        Object.keys(
-            courseTopics
-        );
-
-
-    return courses.map(
-        function(course) {
-
-            return `
-
-                <option
-                    value="${escapeAttribute(course)}"
-                    ${
-                        course === selectedCourse
-                            ? "selected"
-                            : ""
-                    }>
-
-                    ${escapeHTML(course)}
-
-                </option>
-
-            `;
-
-        }
-    ).join("");
-
-}
-
-
-
-// ======================================================
-// LOAD EDIT TOPICS
-// ======================================================
-
-function loadEditTopics(
-    id,
-    course,
-    selectedTopic = ""
-) {
-
-    const topicSelect =
-        document.getElementById(
-            "edit_topic_" + id
-        );
-
-
-    if (!topicSelect) {
-
-        return;
-
-    }
-
-
-    topicSelect.innerHTML = "";
-
-
-    const topics =
-        courseTopics[course] || [];
-
-
-    topics.forEach(
-        function(topic) {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                topic;
-
-
-            option.textContent =
-                topic;
-
-
-            if (
-                topic === selectedTopic
-            ) {
-
-                option.selected =
-                    true;
-
-            }
-
-
-            topicSelect.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-
-
-// ======================================================
-// SAVE EDITED QUESTION
-// ======================================================
-
-async function saveEditedQuestion(
-    id
-) {
-
-    const course =
-        document.getElementById(
-            "edit_course_" + id
-        ).value;
-
-
-    const topic =
-        document.getElementById(
-            "edit_topic_" + id
-        ).value;
-
-
-    const question =
-        document.getElementById(
-            "edit_question_" + id
-        ).value.trim();
-
-
-    const option_a =
-        document.getElementById(
-            "edit_option_a_" + id
-        ).value.trim();
-
-
-    const option_b =
-        document.getElementById(
-            "edit_option_b_" + id
-        ).value.trim();
-
-
-    const option_c =
-        document.getElementById(
-            "edit_option_c_" + id
-        ).value.trim();
-
-
-    const option_d =
-        document.getElementById(
-            "edit_option_d_" + id
-        ).value.trim();
-
-
-    const correct_answer =
-        document.getElementById(
-            "edit_correct_" + id
-        ).value;
-
-
-    const explanation =
-        document.getElementById(
-            "edit_explanation_" + id
-        ).value.trim();
-
-
-    if (
-        !question ||
-        !option_a ||
-        !option_b ||
-        !option_c ||
-        !option_d
-    ) {
-
-        alert(
-            "Please fill in all question fields."
-        );
-
-        return;
-
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("questions")
-            .update({
-
-                course: course,
-
-                topic: topic,
-
-                question: question,
-
-                option_a: option_a,
-
-                option_b: option_b,
-
-                option_c: option_c,
-
-                option_d: option_d,
-
-                correct_answer:
-                    correct_answer,
-
-                explanation:
-                    explanation
-
-            })
-            .eq(
-                "id",
-                id
-            );
-
-
-    if (error) {
-
-        console.error(
-            "Update error:",
-            error
-        );
-
-
-        alert(
-            "❌ Unable to update question:\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    alert(
-        "✅ Question updated successfully!"
-    );
-
-
-    loadQuestions();
-
-}
-
-
-
-// ======================================================
-// DELETE QUESTION
-// ======================================================
-
-async function deleteQuestion(
-    id
-) {
-
-    const q =
-        allQuestions.find(
-            function(question) {
-
-                return String(
-                    question.id
-                ) === String(id);
-
-            }
-        );
-
-
-    if (!q) {
-
-        return;
-
-    }
-
-
-    const confirmed =
-        confirm(
-
-            "Are you sure you want to delete this question?\n\n" +
-            q.question
-
-        );
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("questions")
-            .delete()
-            .eq(
-                "id",
-                id
-            );
-
-
-    if (error) {
-
-        console.error(
-            "Delete error:",
-            error
-        );
-
-
-        alert(
-            "❌ Unable to delete question:\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    alert(
-        "✅ Question deleted successfully!"
-    );
-
-
-    loadQuestions();
-
-}
-
-
-
-// ======================================================
-// ESCAPE HTML
-// ======================================================
-
-function escapeHTML(
-    value
-) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-
-// ======================================================
-// ESCAPE ATTRIBUTE
-// ======================================================
-
-function escapeAttribute(
-    value
-) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        );
-
-}
-
-
-
-// ======================================================
-// LOGOUT
-// ======================================================
-
-async function logout() {
-
-    await supabaseClient
-        .auth
-        .signOut();
-
-
-    window.location.href =
-        "index.html";
+    showQuestion();
 
 }
 
@@ -2369,22 +1681,7 @@ async function logout() {
 // START
 // ======================================================
 
-loadTopics();
-
-updateFilterTopics();
-
-checkAdminAccess()
-    .then(
-        function(isAdmin) {
-
-            if (isAdmin) {
-
-                loadQuestions();
-
-            }
-
-        }
-    );
+loadQuestions();
 
 </script>
 
