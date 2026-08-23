@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,6 +77,11 @@
         }
 
 
+        .back:hover {
+            text-decoration: underline;
+        }
+
+
         .card {
             background: white;
 
@@ -122,6 +126,17 @@
             margin-bottom: 20px;
 
             font-weight: bold;
+        }
+
+
+        .topic-name {
+            text-align: center;
+
+            color: #198754;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
         }
 
 
@@ -196,6 +211,8 @@
 
         .option.disabled {
             cursor: not-allowed;
+
+            pointer-events: none;
         }
 
 
@@ -207,6 +224,8 @@
             border-radius: 10px;
 
             display: none;
+
+            line-height: 1.5;
         }
 
 
@@ -234,6 +253,8 @@
             border-radius: 10px;
 
             display: none;
+
+            line-height: 1.6;
         }
 
 
@@ -410,23 +431,26 @@
 
 
     <a
-        href="dashboard.html"
+        href="microbiology-topics.html"
         class="back">
 
-        ← Back to Courses
+        ← Back to Microbiology Topics
 
     </a>
 
 
 
-    <div
-        id="loading">
+    <!-- LOADING -->
 
-        Loading Microbiology questions...
+    <div id="loading">
+
+        Loading questions...
 
     </div>
 
 
+
+    <!-- ERROR -->
 
     <div
         id="error"
@@ -434,6 +458,8 @@
     </div>
 
 
+
+    <!-- EMPTY -->
 
     <div
         id="empty"
@@ -443,9 +469,11 @@
             No questions available yet.
         </h2>
 
-        <p>
+        <p id="emptyMessage">
+
             Your lecturer/admin has not added
-            Microbiology questions.
+            questions for this topic yet.
+
         </p>
 
     </div>
@@ -474,12 +502,27 @@
 
 
 
+        <!-- TOPIC -->
+
         <div
-            class="counter"
-            id="counter">
+            class="topic-name"
+            id="topicName">
+
         </div>
 
 
+
+        <!-- COUNTER -->
+
+        <div
+            class="counter"
+            id="counter">
+
+        </div>
+
+
+
+        <!-- SCORE -->
 
         <div
             class="score"
@@ -491,12 +534,17 @@
 
 
 
+        <!-- QUESTION -->
+
         <div
             class="question"
             id="question">
+
         </div>
 
 
+
+        <!-- OPTIONS -->
 
         <div class="options">
 
@@ -508,9 +556,7 @@
 
                 <strong>A.</strong>
 
-                <span
-                    id="text_a">
-                </span>
+                <span id="text_a"></span>
 
             </button>
 
@@ -523,9 +569,7 @@
 
                 <strong>B.</strong>
 
-                <span
-                    id="text_b">
-                </span>
+                <span id="text_b"></span>
 
             </button>
 
@@ -538,9 +582,7 @@
 
                 <strong>C.</strong>
 
-                <span
-                    id="text_c">
-                </span>
+                <span id="text_c"></span>
 
             </button>
 
@@ -553,9 +595,7 @@
 
                 <strong>D.</strong>
 
-                <span
-                    id="text_d">
-                </span>
+                <span id="text_d"></span>
 
             </button>
 
@@ -569,15 +609,17 @@
         <div
             class="feedback"
             id="feedback">
+
         </div>
 
 
 
-        <!-- EXPLANATION -->
+        <!-- ANSWER / EXPLANATION -->
 
         <div
             class="answer"
             id="answer">
+
 
             <p>
 
@@ -587,6 +629,7 @@
 
                 <span
                     id="correct_answer">
+
                 </span>
 
             </p>
@@ -600,13 +643,17 @@
 
                 <span
                     id="explanation">
+
                 </span>
 
             </p>
 
+
         </div>
 
 
+
+        <!-- NAVIGATION -->
 
         <div class="buttons">
 
@@ -660,9 +707,15 @@
         <p>
 
             You have completed the
-            Microbiology quiz.
+
+            <span id="resultTopic">
+                Microbiology
+            </span>
+
+            quiz.
 
         </p>
+
 
 
         <div
@@ -674,8 +727,11 @@
         </div>
 
 
+
         <p id="percentage">
-            0%
+
+            Your score: 0%
+
         </p>
 
 
@@ -692,10 +748,10 @@
 
 
         <button
-            onclick="window.location.href='dashboard.html'"
+            onclick="window.location.href='microbiology-topics.html'"
             style="background:#6c757d;">
 
-            ← Back to Courses
+            ← Back to Topics
 
         </button>
 
@@ -756,18 +812,40 @@ let currentQuestion = 0;
 let score = 0;
 
 
-// This stores the student's answer
-// for every question.
+// ------------------------------------------------------
+// IMPORTANT
+// ------------------------------------------------------
+// Instead of one "answered" variable, every question
+// has its own answer state.
+//
+// This prevents a student from answering a question
+// again after clicking Previous.
+// ------------------------------------------------------
 
 let userAnswers = {};
 
 
 
 // ======================================================
-// SHUFFLE FUNCTION
+// GET TOPIC FROM URL
 // ======================================================
 
-function shuffleQuestions(array) {
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const selectedTopic =
+    urlParams.get("topic");
+
+
+
+// ======================================================
+// SHUFFLE ARRAY
+// ======================================================
+
+function shuffleArray(array) {
 
     const shuffled =
         [...array];
@@ -781,8 +859,7 @@ function shuffleQuestions(array) {
 
         const j =
             Math.floor(
-                Math.random() *
-                (i + 1)
+                Math.random() * (i + 1)
             );
 
 
@@ -828,25 +905,34 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
-    // CHECK LOGIN
-    // ==================================================
+    // --------------------------------------------------
+    // MAKE SURE A TOPIC WAS SELECTED
+    // --------------------------------------------------
 
-    const {
-        data: {
-            user
-        }
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
+    if (!selectedTopic) {
 
 
+        loading.style.display =
+            "none";
 
-    if (!user) {
 
-        window.location.href =
-            "index.html";
+        error.style.display =
+            "block";
+
+
+        error.innerHTML = `
+
+            <h2>
+                ⚠️ No Topic Selected
+            </h2>
+
+            <p>
+                Please return to Microbiology
+                and select a topic.
+            </p>
+
+        `;
+
 
         return;
 
@@ -854,13 +940,67 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
-    // GET QUESTIONS
-    // ==================================================
+    // --------------------------------------------------
+    // DISPLAY TOPIC
+    // --------------------------------------------------
+
+    document
+        .getElementById("topicName")
+        .textContent =
+        "Topic: " +
+        selectedTopic;
+
+
+    document
+        .getElementById("resultTopic")
+        .textContent =
+        selectedTopic;
+
+
+
+    // --------------------------------------------------
+    // CHECK LOGIN
+    // --------------------------------------------------
 
     const {
+
+        data: {
+            user
+        },
+
+        error: userError
+
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+
+    if (
+        userError ||
+        !user
+    ) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+
+    // --------------------------------------------------
+    // LOAD ONLY THE SELECTED TOPIC
+    // --------------------------------------------------
+
+    const {
+
         data,
+
         error: databaseError
+
     } =
         await supabaseClient
 
@@ -868,9 +1008,21 @@ async function loadQuestions() {
 
             .select("*")
 
+            // IMPORTANT:
+            // COURSE MUST BE MICROBIOLOGY
+
             .eq(
                 "course",
                 "Microbiology"
+            )
+
+            // IMPORTANT:
+            // TOPIC MUST MATCH THE TOPIC
+            // SELECTED BY THE STUDENT
+
+            .ilike(
+                "topic",
+                selectedTopic
             )
 
             .order(
@@ -882,11 +1034,18 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
+    // --------------------------------------------------
     // DATABASE ERROR
-    // ==================================================
+    // --------------------------------------------------
 
     if (databaseError) {
+
+
+        console.error(
+            "Question loading error:",
+            databaseError
+        );
+
 
         loading.style.display =
             "none";
@@ -896,9 +1055,17 @@ async function loadQuestions() {
             "block";
 
 
-        error.textContent =
-            "Unable to load questions: " +
-            databaseError.message;
+        error.innerHTML = `
+
+            <h2>
+                ❌ Unable to Load Questions
+            </h2>
+
+            <p>
+                ${databaseError.message}
+            </p>
+
+        `;
 
 
         return;
@@ -907,12 +1074,23 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
-    // STORE QUESTIONS
-    // ==================================================
+    // --------------------------------------------------
+    // SAVE QUESTIONS
+    // --------------------------------------------------
 
     questions =
         data || [];
+
+
+
+    // --------------------------------------------------
+    // SHUFFLE QUESTIONS
+    // --------------------------------------------------
+
+    questions =
+        shuffleArray(
+            questions
+        );
 
 
 
@@ -921,14 +1099,29 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
+    // --------------------------------------------------
     // NO QUESTIONS
-    // ==================================================
+    // --------------------------------------------------
 
-    if (questions.length === 0) {
+    if (
+        questions.length === 0
+    ) {
+
 
         empty.style.display =
             "block";
+
+
+        document
+            .getElementById(
+                "emptyMessage"
+            )
+            .textContent =
+
+            "There are currently no questions for " +
+            selectedTopic +
+            ". Add questions from the Admin Dashboard.";
+
 
         return;
 
@@ -936,30 +1129,9 @@ async function loadQuestions() {
 
 
 
-    // ==================================================
-    // SHUFFLE QUESTIONS
-    // ==================================================
-
-    questions =
-        shuffleQuestions(
-            questions
-        );
-
-
-
-    // Reset quiz data
-
-    currentQuestion = 0;
-
-    score = 0;
-
-    userAnswers = {};
-
-
-
-    // ==================================================
+    // --------------------------------------------------
     // SHOW QUIZ
-    // ==================================================
+    // --------------------------------------------------
 
     quizCard.style.display =
         "block";
@@ -983,20 +1155,16 @@ function showQuestion() {
 
 
     if (!q) {
+
         return;
+
     }
 
 
 
-    const questionKey =
-        getQuestionKey(q);
-
-
-
-    const savedAnswer =
-        userAnswers[questionKey];
-
-
+    // --------------------------------------------------
+    // QUESTION COUNTER
+    // --------------------------------------------------
 
     document
         .getElementById("counter")
@@ -1009,6 +1177,10 @@ function showQuestion() {
 
 
 
+    // --------------------------------------------------
+    // SCORE
+    // --------------------------------------------------
+
     document
         .getElementById("score")
         .textContent =
@@ -1018,6 +1190,10 @@ function showQuestion() {
 
 
 
+    // --------------------------------------------------
+    // QUESTION TEXT
+    // --------------------------------------------------
+
     document
         .getElementById("question")
         .textContent =
@@ -1025,11 +1201,14 @@ function showQuestion() {
 
 
 
+    // --------------------------------------------------
+    // OPTIONS
+    // --------------------------------------------------
+
     document
         .getElementById("text_a")
         .textContent =
         q.option_a;
-
 
 
     document
@@ -1038,12 +1217,10 @@ function showQuestion() {
         q.option_b;
 
 
-
     document
         .getElementById("text_c")
         .textContent =
         q.option_c;
-
 
 
     document
@@ -1053,9 +1230,9 @@ function showQuestion() {
 
 
 
-    // ==================================================
-    // RESET OPTIONS VISUALLY
-    // ==================================================
+    // --------------------------------------------------
+    // OPTION BUTTONS
+    // --------------------------------------------------
 
     const options = [
 
@@ -1071,42 +1248,32 @@ function showQuestion() {
 
 
 
-    options.forEach(function(option) {
+    options.forEach(
+        function(option) {
 
-        option.classList.remove(
-            "correct",
-            "wrong",
-            "disabled"
-        );
-
-        option.disabled =
-            false;
-
-    });
+            option.classList.remove(
+                "correct",
+                "wrong",
+                "disabled"
+            );
 
 
+            option.disabled =
+                false;
 
-    // ==================================================
-    // RESET FEEDBACK
-    // ==================================================
-
-    const feedback =
-        document.getElementById(
-            "feedback"
-        );
+        }
+    );
 
 
-    feedback.style.display =
+
+    // --------------------------------------------------
+    // HIDE FEEDBACK
+    // --------------------------------------------------
+
+    document
+        .getElementById("feedback")
+        .style.display =
         "none";
-
-
-    feedback.textContent =
-        "";
-
-
-    feedback.className =
-        "feedback";
-
 
 
     document
@@ -1116,25 +1283,173 @@ function showQuestion() {
 
 
 
-    // ==================================================
-    // QUESTION HAS ALREADY BEEN ANSWERED
-    // ==================================================
+    // --------------------------------------------------
+    // CHECK IF THIS QUESTION
+    // HAS ALREADY BEEN ANSWERED
+    // --------------------------------------------------
+
+    const savedAnswer =
+        userAnswers[q.id];
+
+
 
     if (savedAnswer) {
 
-        restoreAnsweredQuestion(
-            q,
-            savedAnswer
+        // ----------------------------------------------
+        // The question was already answered.
+        //
+        // Restore its previous state.
+        // ----------------------------------------------
+
+        const selected =
+            savedAnswer.selected;
+
+
+        const correct =
+            savedAnswer.correct;
+
+
+        const selectedButton =
+            document.getElementById(
+                "option_" +
+                selected.toLowerCase()
+            );
+
+
+        const correctButton =
+            document.getElementById(
+                "option_" +
+                correct.toLowerCase()
+            );
+
+
+
+        // Disable all options
+
+        options.forEach(
+            function(option) {
+
+                option.disabled =
+                    true;
+
+                option.classList.add(
+                    "disabled"
+                );
+
+            }
         );
+
+
+
+        // Show selected answer
+
+        if (
+            selected === correct
+        ) {
+
+            selectedButton.classList.add(
+                "correct"
+            );
+
+        }
+
+        else {
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+
+            if (correctButton) {
+
+                correctButton.classList.add(
+                    "correct"
+                );
+
+            }
+
+        }
+
+
+
+        // Restore feedback
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+            savedAnswer.feedback;
+
+
+        feedback.className =
+
+            "feedback " +
+
+            (
+                selected === correct
+                    ? "correct-feedback"
+                    : "wrong-feedback"
+            );
+
+
+        feedback.style.display =
+            "block";
+
+
+
+        // Restore explanation
+
+        document
+            .getElementById(
+                "correct_answer"
+            )
+            .textContent =
+            correct;
+
+
+        document
+            .getElementById(
+                "explanation"
+            )
+            .textContent =
+
+            q.explanation ||
+            "No explanation provided.";
+
+
+        document
+            .getElementById(
+                "answer"
+            )
+            .style.display =
+            "block";
+
+
+
+        // Allow student to continue
+
+        document
+            .getElementById(
+                "nextButton"
+            )
+            .disabled =
+            false;
 
     }
 
     else {
 
-        // New unanswered question
+        // ------------------------------------------------
+        // QUESTION HAS NOT BEEN ANSWERED
+        // ------------------------------------------------
 
         document
-            .getElementById("nextButton")
+            .getElementById(
+                "nextButton"
+            )
             .disabled =
             true;
 
@@ -1142,43 +1457,17 @@ function showQuestion() {
 
 
 
-    // ==================================================
+    // --------------------------------------------------
     // PREVIOUS BUTTON
-    // ==================================================
+    // --------------------------------------------------
 
     document
-        .getElementById("previousButton")
+        .getElementById(
+            "previousButton"
+        )
         .disabled =
+
         currentQuestion === 0;
-
-}
-
-
-
-// ======================================================
-// GET UNIQUE QUESTION KEY
-// ======================================================
-
-function getQuestionKey(q) {
-
-
-    // Supabase normally gives each question
-    // a unique id.
-
-    if (q.id) {
-
-        return String(q.id);
-
-    }
-
-
-    // Fallback in case the table has no id.
-
-    return (
-        String(q.question) +
-        "|" +
-        String(q.option_a)
-    );
 
 }
 
@@ -1195,17 +1484,20 @@ function selectAnswer(selected) {
         questions[currentQuestion];
 
 
-    const questionKey =
-        getQuestionKey(q);
+    if (!q) {
+
+        return;
+
+    }
 
 
 
-    // ==================================================
+    // --------------------------------------------------
     // PREVENT RE-ANSWERING
-    // ==================================================
+    // --------------------------------------------------
 
     if (
-        userAnswers[questionKey]
+        userAnswers[q.id]
     ) {
 
         return;
@@ -1213,6 +1505,10 @@ function selectAnswer(selected) {
     }
 
 
+
+    // --------------------------------------------------
+    // GET CORRECT ANSWER
+    // --------------------------------------------------
 
     const correct =
         String(
@@ -1223,9 +1519,159 @@ function selectAnswer(selected) {
 
 
 
-    // Save the answer immediately
+    const selectedButton =
+        document.getElementById(
+            "option_" +
+            selected.toLowerCase()
+        );
 
-    userAnswers[questionKey] = {
+
+    const correctButton =
+        document.getElementById(
+            "option_" +
+            correct.toLowerCase()
+        );
+
+
+
+    // --------------------------------------------------
+    // ALL OPTIONS
+    // --------------------------------------------------
+
+    const options = [
+
+        document.getElementById("option_a"),
+
+        document.getElementById("option_b"),
+
+        document.getElementById("option_c"),
+
+        document.getElementById("option_d")
+
+    ];
+
+
+
+    // --------------------------------------------------
+    // DISABLE ALL OPTIONS
+    // --------------------------------------------------
+
+    options.forEach(
+        function(option) {
+
+            option.disabled =
+                true;
+
+            option.classList.add(
+                "disabled"
+            );
+
+        }
+    );
+
+
+
+    let feedbackText = "";
+
+
+
+    // --------------------------------------------------
+    // CORRECT ANSWER
+    // --------------------------------------------------
+
+    if (
+        selected === correct
+    ) {
+
+
+        score++;
+
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+
+        feedbackText =
+            "✅ Correct! Well done.";
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+            feedbackText;
+
+
+        feedback.className =
+            "feedback correct-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+
+
+    // --------------------------------------------------
+    // WRONG ANSWER
+    // --------------------------------------------------
+
+    else {
+
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+
+        if (correctButton) {
+
+            correctButton.classList.add(
+                "correct"
+            );
+
+        }
+
+
+        feedbackText =
+
+            "❌ Wrong answer. " +
+            "The correct answer is " +
+            correct +
+            ".";
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.textContent =
+            feedbackText;
+
+
+        feedback.className =
+            "feedback wrong-feedback";
+
+
+        feedback.style.display =
+            "block";
+
+    }
+
+
+
+    // --------------------------------------------------
+    // SAVE ANSWER FOR THIS QUESTION
+    // --------------------------------------------------
+
+    userAnswers[q.id] = {
 
         selected:
             selected,
@@ -1233,168 +1679,29 @@ function selectAnswer(selected) {
         correct:
             correct,
 
-        isCorrect:
-            selected === correct
+        feedback:
+            feedbackText
 
     };
 
 
 
-    // ==================================================
-    // UPDATE SCORE ONLY ONCE
-    // ==================================================
-
-    if (
-        selected === correct
-    ) {
-
-        score++;
-
-    }
-
-
-
-    // ==================================================
-    // GET BUTTONS
-    // ==================================================
-
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            selected.toLowerCase()
-        );
-
-
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            correct.toLowerCase()
-        );
-
-
-
-    const options = [
-
-        document.getElementById("option_a"),
-
-        document.getElementById("option_b"),
-
-        document.getElementById("option_c"),
-
-        document.getElementById("option_d")
-
-    ];
-
-
-
-    // Disable all options
-
-    options.forEach(function(option) {
-
-        option.disabled =
-            true;
-
-        option.classList.add(
-            "disabled"
-        );
-
-    });
-
-
-
-    // ==================================================
-    // CORRECT ANSWER
-    // ==================================================
-
-    if (
-        selected === correct
-    ) {
-
-
-        selectedButton.classList.add(
-            "correct"
-        );
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-            "✅ Correct! Well done.";
-
-
-        feedback.className =
-            "feedback correct-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-
-    // ==================================================
-    // WRONG ANSWER
-    // ==================================================
-
-    else {
-
-
-        selectedButton.classList.add(
-            "wrong"
-        );
-
-
-        if (correctButton) {
-
-            correctButton.classList.add(
-                "correct"
-            );
-
-        }
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-
-            "❌ Wrong answer. " +
-            "The correct answer is " +
-            correct +
-            ".";
-
-
-        feedback.className =
-            "feedback wrong-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-
-    // ==================================================
+    // --------------------------------------------------
     // SHOW EXPLANATION
-    // ==================================================
+    // --------------------------------------------------
 
     document
-        .getElementById("correct_answer")
+        .getElementById(
+            "correct_answer"
+        )
         .textContent =
         correct;
 
 
     document
-        .getElementById("explanation")
+        .getElementById(
+            "explanation"
+        )
         .textContent =
 
         q.explanation ||
@@ -1402,18 +1709,22 @@ function selectAnswer(selected) {
 
 
     document
-        .getElementById("answer")
+        .getElementById(
+            "answer"
+        )
         .style.display =
         "block";
 
 
 
-    // ==================================================
+    // --------------------------------------------------
     // UPDATE SCORE
-    // ==================================================
+    // --------------------------------------------------
 
     document
-        .getElementById("score")
+        .getElementById(
+            "score"
+        )
         .textContent =
 
         "Score: " +
@@ -1421,192 +1732,14 @@ function selectAnswer(selected) {
 
 
 
-    // ==================================================
+    // --------------------------------------------------
     // ENABLE NEXT
-    // ==================================================
+    // --------------------------------------------------
 
     document
-        .getElementById("nextButton")
-        .disabled =
-        false;
-
-}
-
-
-
-// ======================================================
-// RESTORE AN ALREADY ANSWERED QUESTION
-// ======================================================
-
-function restoreAnsweredQuestion(
-    q,
-    savedAnswer
-) {
-
-
-    const selected =
-        savedAnswer.selected;
-
-
-    const correct =
-        savedAnswer.correct;
-
-
-
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            selected.toLowerCase()
-        );
-
-
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            correct.toLowerCase()
-        );
-
-
-
-    const options = [
-
-        document.getElementById("option_a"),
-
-        document.getElementById("option_b"),
-
-        document.getElementById("option_c"),
-
-        document.getElementById("option_d")
-
-    ];
-
-
-
-    // Disable every option
-
-    options.forEach(function(option) {
-
-        option.disabled =
-            true;
-
-        option.classList.add(
-            "disabled"
-        );
-
-    });
-
-
-
-    // ==================================================
-    // RESTORE CORRECT ANSWER
-    // ==================================================
-
-    if (
-        savedAnswer.isCorrect
-    ) {
-
-
-        selectedButton.classList.add(
-            "correct"
-        );
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-            "✅ Correct! Well done.";
-
-
-        feedback.className =
-            "feedback correct-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-
-    // ==================================================
-    // RESTORE WRONG ANSWER
-    // ==================================================
-
-    else {
-
-
-        selectedButton.classList.add(
-            "wrong"
-        );
-
-
-        if (correctButton) {
-
-            correctButton.classList.add(
-                "correct"
-            );
-
-        }
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-
-            "❌ Wrong answer. " +
-            "The correct answer is " +
-            correct +
-            ".";
-
-
-        feedback.className =
-            "feedback wrong-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-
-    // ==================================================
-    // RESTORE EXPLANATION
-    // ==================================================
-
-    document
-        .getElementById("correct_answer")
-        .textContent =
-        correct;
-
-
-    document
-        .getElementById("explanation")
-        .textContent =
-
-        q.explanation ||
-        "No explanation provided.";
-
-
-    document
-        .getElementById("answer")
-        .style.display =
-        "block";
-
-
-
-    // Next remains available
-
-    document
-        .getElementById("nextButton")
+        .getElementById(
+            "nextButton"
+        )
         .disabled =
         false;
 
@@ -1619,28 +1752,6 @@ function restoreAnsweredQuestion(
 // ======================================================
 
 function nextQuestion() {
-
-
-    const q =
-        questions[currentQuestion];
-
-
-    const questionKey =
-        getQuestionKey(q);
-
-
-
-    // Do not allow moving forward
-    // without answering.
-
-    if (
-        !userAnswers[questionKey]
-    ) {
-
-        return;
-
-    }
-
 
 
     if (
@@ -1698,13 +1809,17 @@ async function showResult() {
 
 
     document
-        .getElementById("quizCard")
+        .getElementById(
+            "quizCard"
+        )
         .style.display =
         "none";
 
 
     document
-        .getElementById("result")
+        .getElementById(
+            "result"
+        )
         .style.display =
         "block";
 
@@ -1716,6 +1831,7 @@ async function showResult() {
 
 
     const percentage =
+
         total > 0
 
             ? Math.round(
@@ -1727,7 +1843,9 @@ async function showResult() {
 
 
     document
-        .getElementById("finalScore")
+        .getElementById(
+            "finalScore"
+        )
         .textContent =
 
         score +
@@ -1737,7 +1855,9 @@ async function showResult() {
 
 
     document
-        .getElementById("percentage")
+        .getElementById(
+            "percentage"
+        )
         .textContent =
 
         "Your score: " +
@@ -1751,9 +1871,11 @@ async function showResult() {
     // ==================================================
 
     const {
+
         data: {
             user
         }
+
     } =
         await supabaseClient
             .auth
@@ -1774,11 +1896,13 @@ async function showResult() {
 
 
     // ==================================================
-    // SAVE QUIZ RESULT
+    // SAVE RESULT
     // ==================================================
 
     const {
+
         error: saveError
+
     } =
         await supabaseClient
 
@@ -1817,7 +1941,7 @@ async function showResult() {
     else {
 
         console.log(
-            "Quiz result saved successfully."
+            "Microbiology quiz result saved successfully."
         );
 
     }
@@ -1833,46 +1957,45 @@ async function showResult() {
 function restartQuiz() {
 
 
-    // ==================================================
-    // RESET QUIZ
-    // ==================================================
+    currentQuestion =
+        0;
 
-    currentQuestion = 0;
 
-    score = 0;
+    score =
+        0;
+
+
+    // --------------------------------------------------
+    // CLEAR ALL PREVIOUS ANSWERS
+    // --------------------------------------------------
 
     userAnswers = {};
 
 
 
-    // ==================================================
-    // SHUFFLE AGAIN
-    // ==================================================
+    // --------------------------------------------------
+    // SHUFFLE QUESTIONS AGAIN
+    // --------------------------------------------------
 
     questions =
-        shuffleQuestions(
+        shuffleArray(
             questions
         );
 
 
 
-    // ==================================================
-    // HIDE RESULT
-    // ==================================================
-
     document
-        .getElementById("result")
+        .getElementById(
+            "result"
+        )
         .style.display =
         "none";
 
 
-
-    // ==================================================
-    // SHOW QUIZ
-    // ==================================================
-
     document
-        .getElementById("quizCard")
+        .getElementById(
+            "quizCard"
+        )
         .style.display =
         "block";
 
@@ -1897,4 +2020,3 @@ loadQuestions();
 </body>
 
 </html>
-```
