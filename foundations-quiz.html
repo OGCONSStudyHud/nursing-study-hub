@@ -5,9 +5,13 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>OGCONS Study Hub - Foundations of Nursing Quiz</title>
+    <title>
+        OGCONS Study Hub - Foundations of Nursing Quiz
+    </title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -20,6 +24,7 @@
         }
 
         body {
+
             font-family: Arial, sans-serif;
 
             min-height: 100vh;
@@ -33,9 +38,11 @@
                 );
 
             color: #172033;
+
         }
 
         header {
+
             background:
                 linear-gradient(
                     135deg,
@@ -46,26 +53,37 @@
             color: white;
 
             padding: 22px 20px;
+
         }
 
         .header-content {
+
             max-width: 900px;
+
             margin: auto;
 
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
 
             gap: 15px;
+
         }
 
         .logo {
+
             font-size: 22px;
+
             font-weight: bold;
+
         }
 
         .back-button {
+
             background: white;
+
             color: #18a058;
 
             border: none;
@@ -77,17 +95,21 @@
             font-weight: bold;
 
             cursor: pointer;
+
         }
 
         .container {
+
             max-width: 900px;
 
             margin: auto;
 
             padding: 30px 20px;
+
         }
 
         .quiz-header {
+
             background: white;
 
             padding: 25px;
@@ -99,23 +121,41 @@
                 rgba(0,0,0,0.08);
 
             margin-bottom: 25px;
+
         }
 
         .quiz-header h1 {
+
             margin-bottom: 8px;
+
+        }
+
+        .quiz-topic {
+
+            color: #18a058;
+
+            font-weight: bold;
+
+            margin-top: 8px;
+
         }
 
         .quiz-header p {
+
             color: #68756d;
 
             line-height: 1.5;
+
         }
 
         .progress-container {
+
             margin-top: 20px;
+
         }
 
         .progress-info {
+
             display: flex;
 
             justify-content: space-between;
@@ -123,9 +163,11 @@
             font-weight: bold;
 
             margin-bottom: 8px;
+
         }
 
         .progress-bar {
+
             width: 100%;
 
             height: 10px;
@@ -135,9 +177,11 @@
             border-radius: 10px;
 
             overflow: hidden;
+
         }
 
         .progress {
+
             height: 100%;
 
             width: 0%;
@@ -145,9 +189,11 @@
             background: #18a058;
 
             transition: width 0.3s;
+
         }
 
         .question-card {
+
             background: white;
 
             padding: 28px;
@@ -159,17 +205,21 @@
                 rgba(0,0,0,0.08);
 
             margin-bottom: 20px;
+
         }
 
         .question-number {
+
             color: #18a058;
 
             font-weight: bold;
 
             margin-bottom: 12px;
+
         }
 
         .question {
+
             font-size: 20px;
 
             font-weight: bold;
@@ -177,15 +227,19 @@
             line-height: 1.5;
 
             margin-bottom: 25px;
+
         }
 
         .options {
+
             display: grid;
 
             gap: 12px;
+
         }
 
         .option {
+
             width: 100%;
 
             padding: 16px;
@@ -203,29 +257,37 @@
             font-size: 16px;
 
             transition: 0.2s;
+
         }
 
         .option:hover {
+
             border-color: #18a058;
 
             background: #f2fff7;
+
         }
 
         .option.selected {
+
             border-color: #18a058;
 
             background: #e7fff0;
+
         }
 
         .option-letter {
+
             font-weight: bold;
 
             color: #18a058;
 
             margin-right: 8px;
+
         }
 
         .navigation {
+
             display: flex;
 
             justify-content: space-between;
@@ -233,9 +295,11 @@
             gap: 15px;
 
             margin-top: 20px;
+
         }
 
         .nav-button {
+
             border: none;
 
             padding: 13px 22px;
@@ -247,33 +311,43 @@
             font-weight: bold;
 
             cursor: pointer;
+
         }
 
         .previous {
+
             background: #6c757d;
 
             color: white;
+
         }
 
         .next {
+
             background: #18a058;
 
             color: white;
+
         }
 
         .submit {
+
             background: #0b5ed7;
 
             color: white;
+
         }
 
         .nav-button:disabled {
+
             opacity: 0.5;
 
             cursor: not-allowed;
+
         }
 
         .result {
+
             display: none;
 
             background: white;
@@ -287,19 +361,25 @@
                 rgba(0,0,0,0.1);
 
             text-align: center;
+
         }
 
         .result-icon {
+
             font-size: 65px;
 
             margin-bottom: 15px;
+
         }
 
         .result h2 {
+
             margin-bottom: 10px;
+
         }
 
         .score {
+
             font-size: 50px;
 
             font-weight: bold;
@@ -307,17 +387,21 @@
             color: #18a058;
 
             margin: 15px 0;
+
         }
 
         .result-message {
+
             color: #66736c;
 
             margin-bottom: 25px;
 
             line-height: 1.5;
+
         }
 
         .result-buttons {
+
             display: flex;
 
             justify-content: center;
@@ -325,9 +409,11 @@
             flex-wrap: wrap;
 
             gap: 12px;
+
         }
 
         .result-buttons button {
+
             border: none;
 
             padding: 13px 20px;
@@ -337,29 +423,37 @@
             font-weight: bold;
 
             cursor: pointer;
+
         }
 
         .retry {
+
             background: #18a058;
 
             color: white;
+
         }
 
         .home {
+
             background: #6c757d;
 
             color: white;
+
         }
 
         .loading {
+
             text-align: center;
 
             padding: 60px 20px;
 
             font-size: 18px;
+
         }
 
         .error {
+
             background: white;
 
             padding: 30px;
@@ -369,44 +463,39 @@
             text-align: center;
 
             color: #dc3545;
-        }
 
-        .explanation {
-            display: none;
-
-            margin-top: 20px;
-
-            padding: 15px;
-
-            background: #eef8ff;
-
-            border-left: 4px solid #0b5ed7;
-
-            border-radius: 8px;
-
-            line-height: 1.5;
         }
 
         @media (max-width: 600px) {
 
             .header-content {
+
                 flex-direction: column;
+
             }
 
             .question-card {
+
                 padding: 20px;
+
             }
 
             .question {
+
                 font-size: 18px;
+
             }
 
             .navigation {
+
                 flex-direction: column;
+
             }
 
             .nav-button {
+
                 width: 100%;
+
             }
 
         }
@@ -424,7 +513,9 @@
     <div class="header-content">
 
         <div class="logo">
+
             🩺 OGCONS Study Hub
+
         </div>
 
         <button
@@ -440,7 +531,6 @@
 </header>
 
 
-
 <div
     id="loading"
     class="loading">
@@ -450,27 +540,33 @@
 </div>
 
 
-
 <div
     id="quizContainer"
     class="container"
     style="display:none;">
 
 
-    <!-- =========================================
-         QUIZ HEADER
-    ========================================== -->
-
     <div class="quiz-header">
 
         <h1>
+
             Foundations of Nursing
+
         </h1>
 
         <p>
-            Test your knowledge of Foundations
-            of Nursing.
+
+            Test your knowledge of this topic.
+
         </p>
+
+        <div
+            class="quiz-topic"
+            id="quizTopic">
+
+            Loading topic...
+
+        </div>
 
 
         <div class="progress-container">
@@ -478,11 +574,15 @@
             <div class="progress-info">
 
                 <span id="questionProgress">
-                    Question 1 of 15
+
+                    Question 1 of 1
+
                 </span>
 
                 <span id="answeredCount">
+
                     0 answered
+
                 </span>
 
             </div>
@@ -493,6 +593,7 @@
                 <div
                     class="progress"
                     id="progress">
+
                 </div>
 
             </div>
@@ -501,11 +602,6 @@
 
     </div>
 
-
-
-    <!-- =========================================
-         QUESTION AREA
-    ========================================== -->
 
     <div id="questionArea">
 
@@ -532,13 +628,6 @@
             <div
                 class="options"
                 id="optionsContainer">
-
-            </div>
-
-
-            <div
-                class="explanation"
-                id="explanation">
 
             </div>
 
@@ -582,25 +671,26 @@
     </div>
 
 
-
-    <!-- =========================================
-         RESULT
-    ========================================== -->
-
     <div
         class="result"
         id="result">
 
         <div class="result-icon">
+
             🏆
+
         </div>
 
         <h2>
+
             Quiz Completed!
+
         </h2>
 
         <p>
+
             Your score
+
         </p>
 
         <div
@@ -646,7 +736,6 @@
 </div>
 
 
-
 <script>
 
 
@@ -664,9 +753,27 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 const supabaseClient =
     window.supabase.createClient(
+
         SUPABASE_URL,
+
         SUPABASE_PUBLISHABLE_KEY
+
     );
+
+
+
+// ======================================================
+// GET TOPIC
+// ======================================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const topic =
+    urlParams.get("topic");
 
 
 
@@ -691,17 +798,23 @@ let user = null;
 async function loadUser() {
 
     const {
+
         data: {
             user: currentUser
         },
+
         error
+
     } =
         await supabaseClient
             .auth
             .getUser();
 
 
-    if (error || !currentUser) {
+    if (
+        error ||
+        !currentUser
+    ) {
 
         window.location.href =
             "index.html";
@@ -711,7 +824,9 @@ async function loadUser() {
     }
 
 
-    user = currentUser;
+    user =
+        currentUser;
+
 
     return true;
 
@@ -725,10 +840,54 @@ async function loadUser() {
 
 async function loadQuestions() {
 
+    if (!topic) {
+
+        showError(`
+
+            <h2>
+                ⚠️ No Topic Selected
+            </h2>
+
+            <p style="margin-top:10px;">
+
+                Please return to Foundations
+                of Nursing and select a topic.
+
+            </p>
+
+        `);
+
+        return false;
+
+    }
+
+
+    document
+        .getElementById("quizTopic")
+        .textContent =
+        topic;
+
+
+    /*
+       IMPORTANT:
+
+       Both values must match the
+       Admin Dashboard exactly.
+
+       Course:
+       Foundations of Nursing
+
+       Topic:
+       The selected topic
+    */
+
 
     const {
+
         data,
+
         error
+
     } =
         await supabaseClient
 
@@ -739,6 +898,11 @@ async function loadQuestions() {
             .eq(
                 "course",
                 "Foundations of Nursing"
+            )
+
+            .eq(
+                "topic",
+                topic
             )
 
             .order(
@@ -758,8 +922,13 @@ async function loadQuestions() {
 
 
         showError(
+
             "Unable to load the quiz questions.<br><br>" +
-            escapeHTML(error.message)
+
+            escapeHTML(
+                error.message
+            )
+
         );
 
 
@@ -772,7 +941,9 @@ async function loadQuestions() {
         data || [];
 
 
-    if (questions.length === 0) {
+    if (
+        questions.length === 0
+    ) {
 
         showError(`
 
@@ -782,21 +953,29 @@ async function loadQuestions() {
 
             <p style="margin-top:10px;">
 
-                There are currently no
-                Foundations of Nursing questions
-                available.
+                There are currently no questions
+                for:
+
+            </p>
+
+            <p
+                style="
+                    margin-top:10px;
+                    font-weight:bold;
+                ">
+
+                ${escapeHTML(topic)}
 
             </p>
 
             <p style="margin-top:10px;">
 
-                Please add questions from
-                the Admin Dashboard.
+                Please add questions from the
+                Admin Dashboard.
 
             </p>
 
         `);
-
 
         return false;
 
@@ -815,9 +994,10 @@ async function loadQuestions() {
 
 function displayQuestion() {
 
-
     const q =
-        questions[currentQuestion];
+        questions[
+            currentQuestion
+        ];
 
 
     if (!q) {
@@ -830,15 +1010,21 @@ function displayQuestion() {
     document
         .getElementById("questionNumber")
         .textContent =
+
         "Question " +
-        (currentQuestion + 1);
+        (
+            currentQuestion + 1
+        );
 
 
     document
         .getElementById("questionProgress")
         .textContent =
+
         "Question " +
-        (currentQuestion + 1) +
+        (
+            currentQuestion + 1
+        ) +
         " of " +
         questions.length;
 
@@ -897,9 +1083,12 @@ function displayQuestion() {
 
 
             if (
+
                 selectedAnswers[
                     currentQuestion
-                ] === option.letter
+                ] ===
+                option.letter
+
             ) {
 
                 button.classList.add(
@@ -961,8 +1150,10 @@ function displayQuestion() {
 
 
     if (
+
         currentQuestion ===
         questions.length - 1
+
     ) {
 
         nextButton.style.display =
@@ -971,7 +1162,9 @@ function displayQuestion() {
         submitButton.style.display =
             "block";
 
-    } else {
+    }
+
+    else {
 
         nextButton.style.display =
             "block";
@@ -994,7 +1187,6 @@ function displayQuestion() {
 
 function selectAnswer(answer) {
 
-
     selectedAnswers[
         currentQuestion
     ] =
@@ -1008,15 +1200,16 @@ function selectAnswer(answer) {
 
 
 // ======================================================
-// NEXT QUESTION
+// NEXT
 // ======================================================
 
 function nextQuestion() {
 
-
     if (
+
         currentQuestion <
         questions.length - 1
+
     ) {
 
         currentQuestion++;
@@ -1030,11 +1223,10 @@ function nextQuestion() {
 
 
 // ======================================================
-// PREVIOUS QUESTION
+// PREVIOUS
 // ======================================================
 
 function previousQuestion() {
-
 
     if (
         currentQuestion > 0
@@ -1056,7 +1248,6 @@ function previousQuestion() {
 
 function updateProgress() {
 
-
     const answered =
         Object.keys(
             selectedAnswers
@@ -1066,6 +1257,7 @@ function updateProgress() {
     document
         .getElementById("answeredCount")
         .textContent =
+
         answered +
         " answered";
 
@@ -1084,6 +1276,7 @@ function updateProgress() {
     document
         .getElementById("progress")
         .style.width =
+
         percentage + "%";
 
 }
@@ -1095,7 +1288,6 @@ function updateProgress() {
 // ======================================================
 
 async function submitQuiz() {
-
 
     const answered =
         Object.keys(
@@ -1109,6 +1301,7 @@ async function submitQuiz() {
     ) {
 
         const remaining =
+
             questions.length -
             answered;
 
@@ -1146,9 +1339,11 @@ async function submitQuiz() {
 
 
             if (
+
                 selected &&
                 selected ===
                 q.correct_answer
+
             ) {
 
                 score++;
@@ -1187,14 +1382,13 @@ async function submitQuiz() {
 
 
 // ======================================================
-// SAVE QUIZ RESULT
+// SAVE RESULT
 // ======================================================
 
 async function saveQuizResult(
     score,
     percentage
 ) {
-
 
     if (!user) {
 
@@ -1224,7 +1418,9 @@ async function saveQuizResult(
         error
     } =
         await supabaseClient
+
             .from("quiz_results")
+
             .insert([
                 resultData
             ]);
@@ -1236,9 +1432,6 @@ async function saveQuizResult(
             "Unable to save quiz result:",
             error
         );
-
-        // Do not stop the quiz.
-        // The score can still be shown.
 
     }
 
@@ -1254,7 +1447,6 @@ function showResult(
     score,
     percentage
 ) {
-
 
     document
         .getElementById("questionArea")
@@ -1277,21 +1469,27 @@ function showResult(
     let message = "";
 
 
-    if (percentage >= 80) {
+    if (
+        percentage >= 80
+    ) {
 
         message =
-            "Excellent work! 🎉 You have a strong understanding of Foundations of Nursing.";
+            "Excellent work! 🎉 You have a strong understanding of this topic.";
 
     }
 
-    else if (percentage >= 60) {
+    else if (
+        percentage >= 60
+    ) {
 
         message =
             "Good job! 👍 Keep studying and you can improve even further.";
 
     }
 
-    else if (percentage >= 50) {
+    else if (
+        percentage >= 50
+    ) {
 
         message =
             "Fair attempt. 📚 Review your notes and try the quiz again.";
@@ -1301,7 +1499,7 @@ function showResult(
     else {
 
         message =
-            "Keep practicing. 💪 Go through your Foundations of Nursing notes and try again.";
+            "Keep practicing. 💪 Go through your notes and try again.";
 
     }
 
@@ -1322,11 +1520,10 @@ function showResult(
 
 
 // ======================================================
-// RETRY QUIZ
+// RETRY
 // ======================================================
 
 function retryQuiz() {
-
 
     currentQuestion = 0;
 
@@ -1352,7 +1549,7 @@ function retryQuiz() {
 
 
 // ======================================================
-// GO BACK
+// BACK
 // ======================================================
 
 function goBack() {
@@ -1365,11 +1562,10 @@ function goBack() {
 
 
 // ======================================================
-// SHOW ERROR
+// ERROR
 // ======================================================
 
 function showError(message) {
-
 
     document
         .getElementById("loading")
@@ -1415,7 +1611,6 @@ function showError(message) {
 
 function escapeHTML(value) {
 
-
     if (
         value === null ||
         value === undefined
@@ -1428,30 +1623,15 @@ function escapeHTML(value) {
 
     return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        .replace(/&/g, "&amp;")
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+        .replace(/</g, "&lt;")
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+        .replace(/>/g, "&gt;")
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+        .replace(/"/g, "&quot;")
 
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/'/g, "&#039;");
 
 }
 
@@ -1462,7 +1642,6 @@ function escapeHTML(value) {
 // ======================================================
 
 async function startQuiz() {
-
 
     const loggedIn =
         await loadUser();
