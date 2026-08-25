@@ -21,7 +21,6 @@
             padding: 0;
         }
 
-
         body {
 
             font-family: Arial, sans-serif;
@@ -41,9 +40,9 @@
         }
 
 
-        /* ==========================================
+        /* =========================
            HEADER
-        ========================================== */
+        ========================= */
 
         header {
 
@@ -65,9 +64,9 @@
 
         header h1 {
 
-            margin-bottom: 8px;
+            font-size: 30px;
 
-            font-size: 32px;
+            margin-bottom: 8px;
 
         }
 
@@ -76,16 +75,18 @@
 
             font-size: 16px;
 
+            opacity: 0.95;
+
         }
 
 
-        /* ==========================================
+        /* =========================
            CONTAINER
-        ========================================== */
+        ========================= */
 
         .container {
 
-            max-width: 1000px;
+            max-width: 900px;
 
             margin: auto;
 
@@ -94,21 +95,21 @@
         }
 
 
-        /* ==========================================
+        /* =========================
            BACK BUTTON
-        ========================================== */
+        ========================= */
 
         .back {
 
             display: inline-block;
-
-            margin-bottom: 25px;
 
             color: #18a058;
 
             text-decoration: none;
 
             font-weight: bold;
+
+            margin-bottom: 25px;
 
         }
 
@@ -120,11 +121,11 @@
         }
 
 
-        /* ==========================================
-           INTRO
-        ========================================== */
+        /* =========================
+           INFO CARD
+        ========================= */
 
-        .intro {
+        .info-card {
 
             background: white;
 
@@ -132,25 +133,25 @@
 
             border-radius: 20px;
 
-            text-align: center;
-
             box-shadow:
                 0 10px 25px
                 rgba(0,0,0,0.08);
+
+            text-align: center;
 
             margin-bottom: 25px;
 
         }
 
 
-        .intro h2 {
+        .info-card h2 {
 
             margin-bottom: 10px;
 
         }
 
 
-        .intro p {
+        .info-card p {
 
             color: #617568;
 
@@ -159,48 +160,57 @@
         }
 
 
-        /* ==========================================
-           REFRESH
-        ========================================== */
+        /* =========================
+           MY POSITION
+        ========================= */
 
-        .refresh-container {
+        .my-position {
 
-            text-align: center;
-
-            margin-bottom: 25px;
-
-        }
-
-
-        .refresh-button {
-
-            border: none;
-
-            background: #18a058;
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
 
             color: white;
 
-            padding: 12px 22px;
+            padding: 22px;
 
-            border-radius: 25px;
+            border-radius: 18px;
+
+            margin-bottom: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 20px
+                rgba(24,160,88,0.25);
+
+        }
+
+
+        .my-position h2 {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .my-position .score {
+
+            font-size: 32px;
 
             font-weight: bold;
 
-            cursor: pointer;
+            margin: 8px 0;
 
         }
 
 
-        .refresh-button:hover {
-
-            background: #117d45;
-
-        }
-
-
-        /* ==========================================
+        /* =========================
            LEADERBOARD
-        ========================================== */
+        ========================= */
 
         .leaderboard {
 
@@ -217,19 +227,25 @@
         }
 
 
-        /* ==========================================
+        .leaderboard-title {
+
+            font-size: 22px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================
            ROW
-        ========================================== */
+        ========================= */
 
         .student-row {
 
             display: grid;
 
             grid-template-columns:
-                70px
-                1fr
-                150px
-                150px;
+                80px 1fr 120px;
 
             align-items: center;
 
@@ -238,7 +254,9 @@
             padding: 18px;
 
             border-bottom:
-                1px solid #e6ece8;
+                1px solid #edf0f2;
+
+            transition: 0.2s;
 
         }
 
@@ -252,16 +270,31 @@
 
         .student-row:hover {
 
-            background: #f7fbf8;
+            background: #f8fffb;
 
         }
 
 
-        /* ==========================================
-           POSITION
-        ========================================== */
+        /* =========================
+           CURRENT USER
+        ========================= */
 
-        .position {
+        .student-row.you {
+
+            background: #e8fff2;
+
+            border-radius: 12px;
+
+            border: 2px solid #18a058;
+
+        }
+
+
+        /* =========================
+           RANK
+        ========================= */
+
+        .rank {
 
             font-size: 22px;
 
@@ -272,222 +305,152 @@
         }
 
 
-        /* ==========================================
-           NAME
-        ========================================== */
+        /* =========================
+           STUDENT
+        ========================= */
 
         .student-name {
 
             font-weight: bold;
 
-            font-size: 17px;
+            font-size: 16px;
 
         }
 
 
-        /* ==========================================
-           QUIZZES
-        ========================================== */
-
-        .quiz-number {
-
-            text-align: center;
-
-            color: #617568;
-
-        }
-
-
-        /* ==========================================
-           SCORE
-        ========================================== */
-
-        .score {
-
-            text-align: center;
-
-            font-weight: bold;
-
-            color: #18a058;
-
-            font-size: 19px;
-
-        }
-
-
-        /* ==========================================
-           TOP THREE
-        ========================================== */
-
-        .first {
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #fff8d8,
-                    white
-                );
-
-            border-radius: 12px;
-
-        }
-
-
-        .second {
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #f0f3f5,
-                    white
-                );
-
-            border-radius: 12px;
-
-        }
-
-
-        .third {
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #fff0e3,
-                    white
-                );
-
-            border-radius: 12px;
-
-        }
-
-
-        /* ==========================================
-           CURRENT USER
-        ========================================== */
-
-        .current-user {
-
-            border:
-                2px solid #18a058;
-
-            background: #f0fff7;
-
-        }
-
-
-        .you {
+        .you-label {
 
             display: inline-block;
-
-            margin-left: 8px;
 
             background: #18a058;
 
             color: white;
 
-            padding: 3px 8px;
+            padding: 4px 8px;
 
-            border-radius: 12px;
+            border-radius: 10px;
 
             font-size: 11px;
+
+            margin-left: 6px;
 
         }
 
 
-        /* ==========================================
-           EMPTY / LOADING
-        ========================================== */
+        /* =========================
+           SCORE
+        ========================= */
+
+        .score {
+
+            text-align: right;
+
+            font-weight: bold;
+
+            color: #18a058;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =========================
+           LOADING
+        ========================= */
 
         .loading {
 
             text-align: center;
 
-            padding: 50px;
+            padding: 50px 20px;
 
             color: #617568;
 
         }
 
+
+        /* =========================
+           EMPTY
+        ========================= */
 
         .empty {
 
             text-align: center;
 
-            padding: 50px;
+            padding: 50px 20px;
 
             color: #617568;
 
         }
 
 
+        /* =========================
+           ERROR
+        ========================= */
+
         .error {
 
             text-align: center;
 
-            padding: 30px;
+            padding: 40px 20px;
 
             color: #dc3545;
 
-            line-height: 1.6;
-
         }
 
 
-        /* ==========================================
-           FOOTER
-        ========================================== */
-
-        footer {
-
-            text-align: center;
-
-            padding: 30px;
-
-            color: #527060;
-
-        }
-
-
-        /* ==========================================
+        /* =========================
            MOBILE
-        ========================================== */
+        ========================= */
 
-        @media (max-width: 700px) {
+        @media (max-width: 600px) {
 
             .student-row {
 
                 grid-template-columns:
-                    50px
-                    1fr
-                    90px;
+                    55px 1fr 80px;
 
-                gap: 10px;
+                gap: 8px;
+
+                padding: 15px 10px;
 
             }
 
 
-            .quiz-number {
+            .rank {
 
-                display: none;
+                font-size: 18px;
+
+            }
+
+
+            .student-name {
+
+                font-size: 14px;
 
             }
 
 
             .score {
 
-                font-size: 17px;
+                font-size: 15px;
 
             }
 
 
-            header h1 {
+            .you-label {
 
-                font-size: 27px;
+                display: block;
+
+                width: fit-content;
+
+                margin-left: 0;
+
+                margin-top: 4px;
 
             }
 
         }
-
 
     </style>
 
@@ -496,10 +459,6 @@
 
 <body>
 
-
-<!-- ==========================================
-     HEADER
-========================================== -->
 
 <header>
 
@@ -518,10 +477,6 @@
 <div class="container">
 
 
-    <!-- ==========================================
-         BACK
-    ========================================== -->
-
     <a
         href="dashboard.html"
         class="back">
@@ -532,11 +487,11 @@
 
 
 
-    <!-- ==========================================
-         INTRO
-    ========================================== -->
+    <!-- =========================
+         INFORMATION
+    ========================= -->
 
-    <div class="intro">
+    <div class="info-card">
 
         <h2>
             🏆 Class Leaderboard
@@ -544,8 +499,12 @@
 
         <p>
 
-            See how students are performing
-            based on their completed quizzes.
+            See how you rank among other
+            students based on your quiz
+            performance.
+
+            Student names are hidden
+            for privacy.
 
         </p>
 
@@ -553,35 +512,56 @@
 
 
 
-    <!-- ==========================================
-         REFRESH
-    ========================================== -->
+    <!-- =========================
+         MY POSITION
+    ========================= -->
 
-    <div class="refresh-container">
+    <div
+        id="myPosition"
+        class="my-position"
+        style="display:none;">
 
-        <button
-            class="refresh-button"
-            onclick="loadLeaderboard()">
+        <h2>
+            🎯 Your Position
+        </h2>
 
-            🔄 Refresh Leaderboard
+        <div
+            id="myRank"
+            class="score">
 
-        </button>
+            -
+
+        </div>
+
+        <p>
+            Keep studying and improve your score!
+        </p>
 
     </div>
 
 
 
-    <!-- ==========================================
+    <!-- =========================
          LEADERBOARD
-    ========================================== -->
+    ========================= -->
 
-    <div
-        class="leaderboard"
-        id="leaderboard">
+    <div class="leaderboard">
 
-        <div class="loading">
+        <h2 class="leaderboard-title">
 
-            Loading leaderboard...
+            📊 Rankings
+
+        </h2>
+
+
+        <div
+            id="leaderboardList">
+
+            <div class="loading">
+
+                Loading leaderboard...
+
+            </div>
 
         </div>
 
@@ -592,21 +572,12 @@
 
 
 
-<footer>
-
-    © 2026 OGCONS Study Hub
-    • Built for students
-
-</footer>
-
-
-
 <script>
 
 
-// ==========================================
-// SUPABASE CONNECTION
-// ==========================================
+// =====================================================
+// SUPABASE
+// =====================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -627,11 +598,433 @@ const supabaseClient =
 
 
 
-// ==========================================
-// ESCAPE HTML
-// ==========================================
+// =====================================================
+// GET CURRENT USER
+// =====================================================
 
-function escapeHTML(value) {
+async function getCurrentUser() {
+
+    const {
+
+        data: {
+            user
+
+        },
+
+        error
+
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+    if (error || !user) {
+
+        window.location.href =
+            "index.html";
+
+        return null;
+
+    }
+
+
+    return user;
+
+}
+
+
+
+// =====================================================
+// LOAD LEADERBOARD
+// =====================================================
+
+async function loadLeaderboard() {
+
+
+    const list =
+        document.getElementById(
+            "leaderboardList"
+        );
+
+
+    const myPosition =
+        document.getElementById(
+            "myPosition"
+        );
+
+
+    const myRank =
+        document.getElementById(
+            "myRank"
+        );
+
+
+
+    const user =
+        await getCurrentUser();
+
+
+    if (!user) {
+
+        return;
+
+    }
+
+
+
+    // =================================================
+    // GET QUIZ RESULTS
+    // =================================================
+
+    const {
+
+        data,
+        error
+
+    } =
+        await supabaseClient
+
+            .from("quiz_results")
+
+            .select(
+                "user_id, percentage"
+            );
+
+
+
+    if (error) {
+
+        console.error(
+            "Leaderboard error:",
+            error
+        );
+
+
+        list.innerHTML = `
+
+            <div class="error">
+
+                ❌ Unable to load leaderboard.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    const results =
+        data || [];
+
+
+
+    // =================================================
+    // NO RESULTS
+    // =================================================
+
+    if (
+        results.length === 0
+    ) {
+
+        list.innerHTML = `
+
+            <div class="empty">
+
+                📭 No quiz results yet.
+
+                <br><br>
+
+                Complete a quiz to appear
+                on the leaderboard.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    // =================================================
+    // CALCULATE STUDENT AVERAGES
+    // =================================================
+
+    const students = {};
+
+
+
+    results.forEach(
+        function(result) {
+
+            const userId =
+                result.user_id;
+
+
+            const percentage =
+                Number(
+                    result.percentage || 0
+                );
+
+
+            if (
+                !students[userId]
+            ) {
+
+                students[userId] = {
+
+                    total: 0,
+
+                    quizzes: 0
+
+                };
+
+            }
+
+
+            students[userId].total +=
+                percentage;
+
+
+            students[userId].quizzes++;
+
+        }
+    );
+
+
+
+    // =================================================
+    // CREATE RANKING
+    // =================================================
+
+    const ranking =
+
+        Object.keys(students)
+
+            .map(
+                function(userId) {
+
+                    const average =
+
+                        students[userId].total /
+                        students[userId].quizzes;
+
+
+                    return {
+
+                        userId:
+                            userId,
+
+                        average:
+                            Math.round(
+                                average
+                            ),
+
+                        quizzes:
+                            students[userId].quizzes
+
+                    };
+
+                }
+            )
+
+            .sort(
+                function(a, b) {
+
+                    return b.average -
+                        a.average;
+
+                }
+            );
+
+
+
+    // =================================================
+    // FIND CURRENT USER
+    // =================================================
+
+    const currentIndex =
+        ranking.findIndex(
+            function(student) {
+
+                return String(
+                    student.userId
+                ) === String(
+                    user.id
+                );
+
+            }
+        );
+
+
+
+    if (
+        currentIndex !== -1
+    ) {
+
+        myPosition.style.display =
+            "block";
+
+
+        myRank.textContent =
+
+            "Rank #" +
+            (
+                currentIndex + 1
+            ) +
+            " • " +
+            ranking[currentIndex].average +
+            "%";
+
+    }
+
+
+
+    // =================================================
+    // DISPLAY LEADERBOARD
+    // =================================================
+
+    list.innerHTML = "";
+
+
+
+    ranking.forEach(
+        function(student, index) {
+
+            const rank =
+                index + 1;
+
+
+            const isYou =
+                String(
+                    student.userId
+                ) === String(
+                    user.id
+                );
+
+
+
+            let rankDisplay;
+
+
+            if (rank === 1) {
+
+                rankDisplay = "🥇";
+
+            }
+
+            else if (rank === 2) {
+
+                rankDisplay = "🥈";
+
+            }
+
+            else if (rank === 3) {
+
+                rankDisplay = "🥉";
+
+            }
+
+            else {
+
+                rankDisplay =
+                    "#" + rank;
+
+            }
+
+
+
+            // Anonymous student number
+            const studentNumber =
+                String(rank)
+                    .padStart(
+                        3,
+                        "0"
+                    );
+
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "student-row" +
+                (
+                    isYou
+                        ? " you"
+                        : ""
+                );
+
+
+
+            row.innerHTML = `
+
+                <div class="rank">
+
+                    ${rankDisplay}
+
+                </div>
+
+
+                <div class="student-name">
+
+                    Student #${studentNumber}
+
+                    ${
+                        isYou
+                            ? `
+                                <span class="you-label">
+                                    YOU
+                                </span>
+                              `
+                            : ""
+                    }
+
+                </div>
+
+
+                <div class="score">
+
+                    ${student.average}%
+
+                </div>
+
+            `;
+
+
+
+            list.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHTML(
+    value
+) {
 
     if (
         value === null ||
@@ -674,537 +1067,9 @@ function escapeHTML(value) {
 
 
 
-// ==========================================
-// GET CURRENT USER
-// ==========================================
-
-async function getCurrentUser() {
-
-    const {
-        data: {
-            user
-        }
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
-
-
-    return user;
-
-}
-
-
-
-// ==========================================
-// LOAD LEADERBOARD
-// ==========================================
-
-async function loadLeaderboard() {
-
-
-    const leaderboard =
-        document.getElementById(
-            "leaderboard"
-        );
-
-
-    leaderboard.innerHTML = `
-
-        <div class="loading">
-
-            🔄 Loading leaderboard...
-
-        </div>
-
-    `;
-
-
-    // ==========================================
-    // GET CURRENT USER
-    // ==========================================
-
-    const currentUser =
-        await getCurrentUser();
-
-
-
-    if (!currentUser) {
-
-        window.location.href =
-            "index.html";
-
-        return;
-
-    }
-
-
-
-    // ==========================================
-    // GET QUIZ RESULTS
-    // ==========================================
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-
-            .from("quiz_results")
-
-            .select(
-                "user_id, percentage"
-            );
-
-
-
-    if (error) {
-
-        console.error(
-            "Leaderboard error:",
-            error
-        );
-
-
-        leaderboard.innerHTML = `
-
-            <div class="error">
-
-                ❌ Unable to load leaderboard.
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    const results =
-        data || [];
-
-
-
-    // ==========================================
-    // NO RESULTS
-    // ==========================================
-
-    if (
-        results.length === 0
-    ) {
-
-        leaderboard.innerHTML = `
-
-            <div class="empty">
-
-                📝 No quiz results yet.
-
-                <br><br>
-
-                Complete a quiz to appear
-                on the leaderboard.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    // ==========================================
-    // GROUP RESULTS BY USER
-    // ==========================================
-
-    const students = {};
-
-
-
-    results.forEach(
-        function(result) {
-
-
-            const userId =
-                result.user_id;
-
-
-            if (!userId) {
-
-                return;
-
-            }
-
-
-
-            if (!students[userId]) {
-
-                students[userId] = {
-
-                    user_id:
-                        userId,
-
-                    total:
-                        0,
-
-                    quizzes:
-                        0,
-
-                    scores:
-                        []
-
-                };
-
-            }
-
-
-
-            const score =
-                Number(
-                    result.percentage || 0
-                );
-
-
-            students[userId].scores.push(
-                score
-            );
-
-
-            students[userId].total +=
-                score;
-
-
-            students[userId].quizzes +=
-                1;
-
-
-        }
-    );
-
-
-
-    // ==========================================
-    // CALCULATE AVERAGES
-    // ==========================================
-
-    const studentList =
-
-        Object.values(
-            students
-        ).map(
-            function(student) {
-
-
-                const average =
-
-                    student.quizzes > 0
-
-                        ? student.total /
-                          student.quizzes
-
-                        : 0;
-
-
-                return {
-
-                    user_id:
-                        student.user_id,
-
-                    quizzes:
-                        student.quizzes,
-
-                    average:
-                        Math.round(
-                            average
-                        )
-
-                };
-
-            }
-        );
-
-
-
-    // ==========================================
-    // SORT BY AVERAGE
-    // ==========================================
-
-    studentList.sort(
-        function(a, b) {
-
-
-            if (
-                b.average !==
-                a.average
-            ) {
-
-                return (
-                    b.average -
-                    a.average
-                );
-
-            }
-
-
-            return (
-                b.quizzes -
-                a.quizzes
-            );
-
-        }
-    );
-
-
-
-    // ==========================================
-    // CREATE ROWS
-    // ==========================================
-
-    let html = `
-
-        <div
-            class="student-row"
-            style="
-                font-weight:bold;
-                color:#617568;
-                background:#f7faf8;
-                border-radius:12px;
-            ">
-
-            <div class="position">
-                #
-            </div>
-
-            <div>
-                Student
-            </div>
-
-            <div class="quiz-number">
-                Quizzes
-            </div>
-
-            <div class="score">
-                Average
-            </div>
-
-        </div>
-
-    `;
-
-
-
-    studentList.forEach(
-        function(student, index) {
-
-
-            const position =
-                index + 1;
-
-
-            let medal =
-                position;
-
-
-            if (
-                position === 1
-            ) {
-
-                medal = "🥇";
-
-            }
-            else if (
-                position === 2
-            ) {
-
-                medal = "🥈";
-
-            }
-            else if (
-                position === 3
-            ) {
-
-                medal = "🥉";
-
-            }
-
-
-
-            let rowClass =
-                "student-row";
-
-
-            if (
-                position === 1
-            ) {
-
-                rowClass +=
-                    " first";
-
-            }
-
-
-            if (
-                position === 2
-            ) {
-
-                rowClass +=
-                    " second";
-
-            }
-
-
-            if (
-                position === 3
-            ) {
-
-                rowClass +=
-                    " third";
-
-            }
-
-
-            if (
-                student.user_id ===
-                currentUser.id
-            ) {
-
-                rowClass +=
-                    " current-user";
-
-            }
-
-
-
-            // ==========================================
-            // STUDENT NAME
-            // ==========================================
-
-            let studentName =
-                "Student";
-
-
-            if (
-                student.user_id ===
-                currentUser.id
-            ) {
-
-                studentName =
-
-                    currentUser
-                        .user_metadata
-                        ?.full_name ||
-
-                    currentUser
-                        .email
-                        ?.split("@")[0] ||
-
-                    "Student";
-
-            }
-            else {
-
-                /*
-                 * Supabase normally does not allow
-                 * reading another user's auth
-                 * metadata directly from the browser.
-                 *
-                 * Therefore other students will
-                 * initially display as "Student".
-                 *
-                 * We will improve this in the next
-                 * step using a profiles table.
-                 */
-
-                studentName =
-                    "Student";
-
-            }
-
-
-
-            let you = "";
-
-            if (
-                student.user_id ===
-                currentUser.id
-            ) {
-
-                you = `
-
-                    <span class="you">
-                        YOU
-                    </span>
-
-                `;
-
-            }
-
-
-
-            html += `
-
-                <div
-                    class="${rowClass}">
-
-                    <div class="position">
-
-                        ${medal}
-
-                    </div>
-
-
-                    <div class="student-name">
-
-                        ${escapeHTML(
-                            studentName
-                        )}
-
-                        ${you}
-
-                    </div>
-
-
-                    <div class="quiz-number">
-
-                        ${student.quizzes}
-
-                    </div>
-
-
-                    <div class="score">
-
-                        ${student.average}%
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-
-    leaderboard.innerHTML =
-        html;
-
-}
-
-
-
-// ==========================================
+// =====================================================
 // START
-// ==========================================
+// =====================================================
 
 loadLeaderboard();
 
