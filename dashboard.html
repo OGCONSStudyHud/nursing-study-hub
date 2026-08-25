@@ -22,9 +22,7 @@
         }
 
         body {
-
             font-family: Arial, sans-serif;
-
             min-height: 100vh;
 
             background:
@@ -36,16 +34,13 @@
                 );
 
             color: #163020;
-
         }
 
-
-        /* =========================
+        /* ==========================================
            HEADER
-        ========================= */
+        ========================================== */
 
         header {
-
             background:
                 linear-gradient(
                     135deg,
@@ -54,43 +49,27 @@
                 );
 
             color: white;
-
             padding: 25px;
-
         }
 
-
         .header-content {
-
             max-width: 1100px;
-
             margin: auto;
 
             display: flex;
-
-            justify-content:
-                space-between;
-
+            justify-content: space-between;
             align-items: center;
 
             gap: 20px;
-
         }
-
 
         .logo {
-
             font-size: 24px;
-
             font-weight: bold;
-
         }
 
-
         .logout {
-
             background: white;
-
             color: #18a058;
 
             border: none;
@@ -102,38 +81,27 @@
             font-weight: bold;
 
             cursor: pointer;
-
         }
-
 
         .logout:hover {
-
             background: #f0f0f0;
-
         }
 
-
-        /* =========================
+        /* ==========================================
            CONTAINER
-        ========================= */
+        ========================================== */
 
         .container {
-
             max-width: 1100px;
-
             margin: auto;
-
             padding: 35px 20px;
-
         }
 
-
-        /* =========================
+        /* ==========================================
            WELCOME
-        ========================= */
+        ========================================== */
 
         .welcome {
-
             background: white;
 
             padding: 30px;
@@ -145,57 +113,40 @@
                 rgba(0,0,0,0.08);
 
             margin-bottom: 30px;
-
         }
-
 
         .welcome h1 {
-
             margin-bottom: 10px;
-
         }
-
 
         .welcome p {
-
             color: #617568;
-
             line-height: 1.5;
-
         }
 
-
-        /* =========================
-           SECTION
-        ========================= */
+        /* ==========================================
+           SECTION TITLE
+        ========================================== */
 
         .section-title {
-
             margin: 30px 0 18px;
-
             font-size: 24px;
-
         }
 
-
-        /* =========================
+        /* ==========================================
            CARDS
-        ========================= */
+        ========================================== */
 
         .cards {
-
             display: grid;
 
             grid-template-columns:
                 repeat(3, 1fr);
 
             gap: 20px;
-
         }
 
-
         .card {
-
             background: white;
 
             padding: 25px;
@@ -209,47 +160,30 @@
             text-align: center;
 
             transition: 0.2s;
-
         }
-
 
         .card:hover {
-
-            transform:
-                translateY(-3px);
-
+            transform: translateY(-3px);
         }
-
 
         .icon {
-
             font-size: 42px;
-
             margin-bottom: 12px;
-
         }
-
 
         .card h3 {
-
             margin-bottom: 8px;
-
         }
 
-
         .card p {
-
             color: #617568;
 
             margin-bottom: 18px;
 
             line-height: 1.5;
-
         }
 
-
         .card button {
-
             border: none;
 
             background: #18a058;
@@ -263,38 +197,26 @@
             font-weight: bold;
 
             cursor: pointer;
-
         }
-
 
         .card button:hover {
-
             background: #117d45;
-
         }
 
-
-        /* =========================
+        /* ==========================================
            COMING SOON
-        ========================= */
+        ========================================== */
 
         .coming-soon {
-
-            background:
-                #9aa6a0 !important;
-
-            cursor:
-                not-allowed !important;
-
+            background: #9aa6a0 !important;
+            cursor: not-allowed !important;
         }
 
-
-        /* =========================
+        /* ==========================================
            STAT
-        ========================= */
+        ========================================== */
 
         .stat {
-
             font-size: 32px;
 
             font-weight: bold;
@@ -302,42 +224,45 @@
             color: #18a058;
 
             margin: 10px 0;
-
         }
 
-
-        /* =========================
+        /* ==========================================
            LOADING
-        ========================= */
+        ========================================== */
 
         .loading {
-
             text-align: center;
 
             padding: 50px;
 
             font-size: 18px;
+        }
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 900px) {
+
+            .cards {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
 
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 750px) {
+        @media (max-width: 600px) {
 
             .cards {
-
                 grid-template-columns: 1fr;
-
             }
 
-
             .header-content {
-
                 flex-direction: column;
+            }
 
+            .logo {
+                text-align: center;
             }
 
         }
@@ -349,6 +274,10 @@
 
 <body>
 
+
+<!-- ==========================================
+     HEADER
+========================================== -->
 
 <header>
 
@@ -375,6 +304,10 @@
 
 
 
+<!-- ==========================================
+     LOADING
+========================================== -->
+
 <div
     id="loading"
     class="loading">
@@ -385,25 +318,25 @@
 
 
 
+<!-- ==========================================
+     DASHBOARD
+========================================== -->
+
 <div
     id="dashboard"
     class="container"
     style="display:none;">
 
 
-    <!-- =========================
+    <!-- ==========================================
          WELCOME
-    ========================= -->
+    ========================================== -->
 
     <div class="welcome">
 
         <h1>
 
-            Welcome,
-            <span id="studentName">
-                Student
-            </span>
-            👋
+            Welcome 👋
 
         </h1>
 
@@ -422,9 +355,9 @@
 
 
 
-    <!-- =========================
+    <!-- ==========================================
          COURSES
-    ========================= -->
+    ========================================== -->
 
     <h2 class="section-title">
 
@@ -437,7 +370,9 @@
     <div class="cards">
 
 
-        <!-- MICROBIOLOGY -->
+        <!-- ==========================================
+             MICROBIOLOGY
+        ========================================== -->
 
         <div class="card">
 
@@ -445,11 +380,9 @@
                 🦠
             </div>
 
-
             <h3>
                 Microbiology
             </h3>
-
 
             <p>
 
@@ -459,7 +392,6 @@
                 concepts.
 
             </p>
-
 
             <button
                 onclick="openMicrobiology()">
@@ -472,7 +404,9 @@
 
 
 
-        <!-- ANATOMY -->
+        <!-- ==========================================
+             ANATOMY & PHYSIOLOGY
+        ========================================== -->
 
         <div class="card">
 
@@ -480,11 +414,9 @@
                 🫀
             </div>
 
-
             <h3>
                 Anatomy & Physiology
             </h3>
-
 
             <p>
 
@@ -493,7 +425,6 @@
                 human body functions.
 
             </p>
-
 
             <button
                 onclick="openAnatomy()">
@@ -506,7 +437,9 @@
 
 
 
-        <!-- PHARMACOLOGY -->
+        <!-- ==========================================
+             PHARMACOLOGY
+        ========================================== -->
 
         <div class="card">
 
@@ -514,11 +447,9 @@
                 💊
             </div>
 
-
             <h3>
                 Pharmacology
             </h3>
-
 
             <p>
 
@@ -527,7 +458,6 @@
                 actions and uses.
 
             </p>
-
 
             <button
                 onclick="openPharmacology()">
@@ -540,7 +470,42 @@
 
 
 
-        <!-- MEDICAL SURGICAL -->
+        <!-- ==========================================
+             FOUNDATIONS OF NURSING
+        ========================================== -->
+
+        <div class="card">
+
+            <div class="icon">
+                👩‍⚕️
+            </div>
+
+            <h3>
+                Foundations of Nursing
+            </h3>
+
+            <p>
+
+                Study fundamental nursing
+                principles, concepts,
+                procedures and skills.
+
+            </p>
+
+            <button
+                onclick="openFoundations()">
+
+                Open Course
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             MEDICAL-SURGICAL NURSING
+        ========================================== -->
 
         <div class="card">
 
@@ -548,11 +513,9 @@
                 🏥
             </div>
 
-
             <h3>
                 Medical-Surgical Nursing
             </h3>
-
 
             <p>
 
@@ -562,7 +525,6 @@
 
             </p>
 
-
             <button
                 class="coming-soon">
 
@@ -574,7 +536,9 @@
 
 
 
-        <!-- NUTRITION -->
+        <!-- ==========================================
+             NUTRITION
+        ========================================== -->
 
         <div class="card">
 
@@ -582,11 +546,9 @@
                 🥗
             </div>
 
-
             <h3>
                 Nutrition
             </h3>
-
 
             <p>
 
@@ -596,7 +558,6 @@
 
             </p>
 
-
             <button
                 class="coming-soon">
 
@@ -608,7 +569,9 @@
 
 
 
-        <!-- NURSING PRACTICE -->
+        <!-- ==========================================
+             NURSING PRACTICE
+        ========================================== -->
 
         <div class="card">
 
@@ -616,11 +579,9 @@
                 👩‍⚕️
             </div>
 
-
             <h3>
                 Nursing Practice
             </h3>
-
 
             <p>
 
@@ -630,6 +591,38 @@
 
             </p>
 
+            <button
+                class="coming-soon">
+
+                Coming Soon
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             PHARMACY / OTHER COURSE
+        ========================================== -->
+
+        <div class="card">
+
+            <div class="icon">
+                🔬
+            </div>
+
+            <h3>
+                Chemistry
+            </h3>
+
+            <p>
+
+                Study important chemical
+                principles related to
+                nursing and healthcare.
+
+            </p>
 
             <button
                 class="coming-soon">
@@ -641,13 +634,14 @@
         </div>
 
 
+
     </div>
 
 
 
-    <!-- =========================
+    <!-- ==========================================
          PROGRESS
-    ========================= -->
+    ========================================== -->
 
     <h2 class="section-title">
 
@@ -660,7 +654,9 @@
     <div class="cards">
 
 
-        <!-- QUIZ COUNT -->
+        <!-- ==========================================
+             QUIZZES COMPLETED
+        ========================================== -->
 
         <div class="card">
 
@@ -668,11 +664,9 @@
                 📝
             </div>
 
-
             <h3>
                 Quizzes Completed
             </h3>
-
 
             <div
                 class="stat"
@@ -681,7 +675,6 @@
                 0
 
             </div>
-
 
             <p>
 
@@ -694,7 +687,9 @@
 
 
 
-        <!-- AVERAGE -->
+        <!-- ==========================================
+             AVERAGE SCORE
+        ========================================== -->
 
         <div class="card">
 
@@ -702,11 +697,9 @@
                 ⭐
             </div>
 
-
             <h3>
                 Average Score
             </h3>
-
 
             <div
                 class="stat"
@@ -715,7 +708,6 @@
                 0%
 
             </div>
-
 
             <p>
 
@@ -728,7 +720,9 @@
 
 
 
-        <!-- LEADERBOARD -->
+        <!-- ==========================================
+             LEADERBOARD
+        ========================================== -->
 
         <div class="card">
 
@@ -736,11 +730,9 @@
                 🏆
             </div>
 
-
             <h3>
                 Leaderboard
             </h3>
-
 
             <p>
 
@@ -749,11 +741,10 @@
 
             </p>
 
-
             <button
-                onclick="openLeaderboard()">
+                class="coming-soon">
 
-                View Leaderboard
+                Coming Soon
 
             </button>
 
@@ -770,9 +761,9 @@
 <script>
 
 
-// =====================================================
+// ==================================================
 // SUPABASE CONNECTION
-// =====================================================
+// ==================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -793,25 +784,34 @@ const supabaseClient =
 
 
 
-// =====================================================
+// ==================================================
 // CHECK USER
-// =====================================================
+// ==================================================
 
 async function checkUser() {
-
 
     const {
 
         data: {
             user
+        },
 
-        }
+        error
 
     } =
         await supabaseClient
             .auth
             .getUser();
 
+
+    if (error) {
+
+        console.error(
+            "User check error:",
+            error.message
+        );
+
+    }
 
 
     if (!user) {
@@ -824,29 +824,10 @@ async function checkUser() {
     }
 
 
-
-    const name =
-
-        user.user_metadata?.full_name ||
-
-        user.email?.split("@")[0] ||
-
-        "Student";
-
-
-
-    document
-        .getElementById("studentName")
-        .textContent =
-        name;
-
-
-
     document
         .getElementById("loading")
         .style.display =
         "none";
-
 
 
     document
@@ -858,9 +839,9 @@ async function checkUser() {
 
 
 
-// =====================================================
-// MICROBIOLOGY
-// =====================================================
+// ==================================================
+// OPEN MICROBIOLOGY
+// ==================================================
 
 function openMicrobiology() {
 
@@ -871,9 +852,9 @@ function openMicrobiology() {
 
 
 
-// =====================================================
-// ANATOMY & PHYSIOLOGY
-// =====================================================
+// ==================================================
+// OPEN ANATOMY & PHYSIOLOGY
+// ==================================================
 
 function openAnatomy() {
 
@@ -884,9 +865,9 @@ function openAnatomy() {
 
 
 
-// =====================================================
-// PHARMACOLOGY
-// =====================================================
+// ==================================================
+// OPEN PHARMACOLOGY
+// ==================================================
 
 function openPharmacology() {
 
@@ -897,22 +878,22 @@ function openPharmacology() {
 
 
 
-// =====================================================
-// LEADERBOARD
-// =====================================================
+// ==================================================
+// OPEN FOUNDATIONS OF NURSING
+// ==================================================
 
-function openLeaderboard() {
+function openFoundations() {
 
     window.location.href =
-        "leaderboard.html";
+        "foundations-topics.html";
 
 }
 
 
 
-// =====================================================
+// ==================================================
 // LOGOUT
-// =====================================================
+// ==================================================
 
 async function logout() {
 
@@ -928,9 +909,9 @@ async function logout() {
 
 
 
-// =====================================================
+// ==================================================
 // LOAD QUIZ PROGRESS
-// =====================================================
+// ==================================================
 
 async function loadQuizProgress() {
 
@@ -939,8 +920,9 @@ async function loadQuizProgress() {
 
         data: {
             user
+        },
 
-        }
+        error: userError
 
     } =
         await supabaseClient
@@ -948,13 +930,14 @@ async function loadQuizProgress() {
             .getUser();
 
 
-
-    if (!user) {
+    if (
+        userError ||
+        !user
+    ) {
 
         return;
 
     }
-
 
 
     const {
@@ -975,7 +958,6 @@ async function loadQuizProgress() {
             );
 
 
-
     if (error) {
 
         console.error(
@@ -988,15 +970,13 @@ async function loadQuizProgress() {
     }
 
 
-
     const results =
         data || [];
 
 
-
-    // =================================================
-    // QUIZ COUNT
-    // =================================================
+    // ==========================================
+    // QUIZZES COMPLETED
+    // ==========================================
 
     document
         .getElementById("quizCount")
@@ -1004,10 +984,9 @@ async function loadQuizProgress() {
         results.length;
 
 
-
-    // =================================================
+    // ==========================================
     // AVERAGE SCORE
-    // =================================================
+    // ==========================================
 
     if (
         results.length === 0
@@ -1023,14 +1002,15 @@ async function loadQuizProgress() {
     }
 
 
-
     const totalPercentage =
 
         results.reduce(
-            function(total, result) {
+            function(
+                total,
+                result
+            ) {
 
                 return total +
-
                     Number(
                         result.percentage || 0
                     );
@@ -1038,9 +1018,7 @@ async function loadQuizProgress() {
             },
 
             0
-
         );
-
 
 
     const average =
@@ -1053,7 +1031,6 @@ async function loadQuizProgress() {
         );
 
 
-
     document
         .getElementById("averageScore")
         .textContent =
@@ -1063,9 +1040,9 @@ async function loadQuizProgress() {
 
 
 
-// =====================================================
-// START
-// =====================================================
+// ==================================================
+// START DASHBOARD
+// ==================================================
 
 checkUser();
 
