@@ -36,10 +36,6 @@
             color: #163020;
         }
 
-        /* ==========================================
-           HEADER
-        ========================================== */
-
         header {
             background:
                 linear-gradient(
@@ -87,19 +83,11 @@
             background: #f0f0f0;
         }
 
-        /* ==========================================
-           CONTAINER
-        ========================================== */
-
         .container {
             max-width: 1100px;
             margin: auto;
             padding: 35px 20px;
         }
-
-        /* ==========================================
-           WELCOME
-        ========================================== */
 
         .welcome {
             background: white;
@@ -124,18 +112,10 @@
             line-height: 1.5;
         }
 
-        /* ==========================================
-           SECTION TITLE
-        ========================================== */
-
         .section-title {
             margin: 30px 0 18px;
             font-size: 24px;
         }
-
-        /* ==========================================
-           CARDS
-        ========================================== */
 
         .cards {
             display: grid;
@@ -203,18 +183,10 @@
             background: #117d45;
         }
 
-        /* ==========================================
-           COMING SOON
-        ========================================== */
-
         .coming-soon {
             background: #9aa6a0 !important;
             cursor: not-allowed !important;
         }
-
-        /* ==========================================
-           STAT
-        ========================================== */
 
         .stat {
             font-size: 32px;
@@ -226,10 +198,6 @@
             margin: 10px 0;
         }
 
-        /* ==========================================
-           LOADING
-        ========================================== */
-
         .loading {
             text-align: center;
 
@@ -237,10 +205,6 @@
 
             font-size: 18px;
         }
-
-        /* ==========================================
-           MOBILE
-        ========================================== */
 
         @media (max-width: 900px) {
 
@@ -275,20 +239,13 @@
 <body>
 
 
-<!-- ==========================================
-     HEADER
-========================================== -->
-
 <header>
 
     <div class="header-content">
 
         <div class="logo">
-
             🩺 OGCONS Study Hub
-
         </div>
-
 
         <button
             class="logout"
@@ -304,10 +261,6 @@
 
 
 
-<!-- ==========================================
-     LOADING
-========================================== -->
-
 <div
     id="loading"
     class="loading">
@@ -317,10 +270,6 @@
 </div>
 
 
-
-<!-- ==========================================
-     DASHBOARD
-========================================== -->
 
 <div
     id="dashboard"
@@ -335,11 +284,8 @@
     <div class="welcome">
 
         <h1>
-
             Welcome 👋
-
         </h1>
-
 
         <p>
 
@@ -486,9 +432,9 @@
 
             <p>
 
-                Study fundamental nursing
-                principles, concepts,
-                procedures and skills.
+                Study the principles,
+                skills, ethics and
+                basic practices of nursing.
 
             </p>
 
@@ -504,7 +450,7 @@
 
 
         <!-- ==========================================
-             MEDICAL-SURGICAL NURSING
+             MEDICAL SURGICAL
         ========================================== -->
 
         <div class="card">
@@ -576,7 +522,7 @@
         <div class="card">
 
             <div class="icon">
-                👩‍⚕️
+                🩺
             </div>
 
             <h3>
@@ -601,40 +547,6 @@
         </div>
 
 
-
-        <!-- ==========================================
-             PHARMACY / OTHER COURSE
-        ========================================== -->
-
-        <div class="card">
-
-            <div class="icon">
-                🔬
-            </div>
-
-            <h3>
-                Chemistry
-            </h3>
-
-            <p>
-
-                Study important chemical
-                principles related to
-                nursing and healthcare.
-
-            </p>
-
-            <button
-                class="coming-soon">
-
-                Coming Soon
-
-            </button>
-
-        </div>
-
-
-
     </div>
 
 
@@ -654,9 +566,7 @@
     <div class="cards">
 
 
-        <!-- ==========================================
-             QUIZZES COMPLETED
-        ========================================== -->
+        <!-- QUIZZES COMPLETED -->
 
         <div class="card">
 
@@ -687,9 +597,7 @@
 
 
 
-        <!-- ==========================================
-             AVERAGE SCORE
-        ========================================== -->
+        <!-- AVERAGE SCORE -->
 
         <div class="card">
 
@@ -720,9 +628,7 @@
 
 
 
-        <!-- ==========================================
-             LEADERBOARD
-        ========================================== -->
+        <!-- LEADERBOARD -->
 
         <div class="card">
 
@@ -761,9 +667,9 @@
 <script>
 
 
-// ==================================================
+// ==========================================
 // SUPABASE CONNECTION
-// ==================================================
+// ==========================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -784,37 +690,26 @@ const supabaseClient =
 
 
 
-// ==================================================
+// ==========================================
 // CHECK USER
-// ==================================================
+// ==========================================
 
 async function checkUser() {
 
-    const {
 
+    const {
         data: {
             user
         },
-
         error
-
     } =
         await supabaseClient
             .auth
             .getUser();
 
 
-    if (error) {
 
-        console.error(
-            "User check error:",
-            error.message
-        );
-
-    }
-
-
-    if (!user) {
+    if (error || !user) {
 
         window.location.href =
             "index.html";
@@ -822,6 +717,7 @@ async function checkUser() {
         return;
 
     }
+
 
 
     document
@@ -839,9 +735,9 @@ async function checkUser() {
 
 
 
-// ==================================================
+// ==========================================
 // OPEN MICROBIOLOGY
-// ==================================================
+// ==========================================
 
 function openMicrobiology() {
 
@@ -852,9 +748,9 @@ function openMicrobiology() {
 
 
 
-// ==================================================
+// ==========================================
 // OPEN ANATOMY & PHYSIOLOGY
-// ==================================================
+// ==========================================
 
 function openAnatomy() {
 
@@ -865,9 +761,9 @@ function openAnatomy() {
 
 
 
-// ==================================================
+// ==========================================
 // OPEN PHARMACOLOGY
-// ==================================================
+// ==========================================
 
 function openPharmacology() {
 
@@ -878,9 +774,9 @@ function openPharmacology() {
 
 
 
-// ==================================================
+// ==========================================
 // OPEN FOUNDATIONS OF NURSING
-// ==================================================
+// ==========================================
 
 function openFoundations() {
 
@@ -891,9 +787,9 @@ function openFoundations() {
 
 
 
-// ==================================================
+// ==========================================
 // LOGOUT
-// ==================================================
+// ==========================================
 
 async function logout() {
 
@@ -909,9 +805,9 @@ async function logout() {
 
 
 
-// ==================================================
+// ==========================================
 // LOAD QUIZ PROGRESS
-// ==================================================
+// ==========================================
 
 async function loadQuizProgress() {
 
@@ -920,9 +816,8 @@ async function loadQuizProgress() {
 
         data: {
             user
-        },
 
-        error: userError
+        }
 
     } =
         await supabaseClient
@@ -930,14 +825,13 @@ async function loadQuizProgress() {
             .getUser();
 
 
-    if (
-        userError ||
-        !user
-    ) {
+
+    if (!user) {
 
         return;
 
     }
+
 
 
     const {
@@ -958,6 +852,7 @@ async function loadQuizProgress() {
             );
 
 
+
     if (error) {
 
         console.error(
@@ -970,18 +865,21 @@ async function loadQuizProgress() {
     }
 
 
+
     const results =
         data || [];
 
 
+
     // ==========================================
-    // QUIZZES COMPLETED
+    // NUMBER OF QUIZZES COMPLETED
     // ==========================================
 
     document
         .getElementById("quizCount")
         .textContent =
         results.length;
+
 
 
     // ==========================================
@@ -1002,13 +900,11 @@ async function loadQuizProgress() {
     }
 
 
+
     const totalPercentage =
 
         results.reduce(
-            function(
-                total,
-                result
-            ) {
+            function(total, result) {
 
                 return total +
                     Number(
@@ -1016,19 +912,18 @@ async function loadQuizProgress() {
                     );
 
             },
-
             0
         );
+
 
 
     const average =
 
         Math.round(
-
             totalPercentage /
             results.length
-
         );
+
 
 
     document
@@ -1040,9 +935,9 @@ async function loadQuizProgress() {
 
 
 
-// ==================================================
-// START DASHBOARD
-// ==================================================
+// ==========================================
+// START
+// ==========================================
 
 checkUser();
 
