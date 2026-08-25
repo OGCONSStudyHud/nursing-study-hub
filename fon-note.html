@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>OGCONS Study Hub - Foundations of Nursing</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
+
+            color: #163020;
+
+        }
+
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
+
+            color: white;
+
+            padding: 22px 20px;
+
+        }
+
+
+        .header-content {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .logo {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+        }
+
+
+        .back-button {
+
+            border: none;
+
+            background: white;
+
+            color: #18a058;
+
+            padding: 10px 18px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .back-button:hover {
+
+            background: #f0f0f0;
+
+        }
+
+
+
+        /* ================================
+           MAIN
+        ================================= */
+
+        .container {
+
+            max-width: 950px;
+
+            margin: auto;
+
+            padding: 35px 20px;
+
+        }
+
+
+
+        /* ================================
+           TOPIC HEADER
+        ================================= */
+
+        .topic-header {
+
+            background: white;
+
+            padding: 35px 25px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .topic-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .topic-header h1 {
+
+            color: #18a058;
+
+            font-size: 30px;
+
+            line-height: 1.3;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .topic-header p {
+
+            color: #617568;
+
+            line-height: 1.6;
+
+        }
+
+
+
+        /* ================================
+           ACTION BUTTONS
+        ================================= */
+
+        .actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .action-card {
+
+            background: white;
+
+            padding: 28px 20px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+            text-align: center;
+
+            transition: 0.2s;
+
+        }
+
+
+        .action-card:hover {
+
+            transform: translateY(-3px);
+
+        }
+
+
+        .action-icon {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .action-card h2 {
+
+            margin-bottom: 8px;
+
+            font-size: 20px;
+
+        }
+
+
+        .action-card p {
+
+            color: #617568;
+
+            line-height: 1.5;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .action-button {
+
+            border: none;
+
+            background: #18a058;
+
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 22px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+        }
+
+
+        .action-button:hover {
+
+            background: #117d45;
+
+        }
+
+
+
+        /* ================================
+           NOTE SECTION
+        ================================= */
+
+        #noteSection {
+
+            display: none;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
+
+            margin-top: 25px;
+
+        }
+
+
+        #noteSection h2 {
+
+            color: #18a058;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .note-content {
+
+            line-height: 1.8;
+
+            color: #26382d;
+
+        }
+
+
+        .note-content h3 {
+
+            color: #18a058;
+
+            margin-top: 25px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .note-content p {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .note-content ul {
+
+            margin-left: 25px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .note-content li {
+
+            margin-bottom: 8px;
+
+        }
+
+
+
+        /* ================================
+           MESSAGE
+        ================================= */
+
+        .message {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .message h2 {
+
+            color: #18a058;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .message p {
+
+            color: #617568;
+
+            line-height: 1.6;
+
+        }
+
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #718077;
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 700px) {
+
+            .header-content {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+
+            .actions {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .topic-header h1 {
+
+                font-size: 25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <div class="header-content">
+
+        <div class="logo">
+
+            🩺 OGCONS Study Hub
+
+        </div>
+
+
+        <button
+            class="back-button"
+            onclick="goBack()">
+
+            ← Back to Topics
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<div class="container">
+
+
+    <!-- TOPIC HEADER -->
+
+    <div class="topic-header">
+
+        <div class="topic-icon">
+
+            📚
+
+        </div>
+
+
+        <h1
+            id="topicTitle">
+
+            Foundations of Nursing
+
+        </h1>
+
+
+        <p>
+
+            Study this topic and test your
+            understanding with a quiz.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- ACTIONS -->
+
+    <div class="actions">
+
+
+        <!-- NOTE -->
+
+        <div class="action-card">
+
+            <div class="action-icon">
+
+                📖
+
+            </div>
+
+
+            <h2>
+
+                Read Note
+
+            </h2>
+
+
+            <p>
+
+                Study the detailed nursing note
+                for this topic.
+
+            </p>
+
+
+            <button
+                class="action-button"
+                onclick="showNote()">
+
+                Read Note
+
+            </button>
+
+        </div>
+
+
+
+        <!-- QUIZ -->
+
+        <div class="action-card">
+
+            <div class="action-icon">
+
+                📝
+
+            </div>
+
+
+            <h2>
+
+                Take Quiz
+
+            </h2>
+
+
+            <p>
+
+                Test your knowledge and
+                see how well you understand
+                this topic.
+
+            </p>
+
+
+            <button
+                class="action-button"
+                onclick="takeQuiz()">
+
+                Take Quiz
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ======================================
+         NOTE SECTION
+    ======================================= -->
+
+    <div id="noteSection">
+
+
+        <h2>
+
+            📖
+            <span id="noteTitle">
+                Topic Note
+            </span>
+
+        </h2>
+
+
+        <div
+            class="note-content"
+            id="noteContent">
+
+            <p>
+
+                The detailed note for this topic
+                will be added here.
+
+            </p>
+
+
+            <p>
+
+                We will build the notes according
+                to your Foundations of Nursing
+                curriculum.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ======================================
+         DEFAULT MESSAGE
+    ======================================= -->
+
+    <div
+        class="message"
+        id="messageBox">
+
+        <h2>
+
+            📚 Ready to Study?
+
+        </h2>
+
+
+        <p>
+
+            Choose <strong>Read Note</strong>
+            to study this topic or
+            <strong>Take Quiz</strong>
+            to test your knowledge.
+
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<footer>
+
+    OGCONS Study Hub © 2026
+
+</footer>
+
+
+
+<script>
+
+
+// ==================================================
+// GET TOPIC FROM URL
+// ==================================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const topic =
+    urlParams.get("topic");
+
+
+
+// ==================================================
+// TOPIC TITLE
+// ==================================================
+
+const topicTitle =
+    document.getElementById(
+        "topicTitle"
+    );
+
+
+const noteTitle =
+    document.getElementById(
+        "noteTitle"
+    );
+
+
+
+if (topic) {
+
+    topicTitle.textContent =
+        topic;
+
+    noteTitle.textContent =
+        topic;
+
+} else {
+
+    topicTitle.textContent =
+        "Foundations of Nursing";
+
+    noteTitle.textContent =
+        "Foundations of Nursing";
+
+}
+
+
+
+// ==================================================
+// GO BACK
+// ==================================================
+
+function goBack() {
+
+    window.location.href =
+        "fon-topics.html";
+
+}
+
+
+
+// ==================================================
+// SHOW NOTE
+// ==================================================
+
+function showNote() {
+
+
+    const noteSection =
+        document.getElementById(
+            "noteSection"
+        );
+
+
+    const messageBox =
+        document.getElementById(
+            "messageBox"
+        );
+
+
+    const noteContent =
+        document.getElementById(
+            "noteContent"
+        );
+
+
+    /*
+       FOR NOW WE SHOW A TEMPORARY
+       MESSAGE.
+
+       We will replace this with
+       the complete curriculum-based
+       note for each topic.
+    */
+
+
+    noteContent.innerHTML = `
+
+        <h3>
+            Introduction
+        </h3>
+
+        <p>
+            The detailed note for
+            <strong>
+                ${escapeHTML(topic)}
+            </strong>
+            will be placed here.
+        </p>
+
+
+        <h3>
+            Learning Objectives
+        </h3>
+
+        <ul>
+
+            <li>
+                Understand the basic concepts
+                related to this topic.
+            </li>
+
+            <li>
+                Explain the important principles
+                involved.
+            </li>
+
+            <li>
+                Apply the knowledge to nursing
+                practice.
+            </li>
+
+        </ul>
+
+
+        <h3>
+            Summary
+        </h3>
+
+        <p>
+            This section will contain the
+            simplified study note prepared
+            for OGCONS students.
+        </p>
+
+    `;
+
+
+    noteSection.style.display =
+        "block";
+
+
+    messageBox.style.display =
+        "none";
+
+
+    noteSection.scrollIntoView({
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+
+// ==================================================
+// TAKE QUIZ
+// ==================================================
+
+function takeQuiz() {
+
+
+    /*
+       We pass the exact topic to the
+       quiz page.
+
+       Example:
+
+       fon-quiz.html?topic=Introduction%20to%20Nursing
+    */
+
+
+    if (!topic) {
+
+        alert(
+            "No topic was selected."
+        );
+
+        return;
+
+    }
+
+
+    const quizURL =
+
+        "fon-quiz.html?topic=" +
+
+        encodeURIComponent(
+            topic
+        );
+
+
+    window.location.href =
+        quizURL;
+
+}
+
+
+
+// ==================================================
+// ESCAPE HTML
+// ==================================================
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
