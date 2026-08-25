@@ -9,9 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>
-        OGCONS Study Hub - Admin
-    </title>
+    <title>OGCONS Study Hub - Admin</title>
 
     <style>
 
@@ -51,11 +49,7 @@
             background: white;
             padding: 25px;
             border-radius: 14px;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.08);
-
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin-bottom: 25px;
         }
 
@@ -296,293 +290,329 @@
 </header>
 
 
+
 <div class="container">
 
 
-<div class="card">
+    <!-- ==================================================
+         ADD QUESTION
+    ================================================== -->
 
-    <h2>
-        ➕ Add New Question
-    </h2>
-
-
-    <label>
-        Course
-    </label>
-
-    <select id="course">
-
-        <option value="Microbiology">
-            Microbiology
-        </option>
-
-        <option value="Anatomy & Physiology">
-            Anatomy & Physiology
-        </option>
-
-        <option value="Pharmacology">
-            Pharmacology
-        </option>
-
-        <option value="Medical-Surgical Nursing">
-            Medical-Surgical Nursing
-        </option>
-
-        <option value="Nutrition">
-            Nutrition
-        </option>
-
-        <option value="Psychology">
-            Psychology
-        </option>
-
-        <option value="Nursing Practice">
-            Nursing Practice
-        </option>
-
-        <option value="Chemistry">
-            Chemistry
-        </option>
-
-    </select>
-
-
-    <label>
-        Topic
-    </label>
-
-    <select id="topic">
-    </select>
-
-
-    <div class="topic-help">
-        Select the topic where this question belongs.
-    </div>
-
-
-    <label>
-        Question
-    </label>
-
-    <textarea
-        id="question"
-        placeholder="Enter your question">
-    </textarea>
-
-
-    <label>
-        Option A
-    </label>
-
-    <input
-        id="option_a"
-        type="text"
-        placeholder="Enter option A">
-
-
-    <label>
-        Option B
-    </label>
-
-    <input
-        id="option_b"
-        type="text"
-        placeholder="Enter option B">
-
-
-    <label>
-        Option C
-    </label>
-
-    <input
-        id="option_c"
-        type="text"
-        placeholder="Enter option C">
-
-
-    <label>
-        Option D
-    </label>
-
-    <input
-        id="option_d"
-        type="text"
-        placeholder="Enter option D">
-
-
-    <label>
-        Correct Answer
-    </label>
-
-    <select id="correct_answer">
-
-        <option value="A">A</option>
-
-        <option value="B">B</option>
-
-        <option value="C">C</option>
-
-        <option value="D">D</option>
-
-    </select>
-
-
-    <label>
-        Explanation
-    </label>
-
-    <textarea
-        id="explanation"
-        placeholder="Enter explanation for the answer">
-    </textarea>
-
-
-    <button
-        id="addQuestionButton"
-        onclick="addQuestion()">
-
-        ➕ Add Question
-
-    </button>
-
-
-    <div id="message"></div>
-
-</div>
-
-
-
-<div class="card">
-
-    <div class="management-header">
+    <div class="card">
 
         <h2>
-            📚 Manage Questions
+            ➕ Add New Question
         </h2>
 
-        <button
-            class="refresh-button"
-            onclick="loadQuestions()">
 
-            🔄 Refresh
+        <label>
+            Course
+        </label>
+
+        <select id="course">
+
+            <option value="Microbiology">
+                Microbiology
+            </option>
+
+            <option value="Anatomy & Physiology">
+                Anatomy & Physiology
+            </option>
+
+            <option value="Pharmacology">
+                Pharmacology
+            </option>
+
+            <option value="Foundations of Nursing">
+                Foundations of Nursing
+            </option>
+
+            <option value="Medical-Surgical Nursing">
+                Medical-Surgical Nursing
+            </option>
+
+            <option value="Nutrition">
+                Nutrition
+            </option>
+
+            <option value="Psychology">
+                Psychology
+            </option>
+
+            <option value="Nursing Practice">
+                Nursing Practice
+            </option>
+
+            <option value="Chemistry">
+                Chemistry
+            </option>
+
+        </select>
+
+
+
+        <label>
+            Topic
+        </label>
+
+        <select id="topic">
+        </select>
+
+
+        <div class="topic-help">
+
+            Select the topic where this question belongs.
+
+        </div>
+
+
+
+        <label>
+            Question
+        </label>
+
+        <textarea
+            id="question"
+            placeholder="Enter your question">
+        </textarea>
+
+
+
+        <label>
+            Option A
+        </label>
+
+        <input
+            id="option_a"
+            type="text"
+            placeholder="Enter option A">
+
+
+
+        <label>
+            Option B
+        </label>
+
+        <input
+            id="option_b"
+            type="text"
+            placeholder="Enter option B">
+
+
+
+        <label>
+            Option C
+        </label>
+
+        <input
+            id="option_c"
+            type="text"
+            placeholder="Enter option C">
+
+
+
+        <label>
+            Option D
+        </label>
+
+        <input
+            id="option_d"
+            type="text"
+            placeholder="Enter option D">
+
+
+
+        <label>
+            Correct Answer
+        </label>
+
+        <select id="correct_answer">
+
+            <option value="A">A</option>
+
+            <option value="B">B</option>
+
+            <option value="C">C</option>
+
+            <option value="D">D</option>
+
+        </select>
+
+
+
+        <label>
+            Explanation
+        </label>
+
+        <textarea
+            id="explanation"
+            placeholder="Enter explanation for the answer">
+        </textarea>
+
+
+
+        <button
+            id="addQuestionButton"
+            onclick="addQuestion()">
+
+            ➕ Add Question
 
         </button>
 
-    </div>
 
-
-    <div class="filters">
-
-        <div>
-
-            <label>
-                Filter by Course
-            </label>
-
-            <select
-                id="filterCourse"
-                onchange="updateFilterTopics(); loadQuestions();">
-
-                <option value="">
-                    All Courses
-                </option>
-
-                <option value="Microbiology">
-                    Microbiology
-                </option>
-
-                <option value="Anatomy & Physiology">
-                    Anatomy & Physiology
-                </option>
-
-                <option value="Pharmacology">
-                    Pharmacology
-                </option>
-
-                <option value="Medical-Surgical Nursing">
-                    Medical-Surgical Nursing
-                </option>
-
-                <option value="Nutrition">
-                    Nutrition
-                </option>
-
-                <option value="Psychology">
-                    Psychology
-                </option>
-
-                <option value="Nursing Practice">
-                    Nursing Practice
-                </option>
-
-                <option value="Chemistry">
-                    Chemistry
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div>
-
-            <label>
-                Filter by Topic
-            </label>
-
-            <select
-                id="filterTopic"
-                onchange="loadQuestions()">
-
-                <option value="">
-                    All Topics
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div>
-
-            <label>
-                Search
-            </label>
-
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Search questions..."
-                oninput="filterQuestions()">
-
-        </div>
+        <div id="message"></div>
 
     </div>
 
 
-    <div
-        class="question-count"
-        id="questionCount">
 
-        Loading questions...
+    <!-- ==================================================
+         QUESTION MANAGEMENT
+    ================================================== -->
 
-    </div>
+    <div class="card">
+
+        <div class="management-header">
+
+            <h2>
+                📚 Manage Questions
+            </h2>
+
+            <button
+                class="refresh-button"
+                onclick="loadQuestions()">
+
+                🔄 Refresh
+
+            </button>
+
+        </div>
 
 
-    <div
-        class="questions-list"
-        id="questionsList">
 
-        <div class="loading-text">
+        <div class="filters">
+
+
+            <div>
+
+                <label>
+                    Filter by Course
+                </label>
+
+                <select
+                    id="filterCourse"
+                    onchange="updateFilterTopics(); loadQuestions();">
+
+                    <option value="">
+                        All Courses
+                    </option>
+
+                    <option value="Microbiology">
+                        Microbiology
+                    </option>
+
+                    <option value="Anatomy & Physiology">
+                        Anatomy & Physiology
+                    </option>
+
+                    <option value="Pharmacology">
+                        Pharmacology
+                    </option>
+
+                    <option value="Foundations of Nursing">
+                        Foundations of Nursing
+                    </option>
+
+                    <option value="Medical-Surgical Nursing">
+                        Medical-Surgical Nursing
+                    </option>
+
+                    <option value="Nutrition">
+                        Nutrition
+                    </option>
+
+                    <option value="Psychology">
+                        Psychology
+                    </option>
+
+                    <option value="Nursing Practice">
+                        Nursing Practice
+                    </option>
+
+                    <option value="Chemistry">
+                        Chemistry
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+                    Filter by Topic
+                </label>
+
+                <select
+                    id="filterTopic"
+                    onchange="loadQuestions()">
+
+                    <option value="">
+                        All Topics
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div>
+
+                <label>
+                    Search
+                </label>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search questions..."
+                    oninput="filterQuestions()">
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="question-count"
+            id="questionCount">
+
             Loading questions...
+
+        </div>
+
+
+
+        <div
+            class="questions-list"
+            id="questionsList">
+
+            <div class="loading-text">
+
+                Loading questions...
+
+            </div>
+
         </div>
 
     </div>
 
 </div>
 
-
-</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -590,6 +620,10 @@
 
 <script>
 
+
+// ======================================================
+// SUPABASE
+// ======================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -606,11 +640,17 @@ const supabaseClient =
     );
 
 
-/* ======================================================
-   COURSE TOPICS
-====================================================== */
+
+// ======================================================
+// ALL COURSE TOPICS
+// ======================================================
 
 const courseTopics = {
+
+
+    // ==================================================
+    // MICROBIOLOGY
+    // ==================================================
 
     "Microbiology": [
 
@@ -632,6 +672,11 @@ const courseTopics = {
 
     ],
 
+
+
+    // ==================================================
+    // ANATOMY & PHYSIOLOGY
+    // ==================================================
 
     "Anatomy & Physiology": [
 
@@ -669,19 +714,79 @@ const courseTopics = {
 
         "Genetics and inheritance",
 
-        /* NEW TOPIC */
-
-        "The Reproductive System"
+        "The reproductive systems"
 
     ],
 
+
+
+    // ==================================================
+    // PHARMACOLOGY
+    // ==================================================
 
     "Pharmacology": [
 
-        "General Pharmacology"
+        "Introduction",
+
+        "Sources and Classification of Drugs",
+
+        "Preparation of drugs",
+
+        "Routes of drug administration",
+
+        "Mechanism of drug action",
+
+        "National Drug Policy",
+
+        "Drugs used in management of other health conditions",
+
+        "Patient Education and Counseling"
 
     ],
 
+
+
+    // ==================================================
+    // FOUNDATIONS OF NURSING
+    // ==================================================
+
+    "Foundations of Nursing": [
+
+        "Introduction to Nursing",
+
+        "Health Care Institutions",
+
+        "Ethico-Legal Issues in Nursing",
+
+        "Tools of Nursing",
+
+        "Comfort and Safety Measures",
+
+        "Emergency Care",
+
+        "Administration of Drugs",
+
+        "Diagnostic Investigation",
+
+        "Aseptic Techniques",
+
+        "Unsafe Injection Safety",
+
+        "Introduction to Healthcare Waste",
+
+        "Legal Aspects of Nursing",
+
+        "Nursing Care of Patients with Feeding/Elimination Problems",
+
+        "Basic Life Support"
+
+    ],
+
+
+
+    // ==================================================
+    // OTHER COURSES
+    // ==================================================
 
     "Medical-Surgical Nursing": [
 
@@ -720,40 +825,50 @@ const courseTopics = {
 };
 
 
-/* ======================================================
-   LOAD TOPICS
-====================================================== */
+
+// ======================================================
+// LOAD TOPICS
+// ======================================================
 
 function loadTopics() {
 
     const course =
         document.getElementById("course").value;
 
-
     const topicSelect =
         document.getElementById("topic");
 
-
     topicSelect.innerHTML = "";
-
 
     const topics =
         courseTopics[course] || [];
 
+    if (topics.length === 0) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = "";
+
+        option.textContent =
+            "No topics available";
+
+        topicSelect.appendChild(option);
+
+        return;
+
+    }
 
     topics.forEach(function(topic) {
 
         const option =
             document.createElement("option");
 
-
         option.value =
             topic;
 
-
         option.textContent =
             topic;
-
 
         topicSelect.appendChild(option);
 
@@ -762,79 +877,62 @@ function loadTopics() {
 }
 
 
-/* ======================================================
-   FILTER TOPICS
-====================================================== */
+
+// ======================================================
+// UPDATE FILTER TOPICS
+// ======================================================
 
 function updateFilterTopics() {
 
     const course =
-        document.getElementById(
-            "filterCourse"
-        ).value;
-
+        document.getElementById("filterCourse").value;
 
     const topicSelect =
-        document.getElementById(
-            "filterTopic"
-        );
-
+        document.getElementById("filterTopic");
 
     topicSelect.innerHTML = "";
 
-
     const allOption =
         document.createElement("option");
-
 
     allOption.value = "";
 
     allOption.textContent =
         "All Topics";
 
-
-    topicSelect.appendChild(
-        allOption
-    );
-
+    topicSelect.appendChild(allOption);
 
     if (!course) {
-        return;
-    }
 
+        return;
+
+    }
 
     const topics =
         courseTopics[course] || [];
 
-
     topics.forEach(function(topic) {
 
         const option =
-            document.createElement(
-                "option"
-            );
-
+            document.createElement("option");
 
         option.value =
             topic;
 
-
         option.textContent =
             topic;
 
-
-        topicSelect.appendChild(
-            option
-        );
+        topicSelect.appendChild(option);
 
     });
 
 }
 
 
-/* ======================================================
-   COURSE CHANGE
-====================================================== */
+
+// ======================================================
+// COURSE CHANGE
+// ======================================================
 
 document
     .getElementById("course")
@@ -844,9 +942,10 @@ document
     );
 
 
-/* ======================================================
-   CHECK ADMIN
-====================================================== */
+
+// ======================================================
+// CHECK ADMIN
+// ======================================================
 
 async function checkAdminAccess() {
 
@@ -858,7 +957,6 @@ async function checkAdminAccess() {
             .auth
             .getUser();
 
-
     if (userError || !user) {
 
         window.location.href =
@@ -868,32 +966,28 @@ async function checkAdminAccess() {
 
     }
 
-
     const {
         data: admin,
         error: adminError
     } =
         await supabaseClient
-
             .from("admins")
-
             .select("user_id")
-
-            .eq(
-                "user_id",
-                user.id
-            )
-
+            .eq("user_id", user.id)
             .maybeSingle();
 
-
     if (adminError) {
+
+        console.error(
+            "Admin check error:",
+            adminError.message
+        );
 
         document.body.innerHTML = `
 
             <div style="
                 text-align:center;
-                padding:60px;
+                padding:60px 20px;
                 font-family:Arial;
             ">
 
@@ -902,9 +996,7 @@ async function checkAdminAccess() {
                 </h2>
 
                 <p>
-                    ${escapeHTML(
-                        adminError.message
-                    )}
+                    ${escapeHTML(adminError.message)}
                 </p>
 
             </div>
@@ -915,14 +1007,13 @@ async function checkAdminAccess() {
 
     }
 
-
     if (!admin) {
 
         document.body.innerHTML = `
 
             <div style="
                 text-align:center;
-                padding:60px;
+                padding:60px 20px;
                 font-family:Arial;
             ">
 
@@ -935,6 +1026,12 @@ async function checkAdminAccess() {
                     to access the Admin Dashboard.
                 </p>
 
+                <br>
+
+                <a href="dashboard.html">
+                    ← Return to Dashboard
+                </a>
+
             </div>
 
         `;
@@ -943,83 +1040,92 @@ async function checkAdminAccess() {
 
     }
 
-
     return true;
 
 }
 
 
-/* ======================================================
-   ADD QUESTION
-====================================================== */
+
+// ======================================================
+// ADD QUESTION
+// ======================================================
 
 async function addQuestion() {
 
     const message =
-        document.getElementById(
-            "message"
-        );
-
+        document.getElementById("message");
 
     const button =
         document.getElementById(
             "addQuestionButton"
         );
 
+    const {
+        data: { user },
+        error: userError
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+    if (userError || !user) {
+
+        message.textContent =
+            "❌ You must be logged in before adding questions.";
+
+        message.style.color =
+            "#dc3545";
+
+        return;
+
+    }
 
     const course =
-        document.getElementById(
-            "course"
-        ).value;
-
+        document.getElementById("course").value;
 
     const topic =
-        document.getElementById(
-            "topic"
-        ).value;
-
+        document.getElementById("topic").value;
 
     const question =
-        document.getElementById(
-            "question"
-        ).value.trim();
-
+        document
+            .getElementById("question")
+            .value
+            .trim();
 
     const option_a =
-        document.getElementById(
-            "option_a"
-        ).value.trim();
-
+        document
+            .getElementById("option_a")
+            .value
+            .trim();
 
     const option_b =
-        document.getElementById(
-            "option_b"
-        ).value.trim();
-
+        document
+            .getElementById("option_b")
+            .value
+            .trim();
 
     const option_c =
-        document.getElementById(
-            "option_c"
-        ).value.trim();
-
+        document
+            .getElementById("option_c")
+            .value
+            .trim();
 
     const option_d =
-        document.getElementById(
-            "option_d"
-        ).value.trim();
-
+        document
+            .getElementById("option_d")
+            .value
+            .trim();
 
     const correct_answer =
         document.getElementById(
             "correct_answer"
         ).value;
 
-
     const explanation =
-        document.getElementById(
-            "explanation"
-        ).value.trim();
-
+        document
+            .getElementById("explanation")
+            .value
+            .trim();
 
     if (
         !question ||
@@ -1030,7 +1136,7 @@ async function addQuestion() {
     ) {
 
         message.textContent =
-            "⚠️ Please fill in all question fields.";
+            "⚠️ Please fill in all the question fields.";
 
         message.style.color =
             "#dc3545";
@@ -1039,42 +1145,31 @@ async function addQuestion() {
 
     }
 
-
     button.disabled = true;
 
     button.textContent =
         "Saving question...";
 
-
     const {
         error
     } =
         await supabaseClient
-
             .from("questions")
-
             .insert([{
 
-                course:
-                    course,
+                course: course,
 
-                topic:
-                    topic,
+                topic: topic,
 
-                question:
-                    question,
+                question: question,
 
-                option_a:
-                    option_a,
+                option_a: option_a,
 
-                option_b:
-                    option_b,
+                option_b: option_b,
 
-                option_c:
-                    option_c,
+                option_c: option_c,
 
-                option_d:
-                    option_d,
+                option_d: option_d,
 
                 correct_answer:
                     correct_answer,
@@ -1084,8 +1179,12 @@ async function addQuestion() {
 
             }]);
 
-
     if (error) {
+
+        console.error(
+            "Question insert error:",
+            error
+        );
 
         message.textContent =
             "❌ Error: " +
@@ -1094,8 +1193,7 @@ async function addQuestion() {
         message.style.color =
             "#dc3545";
 
-        button.disabled =
-            false;
+        button.disabled = false;
 
         button.textContent =
             "➕ Add Question";
@@ -1104,13 +1202,11 @@ async function addQuestion() {
 
     }
 
-
     message.textContent =
         "✅ Question added successfully!";
 
     message.style.color =
         "#198754";
-
 
     document.getElementById("question").value = "";
 
@@ -1124,22 +1220,20 @@ async function addQuestion() {
 
     document.getElementById("explanation").value = "";
 
-
-    button.disabled =
-        false;
+    button.disabled = false;
 
     button.textContent =
         "➕ Add Question";
-
 
     loadQuestions();
 
 }
 
 
-/* ======================================================
-   LOAD QUESTIONS
-====================================================== */
+
+// ======================================================
+// LOAD QUESTIONS
+// ======================================================
 
 let allQuestions = [];
 
@@ -1151,12 +1245,10 @@ async function loadQuestions() {
             "questionsList"
         );
 
-
     const count =
         document.getElementById(
             "questionCount"
         );
-
 
     list.innerHTML = `
 
@@ -1166,18 +1258,15 @@ async function loadQuestions() {
 
     `;
 
-
     const filterCourse =
         document.getElementById(
             "filterCourse"
         ).value;
 
-
     const filterTopic =
         document.getElementById(
             "filterTopic"
         ).value;
-
 
     let query =
         supabaseClient
@@ -1190,7 +1279,6 @@ async function loadQuestions() {
                 }
             );
 
-
     if (filterCourse) {
 
         query =
@@ -1200,7 +1288,6 @@ async function loadQuestions() {
             );
 
     }
-
 
     if (filterTopic) {
 
@@ -1212,15 +1299,18 @@ async function loadQuestions() {
 
     }
 
-
     const {
         data,
         error
     } =
         await query;
 
-
     if (error) {
+
+        console.error(
+            "Unable to load questions:",
+            error.message
+        );
 
         list.innerHTML = `
 
@@ -1230,9 +1320,7 @@ async function loadQuestions() {
 
                 <br><br>
 
-                ${escapeHTML(
-                    error.message
-                )}
+                ${escapeHTML(error.message)}
 
             </div>
 
@@ -1245,10 +1333,8 @@ async function loadQuestions() {
 
     }
 
-
     allQuestions =
         data || [];
-
 
     displayQuestions(
         allQuestions
@@ -1257,21 +1343,19 @@ async function loadQuestions() {
 }
 
 
-/* ======================================================
-   SEARCH
-====================================================== */
+
+// ======================================================
+// SEARCH
+// ======================================================
 
 function filterQuestions() {
 
     const search =
         document
-            .getElementById(
-                "searchInput"
-            )
+            .getElementById("searchInput")
             .value
             .trim()
             .toLowerCase();
-
 
     if (!search) {
 
@@ -1283,40 +1367,32 @@ function filterQuestions() {
 
     }
 
-
     const filtered =
         allQuestions.filter(
             function(q) {
 
                 return (
 
-                    String(
-                        q.question || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
+                    String(q.question || "")
+                        .toLowerCase()
+                        .includes(search)
 
                     ||
 
-                    String(
-                        q.course || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
+                    String(q.course || "")
+                        .toLowerCase()
+                        .includes(search)
 
                     ||
 
-                    String(
-                        q.topic || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
+                    String(q.topic || "")
+                        .toLowerCase()
+                        .includes(search)
 
                 );
 
             }
         );
-
 
     displayQuestions(
         filtered
@@ -1325,9 +1401,10 @@ function filterQuestions() {
 }
 
 
-/* ======================================================
-   DISPLAY
-====================================================== */
+
+// ======================================================
+// DISPLAY QUESTIONS
+// ======================================================
 
 function displayQuestions(questions) {
 
@@ -1336,12 +1413,10 @@ function displayQuestions(questions) {
             "questionsList"
         );
 
-
     const count =
         document.getElementById(
             "questionCount"
         );
-
 
     count.textContent =
         questions.length +
@@ -1352,7 +1427,6 @@ function displayQuestions(questions) {
                 : "s"
         ) +
         " found";
-
 
     if (questions.length === 0) {
 
@@ -1370,27 +1444,20 @@ function displayQuestions(questions) {
 
     }
 
-
     list.innerHTML = "";
-
 
     questions.forEach(
         function(q, index) {
 
             const item =
-                document.createElement(
-                    "div"
-                );
-
+                document.createElement("div");
 
             item.className =
                 "question-item";
 
-
             item.id =
                 "question-" +
                 q.id;
-
 
             item.innerHTML = `
 
@@ -1400,31 +1467,23 @@ function displayQuestions(questions) {
 
                 </div>
 
-
                 <div class="question-meta">
 
                     <span class="badge">
-
                         ${escapeHTML(q.course)}
-
                     </span>
 
-
                     <span class="badge">
-
                         ${escapeHTML(q.topic)}
-
                     </span>
 
                 </div>
-
 
                 <div class="question-text">
 
                     ${escapeHTML(q.question)}
 
                 </div>
-
 
                 <div class="options-list">
 
@@ -1444,7 +1503,6 @@ function displayQuestions(questions) {
 
                     </div>
 
-
                     <div class="${
                         q.correct_answer === "B"
                             ? "correct-option"
@@ -1461,7 +1519,6 @@ function displayQuestions(questions) {
 
                     </div>
 
-
                     <div class="${
                         q.correct_answer === "C"
                             ? "correct-option"
@@ -1477,7 +1534,6 @@ function displayQuestions(questions) {
                         }
 
                     </div>
-
 
                     <div class="${
                         q.correct_answer === "D"
@@ -1497,7 +1553,6 @@ function displayQuestions(questions) {
 
                 </div>
 
-
                 <div class="explanation-box">
 
                     <strong>
@@ -1511,7 +1566,6 @@ function displayQuestions(questions) {
 
                 </div>
 
-
                 <div class="question-actions">
 
                     <button
@@ -1521,7 +1575,6 @@ function displayQuestions(questions) {
                         ✏️ Edit
 
                     </button>
-
 
                     <button
                         class="delete-button"
@@ -1535,7 +1588,6 @@ function displayQuestions(questions) {
 
             `;
 
-
             list.appendChild(item);
 
         }
@@ -1544,9 +1596,10 @@ function displayQuestions(questions) {
 }
 
 
-/* ======================================================
-   EDIT QUESTION
-====================================================== */
+
+// ======================================================
+// EDIT QUESTION
+// ======================================================
 
 function editQuestion(id) {
 
@@ -1561,17 +1614,24 @@ function editQuestion(id) {
             }
         );
 
-
     if (!q) {
-        return;
-    }
 
+        alert("Question not found.");
+
+        return;
+
+    }
 
     const item =
         document.getElementById(
             "question-" + id
         );
 
+    if (!item) {
+
+        return;
+
+    }
 
     item.innerHTML = `
 
@@ -1580,7 +1640,6 @@ function editQuestion(id) {
             <h3>
                 ✏️ Edit Question
             </h3>
-
 
             <label>
                 Course
@@ -1594,15 +1653,12 @@ function editQuestion(id) {
 
             </select>
 
-
             <label>
                 Topic
             </label>
 
             <select id="edit_topic_${id}">
-
             </select>
-
 
             <label>
                 Question
@@ -1612,7 +1668,6 @@ function editQuestion(id) {
                 id="edit_question_${id}">${escapeHTML(
                     q.question
                 )}</textarea>
-
 
             <label>
                 Option A
@@ -1624,7 +1679,6 @@ function editQuestion(id) {
                     q.option_a
                 )}">
 
-
             <label>
                 Option B
             </label>
@@ -1634,7 +1688,6 @@ function editQuestion(id) {
                 value="${escapeAttribute(
                     q.option_b
                 )}">
-
 
             <label>
                 Option C
@@ -1646,7 +1699,6 @@ function editQuestion(id) {
                     q.option_c
                 )}">
 
-
             <label>
                 Option D
             </label>
@@ -1656,7 +1708,6 @@ function editQuestion(id) {
                 value="${escapeAttribute(
                     q.option_d
                 )}">
-
 
             <label>
                 Correct Answer
@@ -1694,7 +1745,6 @@ function editQuestion(id) {
 
             </select>
 
-
             <label>
                 Explanation
             </label>
@@ -1703,7 +1753,6 @@ function editQuestion(id) {
                 id="edit_explanation_${id}">${escapeHTML(
                     q.explanation || ""
                 )}</textarea>
-
 
             <div class="question-actions">
 
@@ -1714,7 +1763,6 @@ function editQuestion(id) {
                     💾 Save Changes
 
                 </button>
-
 
                 <button
                     class="cancel-button"
@@ -1730,12 +1778,10 @@ function editQuestion(id) {
 
     `;
 
-
     const editCourse =
         document.getElementById(
             "edit_course_" + id
         );
-
 
     editCourse.addEventListener(
         "change",
@@ -1749,7 +1795,6 @@ function editQuestion(id) {
         }
     );
 
-
     loadEditTopics(
         id,
         q.course,
@@ -1759,9 +1804,10 @@ function editQuestion(id) {
 }
 
 
-/* ======================================================
-   COURSE OPTIONS
-====================================================== */
+
+// ======================================================
+// COURSE OPTIONS
+// ======================================================
 
 function createCourseOptions(
     selectedCourse
@@ -1770,35 +1816,36 @@ function createCourseOptions(
     return Object.keys(
         courseTopics
     )
-    .map(
-        function(course) {
+        .map(
+            function(course) {
 
-            return `
+                return `
 
-                <option
-                    value="${escapeAttribute(course)}"
-                    ${
-                        course === selectedCourse
-                            ? "selected"
-                            : ""
-                    }>
+                    <option
+                        value="${escapeAttribute(course)}"
+                        ${
+                            course === selectedCourse
+                                ? "selected"
+                                : ""
+                        }>
 
-                    ${escapeHTML(course)}
+                        ${escapeHTML(course)}
 
-                </option>
+                    </option>
 
-            `;
+                `;
 
-        }
-    )
-    .join("");
+            }
+        )
+        .join("");
 
 }
 
 
-/* ======================================================
-   EDIT TOPICS
-====================================================== */
+
+// ======================================================
+// EDIT TOPICS
+// ======================================================
 
 function loadEditTopics(
     id,
@@ -1811,18 +1858,16 @@ function loadEditTopics(
             "edit_topic_" + id
         );
 
-
     if (!topicSelect) {
-        return;
-    }
 
+        return;
+
+    }
 
     topicSelect.innerHTML = "";
 
-
     const topics =
         courseTopics[course] || [];
-
 
     topics.forEach(
         function(topic) {
@@ -1832,14 +1877,11 @@ function loadEditTopics(
                     "option"
                 );
 
-
             option.value =
                 topic;
 
-
             option.textContent =
                 topic;
-
 
             if (
                 topic === selectedTopic
@@ -1849,7 +1891,6 @@ function loadEditTopics(
                     true;
 
             }
-
 
             topicSelect.appendChild(
                 option
@@ -1861,9 +1902,10 @@ function loadEditTopics(
 }
 
 
-/* ======================================================
-   SAVE EDIT
-====================================================== */
+
+// ======================================================
+// SAVE EDIT
+// ======================================================
 
 async function saveEditedQuestion(id) {
 
@@ -1872,54 +1914,45 @@ async function saveEditedQuestion(id) {
             "edit_course_" + id
         ).value;
 
-
     const topic =
         document.getElementById(
             "edit_topic_" + id
         ).value;
-
 
     const question =
         document.getElementById(
             "edit_question_" + id
         ).value.trim();
 
-
     const option_a =
         document.getElementById(
             "edit_option_a_" + id
         ).value.trim();
-
 
     const option_b =
         document.getElementById(
             "edit_option_b_" + id
         ).value.trim();
 
-
     const option_c =
         document.getElementById(
             "edit_option_c_" + id
         ).value.trim();
-
 
     const option_d =
         document.getElementById(
             "edit_option_d_" + id
         ).value.trim();
 
-
     const correct_answer =
         document.getElementById(
             "edit_correct_" + id
         ).value;
 
-
     const explanation =
         document.getElementById(
             "edit_explanation_" + id
         ).value.trim();
-
 
     if (
         !question ||
@@ -1937,36 +1970,26 @@ async function saveEditedQuestion(id) {
 
     }
 
-
     const {
         error
     } =
         await supabaseClient
-
             .from("questions")
-
             .update({
 
-                course:
-                    course,
+                course: course,
 
-                topic:
-                    topic,
+                topic: topic,
 
-                question:
-                    question,
+                question: question,
 
-                option_a:
-                    option_a,
+                option_a: option_a,
 
-                option_b:
-                    option_b,
+                option_b: option_b,
 
-                option_c:
-                    option_c,
+                option_c: option_c,
 
-                option_d:
-                    option_d,
+                option_d: option_d,
 
                 correct_answer:
                     correct_answer,
@@ -1975,12 +1998,10 @@ async function saveEditedQuestion(id) {
                     explanation
 
             })
-
             .eq(
                 "id",
                 id
             );
-
 
     if (error) {
 
@@ -1993,20 +2014,19 @@ async function saveEditedQuestion(id) {
 
     }
 
-
     alert(
         "✅ Question updated successfully!"
     );
-
 
     loadQuestions();
 
 }
 
 
-/* ======================================================
-   DELETE
-====================================================== */
+
+// ======================================================
+// DELETE
+// ======================================================
 
 async function deleteQuestion(id) {
 
@@ -2021,11 +2041,11 @@ async function deleteQuestion(id) {
             }
         );
 
-
     if (!q) {
-        return;
-    }
 
+        return;
+
+    }
 
     const confirmed =
         confirm(
@@ -2033,26 +2053,22 @@ async function deleteQuestion(id) {
             q.question
         );
 
-
     if (!confirmed) {
-        return;
-    }
 
+        return;
+
+    }
 
     const {
         error
     } =
         await supabaseClient
-
             .from("questions")
-
             .delete()
-
             .eq(
                 "id",
                 id
             );
-
 
     if (error) {
 
@@ -2065,20 +2081,19 @@ async function deleteQuestion(id) {
 
     }
 
-
     alert(
         "✅ Question deleted successfully!"
     );
-
 
     loadQuestions();
 
 }
 
 
-/* ======================================================
-   ESCAPE HTML
-====================================================== */
+
+// ======================================================
+// ESCAPE HTML
+// ======================================================
 
 function escapeHTML(value) {
 
@@ -2091,40 +2106,25 @@ function escapeHTML(value) {
 
     }
 
-
     return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        .replace(/&/g, "&amp;")
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+        .replace(/</g, "&lt;")
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+        .replace(/>/g, "&gt;")
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+        .replace(/"/g, "&quot;")
 
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/'/g, "&#039;");
 
 }
 
 
-/* ======================================================
-   ESCAPE ATTRIBUTE
-====================================================== */
+
+// ======================================================
+// ESCAPE ATTRIBUTE
+// ======================================================
 
 function escapeAttribute(value) {
 
@@ -2137,35 +2137,23 @@ function escapeAttribute(value) {
 
     }
 
-
     return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        .replace(/&/g, "&amp;")
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+        .replace(/"/g, "&quot;")
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+        .replace(/</g, "&lt;")
 
-        .replace(
-            />/g,
-            "&gt;"
-        );
+        .replace(/>/g, "&gt;");
 
 }
 
 
-/* ======================================================
-   LOGOUT
-====================================================== */
+
+// ======================================================
+// LOGOUT
+// ======================================================
 
 async function logout() {
 
@@ -2173,16 +2161,16 @@ async function logout() {
         .auth
         .signOut();
 
-
     window.location.href =
         "index.html";
 
 }
 
 
-/* ======================================================
-   START
-====================================================== */
+
+// ======================================================
+// START
+// ======================================================
 
 loadTopics();
 
