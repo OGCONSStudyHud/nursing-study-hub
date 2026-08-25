@@ -22,7 +22,9 @@
         }
 
         body {
+
             font-family: Arial, sans-serif;
+
             min-height: 100vh;
 
             background:
@@ -34,9 +36,16 @@
                 );
 
             color: #163020;
+
         }
 
+
+        /* =========================
+           HEADER
+        ========================= */
+
         header {
+
             background:
                 linear-gradient(
                     135deg,
@@ -45,27 +54,43 @@
                 );
 
             color: white;
+
             padding: 25px;
+
         }
 
+
         .header-content {
+
             max-width: 1100px;
+
             margin: auto;
 
             display: flex;
-            justify-content: space-between;
+
+            justify-content:
+                space-between;
+
             align-items: center;
 
             gap: 20px;
+
         }
+
 
         .logo {
+
             font-size: 24px;
+
             font-weight: bold;
+
         }
 
+
         .logout {
+
             background: white;
+
             color: #18a058;
 
             border: none;
@@ -77,19 +102,38 @@
             font-weight: bold;
 
             cursor: pointer;
+
         }
+
 
         .logout:hover {
+
             background: #f0f0f0;
+
         }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
 
         .container {
+
             max-width: 1100px;
+
             margin: auto;
+
             padding: 35px 20px;
+
         }
 
+
+        /* =========================
+           WELCOME
+        ========================= */
+
         .welcome {
+
             background: white;
 
             padding: 30px;
@@ -101,32 +145,57 @@
                 rgba(0,0,0,0.08);
 
             margin-bottom: 30px;
+
         }
+
 
         .welcome h1 {
+
             margin-bottom: 10px;
+
         }
+
 
         .welcome p {
+
             color: #617568;
+
             line-height: 1.5;
+
         }
+
+
+        /* =========================
+           SECTION
+        ========================= */
 
         .section-title {
+
             margin: 30px 0 18px;
+
             font-size: 24px;
+
         }
 
+
+        /* =========================
+           CARDS
+        ========================= */
+
         .cards {
+
             display: grid;
 
             grid-template-columns:
                 repeat(3, 1fr);
 
             gap: 20px;
+
         }
 
+
         .card {
+
             background: white;
 
             padding: 25px;
@@ -140,30 +209,47 @@
             text-align: center;
 
             transition: 0.2s;
+
         }
+
 
         .card:hover {
-            transform: translateY(-3px);
+
+            transform:
+                translateY(-3px);
+
         }
+
 
         .icon {
+
             font-size: 42px;
+
             margin-bottom: 12px;
+
         }
+
 
         .card h3 {
+
             margin-bottom: 8px;
+
         }
 
+
         .card p {
+
             color: #617568;
 
             margin-bottom: 18px;
 
             line-height: 1.5;
+
         }
 
+
         .card button {
+
             border: none;
 
             background: #18a058;
@@ -177,13 +263,38 @@
             font-weight: bold;
 
             cursor: pointer;
+
         }
+
 
         .card button:hover {
+
             background: #117d45;
+
         }
 
+
+        /* =========================
+           COMING SOON
+        ========================= */
+
+        .coming-soon {
+
+            background:
+                #9aa6a0 !important;
+
+            cursor:
+                not-allowed !important;
+
+        }
+
+
+        /* =========================
+           STAT
+        ========================= */
+
         .stat {
+
             font-size: 32px;
 
             font-weight: bold;
@@ -191,24 +302,42 @@
             color: #18a058;
 
             margin: 10px 0;
+
         }
 
+
+        /* =========================
+           LOADING
+        ========================= */
+
         .loading {
+
             text-align: center;
 
             padding: 50px;
 
             font-size: 18px;
+
         }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 750px) {
 
             .cards {
+
                 grid-template-columns: 1fr;
+
             }
 
+
             .header-content {
+
                 flex-direction: column;
+
             }
 
         }
@@ -226,8 +355,11 @@
     <div class="header-content">
 
         <div class="logo">
+
             🩺 OGCONS Study Hub
+
         </div>
+
 
         <button
             class="logout"
@@ -259,9 +391,9 @@
     style="display:none;">
 
 
-    <!-- ==========================================
+    <!-- =========================
          WELCOME
-    ========================================== -->
+    ========================= -->
 
     <div class="welcome">
 
@@ -274,6 +406,7 @@
             👋
 
         </h1>
+
 
         <p>
 
@@ -289,9 +422,9 @@
 
 
 
-    <!-- ==========================================
+    <!-- =========================
          COURSES
-    ========================================== -->
+    ========================= -->
 
     <h2 class="section-title">
 
@@ -312,9 +445,11 @@
                 🦠
             </div>
 
+
             <h3>
                 Microbiology
             </h3>
+
 
             <p>
 
@@ -324,6 +459,7 @@
                 concepts.
 
             </p>
+
 
             <button
                 onclick="openMicrobiology()">
@@ -336,7 +472,7 @@
 
 
 
-        <!-- ANATOMY & PHYSIOLOGY -->
+        <!-- ANATOMY -->
 
         <div class="card">
 
@@ -344,9 +480,11 @@
                 🫀
             </div>
 
+
             <h3>
                 Anatomy & Physiology
             </h3>
+
 
             <p>
 
@@ -355,6 +493,7 @@
                 human body functions.
 
             </p>
+
 
             <button
                 onclick="openAnatomy()">
@@ -375,9 +514,11 @@
                 💊
             </div>
 
+
             <h3>
                 Pharmacology
             </h3>
+
 
             <p>
 
@@ -386,6 +527,7 @@
                 actions and uses.
 
             </p>
+
 
             <button
                 onclick="openPharmacology()">
@@ -406,9 +548,11 @@
                 🏥
             </div>
 
+
             <h3>
                 Medical-Surgical Nursing
             </h3>
+
 
             <p>
 
@@ -418,12 +562,9 @@
 
             </p>
 
+
             <button
-                style="
-                    background:#9aa6a0;
-                    cursor:not-allowed;
-                "
-                disabled>
+                class="coming-soon">
 
                 Coming Soon
 
@@ -441,9 +582,11 @@
                 🥗
             </div>
 
+
             <h3>
                 Nutrition
             </h3>
+
 
             <p>
 
@@ -453,12 +596,9 @@
 
             </p>
 
+
             <button
-                style="
-                    background:#9aa6a0;
-                    cursor:not-allowed;
-                "
-                disabled>
+                class="coming-soon">
 
                 Coming Soon
 
@@ -476,9 +616,11 @@
                 👩‍⚕️
             </div>
 
+
             <h3>
                 Nursing Practice
             </h3>
+
 
             <p>
 
@@ -488,12 +630,9 @@
 
             </p>
 
+
             <button
-                style="
-                    background:#9aa6a0;
-                    cursor:not-allowed;
-                "
-                disabled>
+                class="coming-soon">
 
                 Coming Soon
 
@@ -506,9 +645,9 @@
 
 
 
-    <!-- ==========================================
+    <!-- =========================
          PROGRESS
-    ========================================== -->
+    ========================= -->
 
     <h2 class="section-title">
 
@@ -521,7 +660,7 @@
     <div class="cards">
 
 
-        <!-- QUIZZES COMPLETED -->
+        <!-- QUIZ COUNT -->
 
         <div class="card">
 
@@ -529,9 +668,11 @@
                 📝
             </div>
 
+
             <h3>
                 Quizzes Completed
             </h3>
+
 
             <div
                 class="stat"
@@ -540,6 +681,7 @@
                 0
 
             </div>
+
 
             <p>
 
@@ -552,7 +694,7 @@
 
 
 
-        <!-- AVERAGE SCORE -->
+        <!-- AVERAGE -->
 
         <div class="card">
 
@@ -560,9 +702,11 @@
                 ⭐
             </div>
 
+
             <h3>
                 Average Score
             </h3>
+
 
             <div
                 class="stat"
@@ -571,6 +715,7 @@
                 0%
 
             </div>
+
 
             <p>
 
@@ -591,9 +736,11 @@
                 🏆
             </div>
 
+
             <h3>
                 Leaderboard
             </h3>
+
 
             <p>
 
@@ -601,6 +748,7 @@
                 among your classmates.
 
             </p>
+
 
             <button
                 onclick="openLeaderboard()">
@@ -622,9 +770,9 @@
 <script>
 
 
-// ==========================================
+// =====================================================
 // SUPABASE CONNECTION
-// ==========================================
+// =====================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -645,20 +793,25 @@ const supabaseClient =
 
 
 
-// ==========================================
+// =====================================================
 // CHECK USER
-// ==========================================
+// =====================================================
 
 async function checkUser() {
 
+
     const {
+
         data: {
             user
+
         }
+
     } =
         await supabaseClient
             .auth
             .getUser();
+
 
 
     if (!user) {
@@ -671,6 +824,7 @@ async function checkUser() {
     }
 
 
+
     const name =
 
         user.user_metadata?.full_name ||
@@ -680,16 +834,19 @@ async function checkUser() {
         "Student";
 
 
+
     document
         .getElementById("studentName")
         .textContent =
         name;
 
 
+
     document
         .getElementById("loading")
         .style.display =
         "none";
+
 
 
     document
@@ -701,9 +858,9 @@ async function checkUser() {
 
 
 
-// ==========================================
-// OPEN MICROBIOLOGY
-// ==========================================
+// =====================================================
+// MICROBIOLOGY
+// =====================================================
 
 function openMicrobiology() {
 
@@ -714,9 +871,9 @@ function openMicrobiology() {
 
 
 
-// ==========================================
-// OPEN ANATOMY & PHYSIOLOGY
-// ==========================================
+// =====================================================
+// ANATOMY & PHYSIOLOGY
+// =====================================================
 
 function openAnatomy() {
 
@@ -727,9 +884,9 @@ function openAnatomy() {
 
 
 
-// ==========================================
-// OPEN PHARMACOLOGY
-// ==========================================
+// =====================================================
+// PHARMACOLOGY
+// =====================================================
 
 function openPharmacology() {
 
@@ -740,9 +897,9 @@ function openPharmacology() {
 
 
 
-// ==========================================
-// OPEN LEADERBOARD
-// ==========================================
+// =====================================================
+// LEADERBOARD
+// =====================================================
 
 function openLeaderboard() {
 
@@ -753,9 +910,9 @@ function openLeaderboard() {
 
 
 
-// ==========================================
+// =====================================================
 // LOGOUT
-// ==========================================
+// =====================================================
 
 async function logout() {
 
@@ -771,20 +928,25 @@ async function logout() {
 
 
 
-// ==========================================
+// =====================================================
 // LOAD QUIZ PROGRESS
-// ==========================================
+// =====================================================
 
 async function loadQuizProgress() {
 
+
     const {
+
         data: {
             user
+
         }
+
     } =
         await supabaseClient
             .auth
             .getUser();
+
 
 
     if (!user) {
@@ -794,9 +956,12 @@ async function loadQuizProgress() {
     }
 
 
+
     const {
+
         data,
         error
+
     } =
         await supabaseClient
 
@@ -808,6 +973,7 @@ async function loadQuizProgress() {
                 "user_id",
                 user.id
             );
+
 
 
     if (error) {
@@ -822,15 +988,26 @@ async function loadQuizProgress() {
     }
 
 
+
     const results =
         data || [];
 
+
+
+    // =================================================
+    // QUIZ COUNT
+    // =================================================
 
     document
         .getElementById("quizCount")
         .textContent =
         results.length;
 
+
+
+    // =================================================
+    // AVERAGE SCORE
+    // =================================================
 
     if (
         results.length === 0
@@ -846,27 +1023,35 @@ async function loadQuizProgress() {
     }
 
 
+
     const totalPercentage =
 
         results.reduce(
             function(total, result) {
 
                 return total +
+
                     Number(
                         result.percentage || 0
                     );
 
             },
+
             0
+
         );
+
 
 
     const average =
 
         Math.round(
+
             totalPercentage /
             results.length
+
         );
+
 
 
     document
@@ -878,9 +1063,9 @@ async function loadQuizProgress() {
 
 
 
-// ==========================================
+// =====================================================
 // START
-// ==========================================
+// =====================================================
 
 checkUser();
 
