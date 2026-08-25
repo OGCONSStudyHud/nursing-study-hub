@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>OGCONS Study Hub - Foundations of Nursing</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
+
+            color: #163020;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
+
+            color: white;
+
+            text-align: center;
+
+            padding: 35px 20px;
+        }
+
+
+        header h1 {
+
+            margin: 0;
+
+            font-size: 34px;
+        }
+
+
+        header p {
+
+            margin-top: 10px;
+
+            font-size: 17px;
+        }
+
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 30px 20px;
+        }
+
+
+        /* ==========================================
+           BACK BUTTON
+        ========================================== */
+
+        .back {
+
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            color: #18a058;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        .back:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ==========================================
+           INTRO
+        ========================================== */
+
+        .intro {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.08);
+        }
+
+
+        .intro h2 {
+
+            margin-bottom: 10px;
+        }
+
+
+        .intro p {
+
+            color: #617568;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==========================================
+           TOPICS GRID
+        ========================================== */
+
+        .topics {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        /* ==========================================
+           TOPIC CARD
+        ========================================== */
+
+        .topic {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.08);
+
+            transition: 0.2s;
+        }
+
+
+        .topic:hover {
+
+            transform:
+                translateY(-5px);
+        }
+
+
+        /* ==========================================
+           ICON
+        ========================================== */
+
+        .icon {
+
+            font-size: 45px;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* ==========================================
+           TITLE
+        ========================================== */
+
+        .topic h3 {
+
+            margin-bottom: 10px;
+
+            line-height: 1.3;
+        }
+
+
+        /* ==========================================
+           DESCRIPTION
+        ========================================== */
+
+        .topic p {
+
+            color: #617568;
+
+            min-height: 55px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==========================================
+           BUTTON
+        ========================================== */
+
+        .topic button {
+
+            border: none;
+
+            background: #18a058;
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+
+        .topic button:hover {
+
+            background: #117d45;
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #527060;
+        }
+
+
+        /* ==========================================
+           TABLET
+        ========================================== */
+
+        @media (max-width: 800px) {
+
+            .topics {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 550px) {
+
+            .topics {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            header h1 {
+
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header>
+
+    <h1>
+        👩‍⚕️ Foundations of Nursing
+    </h1>
+
+    <p>
+        Choose a topic to begin studying
+    </p>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- ==========================================
+         BACK
+    ========================================== -->
+
+    <a
+        href="dashboard.html"
+        class="back">
+
+        ← Back to Dashboard
+
+    </a>
+
+
+
+    <!-- ==========================================
+         INTRO
+    ========================================== -->
+
+    <div class="intro">
+
+        <h2>
+            📚 Foundations of Nursing Topics
+        </h2>
+
+        <p>
+
+            Study the fundamental principles,
+            concepts and skills that form the
+            foundation of nursing practice.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         TOPICS
+    ========================================== -->
+
+    <div class="topics">
+
+
+        <!-- 1 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🩺
+            </div>
+
+            <h3>
+                Introduction to Nursing
+            </h3>
+
+            <p>
+                Learn the meaning, aims,
+                functions, roles and importance
+                of nursing.
+            </p>
+
+            <button
+                onclick="openTopic('Introduction to Nursing')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 2 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                📜
+            </div>
+
+            <h3>
+                History and Development of Nursing
+            </h3>
+
+            <p>
+                Study the development of nursing
+                from early care to modern nursing.
+            </p>
+
+            <button
+                onclick="openTopic('History and Development of Nursing')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 3 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                👩‍⚕️
+            </div>
+
+            <h3>
+                Nursing as a Profession
+            </h3>
+
+            <p>
+                Learn the characteristics,
+                responsibilities and standards
+                of the nursing profession.
+            </p>
+
+            <button
+                onclick="openTopic('Nursing as a Profession')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 4 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                📋
+            </div>
+
+            <h3>
+                Nursing Process
+            </h3>
+
+            <p>
+                Study assessment, diagnosis,
+                planning, implementation and
+                evaluation.
+            </p>
+
+            <button
+                onclick="openTopic('Nursing Process')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 5 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                ❤️
+            </div>
+
+            <h3>
+                Basic Nursing Concepts
+            </h3>
+
+            <p>
+                Understand basic concepts and
+                principles that guide nursing care.
+            </p>
+
+            <button
+                onclick="openTopic('Basic Nursing Concepts')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 6 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                💬
+            </div>
+
+            <h3>
+                Communication in Nursing
+            </h3>
+
+            <p>
+                Learn effective communication,
+                therapeutic communication and
+                interpersonal relationships.
+            </p>
+
+            <button
+                onclick="openTopic('Communication in Nursing')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 7 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🏥
+            </div>
+
+            <h3>
+                Health and Illness
+            </h3>
+
+            <p>
+                Study the concepts of health,
+                illness, disease and factors
+                affecting health.
+            </p>
+
+            <button
+                onclick="openTopic('Health and Illness')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 8 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🛏️
+            </div>
+
+            <h3>
+                Admission, Discharge and Transfer
+            </h3>
+
+            <p>
+                Learn the basic nursing procedures
+                involved in admitting, transferring
+                and discharging patients.
+            </p>
+
+            <button
+                onclick="openTopic('Admission, Discharge and Transfer')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 9 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🌡️
+            </div>
+
+            <h3>
+                Vital Signs
+            </h3>
+
+            <p>
+                Study temperature, pulse,
+                respiration, blood pressure
+                and other observations.
+            </p>
+
+            <button
+                onclick="openTopic('Vital Signs')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 10 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🛏️
+            </div>
+
+            <h3>
+                Bed Making
+            </h3>
+
+            <p>
+                Learn the principles, purposes
+                and different techniques of
+                making hospital beds.
+            </p>
+
+            <button
+                onclick="openTopic('Bed Making')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 11 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🧼
+            </div>
+
+            <h3>
+                Personal Hygiene
+            </h3>
+
+            <p>
+                Study personal hygiene care
+                and how nurses assist patients
+                with hygiene needs.
+            </p>
+
+            <button
+                onclick="openTopic('Personal Hygiene')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 12 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Patient Safety
+            </h3>
+
+            <p>
+                Learn how nurses prevent accidents,
+                injuries and other risks to patients.
+            </p>
+
+            <button
+                onclick="openTopic('Patient Safety')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 13 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🦠
+            </div>
+
+            <h3>
+                Infection Prevention and Control
+            </h3>
+
+            <p>
+                Study infection prevention,
+                hand hygiene, PPE and standard
+                precautions.
+            </p>
+
+            <button
+                onclick="openTopic('Infection Prevention and Control')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 14 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🧍
+            </div>
+
+            <h3>
+                Positioning and Mobility
+            </h3>
+
+            <p>
+                Learn common patient positions,
+                mobility assistance and safe
+                movement.
+            </p>
+
+            <button
+                onclick="openTopic('Positioning and Mobility')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 15 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                📝
+            </div>
+
+            <h3>
+                Documentation and Reporting
+            </h3>
+
+            <p>
+                Learn the principles of accurate
+                nursing documentation and reporting.
+            </p>
+
+            <button
+                onclick="openTopic('Documentation and Reporting')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 16 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                😴
+            </div>
+
+            <h3>
+                Patient Comfort and Rest
+            </h3>
+
+            <p>
+                Study factors affecting comfort,
+                sleep and rest and how nurses
+                provide supportive care.
+            </p>
+
+            <button
+                onclick="openTopic('Patient Comfort and Rest')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 17 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🍽️
+            </div>
+
+            <h3>
+                Nutrition and Feeding
+            </h3>
+
+            <p>
+                Learn basic nutritional needs
+                and nursing assistance with
+                patient feeding.
+            </p>
+
+            <button
+                onclick="openTopic('Nutrition and Feeding')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 18 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🚽
+            </div>
+
+            <h3>
+                Elimination
+            </h3>
+
+            <p>
+                Study normal elimination and
+                basic nursing care related to
+                urinary and bowel elimination.
+            </p>
+
+            <button
+                onclick="openTopic('Elimination')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 19 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                🚑
+            </div>
+
+            <h3>
+                Basic First Aid
+            </h3>
+
+            <p>
+                Learn basic principles of first
+                aid and immediate care during
+                common emergencies.
+            </p>
+
+            <button
+                onclick="openTopic('Basic First Aid')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+
+        <!-- 20 -->
+
+        <div class="topic">
+
+            <div class="icon">
+                📚
+            </div>
+
+            <h3>
+                Patient Education
+            </h3>
+
+            <p>
+                Learn how nurses educate patients
+                and families to promote health and
+                support self-care.
+            </p>
+
+            <button
+                onclick="openTopic('Patient Education')">
+
+                Start Topic
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<footer>
+
+    © 2026 OGCONS Study Hub
+    • Built for students
+
+</footer>
+
+
+
+<script>
+
+
+// ==========================================
+// OPEN SELECTED TOPIC
+// ==========================================
+
+function openTopic(topic) {
+
+    window.location.href =
+        "foundations-quiz.html?topic=" +
+        encodeURIComponent(topic);
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
