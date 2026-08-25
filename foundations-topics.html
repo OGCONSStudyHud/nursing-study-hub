@@ -35,13 +35,7 @@
             color: #163020;
         }
 
-
-        /* ================================
-           HEADER
-        ================================= */
-
         header {
-
             background:
                 linear-gradient(
                     135deg,
@@ -54,9 +48,7 @@
             padding: 25px 20px;
         }
 
-
         .header-content {
-
             max-width: 1100px;
 
             margin: auto;
@@ -70,17 +62,13 @@
             gap: 15px;
         }
 
-
         .logo {
-
             font-size: 23px;
 
             font-weight: bold;
         }
 
-
         .back-button {
-
             border: none;
 
             background: white;
@@ -96,20 +84,11 @@
             cursor: pointer;
         }
 
-
         .back-button:hover {
-
             background: #f0f0f0;
         }
 
-
-
-        /* ================================
-           CONTAINER
-        ================================= */
-
         .container {
-
             max-width: 1100px;
 
             margin: auto;
@@ -117,14 +96,7 @@
             padding: 35px 20px;
         }
 
-
-
-        /* ================================
-           PAGE INTRO
-        ================================= */
-
         .intro {
-
             background: white;
 
             padding: 30px;
@@ -140,17 +112,13 @@
             text-align: center;
         }
 
-
         .intro-icon {
-
             font-size: 50px;
 
             margin-bottom: 10px;
         }
 
-
         .intro h1 {
-
             font-size: 30px;
 
             margin-bottom: 10px;
@@ -158,9 +126,7 @@
             color: #18a058;
         }
 
-
         .intro p {
-
             color: #617568;
 
             line-height: 1.6;
@@ -170,22 +136,13 @@
             margin: auto;
         }
 
-
-
-        /* ================================
-           TOPICS
-        ================================= */
-
         .section-title {
-
             font-size: 24px;
 
             margin-bottom: 20px;
         }
 
-
         .topics {
-
             display: grid;
 
             grid-template-columns:
@@ -194,9 +151,7 @@
             gap: 18px;
         }
 
-
         .topic-card {
-
             background: white;
 
             padding: 22px;
@@ -216,9 +171,7 @@
             transition: 0.2s;
         }
 
-
         .topic-card:hover {
-
             transform: translateY(-3px);
 
             box-shadow:
@@ -226,9 +179,7 @@
                 rgba(0,0,0,0.10);
         }
 
-
         .topic-number {
-
             min-width: 45px;
 
             height: 45px;
@@ -250,15 +201,11 @@
             font-size: 17px;
         }
 
-
         .topic-content {
-
             flex: 1;
         }
 
-
         .topic-content h3 {
-
             font-size: 17px;
 
             margin-bottom: 6px;
@@ -266,17 +213,15 @@
             line-height: 1.4;
         }
 
-
         .topic-content p {
-
             color: #718077;
 
             font-size: 13px;
+
+            line-height: 1.4;
         }
 
-
         .open-topic {
-
             border: none;
 
             background: #18a058;
@@ -294,20 +239,11 @@
             white-space: nowrap;
         }
 
-
         .open-topic:hover {
-
             background: #117d45;
         }
 
-
-
-        /* ================================
-           FOOTER
-        ================================= */
-
         footer {
-
             text-align: center;
 
             padding: 30px 20px;
@@ -317,60 +253,41 @@
             font-size: 14px;
         }
 
-
-
-        /* ================================
-           MOBILE
-        ================================= */
-
         @media (max-width: 750px) {
 
             .header-content {
-
                 flex-direction: column;
 
                 text-align: center;
             }
 
-
             .topics {
-
                 grid-template-columns: 1fr;
             }
 
-
             .topic-card {
-
                 align-items: flex-start;
             }
 
-
             .open-topic {
-
                 padding: 9px 12px;
 
                 font-size: 13px;
             }
 
-
             .intro h1 {
-
                 font-size: 25px;
             }
 
         }
 
-
         @media (max-width: 500px) {
 
             .topic-card {
-
                 flex-wrap: wrap;
             }
 
-
             .open-topic {
-
                 width: 100%;
 
                 margin-top: 5px;
@@ -386,20 +303,13 @@
 <body>
 
 
-<!-- ==========================================
-     HEADER
-========================================== -->
-
 <header>
 
     <div class="header-content">
 
         <div class="logo">
-
             🩺 OGCONS Study Hub
-
         </div>
-
 
         <button
             class="back-button"
@@ -414,31 +324,18 @@
 </header>
 
 
-
-<!-- ==========================================
-     MAIN
-========================================== -->
-
 <div class="container">
 
-
-    <!-- INTRO -->
 
     <div class="intro">
 
         <div class="intro-icon">
-
             📚
-
         </div>
 
-
         <h1>
-
             Foundations of Nursing
-
         </h1>
-
 
         <p>
 
@@ -452,15 +349,11 @@
     </div>
 
 
-
-    <!-- TOPIC LIST -->
-
     <h2 class="section-title">
 
         📖 Course Topics
 
     </h2>
-
 
 
     <div
@@ -473,7 +366,6 @@
 </div>
 
 
-
 <footer>
 
     OGCONS Study Hub © 2026
@@ -481,134 +373,139 @@
 </footer>
 
 
-
 <script>
 
-
-// ==================================================
-// FOUNDATIONS OF NURSING TOPICS
-// ==================================================
 
 const topics = [
 
     {
         number: 1,
+
         name: "Introduction to Nursing",
+
         description:
             "Basic concepts, history, roles and functions of nursing."
     },
 
-
     {
         number: 2,
+
         name: "Health Care Institutions",
+
         description:
             "Types, organization and functions of healthcare institutions."
     },
 
-
     {
         number: 3,
+
         name: "Ethico-Legal Issues in Nursing",
+
         description:
             "Ethical principles and legal responsibilities in nursing practice."
     },
 
-
     {
         number: 4,
+
         name: "Tools of Nursing",
+
         description:
             "Common tools and equipment used in nursing practice."
     },
 
-
     {
         number: 5,
+
         name: "Comfort and Safety Measures",
+
         description:
             "Measures used to promote patient comfort and maintain safety."
     },
 
-
     {
         number: 6,
+
         name: "Emergency Care",
+
         description:
             "Basic principles of responding to emergencies and critically ill patients."
     },
 
-
     {
         number: 7,
+
         name: "Administration of Drugs",
+
         description:
             "Basic principles and safe practices involved in medication administration."
     },
 
-
     {
         number: 8,
+
         name: "Diagnostic Investigation",
+
         description:
             "Basic investigations used to assess and diagnose patients."
     },
 
-
     {
         number: 9,
+
         name: "Aseptic Techniques",
+
         description:
             "Principles and practices used to prevent contamination and infection."
     },
 
-
     {
         number: 10,
+
         name: "Unsafe Injection Safety",
+
         description:
             "Safe injection practices and prevention of injection-related infections."
     },
 
-
     {
         number: 11,
+
         name: "Introduction to Healthcare Waste",
+
         description:
             "Types, handling, disposal and safety principles of healthcare waste."
     },
 
-
     {
         number: 12,
+
         name: "Legal Aspects of Nursing",
+
         description:
             "Legal responsibilities, accountability and professional nursing practice."
     },
 
-
     {
         number: 13,
+
         name: "Nursing Care of Patients with Feeding/Elimination Problems",
+
         description:
             "Nursing care for patients experiencing feeding and elimination problems."
     },
 
-
     {
         number: 14,
+
         name: "Basic Life Support",
+
         description:
             "Fundamental life-saving measures for patients in cardiac or respiratory emergencies."
     }
 
 ];
 
-
-
-// ==================================================
-// DISPLAY TOPICS
-// ==================================================
 
 function displayTopics() {
 
@@ -617,16 +514,13 @@ function displayTopics() {
             "topicsContainer"
         );
 
-
     container.innerHTML = "";
 
 
     topics.forEach(function(topic) {
 
-
         const card =
             document.createElement("div");
-
 
         card.className =
             "topic-card";
@@ -640,24 +534,17 @@ function displayTopics() {
 
             </div>
 
-
             <div class="topic-content">
 
                 <h3>
-
                     ${escapeHTML(topic.name)}
-
                 </h3>
 
-
                 <p>
-
                     ${escapeHTML(topic.description)}
-
                 </p>
 
             </div>
-
 
             <button
                 class="open-topic"
@@ -677,37 +564,11 @@ function displayTopics() {
 }
 
 
-
-// ==================================================
-// OPEN TOPIC
-// ==================================================
-
 function openTopic(topicName) {
 
-
-    /*
-        IMPORTANT:
-
-        We are using ONE page:
-
-        fon-note.html
-
-        The selected topic is passed
-        through the URL.
-
-        Example:
-
-        fon-note.html?topic=Introduction%20to%20Nursing
-    */
-
-
     const url =
-
         "fon-note.html?topic=" +
-
-        encodeURIComponent(
-            topicName
-        );
+        encodeURIComponent(topicName);
 
 
     window.location.href =
@@ -716,11 +577,6 @@ function openTopic(topicName) {
 }
 
 
-
-// ==================================================
-// BACK TO DASHBOARD
-// ==================================================
-
 function goBack() {
 
     window.location.href =
@@ -728,11 +584,6 @@ function goBack() {
 
 }
 
-
-
-// ==================================================
-// ESCAPE HTML
-// ==================================================
 
 function escapeHTML(value) {
 
@@ -748,38 +599,18 @@ function escapeHTML(value) {
 
     return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        .replace(/&/g, "&amp;")
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+        .replace(/</g, "&lt;")
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+        .replace(/>/g, "&gt;")
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+        .replace(/"/g, "&quot;")
 
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/'/g, "&#039;");
 
 }
 
-
-
-// ==================================================
-// START
-// ==================================================
 
 displayTopics();
 
