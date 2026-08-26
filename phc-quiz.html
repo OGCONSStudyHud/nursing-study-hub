@@ -5,9 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OGCONS Study Hub - PHC Quiz</title>
 
@@ -15,367 +13,246 @@
 
 <style>
 
-* {
-    box-sizing: border-box;
+*{
+box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-
-    font-family: Arial, sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e8fff2,
-            #e8f4ff,
-            #f5eaff
-        );
-
-    color: #172033;
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#e8fff2,#e8f4ff,#f5eaff);
+color:#172033;
 }
 
-header {
-    background:
-        linear-gradient(
-            135deg,
-            #087f5b,
-            #20c997
-        );
-
-    color: white;
-
-    padding: 28px 20px;
-
-    text-align: center;
+header{
+background:linear-gradient(135deg,#18a058,#2eb7a0);
+color:white;
+padding:25px 20px;
+text-align:center;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 28px;
+header h1{
+margin:0;
 }
 
-header p {
-    margin: 8px 0 0;
+header p{
+margin:8px 0 0;
 }
 
-.container {
-    max-width: 850px;
-
-    margin: 30px auto;
-
-    padding: 20px;
+.container{
+max-width:850px;
+margin:30px auto;
+padding:20px;
 }
 
-.back {
-    display: inline-block;
-
-    margin-bottom: 20px;
-
-    color: #087f5b;
-
-    text-decoration: none;
-
-    font-weight: bold;
+.back{
+display:inline-block;
+margin-bottom:20px;
+color:#18a058;
+text-decoration:none;
+font-weight:bold;
 }
 
-.card {
-    background: white;
-
-    border-radius: 18px;
-
-    padding: 30px;
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,0.08);
+.card{
+background:white;
+border-radius:18px;
+padding:30px;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
-.course-title {
-    text-align: center;
-
-    margin-bottom: 20px;
+.topic-name{
+text-align:center;
+background:#e8fff2;
+color:#18a058;
+padding:12px;
+border-radius:10px;
+font-weight:bold;
+margin-bottom:20px;
 }
 
-.course-title h2 {
-    color: #087f5b;
-
-    margin-bottom: 8px;
+.counter{
+text-align:center;
+font-weight:bold;
+color:#667085;
+margin-bottom:10px;
 }
 
-.course-title p {
-    color: #667085;
+.score{
+text-align:center;
+color:#18a058;
+font-weight:bold;
+margin-bottom:25px;
 }
 
-.topic-name {
-    text-align: center;
-
-    background: #e7f8f1;
-
-    color: #087f5b;
-
-    padding: 12px;
-
-    border-radius: 10px;
-
-    font-weight: bold;
-
-    margin-bottom: 20px;
+.question{
+font-size:21px;
+font-weight:bold;
+line-height:1.5;
+margin-bottom:25px;
 }
 
-.counter {
-    text-align: center;
-
-    color: #667085;
-
-    font-weight: bold;
-
-    margin-bottom: 10px;
+.options{
+display:grid;
+gap:12px;
 }
 
-.score {
-    text-align: center;
-
-    color: #087f5b;
-
-    font-weight: bold;
-
-    margin-bottom: 25px;
+.option{
+width:100%;
+text-align:left;
+background:#f7f9fc;
+border:2px solid #d8dee8;
+border-radius:12px;
+padding:16px;
+font-size:16px;
+cursor:pointer;
 }
 
-.question {
-    font-size: 21px;
-
-    font-weight: bold;
-
-    line-height: 1.5;
-
-    margin-bottom: 25px;
+.option:hover{
+background:#f2fff7;
+border-color:#18a058;
 }
 
-.options {
-    display: grid;
-
-    gap: 12px;
+.option.correct{
+background:#d1e7dd;
+border-color:#198754;
+color:#0f5132;
 }
 
-.option {
-    width: 100%;
-
-    text-align: left;
-
-    background: #f7f9fc;
-
-    border: 2px solid #d8dee8;
-
-    border-radius: 12px;
-
-    padding: 16px;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
+.option.wrong{
+background:#f8d7da;
+border-color:#dc3545;
+color:#842029;
 }
 
-.option:hover {
-    background: #effcf7;
-
-    border-color: #087f5b;
+.option.disabled{
+cursor:not-allowed;
 }
 
-.option.correct {
-    background: #d1e7dd;
-
-    border-color: #198754;
-
-    color: #0f5132;
+.feedback{
+margin-top:20px;
+padding:18px;
+border-radius:12px;
+display:none;
+font-weight:bold;
 }
 
-.option.wrong {
-    background: #f8d7da;
-
-    border-color: #dc3545;
-
-    color: #842029;
+.correct-feedback{
+background:#d1e7dd;
+color:#0f5132;
 }
 
-.option.disabled {
-    cursor: not-allowed;
+.wrong-feedback{
+background:#f8d7da;
+color:#842029;
 }
 
-.option strong {
-    margin-right: 8px;
+.answer{
+margin-top:15px;
+padding:18px;
+background:#eef6ff;
+border-radius:12px;
+display:none;
+line-height:1.6;
 }
 
-.feedback {
-    margin-top: 20px;
-
-    padding: 18px;
-
-    border-radius: 12px;
-
-    display: none;
-
-    font-weight: bold;
+.answer strong{
+color:#0b5ed7;
 }
 
-.correct-feedback {
-    background: #d1e7dd;
-
-    color: #0f5132;
+.buttons{
+display:flex;
+justify-content:space-between;
+gap:12px;
+margin-top:25px;
 }
 
-.wrong-feedback {
-    background: #f8d7da;
-
-    color: #842029;
+button{
+border:none;
+border-radius:10px;
+padding:13px 20px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.answer {
-    margin-top: 15px;
-
-    padding: 18px;
-
-    background: #eef6ff;
-
-    border-radius: 12px;
-
-    display: none;
-
-    line-height: 1.7;
+.primary{
+background:#18a058;
+color:white;
 }
 
-.answer strong {
-    color: #0b5ed7;
+.secondary{
+background:#e9edf3;
+color:#172033;
 }
 
-.buttons {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 12px;
-
-    margin-top: 25px;
-}
-
-button {
-    border: none;
-
-    border-radius: 10px;
-
-    padding: 13px 20px;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.primary {
-    background: #087f5b;
-
-    color: white;
-}
-
-.secondary {
-    background: #e9edf3;
-
-    color: #172033;
-}
-
-button:disabled {
-    opacity: 0.5;
-
-    cursor: not-allowed;
+button:disabled{
+opacity:.5;
+cursor:not-allowed;
 }
 
 #loading,
-#error,
-#empty {
-    background: white;
-
-    border-radius: 18px;
-
-    padding: 35px;
-
-    text-align: center;
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,0.08);
+#empty,
+#error{
+background:white;
+border-radius:18px;
+padding:35px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
-#error {
-    color: #dc3545;
+#error{
+color:#dc3545;
 }
 
-.result {
-    text-align: center;
-
-    display: none;
+.result{
+text-align:center;
+display:none;
 }
 
-.result-icon {
-    font-size: 65px;
-
-    margin-bottom: 15px;
+.result-icon{
+font-size:65px;
 }
 
-.final-score {
-    font-size: 42px;
-
-    font-weight: bold;
-
-    color: #087f5b;
-
-    margin: 20px 0;
+.final-score{
+font-size:42px;
+font-weight:bold;
+color:#18a058;
+margin:20px 0;
 }
 
-.result button {
-    background: #087f5b;
-
-    color: white;
-
-    margin-top: 10px;
+.result button{
+background:#18a058;
+color:white;
+margin-top:10px;
 }
 
-.result .back-topic {
-    background: #6c757d;
+footer{
+text-align:center;
+padding:35px;
+color:#667085;
 }
 
-footer {
-    text-align: center;
+@media(max-width:600px){
 
-    padding: 35px;
-
-    color: #667085;
+.container{
+padding:12px;
 }
 
-@media (max-width: 600px) {
+.card{
+padding:20px;
+}
 
-    .container {
-        padding: 12px;
-    }
+.question{
+font-size:19px;
+}
 
-    .card {
-        padding: 20px;
-    }
+.buttons{
+flex-direction:column;
+}
 
-    .question {
-        font-size: 19px;
-    }
-
-    .buttons {
-        flex-direction: column;
-    }
-
-    button {
-        width: 100%;
-    }
+button{
+width:100%;
+}
 
 }
 
@@ -383,14 +260,12 @@ footer {
 
 </head>
 
-
 <body>
-
 
 <header>
 
 <h1>
-🌍 OGCONS Study Hub
+🏥 OGCONS Study Hub
 </h1>
 
 <p>
@@ -399,222 +274,106 @@ Primary Health Care Quiz
 
 </header>
 
-
-
 <div class="container">
 
-
-<a
-    href="phc-topics.html"
-    class="back">
-
-    ← Back to PHC Topics
-
+<a href="phc-topics.html" class="back">
+← Back to PHC Topics
 </a>
 
+<div id="loading">
 
-
-<div
-    id="loading">
-
-    <h2>
-        🔄 Loading questions...
-    </h2>
-
-    <p>
-        Please wait while we prepare your quiz.
-    </p>
-
-</div>
-
-
-
-<div
-    id="error"
-    style="display:none;">
-</div>
-
-
-
-<div
-    id="empty"
-    style="display:none;">
-
-    <h2>
-        📚 No Questions Yet
-    </h2>
-
-    <p id="emptyMessage">
-        There are currently no questions for this topic.
-    </p>
-
-</div>
-
-
-
-<div
-    class="card"
-    id="quizCard"
-    style="display:none;">
-
-
-<div class="course-title">
-
-<h2 id="courseHeading">
-🌍 Primary Health Care
+<h2>
+🔄 Loading questions...
 </h2>
 
 <p>
-Test your knowledge
+Please wait while we prepare your quiz.
 </p>
 
 </div>
 
+<div id="error" style="display:none;"></div>
 
+<div id="empty" style="display:none;">
 
-<div
-    class="topic-name"
-    id="topicName">
+<h2>
+📚 No Questions Yet
+</h2>
+
+<p id="emptyMessage">
+There are currently no questions for this topic.
+</p>
+
 </div>
 
+<div class="card" id="quizCard" style="display:none;">
 
+<div class="topic-name" id="topicName"></div>
 
-<div
-    class="counter"
-    id="counter">
-</div>
+<div class="counter" id="counter"></div>
 
-
-
-<div
-    class="score"
-    id="score">
-
+<div class="score" id="score">
 Score: 0
-
 </div>
 
-
-
-<div
-    class="question"
-    id="question">
-</div>
-
-
+<div class="question" id="question"></div>
 
 <div class="options">
 
-
-<button
-    class="option"
-    id="option_a"
-    onclick="selectAnswer('A')">
-
+<button class="option" id="option_a" onclick="selectAnswer('A')">
 <strong>A.</strong>
-
 <span id="text_a"></span>
-
 </button>
 
-
-
-<button
-    class="option"
-    id="option_b"
-    onclick="selectAnswer('B')">
-
+<button class="option" id="option_b" onclick="selectAnswer('B')">
 <strong>B.</strong>
-
 <span id="text_b"></span>
-
 </button>
 
-
-
-<button
-    class="option"
-    id="option_c"
-    onclick="selectAnswer('C')">
-
+<button class="option" id="option_c" onclick="selectAnswer('C')">
 <strong>C.</strong>
-
 <span id="text_c"></span>
-
 </button>
 
-
-
-<button
-    class="option"
-    id="option_d"
-    onclick="selectAnswer('D')">
-
+<button class="option" id="option_d" onclick="selectAnswer('D')">
 <strong>D.</strong>
-
 <span id="text_d"></span>
-
 </button>
 
-
 </div>
 
+<div class="feedback" id="feedback"></div>
 
-
-<div
-    class="feedback"
-    id="feedback">
-</div>
-
-
-
-<div
-    class="answer"
-    id="answer">
+<div class="answer" id="answer">
 
 <p>
-
-<strong>
-Correct Answer:
-</strong>
-
+<strong>Correct Answer:</strong>
 <span id="correct_answer"></span>
-
 </p>
 
-
-<p style="margin-top:10px;">
-
-<strong>
-Explanation:
-</strong>
-
+<p>
+<strong>Explanation:</strong>
 <span id="explanation"></span>
-
 </p>
 
 </div>
-
-
 
 <div class="buttons">
 
 <button
-    class="secondary"
-    id="previousButton"
-    onclick="previousQuestion()">
+class="secondary"
+id="previousButton"
+onclick="previousQuestion()">
 
 ← Previous
 
 </button>
 
-
-
 <button
-    class="primary"
-    id="nextButton"
-    onclick="nextQuestion()"
-    disabled>
+class="primary"
+id="nextButton"
+onclick="nextQuestion()"
+disabled>
 
 Next →
 
@@ -622,14 +381,9 @@ Next →
 
 </div>
 
-
 </div>
 
-
-
-<div
-    class="card result"
-    id="result">
+<div class="card result" id="result">
 
 <div class="result-icon">
 🏆
@@ -640,1057 +394,629 @@ Quiz Completed!
 </h2>
 
 <p>
-You have completed the quiz.
+You have completed the
+<span id="resultTopic"></span>
+quiz.
 </p>
 
-<div
-    class="final-score"
-    id="finalScore">
-
+<div class="final-score" id="finalScore">
 0 / 0
-
 </div>
 
 <p id="percentage">
 Your score: 0%
 </p>
 
-<button
-    onclick="restartQuiz()">
-
+<button onclick="restartQuiz()">
 🔄 Try Again
-
 </button>
 
 <br>
 
-<button
-    class="back-topic"
-    onclick="window.location.href='phc-topics.html'">
-
+<button onclick="window.location.href='phc-topics.html'">
 ← Back to PHC Topics
-
 </button>
 
 </div>
 
-
-
 </div>
 
-
-
 <footer>
-
 © 2026 OGCONS Study Hub • Built for students
-
 </footer>
-
-
 
 <script>
 
+const SUPABASE_URL=
+"https://bvetmmvpdotifusjkywd.supabase.co";
 
-// ======================================================
-// SUPABASE
-// ======================================================
+const SUPABASE_PUBLISHABLE_KEY=
+"sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
-const SUPABASE_URL =
-    "https://bvetmmvpdotifusjkywd.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+const supabaseClient=
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
 
 
-
-// ======================================================
-// VARIABLES
-// ======================================================
-
-let questions = [];
-
-let currentQuestion = 0;
-
-let score = 0;
-
-let answeredQuestions = [];
+let questions=[];
+let currentQuestion=0;
+let score=0;
+let answeredQuestions=[];
 
 
+const urlParams=
+new URLSearchParams(window.location.search);
 
-// ======================================================
-// URL
-// ======================================================
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
+const selectedTopic=
+urlParams.get("topic");
 
 
-const selectedCourse =
-    params.get("course");
+function shuffleQuestions(array){
 
+const shuffled=[...array];
 
-const selectedTopic =
-    params.get("topic");
+for(let i=shuffled.length-1;i>0;i--){
 
+const j=
+Math.floor(Math.random()*(i+1));
 
+[shuffled[i],shuffled[j]]=
+[shuffled[j],shuffled[i]];
 
-// ======================================================
-// SHUFFLE
-// ======================================================
+}
 
-function shuffleQuestions(array) {
-
-    const shuffled =
-        [...array];
-
-    for (
-        let i = shuffled.length - 1;
-        i > 0;
-        i--
-    ) {
-
-        const j =
-            Math.floor(
-                Math.random() * (i + 1)
-            );
-
-        [
-            shuffled[i],
-            shuffled[j]
-        ] =
-        [
-            shuffled[j],
-            shuffled[i]
-        ];
-
-    }
-
-    return shuffled;
+return shuffled;
 
 }
 
 
+async function loadQuestions(){
 
-// ======================================================
-// LOAD QUESTIONS
-// ======================================================
+const loading=
+document.getElementById("loading");
 
-async function loadQuestions() {
+const quizCard=
+document.getElementById("quizCard");
 
-    const loading =
-        document.getElementById("loading");
+const empty=
+document.getElementById("empty");
 
-    const quizCard =
-        document.getElementById("quizCard");
+const error=
+document.getElementById("error");
 
-    const empty =
-        document.getElementById("empty");
 
-    const error =
-        document.getElementById("error");
+if(!selectedTopic){
 
+loading.style.display="none";
 
+error.style.display="block";
 
-    if (
-        !selectedCourse ||
-        !selectedTopic
-    ) {
+error.innerHTML=`
 
-        loading.style.display =
-            "none";
+<h2>⚠️ No Topic Selected</h2>
 
-        error.style.display =
-            "block";
+<p>
+Please return to PHC Topics and select a topic.
+</p>
 
-        error.innerHTML = `
+`;
 
-            <h2>
-                ⚠️ Topic Not Selected
-            </h2>
-
-            <p>
-                Please return to PHC Topics
-                and select a topic.
-            </p>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    document
-        .getElementById("topicName")
-        .textContent =
-        "Topic: " +
-        selectedTopic;
-
-
-
-    document
-        .getElementById("courseHeading")
-        .textContent =
-        "🌍 " +
-        selectedCourse;
-
-
-
-    const {
-        data: { user },
-        error: userError
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
-
-
-
-    if (
-        userError ||
-        !user
-    ) {
-
-        window.location.href =
-            "login.html";
-
-        return;
-
-    }
-
-
-
-    const {
-        data,
-        error: databaseError
-    } =
-        await supabaseClient
-
-            .from("questions")
-
-            .select("*")
-
-            .eq(
-                "course",
-                selectedCourse
-            )
-
-            .ilike(
-                "topic",
-                selectedTopic
-            )
-
-            .order(
-                "created_at",
-                {
-                    ascending: true
-                }
-            );
-
-
-
-    if (databaseError) {
-
-        loading.style.display =
-            "none";
-
-        error.style.display =
-            "block";
-
-        error.innerHTML = `
-
-            <h2>
-                ❌ Unable to Load Questions
-            </h2>
-
-            <p>
-                ${databaseError.message}
-            </p>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    questions =
-        shuffleQuestions(
-            data || []
-        );
-
-
-
-    loading.style.display =
-        "none";
-
-
-
-    if (
-        questions.length === 0
-    ) {
-
-        empty.style.display =
-            "block";
-
-        document
-            .getElementById("emptyMessage")
-            .textContent =
-
-            "There are currently no questions for " +
-            selectedTopic +
-            ". Add questions from the Admin Dashboard.";
-
-        return;
-
-    }
-
-
-
-    answeredQuestions =
-        new Array(
-            questions.length
-        ).fill(null);
-
-
-
-    quizCard.style.display =
-        "block";
-
-
-
-    showQuestion();
+return;
 
 }
 
 
+document.getElementById("topicName").textContent=
+"Topic: "+selectedTopic;
 
-// ======================================================
-// SHOW QUESTION
-// ======================================================
-
-function showQuestion() {
-
-    const q =
-        questions[currentQuestion];
-
-    if (!q) {
-        return;
-    }
+document.getElementById("resultTopic").textContent=
+selectedTopic;
 
 
-
-    document
-        .getElementById("counter")
-        .textContent =
-
-        "Question " +
-        (currentQuestion + 1) +
-        " of " +
-        questions.length;
+const {
+data:{user},
+error:userError
+}=
+await supabaseClient.auth.getUser();
 
 
+if(userError || !user){
 
-    document
-        .getElementById("score")
-        .textContent =
-
-        "Score: " +
-        score;
-
-
-
-    document
-        .getElementById("question")
-        .textContent =
-        q.question;
-
-
-
-    document
-        .getElementById("text_a")
-        .textContent =
-        q.option_a;
-
-
-
-    document
-        .getElementById("text_b")
-        .textContent =
-        q.option_b;
-
-
-
-    document
-        .getElementById("text_c")
-        .textContent =
-        q.option_c;
-
-
-
-    document
-        .getElementById("text_d")
-        .textContent =
-        q.option_d;
-
-
-
-    const options = [
-
-        document.getElementById("option_a"),
-
-        document.getElementById("option_b"),
-
-        document.getElementById("option_c"),
-
-        document.getElementById("option_d")
-
-    ];
-
-
-
-    options.forEach(function(option) {
-
-        option.disabled =
-            false;
-
-        option.classList.remove(
-            "correct",
-            "wrong",
-            "disabled"
-        );
-
-    });
-
-
-
-    document
-        .getElementById("feedback")
-        .style.display =
-        "none";
-
-
-
-    document
-        .getElementById("answer")
-        .style.display =
-        "none";
-
-
-
-    const previousAnswer =
-        answeredQuestions[
-            currentQuestion
-        ];
-
-
-
-    if (previousAnswer) {
-
-        restoreAnsweredQuestion(
-            previousAnswer
-        );
-
-    }
-
-    else {
-
-        document
-            .getElementById("nextButton")
-            .disabled =
-            true;
-
-    }
-
-
-
-    document
-        .getElementById("previousButton")
-        .disabled =
-        currentQuestion === 0;
+window.location.href="login.html";
+return;
 
 }
 
 
+const {
+data,
+error:databaseError
+}=
+await supabaseClient
 
-// ======================================================
-// RESTORE ANSWER
-// ======================================================
+.from("questions")
 
-function restoreAnsweredQuestion(
-    selected
-) {
+.select("*")
 
-    const q =
-        questions[currentQuestion];
+.eq("course","Primary Health Care")
 
+.ilike("topic",selectedTopic)
 
+.order("created_at",{ascending:true});
 
-    const correct =
-        String(
-            q.correct_answer
-        )
-        .trim()
-        .toUpperCase();
 
+if(databaseError){
 
+loading.style.display="none";
 
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            selected.toLowerCase()
-        );
+error.style.display="block";
 
+error.innerHTML=`
 
+<h2>❌ Unable to Load Questions</h2>
 
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            correct.toLowerCase()
-        );
+<p>
+${escapeHTML(databaseError.message)}
+</p>
 
+`;
 
-
-    const options = [
-
-        document.getElementById("option_a"),
-
-        document.getElementById("option_b"),
-
-        document.getElementById("option_c"),
-
-        document.getElementById("option_d")
-
-    ];
-
-
-
-    options.forEach(function(option) {
-
-        option.disabled =
-            true;
-
-        option.classList.add(
-            "disabled"
-        );
-
-    });
-
-
-
-    if (
-        selected === correct
-    ) {
-
-        selectedButton.classList.add(
-            "correct"
-        );
-
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-
-        feedback.textContent =
-            "✅ Correct! Well done.";
-
-        feedback.className =
-            "feedback correct-feedback";
-
-        feedback.style.display =
-            "block";
-
-    }
-
-    else {
-
-        selectedButton.classList.add(
-            "wrong"
-        );
-
-
-
-        if (correctButton) {
-
-            correctButton.classList.add(
-                "correct"
-            );
-
-        }
-
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-
-        feedback.textContent =
-
-            "❌ Wrong answer. " +
-            "The correct answer is " +
-            correct +
-            ".";
-
-        feedback.className =
-            "feedback wrong-feedback";
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-
-    document
-        .getElementById("correct_answer")
-        .textContent =
-        correct;
-
-
-
-    document
-        .getElementById("explanation")
-        .textContent =
-
-        q.explanation ||
-        "No explanation provided.";
-
-
-
-    document
-        .getElementById("answer")
-        .style.display =
-        "block";
-
-
-
-    document
-        .getElementById("nextButton")
-        .disabled =
-        false;
+return;
 
 }
 
 
+questions=data || [];
 
-// ======================================================
-// SELECT ANSWER
-// ======================================================
+questions=shuffleQuestions(questions);
 
-function selectAnswer(selected) {
 
-    if (
-        answeredQuestions[
-            currentQuestion
-        ]
-    ) {
+loading.style.display="none";
 
-        return;
 
-    }
+if(questions.length===0){
 
+empty.style.display="block";
 
+document.getElementById("emptyMessage").textContent=
+"There are currently no questions for "+
+selectedTopic+
+". Add questions from the Admin Dashboard.";
 
-    const q =
-        questions[currentQuestion];
-
-
-
-    const correct =
-        String(
-            q.correct_answer
-        )
-        .trim()
-        .toUpperCase();
-
-
-
-    answeredQuestions[
-        currentQuestion
-    ] =
-        selected;
-
-
-
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            selected.toLowerCase()
-        );
-
-
-
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            correct.toLowerCase()
-        );
-
-
-
-    const options = [
-
-        document.getElementById("option_a"),
-
-        document.getElementById("option_b"),
-
-        document.getElementById("option_c"),
-
-        document.getElementById("option_d")
-
-    ];
-
-
-
-    options.forEach(function(option) {
-
-        option.disabled =
-            true;
-
-        option.classList.add(
-            "disabled"
-        );
-
-    });
-
-
-
-    if (
-        selected === correct
-    ) {
-
-        score++;
-
-
-
-        selectedButton.classList.add(
-            "correct"
-        );
-
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-
-        feedback.textContent =
-            "✅ Correct! Well done.";
-
-        feedback.className =
-            "feedback correct-feedback";
-
-        feedback.style.display =
-            "block";
-
-    }
-
-    else {
-
-        selectedButton.classList.add(
-            "wrong"
-        );
-
-
-
-        if (correctButton) {
-
-            correctButton.classList.add(
-                "correct"
-            );
-
-        }
-
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-
-        feedback.textContent =
-
-            "❌ Wrong answer. " +
-            "The correct answer is " +
-            correct +
-            ".";
-
-        feedback.className =
-            "feedback wrong-feedback";
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-
-    document
-        .getElementById("correct_answer")
-        .textContent =
-        correct;
-
-
-
-    document
-        .getElementById("explanation")
-        .textContent =
-
-        q.explanation ||
-        "No explanation provided.";
-
-
-
-    document
-        .getElementById("answer")
-        .style.display =
-        "block";
-
-
-
-    document
-        .getElementById("score")
-        .textContent =
-
-        "Score: " +
-        score;
-
-
-
-    document
-        .getElementById("nextButton")
-        .disabled =
-        false;
+return;
 
 }
 
 
+answeredQuestions=
+new Array(questions.length).fill(null);
 
-// ======================================================
-// NEXT
-// ======================================================
+quizCard.style.display="block";
 
-function nextQuestion() {
-
-    if (
-        currentQuestion <
-        questions.length - 1
-    ) {
-
-        currentQuestion++;
-
-        showQuestion();
-
-    }
-
-    else {
-
-        showResult();
-
-    }
+showQuestion();
 
 }
 
 
+function showQuestion(){
 
-// ======================================================
-// PREVIOUS
-// ======================================================
+const q=
+questions[currentQuestion];
 
-function previousQuestion() {
+if(!q)return;
 
-    if (
-        currentQuestion > 0
-    ) {
 
-        currentQuestion--;
+document.getElementById("counter").textContent=
+"Question "+
+(currentQuestion+1)+
+" of "+
+questions.length;
 
-        showQuestion();
+document.getElementById("score").textContent=
+"Score: "+
+score;
 
-    }
+document.getElementById("question").textContent=
+q.question;
+
+document.getElementById("text_a").textContent=
+q.option_a;
+
+document.getElementById("text_b").textContent=
+q.option_b;
+
+document.getElementById("text_c").textContent=
+q.option_c;
+
+document.getElementById("text_d").textContent=
+q.option_d;
+
+
+const options=[
+document.getElementById("option_a"),
+document.getElementById("option_b"),
+document.getElementById("option_c"),
+document.getElementById("option_d")
+];
+
+
+options.forEach(function(option){
+
+option.classList.remove(
+"correct",
+"wrong",
+"disabled"
+);
+
+option.disabled=false;
+
+});
+
+
+document.getElementById("feedback").style.display="none";
+
+document.getElementById("answer").style.display="none";
+
+
+const previousAnswer=
+answeredQuestions[currentQuestion];
+
+
+if(previousAnswer){
+
+restoreAnsweredQuestion(previousAnswer);
+
+}
+
+else{
+
+document.getElementById("nextButton").disabled=true;
 
 }
 
 
-
-// ======================================================
-// RESULT
-// ======================================================
-
-async function showResult() {
-
-    document
-        .getElementById("quizCard")
-        .style.display =
-        "none";
-
-
-
-    document
-        .getElementById("result")
-        .style.display =
-        "block";
-
-
-
-    const total =
-        questions.length;
-
-
-
-    const percentage =
-        Math.round(
-            (score / total) * 100
-        );
-
-
-
-    document
-        .getElementById("finalScore")
-        .textContent =
-
-        score +
-        " / " +
-        total;
-
-
-
-    document
-        .getElementById("percentage")
-        .textContent =
-
-        "Your score: " +
-        percentage +
-        "%";
-
-
-
-    const {
-        data: { user }
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
-
-
-
-    if (!user) {
-        return;
-    }
-
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-
-            .from("quiz_results")
-
-            .insert({
-
-                user_id:
-                    user.id,
-
-                course:
-                    selectedCourse,
-
-                score:
-                    score,
-
-                total_questions:
-                    total,
-
-                percentage:
-                    percentage
-
-            });
-
-
-
-    if (error) {
-
-        console.error(
-            "Could not save quiz result:",
-            error.message
-        );
-
-    }
+document.getElementById("previousButton").disabled=
+currentQuestion===0;
 
 }
 
 
+function restoreAnsweredQuestion(selected){
 
-// ======================================================
-// RESTART
-// ======================================================
+const q=
+questions[currentQuestion];
 
-function restartQuiz() {
-
-    currentQuestion = 0;
-
-    score = 0;
-
-    answeredQuestions =
-        new Array(
-            questions.length
-        ).fill(null);
+const correct=
+String(q.correct_answer)
+.trim()
+.toUpperCase();
 
 
+const selectedButton=
+document.getElementById(
+"option_"+selected.toLowerCase()
+);
 
-    questions =
-        shuffleQuestions(
-            questions
-        );
-
-
-
-    document
-        .getElementById("result")
-        .style.display =
-        "none";
+const correctButton=
+document.getElementById(
+"option_"+correct.toLowerCase()
+);
 
 
+const options=[
+document.getElementById("option_a"),
+document.getElementById("option_b"),
+document.getElementById("option_c"),
+document.getElementById("option_d")
+];
 
-    document
-        .getElementById("quizCard")
-        .style.display =
-        "block";
+
+options.forEach(function(option){
+
+option.disabled=true;
+
+option.classList.add("disabled");
+
+});
 
 
+if(selected===correct){
 
-    showQuestion();
+selectedButton.classList.add("correct");
+
+const feedback=
+document.getElementById("feedback");
+
+feedback.textContent=
+"✅ Correct! Well done.";
+
+feedback.className=
+"feedback correct-feedback";
+
+feedback.style.display="block";
 
 }
 
+else{
+
+selectedButton.classList.add("wrong");
+
+if(correctButton){
+
+correctButton.classList.add("correct");
+
+}
+
+const feedback=
+document.getElementById("feedback");
+
+feedback.textContent=
+"❌ Wrong answer. The correct answer is "+
+correct+".";
+
+feedback.className=
+"feedback wrong-feedback";
+
+feedback.style.display="block";
+
+}
+
+
+document.getElementById("correct_answer").textContent=
+correct;
+
+document.getElementById("explanation").textContent=
+q.explanation ||
+"No explanation provided.";
+
+document.getElementById("answer").style.display="block";
+
+document.getElementById("nextButton").disabled=false;
+
+}
+
+
+function selectAnswer(selected){
+
+if(answeredQuestions[currentQuestion]){
+return;
+}
+
+
+const q=
+questions[currentQuestion];
+
+const correct=
+String(q.correct_answer)
+.trim()
+.toUpperCase();
+
+
+answeredQuestions[currentQuestion]=selected;
+
+
+const selectedButton=
+document.getElementById(
+"option_"+selected.toLowerCase()
+);
+
+const correctButton=
+document.getElementById(
+"option_"+correct.toLowerCase()
+);
+
+
+const options=[
+document.getElementById("option_a"),
+document.getElementById("option_b"),
+document.getElementById("option_c"),
+document.getElementById("option_d")
+];
+
+
+options.forEach(function(option){
+
+option.disabled=true;
+
+option.classList.add("disabled");
+
+});
+
+
+if(selected===correct){
+
+score++;
+
+selectedButton.classList.add("correct");
+
+const feedback=
+document.getElementById("feedback");
+
+feedback.textContent=
+"✅ Correct! Well done.";
+
+feedback.className=
+"feedback correct-feedback";
+
+feedback.style.display="block";
+
+}
+
+else{
+
+selectedButton.classList.add("wrong");
+
+if(correctButton){
+
+correctButton.classList.add("correct");
+
+}
+
+const feedback=
+document.getElementById("feedback");
+
+feedback.textContent=
+"❌ Wrong answer. The correct answer is "+
+correct+".";
+
+feedback.className=
+"feedback wrong-feedback";
+
+feedback.style.display="block";
+
+}
+
+
+document.getElementById("correct_answer").textContent=
+correct;
+
+document.getElementById("explanation").textContent=
+q.explanation ||
+"No explanation provided.";
+
+document.getElementById("answer").style.display="block";
+
+document.getElementById("score").textContent=
+"Score: "+score;
+
+document.getElementById("nextButton").disabled=false;
+
+}
+
+
+function nextQuestion(){
+
+if(currentQuestion<questions.length-1){
+
+currentQuestion++;
+
+showQuestion();
+
+}
+
+else{
+
+showResult();
+
+}
+
+}
+
+
+function previousQuestion(){
+
+if(currentQuestion>0){
+
+currentQuestion--;
+
+showQuestion();
+
+}
+
+}
+
+
+async function showResult(){
+
+document.getElementById("quizCard").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+
+const total=questions.length;
+
+const percentage=
+Math.round((score/total)*100);
+
+
+document.getElementById("finalScore").textContent=
+score+" / "+total;
+
+document.getElementById("percentage").textContent=
+"Your score: "+percentage+"%";
+
+
+const {
+data:{user}
+}=
+await supabaseClient.auth.getUser();
+
+
+if(!user)return;
+
+
+const {error}=
+await supabaseClient
+
+.from("quiz_results")
+
+.insert({
+
+user_id:user.id,
+
+course:"Primary Health Care",
+
+topic:selectedTopic,
+
+score:score,
+
+total_questions:total,
+
+percentage:percentage
+
+});
+
+
+if(error){
+
+console.error(
+"Could not save PHC result:",
+error.message
+);
+
+}
+
+}
+
+
+function restartQuiz(){
+
+currentQuestion=0;
+
+score=0;
+
+answeredQuestions=
+new Array(questions.length).fill(null);
+
+questions=
+shuffleQuestions(questions);
+
+document.getElementById("result").style.display="none";
+
+document.getElementById("quizCard").style.display="block";
+
+showQuestion();
+
+}
+
+
+function escapeHTML(value){
+
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
 
 
 loadQuestions();
 
-
 </script>
 
 </body>
-
 </html>
