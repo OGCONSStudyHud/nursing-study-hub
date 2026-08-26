@@ -9,9 +9,12 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>OGCONS Study Hub - Dashboard</title>
+    <title>
+        OGCONS Study Hub - Dashboard
+    </title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
     <style>
 
@@ -21,8 +24,11 @@
             padding: 0;
         }
 
+
         body {
+
             font-family: Arial, sans-serif;
+
             min-height: 100vh;
 
             background:
@@ -37,11 +43,12 @@
         }
 
 
-        /* ==========================================
+        /* ===============================
            HEADER
-        ========================================== */
+        =============================== */
 
         header {
+
             background:
                 linear-gradient(
                     135deg,
@@ -50,16 +57,21 @@
                 );
 
             color: white;
+
             padding: 25px;
         }
 
 
         .header-content {
+
             max-width: 1100px;
+
             margin: auto;
 
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
 
             gap: 20px;
@@ -67,13 +79,17 @@
 
 
         .logo {
+
             font-size: 24px;
+
             font-weight: bold;
         }
 
 
         .logout {
+
             background: white;
+
             color: #18a058;
 
             border: none;
@@ -89,15 +105,18 @@
 
 
         .logout:hover {
+
             background: #f0f0f0;
         }
 
 
-        /* ==========================================
-           CONTAINER
-        ========================================== */
+
+        /* ===============================
+           MAIN CONTAINER
+        =============================== */
 
         .container {
+
             max-width: 1100px;
 
             margin: auto;
@@ -106,11 +125,13 @@
         }
 
 
-        /* ==========================================
+
+        /* ===============================
            WELCOME
-        ========================================== */
+        =============================== */
 
         .welcome {
+
             background: white;
 
             padding: 30px;
@@ -126,33 +147,39 @@
 
 
         .welcome h1 {
+
             margin-bottom: 10px;
         }
 
 
         .welcome p {
+
             color: #617568;
 
             line-height: 1.5;
         }
 
 
-        /* ==========================================
+
+        /* ===============================
            SECTION TITLE
-        ========================================== */
+        =============================== */
 
         .section-title {
+
             margin: 30px 0 18px;
 
             font-size: 24px;
         }
 
 
-        /* ==========================================
-           CARDS
-        ========================================== */
+
+        /* ===============================
+           COURSE CARDS
+        =============================== */
 
         .cards {
+
             display: grid;
 
             grid-template-columns:
@@ -163,6 +190,7 @@
 
 
         .card {
+
             background: white;
 
             padding: 25px;
@@ -180,11 +208,13 @@
 
 
         .card:hover {
+
             transform: translateY(-3px);
         }
 
 
         .icon {
+
             font-size: 42px;
 
             margin-bottom: 12px;
@@ -192,11 +222,13 @@
 
 
         .card h3 {
+
             margin-bottom: 8px;
         }
 
 
         .card p {
+
             color: #617568;
 
             margin-bottom: 18px;
@@ -205,7 +237,11 @@
         }
 
 
-        .card button {
+        .card button,
+        .course-link {
+
+            display: inline-block;
+
             border: none;
 
             background: #18a058;
@@ -219,30 +255,39 @@
             font-weight: bold;
 
             cursor: pointer;
+
+            text-decoration: none;
+
+            font-size: 14px;
         }
 
 
-        .card button:hover {
+        .card button:hover,
+        .course-link:hover {
+
             background: #117d45;
         }
 
 
-        /* ==========================================
+        /* ===============================
            COMING SOON
-        ========================================== */
+        =============================== */
 
         .coming-soon {
+
             background: #9aa6a0 !important;
 
             cursor: not-allowed !important;
         }
 
 
-        /* ==========================================
-           STATISTICS
-        ========================================== */
+
+        /* ===============================
+           PROGRESS
+        =============================== */
 
         .stat {
+
             font-size: 32px;
 
             font-weight: bold;
@@ -253,11 +298,13 @@
         }
 
 
-        /* ==========================================
+
+        /* ===============================
            LOADING
-        ========================================== */
+        =============================== */
 
         .loading {
+
             text-align: center;
 
             padding: 50px;
@@ -266,13 +313,15 @@
         }
 
 
-        /* ==========================================
+
+        /* ===============================
            MOBILE
-        ========================================== */
+        =============================== */
 
         @media (max-width: 900px) {
 
             .cards {
+
                 grid-template-columns:
                     repeat(2, 1fr);
             }
@@ -283,16 +332,19 @@
         @media (max-width: 600px) {
 
             .cards {
+
                 grid-template-columns: 1fr;
             }
 
 
             .header-content {
+
                 flex-direction: column;
             }
 
 
             .logo {
+
                 text-align: center;
             }
 
@@ -303,16 +355,18 @@
 </head>
 
 
+
 <body>
 
 
-<!-- ==========================================
+<!-- =========================================
      HEADER
-========================================== -->
+========================================= -->
 
 <header>
 
     <div class="header-content">
+
 
         <div class="logo">
 
@@ -329,15 +383,16 @@
 
         </button>
 
+
     </div>
 
 </header>
 
 
 
-<!-- ==========================================
+<!-- =========================================
      LOADING
-========================================== -->
+========================================= -->
 
 <div
     id="loading"
@@ -349,9 +404,9 @@
 
 
 
-<!-- ==========================================
+<!-- =========================================
      DASHBOARD
-========================================== -->
+========================================= -->
 
 <div
     id="dashboard"
@@ -360,15 +415,21 @@
 
 
 
-    <!-- ==========================================
+    <!-- =====================================
          WELCOME
-    ========================================== -->
+    ====================================== -->
 
     <div class="welcome">
 
+
         <h1>
 
-            Welcome 👋
+            Welcome,
+            <span id="studentName">
+                Student
+            </span>
+
+            👋
 
         </h1>
 
@@ -383,13 +444,14 @@
 
         </p>
 
+
     </div>
 
 
 
-    <!-- ==========================================
+    <!-- =====================================
          COURSES
-    ========================================== -->
+    ====================================== -->
 
     <h2 class="section-title">
 
@@ -403,9 +465,9 @@
 
 
 
-        <!-- ==========================================
+        <!-- =================================
              MICROBIOLOGY
-        ========================================== -->
+        ================================== -->
 
         <div class="card">
 
@@ -444,9 +506,9 @@
 
 
 
-        <!-- ==========================================
+        <!-- =================================
              ANATOMY & PHYSIOLOGY
-        ========================================== -->
+        ================================== -->
 
         <div class="card">
 
@@ -484,9 +546,9 @@
 
 
 
-        <!-- ==========================================
+        <!-- =================================
              PHARMACOLOGY
-        ========================================== -->
+        ================================== -->
 
         <div class="card">
 
@@ -524,9 +586,9 @@
 
 
 
-        <!-- ==========================================
+        <!-- =================================
              FOUNDATIONS OF NURSING
-        ========================================== -->
+        ================================== -->
 
         <div class="card">
 
@@ -564,9 +626,9 @@
 
 
 
-        <!-- ==========================================
+        <!-- =================================
              PRIMARY HEALTH CARE
-        ========================================== -->
+        ================================== -->
 
         <div class="card">
 
@@ -586,18 +648,65 @@
 
             <p>
 
-                Study community health,
-                health promotion, disease
-                prevention and primary
-                healthcare services.
+                Study primary health care,
+                community health,
+                health education and
+                PHC nursing.
+
+            </p>
+
+
+            <!-- IMPORTANT:
+                 Direct link to the exact
+                 existing filename.
+            -->
+
+            <a
+                href="phc-topics.html"
+                class="course-link">
+
+                Open Course
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================
+             MEDICAL SURGICAL
+        ================================== -->
+
+        <div class="card">
+
+            <div class="icon">
+
+                🏥
+
+            </div>
+
+
+            <h3>
+
+                Medical-Surgical Nursing
+
+            </h3>
+
+
+            <p>
+
+                Study common medical
+                and surgical conditions
+                and nursing care.
 
             </p>
 
 
             <button
-                onclick="openPrimaryHealthCare()">
+                class="coming-soon"
+                disabled>
 
-                Open Course
+                Coming Soon
 
             </button>
 
@@ -605,9 +714,9 @@
 
 
 
-        <!-- ==========================================
+        <!-- =================================
              NUTRITION
-        ========================================== -->
+        ================================== -->
 
         <div class="card">
 
@@ -635,7 +744,8 @@
 
 
             <button
-                class="coming-soon">
+                class="coming-soon"
+                disabled>
 
                 Coming Soon
 
@@ -645,9 +755,9 @@
 
 
 
-        <!-- ==========================================
+        <!-- =================================
              NURSING PRACTICE
-        ========================================== -->
+        ================================== -->
 
         <div class="card">
 
@@ -675,7 +785,8 @@
 
 
             <button
-                class="coming-soon">
+                class="coming-soon"
+                disabled>
 
                 Coming Soon
 
@@ -689,9 +800,9 @@
 
 
 
-    <!-- ==========================================
+    <!-- =========================================
          PROGRESS
-    ========================================== -->
+    ========================================= -->
 
     <h2 class="section-title">
 
@@ -705,9 +816,7 @@
 
 
 
-        <!-- ==========================================
-             QUIZZES COMPLETED
-        ========================================== -->
+        <!-- QUIZZES COMPLETED -->
 
         <div class="card">
 
@@ -745,9 +854,7 @@
 
 
 
-        <!-- ==========================================
-             AVERAGE SCORE
-        ========================================== -->
+        <!-- AVERAGE SCORE -->
 
         <div class="card">
 
@@ -785,9 +892,7 @@
 
 
 
-        <!-- ==========================================
-             LEADERBOARD
-        ========================================== -->
+        <!-- LEADERBOARD -->
 
         <div class="card">
 
@@ -814,7 +919,8 @@
 
 
             <button
-                class="coming-soon">
+                class="coming-soon"
+                disabled>
 
                 Coming Soon
 
@@ -826,26 +932,34 @@
     </div>
 
 
+
 </div>
 
 
 
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
 <script>
 
 
-// ==========================================
+// ==================================================
 // SUPABASE CONNECTION
-// ==========================================
+// ==================================================
 
 const SUPABASE_URL =
+
     "https://bvetmmvpdotifusjkywd.supabase.co";
 
 
 const SUPABASE_PUBLISHABLE_KEY =
+
     "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
 
 const supabaseClient =
+
     window.supabase.createClient(
 
         SUPABASE_URL,
@@ -856,22 +970,30 @@ const supabaseClient =
 
 
 
-// ==========================================
+// ==================================================
 // CHECK USER
-// ==========================================
+// ==================================================
 
 async function checkUser() {
 
 
     const {
+
         data: {
             user
+
         },
+
         error
+
     } =
+
         await supabaseClient
+
             .auth
+
             .getUser();
+
 
 
     if (
@@ -887,24 +1009,58 @@ async function checkUser() {
     }
 
 
+
+    const name =
+
+        user.user_metadata?.full_name ||
+
+        user.email?.split("@")[0] ||
+
+        "Student";
+
+
+
     document
-        .getElementById("loading")
+
+        .getElementById(
+            "studentName"
+        )
+
+        .textContent =
+
+        name;
+
+
+
+    document
+
+        .getElementById(
+            "loading"
+        )
+
         .style.display =
+
         "none";
 
 
+
     document
-        .getElementById("dashboard")
+
+        .getElementById(
+            "dashboard"
+        )
+
         .style.display =
+
         "block";
 
 }
 
 
 
-// ==========================================
+// ==================================================
 // OPEN MICROBIOLOGY
-// ==========================================
+// ==================================================
 
 function openMicrobiology() {
 
@@ -915,9 +1071,9 @@ function openMicrobiology() {
 
 
 
-// ==========================================
+// ==================================================
 // OPEN ANATOMY & PHYSIOLOGY
-// ==========================================
+// ==================================================
 
 function openAnatomy() {
 
@@ -928,9 +1084,9 @@ function openAnatomy() {
 
 
 
-// ==========================================
+// ==================================================
 // OPEN PHARMACOLOGY
-// ==========================================
+// ==================================================
 
 function openPharmacology() {
 
@@ -941,9 +1097,9 @@ function openPharmacology() {
 
 
 
-// ==========================================
+// ==================================================
 // OPEN FOUNDATIONS OF NURSING
-// ==========================================
+// ==================================================
 
 function openFoundations() {
 
@@ -954,29 +1110,19 @@ function openFoundations() {
 
 
 
-// ==========================================
-// OPEN PRIMARY HEALTH CARE
-// ==========================================
-
-function openPrimaryHealthCare() {
-
-    window.location.href =
-        "primary-health-care.html";
-
-}
-
-
-
-// ==========================================
+// ==================================================
 // LOGOUT
-// ==========================================
+// ==================================================
 
 async function logout() {
 
 
     await supabaseClient
+
         .auth
+
         .signOut();
+
 
 
     window.location.href =
@@ -986,21 +1132,28 @@ async function logout() {
 
 
 
-// ==========================================
+// ==================================================
 // LOAD QUIZ PROGRESS
-// ==========================================
+// ==================================================
 
 async function loadQuizProgress() {
 
 
     const {
+
         data: {
             user
+
         }
+
     } =
+
         await supabaseClient
+
             .auth
+
             .getUser();
+
 
 
     if (!user) {
@@ -1010,10 +1163,15 @@ async function loadQuizProgress() {
     }
 
 
+
     const {
+
         data,
+
         error
+
     } =
+
         await supabaseClient
 
             .from("quiz_results")
@@ -1026,11 +1184,15 @@ async function loadQuizProgress() {
             );
 
 
+
     if (error) {
 
         console.error(
+
             "Unable to load quiz progress:",
+
             error.message
+
         );
 
         return;
@@ -1038,33 +1200,44 @@ async function loadQuizProgress() {
     }
 
 
+
     const results =
         data || [];
 
 
 
-    // ==========================================
-    // NUMBER OF QUIZZES COMPLETED
-    // ==========================================
+    // ==============================================
+    // NUMBER OF QUIZZES
+    // ==============================================
 
     document
-        .getElementById("quizCount")
+
+        .getElementById(
+            "quizCount"
+        )
+
         .textContent =
+
         results.length;
 
 
 
-    // ==========================================
-    // AVERAGE SCORE
-    // ==========================================
+    // ==============================================
+    // NO RESULTS
+    // ==============================================
 
     if (
         results.length === 0
     ) {
 
         document
-            .getElementById("averageScore")
+
+            .getElementById(
+                "averageScore"
+            )
+
             .textContent =
+
             "0%";
 
         return;
@@ -1072,7 +1245,13 @@ async function loadQuizProgress() {
     }
 
 
+
+    // ==============================================
+    // CALCULATE AVERAGE
+    // ==============================================
+
     const totalPercentage =
+
         results.reduce(
 
             function(
@@ -1080,10 +1259,15 @@ async function loadQuizProgress() {
                 result
             ) {
 
-                return total +
+                return (
+
+                    total +
+
                     Number(
                         result.percentage || 0
-                    );
+                    )
+
+                );
 
             },
 
@@ -1092,27 +1276,36 @@ async function loadQuizProgress() {
         );
 
 
+
     const average =
+
         Math.round(
 
             totalPercentage /
+
             results.length
 
         );
 
 
+
     document
-        .getElementById("averageScore")
+
+        .getElementById(
+            "averageScore"
+        )
+
         .textContent =
+
         average + "%";
 
 }
 
 
 
-// ==========================================
+// ==================================================
 // START
-// ==========================================
+// ==================================================
 
 checkUser();
 
