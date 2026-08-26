@@ -9,10 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>
-        OGCONS Study Hub - Foundations of Nursing
-    </title>
-
+    <title>OGCONS Study Hub - Foundations of Nursing</title>
 
     <style>
 
@@ -22,11 +19,8 @@
             padding: 0;
         }
 
-
         body {
-
             font-family: Arial, sans-serif;
-
             min-height: 100vh;
 
             background:
@@ -37,14 +31,13 @@
                     #f5eaff
                 );
 
-            color: #26352c;
-
+            color: #172033;
         }
 
 
-        /* ================================
+        /* ===============================
            HEADER
-        ================================= */
+        =============================== */
 
         header {
 
@@ -56,7 +49,6 @@
                 );
 
             color: white;
-
             padding: 22px 20px;
 
         }
@@ -65,13 +57,10 @@
         .header-content {
 
             max-width: 1100px;
-
             margin: auto;
 
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
 
             gap: 15px;
@@ -82,7 +71,6 @@
         .logo {
 
             font-size: 22px;
-
             font-weight: bold;
 
         }
@@ -93,7 +81,6 @@
             border: none;
 
             background: white;
-
             color: #18a058;
 
             padding: 10px 18px;
@@ -114,24 +101,26 @@
         }
 
 
-        /* ================================
+
+        /* ===============================
            CONTAINER
-        ================================= */
+        =============================== */
 
         .container {
 
-            max-width: 950px;
+            max-width: 1000px;
 
             margin: auto;
 
-            padding: 35px 20px;
+            padding: 30px 20px;
 
         }
 
 
-        /* ================================
+
+        /* ===============================
            TOPIC HEADER
-        ================================= */
+        =============================== */
 
         .topic-header {
 
@@ -156,7 +145,7 @@
 
             font-size: 55px;
 
-            margin-bottom: 15px;
+            margin-bottom: 12px;
 
         }
 
@@ -183,15 +172,16 @@
         }
 
 
-        /* ================================
-           NOTE CARD
-        ================================= */
+
+        /* ===============================
+           NOTE
+        =============================== */
 
         .note-card {
 
             background: white;
 
-            padding: 30px;
+            padding: 35px;
 
             border-radius: 20px;
 
@@ -202,49 +192,68 @@
         }
 
 
-        .note-card h2 {
+        .note-title {
 
             color: #18a058;
 
-            margin-top: 25px;
+            font-size: 26px;
 
-            margin-bottom: 12px;
+            margin-bottom: 25px;
 
-            font-size: 22px;
+            padding-bottom: 15px;
 
-        }
-
-
-        .note-card h2:first-child {
-
-            margin-top: 0;
+            border-bottom:
+                2px solid #e5f3eb;
 
         }
 
 
-        .note-card h3 {
-
-            color: #237a53;
-
-            margin-top: 20px;
-
-            margin-bottom: 10px;
-
-            font-size: 18px;
-
-        }
-
-
-        .note-card p {
+        .note-content {
 
             line-height: 1.8;
 
-            margin-bottom: 14px;
+            color: #26382d;
+
+            font-size: 16px;
 
         }
 
 
-        .note-card ul {
+        .note-content h2 {
+
+            color: #18a058;
+
+            font-size: 22px;
+
+            margin-top: 30px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .note-content h3 {
+
+            color: #117d45;
+
+            font-size: 18px;
+
+            margin-top: 22px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .note-content p {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .note-content ul,
+        .note-content ol {
 
             margin-left: 25px;
 
@@ -253,9 +262,7 @@
         }
 
 
-        .note-card li {
-
-            line-height: 1.7;
+        .note-content li {
 
             margin-bottom: 8px;
 
@@ -264,17 +271,16 @@
 
         .definition {
 
-            background: #eefaf4;
+            background: #eefaf3;
 
-            border-left: 5px solid #18a058;
+            border-left:
+                5px solid #18a058;
 
             padding: 18px;
 
             border-radius: 10px;
 
-            margin: 15px 0 20px;
-
-            line-height: 1.7;
+            margin: 18px 0;
 
         }
 
@@ -283,60 +289,99 @@
 
             background: #fff8e8;
 
-            border-left: 5px solid #f59e0b;
+            border-left:
+                5px solid #f59e0b;
 
             padding: 18px;
 
             border-radius: 10px;
 
-            margin: 15px 0 20px;
-
-            line-height: 1.7;
+            margin: 18px 0;
 
         }
 
 
-        .summary {
+        .remember {
 
             background: #eef6ff;
 
-            border-left: 5px solid #0b5ed7;
+            border-left:
+                5px solid #0b5ed7;
 
             padding: 18px;
 
             border-radius: 10px;
 
-            margin-top: 20px;
-
-            line-height: 1.7;
+            margin: 18px 0;
 
         }
 
 
-        /* ================================
+        .note-table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin: 20px 0;
+
+        }
+
+
+        .note-table th,
+        .note-table td {
+
+            border:
+                1px solid #dce5df;
+
+            padding: 12px;
+
+            text-align: left;
+
+            vertical-align: top;
+
+        }
+
+
+        .note-table th {
+
+            background: #e8f8ef;
+
+            color: #117d45;
+
+        }
+
+
+
+        /* ===============================
            QUIZ BUTTON
-        ================================= */
+        =============================== */
 
         .quiz-box {
 
             margin-top: 30px;
 
-            background: #f5fff9;
-
             padding: 25px;
 
-            border-radius: 15px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #eef9ff
+                );
+
+            border-radius: 16px;
 
             text-align: center;
 
         }
 
 
-        .quiz-box h2 {
+        .quiz-box h3 {
 
             color: #18a058;
 
-            margin-bottom: 10px;
+            margin-bottom: 8px;
 
         }
 
@@ -345,7 +390,7 @@
 
             color: #617568;
 
-            margin-bottom: 18px;
+            margin-bottom: 15px;
 
         }
 
@@ -358,7 +403,7 @@
 
             color: white;
 
-            padding: 13px 25px;
+            padding: 13px 24px;
 
             border-radius: 25px;
 
@@ -378,9 +423,10 @@
         }
 
 
-        /* ================================
+
+        /* ===============================
            FOOTER
-        ================================= */
+        =============================== */
 
         footer {
 
@@ -395,9 +441,10 @@
         }
 
 
-        /* ================================
+
+        /* ===============================
            MOBILE
-        ================================= */
+        =============================== */
 
         @media (max-width: 700px) {
 
@@ -410,6 +457,13 @@
             }
 
 
+            .note-card {
+
+                padding: 22px;
+
+            }
+
+
             .topic-header h1 {
 
                 font-size: 25px;
@@ -417,9 +471,16 @@
             }
 
 
-            .note-card {
+            .note-content {
 
-                padding: 22px;
+                font-size: 15px;
+
+            }
+
+
+            .note-table {
+
+                font-size: 14px;
 
             }
 
@@ -469,27 +530,26 @@
 <div class="container">
 
 
-    <!-- TOPIC HEADER -->
-
     <div class="topic-header">
 
         <div class="topic-icon">
 
-            🏥
+            📚
 
         </div>
 
 
-        <h1>
+        <h1 id="topicTitle">
 
-            Healthcare Institutions
+            Foundations of Nursing
 
         </h1>
 
 
         <p>
 
-            Foundations of Nursing
+            Curriculum-based study note for
+            Foundations of Nursing.
 
         </p>
 
@@ -497,643 +557,41 @@
 
 
 
-    <!-- ==========================================
-         NOTE
-    ========================================== -->
+    <!-- ======================================
+         NOTE CARD
+    ======================================= -->
 
     <div class="note-card">
 
+        <h2
+            class="note-title"
+            id="noteTitle">
 
-        <h2>
-            1. Introduction
+            Foundations of Nursing
+
         </h2>
 
 
-        <p>
-
-            Healthcare institutions are organized
-            places where health services are provided
-            to individuals, families and communities.
-
-            They provide services such as prevention
-            of diseases, diagnosis, treatment,
-            rehabilitation and health promotion.
-
-        </p>
-
-
-
-        <div class="definition">
-
-            <strong>Definition:</strong>
-
-            A healthcare institution is an
-            organization or establishment designed
-            to provide healthcare services to people
-            who need them.
+        <div
+            class="note-content"
+            id="noteContent">
 
         </div>
 
-
-
-        <h2>
-            2. Types of Healthcare Institutions
-        </h2>
-
-
-        <p>
-
-            Healthcare institutions can be classified
-            according to the level and type of care
-            they provide.
-
-        </p>
-
-
-
-        <h3>
-            A. Primary Healthcare Institutions
-        </h3>
-
-
-        <p>
-
-            Primary healthcare institutions provide
-            basic and essential healthcare services
-            and are usually the first point of contact
-            between individuals and the healthcare
-            system.
-
-        </p>
-
-
-        <p>
-            Examples include:
-        </p>
-
-
-        <ul>
-
-            <li>
-                Primary Health Care Centres (PHCs)
-            </li>
-
-            <li>
-                Health posts
-            </li>
-
-            <li>
-                Health centres
-            </li>
-
-            <li>
-                Community health facilities
-            </li>
-
-        </ul>
-
-
-        <p>
-
-            Services may include health education,
-            immunization, antenatal care,
-            family planning, treatment of minor
-            illnesses and disease prevention.
-
-        </p>
-
-
-
-        <h3>
-            B. Secondary Healthcare Institutions
-        </h3>
-
-
-        <p>
-
-            Secondary healthcare institutions provide
-            more specialized services than primary
-            healthcare facilities.
-
-        </p>
-
-
-        <p>
-            Examples include:
-        </p>
-
-
-        <ul>
-
-            <li>
-                General hospitals
-            </li>
-
-            <li>
-                Specialist hospitals at the secondary
-                level
-            </li>
-
-            <li>
-                District hospitals
-            </li>
-
-        </ul>
-
-
-        <p>
-
-            They provide services such as medical
-            treatment, surgery, laboratory
-            investigations, maternity services and
-            inpatient care.
-
-        </p>
-
-
-
-        <h3>
-            C. Tertiary Healthcare Institutions
-        </h3>
-
-
-        <p>
-
-            Tertiary healthcare institutions provide
-            highly specialized and advanced medical
-            services.
-
-        </p>
-
-
-        <p>
-            Examples include:
-        </p>
-
-
-        <ul>
-
-            <li>
-                Teaching hospitals
-            </li>
-
-            <li>
-                Federal medical centres
-            </li>
-
-            <li>
-                Highly specialized hospitals
-            </li>
-
-        </ul>
-
-
-        <p>
-
-            They also provide specialized treatment,
-            advanced diagnostic services, research
-            and training of healthcare professionals.
-
-        </p>
-
-
-
-        <h2>
-            3. Levels of Healthcare
-        </h2>
-
-
-        <p>
-
-            The healthcare system is commonly
-            organized into three major levels:
-
-        </p>
-
-
-        <ul>
-
-            <li>
-                <strong>Primary level</strong> –
-                provides basic and essential healthcare.
-            </li>
-
-            <li>
-                <strong>Secondary level</strong> –
-                provides specialized healthcare and
-                referral services.
-            </li>
-
-            <li>
-                <strong>Tertiary level</strong> –
-                provides highly specialized care,
-                teaching and research.
-            </li>
-
-        </ul>
-
-
-
-        <h2>
-            4. Functions of Healthcare Institutions
-        </h2>
-
-
-        <p>
-
-            Healthcare institutions perform several
-            important functions in maintaining the
-            health of individuals and communities.
-
-        </p>
-
-
-        <ul>
-
-            <li>
-                Promotion of health.
-            </li>
-
-            <li>
-                Prevention of diseases.
-            </li>
-
-            <li>
-                Diagnosis of diseases and health
-                conditions.
-            </li>
-
-            <li>
-                Treatment of illnesses and injuries.
-            </li>
-
-            <li>
-                Rehabilitation of patients.
-            </li>
-
-            <li>
-                Provision of emergency care.
-            </li>
-
-            <li>
-                Provision of maternal and child health
-                services.
-            </li>
-
-            <li>
-                Health education.
-            </li>
-
-            <li>
-                Training of healthcare professionals.
-            </li>
-
-            <li>
-                Conducting healthcare research.
-            </li>
-
-        </ul>
-
-
-
-        <h2>
-            5. Hospital
-        </h2>
-
-
-        <div class="definition">
-
-            <strong>Definition:</strong>
-
-            A hospital is a healthcare institution
-            established to provide medical,
-            surgical, nursing and other healthcare
-            services to patients.
-
-        </div>
-
-
-
-        <h2>
-            6. Departments in a Hospital
-        </h2>
-
-
-        <p>
-
-            Hospitals are divided into different
-            departments to allow healthcare workers
-            to provide specialized services.
-
-        </p>
-
-
-        <p>
-            Common hospital departments include:
-        </p>
-
-
-        <ul>
-
-            <li>
-                Medical ward
-            </li>
-
-            <li>
-                Surgical ward
-            </li>
-
-            <li>
-                Paediatric ward
-            </li>
-
-            <li>
-                Maternity/Obstetric department
-            </li>
-
-            <li>
-                Emergency department
-            </li>
-
-            <li>
-                Operating theatre
-            </li>
-
-            <li>
-                Laboratory
-            </li>
-
-            <li>
-                Pharmacy
-            </li>
-
-            <li>
-                Radiology/Imaging department
-            </li>
-
-            <li>
-                Outpatient department
-            </li>
-
-            <li>
-                Intensive Care Unit
-            </li>
-
-        </ul>
-
-
-
-        <h2>
-            7. Members of the Healthcare Team
-        </h2>
-
-
-        <p>
-
-            Healthcare is provided through teamwork.
-            Different healthcare professionals work
-            together to provide safe and effective
-            patient care.
-
-        </p>
-
-
-        <ul>
-
-            <li>
-                Doctors
-            </li>
-
-            <li>
-                Nurses
-            </li>
-
-            <li>
-                Pharmacists
-            </li>
-
-            <li>
-                Medical laboratory scientists
-            </li>
-
-            <li>
-                Radiographers
-            </li>
-
-            <li>
-                Physiotherapists
-            </li>
-
-            <li>
-                Nutritionists/Dietitians
-            </li>
-
-            <li>
-                Community health practitioners
-            </li>
-
-            <li>
-                Dentists
-            </li>
-
-            <li>
-                Social workers
-            </li>
-
-        </ul>
-
-
-
-        <h2>
-            8. Role of the Nurse in Healthcare Institutions
-        </h2>
-
-
-        <p>
-
-            Nurses play an important role in the
-            healthcare team and provide continuous
-            care to patients.
-
-        </p>
-
-
-        <ul>
-
-            <li>
-                Assessing patients' health conditions.
-            </li>
-
-            <li>
-                Providing direct nursing care.
-            </li>
-
-            <li>
-                Administering medications as prescribed.
-            </li>
-
-            <li>
-                Monitoring vital signs.
-            </li>
-
-            <li>
-                Maintaining patient safety.
-            </li>
-
-            <li>
-                Providing health education.
-            </li>
-
-            <li>
-                Supporting patients emotionally.
-            </li>
-
-            <li>
-                Maintaining accurate nursing records.
-            </li>
-
-            <li>
-                Communicating with other members of
-                the healthcare team.
-            </li>
-
-            <li>
-                Advocating for patients.
-            </li>
-
-        </ul>
-
-
-
-        <h2>
-            9. Referral System
-        </h2>
-
-
-        <p>
-
-            A referral system is the process of
-            transferring or directing a patient from
-            one healthcare facility or level of care
-            to another facility that can provide the
-            required service.
-
-        </p>
-
-
-        <p>
-
-            For example, a patient whose condition
-            requires specialized treatment may be
-            referred from a primary healthcare centre
-            to a secondary or tertiary healthcare
-            institution.
-
-        </p>
-
-
-
-        <div class="important">
-
-            <strong>Important:</strong>
-
-            The main purpose of referral is to ensure
-            that the patient receives the appropriate
-            level of care required for the condition.
-
-        </div>
-
-
-
-        <h2>
-            10. Importance of Healthcare Institutions
-        </h2>
-
-
-        <ul>
-
-            <li>
-                They provide healthcare services.
-            </li>
-
-            <li>
-                They help prevent and control diseases.
-            </li>
-
-            <li>
-                They provide emergency treatment.
-            </li>
-
-            <li>
-                They promote health education.
-            </li>
-
-            <li>
-                They support maternal and child health.
-            </li>
-
-            <li>
-                They provide rehabilitation services.
-            </li>
-
-            <li>
-                They train healthcare professionals.
-            </li>
-
-            <li>
-                They support medical and healthcare
-                research.
-            </li>
-
-        </ul>
-
-
-
-        <h2>
-            11. Summary
-        </h2>
-
-
-        <div class="summary">
-
-            Healthcare institutions are organized
-            establishments that provide healthcare
-            services.
-
-            They operate at primary, secondary and
-            tertiary levels.
-
-            Primary healthcare provides basic and
-            essential services, secondary healthcare
-            provides more specialized care, while
-            tertiary healthcare provides highly
-            specialized services, teaching and
-            research.
-
-            Nurses work with other healthcare
-            professionals as part of the healthcare
-            team to provide safe, effective and
-            patient-centred care.
-
-        </div>
-
-
-
-        <!-- ======================================
-             QUIZ
-        ======================================= -->
 
         <div class="quiz-box">
 
-            <h2>
-                📝 Ready to Test Yourself?
-            </h2>
+            <h3>
+
+                📝 Test Your Understanding
+
+            </h3>
 
 
             <p>
 
-                Take the Healthcare Institutions
-                quiz to test your understanding.
+                After studying this topic,
+                take the quiz to test your knowledge.
 
             </p>
 
@@ -1142,14 +600,14 @@
                 class="quiz-button"
                 onclick="takeQuiz()">
 
-                Take Quiz →
+                Take Topic Quiz →
 
             </button>
 
         </div>
 
-
     </div>
+
 
 </div>
 
@@ -1166,9 +624,9 @@
 <script>
 
 
-// ==================================================
-// GET TOPIC
-// ==================================================
+// ======================================================
+// GET TOPIC FROM URL
+// ======================================================
 
 const urlParams =
     new URLSearchParams(
@@ -1176,33 +634,1543 @@ const urlParams =
     );
 
 
-const topic =
+const selectedTopic =
     urlParams.get("topic");
 
 
 
-// ==================================================
-// BACK
-// ==================================================
+// ======================================================
+// TOPIC TITLE
+// ======================================================
 
-function goBack() {
+const topicTitle =
+    document.getElementById(
+        "topicTitle"
+    );
 
-    window.location.href =
-        "foundations-topics.html";
+
+const noteTitle =
+    document.getElementById(
+        "noteTitle"
+    );
+
+
+if (selectedTopic) {
+
+    topicTitle.textContent =
+        selectedTopic;
+
+    noteTitle.textContent =
+        selectedTopic;
 
 }
 
 
 
-// ==================================================
+// ======================================================
+// NOTES DATABASE
+// ======================================================
+
+const notes = {
+
+
+// ======================================================
+// 1. INTRODUCTION TO NURSING
+// ======================================================
+
+"Introduction to Nursing": `
+
+    <h2>1. Meaning of Nursing</h2>
+
+    <div class="definition">
+
+        <strong>Nursing</strong> is the art and science of
+        caring for individuals, families and communities
+        to promote health, prevent illness, restore health,
+        relieve suffering and help people achieve the best
+        possible level of health.
+
+    </div>
+
+
+    <h2>2. Nature of Nursing</h2>
+
+    <p>
+        Nursing is both an art and a science. It involves
+        scientific knowledge as well as skills, compassion,
+        communication and professional judgment.
+    </p>
+
+
+    <h3>Important characteristics of nursing</h3>
+
+    <ul>
+
+        <li>It is a caring profession.</li>
+
+        <li>It involves scientific knowledge and skills.</li>
+
+        <li>It focuses on the individual as a whole.</li>
+
+        <li>It promotes health and prevents illness.</li>
+
+        <li>It involves teamwork with other healthcare professionals.</li>
+
+        <li>It requires professional accountability.</li>
+
+    </ul>
+
+
+    <h2>3. Goals of Nursing</h2>
+
+    <ul>
+
+        <li>To promote health.</li>
+
+        <li>To prevent diseases and complications.</li>
+
+        <li>To restore health.</li>
+
+        <li>To relieve pain and suffering.</li>
+
+        <li>To assist patients in rehabilitation.</li>
+
+        <li>To provide comfort and emotional support.</li>
+
+        <li>To help patients achieve independence.</li>
+
+    </ul>
+
+
+    <h2>4. Roles of a Nurse</h2>
+
+    <ul>
+
+        <li><strong>Caregiver:</strong> Provides direct care to patients.</li>
+
+        <li><strong>Educator:</strong> Teaches patients and families about health.</li>
+
+        <li><strong>Advocate:</strong> Protects and speaks up for patients' rights.</li>
+
+        <li><strong>Communicator:</strong> Maintains effective communication with patients and healthcare workers.</li>
+
+        <li><strong>Collaborator:</strong> Works with other members of the healthcare team.</li>
+
+        <li><strong>Counsellor:</strong> Provides emotional support and guidance.</li>
+
+        <li><strong>Manager:</strong> Coordinates nursing care and resources.</li>
+
+        <li><strong>Researcher:</strong> Uses evidence and participates in improving nursing practice.</li>
+
+    </ul>
+
+
+    <h2>5. Qualities of a Good Nurse</h2>
+
+    <ul>
+
+        <li>Compassion</li>
+
+        <li>Patience</li>
+
+        <li>Honesty</li>
+
+        <li>Respect</li>
+
+        <li>Good communication skills</li>
+
+        <li>Observation skills</li>
+
+        <li>Responsibility</li>
+
+        <li>Emotional stability</li>
+
+        <li>Confidentiality</li>
+
+        <li>Professionalism</li>
+
+    </ul>
+
+
+    <div class="remember">
+
+        <strong>Remember:</strong>
+        Nursing is not only about treating illness.
+        It also involves health promotion, disease prevention,
+        comfort, rehabilitation and patient education.
+
+    </div>
+
+`,
+
+
+// ======================================================
+// 2. HEALTH CARE INSTITUTIONS
+// ======================================================
+
+"Health Care Institutions": `
+
+    <h2>1. Meaning of Health Care Institution</h2>
+
+    <div class="definition">
+
+        A health care institution is an organized establishment
+        where health services are provided to individuals,
+        families and communities.
+
+    </div>
+
+
+    <h2>2. Examples of Health Care Institutions</h2>
+
+    <ul>
+
+        <li>Hospitals</li>
+
+        <li>Primary Health Centres</li>
+
+        <li>Health clinics</li>
+
+        <li>Maternity centres</li>
+
+        <li>Specialist hospitals</li>
+
+        <li>Rehabilitation centres</li>
+
+        <li>Long-term care facilities</li>
+
+        <li>Laboratories</li>
+
+        <li>Community health centres</li>
+
+    </ul>
+
+
+    <h2>3. Levels of Health Care</h2>
+
+
+    <h3>Primary Health Care</h3>
+
+    <p>
+        Primary health care is the first level of contact
+        between individuals and the healthcare system.
+        It emphasizes health promotion, disease prevention,
+        basic treatment and community participation.
+    </p>
+
+
+    <h3>Secondary Health Care</h3>
+
+    <p>
+        Secondary health care provides more specialized
+        services, usually through general hospitals and
+        specialist clinics.
+    </p>
+
+
+    <h3>Tertiary Health Care</h3>
+
+    <p>
+        Tertiary health care provides highly specialized
+        services such as advanced surgery, intensive care
+        and management of complex diseases.
+    </p>
+
+
+    <h2>4. Functions of Hospitals</h2>
+
+    <ul>
+
+        <li>Diagnosis and treatment of diseases.</li>
+
+        <li>Emergency services.</li>
+
+        <li>Surgical services.</li>
+
+        <li>Maternity services.</li>
+
+        <li>Health education.</li>
+
+        <li>Training of healthcare professionals.</li>
+
+        <li>Research.</li>
+
+        <li>Rehabilitation.</li>
+
+    </ul>
+
+
+    <h2>5. Departments Commonly Found in Hospitals</h2>
+
+    <ul>
+
+        <li>Medical ward</li>
+
+        <li>Surgical ward</li>
+
+        <li>Paediatric ward</li>
+
+        <li>Maternity ward</li>
+
+        <li>Emergency department</li>
+
+        <li>Pharmacy</li>
+
+        <li>Laboratory</li>
+
+        <li>Radiology</li>
+
+        <li>Operating theatre</li>
+
+        <li>Medical records department</li>
+
+    </ul>
+
+
+    <div class="remember">
+
+        <strong>Remember:</strong>
+        Primary care is the first level,
+        secondary care provides specialized care,
+        while tertiary care provides highly specialized care.
+
+    </div>
+
+`,
+
+
+// ======================================================
+// 3. ETHICO-LEGAL ISSUES
+// ======================================================
+
+"Ethico-Legal Issues in Nursing": `
+
+    <h2>1. Meaning of Ethics</h2>
+
+    <div class="definition">
+
+        Ethics refers to principles that guide a person's
+        conduct and help determine what is right or wrong.
+
+    </div>
+
+
+    <h2>2. Nursing Ethics</h2>
+
+    <p>
+        Nursing ethics refers to the moral principles and
+        professional standards that guide nurses in their
+        relationships with patients, colleagues and society.
+    </p>
+
+
+    <h2>3. Important Ethical Principles</h2>
+
+    <h3>Autonomy</h3>
+
+    <p>
+        Respecting the patient's right to make informed
+        decisions about their own healthcare.
+    </p>
+
+
+    <h3>Beneficence</h3>
+
+    <p>
+        The duty to do good and promote the welfare of
+        the patient.
+    </p>
+
+
+    <h3>Non-maleficence</h3>
+
+    <p>
+        The duty to avoid causing harm to the patient.
+    </p>
+
+
+    <h3>Justice</h3>
+
+    <p>
+        Providing fair and equal treatment to patients.
+    </p>
+
+
+    <h3>Fidelity</h3>
+
+    <p>
+        Being faithful to professional responsibilities
+        and promises.
+    </p>
+
+
+    <h3>Veracity</h3>
+
+    <p>
+        Telling the truth and providing accurate information.
+    </p>
+
+
+    <h3>Confidentiality</h3>
+
+    <p>
+        Protecting private information obtained from patients.
+    </p>
+
+
+    <h2>4. Ethical Problems in Nursing</h2>
+
+    <ul>
+
+        <li>Confidentiality violations.</li>
+
+        <li>Informed consent issues.</li>
+
+        <li>Patient refusal of treatment.</li>
+
+        <li>End-of-life decisions.</li>
+
+        <li>Patient privacy.</li>
+
+        <li>Discrimination.</li>
+
+        <li>Conflict between professional duties and patient wishes.</li>
+
+    </ul>
+
+
+    <div class="important">
+
+        <strong>Important:</strong>
+        A nurse must respect the patient's dignity,
+        rights, privacy and confidentiality.
+
+    </div>
+
+`,
+
+
+// ======================================================
+// 4. TOOLS OF NURSING
+// ======================================================
+
+"Tools of Nursing": `
+
+    <h2>1. Meaning of Nursing Tools</h2>
+
+    <p>
+        Nursing tools are equipment and materials used by
+        nurses to assess patients, provide care, perform
+        procedures and monitor health conditions.
+    </p>
+
+
+    <h2>2. Common Nursing Tools</h2>
+
+    <table class="note-table">
+
+        <tr>
+
+            <th>Tool</th>
+
+            <th>Use</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Thermometer</td>
+
+            <td>Measures body temperature.</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Sphygmomanometer</td>
+
+            <td>Measures blood pressure.</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Stethoscope</td>
+
+            <td>Used for auscultation of body sounds.</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Pulse oximeter</td>
+
+            <td>Measures oxygen saturation and pulse rate.</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Weighing scale</td>
+
+            <td>Measures body weight.</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Kidney dish</td>
+
+            <td>Used to receive waste materials and during procedures.</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Gloves</td>
+
+            <td>Protect the nurse and patient from contamination.</td>
+
+        </tr>
+
+    </table>
+
+
+    <h2>3. Principles of Using Nursing Equipment</h2>
+
+    <ul>
+
+        <li>Use the correct equipment for the procedure.</li>
+
+        <li>Check equipment before use.</li>
+
+        <li>Maintain cleanliness.</li>
+
+        <li>Use sterile equipment when required.</li>
+
+        <li>Handle equipment carefully.</li>
+
+        <li>Clean and store equipment properly after use.</li>
+
+        <li>Report damaged equipment.</li>
+
+    </ul>
+
+`,
+
+
+// ======================================================
+// 5. COMFORT AND SAFETY
+// ======================================================
+
+"Comfort and Safety Measures": `
+
+    <h2>1. Meaning of Comfort</h2>
+
+    <div class="definition">
+
+        Comfort is a state in which a patient experiences
+        physical, psychological and environmental well-being.
+
+    </div>
+
+
+    <h2>2. Measures for Patient Comfort</h2>
+
+    <ul>
+
+        <li>Proper positioning.</li>
+
+        <li>Maintaining cleanliness.</li>
+
+        <li>Providing clean and comfortable bedding.</li>
+
+        <li>Managing pain.</li>
+
+        <li>Providing adequate rest and sleep.</li>
+
+        <li>Maintaining appropriate room temperature.</li>
+
+        <li>Providing emotional support.</li>
+
+        <li>Maintaining privacy.</li>
+
+        <li>Good communication.</li>
+
+    </ul>
+
+
+    <h2>3. Patient Safety</h2>
+
+    <p>
+        Patient safety involves preventing avoidable injury,
+        accidents, infection and other forms of harm during
+        healthcare.
+    </p>
+
+
+    <h3>Common Safety Measures</h3>
+
+    <ul>
+
+        <li>Keep the patient's environment clean and free from hazards.</li>
+
+        <li>Use bed rails when indicated.</li>
+
+        <li>Keep frequently used items within reach.</li>
+
+        <li>Prevent falls.</li>
+
+        <li>Identify patients correctly.</li>
+
+        <li>Use medicines safely.</li>
+
+        <li>Maintain infection prevention practices.</li>
+
+        <li>Ensure proper lighting.</li>
+
+        <li>Keep floors dry.</li>
+
+    </ul>
+
+
+    <div class="remember">
+
+        <strong>Remember:</strong>
+        Comfort promotes wellbeing, while safety measures
+        help prevent injury and complications.
+
+    </div>
+
+`,
+
+
+// ======================================================
+// 6. EMERGENCY CARE
+// ======================================================
+
+"Emergency Care": `
+
+    <h2>1. Meaning of Emergency</h2>
+
+    <div class="definition">
+
+        An emergency is a sudden condition that requires
+        immediate assessment and intervention to prevent
+        death, permanent disability or serious complications.
+
+    </div>
+
+
+    <h2>2. Examples of Emergencies</h2>
+
+    <ul>
+
+        <li>Cardiac arrest</li>
+
+        <li>Respiratory arrest</li>
+
+        <li>Severe bleeding</li>
+
+        <li>Shock</li>
+
+        <li>Severe burns</li>
+
+        <li>Poisoning</li>
+
+        <li>Severe allergic reaction</li>
+
+        <li>Unconsciousness</li>
+
+        <li>Major trauma</li>
+
+    </ul>
+
+
+    <h2>3. General Principles of Emergency Care</h2>
+
+    <ol>
+
+        <li>Ensure safety of the scene.</li>
+
+        <li>Assess the patient's responsiveness.</li>
+
+        <li>Call for help.</li>
+
+        <li>Assess airway.</li>
+
+        <li>Assess breathing.</li>
+
+        <li>Assess circulation.</li>
+
+        <li>Control severe bleeding.</li>
+
+        <li>Provide appropriate immediate care.</li>
+
+        <li>Monitor the patient continuously.</li>
+
+        <li>Document care provided.</li>
+
+    </ol>
+
+
+    <h2>4. Aims of Emergency Care</h2>
+
+    <ul>
+
+        <li>Preserve life.</li>
+
+        <li>Prevent deterioration.</li>
+
+        <li>Prevent disability.</li>
+
+        <li>Relieve suffering.</li>
+
+        <li>Promote recovery.</li>
+
+    </ul>
+
+`,
+
+
+// ======================================================
+// 7. ADMINISTRATION OF DRUGS
+// ======================================================
+
+"Administration of Drugs": `
+
+    <h2>1. Meaning of Drug Administration</h2>
+
+    <div class="definition">
+
+        Drug administration is the process of giving a
+        medication to a patient by an appropriate route,
+        dose and method according to a valid prescription
+        or authorized order.
+
+    </div>
+
+
+    <h2>2. Common Routes of Drug Administration</h2>
+
+    <ul>
+
+        <li><strong>Oral:</strong> Through the mouth.</li>
+
+        <li><strong>Sublingual:</strong> Under the tongue.</li>
+
+        <li><strong>Topical:</strong> Applied to the skin.</li>
+
+        <li><strong>Inhalation:</strong> Breathed into the respiratory tract.</li>
+
+        <li><strong>Rectal:</strong> Through the rectum.</li>
+
+        <li><strong>Intravenous:</strong> Into a vein.</li>
+
+        <li><strong>Intramuscular:</strong> Into a muscle.</li>
+
+        <li><strong>Subcutaneous:</strong> Into subcutaneous tissue.</li>
+
+        <li><strong>Intradermal:</strong> Into the dermis.</li>
+
+    </ul>
+
+
+    <h2>3. Rights of Medication Administration</h2>
+
+    <ul>
+
+        <li>Right patient</li>
+
+        <li>Right medication</li>
+
+        <li>Right dose</li>
+
+        <li>Right route</li>
+
+        <li>Right time</li>
+
+        <li>Right documentation</li>
+
+        <li>Right reason</li>
+
+        <li>Right response</li>
+
+        <li>Right education</li>
+
+        <li>Right to refuse</li>
+
+    </ul>
+
+
+    <h2>4. General Procedure</h2>
+
+    <ol>
+
+        <li>Check the prescription/order.</li>
+
+        <li>Identify the patient correctly.</li>
+
+        <li>Check allergies.</li>
+
+        <li>Perform hand hygiene.</li>
+
+        <li>Prepare the medication safely.</li>
+
+        <li>Check the medication against the order.</li>
+
+        <li>Administer using the correct route.</li>
+
+        <li>Observe the patient for response or adverse effects.</li>
+
+        <li>Document the medication given.</li>
+
+    </ol>
+
+
+    <div class="important">
+
+        Never administer a medication when the prescription,
+        patient identity, drug, dose or route is unclear.
+        Clarify the order before administration.
+
+    </div>
+
+`,
+
+
+// ======================================================
+// 8. DIAGNOSTIC INVESTIGATION
+// ======================================================
+
+"Diagnostic Investigation": `
+
+    <h2>1. Meaning</h2>
+
+    <div class="definition">
+
+        Diagnostic investigations are tests performed to
+        obtain information about a patient's health condition
+        and assist in diagnosis, treatment and monitoring.
+
+    </div>
+
+
+    <h2>2. Examples</h2>
+
+    <ul>
+
+        <li>Blood tests</li>
+
+        <li>Urinalysis</li>
+
+        <li>X-ray</li>
+
+        <li>Ultrasound</li>
+
+        <li>Computed tomography (CT)</li>
+
+        <li>Magnetic resonance imaging (MRI)</li>
+
+        <li>Electrocardiogram (ECG)</li>
+
+        <li>Endoscopy</li>
+
+        <li>Stool examination</li>
+
+    </ul>
+
+
+    <h2>3. Nurse's Responsibilities</h2>
+
+    <ul>
+
+        <li>Explain the procedure to the patient.</li>
+
+        <li>Obtain or confirm appropriate consent where required.</li>
+
+        <li>Prepare the patient.</li>
+
+        <li>Check relevant instructions and precautions.</li>
+
+        <li>Collect specimens correctly.</li>
+
+        <li>Label specimens accurately.</li>
+
+        <li>Send specimens promptly.</li>
+
+        <li>Observe the patient after the procedure when necessary.</li>
+
+        <li>Document the procedure and relevant findings.</li>
+
+    </ul>
+
+
+    <h2>4. Common Specimens</h2>
+
+    <ul>
+
+        <li>Blood</li>
+
+        <li>Urine</li>
+
+        <li>Stool</li>
+
+        <li>Sputum</li>
+
+        <li>Wound swab</li>
+
+        <li>Cerebrospinal fluid</li>
+
+    </ul>
+
+`,
+
+
+// ======================================================
+// 9. ASEPTIC TECHNIQUES
+// ======================================================
+
+"Aseptic Techniques": `
+
+    <h2>1. Meaning of Asepsis</h2>
+
+    <div class="definition">
+
+        Asepsis refers to practices used to prevent the
+        introduction and spread of microorganisms that can
+        cause infection.
+
+    </div>
+
+
+    <h2>2. Types of Aseptic Technique</h2>
+
+    <h3>Medical Asepsis</h3>
+
+    <p>
+        Medical asepsis refers to practices that reduce
+        the number and spread of microorganisms.
+    </p>
+
+
+    <h3>Surgical Asepsis</h3>
+
+    <p>
+        Surgical asepsis, also called sterile technique,
+        aims to eliminate microorganisms from an area,
+        object or procedure where sterility is required.
+    </p>
+
+
+    <h2>3. Principles of Aseptic Technique</h2>
+
+    <ul>
+
+        <li>Perform proper hand hygiene.</li>
+
+        <li>Use appropriate personal protective equipment.</li>
+
+        <li>Maintain a clean environment.</li>
+
+        <li>Use sterile equipment when required.</li>
+
+        <li>Do not touch sterile items with contaminated hands.</li>
+
+        <li>Keep sterile fields within view.</li>
+
+        <li>Avoid reaching over sterile fields.</li>
+
+        <li>Dispose of contaminated materials correctly.</li>
+
+    </ul>
+
+
+    <h2>4. Importance</h2>
+
+    <ul>
+
+        <li>Prevents healthcare-associated infections.</li>
+
+        <li>Protects patients.</li>
+
+        <li>Protects healthcare workers.</li>
+
+        <li>Reduces cross-infection.</li>
+
+        <li>Promotes safe nursing procedures.</li>
+
+    </ul>
+
+`,
+
+
+// ======================================================
+// 10. UNSAFE INJECTION SAFETY
+// ======================================================
+
+"Unsafe Injection Safety": `
+
+    <h2>1. Meaning of Injection Safety</h2>
+
+    <div class="definition">
+
+        Injection safety refers to practices that ensure
+        injections are prepared and administered in a way
+        that prevents harm, contamination and transmission
+        of infection.
+
+    </div>
+
+
+    <h2>2. Unsafe Injection Practices</h2>
+
+    <ul>
+
+        <li>Reusing needles.</li>
+
+        <li>Reusing syringes.</li>
+
+        <li>Using contaminated equipment.</li>
+
+        <li>Using medications from improperly handled containers.</li>
+
+        <li>Failing to perform hand hygiene.</li>
+
+        <li>Incorrect disposal of sharps.</li>
+
+        <li>Recapping contaminated needles unnecessarily.</li>
+
+    </ul>
+
+
+    <h2>3. Safe Injection Practices</h2>
+
+    <ul>
+
+        <li>Use a new sterile needle and syringe for every injection.</li>
+
+        <li>Perform hand hygiene before preparing medication.</li>
+
+        <li>Prepare injections in a clean area.</li>
+
+        <li>Check the medication before use.</li>
+
+        <li>Use aseptic technique.</li>
+
+        <li>Dispose of used needles immediately in an appropriate sharps container.</li>
+
+        <li>Never reuse a syringe or needle.</li>
+
+        <li>Follow institutional infection-prevention policies.</li>
+
+    </ul>
+
+
+    <div class="important">
+
+        <strong>Important:</strong>
+        A syringe and needle used for one patient must
+        not be reused for another patient.
+
+    </div>
+
+`,
+
+
+// ======================================================
+// 11. HEALTHCARE WASTE
+// ======================================================
+
+"Introduction to Healthcare Waste": `
+
+    <h2>1. Meaning of Healthcare Waste</h2>
+
+    <div class="definition">
+
+        Healthcare waste is waste generated during healthcare
+        activities, including diagnosis, treatment, immunization,
+        laboratory procedures and patient care.
+
+    </div>
+
+
+    <h2>2. Types of Healthcare Waste</h2>
+
+    <ul>
+
+        <li>General/non-hazardous waste</li>
+
+        <li>Infectious waste</li>
+
+        <li>Sharps</li>
+
+        <li>Pathological waste</li>
+
+        <li>Pharmaceutical waste</li>
+
+        <li>Chemical waste</li>
+
+        <li>Radioactive waste</li>
+
+    </ul>
+
+
+    <h2>3. Principles of Healthcare Waste Management</h2>
+
+    <ol>
+
+        <li>Waste should be separated at the point of generation.</li>
+
+        <li>Appropriate containers should be used.</li>
+
+        <li>Sharps should be placed in puncture-resistant containers.</li>
+
+        <li>Waste should be transported safely.</li>
+
+        <li>Waste should be stored appropriately.</li>
+
+        <li>Final disposal should follow approved procedures.</li>
+
+    </ol>
+
+
+    <h2>4. Importance</h2>
+
+    <ul>
+
+        <li>Prevents infection.</li>
+
+        <li>Protects healthcare workers.</li>
+
+        <li>Protects patients and visitors.</li>
+
+        <li>Protects the environment.</li>
+
+        <li>Reduces injuries from sharps.</li>
+
+    </ul>
+
+`,
+
+
+// ======================================================
+// 12. LEGAL ASPECTS OF NURSING
+// ======================================================
+
+"Legal Aspects of Nursing": `
+
+    <h2>1. Meaning of Law</h2>
+
+    <div class="definition">
+
+        Law is a system of rules established and enforced
+        by an authority to regulate behaviour and protect
+        the rights and responsibilities of individuals.
+
+    </div>
+
+
+    <h2>2. Importance of Law in Nursing</h2>
+
+    <ul>
+
+        <li>Protects patients' rights.</li>
+
+        <li>Protects nurses who practice within professional standards.</li>
+
+        <li>Defines professional responsibilities.</li>
+
+        <li>Promotes accountability.</li>
+
+        <li>Provides standards for safe practice.</li>
+
+    </ul>
+
+
+    <h2>3. Common Legal Issues in Nursing</h2>
+
+    <ul>
+
+        <li>Negligence</li>
+
+        <li>Malpractice</li>
+
+        <li>Assault</li>
+
+        <li>Battery</li>
+
+        <li>False imprisonment</li>
+
+        <li>Invasion of privacy</li>
+
+        <li>Breach of confidentiality</li>
+
+        <li>Failure to obtain appropriate consent</li>
+
+    </ul>
+
+
+    <h2>4. Negligence</h2>
+
+    <p>
+        Negligence occurs when a healthcare professional
+        fails to provide the reasonable standard of care
+        expected in a particular situation, resulting in
+        harm or risk of harm.
+    </p>
+
+
+    <h2>5. Nurse's Legal Responsibilities</h2>
+
+    <ul>
+
+        <li>Practice within professional scope.</li>
+
+        <li>Maintain accurate documentation.</li>
+
+        <li>Protect patient confidentiality.</li>
+
+        <li>Obtain appropriate consent according to policy.</li>
+
+        <li>Report unsafe practices.</li>
+
+        <li>Follow institutional policies.</li>
+
+        <li>Maintain professional competence.</li>
+
+    </ul>
+
+
+    <div class="remember">
+
+        <strong>Remember:</strong>
+        Good nursing documentation is an important part
+        of professional and legal accountability.
+
+    </div>
+
+`,
+
+
+// ======================================================
+// 13. FEEDING / ELIMINATION
+// ======================================================
+
+"Nursing Care of Patients with Feeding/Elimination Problems": `
+
+    <h2>1. Introduction</h2>
+
+    <p>
+        Feeding and elimination are basic physiological
+        needs. Nurses assess patients who have difficulty
+        eating, drinking, passing urine or passing stool
+        and provide appropriate nursing care.
+    </p>
+
+
+    <h2>2. Feeding Problems</h2>
+
+    <p>
+        Feeding problems may occur because of illness,
+        weakness, swallowing difficulty, surgery, reduced
+        appetite or other conditions.
+    </p>
+
+
+    <h3>Examples</h3>
+
+    <ul>
+
+        <li>Loss of appetite</li>
+
+        <li>Dysphagia</li>
+
+        <li>Nausea and vomiting</li>
+
+        <li>Inability to feed independently</li>
+
+        <li>Risk of aspiration</li>
+
+    </ul>
+
+
+    <h2>3. Nursing Care for Feeding Problems</h2>
+
+    <ul>
+
+        <li>Assess nutritional status.</li>
+
+        <li>Assess ability to swallow.</li>
+
+        <li>Provide appropriate positioning during feeding.</li>
+
+        <li>Assist the patient as necessary.</li>
+
+        <li>Maintain oral hygiene.</li>
+
+        <li>Monitor food and fluid intake.</li>
+
+        <li>Observe for choking or aspiration.</li>
+
+        <li>Provide prescribed nutritional support.</li>
+
+        <li>Document intake and patient's response.</li>
+
+    </ul>
+
+
+    <h2>4. Elimination Problems</h2>
+
+    <p>
+        Elimination problems involve difficulty with the
+        normal removal of urine or faeces from the body.
+    </p>
+
+
+    <h3>Common Problems</h3>
+
+    <ul>
+
+        <li>Constipation</li>
+
+        <li>Diarrhoea</li>
+
+        <li>Urinary retention</li>
+
+        <li>Urinary incontinence</li>
+
+        <li>Difficulty passing urine</li>
+
+    </ul>
+
+
+    <h2>5. Nursing Care</h2>
+
+    <ul>
+
+        <li>Assess the patient's normal elimination pattern.</li>
+
+        <li>Monitor urine and stool characteristics.</li>
+
+        <li>Encourage appropriate fluid intake when not contraindicated.</li>
+
+        <li>Encourage appropriate mobility.</li>
+
+        <li>Provide privacy during elimination.</li>
+
+        <li>Maintain perineal hygiene.</li>
+
+        <li>Monitor intake and output when indicated.</li>
+
+        <li>Report abnormal findings.</li>
+
+        <li>Provide prescribed interventions.</li>
+
+    </ul>
+
+`,
+
+
+// ======================================================
+// 14. BASIC LIFE SUPPORT
+// ======================================================
+
+"Basic Life Support": `
+
+    <h2>1. Meaning of Basic Life Support</h2>
+
+    <div class="definition">
+
+        Basic Life Support (BLS) consists of immediate
+        life-saving interventions used to support a person
+        who has cardiac arrest, respiratory arrest or another
+        life-threatening emergency.
+
+    </div>
+
+
+    <h2>2. Main Components of BLS</h2>
+
+    <ul>
+
+        <li>Recognition of cardiac arrest.</li>
+
+        <li>Activation of emergency response.</li>
+
+        <li>High-quality cardiopulmonary resuscitation (CPR).</li>
+
+        <li>Use of an automated external defibrillator (AED) when available and appropriate.</li>
+
+        <li>Continued assessment and care.</li>
+
+    </ul>
+
+
+    <h2>3. Basic Adult BLS Sequence</h2>
+
+    <ol>
+
+        <li>Ensure the environment is safe.</li>
+
+        <li>Check responsiveness.</li>
+
+        <li>Call for help and activate the emergency response system.</li>
+
+        <li>Assess breathing and signs of circulation according to current BLS protocol.</li>
+
+        <li>Begin CPR when indicated.</li>
+
+        <li>Use an AED as soon as it becomes available.</li>
+
+        <li>Continue resuscitation according to the applicable BLS protocol.</li>
+
+    </ol>
+
+
+    <h2>4. Chest Compressions</h2>
+
+    <p>
+        Chest compressions are used during CPR to circulate
+        blood to vital organs when the heart is not effectively
+        pumping.
+    </p>
+
+
+    <h3>Important Principles</h3>
+
+    <ul>
+
+        <li>Position the patient appropriately on a firm surface.</li>
+
+        <li>Place the hands correctly on the chest.</li>
+
+        <li>Allow adequate chest recoil after each compression.</li>
+
+        <li>Minimize interruptions.</li>
+
+        <li>Use an AED when available.</li>
+
+    </ul>
+
+
+    <h2>5. Importance of Early CPR</h2>
+
+    <p>
+        Early recognition, activation of emergency assistance,
+        effective CPR and early defibrillation when indicated
+        can improve the chances of survival from cardiac arrest.
+    </p>
+
+
+    <div class="important">
+
+        <strong>Important:</strong>
+        BLS skills should be learned and practiced according
+        to the current approved resuscitation guidelines and
+        institutional protocols.
+
+    </div>
+
+`
+
+};
+
+
+
+// ======================================================
+// DISPLAY NOTE
+// ======================================================
+
+function displayNote() {
+
+    const noteContent =
+        document.getElementById(
+            "noteContent"
+        );
+
+
+    if (!selectedTopic) {
+
+        topicTitle.textContent =
+            "Foundations of Nursing";
+
+        noteTitle.textContent =
+            "Foundations of Nursing";
+
+
+        noteContent.innerHTML = `
+
+            <div class="definition">
+
+                <strong>No topic selected.</strong>
+
+            </div>
+
+            <p>
+
+                Please return to the Foundations of Nursing
+                topics page and select a topic.
+
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (notes[selectedTopic]) {
+
+        noteContent.innerHTML =
+            notes[selectedTopic];
+
+    }
+
+    else {
+
+        noteContent.innerHTML = `
+
+            <div class="definition">
+
+                <strong>Note not found.</strong>
+
+            </div>
+
+            <p>
+
+                The note for
+                <strong>
+                    ${escapeHTML(selectedTopic)}
+                </strong>
+                has not been added yet.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+
+// ======================================================
 // TAKE QUIZ
-// ==================================================
+// ======================================================
 
 function takeQuiz() {
 
-    const selectedTopic =
-        topic ||
-        "Healthcare Institutions";
+    if (!selectedTopic) {
+
+        alert(
+            "Please select a topic first."
+        );
+
+        return;
+
+    }
 
 
     window.location.href =
@@ -1214,6 +2182,75 @@ function takeQuiz() {
         );
 
 }
+
+
+
+// ======================================================
+// GO BACK
+// ======================================================
+
+function goBack() {
+
+    window.location.href =
+        "foundations-topics.html";
+
+}
+
+
+
+// ======================================================
+// ESCAPE HTML
+// ======================================================
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+// ======================================================
+// START
+// ======================================================
+
+displayNote();
+
 
 </script>
 
