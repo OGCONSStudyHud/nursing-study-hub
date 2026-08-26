@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>OGCONS Study Hub - PHC Note</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
+
+    color: #172033;
+
+    line-height: 1.8;
+}
+
+header {
+    background:
+        linear-gradient(
+            135deg,
+            #087f5b,
+            #20c997
+        );
+
+    color: white;
+
+    padding: 22px 20px;
+}
+
+.header-content {
+    max-width: 1000px;
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.back-button {
+    border: none;
+
+    background: white;
+
+    color: #087f5b;
+
+    padding: 10px 17px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 35px 20px;
+}
+
+.topic-header {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.08);
+
+    margin-bottom: 25px;
+
+    text-align: center;
+}
+
+.topic-header .icon {
+    font-size: 55px;
+}
+
+.topic-header h1 {
+    color: #087f5b;
+
+    font-size: 30px;
+
+    margin: 10px 0;
+}
+
+.topic-header p {
+    color: #66756d;
+}
+
+.note {
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.08);
+}
+
+.note h2 {
+    color: #087f5b;
+
+    font-size: 26px;
+
+    margin-top: 30px;
+
+    margin-bottom: 15px;
+
+    border-bottom:
+        2px solid #dff3eb;
+
+    padding-bottom: 8px;
+}
+
+.note h3 {
+    color: #126b51;
+
+    font-size: 20px;
+
+    margin-top: 25px;
+
+    margin-bottom: 10px;
+}
+
+.note p {
+    margin-bottom: 15px;
+}
+
+.note ul,
+.note ol {
+    margin-left: 28px;
+
+    margin-bottom: 18px;
+}
+
+.note li {
+    margin-bottom: 8px;
+}
+
+.definition {
+    background: #eefaf5;
+
+    border-left:
+        5px solid #087f5b;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    margin: 15px 0 20px;
+}
+
+.warning {
+    background: #fff8e8;
+
+    border-left:
+        5px solid #f59f00;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    margin: 15px 0;
+}
+
+.actions {
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.action-button {
+    flex: 1;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.quiz-button {
+    background: #087f5b;
+    color: white;
+}
+
+.topics-button {
+    background: #6c757d;
+    color: white;
+}
+
+footer {
+    text-align: center;
+
+    padding: 30px;
+
+    color: #718077;
+}
+
+@media (max-width: 650px) {
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .note {
+        padding: 22px;
+    }
+
+    .topic-header h1 {
+        font-size: 24px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+🌍 OGCONS Study Hub
+</div>
+
+<button
+    class="back-button"
+    onclick="goBack()">
+
+    ← Back to Topics
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="topic-header">
+
+<div class="icon">
+📚
+</div>
+
+<h1 id="topicTitle">
+Primary Health Care
+</h1>
+
+<p id="courseTitle">
+Loading course...
+</p>
+
+</div>
+
+
+
+<div
+    class="note"
+    id="noteContent">
+
+</div>
+
+
+
+<div class="actions">
+
+<button
+    class="action-button topics-button"
+    onclick="goBack()">
+
+    ← Back to Topics
+
+</button>
+
+<button
+    class="action-button quiz-button"
+    onclick="takeQuiz()">
+
+    📝 Take Quiz →
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+<footer>
+
+OGCONS Study Hub © 2026
+
+</footer>
+
+
+
+<script>
+
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const course =
+    params.get("course") ||
+    "Primary Health Care I";
+
+
+const topic =
+    params.get("topic") ||
+    "Introduction to Primary Health Care";
+
+
+document
+    .getElementById("topicTitle")
+    .textContent =
+    topic;
+
+
+document
+    .getElementById("courseTitle")
+    .textContent =
+    course;
+
+
+
+const notes = {};
+
+
+
+// ======================================================
+// PHC I - UNIT I
+// ======================================================
+
+notes["Introduction to Primary Health Care"] = `
+
+<h2>Unit I: Introduction to Primary Health Care</h2>
+
+<h3>Meaning of Primary Health Care</h3>
+
+<div class="definition">
+
+<strong>Primary Health Care (PHC)</strong> is essential health care that is made
+accessible to individuals and families in the community through acceptable
+methods and with their participation.
+
+</div>
+
+<p>
+Primary Health Care is the first level of contact between individuals,
+families and the health system. It brings basic health services closer
+to where people live and work.
+</p>
+
+<h3>Historical Perspective</h3>
+
+<p>
+Primary Health Care became a major international health strategy following
+the Alma-Ata Declaration of 1978. The declaration emphasized health for
+all, community participation, equity and accessible health services.
+</p>
+
+<h3>Philosophy of Primary Health Care</h3>
+
+<ul>
+<li>Health is a fundamental human right.</li>
+<li>People should participate in decisions concerning their health.</li>
+<li>Health services should be accessible to everyone.</li>
+<li>Prevention and health promotion are important parts of health care.</li>
+<li>Different sectors and health professionals should work together.</li>
+<li>Communities should be encouraged to become self-reliant.</li>
+</ul>
+
+<h3>Principles of Primary Health Care</h3>
+
+<ol>
+<li>Equitable distribution of health services.</li>
+<li>Community participation.</li>
+<li>Intersectoral collaboration.</li>
+<li>Appropriate technology.</li>
+<li>Health promotion and disease prevention.</li>
+</ol>
+
+<h3>Primary Health Care Services in Nigeria</h3>
+
+<p>
+Primary Health Care services are organized to provide basic health care
+at community and local government levels. They include preventive,
+promotive, curative and rehabilitative services.
+</p>
+
+<h3>Role of the Nurse in PHC</h3>
+
+<ul>
+<li>Health education.</li>
+<li>Maternal and child health services.</li>
+<li>Immunization activities.</li>
+<li>Community assessment.</li>
+<li>Home visits.</li>
+<li>Disease prevention and control.</li>
+<li>Referral of clients.</li>
+<li>Record keeping and reporting.</li>
+<li>Community mobilization.</li>
+</ul>
+
+<h3>Multidisciplinary Team Approach</h3>
+
+<p>
+Primary Health Care requires different health workers and community
+members to work together. Collaboration improves the quality,
+coverage and continuity of health services.
+</p>
+
+`;
+
+
+
+// ======================================================
+// PHC I - UNIT II
+// ======================================================
+
+notes["The Community: Structure and Functions"] = `
+
+<h2>Unit II: The Community – Structure and Functions</h2>
+
+<h3>Meaning of Community</h3>
+
+<div class="definition">
+
+A community is a group of people living in a particular geographical
+area who share common interests, resources, institutions or social
+relationships.
+
+</div>
+
+<h3>Family Patterns</h3>
+
+<ul>
+<li>Nuclear family.</li>
+<li>Extended family.</li>
+<li>Compound family.</li>
+<li>Family of orientation.</li>
+<li>Family of procreation.</li>
+</ul>
+
+<h3>Community Structure</h3>
+
+<p>
+Community structure refers to the way people, groups, institutions
+and leadership systems are organized within a community.
+</p>
+
+<h3>Leadership and Decision Making</h3>
+
+<p>
+Community leaders may include traditional leaders, religious leaders,
+political leaders, youth leaders and other influential persons.
+They may help mobilize community members and support health programmes.
+</p>
+
+<h3>Functions of a Community</h3>
+
+<ul>
+<li>Provides social support.</li>
+<li>Provides opportunities for interaction.</li>
+<li>Helps protect community members.</li>
+<li>Provides resources.</li>
+<li>Supports cultural development.</li>
+<li>Participates in solving community problems.</li>
+</ul>
+
+<h3>Identifying Community Health Needs</h3>
+
+<p>
+The nurse can identify health needs through observation, interviews,
+home visits, surveys, community meetings and review of available
+health records.
+</p>
+
+`;
+
+
+
+// ======================================================
+// PHC I - UNIT III
+// ======================================================
+
+notes["Cadre of Health Workers in PHC"] = `
+
+<h2>Unit III: Cadre of Health Workers in PHC</h2>
+
+<p>
+Primary Health Care is delivered by a team of health workers with
+different professional responsibilities.
+</p>
+
+<h3>Examples of PHC Workers</h3>
+
+<ul>
+<li>Community physicians.</li>
+<li>Midwives.</li>
+<li>Public health nurses.</li>
+<li>Community Health Officers.</li>
+<li>Community Health Extension Workers.</li>
+<li>Environmental health workers.</li>
+<li>Laboratory personnel.</li>
+<li>Pharmacy personnel.</li>
+</ul>
+
+<h3>Importance of Teamwork</h3>
+
+<p>
+Teamwork allows health workers to combine their knowledge and skills
+to address the health needs of individuals, families and communities.
+</p>
+
+<h3>Role of the PHC Nurse</h3>
+
+<ul>
+<li>Assess individuals and communities.</li>
+<li>Provide health education.</li>
+<li>Participate in immunization.</li>
+<li>Provide maternal and child health services.</li>
+<li>Provide basic nursing care.</li>
+<li>Identify health problems.</li>
+<li>Make appropriate referrals.</li>
+<li>Maintain health records.</li>
+</ul>
+
+`;
+
+
+
+// ======================================================
+// PHC I - UNIT IV
+// ======================================================
+
+notes["Community Mobilization"] = `
+
+<h2>Unit IV: Community Mobilization</h2>
+
+<h3>Meaning</h3>
+
+<div class="definition">
+
+Community mobilization is the process of bringing individuals,
+groups and organizations together to identify health problems,
+take action and use available resources to improve community health.
+
+</div>
+
+<h3>Community Participation</h3>
+
+<p>
+Community participation means involving members of the community
+in identifying problems, planning programmes, implementing activities
+and evaluating results.
+</p>
+
+<h3>Advocacy</h3>
+
+<p>
+Advocacy involves supporting or speaking on behalf of individuals,
+groups or communities to influence decisions and policies that
+improve health.
+</p>
+
+<h3>Steps in Community Mobilization</h3>
+
+<ol>
+<li>Identify the community.</li>
+<li>Identify community leaders and stakeholders.</li>
+<li>Identify community health problems.</li>
+<li>Prioritize the problems.</li>
+<li>Mobilize available resources.</li>
+<li>Plan appropriate activities.</li>
+<li>Implement the activities.</li>
+<li>Evaluate the results.</li>
+</ol>
+
+<h3>Community Committees</h3>
+
+<p>
+Community committees can help organize health activities,
+mobilize resources, encourage participation and represent
+community interests.
+</p>
+
+`;
+
+
+
+// ======================================================
+// PHC I - UNIT V
+// ======================================================
+
+notes["Community Diagnosis"] = `
+
+<h2>Unit V: Community Diagnosis</h2>
+
+<h3>Meaning</h3>
+
+<div class="definition">
+
+Community diagnosis is the systematic process of identifying,
+analyzing and prioritizing the health problems and needs of a community.
+
+</div>
+
+<h3>Importance</h3>
+
+<ul>
+<li>Identifies major health problems.</li>
+<li>Helps determine community priorities.</li>
+<li>Provides information for planning health services.</li>
+<li>Helps allocate resources.</li>
+<li>Provides a basis for evaluating health programmes.</li>
+</ul>
+
+<h3>Methods</h3>
+
+<ul>
+<li>Community survey.</li>
+<li>Observation.</li>
+<li>Interviews.</li>
+<li>Questionnaires.</li>
+<li>Review of health records.</li>
+<li>Community meetings.</li>
+<li>Focus group discussions.</li>
+</ul>
+
+<h3>Situation Analysis</h3>
+
+<p>
+Situation analysis involves collecting and examining information
+about the current health condition of a community, its resources,
+problems and factors affecting health.
+</p>
+
+`;
+
+
+
+// ======================================================
+// PHC I - UNIT VI
+// ======================================================
+
+notes["Health Education"] = `
+
+<h2>Unit VI: Health Education</h2>
+
+<h3>Meaning of Health Education</h3>
+
+<div class="definition">
+
+Health education is the process of helping individuals, families
+and communities acquire knowledge, skills and attitudes that
+promote and maintain health.
+
+</div>
+
+<h3>Behaviour Change Communication</h3>
+
+<p>
+Behaviour Change Communication (BCC) is communication designed
+to influence knowledge, attitudes and behaviours related to health.
+</p>
+
+<h3>Principles of Health Education</h3>
+
+<ul>
+<li>Use simple language.</li>
+<li>Consider the learner's level of understanding.</li>
+<li>Encourage participation.</li>
+<li>Use relevant examples.</li>
+<li>Provide accurate information.</li>
+<li>Allow questions and feedback.</li>
+<li>Respect culture and beliefs.</li>
+</ul>
+
+<h3>Methods</h3>
+
+<ul>
+<li>Individual teaching.</li>
+<li>Group discussion.</li>
+<li>Demonstration.</li>
+<li>Lecture.</li>
+<li>Role play.</li>
+<li>Use of posters and other IEC materials.</li>
+</ul>
+
+<h3>Guidance and Counselling</h3>
+
+<p>
+The PHC nurse provides guidance and counselling to individuals,
+families and groups on issues such as nutrition, reproductive
+health, disease prevention, medication use and healthy behaviours.
+</p>
+
+`;
+
+
+
+// ======================================================
+// PHC I - UNIT VII
+// ======================================================
+
+notes["Clinical Skills in Primary Health Care"] = `
+
+<h2>Unit VII: Clinical Skills in Primary Health Care</h2>
+
+<h3>History Taking</h3>
+
+<p>
+History taking involves obtaining relevant information from the
+client about the presenting complaint, previous illnesses,
+medications, family history, social history and other relevant
+information.
+</p>
+
+<h3>Physical Examination</h3>
+
+<p>
+Physical examination involves systematic assessment of the client.
+It may include inspection, palpation, percussion and auscultation.
+</p>
+
+<h3>Reporting and Recording</h3>
+
+<p>
+Accurate recording and reporting ensure continuity of care and
+provide useful information for decision-making and evaluation.
+</p>
+
+<h3>Standing Orders</h3>
+
+<p>
+Standing orders are written instructions that guide health workers
+in performing specified procedures or providing specified services
+under defined circumstances.
+</p>
+
+<h3>Diagnostic Techniques</h3>
+
+<p>
+Diagnostic techniques assist health workers in identifying health
+conditions and determining appropriate management or referral.
+</p>
+
+`;
+
+
+
+// ======================================================
+// PHC II NOTES
+// ======================================================
+
+notes["Components of Primary Health Care"] = `
+
+<h2>Unit I: Components of Primary Health Care</h2>
+
+<h3>Components</h3>
+
+<p>
+Primary Health Care includes essential services aimed at promoting
+health, preventing disease, providing basic treatment and supporting
+rehabilitation.
+</p>
+
+<h3>Nutritional Assessment</h3>
+
+<p>
+Nutritional assessment helps identify malnutrition and other
+nutrition-related problems.
+</p>
+
+<ul>
+<li>Weight measurement.</li>
+<li>Height measurement.</li>
+<li>Weight charting.</li>
+<li>Mid-upper arm circumference measurement.</li>
+<li>Assessment of dietary intake.</li>
+</ul>
+
+<h3>Safe Water and Sanitation</h3>
+
+<p>
+Safe water and proper sanitation reduce the spread of waterborne
+and sanitation-related diseases.
+</p>
+
+<h3>Vital Statistics</h3>
+
+<ul>
+<li>Birth rate.</li>
+<li>Mortality rate.</li>
+<li>Morbidity rate.</li>
+<li>Incidence rate.</li>
+<li>Population growth.</li>
+<li>Epidemic occurrence.</li>
+</ul>
+
+`;
+
+
+
+notes["Immunization Against Major Communicable Diseases"] = `
+
+<h2>Unit II: Immunization Against Major Communicable Diseases</h2>
+
+<h3>Meaning of Immunization</h3>
+
+<div class="definition">
+
+Immunization is the process by which a person becomes protected
+against a disease, usually through vaccination.
+
+</div>
+
+<h3>Importance</h3>
+
+<ul>
+<li>Prevents vaccine-preventable diseases.</li>
+<li>Reduces complications.</li>
+<li>Reduces deaths.</li>
+<li>Protects individuals and communities.</li>
+<li>Helps control outbreaks.</li>
+</ul>
+
+<h3>Cold Chain</h3>
+
+<p>
+The cold chain is the system used to store and transport vaccines
+within recommended temperature conditions from the point of
+manufacture to the point of administration.
+</p>
+
+<h3>Follow-up of Defaulters</h3>
+
+<p>
+Defaulters are clients who have missed scheduled immunization doses.
+Health workers should identify and follow them up to improve
+immunization coverage.
+</p>
+
+`;
+
+
+
+notes["Prevention and Control of Endemic and Epidemic Diseases"] = `
+
+<h2>Unit III: Prevention and Control of Locally Endemic and Epidemic Diseases</h2>
+
+<h3>Important Terms</h3>
+
+<ul>
+<li><strong>Endemic:</strong> A disease regularly present in a particular area or population.</li>
+<li><strong>Epidemic:</strong> Occurrence of disease cases above what is normally expected in a population or area.</li>
+<li><strong>Incidence:</strong> Number of new cases occurring in a population during a specified period.</li>
+<li><strong>Surveillance:</strong> Continuous systematic collection and use of health information.</li>
+<li><strong>Reservoir:</strong> A place where an infectious organism normally lives and multiplies.</li>
+<li><strong>Route of transmission:</strong> The way an infectious agent moves from its source to a susceptible person.</li>
+</ul>
+
+<h3>Prevention and Control</h3>
+
+<ul>
+<li>Health education.</li>
+<li>Immunization.</li>
+<li>Environmental sanitation.</li>
+<li>Early detection.</li>
+<li>Prompt treatment.</li>
+<li>Contact tracing.</li>
+<li>Disease notification.</li>
+<li>Surveillance.</li>
+</ul>
+
+<h3>Common Injuries</h3>
+
+<p>
+The community nurse should provide appropriate first aid and basic
+care for common injuries and refer serious cases when necessary.
+</p>
+
+`;
+
+
+
+notes["Promotion of Mental Health"] = `
+
+<h2>Unit IV: Promotion of Mental Health</h2>
+
+<h3>Mental Health</h3>
+
+<div class="definition">
+
+Mental health is a state of well-being in which a person can cope
+with normal stresses of life, function effectively and contribute
+to the community.
+
+</div>
+
+<h3>Common Mental Health Problems</h3>
+
+<ul>
+<li>Anxiety disorders.</li>
+<li>Depression.</li>
+<li>Substance-related problems.</li>
+<li>Severe mental disorders.</li>
+</ul>
+
+<h3>Role of the PHC Nurse</h3>
+
+<ul>
+<li>Identify early signs of mental health problems.</li>
+<li>Provide counselling.</li>
+<li>Promote healthy coping methods.</li>
+<li>Educate families.</li>
+<li>Provide appropriate referral.</li>
+<li>Support community mental health programmes.</li>
+</ul>
+
+`;
+
+
+
+notes["Maternal and Child Health Services"] = `
+
+<h2>Unit V: Maternal and Child Health Services</h2>
+
+<h3>Maternal Health Services</h3>
+
+<ul>
+<li>Prenatal/antenatal care.</li>
+<li>Intranatal care.</li>
+<li>Postnatal care.</li>
+<li>Family planning.</li>
+<li>Health education.</li>
+<li>Prevention of maternal complications.</li>
+</ul>
+
+<h3>Newborn Care</h3>
+
+<ul>
+<li>Keeping the newborn warm.</li>
+<li>Breastfeeding support.</li>
+<li>Infection prevention.</li>
+<li>Recognition of danger signs.</li>
+<li>Appropriate referral.</li>
+</ul>
+
+<h3>Child Health</h3>
+
+<ul>
+<li>Growth monitoring.</li>
+<li>Immunization.</li>
+<li>Nutrition education.</li>
+<li>Prevention and management of diarrhoeal diseases.</li>
+<li>Exclusive breastfeeding education.</li>
+</ul>
+
+<h3>Family Planning</h3>
+
+<p>
+Family planning enables individuals and couples to decide freely
+and responsibly the number and spacing of their children.
+Counselling should be respectful, accurate and client-centred.
+</p>
+
+`;
+
+
+
+notes["Provision of Essential Drugs and Supplies"] = `
+
+<h2>Unit VI: Provision of Essential Drugs and Supplies</h2>
+
+<h3>Essential Drugs</h3>
+
+<p>
+Essential drugs are medicines that satisfy the priority health
+needs of a population. They should be available in appropriate
+amounts, quality and dosage forms.
+</p>
+
+<h3>Rational Drug Use</h3>
+
+<p>
+Rational drug use means that patients receive appropriate medicines
+for their clinical needs, in suitable doses, for an adequate period
+and at the lowest appropriate cost.
+</p>
+
+<h3>Drug Management</h3>
+
+<ul>
+<li>Procurement.</li>
+<li>Storage.</li>
+<li>Inventory control.</li>
+<li>Distribution.</li>
+<li>Proper prescribing and dispensing.</li>
+<li>Pharmacovigilance.</li>
+</ul>
+
+<h3>Drug Revolving Fund</h3>
+
+<p>
+A Drug Revolving Fund is a system designed to maintain availability
+of medicines by recovering part or all of the cost of medicines
+and using the funds to replenish supplies.
+</p>
+
+`;
+
+
+
+notes["Oral Hygiene and Eye Care"] = `
+
+<h2>Unit VII: Oral Hygiene and Eye Care</h2>
+
+<h3>Oral Hygiene</h3>
+
+<p>
+Oral hygiene involves practices that keep the mouth, teeth and
+gums clean and healthy.
+</p>
+
+<ul>
+<li>Regular tooth brushing.</li>
+<li>Cleaning of the tongue.</li>
+<li>Appropriate dental care.</li>
+<li>Reduction of harmful dietary practices.</li>
+<li>Early treatment of dental problems.</li>
+</ul>
+
+<h3>Common Dental Problems</h3>
+
+<ul>
+<li>Dental caries.</li>
+<li>Gum disease.</li>
+<li>Toothache.</li>
+<li>Oral infections.</li>
+</ul>
+
+<h3>Eye Care</h3>
+
+<p>
+The PHC worker promotes eye health through health education,
+early identification of eye problems and appropriate referral.
+</p>
+
+`;
+
+
+
+notes["Adolescence and Their Problems"] = `
+
+<h2>Unit VIII: Adolescence and Their Problems</h2>
+
+<h3>Meaning of Adolescence</h3>
+
+<p>
+Adolescence is the developmental period between childhood and
+adulthood characterized by physical, emotional, psychological
+and social changes.
+</p>
+
+<h3>Characteristics</h3>
+
+<ul>
+<li>Rapid physical growth.</li>
+<li>Development of secondary sexual characteristics.</li>
+<li>Emotional changes.</li>
+<li>Development of independence.</li>
+<li>Changes in social relationships.</li>
+</ul>
+
+<h3>Common Problems</h3>
+
+<ul>
+<li>Substance abuse.</li>
+<li>Obesity.</li>
+<li>Eating disorders.</li>
+<li>Sexual and reproductive health problems.</li>
+<li>Peer pressure.</li>
+<li>Mental health problems.</li>
+</ul>
+
+<h3>Nursing Care</h3>
+
+<p>
+The nurse should provide confidential, respectful and age-appropriate
+health education, counselling and referral services.
+</p>
+
+`;
+
+
+
+notes["Referral System in PHC"] = `
+
+<h2>Unit IX: Referral System in PHC</h2>
+
+<h3>Meaning</h3>
+
+<div class="definition">
+
+Referral is the process of directing a client from one health
+facility or health worker to another facility or professional
+with the appropriate resources and expertise needed.
+
+</div>
+
+<h3>Referral Pathway</h3>
+
+<p>
+A referral pathway describes the movement of a client from the
+initial point of care to another appropriate level of care.
+</p>
+
+<h3>Reasons for Referral</h3>
+
+<ul>
+<li>Need for specialized investigation.</li>
+<li>Need for specialist treatment.</li>
+<li>Emergency conditions beyond the facility's capacity.</li>
+<li>Need for advanced diagnostic services.</li>
+</ul>
+
+<h3>Referral Forms</h3>
+
+<p>
+Referral documentation should contain relevant patient information,
+findings, treatment already given, reason for referral and other
+important clinical information.
+</p>
+
+`;
+
+
+
+notes["Care of the Aged in the Community"] = `
+
+<h2>Unit X: Care of the Aged in the Community</h2>
+
+<h3>Ageing</h3>
+
+<p>
+Ageing is a natural process associated with progressive physical,
+physiological, psychological and social changes.
+</p>
+
+<h3>Common Needs of Older People</h3>
+
+<ul>
+<li>Adequate nutrition.</li>
+<li>Safe housing.</li>
+<li>Social support.</li>
+<li>Regular health assessment.</li>
+<li>Prevention of accidents.</li>
+<li>Management of chronic conditions.</li>
+</ul>
+
+<h3>Role of the Community Nurse</h3>
+
+<ul>
+<li>Health assessment.</li>
+<li>Health education.</li>
+<li>Home visits.</li>
+<li>Medication education.</li>
+<li>Fall prevention education.</li>
+<li>Referral when necessary.</li>
+</ul>
+
+`;
+
+
+
+notes["Care of the Physically and Mentally Challenged"] = `
+
+<h2>Unit XI: Care of the Physically and Mentally Challenged</h2>
+
+<h3>Disability</h3>
+
+<p>
+Disability refers to limitations in functioning or participation
+associated with a health condition and environmental or social
+barriers.
+</p>
+
+<h3>Examples</h3>
+
+<ul>
+<li>Visual impairment.</li>
+<li>Hearing impairment.</li>
+<li>Physical disability.</li>
+<li>Stroke-related disability.</li>
+<li>Intellectual disability.</li>
+<li>Mental health conditions.</li>
+</ul>
+
+<h3>Nursing Responsibilities</h3>
+
+<ul>
+<li>Promote dignity and independence.</li>
+<li>Identify health needs.</li>
+<li>Educate families.</li>
+<li>Prevent complications.</li>
+<li>Encourage rehabilitation.</li>
+<li>Promote social inclusion.</li>
+<li>Refer when necessary.</li>
+</ul>
+
+`;
+
+
+
+notes["Management of Occupational Health"] = `
+
+<h2>Unit XII: Management of Occupational Health</h2>
+
+<h3>Occupational Health</h3>
+
+<div class="definition">
+
+Occupational health is concerned with promoting and maintaining
+the physical, mental and social well-being of workers.
+
+</div>
+
+<h3>Occupational Hazards</h3>
+
+<ul>
+<li>Physical hazards.</li>
+<li>Chemical hazards.</li>
+<li>Biological hazards.</li>
+<li>Ergonomic hazards.</li>
+<li>Psychosocial hazards.</li>
+</ul>
+
+<h3>Possible Effects</h3>
+
+<ul>
+<li>Hearing impairment.</li>
+<li>Respiratory problems.</li>
+<li>Dermatitis.</li>
+<li>Chemical burns.</li>
+<li>Musculoskeletal problems.</li>
+<li>Stress-related problems.</li>
+</ul>
+
+<h3>Prevention</h3>
+
+<ul>
+<li>Risk assessment.</li>
+<li>Use of appropriate protective equipment.</li>
+<li>Health education.</li>
+<li>Safe work practices.</li>
+<li>Regular health surveillance.</li>
+<li>Appropriate reporting and management of injuries.</li>
+</ul>
+
+`;
+
+
+
+notes["Training"] = `
+
+<h2>Unit XIII: Training</h2>
+
+<h3>Training Needs Assessment</h3>
+
+<p>
+Training needs assessment identifies the knowledge, skills and
+attitudes that learners need to develop in order to perform
+their roles effectively.
+</p>
+
+<h3>Principles of Teaching and Learning</h3>
+
+<ul>
+<li>Learning should be purposeful.</li>
+<li>The learner should participate actively.</li>
+<li>Teaching should move from simple to complex.</li>
+<li>Previous knowledge should be considered.</li>
+<li>Feedback should be provided.</li>
+<li>Learning should be evaluated.</li>
+</ul>
+
+<h3>Training Methods</h3>
+
+<ul>
+<li>Lecture.</li>
+<li>Demonstration.</li>
+<li>Discussion.</li>
+<li>Practical exercises.</li>
+<li>Role play.</li>
+<li>Group work.</li>
+</ul>
+
+<h3>Evaluation</h3>
+
+<p>
+Training may be evaluated by examining the process, immediate
+outcomes and longer-term impact of the training programme.
+</p>
+
+`;
+
+
+
+notes["Management in Primary Health Care"] = `
+
+<h2>Unit XIV: Management in Primary Health Care</h2>
+
+<h3>Meaning of Management</h3>
+
+<div class="definition">
+
+Management is the process of planning, organizing, directing,
+coordinating and controlling resources to achieve specific goals.
+
+</div>
+
+<h3>Management Resources</h3>
+
+<ul>
+<li>Human resources.</li>
+<li>Money.</li>
+<li>Materials.</li>
+<li>Time.</li>
+</ul>
+
+<h3>Budgeting</h3>
+
+<p>
+A budget is a financial plan showing expected income and expenditure
+for a specified period.
+</p>
+
+<h3>Health Committees</h3>
+
+<p>
+Health committees help facilitate community participation and
+support implementation of primary health care activities.
+</p>
+
+<h3>Monitoring and Evaluation</h3>
+
+<p>
+Monitoring involves continuously following activities to determine
+whether they are being implemented as planned. Evaluation determines
+the extent to which objectives have been achieved.
+</p>
+
+<h3>PHC Information System</h3>
+
+<p>
+The PHC information system involves collecting, recording,
+processing, reporting and using health information for planning,
+decision-making and evaluation.
+</p>
+
+`;
+
+
+
+function displayNote() {
+
+    const content =
+        notes[topic];
+
+    const note =
+        document.getElementById(
+            "noteContent"
+        );
+
+    if (content) {
+
+        note.innerHTML =
+            content;
+
+    }
+
+    else {
+
+        note.innerHTML = `
+
+            <h2>
+                ${escapeHTML(topic)}
+            </h2>
+
+            <p>
+                The detailed note for this topic
+                is being prepared.
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+
+function takeQuiz() {
+
+    window.location.href =
+        "phc-quiz.html?course=" +
+        encodeURIComponent(course) +
+        "&topic=" +
+        encodeURIComponent(topic);
+
+}
+
+
+
+function goBack() {
+
+    window.location.href =
+        "phc-topics.html";
+
+}
+
+
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+displayNote();
+
+
+</script>
+
+</body>
+
+</html>
