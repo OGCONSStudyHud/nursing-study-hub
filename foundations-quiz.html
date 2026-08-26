@@ -5,15 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        OGCONS Study Hub - Foundations of Nursing Quiz
-    </title>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>OGCONS Study Hub - Foundations of Nursing</title>
 
     <style>
 
@@ -24,9 +18,7 @@
         }
 
         body {
-
             font-family: Arial, sans-serif;
-
             min-height: 100vh;
 
             background:
@@ -37,12 +29,10 @@
                     #f5eaff
                 );
 
-            color: #172033;
-
+            color: #163020;
         }
 
         header {
-
             background:
                 linear-gradient(
                     135deg,
@@ -51,451 +41,227 @@
                 );
 
             color: white;
-
             padding: 22px 20px;
-
         }
 
         .header-content {
-
-            max-width: 900px;
-
+            max-width: 1100px;
             margin: auto;
 
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
 
             gap: 15px;
-
         }
 
         .logo {
-
             font-size: 22px;
-
             font-weight: bold;
-
         }
 
         .back-button {
-
+            border: none;
             background: white;
-
             color: #18a058;
 
-            border: none;
-
-            padding: 10px 16px;
-
+            padding: 10px 18px;
             border-radius: 20px;
 
             font-weight: bold;
-
             cursor: pointer;
-
         }
 
         .container {
-
-            max-width: 900px;
-
+            max-width: 950px;
             margin: auto;
-
-            padding: 30px 20px;
-
+            padding: 35px 20px;
         }
 
-        .quiz-header {
-
+        .topic-header {
             background: white;
-
-            padding: 25px;
-
-            border-radius: 18px;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.08);
-
-            margin-bottom: 25px;
-
-        }
-
-        .quiz-header h1 {
-
-            margin-bottom: 8px;
-
-        }
-
-        .quiz-topic {
-
-            color: #18a058;
-
-            font-weight: bold;
-
-            margin-top: 8px;
-
-        }
-
-        .quiz-header p {
-
-            color: #68756d;
-
-            line-height: 1.5;
-
-        }
-
-        .progress-container {
-
-            margin-top: 20px;
-
-        }
-
-        .progress-info {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            font-weight: bold;
-
-            margin-bottom: 8px;
-
-        }
-
-        .progress-bar {
-
-            width: 100%;
-
-            height: 10px;
-
-            background: #e1e7e4;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-        }
-
-        .progress {
-
-            height: 100%;
-
-            width: 0%;
-
-            background: #18a058;
-
-            transition: width 0.3s;
-
-        }
-
-        .question-card {
-
-            background: white;
-
-            padding: 28px;
-
-            border-radius: 18px;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.08);
-
-            margin-bottom: 20px;
-
-        }
-
-        .question-number {
-
-            color: #18a058;
-
-            font-weight: bold;
-
-            margin-bottom: 12px;
-
-        }
-
-        .question {
-
-            font-size: 20px;
-
-            font-weight: bold;
-
-            line-height: 1.5;
-
-            margin-bottom: 25px;
-
-        }
-
-        .options {
-
-            display: grid;
-
-            gap: 12px;
-
-        }
-
-        .option {
-
-            width: 100%;
-
-            padding: 16px;
-
-            border: 2px solid #dce4df;
-
-            border-radius: 12px;
-
-            background: white;
-
-            text-align: left;
-
-            cursor: pointer;
-
-            font-size: 16px;
-
-            transition: 0.2s;
-
-        }
-
-        .option:hover {
-
-            border-color: #18a058;
-
-            background: #f2fff7;
-
-        }
-
-        .option.selected {
-
-            border-color: #18a058;
-
-            background: #e7fff0;
-
-        }
-
-        .option-letter {
-
-            font-weight: bold;
-
-            color: #18a058;
-
-            margin-right: 8px;
-
-        }
-
-        .navigation {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            gap: 15px;
-
-            margin-top: 20px;
-
-        }
-
-        .nav-button {
-
-            border: none;
-
-            padding: 13px 22px;
-
-            border-radius: 25px;
-
-            font-size: 15px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-        }
-
-        .previous {
-
-            background: #6c757d;
-
-            color: white;
-
-        }
-
-        .next {
-
-            background: #18a058;
-
-            color: white;
-
-        }
-
-        .submit {
-
-            background: #0b5ed7;
-
-            color: white;
-
-        }
-
-        .nav-button:disabled {
-
-            opacity: 0.5;
-
-            cursor: not-allowed;
-
-        }
-
-        .result {
-
-            display: none;
-
-            background: white;
-
             padding: 35px 25px;
 
             border-radius: 20px;
 
             box-shadow:
-                0 10px 30px
-                rgba(0,0,0,0.1);
+                0 10px 25px
+                rgba(0,0,0,0.08);
 
             text-align: center;
-
-        }
-
-        .result-icon {
-
-            font-size: 65px;
-
-            margin-bottom: 15px;
-
-        }
-
-        .result h2 {
-
-            margin-bottom: 10px;
-
-        }
-
-        .score {
-
-            font-size: 50px;
-
-            font-weight: bold;
-
-            color: #18a058;
-
-            margin: 15px 0;
-
-        }
-
-        .result-message {
-
-            color: #66736c;
-
             margin-bottom: 25px;
+        }
 
+        .topic-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .topic-header h1 {
+            color: #18a058;
+            font-size: 30px;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .topic-header p {
+            color: #617568;
+            line-height: 1.6;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .action-card {
+            background: white;
+            padding: 28px 20px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .action-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .action-card h2 {
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .action-card p {
+            color: #617568;
             line-height: 1.5;
-
+            margin-bottom: 18px;
         }
 
-        .result-buttons {
-
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 12px;
-
-        }
-
-        .result-buttons button {
-
+        .action-button {
             border: none;
 
-            padding: 13px 20px;
+            background: #18a058;
+            color: white;
 
-            border-radius: 25px;
+            padding: 12px 22px;
+
+            border-radius: 22px;
 
             font-weight: bold;
-
             cursor: pointer;
-
+            font-size: 15px;
         }
 
-        .retry {
-
-            background: #18a058;
-
-            color: white;
-
+        .action-button:hover {
+            background: #117d45;
         }
 
-        .home {
-
-            background: #6c757d;
-
-            color: white;
-
-        }
-
-        .loading {
-
-            text-align: center;
-
-            padding: 60px 20px;
-
-            font-size: 18px;
-
-        }
-
-        .error {
+        #noteSection {
+            display: none;
 
             background: white;
 
             padding: 30px;
 
-            border-radius: 15px;
+            border-radius: 20px;
 
-            text-align: center;
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
 
-            color: #dc3545;
-
+            margin-top: 25px;
         }
 
-        @media (max-width: 600px) {
+        #noteSection h2 {
+            color: #18a058;
+            margin-bottom: 20px;
+        }
+
+        .note-content {
+            line-height: 1.8;
+            color: #26382d;
+        }
+
+        .note-content h3 {
+            color: #18a058;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .note-content p {
+            margin-bottom: 15px;
+        }
+
+        .note-content ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .note-content li {
+            margin-bottom: 8px;
+        }
+
+        .message {
+            text-align: center;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+        }
+
+        .message h2 {
+            color: #18a058;
+            margin-bottom: 10px;
+        }
+
+        .message p {
+            color: #617568;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #718077;
+
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
 
             .header-content {
-
                 flex-direction: column;
-
+                text-align: center;
             }
 
-            .question-card {
-
-                padding: 20px;
-
+            .actions {
+                grid-template-columns: 1fr;
             }
 
-            .question {
-
-                font-size: 18px;
-
-            }
-
-            .navigation {
-
-                flex-direction: column;
-
-            }
-
-            .nav-button {
-
-                width: 100%;
-
+            .topic-header h1 {
+                font-size: 25px;
             }
 
         }
@@ -513,9 +279,7 @@
     <div class="header-content">
 
         <div class="logo">
-
             🩺 OGCONS Study Hub
-
         </div>
 
         <button
@@ -531,140 +295,105 @@
 </header>
 
 
-<div
-    id="loading"
-    class="loading">
-
-    Loading Foundations of Nursing quiz...
-
-</div>
+<div class="container">
 
 
-<div
-    id="quizContainer"
-    class="container"
-    style="display:none;">
+    <div class="topic-header">
 
+        <div class="topic-icon">
+            📚
+        </div>
 
-    <div class="quiz-header">
-
-        <h1>
-
+        <h1 id="topicTitle">
             Foundations of Nursing
-
         </h1>
 
         <p>
-
-            Test your knowledge of this topic.
-
+            Study this topic and test your
+            understanding with a quiz.
         </p>
 
-        <div
-            class="quiz-topic"
-            id="quizTopic">
+    </div>
 
-            Loading topic...
+
+    <div class="actions">
+
+
+        <!-- READ NOTE -->
+
+        <div class="action-card">
+
+            <div class="action-icon">
+                📖
+            </div>
+
+            <h2>
+                Read Note
+            </h2>
+
+            <p>
+                Study the detailed nursing note
+                for this topic.
+            </p>
+
+            <button
+                class="action-button"
+                onclick="showNote()">
+
+                Read Note
+
+            </button>
 
         </div>
 
 
-        <div class="progress-container">
+        <!-- TAKE QUIZ -->
 
-            <div class="progress-info">
+        <div class="action-card">
 
-                <span id="questionProgress">
-
-                    Question 1 of 1
-
-                </span>
-
-                <span id="answeredCount">
-
-                    0 answered
-
-                </span>
-
+            <div class="action-icon">
+                📝
             </div>
 
+            <h2>
+                Take Quiz
+            </h2>
 
-            <div class="progress-bar">
+            <p>
+                Test your knowledge and
+                see how well you understand
+                this topic.
+            </p>
 
-                <div
-                    class="progress"
-                    id="progress">
+            <button
+                class="action-button"
+                onclick="takeQuiz()">
 
-                </div>
+                Take Quiz
 
-            </div>
+            </button>
 
         </div>
 
     </div>
 
 
-    <div id="questionArea">
+    <!-- NOTE -->
 
-        <div class="question-card">
+    <div id="noteSection">
 
-            <div
-                class="question-number"
-                id="questionNumber">
+        <h2>
 
-                Question 1
+            📖
+            <span id="noteTitle">
+                Topic Note
+            </span>
 
-            </div>
+        </h2>
 
-
-            <div
-                class="question"
-                id="questionText">
-
-                Loading question...
-
-            </div>
-
-
-            <div
-                class="options"
-                id="optionsContainer">
-
-            </div>
-
-
-            <div class="navigation">
-
-                <button
-                    class="nav-button previous"
-                    id="previousButton"
-                    onclick="previousQuestion()">
-
-                    ← Previous
-
-                </button>
-
-
-                <button
-                    class="nav-button next"
-                    id="nextButton"
-                    onclick="nextQuestion()">
-
-                    Next →
-
-                </button>
-
-
-                <button
-                    class="nav-button submit"
-                    id="submitButton"
-                    onclick="submitQuiz()"
-                    style="display:none;">
-
-                    Submit Quiz ✓
-
-                </button>
-
-            </div>
+        <div
+            class="note-content"
+            id="noteContent">
 
         </div>
 
@@ -672,63 +401,21 @@
 
 
     <div
-        class="result"
-        id="result">
-
-        <div class="result-icon">
-
-            🏆
-
-        </div>
+        class="message"
+        id="messageBox">
 
         <h2>
-
-            Quiz Completed!
-
+            📚 Ready to Study?
         </h2>
 
         <p>
 
-            Your score
+            Choose <strong>Read Note</strong>
+            to study this topic or
+            <strong>Take Quiz</strong>
+            to test your knowledge.
 
         </p>
-
-        <div
-            class="score"
-            id="finalScore">
-
-            0%
-
-        </div>
-
-
-        <p
-            class="result-message"
-            id="resultMessage">
-
-        </p>
-
-
-        <div class="result-buttons">
-
-            <button
-                class="retry"
-                onclick="retryQuiz()">
-
-                🔄 Retake Quiz
-
-            </button>
-
-
-            <button
-                class="home"
-                onclick="goBack()">
-
-                📚 Back to Topics
-
-            </button>
-
-        </div>
 
     </div>
 
@@ -736,34 +423,16 @@
 </div>
 
 
+<footer>
+    OGCONS Study Hub © 2026
+</footer>
+
+
 <script>
 
 
 // ======================================================
-// SUPABASE
-// ======================================================
-
-const SUPABASE_URL =
-    "https://bvetmmvpdotifusjkywd.supabase.co";
-
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
-
-
-const supabaseClient =
-    window.supabase.createClient(
-
-        SUPABASE_URL,
-
-        SUPABASE_PUBLISHABLE_KEY
-
-    );
-
-
-
-// ======================================================
-// GET TOPIC
+// GET TOPIC FROM URL
 // ======================================================
 
 const urlParams =
@@ -776,780 +445,42 @@ const topic =
     urlParams.get("topic");
 
 
-
 // ======================================================
-// VARIABLES
-// ======================================================
-
-let questions = [];
-
-let currentQuestion = 0;
-
-let selectedAnswers = {};
-
-let user = null;
-
-
-
-// ======================================================
-// LOAD USER
+// DISPLAY TOPIC
 // ======================================================
 
-async function loadUser() {
+const topicTitle =
+    document.getElementById(
+        "topicTitle"
+    );
 
-    const {
-
-        data: {
-            user: currentUser
-        },
-
-        error
-
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
+const noteTitle =
+    document.getElementById(
+        "noteTitle"
+    );
 
 
-    if (
-        error ||
-        !currentUser
-    ) {
+if (topic) {
 
-        window.location.href =
-            "index.html";
-
-        return false;
-
-    }
-
-
-    user =
-        currentUser;
-
-
-    return true;
-
-}
-
-
-
-// ======================================================
-// LOAD QUESTIONS
-// ======================================================
-
-async function loadQuestions() {
-
-    if (!topic) {
-
-        showError(`
-
-            <h2>
-                ⚠️ No Topic Selected
-            </h2>
-
-            <p style="margin-top:10px;">
-
-                Please return to Foundations
-                of Nursing and select a topic.
-
-            </p>
-
-        `);
-
-        return false;
-
-    }
-
-
-    document
-        .getElementById("quizTopic")
-        .textContent =
+    topicTitle.textContent =
         topic;
 
+    noteTitle.textContent =
+        topic;
 
-    /*
-       IMPORTANT:
+} else {
 
-       Both values must match the
-       Admin Dashboard exactly.
+    topicTitle.textContent =
+        "Foundations of Nursing";
 
-       Course:
-       Foundations of Nursing
-
-       Topic:
-       The selected topic
-    */
-
-
-    const {
-
-        data,
-
-        error
-
-    } =
-        await supabaseClient
-
-            .from("questions")
-
-            .select("*")
-
-            .eq(
-                "course",
-                "Foundations of Nursing"
-            )
-
-            .eq(
-                "topic",
-                topic
-            )
-
-            .order(
-                "created_at",
-                {
-                    ascending: true
-                }
-            );
-
-
-    if (error) {
-
-        console.error(
-            "Question loading error:",
-            error
-        );
-
-
-        showError(
-
-            "Unable to load the quiz questions.<br><br>" +
-
-            escapeHTML(
-                error.message
-            )
-
-        );
-
-
-        return false;
-
-    }
-
-
-    questions =
-        data || [];
-
-
-    if (
-        questions.length === 0
-    ) {
-
-        showError(`
-
-            <h2>
-                📭 No Questions Yet
-            </h2>
-
-            <p style="margin-top:10px;">
-
-                There are currently no questions
-                for:
-
-            </p>
-
-            <p
-                style="
-                    margin-top:10px;
-                    font-weight:bold;
-                ">
-
-                ${escapeHTML(topic)}
-
-            </p>
-
-            <p style="margin-top:10px;">
-
-                Please add questions from the
-                Admin Dashboard.
-
-            </p>
-
-        `);
-
-        return false;
-
-    }
-
-
-    return true;
+    noteTitle.textContent =
+        "Foundations of Nursing";
 
 }
 
 
-
 // ======================================================
-// DISPLAY QUESTION
-// ======================================================
-
-function displayQuestion() {
-
-    const q =
-        questions[
-            currentQuestion
-        ];
-
-
-    if (!q) {
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("questionNumber")
-        .textContent =
-
-        "Question " +
-        (
-            currentQuestion + 1
-        );
-
-
-    document
-        .getElementById("questionProgress")
-        .textContent =
-
-        "Question " +
-        (
-            currentQuestion + 1
-        ) +
-        " of " +
-        questions.length;
-
-
-    document
-        .getElementById("questionText")
-        .textContent =
-        q.question;
-
-
-    const optionsContainer =
-        document.getElementById(
-            "optionsContainer"
-        );
-
-
-    optionsContainer.innerHTML = "";
-
-
-    const options = [
-
-        {
-            letter: "A",
-            text: q.option_a
-        },
-
-        {
-            letter: "B",
-            text: q.option_b
-        },
-
-        {
-            letter: "C",
-            text: q.option_c
-        },
-
-        {
-            letter: "D",
-            text: q.option_d
-        }
-
-    ];
-
-
-    options.forEach(
-        function(option) {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.className =
-                "option";
-
-
-            if (
-
-                selectedAnswers[
-                    currentQuestion
-                ] ===
-                option.letter
-
-            ) {
-
-                button.classList.add(
-                    "selected"
-                );
-
-            }
-
-
-            button.innerHTML = `
-
-                <span class="option-letter">
-
-                    ${option.letter}.
-
-                </span>
-
-                ${escapeHTML(
-                    option.text
-                )}
-
-            `;
-
-
-            button.onclick =
-                function() {
-
-                    selectAnswer(
-                        option.letter
-                    );
-
-                };
-
-
-            optionsContainer.appendChild(
-                button
-            );
-
-        }
-    );
-
-
-    document
-        .getElementById("previousButton")
-        .disabled =
-        currentQuestion === 0;
-
-
-    const nextButton =
-        document.getElementById(
-            "nextButton"
-        );
-
-
-    const submitButton =
-        document.getElementById(
-            "submitButton"
-        );
-
-
-    if (
-
-        currentQuestion ===
-        questions.length - 1
-
-    ) {
-
-        nextButton.style.display =
-            "none";
-
-        submitButton.style.display =
-            "block";
-
-    }
-
-    else {
-
-        nextButton.style.display =
-            "block";
-
-        submitButton.style.display =
-            "none";
-
-    }
-
-
-    updateProgress();
-
-}
-
-
-
-// ======================================================
-// SELECT ANSWER
-// ======================================================
-
-function selectAnswer(answer) {
-
-    selectedAnswers[
-        currentQuestion
-    ] =
-        answer;
-
-
-    displayQuestion();
-
-}
-
-
-
-// ======================================================
-// NEXT
-// ======================================================
-
-function nextQuestion() {
-
-    if (
-
-        currentQuestion <
-        questions.length - 1
-
-    ) {
-
-        currentQuestion++;
-
-        displayQuestion();
-
-    }
-
-}
-
-
-
-// ======================================================
-// PREVIOUS
-// ======================================================
-
-function previousQuestion() {
-
-    if (
-        currentQuestion > 0
-    ) {
-
-        currentQuestion--;
-
-        displayQuestion();
-
-    }
-
-}
-
-
-
-// ======================================================
-// UPDATE PROGRESS
-// ======================================================
-
-function updateProgress() {
-
-    const answered =
-        Object.keys(
-            selectedAnswers
-        ).length;
-
-
-    document
-        .getElementById("answeredCount")
-        .textContent =
-
-        answered +
-        " answered";
-
-
-    const percentage =
-
-        (
-            (
-                currentQuestion + 1
-            )
-            /
-            questions.length
-        ) * 100;
-
-
-    document
-        .getElementById("progress")
-        .style.width =
-
-        percentage + "%";
-
-}
-
-
-
-// ======================================================
-// SUBMIT QUIZ
-// ======================================================
-
-async function submitQuiz() {
-
-    const answered =
-        Object.keys(
-            selectedAnswers
-        ).length;
-
-
-    if (
-        answered <
-        questions.length
-    ) {
-
-        const remaining =
-
-            questions.length -
-            answered;
-
-
-        const confirmSubmit =
-            confirm(
-
-                "You have " +
-                remaining +
-                " unanswered question(s).\n\n" +
-                "Are you sure you want to submit?"
-
-            );
-
-
-        if (!confirmSubmit) {
-
-            return;
-
-        }
-
-    }
-
-
-    let score = 0;
-
-
-    questions.forEach(
-        function(q, index) {
-
-            const selected =
-                selectedAnswers[
-                    index
-                ];
-
-
-            if (
-
-                selected &&
-                selected ===
-                q.correct_answer
-
-            ) {
-
-                score++;
-
-            }
-
-        }
-    );
-
-
-    const percentage =
-
-        Math.round(
-
-            (
-                score /
-                questions.length
-            ) * 100
-
-        );
-
-
-    await saveQuizResult(
-        score,
-        percentage
-    );
-
-
-    showResult(
-        score,
-        percentage
-    );
-
-}
-
-
-
-// ======================================================
-// SAVE RESULT
-// ======================================================
-
-async function saveQuizResult(
-    score,
-    percentage
-) {
-
-    if (!user) {
-
-        return;
-
-    }
-
-
-    const resultData = {
-
-        user_id:
-            user.id,
-
-        score:
-            score,
-
-        total_questions:
-            questions.length,
-
-        percentage:
-            percentage
-
-    };
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-
-            .from("quiz_results")
-
-            .insert([
-                resultData
-            ]);
-
-
-    if (error) {
-
-        console.error(
-            "Unable to save quiz result:",
-            error
-        );
-
-    }
-
-}
-
-
-
-// ======================================================
-// SHOW RESULT
-// ======================================================
-
-function showResult(
-    score,
-    percentage
-) {
-
-    document
-        .getElementById("questionArea")
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById("result")
-        .style.display =
-        "block";
-
-
-    document
-        .getElementById("finalScore")
-        .textContent =
-        percentage + "%";
-
-
-    let message = "";
-
-
-    if (
-        percentage >= 80
-    ) {
-
-        message =
-            "Excellent work! 🎉 You have a strong understanding of this topic.";
-
-    }
-
-    else if (
-        percentage >= 60
-    ) {
-
-        message =
-            "Good job! 👍 Keep studying and you can improve even further.";
-
-    }
-
-    else if (
-        percentage >= 50
-    ) {
-
-        message =
-            "Fair attempt. 📚 Review your notes and try the quiz again.";
-
-    }
-
-    else {
-
-        message =
-            "Keep practicing. 💪 Go through your notes and try again.";
-
-    }
-
-
-    document
-        .getElementById("resultMessage")
-        .textContent =
-
-        "You scored " +
-        score +
-        " out of " +
-        questions.length +
-        ". " +
-        message;
-
-}
-
-
-
-// ======================================================
-// RETRY
-// ======================================================
-
-function retryQuiz() {
-
-    currentQuestion = 0;
-
-    selectedAnswers = {};
-
-
-    document
-        .getElementById("result")
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById("questionArea")
-        .style.display =
-        "block";
-
-
-    displayQuestion();
-
-}
-
-
-
-// ======================================================
-// BACK
+// BACK TO TOPICS
 // ======================================================
 
 function goBack() {
@@ -1560,49 +491,127 @@ function goBack() {
 }
 
 
-
 // ======================================================
-// ERROR
+// TAKE QUIZ
 // ======================================================
 
-function showError(message) {
+function takeQuiz() {
 
-    document
-        .getElementById("loading")
-        .style.display =
-        "none";
+    if (!topic) {
+
+        alert(
+            "No topic was selected."
+        );
+
+        return;
+
+    }
 
 
-    document
-        .getElementById("quizContainer")
-        .style.display =
-        "block";
+    // IMPORTANT:
+    // The filename MUST be:
+    //
+    // foundations-quiz.html
+    //
+
+    const quizURL =
+        "foundations-quiz.html?topic=" +
+        encodeURIComponent(topic);
 
 
-    document
-        .getElementById("quizContainer")
-        .innerHTML = `
-
-        <div class="error">
-
-            ${message}
-
-            <br><br>
-
-            <button
-                class="nav-button home"
-                onclick="goBack()">
-
-                ← Back to Topics
-
-            </button>
-
-        </div>
-
-    `;
+    window.location.href =
+        quizURL;
 
 }
 
+
+// ======================================================
+// SHOW NOTE
+// ======================================================
+
+function showNote() {
+
+    const noteSection =
+        document.getElementById(
+            "noteSection"
+        );
+
+    const messageBox =
+        document.getElementById(
+            "messageBox"
+        );
+
+    const noteContent =
+        document.getElementById(
+            "noteContent"
+        );
+
+
+    noteContent.innerHTML = `
+
+        <h3>
+            Introduction
+        </h3>
+
+        <p>
+            The detailed note for
+            <strong>
+                ${escapeHTML(topic || "this topic")}
+            </strong>
+            will be added according to the
+            Foundations of Nursing curriculum.
+        </p>
+
+
+        <h3>
+            Learning Objectives
+        </h3>
+
+        <ul>
+
+            <li>
+                Understand the important concepts
+                related to the topic.
+            </li>
+
+            <li>
+                Explain the major principles
+                involved.
+            </li>
+
+            <li>
+                Apply the knowledge to nursing
+                practice.
+            </li>
+
+        </ul>
+
+
+        <h3>
+            Summary
+        </h3>
+
+        <p>
+            This section will contain the
+            complete study note for the selected
+            Foundations of Nursing topic.
+        </p>
+
+    `;
+
+
+    noteSection.style.display =
+        "block";
+
+    messageBox.style.display =
+        "none";
+
+
+    noteSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
 
 
 // ======================================================
@@ -1624,71 +633,12 @@ function escapeHTML(value) {
     return String(value)
 
         .replace(/&/g, "&amp;")
-
         .replace(/</g, "&lt;")
-
         .replace(/>/g, "&gt;")
-
         .replace(/"/g, "&quot;")
-
         .replace(/'/g, "&#039;");
 
 }
-
-
-
-// ======================================================
-// START QUIZ
-// ======================================================
-
-async function startQuiz() {
-
-    const loggedIn =
-        await loadUser();
-
-
-    if (!loggedIn) {
-
-        return;
-
-    }
-
-
-    const loaded =
-        await loadQuestions();
-
-
-    if (!loaded) {
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("loading")
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById("quizContainer")
-        .style.display =
-        "block";
-
-
-    displayQuestion();
-
-}
-
-
-
-// ======================================================
-// START
-// ======================================================
-
-startQuiz();
-
 
 </script>
 
