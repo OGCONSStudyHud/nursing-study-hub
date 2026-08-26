@@ -37,6 +37,10 @@
 
         }
 
+        /* ================================
+           HEADER
+        ================================= */
+
         header {
 
             background:
@@ -100,6 +104,10 @@
 
         }
 
+        /* ================================
+           MAIN
+        ================================= */
+
         .container {
 
             max-width: 950px;
@@ -109,6 +117,10 @@
             padding: 35px 20px;
 
         }
+
+        /* ================================
+           TOPIC HEADER
+        ================================= */
 
         .topic-header {
 
@@ -155,6 +167,10 @@
             line-height: 1.6;
 
         }
+
+        /* ================================
+           ACTION BUTTONS
+        ================================= */
 
         .actions {
 
@@ -245,6 +261,10 @@
 
         }
 
+        /* ================================
+           NOTE SECTION
+        ================================= */
+
         #noteSection {
 
             display: none;
@@ -269,6 +289,8 @@
 
             margin-bottom: 20px;
 
+            line-height: 1.4;
+
         }
 
         .note-content {
@@ -283,9 +305,23 @@
 
             color: #18a058;
 
-            margin-top: 25px;
+            margin-top: 30px;
 
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+
+            font-size: 21px;
+
+        }
+
+        .note-content h4 {
+
+            color: #236b4a;
+
+            margin-top: 20px;
+
+            margin-bottom: 8px;
+
+            font-size: 17px;
 
         }
 
@@ -299,15 +335,79 @@
 
             margin-left: 25px;
 
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+
+        }
+
+        .note-content ol {
+
+            margin-left: 25px;
+
+            margin-bottom: 18px;
 
         }
 
         .note-content li {
 
-            margin-bottom: 8px;
+            margin-bottom: 9px;
 
         }
+
+        .important {
+
+            background: #e9fff2;
+
+            border-left: 5px solid #18a058;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin: 20px 0;
+
+        }
+
+        .definition {
+
+            background: #eef8ff;
+
+            border-left: 5px solid #0b5ed7;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin: 20px 0;
+
+        }
+
+        .exam-point {
+
+            background: #fff8e6;
+
+            border-left: 5px solid #f0a000;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin: 20px 0;
+
+        }
+
+        .topic-divider {
+
+            height: 1px;
+
+            background: #e3ebe6;
+
+            margin: 25px 0;
+
+        }
+
+        /* ================================
+           MESSAGE
+        ================================= */
 
         .message {
 
@@ -341,6 +441,10 @@
 
         }
 
+        /* ================================
+           FOOTER
+        ================================= */
+
         footer {
 
             text-align: center;
@@ -352,6 +456,10 @@
             font-size: 14px;
 
         }
+
+        /* ================================
+           MOBILE
+        ================================= */
 
         @media (max-width: 700px) {
 
@@ -375,6 +483,18 @@
 
             }
 
+            #noteSection {
+
+                padding: 22px;
+
+            }
+
+            .note-content h3 {
+
+                font-size: 19px;
+
+            }
+
         }
 
     </style>
@@ -385,6 +505,10 @@
 <body>
 
 
+<!-- ==========================================
+     HEADER
+========================================== -->
+
 <header>
 
     <div class="header-content">
@@ -394,6 +518,7 @@
             🩺 OGCONS Study Hub
 
         </div>
+
 
         <button
             class="back-button"
@@ -408,8 +533,17 @@
 </header>
 
 
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
 <div class="container">
 
+
+    <!-- ======================================
+         TOPIC HEADER
+    ======================================= -->
 
     <div class="topic-header">
 
@@ -419,11 +553,13 @@
 
         </div>
 
+
         <h1 id="topicTitle">
 
             Foundations of Nursing
 
         </h1>
+
 
         <p>
 
@@ -435,8 +571,15 @@
     </div>
 
 
+
+    <!-- ======================================
+         ACTIONS
+    ======================================= -->
+
     <div class="actions">
 
+
+        <!-- READ NOTE -->
 
         <div class="action-card">
 
@@ -446,11 +589,13 @@
 
             </div>
 
+
             <h2>
 
                 Read Note
 
             </h2>
+
 
             <p>
 
@@ -458,6 +603,7 @@
                 for this topic.
 
             </p>
+
 
             <button
                 class="action-button"
@@ -470,6 +616,9 @@
         </div>
 
 
+
+        <!-- QUIZ -->
+
         <div class="action-card">
 
             <div class="action-icon">
@@ -478,11 +627,13 @@
 
             </div>
 
+
             <h2>
 
                 Take Quiz
 
             </h2>
+
 
             <p>
 
@@ -491,6 +642,7 @@
                 this topic.
 
             </p>
+
 
             <button
                 class="action-button"
@@ -502,20 +654,27 @@
 
         </div>
 
+
     </div>
 
 
+
+    <!-- ======================================
+         NOTE SECTION
+    ======================================= -->
+
     <div id="noteSection">
+
 
         <h2>
 
             📖
-
             <span id="noteTitle">
                 Topic Note
             </span>
 
         </h2>
+
 
         <div
             class="note-content"
@@ -523,8 +682,14 @@
 
         </div>
 
+
     </div>
 
+
+
+    <!-- ======================================
+         DEFAULT MESSAGE
+    ======================================= -->
 
     <div
         class="message"
@@ -535,6 +700,7 @@
             📚 Ready to Study?
 
         </h2>
+
 
         <p>
 
@@ -551,11 +717,13 @@
 </div>
 
 
+
 <footer>
 
     OGCONS Study Hub © 2026
 
 </footer>
+
 
 
 <script>
@@ -576,6 +744,10 @@ const topic =
 
 
 
+// ==================================================
+// ELEMENTS
+// ==================================================
+
 const topicTitle =
     document.getElementById(
         "topicTitle"
@@ -588,6 +760,10 @@ const noteTitle =
     );
 
 
+
+// ==================================================
+// DISPLAY TOPIC TITLE
+// ==================================================
 
 if (topic) {
 
@@ -610,7 +786,7 @@ if (topic) {
 
 
 // ==================================================
-// BACK
+// GO BACK
 // ==================================================
 
 function goBack() {
@@ -628,15 +804,18 @@ function goBack() {
 
 function showNote() {
 
+
     const noteSection =
         document.getElementById(
             "noteSection"
         );
 
+
     const messageBox =
         document.getElementById(
             "messageBox"
         );
+
 
     const noteContent =
         document.getElementById(
@@ -644,66 +823,840 @@ function showNote() {
         );
 
 
-    noteContent.innerHTML = `
+    // ==========================================
+    // TOPIC 1
+    // INTRODUCTION TO NURSING
+    // ==========================================
 
-        <h3>
-            Introduction
-        </h3>
+    if (
+        topic ===
+        "Introduction to Nursing"
+    ) {
 
-        <p>
 
-            The detailed note for
-            <strong>
-                ${escapeHTML(topic || "this topic")}
-            </strong>
-            will be added according to the
-            Foundations of Nursing curriculum.
+        noteContent.innerHTML = `
 
-        </p>
+            <h3>
+                1. Meaning of Nursing
+            </h3>
 
-        <h3>
-            Learning Objectives
-        </h3>
+            <p>
+                Nursing is a healthcare profession concerned
+                with the promotion of health, prevention of
+                illness, care of sick and injured people,
+                and support of individuals, families and
+                communities in achieving and maintaining
+                good health.
+            </p>
 
-        <ul>
 
-            <li>
-                Understand the basic concepts
-                related to this topic.
-            </li>
+            <div class="definition">
 
-            <li>
-                Explain the important principles
-                involved.
-            </li>
+                <strong>
+                    Simple definition:
+                </strong>
 
-            <li>
-                Apply the knowledge to nursing
-                practice.
-            </li>
+                Nursing is the care given to individuals,
+                families and communities to promote health,
+                prevent illness, restore health and provide
+                comfort when recovery is not possible.
 
-        </ul>
+            </div>
 
-        <h3>
-            Summary
-        </h3>
 
-        <p>
+            <h3>
+                2. Who is a Nurse?
+            </h3>
 
-            This section will contain the
-            simplified study note prepared
-            for OGCONS students.
+            <p>
+                A nurse is a trained and licensed healthcare
+                professional who provides care to patients,
+                promotes health, prevents illness and assists
+                individuals in achieving the best possible
+                level of health.
+            </p>
 
-        </p>
+            <p>
+                Nurses work with patients of different ages
+                and in different healthcare settings.
+            </p>
 
-    `;
 
+            <h3>
+                3. Aims of Nursing
+            </h3>
+
+            <p>
+                The major aims of nursing include:
+            </p>
+
+            <ul>
+
+                <li>
+                    Promotion and maintenance of health.
+                </li>
+
+                <li>
+                    Prevention of illness and disease.
+                </li>
+
+                <li>
+                    Restoration of health.
+                </li>
+
+                <li>
+                    Care of sick and injured individuals.
+                </li>
+
+                <li>
+                    Relief of pain and suffering.
+                </li>
+
+                <li>
+                    Provision of comfort and emotional support.
+                </li>
+
+                <li>
+                    Helping patients achieve independence
+                    in activities of daily living.
+                </li>
+
+                <li>
+                    Providing supportive care when recovery
+                    is not possible.
+                </li>
+
+            </ul>
+
+
+            <h3>
+                4. Objectives of Nursing
+            </h3>
+
+            <p>
+                Nursing seeks to achieve the following
+                objectives:
+            </p>
+
+            <ul>
+
+                <li>
+                    To promote physical and mental health.
+                </li>
+
+                <li>
+                    To prevent disease and complications.
+                </li>
+
+                <li>
+                    To identify health problems early.
+                </li>
+
+                <li>
+                    To assist in the diagnosis and treatment
+                    of illness.
+                </li>
+
+                <li>
+                    To provide individualized patient care.
+                </li>
+
+                <li>
+                    To educate patients and their families.
+                </li>
+
+                <li>
+                    To assist patients during rehabilitation.
+                </li>
+
+                <li>
+                    To provide comfort and support.
+                </li>
+
+                <li>
+                    To promote safe nursing practice.
+                </li>
+
+            </ul>
+
+
+            <h3>
+                5. Characteristics of Nursing
+            </h3>
+
+            <p>
+                Nursing has several important characteristics
+                that distinguish it as a professional healthcare
+                discipline.
+            </p>
+
+            <ul>
+
+                <li>
+                    <strong>It is patient-centred:</strong>
+                    Nursing focuses on the needs, problems
+                    and wellbeing of the patient.
+                </li>
+
+                <li>
+                    <strong>It is a caring profession:</strong>
+                    Nurses provide physical, emotional and
+                    psychological support.
+                </li>
+
+                <li>
+                    <strong>It is scientific:</strong>
+                    Nursing practice uses scientific knowledge
+                    and evidence.
+                </li>
+
+                <li>
+                    <strong>It is an art:</strong>
+                    Nursing requires skills such as communication,
+                    observation, compassion and proper interaction
+                    with patients.
+                </li>
+
+                <li>
+                    <strong>It is a profession:</strong>
+                    Nursing requires specialized education,
+                    training, ethical conduct and professional
+                    registration.
+                </li>
+
+                <li>
+                    <strong>It involves teamwork:</strong>
+                    Nurses work with doctors, pharmacists,
+                    physiotherapists, laboratory scientists
+                    and other healthcare professionals.
+                </li>
+
+                <li>
+                    <strong>It requires continuous learning:</strong>
+                    Nurses need to update their knowledge and
+                    skills throughout their careers.
+                </li>
+
+            </ul>
+
+
+            <h3>
+                6. Roles of a Nurse
+            </h3>
+
+            <p>
+                A nurse performs many different roles in the
+                healthcare system.
+            </p>
+
+            <h4>
+                1. Caregiver
+            </h4>
+
+            <p>
+                The nurse provides direct physical and
+                emotional care to patients.
+            </p>
+
+            <h4>
+                2. Health Educator
+            </h4>
+
+            <p>
+                The nurse teaches patients and families about
+                health, disease prevention, medications,
+                nutrition and healthy lifestyles.
+            </p>
+
+            <h4>
+                3. Patient Advocate
+            </h4>
+
+            <p>
+                The nurse protects the patient's rights,
+                dignity, safety and interests.
+            </p>
+
+            <h4>
+                4. Communicator
+            </h4>
+
+            <p>
+                The nurse communicates effectively with
+                patients, relatives and other members of
+                the healthcare team.
+            </p>
+
+            <h4>
+                5. Counselor
+            </h4>
+
+            <p>
+                The nurse provides emotional support and
+                assists patients in dealing with health
+                problems and stressful situations.
+            </p>
+
+            <h4>
+                6. Collaborator
+            </h4>
+
+            <p>
+                The nurse works together with other healthcare
+                professionals to provide effective patient care.
+            </p>
+
+            <h4>
+                7. Manager
+            </h4>
+
+            <p>
+                The nurse organizes patient care, manages
+                available resources and coordinates nursing
+                activities.
+            </p>
+
+            <h4>
+                8. Researcher
+            </h4>
+
+            <p>
+                Nurses participate in research and use research
+                findings to improve nursing practice.
+            </p>
+
+
+            <h3>
+                7. Functions of a Nurse
+            </h3>
+
+            <ul>
+
+                <li>
+                    Assessing patients' health conditions.
+                </li>
+
+                <li>
+                    Monitoring vital signs and changes
+                    in patient condition.
+                </li>
+
+                <li>
+                    Administering medications as prescribed.
+                </li>
+
+                <li>
+                    Providing personal hygiene and comfort.
+                </li>
+
+                <li>
+                    Assisting patients with feeding and
+                    elimination.
+                </li>
+
+                <li>
+                    Performing nursing procedures.
+                </li>
+
+                <li>
+                    Maintaining accurate patient records.
+                </li>
+
+                <li>
+                    Providing health education.
+                </li>
+
+                <li>
+                    Preventing infection.
+                </li>
+
+                <li>
+                    Supporting patients and their families.
+                </li>
+
+                <li>
+                    Working with other members of the
+                    healthcare team.
+                </li>
+
+            </ul>
+
+
+            <h3>
+                8. Qualities of a Good Nurse
+            </h3>
+
+            <p>
+                A good nurse should possess professional,
+                intellectual and personal qualities.
+            </p>
+
+            <ul>
+
+                <li>
+                    Compassion
+                </li>
+
+                <li>
+                    Patience
+                </li>
+
+                <li>
+                    Good communication skills
+                </li>
+
+                <li>
+                    Honesty
+                </li>
+
+                <li>
+                    Responsibility
+                </li>
+
+                <li>
+                    Respect for patients
+                </li>
+
+                <li>
+                    Empathy
+                </li>
+
+                <li>
+                    Good observation skills
+                </li>
+
+                <li>
+                    Critical thinking
+                </li>
+
+                <li>
+                    Emotional stability
+                </li>
+
+                <li>
+                    Cleanliness and good personal hygiene
+                </li>
+
+                <li>
+                    Confidentiality
+                </li>
+
+                <li>
+                    Professional behaviour
+                </li>
+
+                <li>
+                    Willingness to learn
+                </li>
+
+            </ul>
+
+
+            <div class="important">
+
+                <strong>
+                    Important:
+                </strong>
+
+                A nurse should treat every patient with
+                dignity, respect, kindness and without
+                discrimination.
+
+            </div>
+
+
+            <h3>
+                9. Scope of Nursing
+            </h3>
+
+            <p>
+                The scope of nursing refers to the different
+                areas in which nurses can practice and the
+                activities they are professionally prepared
+                and authorized to perform.
+            </p>
+
+            <p>
+                Nurses can work in different healthcare
+                environments, including:
+            </p>
+
+            <ul>
+
+                <li>
+                    Hospitals
+                </li>
+
+                <li>
+                    Primary healthcare centres
+                </li>
+
+                <li>
+                    Clinics
+                </li>
+
+                <li>
+                    Maternity centres
+                </li>
+
+                <li>
+                    Schools
+                </li>
+
+                <li>
+                    Community health settings
+                </li>
+
+                <li>
+                    Occupational health settings
+                </li>
+
+                <li>
+                    Nursing education
+                </li>
+
+                <li>
+                    Research
+                </li>
+
+                <li>
+                    Public health
+                </li>
+
+            </ul>
+
+
+            <h3>
+                10. Nursing as a Profession
+            </h3>
+
+            <p>
+                Nursing is regarded as a profession because
+                it requires specialized education, knowledge,
+                skills, ethical standards and professional
+                regulation.
+            </p>
+
+            <p>
+                Professional nursing involves responsibility
+                and accountability for the care provided to
+                patients.
+            </p>
+
+
+            <h3>
+                11. Nursing as an Art and Science
+            </h3>
+
+            <h4>
+                Nursing as a Science
+            </h4>
+
+            <p>
+                Nursing uses scientific knowledge from areas
+                such as anatomy, physiology, microbiology,
+                pharmacology, psychology and other health
+                sciences.
+            </p>
+
+            <h4>
+                Nursing as an Art
+            </h4>
+
+            <p>
+                Nursing is also an art because nurses must
+                use interpersonal skills, compassion,
+                communication, observation and practical
+                skills when caring for patients.
+            </p>
+
+            <div class="definition">
+
+                <strong>
+                    Remember:
+                </strong>
+
+                Nursing combines scientific knowledge with
+                caring and practical skills.
+
+            </div>
+
+
+            <h3>
+                12. Areas of Nursing Practice
+            </h3>
+
+            <p>
+                Nursing practice can be found in many
+                specialized areas.
+            </p>
+
+            <ul>
+
+                <li>
+                    Medical-surgical nursing
+                </li>
+
+                <li>
+                    Maternal and child health nursing
+                </li>
+
+                <li>
+                    Community health nursing
+                </li>
+
+                <li>
+                    Mental health nursing
+                </li>
+
+                <li>
+                    Paediatric nursing
+                </li>
+
+                <li>
+                    Geriatric nursing
+                </li>
+
+                <li>
+                    Emergency and critical care nursing
+                </li>
+
+                <li>
+                    Public health nursing
+                </li>
+
+                <li>
+                    Occupational health nursing
+                </li>
+
+                <li>
+                    Nursing education
+                </li>
+
+            </ul>
+
+
+            <h3>
+                13. Importance of Nursing
+            </h3>
+
+            <p>
+                Nursing plays an important role in the
+                healthcare system.
+            </p>
+
+            <ul>
+
+                <li>
+                    Nurses provide continuous patient care.
+                </li>
+
+                <li>
+                    Nurses help prevent disease and
+                    complications.
+                </li>
+
+                <li>
+                    Nurses monitor patients and identify
+                    changes in their condition.
+                </li>
+
+                <li>
+                    Nurses educate patients and families.
+                </li>
+
+                <li>
+                    Nurses provide emotional support.
+                </li>
+
+                <li>
+                    Nurses assist patients during recovery
+                    and rehabilitation.
+                </li>
+
+                <li>
+                    Nurses promote health within communities.
+                </li>
+
+                <li>
+                    Nurses contribute to patient safety.
+                </li>
+
+            </ul>
+
+
+            <h3>
+                14. Nursing and Other Health Professions
+            </h3>
+
+            <p>
+                Nursing is part of a multidisciplinary
+                healthcare team. Effective patient care
+                requires cooperation between different
+                health professionals.
+            </p>
+
+            <ul>
+
+                <li>
+                    <strong>Doctors:</strong>
+                    Diagnose diseases and plan medical
+                    treatment.
+                </li>
+
+                <li>
+                    <strong>Pharmacists:</strong>
+                    Provide expertise concerning medicines
+                    and their safe use.
+                </li>
+
+                <li>
+                    <strong>Physiotherapists:</strong>
+                    Help patients improve movement and
+                    physical function.
+                </li>
+
+                <li>
+                    <strong>Laboratory Scientists:</strong>
+                    Perform laboratory investigations that
+                    assist diagnosis and monitoring.
+                </li>
+
+                <li>
+                    <strong>Dietitians/Nutritionists:</strong>
+                    Provide nutritional assessment and
+                    dietary guidance.
+                </li>
+
+                <li>
+                    <strong>Radiographers:</strong>
+                    Perform diagnostic imaging procedures.
+                </li>
+
+            </ul>
+
+
+            <h3>
+                15. Summary
+            </h3>
+
+            <p>
+                Nursing is a professional healthcare
+                discipline focused on promoting health,
+                preventing illness, caring for sick and
+                injured people, supporting recovery and
+                providing comfort.
+            </p>
+
+            <p>
+                Nurses perform many roles including caregiver,
+                educator, advocate, communicator, counselor,
+                collaborator, manager and researcher.
+            </p>
+
+            <p>
+                Effective nursing requires scientific knowledge,
+                practical skills, good communication, compassion,
+                professional behaviour and respect for patients.
+            </p>
+
+
+            <div class="exam-point">
+
+                <strong>
+                    ⭐ Key Examination Points
+                </strong>
+
+                <ul>
+
+                    <li>
+                        Nursing is both an art and a science.
+                    </li>
+
+                    <li>
+                        The nurse provides care to individuals,
+                        families and communities.
+                    </li>
+
+                    <li>
+                        Major aims include health promotion,
+                        disease prevention, restoration of health
+                        and provision of comfort.
+                    </li>
+
+                    <li>
+                        A nurse has several roles, including
+                        caregiver, educator, advocate, communicator
+                        and collaborator.
+                    </li>
+
+                    <li>
+                        Professional nursing requires specialized
+                        education, skills, ethics and accountability.
+                    </li>
+
+                    <li>
+                        Nurses work together with other healthcare
+                        professionals to provide quality patient care.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // ==========================================
+    // OTHER TOPICS
+    // ==========================================
+
+    else {
+
+
+        noteContent.innerHTML = `
+
+            <div class="definition">
+
+                <h3>
+                    📚 Note Coming Soon
+                </h3>
+
+                <p>
+                    The complete curriculum-based note
+                    for <strong>
+                    ${escapeHTML(topic || "this topic")}
+                    </strong>
+                    will be added to OGCONS Study Hub.
+                </p>
+
+                <p>
+                    We are building each Foundations
+                    of Nursing topic carefully so that the
+                    notes are useful for your studies and
+                    examination preparation.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // ==========================================
+    // SHOW NOTE
+    // ==========================================
 
     noteSection.style.display =
         "block";
 
+
     messageBox.style.display =
         "none";
+
 
     noteSection.scrollIntoView({
 
@@ -721,6 +1674,7 @@ function showNote() {
 
 function takeQuiz() {
 
+
     if (!topic) {
 
         alert(
@@ -730,19 +1684,6 @@ function takeQuiz() {
         return;
 
     }
-
-
-    /*
-       IMPORTANT:
-
-       The actual quiz file is:
-
-       foundations-quiz.html
-
-       NOT:
-
-       fon-quiz.html
-    */
 
 
     const quizURL =
@@ -779,18 +1720,32 @@ function escapeHTML(value) {
 
     return String(value)
 
-        .replace(/&/g, "&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-        .replace(/</g, "&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-        .replace(/>/g, "&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-        .replace(/"/g, "&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        .replace(/'/g, "&#039;");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
-
 
 </script>
 
