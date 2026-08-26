@@ -5,9 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OGCONS Study Hub - Primary Health Care</title>
 
@@ -31,7 +29,7 @@ body {
             #f5eaff
         );
 
-    color: #163020;
+    color: #172033;
 }
 
 header {
@@ -39,7 +37,7 @@ header {
         linear-gradient(
             135deg,
             #087f5b,
-            #20c997
+            #20a879
         );
 
     color: white;
@@ -47,18 +45,17 @@ header {
 }
 
 .header-content {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: auto;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 15px;
 }
 
 .logo {
-    font-size: 23px;
+    font-size: 22px;
     font-weight: bold;
 }
 
@@ -68,196 +65,156 @@ header {
     color: #087f5b;
 
     padding: 10px 18px;
-
     border-radius: 20px;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: auto;
     padding: 35px 20px;
 }
 
-.intro {
+.hero {
     background: white;
-
-    padding: 30px;
-
     border-radius: 20px;
+    padding: 35px 25px;
+
+    text-align: center;
 
     box-shadow:
         0 10px 25px
         rgba(0,0,0,0.08);
 
     margin-bottom: 30px;
-
-    text-align: center;
 }
 
-.intro-icon {
+.hero-icon {
     font-size: 55px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-.intro h1 {
+.hero h1 {
     color: #087f5b;
-    font-size: 30px;
     margin-bottom: 10px;
 }
 
-.intro p {
-    color: #617568;
-    line-height: 1.7;
-    max-width: 800px;
-    margin: auto;
+.hero p {
+    color: #667085;
+    line-height: 1.6;
 }
 
 .semester {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .semester-title {
     background: #087f5b;
     color: white;
 
-    padding: 18px 20px;
+    padding: 15px 20px;
 
-    border-radius: 15px;
+    border-radius: 14px 14px 0 0;
 
-    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.semester-title h2 {
-    margin-bottom: 6px;
-}
-
-.semester-title p {
-    opacity: 0.9;
-}
-
-.topic-card {
+.topic-list {
     background: white;
+    padding: 20px;
 
-    padding: 22px;
+    border-radius: 0 0 14px 14px;
 
-    border-radius: 16px;
-
-    margin-bottom: 14px;
+    display: grid;
+    gap: 15px;
 
     box-shadow:
         0 8px 20px
         rgba(0,0,0,0.07);
+}
 
-    display: flex;
+.topic-card {
+    border: 2px solid #e1e7e4;
+    border-radius: 14px;
 
-    align-items: center;
-
-    gap: 18px;
+    padding: 20px;
 
     transition: 0.2s;
 }
 
 .topic-card:hover {
-    transform: translateY(-3px);
+    border-color: #087f5b;
+    transform: translateY(-2px);
 }
 
-.topic-number {
-    min-width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    background: #dff8ee;
-
+.topic-card h3 {
     color: #087f5b;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: bold;
-
-    font-size: 17px;
+    margin-bottom: 8px;
 }
 
-.topic-content {
-    flex: 1;
-}
-
-.topic-content h3 {
-    font-size: 18px;
-    margin-bottom: 6px;
-}
-
-.topic-content p {
-    color: #718077;
-    font-size: 14px;
+.topic-card p {
+    color: #667085;
     line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .topic-button {
     border: none;
 
+    padding: 11px 18px;
+
+    border-radius: 22px;
+
     background: #087f5b;
-
     color: white;
-
-    padding: 11px 17px;
-
-    border-radius: 20px;
 
     font-weight: bold;
 
     cursor: pointer;
-
-    white-space: nowrap;
 }
 
 .topic-button:hover {
-    background: #056b4c;
+    background: #066347;
+}
+
+.quiz-button {
+    background: #0b5ed7;
+}
+
+.quiz-button:hover {
+    background: #084ca8;
 }
 
 footer {
     text-align: center;
-
     padding: 30px;
 
     color: #718077;
-
     font-size: 14px;
 }
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
 
     .header-content {
         flex-direction: column;
         text-align: center;
     }
 
-    .topic-card {
-        align-items: flex-start;
-    }
-
-}
-
-@media (max-width: 520px) {
-
-    .topic-card {
-        flex-wrap: wrap;
+    .buttons {
+        flex-direction: column;
     }
 
     .topic-button {
         width: 100%;
-    }
-
-    .intro h1 {
-        font-size: 25px;
     }
 
 }
@@ -266,9 +223,7 @@ footer {
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -279,10 +234,10 @@ footer {
 </div>
 
 <button
-    class="back-button"
-    onclick="goBack()">
+class="back-button"
+onclick="goBack()">
 
-    ← Back to Dashboard
+← Back to Dashboard
 
 </button>
 
@@ -291,14 +246,12 @@ footer {
 </header>
 
 
-
 <div class="container">
 
+<div class="hero">
 
-<div class="intro">
-
-<div class="intro-icon">
-🌍
+<div class="hero-icon">
+🏥
 </div>
 
 <h1>
@@ -306,68 +259,492 @@ Primary Health Care
 </h1>
 
 <p>
-Study Primary Health Care from the ND I and ND II
-curriculum. Learn the principles of community health,
-health education, immunization, maternal and child
-health, disease prevention, referral systems and
-management of primary health care services.
+Study Primary Health Care I and II according
+to the OGCONS curriculum structure.
 </p>
 
 </div>
 
 
-
-<!-- ==================================================
+<!-- ================================
      PHC I
-================================================== -->
+================================ -->
 
 <div class="semester">
 
 <div class="semester-title">
+📘 NDI — Second Semester: PHC I
+</div>
 
-<h2>
-📘 Primary Health Care I
-</h2>
+<div class="topic-list">
+
+
+<div class="topic-card">
+
+<h3>
+1. Introduction to Primary Health Care
+</h3>
 
 <p>
-ND I • Second Semester • NUR 122
+Meaning, principles, elements, importance
+and development of Primary Health Care.
 </p>
 
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Introduction to Primary Health Care')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Introduction to Primary Health Care')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
 </div>
 
 
-<div id="phc1Topics"></div>
+<div class="topic-card">
+
+<h3>
+2. Principles of Primary Health Care
+</h3>
+
+<p>
+The major principles guiding the delivery
+of Primary Health Care.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Principles of Primary Health Care')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Principles of Primary Health Care')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
 
 </div>
 
 
+<div class="topic-card">
 
-<!-- ==================================================
+<h3>
+3. Elements of Primary Health Care
+</h3>
+
+<p>
+The essential components and services
+provided through Primary Health Care.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Elements of Primary Health Care')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Elements of Primary Health Care')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+4. Community Participation
+</h3>
+
+<p>
+The involvement of individuals, families
+and communities in health care.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Community Participation')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Community Participation')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+5. Health Education
+</h3>
+
+<p>
+The role of health education in disease
+prevention and health promotion.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Health Education')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Health Education')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+6. Maternal and Child Health
+</h3>
+
+<p>
+Primary health care services for mothers,
+newborns and children.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Maternal and Child Health')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Maternal and Child Health')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+7. Immunization
+</h3>
+
+<p>
+Importance of immunization and prevention
+of vaccine-preventable diseases.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Immunization')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Immunization')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- ================================
      PHC II
-================================================== -->
+================================ -->
 
 <div class="semester">
 
 <div class="semester-title">
+📗 ND II — First Semester: PHC II
+</div>
 
-<h2>
-📗 Primary Health Care II
-</h2>
+<div class="topic-list">
+
+
+<div class="topic-card">
+
+<h3>
+1. Community Health Nursing
+</h3>
 
 <p>
-ND II • First Semester • NUR 212
+The role of the nurse in promoting health
+within the community.
 </p>
 
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Community Health Nursing')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Community Health Nursing')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
 </div>
 
 
-<div id="phc2Topics"></div>
+<div class="topic-card">
+
+<h3>
+2. Community Diagnosis
+</h3>
+
+<p>
+Identification and assessment of health
+problems within a community.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Community Diagnosis')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Community Diagnosis')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+3. Home Visiting
+</h3>
+
+<p>
+Purpose, principles and procedures
+involved in home visits.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Home Visiting')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Home Visiting')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+4. School Health Services
+</h3>
+
+<p>
+Health promotion, disease prevention and
+nursing services provided in schools.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('School Health Services')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('School Health Services')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+5. Environmental Health
+</h3>
+
+<p>
+Environmental factors affecting health
+and methods of preventing environmental
+health problems.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Environmental Health')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Environmental Health')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="topic-card">
+
+<h3>
+6. Family Health
+</h3>
+
+<p>
+Family-centred approaches to health
+promotion and disease prevention.
+</p>
+
+<div class="buttons">
+
+<button
+class="topic-button"
+onclick="openNote('Family Health')">
+
+📖 Read Note
+
+</button>
+
+<button
+class="topic-button quiz-button"
+onclick="openQuiz('Family Health')">
+
+📝 Take Quiz
+
+</button>
+
+</div>
 
 </div>
 
 
 </div>
 
+</div>
+
+</div>
 
 
 <footer>
@@ -377,280 +754,32 @@ OGCONS Study Hub © 2026
 </footer>
 
 
-
 <script>
 
+function openNote(topic) {
 
-const phc1Topics = [
-
-{
-    number: 1,
-    name: "Introduction to Primary Health Care",
-    description:
-        "Historical perspectives, philosophy, concepts, principles, organization and scope of PHC in Nigeria."
-},
-
-{
-    number: 2,
-    name: "The Community: Structure and Functions",
-    description:
-        "Community definition, family patterns, leadership, decision-making, community functions and health needs."
-},
-
-{
-    number: 3,
-    name: "Cadre of Health Workers in PHC",
-    description:
-        "Categories, roles and collaborative responsibilities of health workers in Primary Health Care."
-},
-
-{
-    number: 4,
-    name: "Community Mobilization",
-    description:
-        "Community participation, advocacy, group dynamics, committees and the mobilization process."
-},
-
-{
-    number: 5,
-    name: "Community Diagnosis",
-    description:
-        "Community diagnosis, situation analysis, methods, steps and instruments."
-},
-
-{
-    number: 6,
-    name: "Health Education",
-    description:
-        "Health education, behaviour change communication, teaching, counselling and communication skills."
-},
-
-{
-    number: 7,
-    name: "Clinical Skills in Primary Health Care",
-    description:
-        "History taking, physical examination, standing orders, reporting, recording and diagnostic techniques."
-}
-
-];
-
-
-const phc2Topics = [
-
-{
-    number: 1,
-    name: "Components of Primary Health Care",
-    description:
-        "PHC components, nutritional assessment, safe water, sanitation and vital statistics."
-},
-
-{
-    number: 2,
-    name: "Immunization Against Major Communicable Diseases",
-    description:
-        "Immunization, National Programme on Immunization, cold chain and improving immunization coverage."
-},
-
-{
-    number: 3,
-    name: "Prevention and Control of Endemic and Epidemic Diseases",
-    description:
-        "Epidemiology, communicable diseases, disease surveillance, notification and community disease control."
-},
-
-{
-    number: 4,
-    name: "Promotion of Mental Health",
-    description:
-        "Mental health, mental disability, common mental conditions, counselling and community mental health."
-},
-
-{
-    number: 5,
-    name: "Maternal and Child Health Services",
-    description:
-        "Antenatal, intranatal and postnatal care, newborn care, family planning and child health."
-},
-
-{
-    number: 6,
-    name: "Provision of Essential Drugs and Supplies",
-    description:
-        "Essential drugs, rational drug use, drug revolving fund, pharmacovigilance and drug management."
-},
-
-{
-    number: 7,
-    name: "Oral Hygiene and Eye Care",
-    description:
-        "Oral hygiene, dental problems, oral care, eye care, prevention and referral."
-},
-
-{
-    number: 8,
-    name: "Adolescence and Their Problems",
-    description:
-        "Adolescent development, health and social problems, counselling and adolescent-friendly services."
-},
-
-{
-    number: 9,
-    name: "Referral System in PHC",
-    description:
-        "Referral systems, referral pathways, cases for referral, forms and evaluation."
-},
-
-{
-    number: 10,
-    name: "Care of the Aged in the Community",
-    description:
-        "Ageing, needs of older people, community nursing care, resources and health education."
-},
-
-{
-    number: 11,
-    name: "Care of the Physically and Mentally Challenged",
-    description:
-        "Disability, handicap, community care and support for people with physical and mental challenges."
-},
-
-{
-    number: 12,
-    name: "Management of Occupational Health",
-    description:
-        "Occupational health, hazards, occupational health nursing, legislation and prevention."
-},
-
-{
-    number: 13,
-    name: "Training",
-    description:
-        "Training needs assessment, teaching and learning, training methods, implementation and evaluation."
-},
-
-{
-    number: 14,
-    name: "Management in Primary Health Care",
-    description:
-        "Management principles, resources, budgeting, health committees, planning, monitoring and PHC information systems."
-}
-
-];
-
-
-
-function displayTopics(
-    containerId,
-    topics,
-    course
-) {
-
-    const container =
-        document.getElementById(containerId);
-
-    container.innerHTML = "";
-
-    topics.forEach(function(topic) {
-
-        const card =
-            document.createElement("div");
-
-        card.className =
-            "topic-card";
-
-        card.innerHTML = `
-
-            <div class="topic-number">
-                ${topic.number}
-            </div>
-
-            <div class="topic-content">
-
-                <h3>
-                    ${escapeHTML(topic.name)}
-                </h3>
-
-                <p>
-                    ${escapeHTML(topic.description)}
-                </p>
-
-            </div>
-
-            <button
-                class="topic-button"
-                onclick='openTopic(
-                    ${JSON.stringify(course)},
-                    ${JSON.stringify(topic.name)}
-                )'>
-
-                Open →
-
-            </button>
-
-        `;
-
-        container.appendChild(card);
-
-    });
+window.location.href =
+"phc-note.html?topic=" +
+encodeURIComponent(topic);
 
 }
 
 
+function openQuiz(topic) {
 
-function openTopic(course, topic) {
-
-    window.location.href =
-        "phc-note.html?course=" +
-        encodeURIComponent(course) +
-        "&topic=" +
-        encodeURIComponent(topic);
+window.location.href =
+"phc-quiz.html?topic=" +
+encodeURIComponent(topic);
 
 }
-
 
 
 function goBack() {
 
-    window.location.href =
-        "dashboard.html";
+window.location.href =
+"dashboard.html";
 
 }
-
-
-
-function escapeHTML(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-    return String(value)
-
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-
-
-displayTopics(
-    "phc1Topics",
-    phc1Topics,
-    "Primary Health Care I"
-);
-
-displayTopics(
-    "phc2Topics",
-    phc2Topics,
-    "Primary Health Care II"
-);
-
 
 </script>
 
