@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>
+OGCONS Study Hub - Anatomy & Physiology
+</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
+
+    color: #172033;
+}
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #14b8a6
+        );
+
+    color: white;
+
+    padding: 22px 20px;
+}
+
+.header-content {
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.logo {
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+.back-button {
+
+    border: none;
+
+    background: white;
+
+    color: #2563eb;
+
+    padding: 10px 18px;
+
+    border-radius: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.container {
+
+    max-width: 950px;
+
+    margin: auto;
+
+    padding: 35px 20px;
+}
+
+.topic-header {
+
+    background: white;
+
+    padding: 35px 25px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.08);
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.topic-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 15px;
+}
+
+.topic-header h1 {
+
+    color: #2563eb;
+
+    font-size: 30px;
+
+    line-height: 1.3;
+
+    margin-bottom: 10px;
+}
+
+.topic-header p {
+
+    color: #617568;
+
+    line-height: 1.6;
+}
+
+.actions {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.action-card {
+
+    background: white;
+
+    padding: 28px 20px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
+
+    text-align: center;
+}
+
+.action-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 12px;
+}
+
+.action-card h2 {
+
+    margin-bottom: 8px;
+
+    font-size: 20px;
+}
+
+.action-card p {
+
+    color: #617568;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+.action-button {
+
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.action-button:hover {
+
+    background: #1d4ed8;
+}
+
+#noteSection {
+
+    display: none;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.08);
+
+    margin-top: 25px;
+}
+
+#noteSection h2 {
+
+    color: #2563eb;
+
+    margin-bottom: 25px;
+
+    font-size: 26px;
+}
+
+.note-content {
+
+    line-height: 1.85;
+
+    color: #26382d;
+
+    font-size: 16px;
+}
+
+.note-content h3 {
+
+    color: #2563eb;
+
+    margin-top: 30px;
+
+    margin-bottom: 12px;
+
+    font-size: 21px;
+}
+
+.note-content h4 {
+
+    color: #1e40af;
+
+    margin-top: 20px;
+
+    margin-bottom: 8px;
+}
+
+.note-content p {
+
+    margin-bottom: 15px;
+}
+
+.note-content ul {
+
+    margin-left: 25px;
+
+    margin-bottom: 18px;
+}
+
+.note-content li {
+
+    margin-bottom: 9px;
+}
+
+.message {
+
+    text-align: center;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
+}
+
+.message h2 {
+
+    color: #2563eb;
+
+    margin-bottom: 10px;
+}
+
+.message p {
+
+    color: #617568;
+
+    line-height: 1.6;
+}
+
+footer {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #718077;
+
+    font-size: 14px;
+}
+
+@media(max-width:700px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .actions {
+
+        grid-template-columns: 1fr;
+    }
+
+    #noteSection {
+
+        padding: 22px;
+    }
+
+    .topic-header h1 {
+
+        font-size: 25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+
+🩺 OGCONS Study Hub
+
+</div>
+
+
+<button
+    class="back-button"
+    onclick="goBack()">
+
+← Back to Topics
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="topic-header">
+
+<div class="topic-icon">
+
+🫀
+
+</div>
+
+
+<h1 id="topicTitle">
+
+Anatomy & Physiology
+
+</h1>
+
+
+<p>
+
+Study this topic and test your
+understanding with a quiz.
+
+</p>
+
+</div>
+
+
+
+<div class="actions">
+
+
+<div class="action-card">
+
+<div class="action-icon">
+
+📖
+
+</div>
+
+<h2>
+
+Read Note
+
+</h2>
+
+<p>
+
+Study the detailed note for
+this topic.
+
+</p>
+
+<button
+    class="action-button"
+    onclick="showNote()">
+
+Read Note
+
+</button>
+
+</div>
+
+
+
+<div class="action-card">
+
+<div class="action-icon">
+
+📝
+
+</div>
+
+<h2>
+
+Take Quiz
+
+</h2>
+
+<p>
+
+Test your knowledge and see
+how well you understand this topic.
+
+</p>
+
+<button
+    class="action-button"
+    onclick="takeQuiz()">
+
+Take Quiz
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+<div
+    id="noteSection">
+
+
+<h2>
+
+📖
+<span id="noteTitle">
+Topic Note
+</span>
+
+</h2>
+
+
+<div
+    class="note-content"
+    id="noteContent">
+
+</div>
+
+
+</div>
+
+
+
+<div
+    class="message"
+    id="messageBox">
+
+<h2>
+
+📚 Ready to Study?
+
+</h2>
+
+<p>
+
+Choose <strong>Read Note</strong>
+to study this topic or
+<strong>Take Quiz</strong>
+to test your knowledge.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<footer>
+
+OGCONS Study Hub © 2026
+
+</footer>
+
+
+
+<script>
+
+
+const urlParams =
+new URLSearchParams(
+    window.location.search
+);
+
+
+const topic =
+urlParams.get("topic");
+
+
+const topicTitle =
+document.getElementById(
+    "topicTitle"
+);
+
+
+const noteTitle =
+document.getElementById(
+    "noteTitle"
+);
+
+
+if (topic) {
+
+topicTitle.textContent =
+topic;
+
+noteTitle.textContent =
+topic;
+
+}
+
+
+function goBack() {
+
+window.location.href =
+"anatomy-topics.html";
+
+}
+
+
+function takeQuiz() {
+
+if (!topic) {
+
+alert(
+"No topic was selected."
+);
+
+return;
+
+}
+
+window.location.href =
+"anatomy-quiz.html?topic=" +
+encodeURIComponent(topic);
+
+}
+
+
+function showNote() {
+
+const noteSection =
+document.getElementById(
+"noteSection"
+);
+
+const messageBox =
+document.getElementById(
+"messageBox"
+);
+
+const noteContent =
+document.getElementById(
+"noteContent"
+);
+
+
+noteContent.innerHTML =
+getNote(topic);
+
+
+noteSection.style.display =
+"block";
+
+messageBox.style.display =
+"none";
+
+noteSection.scrollIntoView({
+
+behavior: "smooth"
+
+});
+
+}
+
+
+function getNote(topic) {
+
+
+const notes = {
+
+
+"Introduction to Anatomy": `
+
+<h3>Introduction</h3>
+
+<p>
+Anatomy is the branch of science that studies
+the structure of the human body. It describes
+the size, shape, position and relationship of
+the different parts of the body.
+</p>
+
+<p>
+Physiology is the study of how the different
+parts of the body function and work together
+to maintain life.
+</p>
+
+<h3>Branches of Anatomy</h3>
+
+<ul>
+
+<li>
+<strong>Gross anatomy:</strong> study of body
+structures that can be seen with the naked eye.
+</li>
+
+<li>
+<strong>Microscopic anatomy:</strong> study of
+structures that require a microscope.
+</li>
+
+<li>
+<strong>Histology:</strong> study of tissues.
+</li>
+
+<li>
+<strong>Cytology:</strong> study of cells.
+</li>
+
+</ul>
+
+<h3>Levels of Organisation</h3>
+
+<p>
+The human body is organised from simple
+structures to more complex structures.
+</p>
+
+<ul>
+
+<li>Cell</li>
+
+<li>Tissue</li>
+
+<li>Organ</li>
+
+<li>Organ system</li>
+
+<li>Organism</li>
+
+</ul>
+
+<h3>Anatomical Position</h3>
+
+<p>
+The standard anatomical position is standing
+upright, facing forward, with the arms beside
+the body, palms facing forward and feet pointing
+forward.
+</p>
+
+<h3>Directional Terms</h3>
+
+<ul>
+
+<li>
+<strong>Superior:</strong> toward the head.
+</li>
+
+<li>
+<strong>Inferior:</strong> toward the feet.
+</li>
+
+<li>
+<strong>Anterior:</strong> toward the front.
+</li>
+
+<li>
+<strong>Posterior:</strong> toward the back.
+</li>
+
+<li>
+<strong>Medial:</strong> toward the midline.
+</li>
+
+<li>
+<strong>Lateral:</strong> away from the midline.
+</li>
+
+<li>
+<strong>Proximal:</strong> nearer to the point
+of attachment.
+</li>
+
+<li>
+<strong>Distal:</strong> farther from the point
+of attachment.
+</li>
+
+</ul>
+
+<h3>Body Planes</h3>
+
+<ul>
+
+<li>
+<strong>Sagittal plane:</strong> divides the body
+into right and left portions.
+</li>
+
+<li>
+<strong>Frontal plane:</strong> divides the body
+into anterior and posterior portions.
+</li>
+
+<li>
+<strong>Transverse plane:</strong> divides the
+body into upper and lower portions.
+</li>
+
+</ul>
+
+<h3>Body Cavities</h3>
+
+<ul>
+
+<li>Cranial cavity</li>
+
+<li>Thoracic cavity</li>
+
+<li>Abdominal cavity</li>
+
+<li>Pelvic cavity</li>
+
+</ul>
+
+<h3>Importance to Nursing</h3>
+
+<p>
+Knowledge of anatomy and physiology helps
+nurses understand normal body functions,
+recognise abnormalities, understand diseases,
+administer care correctly and communicate
+effectively with other healthcare professionals.
+</p>
+
+`,
+
+
+
+"The Musculoskeletal System": `
+
+<h3>Introduction</h3>
+
+<p>
+The musculoskeletal system consists mainly of
+the bones, joints and muscles. It provides
+support, protection, movement and stability
+for the body.
+</p>
+
+<h3>Functions of the Skeleton</h3>
+
+<ul>
+
+<li>Provides support for the body.</li>
+
+<li>Protects internal organs.</li>
+
+<li>Allows movement with muscles.</li>
+
+<li>Stores minerals such as calcium and phosphorus.</li>
+
+<li>Produces blood cells in bone marrow.</li>
+
+</ul>
+
+<h3>Types of Bones</h3>
+
+<ul>
+
+<li>Long bones</li>
+
+<li>Short bones</li>
+
+<li>Flat bones</li>
+
+<li>Irregular bones</li>
+
+</ul>
+
+<h3>Major Bones</h3>
+
+<p>
+Important bones include the skull, vertebral
+column, ribs, sternum, clavicle, scapula,
+humerus, radius, ulna, pelvis, femur, tibia
+and fibula.
+</p>
+
+<h3>Joints</h3>
+
+<p>
+A joint is the place where two or more bones
+meet. Joints allow movement and provide
+stability.
+</p>
+
+<h3>Muscles</h3>
+
+<ul>
+
+<li>
+<strong>Skeletal muscle:</strong> attached to
+bones and mainly responsible for voluntary
+movement.
+</li>
+
+<li>
+<strong>Smooth muscle:</strong> found in internal
+organs and works involuntarily.
+</li>
+
+<li>
+<strong>Cardiac muscle:</strong> found in the
+heart and contracts involuntarily.
+</li>
+
+</ul>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Understanding the musculoskeletal system helps
+nurses assess mobility, fractures, joint problems,
+muscle weakness, posture and physical activity.
+</p>
+
+`,
+
+
+
+"Blood and Cardiovascular System": `
+
+<h3>Introduction</h3>
+
+<p>
+The cardiovascular system consists of the heart,
+blood and blood vessels. It circulates blood
+throughout the body.
+</p>
+
+<h3>Blood</h3>
+
+<p>
+Blood is a specialised connective tissue that
+transports substances around the body.
+</p>
+
+<h4>Main Components</h4>
+
+<ul>
+
+<li>Plasma</li>
+
+<li>Red blood cells</li>
+
+<li>White blood cells</li>
+
+<li>Platelets</li>
+
+</ul>
+
+<h3>Functions of Blood</h3>
+
+<ul>
+
+<li>Transport of oxygen.</li>
+
+<li>Transport of nutrients.</li>
+
+<li>Removal of waste products.</li>
+
+<li>Defence against infection.</li>
+
+<li>Blood clotting.</li>
+
+<li>Regulation of body temperature.</li>
+
+</ul>
+
+<h3>The Heart</h3>
+
+<p>
+The heart is a muscular organ that pumps blood
+through the pulmonary and systemic circulation.
+</p>
+
+<h4>Chambers</h4>
+
+<ul>
+
+<li>Right atrium</li>
+
+<li>Right ventricle</li>
+
+<li>Left atrium</li>
+
+<li>Left ventricle</li>
+
+</ul>
+
+<h3>Blood Vessels</h3>
+
+<ul>
+
+<li>
+<strong>Arteries:</strong> carry blood away
+from the heart.
+</li>
+
+<li>
+<strong>Veins:</strong> carry blood toward
+the heart.
+</li>
+
+<li>
+<strong>Capillaries:</strong> allow exchange of
+materials between blood and tissues.
+</li>
+
+</ul>
+
+<h3>Circulation</h3>
+
+<p>
+Pulmonary circulation carries blood between the
+heart and lungs, while systemic circulation
+carries blood between the heart and the rest
+of the body.
+</p>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Knowledge of the cardiovascular system is
+important when assessing pulse, blood pressure,
+circulation, heart sounds and cardiovascular
+conditions.
+</p>
+
+`,
+
+
+
+"The Respiratory System": `
+
+<h3>Introduction</h3>
+
+<p>
+The respiratory system is responsible for
+breathing and gas exchange. It supplies oxygen
+to the body and removes carbon dioxide.
+</p>
+
+<h3>Major Structures</h3>
+
+<ul>
+
+<li>Nose and nasal cavity</li>
+
+<li>Pharynx</li>
+
+<li>Larynx</li>
+
+<li>Trachea</li>
+
+<li>Bronchi</li>
+
+<li>Bronchioles</li>
+
+<li>Lungs</li>
+
+<li>Alveoli</li>
+
+</ul>
+
+<h3>Functions</h3>
+
+<ul>
+
+<li>Oxygen intake.</li>
+
+<li>Carbon dioxide removal.</li>
+
+<li>Helps regulate blood pH.</li>
+
+<li>Produces sound through the larynx.</li>
+
+</ul>
+
+<h3>Mechanism of Breathing</h3>
+
+<p>
+During inspiration, the diaphragm contracts
+and moves downward. The volume of the thoracic
+cavity increases and air enters the lungs.
+</p>
+
+<p>
+During expiration, the diaphragm relaxes and
+moves upward. Thoracic volume decreases and
+air leaves the lungs.
+</p>
+
+<h3>Gas Exchange</h3>
+
+<p>
+Gas exchange occurs mainly in the alveoli.
+Oxygen moves from the alveolar air into the
+blood, while carbon dioxide moves from the
+blood into the alveoli.
+</p>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Nurses assess respiratory rate, depth, rhythm,
+oxygen saturation, breath sounds and signs of
+respiratory distress.
+</p>
+
+`,
+
+
+
+"The Digestive System": `
+
+<h3>Introduction</h3>
+
+<p>
+The digestive system breaks food down into
+smaller substances that can be absorbed and
+used by the body.
+</p>
+
+<h3>Major Organs</h3>
+
+<ul>
+
+<li>Mouth</li>
+
+<li>Pharynx</li>
+
+<li>Oesophagus</li>
+
+<li>Stomach</li>
+
+<li>Small intestine</li>
+
+<li>Large intestine</li>
+
+<li>Rectum</li>
+
+<li>Anus</li>
+
+</ul>
+
+<h3>Accessory Organs</h3>
+
+<ul>
+
+<li>Liver</li>
+
+<li>Gallbladder</li>
+
+<li>Pancreas</li>
+
+</ul>
+
+<h3>Digestive Processes</h3>
+
+<ul>
+
+<li>Ingestion</li>
+
+<li>Digestion</li>
+
+<li>Absorption</li>
+
+<li>Assimilation</li>
+
+<li>Defecation</li>
+
+</ul>
+
+<h3>Small Intestine</h3>
+
+<p>
+Most digestion and absorption of nutrients
+occur in the small intestine. Its lining contains
+villi that increase the surface area available
+for absorption.
+</p>
+
+<h3>Liver</h3>
+
+<p>
+The liver performs many functions, including
+processing nutrients, producing bile and
+detoxifying various substances.
+</p>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Understanding digestion helps nurses care for
+patients with conditions such as diarrhoea,
+constipation, ulcers, intestinal obstruction
+and other gastrointestinal disorders.
+</p>
+
+`,
+
+
+
+"The Integumentary System": `
+
+<h3>Introduction</h3>
+
+<p>
+The integumentary system consists mainly of
+the skin, hair, nails and associated glands.
+The skin is the largest organ of the human body.
+</p>
+
+<h3>Layers of the Skin</h3>
+
+<ul>
+
+<li>
+<strong>Epidermis:</strong> outer layer of the skin.
+</li>
+
+<li>
+<strong>Dermis:</strong> deeper layer containing
+blood vessels, nerves, glands and hair follicles.
+</li>
+
+<li>
+<strong>Subcutaneous layer:</strong> contains
+fat and connective tissue beneath the skin.
+</li>
+
+</ul>
+
+<h3>Functions</h3>
+
+<ul>
+
+<li>Protection</li>
+
+<li>Temperature regulation</li>
+
+<li>Sensation</li>
+
+<li>Prevention of excessive water loss</li>
+
+<li>Excretion of some substances through sweat</li>
+
+</ul>
+
+<h3>Skin Appendages</h3>
+
+<ul>
+
+<li>Hair</li>
+
+<li>Nails</li>
+
+<li>Sweat glands</li>
+
+<li>Sebaceous glands</li>
+
+</ul>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Nurses assess the skin for colour, temperature,
+moisture, lesions, wounds, pressure injuries
+and other abnormalities.
+</p>
+
+`,
+
+
+
+"The Excretory System": `
+
+<h3>Introduction</h3>
+
+<p>
+The excretory system removes metabolic waste
+products from the body and helps maintain the
+internal environment.
+</p>
+
+<h3>Urinary System</h3>
+
+<p>
+The urinary system consists of the kidneys,
+ureters, urinary bladder and urethra.
+</p>
+
+<h3>Kidneys</h3>
+
+<p>
+The kidneys filter the blood and form urine.
+They help regulate water balance, electrolytes
+and acid-base balance.
+</p>
+
+<h3>Formation of Urine</h3>
+
+<ul>
+
+<li>Filtration</li>
+
+<li>Reabsorption</li>
+
+<li>Secretion</li>
+
+</ul>
+
+<h3>Ureters</h3>
+
+<p>
+The ureters transport urine from the kidneys
+to the urinary bladder.
+</p>
+
+<h3>Urinary Bladder</h3>
+
+<p>
+The urinary bladder temporarily stores urine
+before it is eliminated.
+</p>
+
+<h3>Urethra</h3>
+
+<p>
+The urethra carries urine from the bladder
+to the outside of the body.
+</p>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Nurses monitor urine amount, colour, appearance,
+frequency and other changes that may indicate
+problems with renal or urinary function.
+</p>
+
+`,
+
+
+
+"The Endocrine System Introduction": `
+
+<h3>Introduction</h3>
+
+<p>
+The endocrine system consists of glands that
+produce hormones. Hormones are chemical
+messengers that regulate many body processes.
+</p>
+
+<h3>Major Endocrine Glands</h3>
+
+<ul>
+
+<li>Hypothalamus</li>
+
+<li>Pituitary gland</li>
+
+<li>Thyroid gland</li>
+
+<li>Parathyroid glands</li>
+
+<li>Adrenal glands</li>
+
+<li>Pancreas</li>
+
+<li>Ovaries</li>
+
+<li>Testes</li>
+
+</ul>
+
+<h3>Functions of Hormones</h3>
+
+<ul>
+
+<li>Growth and development</li>
+
+<li>Metabolism</li>
+
+<li>Reproduction</li>
+
+<li>Stress response</li>
+
+<li>Blood glucose regulation</li>
+
+<li>Water and electrolyte balance</li>
+
+</ul>
+
+<h3>Examples</h3>
+
+<p>
+Insulin helps regulate blood glucose.
+Thyroid hormones influence metabolism.
+Adrenal hormones participate in stress
+responses and regulation of blood pressure.
+</p>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Knowledge of the endocrine system helps nurses
+understand conditions such as diabetes mellitus,
+thyroid disorders and hormonal abnormalities.
+</p>
+
+`,
+
+
+
+"The Female Reproductive System": `
+
+<h3>Introduction</h3>
+
+<p>
+The female reproductive system consists of
+organs involved in production of ova,
+fertilisation, pregnancy and childbirth.
+</p>
+
+<h3>Major Organs</h3>
+
+<ul>
+
+<li>Ovaries</li>
+
+<li>Fallopian tubes</li>
+
+<li>Uterus</li>
+
+<li>Cervix</li>
+
+<li>Vagina</li>
+
+</ul>
+
+<h3>Ovaries</h3>
+
+<p>
+The ovaries produce ova and female reproductive
+hormones such as oestrogen and progesterone.
+</p>
+
+<h3>Fallopian Tubes</h3>
+
+<p>
+The fallopian tubes transport the ovum from
+the ovary toward the uterus. Fertilisation
+commonly occurs in the fallopian tube.
+</p>
+
+<h3>Uterus</h3>
+
+<p>
+The uterus is the organ where implantation
+and development of the embryo and fetus occur.
+</p>
+
+<h3>Menstrual Cycle</h3>
+
+<p>
+The menstrual cycle involves coordinated
+changes in the ovaries and uterus under hormonal
+control.
+</p>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Knowledge of the female reproductive system
+is important in maternal health, reproductive
+health, family planning and obstetric nursing.
+</p>
+
+`,
+
+
+
+"The Male Reproductive System": `
+
+<h3>Introduction</h3>
+
+<p>
+The male reproductive system produces sperm
+and male reproductive hormones and provides
+the structures needed for reproduction.
+</p>
+
+<h3>Major Organs</h3>
+
+<ul>
+
+<li>Testes</li>
+
+<li>Epididymis</li>
+
+<li>Vas deferens</li>
+
+<li>Seminal vesicles</li>
+
+<li>Prostate gland</li>
+
+<li>Penis</li>
+
+<li>Urethra</li>
+
+</ul>
+
+<h3>Testes</h3>
+
+<p>
+The testes produce sperm and testosterone.
+</p>
+
+<h3>Epididymis</h3>
+
+<p>
+The epididymis is where sperm mature and are
+temporarily stored.
+</p>
+
+<h3>Accessory Glands</h3>
+
+<p>
+The seminal vesicles, prostate gland and other
+accessory glands contribute fluids that form
+semen.
+</p>
+
+<h3>Functions</h3>
+
+<ul>
+
+<li>Sperm production</li>
+
+<li>Hormone production</li>
+
+<li>Transport of sperm</li>
+
+<li>Delivery of sperm during reproduction</li>
+
+</ul>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Understanding the male reproductive system is
+important when caring for patients with
+reproductive, urinary and sexual health problems.
+</p>
+
+`,
+
+
+
+"Foetal Development": `
+
+<h3>Introduction</h3>
+
+<p>
+Foetal development refers to the growth and
+development of the unborn baby from early
+pregnancy until birth.
+</p>
+
+<h3>Fertilisation</h3>
+
+<p>
+Fertilisation occurs when a sperm cell combines
+with an ovum to form a zygote.
+</p>
+
+<h3>Implantation</h3>
+
+<p>
+After early cell division, the developing
+conceptus reaches the uterus and implants into
+the uterine lining.
+</p>
+
+<h3>Embryonic Period</h3>
+
+<p>
+The embryonic period is an important stage
+during which major organs and body structures
+begin to develop.
+</p>
+
+<h3>Foetal Period</h3>
+
+<p>
+During the foetal period, the developing fetus
+mainly grows and undergoes further maturation
+of its organs and body systems.
+</p>
+
+<h3>Placenta</h3>
+
+<p>
+The placenta provides an important interface
+between the mother and developing fetus. It
+allows exchange of oxygen, nutrients and waste
+products and also produces important hormones.
+</p>
+
+<h3>Umbilical Cord</h3>
+
+<p>
+The umbilical cord connects the fetus to the
+placenta and contains blood vessels that support
+maternal-fetal exchange.
+</p>
+
+<h3>Nursing Importance</h3>
+
+<p>
+Knowledge of foetal development helps nurses
+understand antenatal care, fetal growth,
+pregnancy complications and maternal-child
+health.
+</p>
+
+`
+
+};
+
+
+return notes[topic] ||
+
+`
+
+<h3>Topic Not Available</h3>
+
+<p>
+The note for this topic has not yet been added.
+</p>
+
+`;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
