@@ -3,259 +3,376 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>OGCONS Study Hub - Admin</title>
+    <title>
+        OGCONS Study Hub - Admin Dashboard
+    </title>
 
-<style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-* {
-    box-sizing: border-box;
-}
+    <style>
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #172033;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-header {
-    background: #0b5ed7;
-    color: white;
-    padding: 20px;
-}
+        body {
 
-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
+            font-family: Arial, sans-serif;
 
-header p {
-    margin: 6px 0 0;
-}
+            min-height: 100vh;
 
-.container {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 20px;
-}
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
 
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
-}
+            color: #172033;
+        }
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 6px;
-}
+        header {
 
-input,
-textarea,
-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccd3df;
-    border-radius: 8px;
-    font-size: 15px;
-}
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
 
-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
+            color: white;
 
-button {
-    margin-top: 20px;
-    padding: 13px 22px;
-    border: none;
-    border-radius: 8px;
-    background: #0b5ed7;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
+            padding: 25px 20px;
+        }
 
-button:hover {
-    opacity: 0.9;
-}
+        .header-content {
 
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
+            max-width: 1100px;
 
-.logout {
-    background: #dc3545;
-    float: right;
-    margin-top: -45px;
-}
+            margin: auto;
 
-.topic-help {
-    margin-top: 6px;
-    color: #6c757d;
-    font-size: 13px;
-}
+            display: flex;
 
-#message {
-    margin-top: 15px;
-    font-weight: bold;
-}
+            justify-content: space-between;
 
-.management-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
+            align-items: center;
 
-.management-header h2 {
-    margin: 0;
-}
+            gap: 15px;
+        }
 
-.refresh-button {
-    background: #198754;
-    margin-top: 0;
-}
+        .logo {
 
-.filters {
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    gap: 15px;
-    margin-top: 20px;
-}
+            font-size: 23px;
 
-.filters label {
-    margin-top: 0;
-}
+            font-weight: bold;
+        }
 
-.question-count {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #0b5ed7;
-}
+        .logout {
 
-.questions-list {
-    margin-top: 20px;
-}
+            border: none;
 
-.question-item {
-    border: 1px solid #dce2ea;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 15px;
-    background: #fafcff;
-}
+            background: white;
 
-.question-number {
-    font-weight: bold;
-    color: #0b5ed7;
-}
+            color: #18a058;
 
-.question-text {
-    font-size: 17px;
-    font-weight: bold;
-    line-height: 1.5;
-    margin: 10px 0;
-}
+            padding: 10px 18px;
 
-.question-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 10px 0;
-}
+            border-radius: 20px;
 
-.badge {
-    background: #e8f1ff;
-    color: #0b5ed7;
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: bold;
-}
+            font-weight: bold;
 
-.options-list {
-    margin-top: 15px;
-    line-height: 1.8;
-}
+            cursor: pointer;
+        }
 
-.correct-option {
-    color: #198754;
-    font-weight: bold;
-}
+        .container {
 
-.explanation-box {
-    background: #eef6ff;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 15px;
-    line-height: 1.5;
-}
+            max-width: 1100px;
 
-.question-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 15px;
-}
+            margin: auto;
 
-.question-actions button {
-    margin-top: 0;
-    padding: 10px 15px;
-    font-size: 14px;
-}
+            padding: 30px 20px;
+        }
 
-.edit-button {
-    background: #ffc107;
-    color: #172033;
-}
+        .page-title {
 
-.delete-button {
-    background: #dc3545;
-}
+            text-align: center;
 
-.cancel-button {
-    background: #6c757d;
-}
+            margin-bottom: 25px;
+        }
 
-.save-edit-button {
-    background: #198754;
-}
+        .page-title h1 {
 
-.loading-text,
-.empty-text {
-    text-align: center;
-    padding: 30px;
-    color: #6c757d;
-}
+            color: #18a058;
 
-.edit-form {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #dce2ea;
-}
+            margin-bottom: 8px;
+        }
 
-@media (max-width: 800px) {
+        .page-title p {
 
-    .filters {
-        grid-template-columns: 1fr;
-    }
+            color: #667085;
+        }
 
-}
+        .card {
 
-</style>
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+
+            color: #18a058;
+
+            margin-bottom: 20px;
+        }
+
+        label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        select,
+        textarea,
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 2px solid #dce4df;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            margin-bottom: 18px;
+
+            outline: none;
+        }
+
+        select:focus,
+        textarea:focus,
+        input:focus {
+
+            border-color: #18a058;
+        }
+
+        textarea {
+
+            min-height: 120px;
+
+            resize: vertical;
+        }
+
+        .options-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .option-box {
+
+            background: #f8fbf9;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid #e0e8e3;
+        }
+
+        .option-box input {
+
+            margin-bottom: 0;
+        }
+
+        .correct-box {
+
+            background: #eefaf3;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            margin-top: 5px;
+
+            margin-bottom: 20px;
+        }
+
+        .save-button {
+
+            width: 100%;
+
+            border: none;
+
+            background: #18a058;
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+
+            background: #117d45;
+        }
+
+        .message {
+
+            display: none;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-weight: bold;
+        }
+
+        .success {
+
+            background: #d1e7dd;
+
+            color: #0f5132;
+        }
+
+        .error {
+
+            background: #f8d7da;
+
+            color: #842029;
+        }
+
+        .topic-info {
+
+            background: #eef8ff;
+
+            border-left: 4px solid #0b5ed7;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            line-height: 1.5;
+        }
+
+        .questions-card {
+
+            display: none;
+        }
+
+        .question-item {
+
+            border: 1px solid #dce4df;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            margin-bottom: 15px;
+
+            background: #fafcfb;
+        }
+
+        .question-item h3 {
+
+            color: #18a058;
+
+            margin-bottom: 8px;
+
+            font-size: 16px;
+        }
+
+        .question-item p {
+
+            line-height: 1.5;
+
+            margin-bottom: 8px;
+        }
+
+        .badge {
+
+            display: inline-block;
+
+            background: #e7fff0;
+
+            color: #117d45;
+
+            padding: 5px 10px;
+
+            border-radius: 15px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #718077;
+
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+
+            .header-content {
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .options-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -265,21 +382,23 @@ button:disabled {
 
 <header>
 
-    <h1>
-        🏥 OGCONS Study Hub
-    </h1>
+    <div class="header-content">
 
-    <p>
-        Admin Dashboard
-    </p>
+        <div class="logo">
 
-    <button
-        class="logout"
-        onclick="logout()">
+            🩺 OGCONS Study Hub — Admin
 
-        Logout
+        </div>
 
-    </button>
+        <button
+            class="logout"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
 
 </header>
 
@@ -288,328 +407,303 @@ button:disabled {
 <div class="container">
 
 
-<!-- =====================================================
-     ADD QUESTION
-===================================================== -->
+    <div class="page-title">
 
-<div class="card">
+        <h1>
+            Admin Dashboard
+        </h1>
 
-    <h2>
-        ➕ Add New Question
-    </h2>
-
-
-    <label>
-        Course
-    </label>
-
-    <select id="course">
-
-        <option value="Microbiology">
-            Microbiology
-        </option>
-
-        <option value="Anatomy & Physiology">
-            Anatomy & Physiology
-        </option>
-
-        <option value="Pharmacology">
-            Pharmacology
-        </option>
-
-        <option value="Foundations of Nursing">
-            Foundations of Nursing
-        </option>
-
-        <option value="Medical-Surgical Nursing">
-            Medical-Surgical Nursing
-        </option>
-
-        <option value="Nutrition">
-            Nutrition
-        </option>
-
-        <option value="Psychology">
-            Psychology
-        </option>
-
-        <option value="Nursing Practice">
-            Nursing Practice
-        </option>
-
-        <option value="Chemistry">
-            Chemistry
-        </option>
-
-    </select>
-
-
-
-    <label>
-        Topic
-    </label>
-
-    <select id="topic">
-    </select>
-
-    <div class="topic-help">
-
-        Select the exact topic where this question belongs.
+        <p>
+            Add and manage quiz questions for students.
+        </p>
 
     </div>
 
 
 
-    <label>
-        Question
-    </label>
-
-    <textarea
-        id="question"
-        placeholder="Enter your question">
-    </textarea>
+    <div
+        id="message"
+        class="message">
+    </div>
 
 
 
-    <label>
-        Option A
-    </label>
+    <!-- ==========================================
+         ADD QUESTION
+    =========================================== -->
 
-    <input
-        id="option_a"
-        type="text"
-        placeholder="Enter option A">
-
-
-
-    <label>
-        Option B
-    </label>
-
-    <input
-        id="option_b"
-        type="text"
-        placeholder="Enter option B">
-
-
-
-    <label>
-        Option C
-    </label>
-
-    <input
-        id="option_c"
-        type="text"
-        placeholder="Enter option C">
-
-
-
-    <label>
-        Option D
-    </label>
-
-    <input
-        id="option_d"
-        type="text"
-        placeholder="Enter option D">
-
-
-
-    <label>
-        Correct Answer
-    </label>
-
-    <select id="correct_answer">
-
-        <option value="A">A</option>
-
-        <option value="B">B</option>
-
-        <option value="C">C</option>
-
-        <option value="D">D</option>
-
-    </select>
-
-
-
-    <label>
-        Explanation
-    </label>
-
-    <textarea
-        id="explanation"
-        placeholder="Enter explanation for the answer">
-    </textarea>
-
-
-
-    <button
-        id="addQuestionButton"
-        onclick="addQuestion()">
-
-        ➕ Add Question
-
-    </button>
-
-
-    <div id="message"></div>
-
-</div>
-
-
-
-<!-- =====================================================
-     QUESTION MANAGEMENT
-===================================================== -->
-
-<div class="card">
-
-    <div class="management-header">
+    <div class="card">
 
         <h2>
-            📚 Manage Questions
+            ➕ Add New Question
         </h2>
 
-        <button
-            class="refresh-button"
-            onclick="loadQuestions()">
 
-            🔄 Refresh
+        <!-- COURSE -->
+
+        <label for="course">
+
+            Select Course
+
+        </label>
+
+
+        <select
+            id="course"
+            onchange="courseChanged()">
+
+            <option value="">
+
+                -- Select Course --
+
+            </option>
+
+            <option value="Foundations of Nursing">
+
+                Foundations of Nursing
+
+            </option>
+
+            <option value="Pharmacology">
+
+                Pharmacology
+
+            </option>
+
+            <option value="Primary Health Care">
+
+                Primary Health Care (PHC)
+
+            </option>
+
+        </select>
+
+
+
+        <!-- TOPIC -->
+
+        <label for="topic">
+
+            Select Topic
+
+        </label>
+
+
+        <select
+            id="topic"
+            disabled>
+
+            <option value="">
+
+                -- Select Course First --
+
+            </option>
+
+        </select>
+
+
+
+        <div
+            id="topicInfo"
+            class="topic-info"
+            style="display:none;">
+
+        </div>
+
+
+
+        <!-- QUESTION -->
+
+        <label for="question">
+
+            Question
+
+        </label>
+
+
+        <textarea
+            id="question"
+            placeholder="Enter the question here...">
+        </textarea>
+
+
+
+        <!-- OPTIONS -->
+
+        <div class="options-grid">
+
+
+            <div class="option-box">
+
+                <label for="optionA">
+
+                    Option A
+
+                </label>
+
+                <input
+                    type="text"
+                    id="optionA"
+                    placeholder="Enter option A">
+
+            </div>
+
+
+
+            <div class="option-box">
+
+                <label for="optionB">
+
+                    Option B
+
+                </label>
+
+                <input
+                    type="text"
+                    id="optionB"
+                    placeholder="Enter option B">
+
+            </div>
+
+
+
+            <div class="option-box">
+
+                <label for="optionC">
+
+                    Option C
+
+                </label>
+
+                <input
+                    type="text"
+                    id="optionC"
+                    placeholder="Enter option C">
+
+            </div>
+
+
+
+            <div class="option-box">
+
+                <label for="optionD">
+
+                    Option D
+
+                </label>
+
+                <input
+                    type="text"
+                    id="optionD"
+                    placeholder="Enter option D">
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- CORRECT ANSWER -->
+
+        <div class="correct-box">
+
+            <label for="correctAnswer">
+
+                Correct Answer
+
+            </label>
+
+
+            <select
+                id="correctAnswer">
+
+                <option value="">
+
+                    -- Select Correct Answer --
+
+                </option>
+
+                <option value="A">
+                    A
+                </option>
+
+                <option value="B">
+                    B
+                </option>
+
+                <option value="C">
+                    C
+                </option>
+
+                <option value="D">
+                    D
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- EXPLANATION -->
+
+        <label for="explanation">
+
+            Explanation
+
+        </label>
+
+
+        <textarea
+            id="explanation"
+            placeholder="Explain why the correct answer is correct...">
+        </textarea>
+
+
+
+        <button
+            class="save-button"
+            onclick="addQuestion()">
+
+            💾 Save Question
 
         </button>
 
-    </div>
-
-
-
-    <div class="filters">
-
-
-        <div>
-
-            <label>
-                Filter by Course
-            </label>
-
-            <select
-                id="filterCourse"
-                onchange="updateFilterTopics(); loadQuestions();">
-
-                <option value="">
-                    All Courses
-                </option>
-
-                <option value="Microbiology">
-                    Microbiology
-                </option>
-
-                <option value="Anatomy & Physiology">
-                    Anatomy & Physiology
-                </option>
-
-                <option value="Pharmacology">
-                    Pharmacology
-                </option>
-
-                <option value="Foundations of Nursing">
-                    Foundations of Nursing
-                </option>
-
-                <option value="Medical-Surgical Nursing">
-                    Medical-Surgical Nursing
-                </option>
-
-                <option value="Nutrition">
-                    Nutrition
-                </option>
-
-                <option value="Psychology">
-                    Psychology
-                </option>
-
-                <option value="Nursing Practice">
-                    Nursing Practice
-                </option>
-
-                <option value="Chemistry">
-                    Chemistry
-                </option>
-
-            </select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Filter by Topic
-            </label>
-
-            <select
-                id="filterTopic"
-                onchange="loadQuestions()">
-
-                <option value="">
-                    All Topics
-                </option>
-
-            </select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Search
-            </label>
-
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Search questions..."
-                oninput="filterQuestions()">
-
-        </div>
 
     </div>
 
 
+
+    <!-- ==========================================
+         QUESTIONS
+    =========================================== -->
 
     <div
-        class="question-count"
-        id="questionCount">
+        class="card questions-card"
+        id="questionsCard">
 
-        Loading questions...
+        <h2>
+            📚 Questions in Selected Topic
+        </h2>
 
-    </div>
-
-
-
-    <div
-        class="questions-list"
-        id="questionsList">
-
-        <div class="loading-text">
-
-            Loading questions...
+        <div id="questionList">
 
         </div>
 
     </div>
-
-</div>
 
 
 </div>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<footer>
+
+    OGCONS Study Hub © 2026
+
+</footer>
+
 
 
 <script>
@@ -629,455 +723,155 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 const supabaseClient =
     window.supabase.createClient(
+
         SUPABASE_URL,
+
         SUPABASE_PUBLISHABLE_KEY
+
     );
 
 
 
 // =====================================================
-// COURSE TOPICS
+// PHC TOPICS
 // =====================================================
 
-const courseTopics = {
+const phcTopics = [
 
+    "Introduction to Primary Health Care",
 
-    "Microbiology": [
+    "The Community",
 
-        "Introduction to Microbiology",
+    "Cadre of health workers in PHC",
 
-        "Bacteria",
+    "Community Mobilization",
 
-        "Viruses",
+    "Community Diagnosis",
 
-        "Fungi",
+    "Health Education",
 
-        "Parasites",
+    "Components of Primary Health Care",
 
-        "Immunology",
+    "Immunization against major communicable diseases",
 
-        "Sterilization & Disinfection",
+    "Prevention and control of locally endemic and epidemic diseases",
 
-        "Healthcare-Associated Infections"
+    "Promotion of mental health",
 
-    ],
+    "Maternal and Child Health Services",
 
+    "Provision of essential drugs and supplies",
 
+    "Oral Hygiene and Eye Care",
 
-    "Anatomy & Physiology": [
+    "Adolescence and their problems",
 
-        "Anatomy and organisation of the body",
+    "Referral system in PHC",
 
-        "Physiological chemistry and processes",
+    "Care of the Aged in the Community",
 
-        "Cells and tissues",
+    "Management of Occupational Health",
 
-        "The blood",
+    "Management in Primary Health Care"
 
-        "The cardiovascular system",
-
-        "The lymphatic system",
-
-        "The nervous system",
-
-        "The special senses",
-
-        "The endocrine system",
-
-        "The respiratory system",
-
-        "Introduction to nutrition",
-
-        "The digestive system",
-
-        "The urinary system",
-
-        "The skin",
-
-        "Defence and immunity",
-
-        "The musculoskeletal system",
-
-        "Genetics and inheritance",
-
-        "The reproductive systems"
-
-    ],
-
-
-
-    // =================================================
-    // PHARMACOLOGY
-    // =================================================
-
-    "Pharmacology": [
-
-        "Introduction",
-
-        "Sources and Classification of Drugs",
-
-        "Preparation of Drugs",
-
-        "Routes of Drug Administration",
-
-        "Mechanism of Drug Action",
-
-        "National Drug Policy",
-
-        "Drugs Used in Management of Other Health Conditions",
-
-        "Patient Education and Counseling"
-
-    ],
-
-
-
-    // =================================================
-    // FOUNDATIONS OF NURSING
-    // =================================================
-
-    "Foundations of Nursing": [
-
-        "Introduction to Nursing",
-
-        "Health Care Institutions",
-
-        "Ethico-Legal Issues in Nursing",
-
-        "Tools of Nursing",
-
-        "Comfort and Safety Measures",
-
-        "Emergency Care",
-
-        "Administration of Drugs",
-
-        "Diagnostic Investigation",
-
-        "Aseptic Techniques",
-
-        "Unsafe Injection Safety",
-
-        "Introduction to Healthcare Waste",
-
-        "Legal Aspects of Nursing",
-
-        "Nursing Care of Patients with Feeding/Elimination Problems",
-
-        "Basic Life Support"
-
-    ],
-
-
-
-    "Medical-Surgical Nursing": [
-
-        "General Medical-Surgical Nursing"
-
-    ],
-
-
-
-    "Nutrition": [
-
-        "Introduction to Nutrition"
-
-    ],
-
-
-
-    "Psychology": [
-
-        "Introduction to Psychology"
-
-    ],
-
-
-
-    "Nursing Practice": [
-
-        "Introduction to Nursing Practice"
-
-    ],
-
-
-
-    "Chemistry": [
-
-        "Introduction to Chemistry"
-
-    ]
-
-};
+];
 
 
 
 // =====================================================
-// LOAD TOPICS
+// OTHER COURSE TOPICS
 // =====================================================
 
-function loadTopics() {
+// Keep these here so you can add or change them later.
+
+const foundationsTopics = [
+
+    "Introduction to Nursing",
+
+    "Nursing as a Profession",
+
+    "History of Nursing",
+
+    "Basic Nursing Concepts",
+
+    "Nursing Process",
+
+    "Admission and Discharge",
+
+    "Vital Signs",
+
+    "Bed Making",
+
+    "Personal Hygiene",
+
+    "Patient Comfort",
+
+    "Safety in Nursing",
+
+    "Infection Prevention and Control",
+
+    "Communication in Nursing",
+
+    "Health Assessment",
+
+    "Documentation and Reporting"
+
+];
 
 
-    const course =
-        document.getElementById(
-            "course"
-        ).value;
+const pharmacologyTopics = [
 
+    "Introduction to Pharmacology",
 
-    const topicSelect =
-        document.getElementById(
-            "topic"
-        );
+    "Drug Names",
 
+    "Drug Sources",
 
-    topicSelect.innerHTML = "";
+    "Drug Forms",
 
+    "Routes of Drug Administration",
 
-    const topics =
-        courseTopics[course] || [];
+    "Drug Absorption",
 
+    "Drug Distribution",
 
-    if (
-        topics.length === 0
-    ) {
+    "Drug Metabolism",
 
-        const option =
-            document.createElement(
-                "option"
-            );
+    "Drug Excretion",
 
-        option.value = "";
+    "Factors Affecting Drug Action",
 
-        option.textContent =
-            "No topics available";
+    "Adverse Drug Reactions",
 
-        topicSelect.appendChild(
-            option
-        );
+    "Drug Interactions",
 
-        return;
+    "Medication Safety"
 
-    }
-
-
-    topics.forEach(
-        function(topic) {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                topic;
-
-            option.textContent =
-                topic;
-
-            topicSelect.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-
-
-// =====================================================
-// UPDATE FILTER TOPICS
-// =====================================================
-
-function updateFilterTopics() {
-
-
-    const course =
-        document.getElementById(
-            "filterCourse"
-        ).value;
-
-
-    const topicSelect =
-        document.getElementById(
-            "filterTopic"
-        );
-
-
-    topicSelect.innerHTML = "";
-
-
-    const allOption =
-        document.createElement(
-            "option"
-        );
-
-    allOption.value = "";
-
-    allOption.textContent =
-        "All Topics";
-
-    topicSelect.appendChild(
-        allOption
-    );
-
-
-    if (!course) {
-
-        return;
-
-    }
-
-
-    const topics =
-        courseTopics[course] || [];
-
-
-    topics.forEach(
-        function(topic) {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                topic;
-
-            option.textContent =
-                topic;
-
-            topicSelect.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
+];
 
 
 
 // =====================================================
-// COURSE CHANGE
+// CHECK ADMIN LOGIN
 // =====================================================
 
-document
-    .getElementById("course")
-    .addEventListener(
-        "change",
-        loadTopics
-    );
-
-
-
-// =====================================================
-// CHECK ADMIN
-// =====================================================
-
-async function checkAdminAccess() {
-
+async function checkAdmin() {
 
     const {
-
         data: {
             user
         },
-
-        error: userError
-
+        error
     } =
         await supabaseClient
             .auth
             .getUser();
 
 
-    if (
-        userError ||
-        !user
-    ) {
+    if (error || !user) {
 
         window.location.href =
-            "index.html";
-
-        return false;
-
-    }
-
-
-    const {
-
-        data: admin,
-        error: adminError
-
-    } =
-        await supabaseClient
-
-            .from("admins")
-
-            .select("user_id")
-
-            .eq(
-                "user_id",
-                user.id
-            )
-
-            .maybeSingle();
-
-
-
-    if (adminError) {
-
-        document.body.innerHTML = `
-
-            <div style="
-                text-align:center;
-                padding:60px;
-                font-family:Arial;
-            ">
-
-                <h2>
-                    ⚠️ Unable to verify admin access
-                </h2>
-
-                <p>
-                    ${escapeHTML(
-                        adminError.message
-                    )}
-                </p>
-
-            </div>
-
-        `;
-
-        return false;
-
-    }
-
-
-    if (!admin) {
-
-        document.body.innerHTML = `
-
-            <div style="
-                text-align:center;
-                padding:60px;
-                font-family:Arial;
-            ">
-
-                <h2>
-                    🚫 Access Denied
-                </h2>
-
-                <p>
-                    You do not have permission
-                    to access the Admin Dashboard.
-                </p>
-
-            </div>
-
-        `;
+            "login.html";
 
         return false;
 
@@ -1091,55 +885,158 @@ async function checkAdminAccess() {
 
 
 // =====================================================
-// ADD QUESTION
+// COURSE CHANGED
 // =====================================================
 
-async function addQuestion() {
+function courseChanged() {
 
 
-    const message =
+    const course =
         document.getElementById(
-            "message"
+            "course"
+        ).value;
+
+
+    const topicSelect =
+        document.getElementById(
+            "topic"
         );
 
 
-    const button =
+    const topicInfo =
         document.getElementById(
-            "addQuestionButton"
+            "topicInfo"
         );
 
 
+    topicSelect.innerHTML = `
 
-    const {
+        <option value="">
 
-        data: {
-            user
-        },
+            -- Select Topic --
 
-        error: userError
+        </option>
 
-    } =
-        await supabaseClient
-            .auth
-            .getUser();
+    `;
 
 
+    topicSelect.disabled =
+        true;
+
+
+    topicInfo.style.display =
+        "none";
+
+
+
+    let topics = [];
+
+
+
+    // =================================================
+    // FOUNDATIONS OF NURSING
+    // =================================================
 
     if (
-        userError ||
-        !user
+        course ===
+        "Foundations of Nursing"
     ) {
 
-        message.textContent =
-            "❌ You must be logged in.";
-
-        message.style.color =
-            "#dc3545";
-
-        return;
+        topics =
+            foundationsTopics;
 
     }
 
+
+
+    // =================================================
+    // PHARMACOLOGY
+    // =================================================
+
+    else if (
+        course ===
+        "Pharmacology"
+    ) {
+
+        topics =
+            pharmacologyTopics;
+
+    }
+
+
+
+    // =================================================
+    // PRIMARY HEALTH CARE
+    // =================================================
+
+    else if (
+        course ===
+        "Primary Health Care"
+    ) {
+
+        topics =
+            phcTopics;
+
+    }
+
+
+
+    // =================================================
+    // CREATE TOPIC OPTIONS
+    // =================================================
+
+    topics.forEach(
+        function(topic) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                topic;
+
+
+            option.textContent =
+                topic;
+
+
+            topicSelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    if (topics.length > 0) {
+
+        topicSelect.disabled =
+            false;
+
+    }
+
+
+
+    topicSelect.onchange =
+        function() {
+
+            showTopicInfo();
+
+            loadTopicQuestions();
+
+        };
+
+}
+
+
+
+// =====================================================
+// SHOW TOPIC INFO
+// =====================================================
+
+function showTopicInfo() {
 
 
     const course =
@@ -1154,39 +1051,105 @@ async function addQuestion() {
         ).value;
 
 
+    const topicInfo =
+        document.getElementById(
+            "topicInfo"
+        );
+
+
+    if (!topic) {
+
+        topicInfo.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    topicInfo.innerHTML = `
+
+        <strong>
+            Course:
+        </strong>
+
+        ${escapeHTML(course)}
+
+        <br>
+
+        <strong>
+            Topic:
+        </strong>
+
+        ${escapeHTML(topic)}
+
+        <br><br>
+
+        Questions added here will appear
+        in the student quiz for this topic.
+
+    `;
+
+
+    topicInfo.style.display =
+        "block";
+
+}
+
+
+
+// =====================================================
+// ADD QUESTION
+// =====================================================
+
+async function addQuestion() {
+
+
+    const course =
+        document.getElementById(
+            "course"
+        ).value.trim();
+
+
+    const topic =
+        document.getElementById(
+            "topic"
+        ).value.trim();
+
+
     const question =
         document.getElementById(
             "question"
         ).value.trim();
 
 
-    const option_a =
+    const optionA =
         document.getElementById(
-            "option_a"
+            "optionA"
         ).value.trim();
 
 
-    const option_b =
+    const optionB =
         document.getElementById(
-            "option_b"
+            "optionB"
         ).value.trim();
 
 
-    const option_c =
+    const optionC =
         document.getElementById(
-            "option_c"
+            "optionC"
         ).value.trim();
 
 
-    const option_d =
+    const optionD =
         document.getElementById(
-            "option_d"
+            "optionD"
         ).value.trim();
 
 
-    const correct_answer =
+    const correctAnswer =
         document.getElementById(
-            "correct_answer"
+            "correctAnswer"
         ).value;
 
 
@@ -1197,19 +1160,69 @@ async function addQuestion() {
 
 
 
+    // =================================================
+    // VALIDATION
+    // =================================================
+
+    if (!course) {
+
+        showMessage(
+            "Please select a course.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!topic) {
+
+        showMessage(
+            "Please select a topic.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!question) {
+
+        showMessage(
+            "Please enter the question.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
     if (
-        !question ||
-        !option_a ||
-        !option_b ||
-        !option_c ||
-        !option_d
+        !optionA ||
+        !optionB ||
+        !optionC ||
+        !optionD
     ) {
 
-        message.textContent =
-            "⚠️ Please fill in all question fields.";
+        showMessage(
+            "Please enter all four options.",
+            "error"
+        );
 
-        message.style.color =
-            "#dc3545";
+        return;
+
+    }
+
+
+    if (!correctAnswer) {
+
+        showMessage(
+            "Please select the correct answer.",
+            "error"
+        );
 
         return;
 
@@ -1217,23 +1230,19 @@ async function addQuestion() {
 
 
 
-    button.disabled = true;
-
-    button.textContent =
-        "Saving question...";
-
-
+    // =================================================
+    // SAVE TO SUPABASE
+    // =================================================
 
     const {
-
+        data,
         error
-
     } =
         await supabaseClient
 
             .from("questions")
 
-            .insert([{
+            .insert({
 
                 course:
                     course,
@@ -1245,41 +1254,52 @@ async function addQuestion() {
                     question,
 
                 option_a:
-                    option_a,
+                    optionA,
 
                 option_b:
-                    option_b,
+                    optionB,
 
                 option_c:
-                    option_c,
+                    optionC,
 
                 option_d:
-                    option_d,
+                    optionD,
 
                 correct_answer:
-                    correct_answer,
+                    correctAnswer,
 
                 explanation:
                     explanation
 
-            }]);
+            })
+
+            .select();
 
 
+
+    // =================================================
+    // ERROR
+    // =================================================
 
     if (error) {
 
-        message.textContent =
-            "❌ Error: " +
-            error.message;
+        console.error(
+            "Add question error:",
+            error
+        );
 
-        message.style.color =
-            "#dc3545";
 
-        button.disabled =
-            false;
+        showMessage(
 
-        button.textContent =
-            "➕ Add Question";
+            "❌ Unable to save question.<br><br>" +
+
+            escapeHTML(
+                error.message
+            ),
+
+            "error"
+
+        );
 
         return;
 
@@ -1287,217 +1307,146 @@ async function addQuestion() {
 
 
 
-    message.textContent =
-        "✅ Question added successfully!";
+    // =================================================
+    // SUCCESS
+    // =================================================
 
-    message.style.color =
-        "#198754";
+    showMessage(
 
+        "✅ Question added successfully! " +
+        "It will now appear in the student quiz.",
 
+        "success"
 
-    document.getElementById(
-        "question"
-    ).value = "";
-
-
-    document.getElementById(
-        "option_a"
-    ).value = "";
-
-
-    document.getElementById(
-        "option_b"
-    ).value = "";
-
-
-    document.getElementById(
-        "option_c"
-    ).value = "";
-
-
-    document.getElementById(
-        "option_d"
-    ).value = "";
-
-
-    document.getElementById(
-        "explanation"
-    ).value = "";
+    );
 
 
 
-    button.disabled =
-        false;
+    // =================================================
+    // CLEAR FORM
+    // =================================================
+
+    document
+        .getElementById("question")
+        .value = "";
 
 
-    button.textContent =
-        "➕ Add Question";
+    document
+        .getElementById("optionA")
+        .value = "";
+
+
+    document
+        .getElementById("optionB")
+        .value = "";
+
+
+    document
+        .getElementById("optionC")
+        .value = "";
+
+
+    document
+        .getElementById("optionD")
+        .value = "";
+
+
+    document
+        .getElementById("correctAnswer")
+        .value = "";
+
+
+    document
+        .getElementById("explanation")
+        .value = "";
 
 
 
-    loadQuestions();
+    // =================================================
+    // REFRESH QUESTIONS
+    // =================================================
+
+    loadTopicQuestions();
 
 }
 
 
 
 // =====================================================
-// LOAD QUESTIONS
+// LOAD QUESTIONS FOR SELECTED TOPIC
 // =====================================================
 
-let allQuestions = [];
+async function loadTopicQuestions() {
 
 
-async function loadQuestions() {
-
-
-    const list =
+    const course =
         document.getElementById(
-            "questionsList"
-        );
-
-
-    const count =
-        document.getElementById(
-            "questionCount"
-        );
-
-
-    list.innerHTML = `
-
-        <div class="loading-text">
-
-            Loading questions...
-
-        </div>
-
-    `;
-
-
-
-    const filterCourse =
-        document.getElementById(
-            "filterCourse"
+            "course"
         ).value;
 
 
-    const filterTopic =
+    const topic =
         document.getElementById(
-            "filterTopic"
+            "topic"
         ).value;
 
 
-
-    let query =
-
-        supabaseClient
-
-            .from("questions")
-
-            .select("*")
-
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
+    const questionsCard =
+        document.getElementById(
+            "questionsCard"
+        );
 
 
-
-    if (filterCourse) {
-
-        query =
-            query.eq(
-                "course",
-                filterCourse
-            );
-
-    }
+    const questionList =
+        document.getElementById(
+            "questionList"
+        );
 
 
+    if (!course || !topic) {
 
-    if (filterTopic) {
+        questionsCard.style.display =
+            "none";
 
-        query =
-            query.eq(
-                "topic",
-                filterTopic
-            );
+        return;
 
     }
 
 
 
     const {
-
         data,
         error
-
     } =
-        await query;
+        await supabaseClient
+
+            .from("questions")
+
+            .select("*")
+
+            .eq(
+                "course",
+                course
+            )
+
+            .ilike(
+                "topic",
+                topic
+            )
+
+            .order(
+                "created_at",
+                {
+                    ascending: true
+                }
+            );
 
 
 
     if (error) {
 
-        list.innerHTML = `
-
-            <div class="empty-text">
-
-                ❌ Unable to load questions.
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message
-                )}
-
-            </div>
-
-        `;
-
-        count.textContent =
-            "Unable to load questions.";
-
-        return;
-
-    }
-
-
-
-    allQuestions =
-        data || [];
-
-
-    displayQuestions(
-        allQuestions
-    );
-
-}
-
-
-
-// =====================================================
-// SEARCH
-// =====================================================
-
-function filterQuestions() {
-
-
-    const search =
-        document.getElementById(
-            "searchInput"
-        ).value
-        .trim()
-        .toLowerCase();
-
-
-
-    if (!search) {
-
-        displayQuestions(
-            allQuestions
+        console.error(
+            error
         );
 
         return;
@@ -1505,99 +1454,28 @@ function filterQuestions() {
     }
 
 
-
-    const filtered =
-        allQuestions.filter(
-            function(q) {
-
-                return (
-
-                    String(
-                        q.question || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
-
-                    ||
-
-                    String(
-                        q.course || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
-
-                    ||
-
-                    String(
-                        q.topic || ""
-                    )
-                    .toLowerCase()
-                    .includes(search)
-
-                );
-
-            }
-        );
+    questionsCard.style.display =
+        "block";
 
 
-
-    displayQuestions(
-        filtered
-    );
-
-}
-
-
-
-// =====================================================
-// DISPLAY QUESTIONS
-// =====================================================
-
-function displayQuestions(
-    questions
-) {
-
-
-    const list =
-        document.getElementById(
-            "questionsList"
-        );
-
-
-    const count =
-        document.getElementById(
-            "questionCount"
-        );
-
-
-
-    count.textContent =
-
-        questions.length +
-
-        " question" +
-
-        (
-            questions.length === 1
-                ? ""
-                : "s"
-        ) +
-
-        " found";
+    questionList.innerHTML =
+        "";
 
 
 
     if (
-        questions.length === 0
+        !data ||
+        data.length === 0
     ) {
 
-        list.innerHTML = `
+        questionList.innerHTML = `
 
-            <div class="empty-text">
+            <p style="color:#667085;">
 
-                📭 No questions found.
+                No questions have been added
+                to this topic yet.
 
-            </div>
+            </p>
 
         `;
 
@@ -1607,13 +1485,8 @@ function displayQuestions(
 
 
 
-    list.innerHTML = "";
-
-
-
-    questions.forEach(
+    data.forEach(
         function(q, index) {
-
 
             const item =
                 document.createElement(
@@ -1625,133 +1498,71 @@ function displayQuestions(
                 "question-item";
 
 
-            item.id =
-                "question-" +
-                q.id;
-
-
-
             item.innerHTML = `
 
-                <div class="question-number">
+                <span class="badge">
 
                     Question ${index + 1}
 
-                </div>
+                </span>
 
-
-                <div class="question-meta">
-
-                    <span class="badge">
-
-                        ${escapeHTML(
-                            q.course
-                        )}
-
-                    </span>
-
-
-                    <span class="badge">
-
-                        ${escapeHTML(
-                            q.topic
-                        )}
-
-                    </span>
-
-                </div>
-
-
-                <div class="question-text">
+                <h3>
 
                     ${escapeHTML(
                         q.question
                     )}
 
-                </div>
+                </h3>
 
+                <p>
 
-                <div class="options-list">
+                    <strong>A:</strong>
+                    ${escapeHTML(
+                        q.option_a
+                    )}
 
-                    <div class="${
-                        q.correct_answer === "A"
-                            ? "correct-option"
-                            : ""
-                    }">
+                </p>
 
-                        A. ${escapeHTML(
-                            q.option_a
-                        )}
+                <p>
 
-                        ${
-                            q.correct_answer === "A"
-                                ? " ✅"
-                                : ""
-                        }
+                    <strong>B:</strong>
+                    ${escapeHTML(
+                        q.option_b
+                    )}
 
-                    </div>
+                </p>
 
+                <p>
 
-                    <div class="${
-                        q.correct_answer === "B"
-                            ? "correct-option"
-                            : ""
-                    }">
+                    <strong>C:</strong>
+                    ${escapeHTML(
+                        q.option_c
+                    )}
 
-                        B. ${escapeHTML(
-                            q.option_b
-                        )}
+                </p>
 
-                        ${
-                            q.correct_answer === "B"
-                                ? " ✅"
-                                : ""
-                        }
+                <p>
 
-                    </div>
+                    <strong>D:</strong>
+                    ${escapeHTML(
+                        q.option_d
+                    )}
 
+                </p>
 
-                    <div class="${
-                        q.correct_answer === "C"
-                            ? "correct-option"
-                            : ""
-                    }">
+                <p>
 
-                        C. ${escapeHTML(
-                            q.option_c
-                        )}
+                    <strong>
+                        Correct Answer:
+                    </strong>
 
-                        ${
-                            q.correct_answer === "C"
-                                ? " ✅"
-                                : ""
-                        }
+                    ${escapeHTML(
+                        q.correct_answer
+                    )}
 
-                    </div>
+                </p>
 
-
-                    <div class="${
-                        q.correct_answer === "D"
-                            ? "correct-option"
-                            : ""
-                    }">
-
-                        D. ${escapeHTML(
-                            q.option_d
-                        )}
-
-                        ${
-                            q.correct_answer === "D"
-                                ? " ✅"
-                                : ""
-                        }
-
-                    </div>
-
-                </div>
-
-
-                <div class="explanation-box">
+                <p>
 
                     <strong>
                         Explanation:
@@ -1762,35 +1573,12 @@ function displayQuestions(
                         "No explanation provided."
                     )}
 
-                </div>
-
-
-                <div class="question-actions">
-
-                    <button
-                        class="edit-button"
-                        onclick="editQuestion('${q.id}')">
-
-                        ✏️ Edit
-
-                    </button>
-
-
-                    <button
-                        class="delete-button"
-                        onclick="deleteQuestion('${q.id}')">
-
-                        🗑️ Delete
-
-                    </button>
-
-                </div>
+                </p>
 
             `;
 
 
-
-            list.appendChild(
+            questionList.appendChild(
                 item
             );
 
@@ -1802,583 +1590,54 @@ function displayQuestions(
 
 
 // =====================================================
-// EDIT QUESTION
+// SHOW MESSAGE
 // =====================================================
 
-function editQuestion(id) {
+function showMessage(
+    text,
+    type
+) {
 
 
-    const q =
-        allQuestions.find(
-            function(question) {
-
-                return String(
-                    question.id
-                ) === String(id);
-
-            }
-        );
-
-
-
-    if (!q) {
-
-        alert(
-            "Question not found."
-        );
-
-        return;
-
-    }
-
-
-
-    const item =
+    const message =
         document.getElementById(
-            "question-" + id
+            "message"
         );
 
 
-
-    item.innerHTML = `
-
-        <div class="edit-form">
-
-            <h3>
-                ✏️ Edit Question
-            </h3>
+    message.innerHTML =
+        text;
 
 
-            <label>
-                Course
-            </label>
-
-            <select
-                id="edit_course_${id}">
-
-                ${createCourseOptions(
-                    q.course
-                )}
-
-            </select>
+    message.className =
+        "message " +
+        type;
 
 
-            <label>
-                Topic
-            </label>
-
-            <select
-                id="edit_topic_${id}">
-
-            </select>
+    message.style.display =
+        "block";
 
 
-            <label>
-                Question
-            </label>
+    window.scrollTo({
 
-            <textarea
-                id="edit_question_${id}">${escapeHTML(
-                    q.question
-                )}</textarea>
+        top: 0,
 
+        behavior: "smooth"
 
-            <label>
-                Option A
-            </label>
-
-            <input
-                id="edit_option_a_${id}"
-                value="${escapeAttribute(
-                    q.option_a
-                )}">
+    });
 
 
-            <label>
-                Option B
-            </label>
-
-            <input
-                id="edit_option_b_${id}"
-                value="${escapeAttribute(
-                    q.option_b
-                )}">
-
-
-            <label>
-                Option C
-            </label>
-
-            <input
-                id="edit_option_c_${id}"
-                value="${escapeAttribute(
-                    q.option_c
-                )}">
-
-
-            <label>
-                Option D
-            </label>
-
-            <input
-                id="edit_option_d_${id}"
-                value="${escapeAttribute(
-                    q.option_d
-                )}">
-
-
-            <label>
-                Correct Answer
-            </label>
-
-            <select
-                id="edit_correct_${id}">
-
-                <option value="A"
-                    ${q.correct_answer === "A"
-                        ? "selected"
-                        : ""}>
-                    A
-                </option>
-
-                <option value="B"
-                    ${q.correct_answer === "B"
-                        ? "selected"
-                        : ""}>
-                    B
-                </option>
-
-                <option value="C"
-                    ${q.correct_answer === "C"
-                        ? "selected"
-                        : ""}>
-                    C
-                </option>
-
-                <option value="D"
-                    ${q.correct_answer === "D"
-                        ? "selected"
-                        : ""}>
-                    D
-                </option>
-
-            </select>
-
-
-            <label>
-                Explanation
-            </label>
-
-            <textarea
-                id="edit_explanation_${id}">${escapeHTML(
-                    q.explanation || ""
-                )}</textarea>
-
-
-            <div class="question-actions">
-
-                <button
-                    class="save-edit-button"
-                    onclick="saveEditedQuestion('${id}')">
-
-                    💾 Save Changes
-
-                </button>
-
-
-                <button
-                    class="cancel-button"
-                    onclick="loadQuestions()">
-
-                    Cancel
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-
-    const editCourse =
-        document.getElementById(
-            "edit_course_" + id
-        );
-
-
-
-    editCourse.addEventListener(
-        "change",
+    setTimeout(
         function() {
 
-            loadEditTopics(
-                id,
-                editCourse.value
-            );
+            message.style.display =
+                "none";
 
-        }
+        },
+
+        5000
+
     );
-
-
-
-    loadEditTopics(
-        id,
-        q.course,
-        q.topic
-    );
-
-}
-
-
-
-// =====================================================
-// COURSE OPTIONS
-// =====================================================
-
-function createCourseOptions(
-    selectedCourse
-) {
-
-
-    return Object.keys(
-        courseTopics
-    )
-    .map(
-        function(course) {
-
-            return `
-
-                <option
-                    value="${escapeAttribute(
-                        course
-                    )}"
-                    ${
-                        course === selectedCourse
-                            ? "selected"
-                            : ""
-                    }>
-
-                    ${escapeHTML(
-                        course
-                    )}
-
-                </option>
-
-            `;
-
-        }
-    )
-    .join("");
-
-}
-
-
-
-// =====================================================
-// EDIT TOPICS
-// =====================================================
-
-function loadEditTopics(
-    id,
-    course,
-    selectedTopic = ""
-) {
-
-
-    const select =
-        document.getElementById(
-            "edit_topic_" + id
-        );
-
-
-    if (!select) {
-
-        return;
-
-    }
-
-
-    select.innerHTML = "";
-
-
-
-    const topics =
-        courseTopics[course] || [];
-
-
-    topics.forEach(
-        function(topic) {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                topic;
-
-            option.textContent =
-                topic;
-
-
-            if (
-                topic === selectedTopic
-            ) {
-
-                option.selected =
-                    true;
-
-            }
-
-
-            select.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-
-
-// =====================================================
-// SAVE EDIT
-// =====================================================
-
-async function saveEditedQuestion(
-    id
-) {
-
-
-    const course =
-        document.getElementById(
-            "edit_course_" + id
-        ).value;
-
-
-    const topic =
-        document.getElementById(
-            "edit_topic_" + id
-        ).value;
-
-
-    const question =
-        document.getElementById(
-            "edit_question_" + id
-        ).value.trim();
-
-
-    const option_a =
-        document.getElementById(
-            "edit_option_a_" + id
-        ).value.trim();
-
-
-    const option_b =
-        document.getElementById(
-            "edit_option_b_" + id
-        ).value.trim();
-
-
-    const option_c =
-        document.getElementById(
-            "edit_option_c_" + id
-        ).value.trim();
-
-
-    const option_d =
-        document.getElementById(
-            "edit_option_d_" + id
-        ).value.trim();
-
-
-    const correct_answer =
-        document.getElementById(
-            "edit_correct_" + id
-        ).value;
-
-
-    const explanation =
-        document.getElementById(
-            "edit_explanation_" + id
-        ).value.trim();
-
-
-
-    if (
-        !question ||
-        !option_a ||
-        !option_b ||
-        !option_c ||
-        !option_d
-    ) {
-
-        alert(
-            "Please fill in all question fields."
-        );
-
-        return;
-
-    }
-
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-
-            .from("questions")
-
-            .update({
-
-                course:
-                    course,
-
-                topic:
-                    topic,
-
-                question:
-                    question,
-
-                option_a:
-                    option_a,
-
-                option_b:
-                    option_b,
-
-                option_c:
-                    option_c,
-
-                option_d:
-                    option_d,
-
-                correct_answer:
-                    correct_answer,
-
-                explanation:
-                    explanation
-
-            })
-
-            .eq(
-                "id",
-                id
-            );
-
-
-
-    if (error) {
-
-        alert(
-            "❌ Unable to update question:\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-
-    alert(
-        "✅ Question updated successfully!"
-    );
-
-
-    loadQuestions();
-
-}
-
-
-
-// =====================================================
-// DELETE
-// =====================================================
-
-async function deleteQuestion(
-    id
-) {
-
-
-    const q =
-        allQuestions.find(
-            function(question) {
-
-                return String(
-                    question.id
-                ) === String(id);
-
-            }
-        );
-
-
-
-    if (!q) {
-
-        return;
-
-    }
-
-
-
-    const confirmed =
-        confirm(
-
-            "Are you sure you want to delete this question?\n\n" +
-
-            q.question
-
-        );
-
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-
-            .from("questions")
-
-            .delete()
-
-            .eq(
-                "id",
-                id
-            );
-
-
-
-    if (error) {
-
-        alert(
-            "❌ Unable to delete question:\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-
-    alert(
-        "✅ Question deleted successfully!"
-    );
-
-
-    loadQuestions();
 
 }
 
@@ -2389,6 +1648,7 @@ async function deleteQuestion(
 // =====================================================
 
 function escapeHTML(value) {
+
 
     if (
         value === null ||
@@ -2432,59 +1692,19 @@ function escapeHTML(value) {
 
 
 // =====================================================
-// ESCAPE ATTRIBUTE
-// =====================================================
-
-function escapeAttribute(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        );
-
-}
-
-
-
-// =====================================================
 // LOGOUT
 // =====================================================
 
 async function logout() {
 
+
     await supabaseClient
         .auth
         .signOut();
 
+
     window.location.href =
-        "index.html";
+        "login.html";
 
 }
 
@@ -2494,23 +1714,7 @@ async function logout() {
 // START
 // =====================================================
 
-loadTopics();
-
-updateFilterTopics();
-
-
-checkAdminAccess()
-    .then(
-        function(isAdmin) {
-
-            if (isAdmin) {
-
-                loadQuestions();
-
-            }
-
-        }
-    );
+checkAdmin();
 
 </script>
 
