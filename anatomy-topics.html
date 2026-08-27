@@ -3,180 +3,243 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-    <title>OGCONS Study Hub - Anatomy & Physiology</title>
+<title>
+OGCONS Study Hub - Anatomy & Physiology
+</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
+body {
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #e8fff2,
-                    #e8f4ff,
-                    #f5eaff
-                );
+    font-family: Arial, sans-serif;
 
-            color: #163020;
-        }
+    min-height: 100vh;
 
-        header {
-            background:
-                linear-gradient(
-                    135deg,
-                    #18a058,
-                    #2eb7a0
-                );
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
 
-            color: white;
-            text-align: center;
-            padding: 35px 20px;
-        }
+    color: #172033;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
-        }
+header {
 
-        header p {
-            margin-top: 10px;
-            font-size: 17px;
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #14b8a6
+        );
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 30px 20px;
-        }
+    color: white;
 
-        .back {
-            display: inline-block;
-            margin-bottom: 25px;
-            color: #18a058;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    padding: 25px 20px;
+}
 
-        .back:hover {
-            text-decoration: underline;
-        }
+.header-content {
 
-        .intro {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            text-align: center;
-            margin-bottom: 30px;
+    max-width: 1000px;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.08);
-        }
+    margin: auto;
 
-        .intro h2 {
-            margin-bottom: 10px;
-        }
+    display: flex;
 
-        .intro p {
-            color: #617568;
-            line-height: 1.5;
-        }
+    justify-content: space-between;
 
-        .topics {
-            display: grid;
-            grid-template-columns:
-                repeat(3, 1fr);
-            gap: 20px;
-        }
+    align-items: center;
 
-        .topic {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            text-align: center;
+    gap: 15px;
+}
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.08);
+.logo {
 
-            transition: 0.2s;
-        }
+    font-size: 22px;
 
-        .topic:hover {
-            transform: translateY(-5px);
-        }
+    font-weight: bold;
+}
 
-        .icon {
-            font-size: 45px;
-            margin-bottom: 12px;
-        }
+.back-button {
 
-        .topic h3 {
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
+    background: white;
 
-        .topic p {
-            color: #617568;
-            min-height: 50px;
-            line-height: 1.5;
-        }
+    color: #2563eb;
 
-        .topic button {
-            border: none;
-            background: #18a058;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+    border: none;
 
-        .topic button:hover {
-            background: #117d45;
-        }
+    padding: 10px 18px;
 
-        footer {
-            text-align: center;
-            padding: 35px;
-            color: #527060;
-        }
+    border-radius: 22px;
 
-        @media (max-width: 800px) {
+    font-weight: bold;
 
-            .topics {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
+    cursor: pointer;
+}
 
-        }
+.container {
 
-        @media (max-width: 550px) {
+    max-width: 1000px;
 
-            .topics {
-                grid-template-columns: 1fr;
-            }
+    margin: auto;
 
-            header h1 {
-                font-size: 28px;
-            }
+    padding: 30px 20px;
+}
 
-        }
+.course-header {
 
-    </style>
+    background: white;
+
+    padding: 30px 25px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+
+    margin-bottom: 25px;
+}
+
+.course-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 12px;
+}
+
+.course-header h1 {
+
+    color: #2563eb;
+
+    margin-bottom: 10px;
+
+    font-size: 30px;
+}
+
+.course-header p {
+
+    color: #68756d;
+
+    line-height: 1.6;
+}
+
+.topics {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.topic-card {
+
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0,0,0,0.07);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    border-left: 5px solid #2563eb;
+}
+
+.topic-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(0,0,0,0.11);
+}
+
+.topic-number {
+
+    color: #2563eb;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+.topic-card h2 {
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+    margin-bottom: 8px;
+}
+
+.topic-card p {
+
+    color: #68756d;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+footer {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #68756d;
+
+    font-size: 14px;
+}
+
+@media(max-width:700px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .topics {
+
+        grid-template-columns: 1fr;
+    }
+
+    .course-header h1 {
+
+        font-size: 25px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -186,518 +249,182 @@
 
 <header>
 
-    <h1>
-        🫀 Anatomy & Physiology
-    </h1>
+<div class="header-content">
 
-    <p>
-        Choose a topic to begin studying
-    </p>
+<div class="logo">
+
+🩺 OGCONS Study Hub
+
+</div>
+
+
+<button
+    class="back-button"
+    onclick="goBack()">
+
+← Back to Dashboard
+
+</button>
+
+</div>
 
 </header>
+
 
 
 <div class="container">
 
 
-    <a
-        href="dashboard.html"
-        class="back">
+<div class="course-header">
 
-        ← Back to Dashboard
+<div class="course-icon">
 
-    </a>
+🫀
 
+</div>
 
-    <div class="intro">
+<h1>
 
-        <h2>
-            📚 Anatomy & Physiology Topics
-        </h2>
+Anatomy & Physiology
 
-        <p>
-            Select a topic below to study
-            and test your knowledge.
-        </p>
+</h1>
 
-    </div>
+<p>
 
+Select a topic below to study the note
+and test your knowledge with a quiz.
 
-    <div class="topics">
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🧍
-            </div>
-
-            <h3>
-                Anatomy and Organisation of the Body
-            </h3>
-
-            <p>
-                Learn how the human body is organised
-                from cells to organs and systems.
-            </p>
-
-            <button
-                onclick="openTopic('Anatomy and organisation of the body')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🧪
-            </div>
-
-            <h3>
-                Physiological Chemistry and Processes
-            </h3>
-
-            <p>
-                Study the chemical processes that
-                support normal body functions.
-            </p>
-
-            <button
-                onclick="openTopic('Physiological chemistry and processes')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🔬
-            </div>
-
-            <h3>
-                Cells and Tissues
-            </h3>
-
-            <p>
-                Study the basic structural and
-                functional units of the body.
-            </p>
-
-            <button
-                onclick="openTopic('Cells and tissues')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🩸
-            </div>
-
-            <h3>
-                The Blood
-            </h3>
-
-            <p>
-                Learn about blood components,
-                functions and blood groups.
-            </p>
-
-            <button
-                onclick="openTopic('The blood')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                ❤️
-            </div>
-
-            <h3>
-                The Cardiovascular System
-            </h3>
-
-            <p>
-                Study the heart, blood vessels
-                and circulation.
-            </p>
-
-            <button
-                onclick="openTopic('The cardiovascular system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🛡️
-            </div>
-
-            <h3>
-                The Lymphatic System
-            </h3>
-
-            <p>
-                Learn about lymph, lymph nodes
-                and lymphatic functions.
-            </p>
-
-            <button
-                onclick="openTopic('The lymphatic system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🧠
-            </div>
-
-            <h3>
-                The Nervous System
-            </h3>
-
-            <p>
-                Study the brain, spinal cord,
-                nerves and nervous control.
-            </p>
-
-            <button
-                onclick="openTopic('The nervous system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                👁️
-            </div>
-
-            <h3>
-                The Special Senses
-            </h3>
-
-            <p>
-                Study vision, hearing, smell,
-                taste and balance.
-            </p>
-
-            <button
-                onclick="openTopic('The special senses')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🧬
-            </div>
-
-            <h3>
-                The Endocrine System
-            </h3>
-
-            <p>
-                Learn about hormones and
-                endocrine glands.
-            </p>
-
-            <button
-                onclick="openTopic('The endocrine system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🫁
-            </div>
-
-            <h3>
-                The Respiratory System
-            </h3>
-
-            <p>
-                Study the respiratory organs
-                and the process of breathing.
-            </p>
-
-            <button
-                onclick="openTopic('The respiratory system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🥗
-            </div>
-
-            <h3>
-                Introduction to Nutrition
-            </h3>
-
-            <p>
-                Learn about nutrients, food
-                and basic nutritional principles.
-            </p>
-
-            <button
-                onclick="openTopic('Introduction to nutrition')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🍽️
-            </div>
-
-            <h3>
-                The Digestive System
-            </h3>
-
-            <p>
-                Study the digestive organs
-                and digestion of food.
-            </p>
-
-            <button
-                onclick="openTopic('The digestive system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🚽
-            </div>
-
-            <h3>
-                The Urinary System
-            </h3>
-
-            <p>
-                Learn about the kidneys,
-                urine formation and excretion.
-            </p>
-
-            <button
-                onclick="openTopic('The urinary system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🖐️
-            </div>
-
-            <h3>
-                The Skin
-            </h3>
-
-            <p>
-                Study the structure and
-                functions of the skin.
-            </p>
-
-            <button
-                onclick="openTopic('The skin')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🛡️
-            </div>
-
-            <h3>
-                Defence and Immunity
-            </h3>
-
-            <p>
-                Learn how the body protects
-                itself from disease.
-            </p>
-
-            <button
-                onclick="openTopic('Defence and immunity')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🦴
-            </div>
-
-            <h3>
-                The Musculoskeletal System
-            </h3>
-
-            <p>
-                Study bones, muscles,
-                joints and movement.
-            </p>
-
-            <button
-                onclick="openTopic('The musculoskeletal system')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <div class="topic">
-
-            <div class="icon">
-                🧬
-            </div>
-
-            <h3>
-                Genetics and Inheritance
-            </h3>
-
-            <p>
-                Learn about genes, heredity
-                and inheritance.
-            </p>
-
-            <button
-                onclick="openTopic('Genetics and inheritance')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-        <!-- NEW TOPIC -->
-
-        <div class="topic">
-
-            <div class="icon">
-                👶
-            </div>
-
-            <h3>
-                The Reproductive System
-            </h3>
-
-            <p>
-                Study the male and female
-                reproductive systems.
-            </p>
-
-            <button
-                onclick="openTopic('The Reproductive System')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-    </div>
+</p>
 
 </div>
 
 
+
+<div
+    class="topics"
+    id="topicsContainer">
+
+</div>
+
+
+</div>
+
+
+
 <footer>
 
-    © 2026 OGCONS Study Hub
-    • Built for students
+OGCONS Study Hub © 2026
 
 </footer>
 
 
+
 <script>
 
-function openTopic(topic) {
+const topics = [
 
-    window.location.href =
-        "anatomy-quiz.html?topic=" +
-        encodeURIComponent(topic);
+"Introduction to Anatomy",
+
+"The Musculoskeletal System",
+
+"Blood and Cardiovascular System",
+
+"The Respiratory System",
+
+"The Digestive System",
+
+"The Integumentary System",
+
+"The Excretory System",
+
+"The Endocrine System Introduction",
+
+"The Female Reproductive System",
+
+"The Male Reproductive System",
+
+"Foetal Development"
+
+];
+
+
+const topicsContainer =
+document.getElementById(
+    "topicsContainer"
+);
+
+
+topics.forEach(
+function(topic, index) {
+
+const card =
+document.createElement("div");
+
+card.className =
+"topic-card";
+
+
+card.innerHTML = `
+
+<div class="topic-number">
+
+TOPIC ${index + 1}
+
+</div>
+
+<h2>
+
+${escapeHTML(topic)}
+
+</h2>
+
+<p>
+
+Click to study this topic and
+take the quiz.
+
+</p>
+
+`;
+
+
+card.onclick =
+function() {
+
+window.location.href =
+"anatomy-note.html?topic=" +
+encodeURIComponent(topic);
+
+};
+
+
+topicsContainer.appendChild(card);
+
+}
+);
+
+
+function goBack() {
+
+window.location.href =
+"dashboard.html";
+
+}
+
+
+function escapeHTML(value) {
+
+return String(value)
+
+.replace(/&/g, "&amp;")
+
+.replace(/</g, "&lt;")
+
+.replace(/>/g, "&gt;")
+
+.replace(/"/g, "&quot;")
+
+.replace(/'/g, "&#039;");
 
 }
 
