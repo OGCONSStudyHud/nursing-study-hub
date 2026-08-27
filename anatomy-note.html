@@ -3,358 +3,657 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>
-OGCONS Study Hub - Anatomy & Physiology
-</title>
+    <title>
+        OGCONS Study Hub - Anatomy & Physiology
+    </title>
 
-<style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <style>
 
-body {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    font-family: Arial, sans-serif;
 
-    min-height: 100vh;
+        body {
 
-    background:
-        linear-gradient(
-            135deg,
-            #e8fff2,
-            #e8f4ff,
-            #f5eaff
-        );
+            font-family: Arial, sans-serif;
 
-    color: #172033;
-}
+            min-height: 100vh;
 
-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5eaff,
+                    #e8f4ff,
+                    #e8fff2
+                );
 
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #14b8a6
-        );
+            color: #172033;
 
-    color: white;
+            line-height: 1.7;
 
-    padding: 22px 20px;
-}
+        }
 
-.header-content {
 
-    max-width: 1000px;
+        /* =========================================
+           HEADER
+        ========================================= */
 
-    margin: auto;
+        header {
 
-    display: flex;
+            background:
+                linear-gradient(
+                    135deg,
+                    #9333ea,
+                    #6366f1
+                );
 
-    justify-content: space-between;
+            color: white;
 
-    align-items: center;
+            padding: 22px 20px;
 
-    gap: 15px;
-}
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.10);
 
-.logo {
+        }
 
-    font-size: 22px;
 
-    font-weight: bold;
-}
+        .header-content {
 
-.back-button {
+            max-width: 1100px;
 
-    border: none;
+            margin: auto;
 
-    background: white;
+            display: flex;
 
-    color: #2563eb;
+            justify-content: space-between;
 
-    padding: 10px 18px;
+            align-items: center;
 
-    border-radius: 22px;
+            gap: 15px;
 
-    font-weight: bold;
+        }
 
-    cursor: pointer;
-}
 
-.container {
+        .logo {
 
-    max-width: 950px;
+            font-size: 22px;
 
-    margin: auto;
+            font-weight: bold;
 
-    padding: 35px 20px;
-}
+        }
 
-.topic-header {
 
-    background: white;
+        .back-button {
 
-    padding: 35px 25px;
+            border: none;
 
-    border-radius: 20px;
+            background: white;
 
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.08);
+            color: #9333ea;
 
-    text-align: center;
+            padding: 10px 18px;
 
-    margin-bottom: 25px;
-}
+            border-radius: 22px;
 
-.topic-icon {
+            font-weight: bold;
 
-    font-size: 55px;
+            cursor: pointer;
 
-    margin-bottom: 15px;
-}
+        }
 
-.topic-header h1 {
 
-    color: #2563eb;
+        .back-button:hover {
 
-    font-size: 30px;
+            background: #f3f3f3;
 
-    line-height: 1.3;
+        }
 
-    margin-bottom: 10px;
-}
 
-.topic-header p {
 
-    color: #617568;
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
 
-    line-height: 1.6;
-}
+        .container {
 
-.actions {
+            max-width: 1000px;
 
-    display: grid;
+            margin: auto;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+            padding: 35px 20px;
 
-    gap: 20px;
+        }
 
-    margin-bottom: 25px;
-}
 
-.action-card {
 
-    background: white;
+        /* =========================================
+           TOPIC HEADER
+        ========================================= */
 
-    padding: 28px 20px;
+        .topic-header {
 
-    border-radius: 18px;
+            background: white;
 
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
+            padding: 35px 25px;
 
-    text-align: center;
-}
+            border-radius: 20px;
 
-.action-icon {
+            text-align: center;
 
-    font-size: 42px;
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
 
-    margin-bottom: 12px;
-}
+            margin-bottom: 25px;
 
-.action-card h2 {
+        }
 
-    margin-bottom: 8px;
 
-    font-size: 20px;
-}
+        .topic-icon {
 
-.action-card p {
+            font-size: 60px;
 
-    color: #617568;
+            margin-bottom: 12px;
 
-    line-height: 1.5;
+        }
 
-    margin-bottom: 18px;
-}
 
-.action-button {
+        .topic-header h1 {
 
-    border: none;
+            color: #9333ea;
 
-    background: #2563eb;
+            font-size: 31px;
 
-    color: white;
+            line-height: 1.3;
 
-    padding: 12px 22px;
+            margin-bottom: 10px;
 
-    border-radius: 22px;
+        }
 
-    font-weight: bold;
 
-    cursor: pointer;
+        .topic-header p {
 
-    font-size: 15px;
-}
+            color: #667085;
 
-.action-button:hover {
+            line-height: 1.6;
 
-    background: #1d4ed8;
-}
+        }
 
-#noteSection {
 
-    display: none;
 
-    background: white;
+        /* =========================================
+           ACTION CARDS
+        ========================================= */
 
-    padding: 35px;
+        .actions {
 
-    border-radius: 20px;
+            display: grid;
 
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.08);
+            grid-template-columns:
+                repeat(2, 1fr);
 
-    margin-top: 25px;
-}
+            gap: 20px;
 
-#noteSection h2 {
+            margin-bottom: 25px;
 
-    color: #2563eb;
+        }
 
-    margin-bottom: 25px;
 
-    font-size: 26px;
-}
+        .action-card {
 
-.note-content {
+            background: white;
 
-    line-height: 1.85;
+            padding: 28px 20px;
 
-    color: #26382d;
+            border-radius: 18px;
 
-    font-size: 16px;
-}
+            text-align: center;
 
-.note-content h3 {
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
 
-    color: #2563eb;
+        }
 
-    margin-top: 30px;
 
-    margin-bottom: 12px;
+        .action-icon {
 
-    font-size: 21px;
-}
+            font-size: 43px;
 
-.note-content h4 {
+            margin-bottom: 12px;
 
-    color: #1e40af;
+        }
 
-    margin-top: 20px;
 
-    margin-bottom: 8px;
-}
+        .action-card h2 {
 
-.note-content p {
+            margin-bottom: 8px;
 
-    margin-bottom: 15px;
-}
+            font-size: 20px;
 
-.note-content ul {
+        }
 
-    margin-left: 25px;
 
-    margin-bottom: 18px;
-}
+        .action-card p {
 
-.note-content li {
+            color: #667085;
 
-    margin-bottom: 9px;
-}
+            line-height: 1.5;
 
-.message {
+            margin-bottom: 18px;
 
-    text-align: center;
+        }
 
-    background: white;
 
-    padding: 30px;
+        .action-button {
 
-    border-radius: 18px;
+            border: none;
 
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
-}
+            color: white;
 
-.message h2 {
+            padding: 12px 22px;
 
-    color: #2563eb;
+            border-radius: 22px;
 
-    margin-bottom: 10px;
-}
+            font-weight: bold;
 
-.message p {
+            cursor: pointer;
 
-    color: #617568;
+            font-size: 15px;
 
-    line-height: 1.6;
-}
+        }
 
-footer {
 
-    text-align: center;
+        .read-button {
 
-    padding: 30px;
+            background: #9333ea;
 
-    color: #718077;
+        }
 
-    font-size: 14px;
-}
 
-@media(max-width:700px) {
+        .read-button:hover {
 
-    .header-content {
+            background: #7e22ce;
 
-        flex-direction: column;
+        }
 
-        text-align: center;
-    }
 
-    .actions {
+        .quiz-button {
 
-        grid-template-columns: 1fr;
-    }
+            background: #2563eb;
 
-    #noteSection {
+        }
 
-        padding: 22px;
-    }
 
-    .topic-header h1 {
+        .quiz-button:hover {
 
-        font-size: 25px;
-    }
+            background: #1d4ed8;
 
-}
+        }
 
-</style>
+
+
+        /* =========================================
+           NOTE SECTION
+        ========================================= */
+
+        #noteSection {
+
+            display: none;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.08);
+
+            margin-top: 25px;
+
+        }
+
+
+        #noteSection > h2 {
+
+            color: #9333ea;
+
+            font-size: 27px;
+
+            margin-bottom: 25px;
+
+            padding-bottom: 15px;
+
+            border-bottom:
+                2px solid #eee;
+
+        }
+
+
+        .note-content {
+
+            color: #263238;
+
+            font-size: 16px;
+
+        }
+
+
+        .note-content h2 {
+
+            color: #9333ea;
+
+            font-size: 25px;
+
+            margin-top: 35px;
+
+            margin-bottom: 15px;
+
+            padding-bottom: 8px;
+
+            border-bottom:
+                2px solid #eadcff;
+
+        }
+
+
+        .note-content h3 {
+
+            color: #6d28d9;
+
+            font-size: 20px;
+
+            margin-top: 27px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .note-content h4 {
+
+            color: #4c1d95;
+
+            margin-top: 20px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .note-content p {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .note-content ul {
+
+            margin-left: 25px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .note-content ol {
+
+            margin-left: 25px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .note-content li {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .definition {
+
+            background: #f5eaff;
+
+            border-left:
+                5px solid #9333ea;
+
+            padding: 16px;
+
+            margin:
+                18px 0;
+
+            border-radius: 8px;
+
+        }
+
+
+        .important {
+
+            background: #fff8e1;
+
+            border-left:
+                5px solid #f59e0b;
+
+            padding: 16px;
+
+            margin:
+                18px 0;
+
+            border-radius: 8px;
+
+        }
+
+
+        .clinical {
+
+            background: #e8f4ff;
+
+            border-left:
+                5px solid #2563eb;
+
+            padding: 16px;
+
+            margin:
+                18px 0;
+
+            border-radius: 8px;
+
+        }
+
+
+        .summary {
+
+            background: #e8fff2;
+
+            border-left:
+                5px solid #18a058;
+
+            padding: 18px;
+
+            margin-top: 25px;
+
+            border-radius: 8px;
+
+        }
+
+
+        .summary h3 {
+
+            color: #168a4b;
+
+            margin-top: 0;
+
+        }
+
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+            margin:
+                20px 0;
+
+        }
+
+
+        .note-table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 600px;
+
+        }
+
+
+        .note-table th,
+        .note-table td {
+
+            border:
+                1px solid #ddd;
+
+            padding: 12px;
+
+            text-align: left;
+
+        }
+
+
+        .note-table th {
+
+            background: #9333ea;
+
+            color: white;
+
+        }
+
+
+        .note-table tr:nth-child(even) {
+
+            background: #fafafa;
+
+        }
+
+
+
+        /* =========================================
+           DEFAULT MESSAGE
+        ========================================= */
+
+        .message {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .message h2 {
+
+            color: #9333ea;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .message p {
+
+            color: #667085;
+
+        }
+
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #718077;
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .header-content {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+
+            .actions {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            #noteSection {
+
+                padding: 22px 18px;
+
+            }
+
+
+            .topic-header h1 {
+
+                font-size: 25px;
+
+            }
+
+
+            .note-content {
+
+                font-size: 15px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -362,178 +661,211 @@ footer {
 <body>
 
 
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <header>
 
-<div class="header-content">
+    <div class="header-content">
 
-<div class="logo">
+        <div class="logo">
 
-🩺 OGCONS Study Hub
+            🫀 OGCONS Study Hub
 
-</div>
+        </div>
 
 
-<button
-    class="back-button"
-    onclick="goBack()">
+        <button
+            class="back-button"
+            onclick="goBack()">
 
-← Back to Topics
+            ← Back to Topics
 
-</button>
+        </button>
 
-</div>
+    </div>
 
 </header>
 
 
 
+<!-- =========================================
+     MAIN
+========================================= -->
+
 <div class="container">
 
 
-<div class="topic-header">
+    <!-- ======================================
+         TOPIC HEADER
+    ======================================= -->
 
-<div class="topic-icon">
+    <div class="topic-header">
 
-🫀
+        <div class="topic-icon">
 
-</div>
+            🫀
 
+        </div>
 
-<h1 id="topicTitle">
 
-Anatomy & Physiology
+        <h1 id="topicTitle">
 
-</h1>
+            Anatomy & Physiology
 
+        </h1>
 
-<p>
 
-Study this topic and test your
-understanding with a quiz.
+        <p>
 
-</p>
+            Study the structure and functions
+            of the human body and test your
+            understanding with a quiz.
 
-</div>
+        </p>
 
+    </div>
 
 
-<div class="actions">
 
+    <!-- ======================================
+         ACTIONS
+    ======================================= -->
 
-<div class="action-card">
+    <div class="actions">
 
-<div class="action-icon">
 
-📖
+        <!-- READ NOTE -->
 
-</div>
+        <div class="action-card">
 
-<h2>
+            <div class="action-icon">
 
-Read Note
+                📖
 
-</h2>
+            </div>
 
-<p>
 
-Study the detailed note for
-this topic.
+            <h2>
 
-</p>
+                Read Note
 
-<button
-    class="action-button"
-    onclick="showNote()">
+            </h2>
 
-Read Note
 
-</button>
+            <p>
 
-</div>
+                Study the full and detailed
+                note for the selected topic.
 
+            </p>
 
 
-<div class="action-card">
+            <button
+                class="action-button read-button"
+                onclick="showNote()">
 
-<div class="action-icon">
+                📖 Read Note
 
-📝
+            </button>
 
-</div>
+        </div>
 
-<h2>
 
-Take Quiz
 
-</h2>
+        <!-- QUIZ -->
 
-<p>
+        <div class="action-card">
 
-Test your knowledge and see
-how well you understand this topic.
+            <div class="action-icon">
 
-</p>
+                📝
 
-<button
-    class="action-button"
-    onclick="takeQuiz()">
+            </div>
 
-Take Quiz
 
-</button>
+            <h2>
 
-</div>
+                Take Quiz
 
+            </h2>
 
-</div>
 
+            <p>
 
+                Test your knowledge of this
+                Anatomy & Physiology topic.
 
-<div
-    id="noteSection">
+            </p>
 
 
-<h2>
+            <button
+                class="action-button quiz-button"
+                onclick="takeQuiz()">
 
-📖
-<span id="noteTitle">
-Topic Note
-</span>
+                📝 Take Quiz
 
-</h2>
+            </button>
 
+        </div>
 
-<div
-    class="note-content"
-    id="noteContent">
+    </div>
 
-</div>
 
 
-</div>
+    <!-- ======================================
+         NOTE
+    ======================================= -->
 
+    <div id="noteSection">
 
 
-<div
-    class="message"
-    id="messageBox">
+        <h2>
 
-<h2>
+            📖
+            <span id="noteTitle">
+                Topic Note
+            </span>
 
-📚 Ready to Study?
+        </h2>
 
-</h2>
 
-<p>
+        <div
+            class="note-content"
+            id="noteContent">
 
-Choose <strong>Read Note</strong>
-to study this topic or
-<strong>Take Quiz</strong>
-to test your knowledge.
+        </div>
 
-</p>
+    </div>
 
-</div>
+
+
+    <!-- ======================================
+         DEFAULT MESSAGE
+    ======================================= -->
+
+    <div
+        class="message"
+        id="messageBox">
+
+        <h2>
+
+            📚 Ready to Study?
+
+        </h2>
+
+
+        <p>
+
+            Select <strong>Read Note</strong>
+            to study the topic or
+            <strong>Take Quiz</strong>
+            to test your knowledge.
+
+        </p>
+
+    </div>
 
 
 </div>
@@ -542,7 +874,7 @@ to test your knowledge.
 
 <footer>
 
-OGCONS Study Hub © 2026
+    OGCONS Study Hub © 2026
 
 </footer>
 
@@ -551,246 +883,291 @@ OGCONS Study Hub © 2026
 <script>
 
 
+// ==================================================
+// GET TOPIC FROM URL
+// ==================================================
+
 const urlParams =
-new URLSearchParams(
-    window.location.search
-);
+    new URLSearchParams(
+        window.location.search
+    );
 
 
 const topic =
-urlParams.get("topic");
+    urlParams.get("topic");
+
 
 
 const topicTitle =
-document.getElementById(
-    "topicTitle"
-);
+    document.getElementById(
+        "topicTitle"
+    );
 
 
 const noteTitle =
-document.getElementById(
-    "noteTitle"
-);
+    document.getElementById(
+        "noteTitle"
+    );
 
 
-if (topic) {
+
+const selectedTopic =
+
+    topic ||
+
+    "Introduction to Anatomy";
+
+
 
 topicTitle.textContent =
-topic;
+    selectedTopic;
+
 
 noteTitle.textContent =
-topic;
+    selectedTopic;
 
-}
 
+
+// ==================================================
+// GO BACK
+// ==================================================
 
 function goBack() {
 
-window.location.href =
-"anatomy-topics.html";
+    window.location.href =
+        "anatomy-topics.html";
 
 }
 
+
+
+// ==================================================
+// TAKE QUIZ
+// ==================================================
 
 function takeQuiz() {
 
-if (!topic) {
 
-alert(
-"No topic was selected."
-);
+    const quizURL =
 
-return;
+        "anatomy-quiz.html?topic=" +
+
+        encodeURIComponent(
+            selectedTopic
+        );
+
+
+    window.location.href =
+        quizURL;
 
 }
 
-window.location.href =
-"anatomy-quiz.html?topic=" +
-encodeURIComponent(topic);
 
-}
 
+// ==================================================
+// SHOW NOTE
+// ==================================================
 
 function showNote() {
 
-const noteSection =
-document.getElementById(
-"noteSection"
-);
 
-const messageBox =
-document.getElementById(
-"messageBox"
-);
-
-const noteContent =
-document.getElementById(
-"noteContent"
-);
+    const noteSection =
+        document.getElementById(
+            "noteSection"
+        );
 
 
-noteContent.innerHTML =
-getNote(topic);
+    const messageBox =
+        document.getElementById(
+            "messageBox"
+        );
 
 
-noteSection.style.display =
-"block";
-
-messageBox.style.display =
-"none";
-
-noteSection.scrollIntoView({
-
-behavior: "smooth"
-
-});
-
-}
+    const noteContent =
+        document.getElementById(
+            "noteContent"
+        );
 
 
-function getNote(topic) {
+
+    const notes = {
 
 
-const notes = {
 
+// ======================================================
+// 1. INTRODUCTION TO ANATOMY
+// ======================================================
 
 "Introduction to Anatomy": `
 
-<h3>Introduction</h3>
+<h2>1. Introduction to Anatomy</h2>
 
-<p>
-Anatomy is the branch of science that studies
-the structure of the human body. It describes
-the size, shape, position and relationship of
-the different parts of the body.
-</p>
+<div class="definition">
 
-<p>
-Physiology is the study of how the different
-parts of the body function and work together
-to maintain life.
-</p>
+<strong>Definition:</strong>
+
+Anatomy is the scientific study of the structure of the human body and the relationship between its different parts.
+
+Physiology is the study of how the structures of the body function and work together to maintain life.
+
+</div>
+
 
 <h3>Branches of Anatomy</h3>
 
 <ul>
 
 <li>
-<strong>Gross anatomy:</strong> study of body
-structures that can be seen with the naked eye.
+<strong>Gross anatomy:</strong>
+Study of body structures that can be seen with the naked eye.
 </li>
 
 <li>
-<strong>Microscopic anatomy:</strong> study of
-structures that require a microscope.
+<strong>Microscopic anatomy:</strong>
+Study of structures that require a microscope.
 </li>
 
 <li>
-<strong>Histology:</strong> study of tissues.
+<strong>Histology:</strong>
+Study of tissues.
 </li>
 
 <li>
-<strong>Cytology:</strong> study of cells.
+<strong>Cytology:</strong>
+Study of cells.
+</li>
+
+<li>
+<strong>Developmental anatomy:</strong>
+Study of structural changes from fertilization through adulthood.
 </li>
 
 </ul>
 
-<h3>Levels of Organisation</h3>
-
-<p>
-The human body is organised from simple
-structures to more complex structures.
-</p>
-
-<ul>
-
-<li>Cell</li>
-
-<li>Tissue</li>
-
-<li>Organ</li>
-
-<li>Organ system</li>
-
-<li>Organism</li>
-
-</ul>
 
 <h3>Anatomical Position</h3>
 
 <p>
-The standard anatomical position is standing
-upright, facing forward, with the arms beside
-the body, palms facing forward and feet pointing
-forward.
+
+The anatomical position is the standard position used when describing the location of body structures.
+
+In this position, the person stands upright, faces forward, keeps the arms at the sides, and has the palms facing forward.
+
 </p>
+
 
 <h3>Directional Terms</h3>
 
-<ul>
+<div class="table-wrapper">
 
-<li>
-<strong>Superior:</strong> toward the head.
-</li>
+<table class="note-table">
 
-<li>
-<strong>Inferior:</strong> toward the feet.
-</li>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
 
-<li>
-<strong>Anterior:</strong> toward the front.
-</li>
+<tr>
+<td>Superior</td>
+<td>Toward the head or above</td>
+</tr>
 
-<li>
-<strong>Posterior:</strong> toward the back.
-</li>
+<tr>
+<td>Inferior</td>
+<td>Away from the head or below</td>
+</tr>
 
-<li>
-<strong>Medial:</strong> toward the midline.
-</li>
+<tr>
+<td>Anterior</td>
+<td>Toward the front</td>
+</tr>
 
-<li>
-<strong>Lateral:</strong> away from the midline.
-</li>
+<tr>
+<td>Posterior</td>
+<td>Toward the back</td>
+</tr>
 
-<li>
-<strong>Proximal:</strong> nearer to the point
-of attachment.
-</li>
+<tr>
+<td>Medial</td>
+<td>Toward the midline</td>
+</tr>
 
-<li>
-<strong>Distal:</strong> farther from the point
-of attachment.
-</li>
+<tr>
+<td>Lateral</td>
+<td>Away from the midline</td>
+</tr>
 
-</ul>
+<tr>
+<td>Proximal</td>
+<td>Nearer to the point of attachment</td>
+</tr>
+
+<tr>
+<td>Distal</td>
+<td>Farther from the point of attachment</td>
+</tr>
+
+<tr>
+<td>Superficial</td>
+<td>Near the surface</td>
+</tr>
+
+<tr>
+<td>Deep</td>
+<td>Farther from the surface</td>
+</tr>
+
+</table>
+
+</div>
+
 
 <h3>Body Planes</h3>
 
 <ul>
 
 <li>
-<strong>Sagittal plane:</strong> divides the body
-into right and left portions.
+<strong>Sagittal plane:</strong>
+Divides the body into right and left portions.
 </li>
 
 <li>
-<strong>Frontal plane:</strong> divides the body
-into anterior and posterior portions.
+<strong>Frontal or coronal plane:</strong>
+Divides the body into anterior and posterior portions.
 </li>
 
 <li>
-<strong>Transverse plane:</strong> divides the
-body into upper and lower portions.
+<strong>Transverse plane:</strong>
+Divides the body into superior and inferior portions.
 </li>
 
 </ul>
 
-<h3>Body Cavities</h3>
+
+<h3>Levels of Organization</h3>
+
+<ol>
+
+<li>Cells</li>
+
+<li>Tissues</li>
+
+<li>Organs</li>
+
+<li>Organ systems</li>
+
+<li>Organism</li>
+
+</ol>
+
+
+<h3>Major Body Cavities</h3>
 
 <ul>
 
 <li>Cranial cavity</li>
+
+<li>Vertebral cavity</li>
 
 <li>Thoracic cavity</li>
 
@@ -800,32 +1177,40 @@ body into upper and lower portions.
 
 </ul>
 
-<h3>Importance to Nursing</h3>
+
+<div class="summary">
+
+<h3>Summary</h3>
 
 <p>
-Knowledge of anatomy and physiology helps
-nurses understand normal body functions,
-recognise abnormalities, understand diseases,
-administer care correctly and communicate
-effectively with other healthcare professionals.
+
+Anatomy deals mainly with body structure, while physiology deals with body function. Understanding anatomical terminology and body organization is essential for studying all the body systems.
+
 </p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 2. MUSCULOSKELETAL SYSTEM
+// ======================================================
 
 "The Musculoskeletal System": `
 
-<h3>Introduction</h3>
+<h2>2. The Musculoskeletal System</h2>
 
-<p>
-The musculoskeletal system consists mainly of
-the bones, joints and muscles. It provides
-support, protection, movement and stability
-for the body.
-</p>
+<div class="definition">
 
-<h3>Functions of the Skeleton</h3>
+<strong>Definition:</strong>
+
+The musculoskeletal system consists mainly of bones, muscles, joints, cartilage, ligaments and tendons. It provides support, protection, movement and stability to the body.
+
+</div>
+
+
+<h3>Functions of the Skeletal System</h3>
 
 <ul>
 
@@ -833,136 +1218,211 @@ for the body.
 
 <li>Protects internal organs.</li>
 
-<li>Allows movement with muscles.</li>
+<li>Allows movement by providing attachment sites for muscles.</li>
 
 <li>Stores minerals such as calcium and phosphorus.</li>
 
-<li>Produces blood cells in bone marrow.</li>
+<li>Produces blood cells in the bone marrow.</li>
+
+<li>Stores fat in yellow bone marrow.</li>
 
 </ul>
+
 
 <h3>Types of Bones</h3>
 
 <ul>
 
-<li>Long bones</li>
+<li>
+<strong>Long bones:</strong>
+Examples include femur and humerus.
+</li>
 
-<li>Short bones</li>
+<li>
+<strong>Short bones:</strong>
+Examples include wrist and ankle bones.
+</li>
 
-<li>Flat bones</li>
+<li>
+<strong>Flat bones:</strong>
+Examples include skull bones, sternum and ribs.
+</li>
 
-<li>Irregular bones</li>
+<li>
+<strong>Irregular bones:</strong>
+Examples include vertebrae.
+</li>
 
 </ul>
 
-<h3>Major Bones</h3>
 
-<p>
-Important bones include the skull, vertebral
-column, ribs, sternum, clavicle, scapula,
-humerus, radius, ulna, pelvis, femur, tibia
-and fibula.
-</p>
+<h3>Structure of a Long Bone</h3>
+
+<ul>
+
+<li>Diaphysis – shaft of the bone.</li>
+
+<li>Epiphysis – ends of the bone.</li>
+
+<li>Periosteum – outer covering of bone.</li>
+
+<li>Compact bone – dense outer bone.</li>
+
+<li>Spongy bone – lighter internal bone.</li>
+
+<li>Bone marrow – found inside bone cavities.</li>
+
+</ul>
+
 
 <h3>Joints</h3>
 
 <p>
-A joint is the place where two or more bones
-meet. Joints allow movement and provide
-stability.
+
+A joint is the place where two or more bones meet.
+
 </p>
 
-<h3>Muscles</h3>
+<p>
+
+Joints allow movement and provide stability.
+
+</p>
+
+
+<h3>Types of Joints</h3>
 
 <ul>
 
 <li>
-<strong>Skeletal muscle:</strong> attached to
-bones and mainly responsible for voluntary
-movement.
+<strong>Fibrous joints:</strong>
+Usually allow little or no movement.
 </li>
 
 <li>
-<strong>Smooth muscle:</strong> found in internal
-organs and works involuntarily.
+<strong>Cartilaginous joints:</strong>
+Allow limited movement.
 </li>
 
 <li>
-<strong>Cardiac muscle:</strong> found in the
-heart and contracts involuntarily.
+<strong>Synovial joints:</strong>
+Freely movable joints.
 </li>
 
 </ul>
 
-<h3>Nursing Importance</h3>
+
+<h3>Types of Muscles</h3>
+
+<ul>
+
+<li>
+<strong>Skeletal muscle:</strong>
+Attached to bones and mainly responsible for voluntary movement.
+</li>
+
+<li>
+<strong>Smooth muscle:</strong>
+Found in organs such as the intestine and blood vessels.
+</li>
+
+<li>
+<strong>Cardiac muscle:</strong>
+Found only in the heart.
+</li>
+
+</ul>
+
+
+<h3>Tendons and Ligaments</h3>
 
 <p>
-Understanding the musculoskeletal system helps
-nurses assess mobility, fractures, joint problems,
-muscle weakness, posture and physical activity.
+
+A tendon connects muscle to bone.
+
+A ligament connects bone to bone.
+
 </p>
+
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Common disorders of the musculoskeletal system include fractures, arthritis, osteoporosis, sprains and muscle injuries.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
+
+<p>
+
+The musculoskeletal system provides support, protects organs and enables movement. Bones provide the framework while muscles provide the force needed for movement.
+
+</p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 3. BLOOD AND CARDIOVASCULAR SYSTEM
+// ======================================================
 
 "Blood and Cardiovascular System": `
 
-<h3>Introduction</h3>
+<h2>3. Blood and Cardiovascular System</h2>
 
-<p>
-The cardiovascular system consists of the heart,
-blood and blood vessels. It circulates blood
-throughout the body.
-</p>
+<div class="definition">
 
-<h3>Blood</h3>
+<strong>Definition:</strong>
 
-<p>
-Blood is a specialised connective tissue that
-transports substances around the body.
-</p>
+The cardiovascular system consists of the heart, blood and blood vessels. Its major function is to transport oxygen, nutrients, hormones and waste products throughout the body.
 
-<h4>Main Components</h4>
+</div>
+
+
+<h3>Components of Blood</h3>
 
 <ul>
 
-<li>Plasma</li>
+<li>
+<strong>Plasma:</strong>
+Liquid portion of blood.
+</li>
 
-<li>Red blood cells</li>
+<li>
+<strong>Red blood cells:</strong>
+Transport oxygen mainly through haemoglobin.
+</li>
 
-<li>White blood cells</li>
+<li>
+<strong>White blood cells:</strong>
+Help defend the body against infection.
+</li>
 
-<li>Platelets</li>
-
-</ul>
-
-<h3>Functions of Blood</h3>
-
-<ul>
-
-<li>Transport of oxygen.</li>
-
-<li>Transport of nutrients.</li>
-
-<li>Removal of waste products.</li>
-
-<li>Defence against infection.</li>
-
-<li>Blood clotting.</li>
-
-<li>Regulation of body temperature.</li>
+<li>
+<strong>Platelets:</strong>
+Important in blood clotting.
+</li>
 
 </ul>
+
 
 <h3>The Heart</h3>
 
 <p>
-The heart is a muscular organ that pumps blood
-through the pulmonary and systemic circulation.
+
+The heart is a muscular organ located in the thoracic cavity between the lungs. It pumps blood throughout the body.
+
 </p>
 
-<h4>Chambers</h4>
+
+<h3>Chambers of the Heart</h3>
 
 <ul>
 
@@ -976,60 +1436,128 @@ through the pulmonary and systemic circulation.
 
 </ul>
 
+
+<h3>Heart Valves</h3>
+
+<ul>
+
+<li>Tricuspid valve</li>
+
+<li>Pulmonary valve</li>
+
+<li>Mitral valve</li>
+
+<li>Aortic valve</li>
+
+</ul>
+
+
 <h3>Blood Vessels</h3>
 
 <ul>
 
 <li>
-<strong>Arteries:</strong> carry blood away
-from the heart.
+<strong>Arteries:</strong>
+Carry blood away from the heart.
 </li>
 
 <li>
-<strong>Veins:</strong> carry blood toward
-the heart.
+<strong>Veins:</strong>
+Carry blood toward the heart.
 </li>
 
 <li>
-<strong>Capillaries:</strong> allow exchange of
-materials between blood and tissues.
+<strong>Capillaries:</strong>
+Small vessels where exchange of substances occurs between blood and tissues.
 </li>
 
 </ul>
 
+
 <h3>Circulation</h3>
 
 <p>
-Pulmonary circulation carries blood between the
-heart and lungs, while systemic circulation
-carries blood between the heart and the rest
-of the body.
-</p>
 
-<h3>Nursing Importance</h3>
+<strong>Pulmonary circulation</strong> carries blood between the heart and lungs.
+
+</p>
 
 <p>
-Knowledge of the cardiovascular system is
-important when assessing pulse, blood pressure,
-circulation, heart sounds and cardiovascular
-conditions.
+
+<strong>Systemic circulation</strong> carries blood between the heart and the rest of the body.
+
 </p>
+
+<div class="important">
+
+<strong>Important:</strong>
+
+The right side of the heart mainly handles deoxygenated blood, while the left side mainly handles oxygenated blood.
+
+</div>
+
+
+<h3>Functions of the Cardiovascular System</h3>
+
+<ul>
+
+<li>Transport of oxygen.</li>
+
+<li>Transport of nutrients.</li>
+
+<li>Removal of carbon dioxide and metabolic wastes.</li>
+
+<li>Transport of hormones.</li>
+
+<li>Regulation of body temperature.</li>
+
+<li>Protection through blood clotting and immune cells.</li>
+
+</ul>
+
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Important cardiovascular conditions include hypertension, heart failure, coronary artery disease, myocardial infarction and stroke.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
+
+<p>
+
+The cardiovascular system maintains circulation of blood throughout the body. The heart acts as the pump while blood vessels provide the pathways for blood flow.
+
+</p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 4. RESPIRATORY SYSTEM
+// ======================================================
 
 "The Respiratory System": `
 
-<h3>Introduction</h3>
+<h2>4. The Respiratory System</h2>
 
-<p>
-The respiratory system is responsible for
-breathing and gas exchange. It supplies oxygen
-to the body and removes carbon dioxide.
-</p>
+<div class="definition">
 
-<h3>Major Structures</h3>
+<strong>Definition:</strong>
+
+The respiratory system is responsible for taking oxygen into the body and removing carbon dioxide.
+
+</div>
+
+
+<h3>Major Respiratory Organs</h3>
 
 <ul>
 
@@ -1051,64 +1579,95 @@ to the body and removes carbon dioxide.
 
 </ul>
 
-<h3>Functions</h3>
+
+<h3>Functions of the Respiratory System</h3>
 
 <ul>
 
-<li>Oxygen intake.</li>
+<li>Provides oxygen to the body.</li>
 
-<li>Carbon dioxide removal.</li>
+<li>Removes carbon dioxide.</li>
 
-<li>Helps regulate blood pH.</li>
+<li>Helps maintain acid-base balance.</li>
 
 <li>Produces sound through the larynx.</li>
 
+<li>Helps regulate body temperature and moisture.</li>
+
 </ul>
+
 
 <h3>Mechanism of Breathing</h3>
 
 <p>
-During inspiration, the diaphragm contracts
-and moves downward. The volume of the thoracic
-cavity increases and air enters the lungs.
+
+<strong>Inspiration</strong> is the process of breathing air into the lungs.
+
+During inspiration, the diaphragm contracts and moves downward while the chest cavity expands.
+
 </p>
 
+
 <p>
-During expiration, the diaphragm relaxes and
-moves upward. Thoracic volume decreases and
-air leaves the lungs.
+
+<strong>Expiration</strong> is the process of breathing air out of the lungs.
+
+The diaphragm relaxes and moves upward while the thoracic cavity decreases in volume.
+
 </p>
+
 
 <h3>Gas Exchange</h3>
 
 <p>
+
 Gas exchange occurs mainly in the alveoli.
-Oxygen moves from the alveolar air into the
-blood, while carbon dioxide moves from the
-blood into the alveoli.
+
+Oxygen moves from the alveoli into the blood, while carbon dioxide moves from the blood into the alveoli and is then exhaled.
+
 </p>
 
-<h3>Nursing Importance</h3>
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Respiratory disorders include asthma, pneumonia, tuberculosis, chronic obstructive pulmonary disease and respiratory failure.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
 
 <p>
-Nurses assess respiratory rate, depth, rhythm,
-oxygen saturation, breath sounds and signs of
-respiratory distress.
+
+The respiratory system supplies oxygen and removes carbon dioxide. The lungs and alveoli are particularly important for gas exchange.
+
 </p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 5. DIGESTIVE SYSTEM
+// ======================================================
 
 "The Digestive System": `
 
-<h3>Introduction</h3>
+<h2>5. The Digestive System</h2>
 
-<p>
-The digestive system breaks food down into
-smaller substances that can be absorbed and
-used by the body.
-</p>
+<div class="definition">
+
+<strong>Definition:</strong>
+
+The digestive system breaks food down into smaller substances that can be absorbed and used by the body.
+
+</div>
+
 
 <h3>Major Organs</h3>
 
@@ -1132,6 +1691,7 @@ used by the body.
 
 </ul>
 
+
 <h3>Accessory Organs</h3>
 
 <ul>
@@ -1144,97 +1704,165 @@ used by the body.
 
 </ul>
 
-<h3>Digestive Processes</h3>
+
+<h3>Major Functions</h3>
 
 <ul>
 
-<li>Ingestion</li>
+<li>Ingestion of food.</li>
 
-<li>Digestion</li>
+<li>Mechanical digestion.</li>
 
-<li>Absorption</li>
+<li>Chemical digestion.</li>
 
-<li>Assimilation</li>
+<li>Absorption of nutrients.</li>
 
-<li>Defecation</li>
+<li>Elimination of waste.</li>
 
 </ul>
+
+
+<h3>Digestion in the Mouth</h3>
+
+<p>
+
+Digestion begins in the mouth.
+
+The teeth mechanically break food into smaller pieces while saliva moistens the food and begins carbohydrate digestion.
+
+</p>
+
+
+<h3>Stomach</h3>
+
+<p>
+
+The stomach stores food, mixes it and begins significant protein digestion.
+
+Gastric secretions include hydrochloric acid and digestive enzymes.
+
+</p>
+
 
 <h3>Small Intestine</h3>
 
 <p>
-Most digestion and absorption of nutrients
-occur in the small intestine. Its lining contains
-villi that increase the surface area available
-for absorption.
+
+The small intestine is the major site of digestion and nutrient absorption.
+
+Its lining contains numerous villi that increase the surface area available for absorption.
+
 </p>
+
+
+<h3>Large Intestine</h3>
+
+<p>
+
+The large intestine mainly absorbs water and electrolytes and forms faeces.
+
+</p>
+
 
 <h3>Liver</h3>
 
 <p>
-The liver performs many functions, including
-processing nutrients, producing bile and
-detoxifying various substances.
+
+The liver performs many functions including production of bile, metabolism of nutrients, detoxification and storage of certain substances.
+
 </p>
 
-<h3>Nursing Importance</h3>
+
+<h3>Pancreas</h3>
 
 <p>
-Understanding digestion helps nurses care for
-patients with conditions such as diarrhoea,
-constipation, ulcers, intestinal obstruction
-and other gastrointestinal disorders.
+
+The pancreas produces digestive enzymes and also produces hormones involved in blood glucose regulation.
+
 </p>
+
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Common digestive conditions include peptic ulcer disease, appendicitis, diarrhoea, constipation, hepatitis and intestinal obstruction.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
+
+<p>
+
+The digestive system processes food, absorbs nutrients and eliminates waste. Digestion involves mechanical and chemical processes.
+
+</p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 6. INTEGUMENTARY SYSTEM
+// ======================================================
 
 "The Integumentary System": `
 
-<h3>Introduction</h3>
+<h2>6. The Integumentary System</h2>
 
-<p>
-The integumentary system consists mainly of
-the skin, hair, nails and associated glands.
-The skin is the largest organ of the human body.
-</p>
+<div class="definition">
+
+<strong>Definition:</strong>
+
+The integumentary system consists mainly of the skin, hair, nails, sweat glands and sebaceous glands.
+
+</div>
+
+
+<h3>Functions of the Skin</h3>
+
+<ul>
+
+<li>Protection from injury and microorganisms.</li>
+
+<li>Prevention of excessive water loss.</li>
+
+<li>Temperature regulation.</li>
+
+<li>Sensation.</li>
+
+<li>Vitamin D synthesis.</li>
+
+<li>Excretion through sweat.</li>
+
+</ul>
+
 
 <h3>Layers of the Skin</h3>
 
 <ul>
 
 <li>
-<strong>Epidermis:</strong> outer layer of the skin.
+<strong>Epidermis:</strong>
+Outer layer of the skin.
 </li>
 
 <li>
-<strong>Dermis:</strong> deeper layer containing
-blood vessels, nerves, glands and hair follicles.
+<strong>Dermis:</strong>
+Layer containing blood vessels, nerves, glands and hair follicles.
 </li>
 
 <li>
-<strong>Subcutaneous layer:</strong> contains
-fat and connective tissue beneath the skin.
+<strong>Subcutaneous layer:</strong>
+Contains mainly connective tissue and fat.
 </li>
 
 </ul>
 
-<h3>Functions</h3>
-
-<ul>
-
-<li>Protection</li>
-
-<li>Temperature regulation</li>
-
-<li>Sensation</li>
-
-<li>Prevention of excessive water loss</li>
-
-<li>Excretion of some substances through sweat</li>
-
-</ul>
 
 <h3>Skin Appendages</h3>
 
@@ -1250,97 +1878,183 @@ fat and connective tissue beneath the skin.
 
 </ul>
 
-<h3>Nursing Importance</h3>
+
+<h3>Temperature Regulation</h3>
 
 <p>
-Nurses assess the skin for colour, temperature,
-moisture, lesions, wounds, pressure injuries
-and other abnormalities.
+
+The skin helps regulate body temperature through sweating and changes in blood flow to the skin.
+
+When the body is hot, sweating increases and skin blood vessels dilate.
+
 </p>
+
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Examples of integumentary problems include burns, wounds, pressure ulcers, dermatitis, acne and skin infections.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
+
+<p>
+
+The integumentary system protects the body, provides sensation, assists temperature regulation and contributes to several other important functions.
+
+</p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 7. EXCRETORY SYSTEM
+// ======================================================
 
 "The Excretory System": `
 
-<h3>Introduction</h3>
+<h2>7. The Excretory System</h2>
 
-<p>
-The excretory system removes metabolic waste
-products from the body and helps maintain the
-internal environment.
-</p>
+<div class="definition">
 
-<h3>Urinary System</h3>
+<strong>Definition:</strong>
 
-<p>
-The urinary system consists of the kidneys,
-ureters, urinary bladder and urethra.
-</p>
+The excretory system removes metabolic wastes from the body and helps maintain fluid, electrolyte and acid-base balance.
 
-<h3>Kidneys</h3>
+</div>
 
-<p>
-The kidneys filter the blood and form urine.
-They help regulate water balance, electrolytes
-and acid-base balance.
-</p>
 
-<h3>Formation of Urine</h3>
+<h3>Main Organs</h3>
 
 <ul>
 
-<li>Filtration</li>
+<li>Kidneys</li>
 
-<li>Reabsorption</li>
+<li>Ureters</li>
 
-<li>Secretion</li>
+<li>Urinary bladder</li>
+
+<li>Urethra</li>
 
 </ul>
 
-<h3>Ureters</h3>
+
+<h3>Functions of the Kidneys</h3>
+
+<ul>
+
+<li>Remove metabolic wastes from blood.</li>
+
+<li>Regulate water balance.</li>
+
+<li>Regulate electrolytes.</li>
+
+<li>Help maintain acid-base balance.</li>
+
+<li>Help regulate blood pressure.</li>
+
+<li>Produce erythropoietin.</li>
+
+<li>Activate vitamin D.</li>
+
+</ul>
+
+
+<h3>The Nephron</h3>
 
 <p>
-The ureters transport urine from the kidneys
-to the urinary bladder.
+
+The nephron is the functional unit of the kidney.
+
+Each kidney contains many nephrons.
+
 </p>
 
-<h3>Urinary Bladder</h3>
+
+<h3>Urine Formation</h3>
 
 <p>
-The urinary bladder temporarily stores urine
-before it is eliminated.
+
+Urine formation involves three major processes:
+
 </p>
 
-<h3>Urethra</h3>
+<ol>
+
+<li>
+<strong>Filtration:</strong>
+Blood is filtered in the renal corpuscle.
+</li>
+
+<li>
+<strong>Reabsorption:</strong>
+Useful substances and water are returned to the blood.
+</li>
+
+<li>
+<strong>Secretion:</strong>
+Additional substances are transferred into the tubular fluid for elimination.
+</li>
+
+</ol>
+
+
+<h3>Pathway of Urine</h3>
 
 <p>
-The urethra carries urine from the bladder
-to the outside of the body.
+
+Kidney → ureter → urinary bladder → urethra → outside the body.
+
 </p>
 
-<h3>Nursing Importance</h3>
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Common urinary problems include urinary tract infection, kidney stones, acute kidney injury and chronic kidney disease.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
 
 <p>
-Nurses monitor urine amount, colour, appearance,
-frequency and other changes that may indicate
-problems with renal or urinary function.
+
+The urinary system removes waste and maintains internal balance. The kidneys are the major organs responsible for urine formation and regulation of body fluids.
+
 </p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 8. ENDOCRINE SYSTEM
+// ======================================================
 
-"The Endocrine System Introduction": `
+"The Endocrine System": `
 
-<h3>Introduction</h3>
+<h2>8. The Endocrine System</h2>
 
-<p>
-The endocrine system consists of glands that
-produce hormones. Hormones are chemical
-messengers that regulate many body processes.
-</p>
+<div class="definition">
+
+<strong>Definition:</strong>
+
+The endocrine system consists of glands that produce hormones. Hormones are chemical messengers that travel through the blood to target cells and organs.
+
+</div>
+
 
 <h3>Major Endocrine Glands</h3>
 
@@ -1362,58 +2076,152 @@ messengers that regulate many body processes.
 
 <li>Testes</li>
 
+<li>Pineal gland</li>
+
 </ul>
 
-<h3>Functions of Hormones</h3>
+
+<h3>Functions of the Endocrine System</h3>
 
 <ul>
 
-<li>Growth and development</li>
+<li>Regulates growth and development.</li>
 
-<li>Metabolism</li>
+<li>Controls metabolism.</li>
 
-<li>Reproduction</li>
+<li>Helps regulate reproduction.</li>
 
-<li>Stress response</li>
+<li>Maintains fluid and electrolyte balance.</li>
 
-<li>Blood glucose regulation</li>
+<li>Helps the body respond to stress.</li>
 
-<li>Water and electrolyte balance</li>
+<li>Regulates blood glucose.</li>
 
 </ul>
 
-<h3>Examples</h3>
+
+<h3>Important Hormones</h3>
+
+<div class="table-wrapper">
+
+<table class="note-table">
+
+<tr>
+
+<th>Gland</th>
+
+<th>Hormone</th>
+
+<th>Main Function</th>
+
+</tr>
+
+<tr>
+
+<td>Thyroid</td>
+
+<td>Thyroxine</td>
+
+<td>Regulates metabolism</td>
+
+</tr>
+
+<tr>
+
+<td>Pancreas</td>
+
+<td>Insulin</td>
+
+<td>Lowers blood glucose</td>
+
+</tr>
+
+<tr>
+
+<td>Pancreas</td>
+
+<td>Glucagon</td>
+
+<td>Raises blood glucose</td>
+
+</tr>
+
+<tr>
+
+<td>Adrenal</td>
+
+<td>Cortisol</td>
+
+<td>Helps regulate stress response and metabolism</td>
+
+</tr>
+
+<tr>
+
+<td>Pituitary</td>
+
+<td>Growth hormone</td>
+
+<td>Promotes growth</td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<h3>Hormonal Regulation</h3>
 
 <p>
-Insulin helps regulate blood glucose.
-Thyroid hormones influence metabolism.
-Adrenal hormones participate in stress
-responses and regulation of blood pressure.
+
+Many endocrine processes are regulated through negative feedback. When the desired level of a hormone or its effect is reached, signals that stimulated its production are reduced.
+
 </p>
 
-<h3>Nursing Importance</h3>
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Endocrine disorders include diabetes mellitus, thyroid disorders, Cushing syndrome and disorders of growth hormone.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
 
 <p>
-Knowledge of the endocrine system helps nurses
-understand conditions such as diabetes mellitus,
-thyroid disorders and hormonal abnormalities.
+
+The endocrine system controls many body functions through hormones. Its activities are closely coordinated with the nervous system.
+
 </p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 9. FEMALE REPRODUCTIVE SYSTEM
+// ======================================================
 
 "The Female Reproductive System": `
 
-<h3>Introduction</h3>
+<h2>9. The Female Reproductive System</h2>
 
-<p>
-The female reproductive system consists of
-organs involved in production of ova,
-fertilisation, pregnancy and childbirth.
-</p>
+<div class="definition">
 
-<h3>Major Organs</h3>
+<strong>Definition:</strong>
+
+The female reproductive system consists of organs involved in production of ova, fertilization, pregnancy, childbirth and reproductive hormone production.
+
+</div>
+
+
+<h3>Major Female Reproductive Organs</h3>
 
 <ul>
 
@@ -1427,61 +2235,118 @@ fertilisation, pregnancy and childbirth.
 
 <li>Vagina</li>
 
+<li>External genitalia</li>
+
 </ul>
+
 
 <h3>Ovaries</h3>
 
 <p>
-The ovaries produce ova and female reproductive
-hormones such as oestrogen and progesterone.
+
+The ovaries produce ova and reproductive hormones, mainly oestrogen and progesterone.
+
 </p>
+
 
 <h3>Fallopian Tubes</h3>
 
 <p>
-The fallopian tubes transport the ovum from
-the ovary toward the uterus. Fertilisation
-commonly occurs in the fallopian tube.
+
+The fallopian tubes transport the ovum toward the uterus. Fertilization commonly occurs in the fallopian tube.
+
 </p>
+
 
 <h3>Uterus</h3>
 
 <p>
-The uterus is the organ where implantation
-and development of the embryo and fetus occur.
+
+The uterus is a muscular organ where implantation occurs and where the fetus develops during pregnancy.
+
 </p>
+
 
 <h3>Menstrual Cycle</h3>
 
 <p>
-The menstrual cycle involves coordinated
-changes in the ovaries and uterus under hormonal
-control.
+
+The menstrual cycle involves coordinated changes in the ovaries and uterus under hormonal control.
+
+Major phases include:
+
 </p>
 
-<h3>Nursing Importance</h3>
+<ul>
+
+<li>Menstrual phase</li>
+
+<li>Follicular/proliferative phase</li>
+
+<li>Ovulation</li>
+
+<li>Luteal/secretory phase</li>
+
+</ul>
+
+
+<h3>Important Hormones</h3>
+
+<ul>
+
+<li>Follicle-stimulating hormone</li>
+
+<li>Luteinizing hormone</li>
+
+<li>Oestrogen</li>
+
+<li>Progesterone</li>
+
+</ul>
+
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Common female reproductive problems include menstrual disorders, pelvic inflammatory disease, ovarian cysts, uterine fibroids and infertility.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
 
 <p>
-Knowledge of the female reproductive system
-is important in maternal health, reproductive
-health, family planning and obstetric nursing.
+
+The female reproductive system produces ova and reproductive hormones and provides the organs necessary for fertilization, pregnancy and childbirth.
+
 </p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 10. MALE REPRODUCTIVE SYSTEM
+// ======================================================
 
 "The Male Reproductive System": `
 
-<h3>Introduction</h3>
+<h2>10. The Male Reproductive System</h2>
 
-<p>
-The male reproductive system produces sperm
-and male reproductive hormones and provides
-the structures needed for reproduction.
-</p>
+<div class="definition">
 
-<h3>Major Organs</h3>
+<strong>Definition:</strong>
+
+The male reproductive system consists of organs responsible for producing sperm, producing male reproductive hormones and delivering sperm for reproduction.
+
+</div>
+
+
+<h3>Major Male Reproductive Organs</h3>
 
 <ul>
 
@@ -1495,142 +2360,361 @@ the structures needed for reproduction.
 
 <li>Prostate gland</li>
 
+<li>Bulbourethral glands</li>
+
 <li>Penis</li>
 
-<li>Urethra</li>
+<li>Scrotum</li>
 
 </ul>
+
 
 <h3>Testes</h3>
 
 <p>
+
 The testes produce sperm and testosterone.
+
+Sperm production occurs in the seminiferous tubules.
+
 </p>
+
 
 <h3>Epididymis</h3>
 
 <p>
-The epididymis is where sperm mature and are
-temporarily stored.
+
+The epididymis is where sperm mature and are stored temporarily.
+
 </p>
+
+
+<h3>Vas Deferens</h3>
+
+<p>
+
+The vas deferens transports sperm from the epididymis toward the ejaculatory ducts.
+
+</p>
+
 
 <h3>Accessory Glands</h3>
 
 <p>
-The seminal vesicles, prostate gland and other
-accessory glands contribute fluids that form
-semen.
+
+The seminal vesicles, prostate gland and bulbourethral glands contribute fluids that form semen and support sperm function.
+
 </p>
 
-<h3>Functions</h3>
 
-<ul>
-
-<li>Sperm production</li>
-
-<li>Hormone production</li>
-
-<li>Transport of sperm</li>
-
-<li>Delivery of sperm during reproduction</li>
-
-</ul>
-
-<h3>Nursing Importance</h3>
+<h3>Testosterone</h3>
 
 <p>
-Understanding the male reproductive system is
-important when caring for patients with
-reproductive, urinary and sexual health problems.
+
+Testosterone is the principal male sex hormone. It contributes to development of male reproductive structures, secondary sexual characteristics and supports sperm production.
+
 </p>
+
+
+<h3>Sperm Production</h3>
+
+<p>
+
+Spermatogenesis is the process through which sperm cells are produced in the testes.
+
+</p>
+
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Problems of the male reproductive system include infertility, prostatitis, benign prostatic enlargement, testicular disorders and sexually transmitted infections.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
+
+<p>
+
+The male reproductive system produces sperm and testosterone and provides the structures needed for reproduction.
+
+</p>
+
+</div>
 
 `,
 
 
+// ======================================================
+// 11. FOETAL DEVELOPMENT
+// ======================================================
 
 "Foetal Development": `
 
-<h3>Introduction</h3>
+<h2>11. Foetal Development</h2>
+
+<div class="definition">
+
+<strong>Definition:</strong>
+
+Foetal development refers to the growth and maturation of the developing human from the embryonic period through the fetal period until birth.
+
+</div>
+
+
+<h3>Fertilization</h3>
 
 <p>
-Foetal development refers to the growth and
-development of the unborn baby from early
-pregnancy until birth.
+
+Fertilization occurs when a sperm cell fuses with an ovum, producing a zygote.
+
+The zygote begins repeated cell division as it travels toward the uterus.
+
 </p>
 
-<h3>Fertilisation</h3>
-
-<p>
-Fertilisation occurs when a sperm cell combines
-with an ovum to form a zygote.
-</p>
 
 <h3>Implantation</h3>
 
 <p>
-After early cell division, the developing
-conceptus reaches the uterus and implants into
-the uterine lining.
+
+Implantation occurs when the developing blastocyst attaches to and becomes embedded in the lining of the uterus.
+
 </p>
+
 
 <h3>Embryonic Period</h3>
 
 <p>
-The embryonic period is an important stage
-during which major organs and body structures
-begin to develop.
+
+The embryonic period is an important stage of development during which major organs and body structures begin to form.
+
 </p>
 
-<h3>Foetal Period</h3>
+
+<h3>Fetal Period</h3>
 
 <p>
-During the foetal period, the developing fetus
-mainly grows and undergoes further maturation
-of its organs and body systems.
+
+The fetal period is characterized mainly by growth and maturation of organs and body systems.
+
 </p>
+
 
 <h3>Placenta</h3>
 
 <p>
-The placenta provides an important interface
-between the mother and developing fetus. It
-allows exchange of oxygen, nutrients and waste
-products and also produces important hormones.
+
+The placenta develops during pregnancy and provides an important interface between maternal and fetal circulation.
+
+It is involved in exchange of oxygen, nutrients and waste products and also produces hormones that support pregnancy.
+
 </p>
+
 
 <h3>Umbilical Cord</h3>
 
 <p>
-The umbilical cord connects the fetus to the
-placenta and contains blood vessels that support
-maternal-fetal exchange.
+
+The umbilical cord connects the fetus to the placenta and contains blood vessels that transport blood between them.
+
 </p>
 
-<h3>Nursing Importance</h3>
+
+<h3>Fetal Circulation</h3>
 
 <p>
-Knowledge of foetal development helps nurses
-understand antenatal care, fetal growth,
-pregnancy complications and maternal-child
-health.
+
+Before birth, the fetus receives oxygenated blood from the placenta rather than directly from the lungs.
+
+Special fetal circulatory pathways help direct blood around the developing lungs.
+
 </p>
+
+
+<h3>Factors Affecting Foetal Development</h3>
+
+<ul>
+
+<li>Maternal nutrition</li>
+
+<li>Maternal health</li>
+
+<li>Infections</li>
+
+<li>Alcohol and certain drugs</li>
+
+<li>Smoking and tobacco exposure</li>
+
+<li>Genetic factors</li>
+
+<li>Environmental factors</li>
+
+</ul>
+
+
+<h3>Stages of Pregnancy</h3>
+
+<p>
+
+Pregnancy is commonly divided into three trimesters.
+
+</p>
+
+<ul>
+
+<li>
+<strong>First trimester:</strong>
+Early development and formation of major structures.
+</li>
+
+<li>
+<strong>Second trimester:</strong>
+Continued growth and maturation.
+</li>
+
+<li>
+<strong>Third trimester:</strong>
+Rapid growth and preparation of organs for life after birth.
+</li>
+
+</ul>
+
+
+<div class="clinical">
+
+<strong>Clinical relevance:</strong>
+
+Adequate antenatal care, proper nutrition, prevention of infections, avoidance of harmful substances and monitoring of maternal and fetal health are important for healthy pregnancy outcomes.
+
+</div>
+
+
+<div class="summary">
+
+<h3>Summary</h3>
+
+<p>
+
+Foetal development begins after fertilization and continues through implantation, embryonic development, fetal growth and maturation until birth. The placenta and umbilical cord play major roles in supporting the developing fetus.
+
+</p>
+
+</div>
 
 `
 
-};
+    };
 
 
-return notes[topic] ||
 
-`
+    // ==================================================
+    // GET SELECTED NOTE
+    // ==================================================
 
-<h3>Topic Not Available</h3>
+    if (
+        notes[selectedTopic]
+    ) {
 
-<p>
-The note for this topic has not yet been added.
-</p>
+        noteContent.innerHTML =
+            notes[selectedTopic];
 
-`;
+    }
+
+    else {
+
+        noteContent.innerHTML = `
+
+            <div class="definition">
+
+                <strong>
+                    Topic not found
+                </strong>
+
+                <p>
+
+                    The note for
+                    <strong>
+                        ${escapeHTML(selectedTopic)}
+                    </strong>
+                    has not been added yet.
+
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    noteSection.style.display =
+        "block";
+
+
+    messageBox.style.display =
+        "none";
+
+
+    noteSection.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+}
+
+
+
+// ==================================================
+// ESCAPE HTML
+// ==================================================
+
+function escapeHTML(value) {
+
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
