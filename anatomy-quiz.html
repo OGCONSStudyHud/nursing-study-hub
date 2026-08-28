@@ -3,498 +3,346 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>OGCONS Study Hub - Anatomy & Physiology Quiz</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
+
+    color: #172033;
+}
+
+header {
+    background:
+        linear-gradient(
+            135deg,
+            #18a058,
+            #2eb7a0
+        );
+
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 8px 0 0;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.back {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #18a058;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back:hover {
+    text-decoration: underline;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+}
+
+.course-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.course-title h2 {
+    margin: 0 0 8px;
+    color: #163020;
+}
+
+.course-title p {
+    margin: 0;
+    color: #617568;
+}
+
+.topic-name {
+    text-align: center;
+
+    background: #e8fff2;
+    color: #16834a;
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    padding: 12px;
+    border-radius: 10px;
 
-    <title>
-        OGCONS Study Hub - Anatomy & Physiology Quiz
-    </title>
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 
+.counter {
+    text-align: center;
+    color: #667085;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-    <style>
+.score {
+    text-align: center;
+    color: #18a058;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+.question {
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
 
+.options {
+    display: grid;
+    gap: 12px;
+}
 
-        body {
+.option {
+    width: 100%;
+    text-align: left;
 
-            margin: 0;
+    background: #f7f9fc;
 
-            font-family: Arial, sans-serif;
+    border: 2px solid #d8dee8;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #e8fff2,
-                    #e8f4ff,
-                    #f5eaff
-                );
+    border-radius: 12px;
 
-            color: #172033;
-        }
+    padding: 16px;
 
+    font-size: 16px;
 
-        header {
+    cursor: pointer;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #18a058,
-                    #2eb7a0
-                );
+    transition: 0.2s;
+}
 
-            color: white;
+.option:hover:not(:disabled) {
+    background: #eefaf4;
+    border-color: #18a058;
+}
 
-            padding: 30px 20px;
+.option strong {
+    margin-right: 8px;
+}
 
-            text-align: center;
-        }
+.option.correct {
+    background: #d1e7dd;
+    border-color: #198754;
+    color: #0f5132;
+}
 
+.option.wrong {
+    background: #f8d7da;
+    border-color: #dc3545;
+    color: #842029;
+}
 
-        header h1 {
+.option.disabled {
+    cursor: not-allowed;
+}
 
-            margin: 0;
+.feedback {
+    margin-top: 20px;
 
-            font-size: 28px;
-        }
+    padding: 18px;
 
+    border-radius: 12px;
 
-        header p {
+    display: none;
 
-            margin: 8px 0 0;
+    font-weight: bold;
+}
 
-            font-size: 16px;
-        }
+.correct-feedback {
+    background: #d1e7dd;
+    color: #0f5132;
+}
 
+.wrong-feedback {
+    background: #f8d7da;
+    color: #842029;
+}
 
-        .container {
+.answer {
+    margin-top: 15px;
 
-            max-width: 850px;
+    padding: 18px;
 
-            margin: 30px auto;
+    background: #eef6ff;
 
-            padding: 20px;
-        }
+    border-radius: 12px;
 
+    display: none;
 
-        .back {
+    line-height: 1.6;
+}
 
-            display: inline-block;
+.answer strong {
+    color: #0b5ed7;
+}
 
-            margin-bottom: 20px;
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 25px;
+}
 
-            color: #18a058;
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 20px;
 
-            text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
 
-            font-weight: bold;
-        }
+    cursor: pointer;
+}
 
+.primary {
+    background: #18a058;
+    color: white;
+}
 
-        .back:hover {
+.primary:hover {
+    background: #117d45;
+}
 
-            text-decoration: underline;
-        }
+.secondary {
+    background: #e9edf3;
+    color: #172033;
+}
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
-        .card {
+#loading,
+#error,
+#empty {
+    background: white;
 
-            background: white;
+    border-radius: 18px;
 
-            border-radius: 18px;
+    padding: 35px;
 
-            padding: 30px;
+    text-align: center;
 
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.08);
-        }
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+}
 
+#error {
+    color: #dc3545;
+}
 
-        .course-title {
+.result {
+    text-align: center;
+    display: none;
+}
 
-            text-align: center;
+.result-icon {
+    font-size: 65px;
+    margin-bottom: 15px;
+}
 
-            margin-bottom: 20px;
-        }
+.result h2 {
+    margin-bottom: 10px;
+}
 
+.final-score {
+    font-size: 42px;
+    font-weight: bold;
+    color: #18a058;
+    margin: 20px 0;
+}
 
-        .course-title h2 {
+.result button {
+    background: #18a058;
+    color: white;
+    margin-top: 10px;
+}
 
-            margin: 0 0 8px;
+.result .back-topic {
+    background: #6c757d;
+}
 
-            color: #163020;
-        }
+footer {
+    text-align: center;
+    padding: 35px;
+    color: #527060;
+}
 
+@media (max-width: 600px) {
 
-        .course-title p {
+    .container {
+        padding: 12px;
+    }
 
-            margin: 0;
+    .card {
+        padding: 20px;
+    }
 
-            color: #617568;
-        }
+    .question {
+        font-size: 19px;
+    }
 
+    .buttons {
+        flex-direction: column;
+    }
 
-        .topic-name {
+    button {
+        width: 100%;
+    }
 
-            text-align: center;
+}
 
-            background: #e8fff2;
-
-            color: #16834a;
-
-            padding: 12px;
-
-            border-radius: 10px;
-
-            font-weight: bold;
-
-            margin-bottom: 20px;
-        }
-
-
-        .counter {
-
-            text-align: center;
-
-            color: #667085;
-
-            font-weight: bold;
-
-            margin-bottom: 10px;
-        }
-
-
-        .score {
-
-            text-align: center;
-
-            color: #18a058;
-
-            font-weight: bold;
-
-            margin-bottom: 25px;
-        }
-
-
-        .question {
-
-            font-size: 21px;
-
-            font-weight: bold;
-
-            line-height: 1.5;
-
-            margin-bottom: 25px;
-        }
-
-
-        .options {
-
-            display: grid;
-
-            gap: 12px;
-        }
-
-
-        .option {
-
-            width: 100%;
-
-            text-align: left;
-
-            background: #f7f9fc;
-
-            border: 2px solid #d8dee8;
-
-            border-radius: 12px;
-
-            padding: 16px;
-
-            font-size: 16px;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-
-        .option:hover:not(:disabled) {
-
-            background: #eefaf4;
-
-            border-color: #18a058;
-        }
-
-
-        .option strong {
-
-            margin-right: 8px;
-        }
-
-
-        .option.correct {
-
-            background: #d1e7dd;
-
-            border-color: #198754;
-
-            color: #0f5132;
-        }
-
-
-        .option.wrong {
-
-            background: #f8d7da;
-
-            border-color: #dc3545;
-
-            color: #842029;
-        }
-
-
-        .option.disabled {
-
-            cursor: not-allowed;
-        }
-
-
-        .feedback {
-
-            margin-top: 20px;
-
-            padding: 18px;
-
-            border-radius: 12px;
-
-            display: none;
-
-            font-weight: bold;
-        }
-
-
-        .correct-feedback {
-
-            background: #d1e7dd;
-
-            color: #0f5132;
-        }
-
-
-        .wrong-feedback {
-
-            background: #f8d7da;
-
-            color: #842029;
-        }
-
-
-        .answer {
-
-            margin-top: 15px;
-
-            padding: 18px;
-
-            background: #eef6ff;
-
-            border-radius: 12px;
-
-            display: none;
-
-            line-height: 1.6;
-        }
-
-
-        .answer strong {
-
-            color: #0b5ed7;
-        }
-
-
-        .buttons {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            gap: 12px;
-
-            margin-top: 25px;
-        }
-
-
-        button {
-
-            border: none;
-
-            border-radius: 10px;
-
-            padding: 13px 20px;
-
-            font-size: 15px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-
-        .primary {
-
-            background: #18a058;
-
-            color: white;
-        }
-
-
-        .primary:hover {
-
-            background: #117d45;
-        }
-
-
-        .secondary {
-
-            background: #e9edf3;
-
-            color: #172033;
-        }
-
-
-        button:disabled {
-
-            opacity: 0.5;
-
-            cursor: not-allowed;
-        }
-
-
-        #loading,
-        #error,
-        #empty {
-
-            background: white;
-
-            border-radius: 18px;
-
-            padding: 35px;
-
-            text-align: center;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.08);
-        }
-
-
-        #error {
-
-            color: #dc3545;
-        }
-
-
-        .result {
-
-            text-align: center;
-
-            display: none;
-        }
-
-
-        .result-icon {
-
-            font-size: 65px;
-
-            margin-bottom: 15px;
-        }
-
-
-        .result h2 {
-
-            margin-bottom: 10px;
-        }
-
-
-        .final-score {
-
-            font-size: 42px;
-
-            font-weight: bold;
-
-            color: #18a058;
-
-            margin: 20px 0;
-        }
-
-
-        .result button {
-
-            background: #18a058;
-
-            color: white;
-
-            margin-top: 10px;
-        }
-
-
-        .result .back-topic {
-
-            background: #6c757d;
-        }
-
-
-        footer {
-
-            text-align: center;
-
-            padding: 35px;
-
-            color: #527060;
-        }
-
-
-        @media (max-width: 600px) {
-
-            .container {
-
-                padding: 12px;
-            }
-
-
-            .card {
-
-                padding: 20px;
-            }
-
-
-            .question {
-
-                font-size: 19px;
-            }
-
-
-            .buttons {
-
-                flex-direction: column;
-            }
-
-
-            button {
-
-                width: 100%;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
-
 
 <body>
 
@@ -512,327 +360,203 @@
 </header>
 
 
-
 <div class="container">
 
 
-    <!-- BACK TO TOPICS -->
+<a href="anatomy-topics.html"
+   class="back">
 
-    <a
-        href="anatomy-topics.html"
-        class="back">
+    ← Back to Anatomy & Physiology Topics
 
-        ← Back to Anatomy & Physiology Topics
-
-    </a>
+</a>
 
 
+<!-- LOADING -->
 
-    <!-- LOADING -->
+<div id="loading">
 
-    <div id="loading">
+    <h2>
+        🔄 Loading questions...
+    </h2>
+
+    <p>
+        Please wait while we prepare your quiz.
+    </p>
+
+</div>
+
+
+<!-- ERROR -->
+
+<div id="error"
+     style="display:none;">
+</div>
+
+
+<!-- EMPTY -->
+
+<div id="empty"
+     style="display:none;">
+
+    <h2>
+        📚 No Questions Yet
+    </h2>
+
+    <p id="emptyMessage">
+
+        There are currently no questions
+        available for this topic.
+
+    </p>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div id="quizCard"
+     class="card"
+     style="display:none;">
+
+
+    <div class="course-title">
 
         <h2>
-            🔄 Loading questions...
+            🫀 Anatomy & Physiology
         </h2>
 
         <p>
-            Please wait while we prepare your quiz.
+            Test your knowledge
         </p>
 
     </div>
 
 
-
-    <!-- ERROR -->
-
-    <div
-        id="error"
-        style="display:none;">
+    <div id="topicName"
+         class="topic-name">
     </div>
 
 
+    <div id="counter"
+         class="counter">
+    </div>
 
-    <!-- EMPTY -->
 
-    <div
-        id="empty"
-        style="display:none;">
+    <div id="score"
+         class="score">
 
-        <h2>
-            📚 No Questions Yet
-        </h2>
-
-        <p id="emptyMessage">
-
-            There are currently no questions
-            available for this topic.
-
-        </p>
+        Score: 0
 
     </div>
 
 
-
-    <!-- QUIZ CARD -->
-
-    <div
-        class="card"
-        id="quizCard"
-        style="display:none;">
+    <div id="question"
+         class="question">
+    </div>
 
 
-        <div class="course-title">
-
-            <h2>
-                🫀 Anatomy & Physiology
-            </h2>
-
-            <p>
-                Test your knowledge
-            </p>
-
-        </div>
+    <div class="options">
 
 
-
-        <div
-            class="topic-name"
-            id="topicName">
-        </div>
-
-
-
-        <div
-            class="counter"
-            id="counter">
-        </div>
-
-
-
-        <div
-            class="score"
-            id="score">
-
-            Score: 0
-
-        </div>
-
-
-
-        <div
-            class="question"
-            id="question">
-        </div>
-
-
-
-        <!-- OPTIONS -->
-
-        <div class="options">
-
-
-            <button
+        <button id="option_a"
                 class="option"
-                id="option_a"
                 onclick="selectAnswer('A')">
 
-                <strong>A.</strong>
+            <strong>A.</strong>
 
-                <span id="text_a"></span>
-
-            </button>
-
-
-
-            <button
-                class="option"
-                id="option_b"
-                onclick="selectAnswer('B')">
-
-                <strong>B.</strong>
-
-                <span id="text_b"></span>
-
-            </button>
-
-
-
-            <button
-                class="option"
-                id="option_c"
-                onclick="selectAnswer('C')">
-
-                <strong>C.</strong>
-
-                <span id="text_c"></span>
-
-            </button>
-
-
-
-            <button
-                class="option"
-                id="option_d"
-                onclick="selectAnswer('D')">
-
-                <strong>D.</strong>
-
-                <span id="text_d"></span>
-
-            </button>
-
-
-        </div>
-
-
-
-        <!-- FEEDBACK -->
-
-        <div
-            class="feedback"
-            id="feedback">
-        </div>
-
-
-
-        <!-- ANSWER / EXPLANATION -->
-
-        <div
-            class="answer"
-            id="answer">
-
-
-            <p>
-
-                <strong>
-                    Correct Answer:
-                </strong>
-
-                <span
-                    id="correct_answer">
-                </span>
-
-            </p>
-
-
-
-            <p>
-
-                <strong>
-                    Explanation:
-                </strong>
-
-                <span
-                    id="explanation">
-                </span>
-
-            </p>
-
-
-        </div>
-
-
-
-        <!-- NAVIGATION -->
-
-        <div class="buttons">
-
-
-            <button
-                class="secondary"
-                id="previousButton"
-                onclick="previousQuestion()">
-
-                ← Previous
-
-            </button>
-
-
-
-            <button
-                class="primary"
-                id="nextButton"
-                onclick="nextQuestion()"
-                disabled>
-
-                Next →
-
-            </button>
-
-
-        </div>
-
-
-    </div>
-
-
-
-    <!-- RESULT -->
-
-    <div
-        class="card result"
-        id="result">
-
-
-        <div class="result-icon">
-            🏆
-        </div>
-
-
-        <h2>
-            Quiz Completed!
-        </h2>
-
-
-        <p>
-
-            You have completed the
-
-            <span id="resultTopic">
-                Anatomy & Physiology
-            </span>
-
-            quiz.
-
-        </p>
-
-
-
-        <div
-            class="final-score"
-            id="finalScore">
-
-            0 / 0
-
-        </div>
-
-
-
-        <p id="percentage">
-
-            Your score: 0%
-
-        </p>
-
-
-
-        <button
-            onclick="restartQuiz()">
-
-            🔄 Try Again
+            <span id="text_a"></span>
 
         </button>
 
 
-        <br>
+        <button id="option_b"
+                class="option"
+                onclick="selectAnswer('B')">
+
+            <strong>B.</strong>
+
+            <span id="text_b"></span>
+
+        </button>
 
 
-        <button
-            class="back-topic"
-            onclick="window.location.href='anatomy-topics.html'">
+        <button id="option_c"
+                class="option"
+                onclick="selectAnswer('C')">
 
-            ← Back to Topics
+            <strong>C.</strong>
+
+            <span id="text_c"></span>
+
+        </button>
+
+
+        <button id="option_d"
+                class="option"
+                onclick="selectAnswer('D')">
+
+            <strong>D.</strong>
+
+            <span id="text_d"></span>
+
+        </button>
+
+
+    </div>
+
+
+    <div id="feedback"
+         class="feedback">
+    </div>
+
+
+    <div id="answer"
+         class="answer">
+
+
+        <p>
+
+            <strong>
+                Correct Answer:
+            </strong>
+
+            <span id="correct_answer"></span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Explanation:
+            </strong>
+
+            <span id="explanation"></span>
+
+        </p>
+
+
+    </div>
+
+
+    <div class="buttons">
+
+
+        <button id="previousButton"
+                class="secondary"
+                onclick="previousQuestion()">
+
+            ← Previous
+
+        </button>
+
+
+        <button id="nextButton"
+                class="primary"
+                onclick="nextQuestion()"
+                disabled>
+
+            Next →
 
         </button>
 
@@ -843,6 +567,72 @@
 </div>
 
 
+<!-- RESULT -->
+
+<div id="result"
+     class="card result">
+
+
+    <div class="result-icon">
+        🏆
+    </div>
+
+
+    <h2>
+        Quiz Completed!
+    </h2>
+
+
+    <p>
+
+        You have completed the
+
+        <span id="resultTopic">
+            Anatomy & Physiology
+        </span>
+
+        quiz.
+
+    </p>
+
+
+    <div id="finalScore"
+         class="final-score">
+
+        0 / 0
+
+    </div>
+
+
+    <p id="percentage">
+        Your score: 0%
+    </p>
+
+
+    <button onclick="restartQuiz()">
+
+        🔄 Try Again
+
+    </button>
+
+
+    <br>
+
+
+    <button
+        class="back-topic"
+        onclick="window.location.href='anatomy-topics.html'">
+
+        ← Back to Topics
+
+    </button>
+
+
+</div>
+
+
+</div>
+
 
 <footer>
 
@@ -852,24 +642,18 @@
 </footer>
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 <script>
 
 
-// ======================================================
+// =====================================================
 // SUPABASE CONNECTION
-// ======================================================
+// =====================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
 
-
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
-
 
 const supabaseClient =
     window.supabase.createClient(
@@ -878,10 +662,9 @@ const supabaseClient =
     );
 
 
-
-// ======================================================
+// =====================================================
 // QUIZ VARIABLES
-// ======================================================
+// =====================================================
 
 let questions = [];
 
@@ -889,44 +672,29 @@ let currentQuestion = 0;
 
 let score = 0;
 
-
-// IMPORTANT:
-//
-// Instead of one "answered" variable,
-// we keep the answer for EVERY question.
-//
-// This prevents a student from answering
-// a previous question again.
-//
-
 let userAnswers = [];
 
 
-
-// ======================================================
-// GET SELECTED TOPIC
-// ======================================================
+// =====================================================
+// GET TOPIC FROM URL
+// =====================================================
 
 const urlParams =
     new URLSearchParams(
         window.location.search
     );
 
-
 const selectedTopic =
     urlParams.get("topic");
 
 
-
-// ======================================================
-// SHUFFLE QUESTIONS
-// ======================================================
+// =====================================================
+// SHUFFLE
+// =====================================================
 
 function shuffleQuestions(array) {
 
-    const shuffled =
-        [...array];
-
+    const shuffled = [...array];
 
     for (
         let i = shuffled.length - 1;
@@ -939,7 +707,6 @@ function shuffleQuestions(array) {
                 Math.random() * (i + 1)
             );
 
-
         [
             shuffled[i],
             shuffled[j]
@@ -951,50 +718,38 @@ function shuffleQuestions(array) {
 
     }
 
-
     return shuffled;
-
 }
 
 
-
-// ======================================================
+// =====================================================
 // LOAD QUESTIONS
-// ======================================================
+// =====================================================
 
 async function loadQuestions() {
-
 
     const loading =
         document.getElementById("loading");
 
+    const error =
+        document.getElementById("error");
+
+    const empty =
+        document.getElementById("empty");
 
     const quizCard =
         document.getElementById("quizCard");
 
 
-    const empty =
-        document.getElementById("empty");
-
-
-    const error =
-        document.getElementById("error");
-
-
-
-    // ----------------------------------------------
+    // ---------------------------------------------
     // CHECK TOPIC
-    // ----------------------------------------------
+    // ---------------------------------------------
 
     if (!selectedTopic) {
 
-        loading.style.display =
-            "none";
+        loading.style.display = "none";
 
-
-        error.style.display =
-            "block";
-
+        error.style.display = "block";
 
         error.innerHTML = `
 
@@ -1003,40 +758,36 @@ async function loadQuestions() {
             </h2>
 
             <p>
-                Please return to Anatomy & Physiology
-                and select a topic.
+                Please return to Anatomy &
+                Physiology Topics and select
+                a topic.
             </p>
 
         `;
 
-
         return;
-
     }
 
 
-
-    // ----------------------------------------------
+    // ---------------------------------------------
     // DISPLAY TOPIC
-    // ----------------------------------------------
+    // ---------------------------------------------
 
     document
         .getElementById("topicName")
         .textContent =
-        "Topic: " +
-        selectedTopic;
-
+            "Topic: " +
+            selectedTopic;
 
     document
         .getElementById("resultTopic")
         .textContent =
-        selectedTopic;
+            selectedTopic;
 
 
-
-    // ----------------------------------------------
+    // ---------------------------------------------
     // CHECK LOGIN
-    // ----------------------------------------------
+    // ---------------------------------------------
 
     const {
         data: { user },
@@ -1050,17 +801,24 @@ async function loadQuestions() {
     if (userError || !user) {
 
         window.location.href =
-            "login.html";
+            "index.html";
 
         return;
-
     }
 
 
-
-    // ----------------------------------------------
+    // ---------------------------------------------
     // GET QUESTIONS
-    // ----------------------------------------------
+    // ---------------------------------------------
+
+    /*
+       IMPORTANT FIX:
+
+       We use the EXACT course name that
+       your Admin Dashboard stores:
+
+       "Anatomy & Physiology"
+    */
 
     const {
         data,
@@ -1077,7 +835,7 @@ async function loadQuestions() {
                 "Anatomy & Physiology"
             )
 
-            .ilike(
+            .eq(
                 "topic",
                 selectedTopic
             )
@@ -1090,26 +848,20 @@ async function loadQuestions() {
             );
 
 
-
-    // ----------------------------------------------
+    // ---------------------------------------------
     // DATABASE ERROR
-    // ----------------------------------------------
+    // ---------------------------------------------
 
     if (databaseError) {
 
         console.error(
-            "Question loading error:",
+            "Database error:",
             databaseError
         );
 
+        loading.style.display = "none";
 
-        loading.style.display =
-            "none";
-
-
-        error.style.display =
-            "block";
-
+        error.style.display = "block";
 
         error.innerHTML = `
 
@@ -1123,16 +875,13 @@ async function loadQuestions() {
 
         `;
 
-
         return;
-
     }
 
 
-
-    // ----------------------------------------------
-    // SHUFFLE QUESTIONS
-    // ----------------------------------------------
+    // ---------------------------------------------
+    // SHUFFLE
+    // ---------------------------------------------
 
     questions =
         shuffleQuestions(
@@ -1140,40 +889,32 @@ async function loadQuestions() {
         );
 
 
-
-    loading.style.display =
-        "none";
+    loading.style.display = "none";
 
 
-
-    // ----------------------------------------------
+    // ---------------------------------------------
     // NO QUESTIONS
-    // ----------------------------------------------
+    // ---------------------------------------------
 
     if (questions.length === 0) {
 
-        empty.style.display =
-            "block";
-
+        empty.style.display = "block";
 
         document
             .getElementById("emptyMessage")
             .textContent =
 
-            "There are currently no questions for " +
+            "No Anatomy & Physiology questions were found for \"" +
             selectedTopic +
-            ". Add questions from the Admin Dashboard.";
-
+            "\". Check that the question was added under the same course and topic in the Admin Dashboard.";
 
         return;
-
     }
 
 
-
-    // ----------------------------------------------
-    // CREATE ANSWER STORAGE
-    // ----------------------------------------------
+    // ---------------------------------------------
+    // CREATE ANSWER ARRAY
+    // ---------------------------------------------
 
     userAnswers =
         new Array(
@@ -1181,40 +922,28 @@ async function loadQuestions() {
         ).fill(null);
 
 
-
-    // ----------------------------------------------
+    // ---------------------------------------------
     // SHOW QUIZ
-    // ----------------------------------------------
+    // ---------------------------------------------
 
-    quizCard.style.display =
-        "block";
-
+    quizCard.style.display = "block";
 
     showQuestion();
-
 }
 
 
-
-// ======================================================
+// =====================================================
 // SHOW QUESTION
-// ======================================================
+// =====================================================
 
 function showQuestion() {
-
 
     const q =
         questions[currentQuestion];
 
-
     const savedAnswer =
         userAnswers[currentQuestion];
 
-
-
-    // ----------------------------------------------
-    // QUESTION COUNTER
-    // ----------------------------------------------
 
     document
         .getElementById("counter")
@@ -1226,11 +955,6 @@ function showQuestion() {
         questions.length;
 
 
-
-    // ----------------------------------------------
-    // SCORE
-    // ----------------------------------------------
-
     document
         .getElementById("score")
         .textContent =
@@ -1239,45 +963,34 @@ function showQuestion() {
         score;
 
 
-
-    // ----------------------------------------------
-    // QUESTION
-    // ----------------------------------------------
-
     document
         .getElementById("question")
         .textContent =
-        q.question;
+        q.question || "";
 
-
-
-    // ----------------------------------------------
-    // OPTIONS
-    // ----------------------------------------------
 
     document
         .getElementById("text_a")
         .textContent =
-        q.option_a;
+        q.option_a || "";
 
 
     document
         .getElementById("text_b")
         .textContent =
-        q.option_b;
+        q.option_b || "";
 
 
     document
         .getElementById("text_c")
         .textContent =
-        q.option_c;
+        q.option_c || "";
 
 
     document
         .getElementById("text_d")
         .textContent =
-        q.option_d;
-
+        q.option_d || "";
 
 
     const options = [
@@ -1293,12 +1006,9 @@ function showQuestion() {
     ];
 
 
-
-    // ----------------------------------------------
-    // RESET OPTION APPEARANCE
-    // ----------------------------------------------
-
     options.forEach(function(option) {
+
+        option.disabled = false;
 
         option.classList.remove(
             "correct",
@@ -1306,92 +1016,52 @@ function showQuestion() {
             "disabled"
         );
 
-
-        option.disabled =
-            false;
-
     });
 
 
-
-    // ----------------------------------------------
-    // HIDE FEEDBACK
-    // ----------------------------------------------
-
     document
         .getElementById("feedback")
-        .style.display =
-        "none";
+        .style.display = "none";
 
 
     document
         .getElementById("answer")
-        .style.display =
-        "none";
+        .style.display = "none";
 
 
-
-    // ----------------------------------------------
-    // NO ANSWER YET
-    // ----------------------------------------------
-
-    if (savedAnswer === null) {
+    document
+        .getElementById("nextButton")
+        .disabled =
+            savedAnswer === null;
 
 
-        document
-            .getElementById("nextButton")
-            .disabled =
-            true;
-
-
-    }
-
-
-
-    // ----------------------------------------------
-    // QUESTION ALREADY ANSWERED
-    // ----------------------------------------------
-
-    else {
+    if (savedAnswer !== null) {
 
         showSavedAnswer();
 
     }
 
 
-
-    // ----------------------------------------------
-    // PREVIOUS BUTTON
-    // ----------------------------------------------
-
     document
         .getElementById("previousButton")
         .disabled =
-        currentQuestion === 0;
+            currentQuestion === 0;
 
 }
 
 
-
-// ======================================================
+// =====================================================
 // SELECT ANSWER
-// ======================================================
+// =====================================================
 
 function selectAnswer(selected) {
-
-
-    // ----------------------------------------------
-    // PREVENT RE-ANSWERING
-    // ----------------------------------------------
 
     if (
         userAnswers[currentQuestion] !== null
     ) {
 
         return;
-
     }
-
 
 
     const q =
@@ -1400,25 +1070,15 @@ function selectAnswer(selected) {
 
     const correct =
         String(
-            q.correct_answer
+            q.correct_answer || ""
         )
         .trim()
         .toUpperCase();
 
 
-
-    // ----------------------------------------------
-    // SAVE ANSWER
-    // ----------------------------------------------
-
     userAnswers[currentQuestion] =
         selected;
 
-
-
-    // ----------------------------------------------
-    // SCORE ONLY ONCE
-    // ----------------------------------------------
 
     if (selected === correct) {
 
@@ -1427,38 +1087,24 @@ function selectAnswer(selected) {
     }
 
 
-
-    // ----------------------------------------------
-    // DISPLAY RESULT
-    // ----------------------------------------------
-
     showSavedAnswer();
 
 
-
-    // ----------------------------------------------
-    // ENABLE NEXT
-    // ----------------------------------------------
-
     document
         .getElementById("nextButton")
-        .disabled =
-        false;
+        .disabled = false;
 
 }
 
 
-
-// ======================================================
+// =====================================================
 // SHOW SAVED ANSWER
-// ======================================================
+// =====================================================
 
 function showSavedAnswer() {
 
-
     const q =
         questions[currentQuestion];
-
 
     const selected =
         userAnswers[currentQuestion];
@@ -1467,18 +1113,15 @@ function showSavedAnswer() {
     if (selected === null) {
 
         return;
-
     }
-
 
 
     const correct =
         String(
-            q.correct_answer
+            q.correct_answer || ""
         )
         .trim()
         .toUpperCase();
-
 
 
     const selectedButton =
@@ -1495,7 +1138,6 @@ function showSavedAnswer() {
         );
 
 
-
     const options = [
 
         document.getElementById("option_a"),
@@ -1509,68 +1151,40 @@ function showSavedAnswer() {
     ];
 
 
-
-    // ----------------------------------------------
-    // DISABLE ALL OPTIONS
-    // ----------------------------------------------
-
     options.forEach(function(option) {
 
-        option.disabled =
-            true;
+        option.disabled = true;
 
-        option.classList.add(
-            "disabled"
-        );
+        option.classList.add("disabled");
 
     });
 
 
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
 
-    // ----------------------------------------------
-    // CORRECT ANSWER
-    // ----------------------------------------------
 
     if (selected === correct) {
-
 
         selectedButton.classList.add(
             "correct"
         );
 
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
         feedback.textContent =
             "✅ Correct! Well done.";
-
 
         feedback.className =
             "feedback correct-feedback";
 
-
-        feedback.style.display =
-            "block";
-
     }
 
-
-
-    // ----------------------------------------------
-    // WRONG ANSWER
-    // ----------------------------------------------
-
     else {
-
 
         selectedButton.classList.add(
             "wrong"
         );
-
 
         if (correctButton) {
 
@@ -1580,35 +1194,21 @@ function showSavedAnswer() {
 
         }
 
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
         feedback.textContent =
 
-            "❌ Wrong answer. " +
-            "The correct answer is " +
+            "❌ Wrong answer. The correct answer is " +
             correct +
             ".";
-
 
         feedback.className =
             "feedback wrong-feedback";
 
-
-        feedback.style.display =
-            "block";
-
     }
 
 
+    feedback.style.display =
+        "block";
 
-    // ----------------------------------------------
-    // SHOW EXPLANATION
-    // ----------------------------------------------
 
     document
         .getElementById("correct_answer")
@@ -1630,11 +1230,6 @@ function showSavedAnswer() {
         "block";
 
 
-
-    // ----------------------------------------------
-    // SCORE
-    // ----------------------------------------------
-
     document
         .getElementById("score")
         .textContent =
@@ -1643,92 +1238,68 @@ function showSavedAnswer() {
         score;
 
 
-
-    // ----------------------------------------------
-    // ENABLE NEXT
-    // ----------------------------------------------
-
     document
         .getElementById("nextButton")
-        .disabled =
-        false;
+        .disabled = false;
 
 }
 
 
-
-// ======================================================
+// =====================================================
 // NEXT QUESTION
-// ======================================================
+// =====================================================
 
 function nextQuestion() {
-
 
     if (
         currentQuestion <
         questions.length - 1
     ) {
 
-
         currentQuestion++;
-
 
         showQuestion();
 
-
+        return;
     }
 
 
-    else {
+    const unanswered =
+        userAnswers.some(
+            function(answer) {
+
+                return answer === null;
+
+            }
+        );
 
 
-        // Make sure every question
-        // has been answered before finishing.
+    if (unanswered) {
 
-        const unanswered =
-            userAnswers.some(
-                function(answer) {
+        alert(
+            "Please answer all questions before completing the quiz."
+        );
 
-                    return answer === null;
-
-                }
-            );
-
-
-        if (unanswered) {
-
-            alert(
-                "Please answer all questions before completing the quiz."
-            );
-
-
-            return;
-
-        }
-
-
-        showResult();
-
+        return;
     }
+
+
+    showResult();
 
 }
 
 
-
-// ======================================================
+// =====================================================
 // PREVIOUS QUESTION
-// ======================================================
+// =====================================================
 
 function previousQuestion() {
-
 
     if (
         currentQuestion > 0
     ) {
 
-
         currentQuestion--;
-
 
         showQuestion();
 
@@ -1737,13 +1308,11 @@ function previousQuestion() {
 }
 
 
-
-// ======================================================
+// =====================================================
 // SHOW RESULT
-// ======================================================
+// =====================================================
 
 async function showResult() {
-
 
     document
         .getElementById("quizCard")
@@ -1757,7 +1326,6 @@ async function showResult() {
         "block";
 
 
-
     const total =
         questions.length;
 
@@ -1766,7 +1334,6 @@ async function showResult() {
         Math.round(
             (score / total) * 100
         );
-
 
 
     document
@@ -1778,7 +1345,6 @@ async function showResult() {
         total;
 
 
-
     document
         .getElementById("percentage")
         .textContent =
@@ -1788,11 +1354,6 @@ async function showResult() {
         "%";
 
 
-
-    // ----------------------------------------------
-    // GET STUDENT
-    // ----------------------------------------------
-
     const {
         data: { user }
     } =
@@ -1801,26 +1362,14 @@ async function showResult() {
             .getUser();
 
 
-
     if (!user) {
 
-        console.log(
-            "Student is not logged in."
-        );
-
-
         return;
-
     }
 
 
-
-    // ----------------------------------------------
-    // SAVE RESULT
-    // ----------------------------------------------
-
     const {
-        error: saveError
+        error
     } =
         await supabaseClient
 
@@ -1846,12 +1395,11 @@ async function showResult() {
             });
 
 
-
-    if (saveError) {
+    if (error) {
 
         console.error(
             "Could not save quiz result:",
-            saveError.message
+            error
         );
 
     }
@@ -1859,28 +1407,17 @@ async function showResult() {
 }
 
 
-
-// ======================================================
-// RESTART QUIZ
-// ======================================================
+// =====================================================
+// RESTART
+// =====================================================
 
 function restartQuiz() {
-
-
-    // ----------------------------------------------
-    // SHUFFLE QUESTIONS AGAIN
-    // ----------------------------------------------
 
     questions =
         shuffleQuestions(
             questions
         );
 
-
-
-    // ----------------------------------------------
-    // RESET QUIZ
-    // ----------------------------------------------
 
     currentQuestion =
         0;
@@ -1896,21 +1433,11 @@ function restartQuiz() {
         ).fill(null);
 
 
-
-    // ----------------------------------------------
-    // HIDE RESULT
-    // ----------------------------------------------
-
     document
         .getElementById("result")
         .style.display =
         "none";
 
-
-
-    // ----------------------------------------------
-    // SHOW QUIZ
-    // ----------------------------------------------
 
     document
         .getElementById("quizCard")
@@ -1918,22 +1445,18 @@ function restartQuiz() {
         "block";
 
 
-
     showQuestion();
 
 }
 
 
-
-// ======================================================
-// START QUIZ
-// ======================================================
+// =====================================================
+// START
+// =====================================================
 
 loadQuestions();
 
-
 </script>
-
 
 </body>
 
