@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+OGCONS Study Hub - Medical/Surgical Nursing
+</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
+
+    color: #172033;
+
+}
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #18a058,
+            #2eb7a0
+        );
+
+    color: white;
+
+    padding: 22px 20px;
+
+}
+
+.header-content {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+.logo {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+.back-button {
+
+    border: none;
+
+    background: white;
+
+    color: #18a058;
+
+    padding: 10px 18px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.container {
+
+    max-width: 950px;
+
+    margin: auto;
+
+    padding: 35px 20px;
+
+}
+
+.topic-header {
+
+    background: white;
+
+    padding: 35px 25px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.08);
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+}
+
+.topic-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 15px;
+
+}
+
+.topic-header h1 {
+
+    color: #18a058;
+
+    font-size: 30px;
+
+    line-height: 1.4;
+
+    margin-bottom: 10px;
+
+}
+
+.topic-header p {
+
+    color: #617568;
+
+    line-height: 1.6;
+
+}
+
+.actions {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+.action-card {
+
+    background: white;
+
+    padding: 28px 20px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
+
+    text-align: center;
+
+}
+
+.action-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 12px;
+
+}
+
+.action-card h2 {
+
+    margin-bottom: 8px;
+
+}
+
+.action-card p {
+
+    color: #617568;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+
+}
+
+.action-button {
+
+    border: none;
+
+    background: #18a058;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+.action-button:hover {
+
+    background: #117d45;
+
+}
+
+.quiz-button {
+
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #0b5ed7;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 22px;
+
+    font-weight: bold;
+
+}
+
+.quiz-button:hover {
+
+    background: #084298;
+
+}
+
+#noteSection {
+
+    display: none;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.08);
+
+}
+
+#noteSection h2 {
+
+    color: #18a058;
+
+    margin-bottom: 25px;
+
+}
+
+.note-content {
+
+    line-height: 1.8;
+
+    color: #26382d;
+
+    font-size: 16px;
+
+}
+
+.note-content h3 {
+
+    color: #18a058;
+
+    margin-top: 30px;
+
+    margin-bottom: 12px;
+
+    font-size: 21px;
+
+}
+
+.note-content h4 {
+
+    color: #2d6248;
+
+    margin-top: 20px;
+
+    margin-bottom: 8px;
+
+}
+
+.note-content p {
+
+    margin-bottom: 16px;
+
+}
+
+.note-content ul,
+.note-content ol {
+
+    margin-left: 28px;
+
+    margin-bottom: 18px;
+
+}
+
+.note-content li {
+
+    margin-bottom: 9px;
+
+}
+
+.note-content strong {
+
+    color: #163020;
+
+}
+
+.message {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
+
+}
+
+.message h2 {
+
+    color: #18a058;
+
+    margin-bottom: 10px;
+
+}
+
+.message p {
+
+    color: #617568;
+
+    line-height: 1.6;
+
+}
+
+footer {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #718077;
+
+}
+
+@media (max-width: 700px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+    .actions {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .topic-header h1 {
+
+        font-size: 24px;
+
+    }
+
+    #noteSection {
+
+        padding: 22px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+🩺 OGCONS Study Hub
+</div>
+
+<button
+class="back-button"
+onclick="goBack()">
+
+← Back to Topics
+
+</button>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="topic-header">
+
+<div class="topic-icon">
+🏥
+</div>
+
+<h1 id="topicTitle">
+Medical/Surgical Nursing
+</h1>
+
+<p>
+Study this topic and test your understanding
+with a quiz.
+</p>
+
+</div>
+
+
+<div class="actions">
+
+
+<!-- READ NOTE -->
+
+<div class="action-card">
+
+<div class="action-icon">
+📖
+</div>
+
+<h2>
+Read Note
+</h2>
+
+<p>
+Study the detailed note for this topic.
+</p>
+
+<button
+class="action-button"
+onclick="showNote()">
+
+Read Note
+
+</button>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div class="action-card">
+
+<div class="action-icon">
+📝
+</div>
+
+<h2>
+Take Quiz
+</h2>
+
+<p>
+Test your knowledge of this topic.
+</p>
+
+<a
+id="quizButton"
+class="quiz-button"
+href="#">
+
+Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- NOTE -->
+
+<div id="noteSection">
+
+<h2>
+📖
+<span id="noteTitle">
+Topic Note
+</span>
+</h2>
+
+
+<div
+class="note-content"
+id="noteContent">
+
+</div>
+
+</div>
+
+
+<div
+class="message"
+id="messageBox">
+
+<h2>
+📚 Ready to Study?
+</h2>
+
+<p>
+Choose <strong>Read Note</strong>
+to study or
+<strong>Take Quiz</strong>
+to test your knowledge.
+</p>
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+OGCONS Study Hub © 2026
+
+</footer>
+
+
+<script>
+
+
+// ======================================================
+// GET TOPIC
+// ======================================================
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const topic =
+params.get("topic") ||
+"Medical/Surgical Nursing";
+
+
+document
+.getElementById("topicTitle")
+.textContent =
+topic;
+
+
+document
+.getElementById("noteTitle")
+.textContent =
+topic;
+
+
+// ======================================================
+// QUIZ BUTTON
+// ======================================================
+
+document
+.getElementById("quizButton")
+.href =
+"medical-surgical-quiz.html?topic=" +
+encodeURIComponent(topic);
+
+
+// ======================================================
+// BACK
+// ======================================================
+
+function goBack() {
+
+    window.location.href =
+        "medical-surgical-topics.html";
+
+}
+
+
+// ======================================================
+// SHOW NOTE
+// ======================================================
+
+function showNote() {
+
+    const noteSection =
+        document.getElementById(
+            "noteSection"
+        );
+
+    const messageBox =
+        document.getElementById(
+            "messageBox"
+        );
+
+    const noteContent =
+        document.getElementById(
+            "noteContent"
+        );
+
+
+    let note = "";
+
+
+// ======================================================
+// TOPIC 1
+// ======================================================
+
+if (
+topic ===
+"Concepts and Terms in Medical-Surgical Nursing"
+) {
+
+note = `
+
+<h3>Introduction</h3>
+
+<p>
+Medical-Surgical Nursing is a major area of nursing
+that focuses on the care of adult patients with
+medical and surgical conditions. The nurse provides
+care before, during and after treatment while helping
+the patient maintain health, recover from illness and
+adapt to changes in health status.
+</p>
+
+<h3>Meaning of Medical-Surgical Nursing</h3>
+
+<p>
+Medical-Surgical Nursing involves the assessment,
+planning, implementation and evaluation of nursing
+care for patients experiencing medical or surgical
+problems.
+</p>
+
+<p>
+The medical-surgical nurse works with other members
+of the healthcare team to provide safe, effective and
+individualized care.
+</p>
+
+<h3>Important Terms</h3>
+
+<h4>Health</h4>
+
+<p>
+Health refers to a state of physical, mental and
+social well-being and not merely the absence of
+disease.
+</p>
+
+<h4>Illness</h4>
+
+<p>
+Illness is the person's experience or perception of
+being unhealthy. It may affect physical, emotional,
+social and psychological functioning.
+</p>
+
+<h4>Disease</h4>
+
+<p>
+Disease refers to an abnormal condition affecting the
+structure or function of the body and producing
+characteristic signs or symptoms.
+</p>
+
+<h4>Acute Condition</h4>
+
+<p>
+An acute condition usually begins suddenly and may
+require immediate attention. It may be severe but
+often has a relatively short duration.
+</p>
+
+<h4>Chronic Condition</h4>
+
+<p>
+A chronic condition develops or persists over a long
+period. It may require continuing treatment and
+long-term nursing care.
+</p>
+
+<h4>Signs</h4>
+
+<p>
+Signs are objective findings that can be observed or
+measured by another person, such as elevated
+temperature, increased blood pressure or swelling.
+</p>
+
+<h4>Symptoms</h4>
+
+<p>
+Symptoms are subjective experiences reported by the
+patient, such as pain, nausea, dizziness or fatigue.
+</p>
+
+<h3>Role of the Medical-Surgical Nurse</h3>
+
+<ul>
+
+<li>Assess the patient's condition.</li>
+
+<li>Identify actual and potential health problems.</li>
+
+<li>Plan individualized nursing care.</li>
+
+<li>Administer medications and treatments safely.</li>
+
+<li>Monitor the patient's response to treatment.</li>
+
+<li>Provide health education.</li>
+
+<li>Prevent complications.</li>
+
+<li>Provide emotional and psychological support.</li>
+
+<li>Maintain accurate documentation.</li>
+
+<li>Collaborate with the healthcare team.</li>
+
+</ul>
+
+<h3>Summary</h3>
+
+<p>
+Medical-Surgical Nursing involves comprehensive
+nursing care of patients with medical and surgical
+conditions. Understanding basic concepts and terms
+helps the nurse communicate effectively, recognize
+changes in the patient's condition and provide
+appropriate care.
+</p>
+
+`;
+
+}
+
+
+// ======================================================
+// TOPIC 2 AND 3
+// ======================================================
+
+else if (
+topic ===
+"Management of Patients with Medical/Surgical Conditions"
+) {
+
+note = `
+
+<h3>Introduction</h3>
+
+<p>
+Management of patients with medical and surgical
+conditions requires systematic assessment,
+planning, implementation and evaluation of care.
+The nurse must consider the patient's physical,
+psychological, social and spiritual needs.
+</p>
+
+<h3>Assessment</h3>
+
+<p>
+Assessment is the first major step in patient
+management. The nurse collects information about
+the patient's health status through observation,
+interview, physical examination and review of
+available investigations.
+</p>
+
+<h3>Important Areas of Assessment</h3>
+
+<ul>
+
+<li>Airway and breathing.</li>
+
+<li>Circulation.</li>
+
+<li>Level of consciousness.</li>
+
+<li>Vital signs.</li>
+
+<li>Pain.</li>
+
+<li>Nutrition and hydration.</li>
+
+<li>Elimination.</li>
+
+<li>Mobility.</li>
+
+<li>Skin condition.</li>
+
+<li>Psychological and emotional state.</li>
+
+</ul>
+
+<h3>Nursing Diagnosis</h3>
+
+<p>
+After assessment, the nurse identifies actual or
+potential patient problems that can be addressed
+through nursing care.
+</p>
+
+<h3>Planning</h3>
+
+<p>
+Planning involves setting appropriate goals and
+selecting nursing interventions that will help the
+patient achieve the desired outcomes.
+</p>
+
+<h3>Implementation</h3>
+
+<p>
+Implementation is the stage in which the planned
+nursing interventions are carried out. These may
+include medication administration, wound care,
+monitoring, positioning, hygiene, nutrition,
+patient education and other prescribed treatments.
+</p>
+
+<h3>Evaluation</h3>
+
+<p>
+Evaluation involves determining whether the desired
+patient outcomes have been achieved. The nurse
+compares the patient's current condition with the
+planned goals and modifies the plan where necessary.
+</p>
+
+<h3>Preoperative Care</h3>
+
+<p>
+Preoperative care is care provided before a surgical
+procedure. It includes preparation of the patient,
+assessment, education, psychological support,
+necessary investigations and preparation according
+to the planned operation.
+</p>
+
+<h3>Postoperative Care</h3>
+
+<p>
+Postoperative care is provided after surgery.
+The nurse monitors vital signs, pain, wound condition,
+fluid balance, elimination, mobility and possible
+complications.
+</p>
+
+<h3>Prevention of Complications</h3>
+
+<ul>
+
+<li>Regular monitoring of vital signs.</li>
+
+<li>Maintaining appropriate hygiene.</li>
+
+<li>Promoting mobility when permitted.</li>
+
+<li>Monitoring wounds and surgical sites.</li>
+
+<li>Maintaining adequate nutrition and hydration.</li>
+
+<li>Administering prescribed medications.</li>
+
+<li>Observing for changes in the patient's condition.</li>
+
+</ul>
+
+<h3>Summary</h3>
+
+<p>
+Effective patient management requires continuous
+assessment and appropriate nursing intervention.
+The nurse should provide individualized care and
+work closely with the healthcare team.
+</p>
+
+`;
+
+}
+
+
+// ======================================================
+// TOPIC 4
+// ======================================================
+
+else if (
+topic ===
+"Common Situations That Threaten Adaptation"
+) {
+
+note = `
+
+<h3>Introduction</h3>
+
+<p>
+Adaptation is the process by which an individual
+adjusts to changes in the internal or external
+environment. Illness, injury, hospitalization,
+surgery and changes in body function may challenge
+the patient's ability to adapt.
+</p>
+
+<h3>Situations That May Threaten Adaptation</h3>
+
+<h4>Illness</h4>
+
+<p>
+Illness can interfere with normal physical,
+psychological and social functioning. The patient may
+experience fear, anxiety, uncertainty or dependence
+on others.
+</p>
+
+<h4>Pain</h4>
+
+<p>
+Pain can affect sleep, mobility, appetite, mood and
+the patient's ability to perform normal activities.
+Effective pain assessment and management are
+important components of nursing care.
+</p>
+
+<h4>Hospitalization</h4>
+
+<p>
+Hospitalization can separate patients from their
+families and familiar surroundings. It may produce
+anxiety, fear and loss of independence.
+</p>
+
+<h4>Surgery</h4>
+
+<p>
+Surgery can create physical and emotional stress.
+Patients may worry about the procedure, pain,
+possible complications and the outcome of treatment.
+</p>
+
+<h4>Loss of Body Function</h4>
+
+<p>
+Changes in physical function can affect independence,
+self-image and quality of life. Nursing care should
+support the patient's adjustment and encourage
+maximum independence.
+</p>
+
+<h3>Nursing Measures to Promote Adaptation</h3>
+
+<ul>
+
+<li>Provide accurate information.</li>
+
+<li>Encourage communication.</li>
+
+<li>Provide emotional support.</li>
+
+<li>Promote patient participation in care.</li>
+
+<li>Respect the patient's dignity.</li>
+
+<li>Encourage appropriate family support.</li>
+
+<li>Manage pain and other distressing symptoms.</li>
+
+<li>Promote independence where possible.</li>
+
+</ul>
+
+<h3>Summary</h3>
+
+<p>
+The nurse plays an important role in helping patients
+adapt to illness and changes in health. Good
+communication, emotional support, patient education
+and appropriate nursing interventions can improve
+adaptation.
+</p>
+
+`;
+
+}
+
+
+// ======================================================
+// TOPIC 5
+// ======================================================
+
+else if (
+topic ===
+"Body Defense Mechanisms"
+) {
+
+note = `
+
+<h3>Introduction</h3>
+
+<p>
+The body has several mechanisms that protect it
+against harmful microorganisms and other substances.
+These defense mechanisms work together to maintain
+health and prevent infection.
+</p>
+
+<h3>First Line of Defense</h3>
+
+<p>
+The first line of defense prevents microorganisms
+from entering the body.
+</p>
+
+<ul>
+
+<li>Skin.</li>
+
+<li>Mucous membranes.</li>
+
+<li>Tears.</li>
+
+<li>Saliva.</li>
+
+<li>Normal body secretions.</li>
+
+<li>Normal microorganisms of the body.</li>
+
+</ul>
+
+<h3>Skin</h3>
+
+<p>
+The skin forms a physical barrier that helps prevent
+the entry of microorganisms. Intact skin is therefore
+important in preventing infection.
+</p>
+
+<h3>Mucous Membranes</h3>
+
+<p>
+Mucous membranes line several body passages and
+produce mucus that can trap microorganisms and
+foreign particles.
+</p>
+
+<h3>Second Line of Defense</h3>
+
+<p>
+The second line provides nonspecific internal
+protection against invading organisms.
+</p>
+
+<ul>
+
+<li>Inflammatory response.</li>
+
+<li>Phagocytosis.</li>
+
+<li>Fever.</li>
+
+<li>Natural killer cells.</li>
+
+<li>Complement and other protective substances.</li>
+
+</ul>
+
+<h3>Inflammation</h3>
+
+<p>
+Inflammation is a protective response to tissue
+injury or harmful stimuli. It helps isolate the
+problem, remove harmful substances and begin tissue
+repair.
+</p>
+
+<h3>Phagocytosis</h3>
+
+<p>
+Phagocytosis is the process by which certain cells
+engulf and destroy microorganisms and cellular
+debris.
+</p>
+
+<h3>Third Line of Defense</h3>
+
+<p>
+The third line of defense is the specific immune
+response. It involves lymphocytes and provides
+specific responses to particular foreign substances.
+</p>
+
+<h3>Importance to Nursing</h3>
+
+<p>
+Nurses help support the body's defense mechanisms by
+maintaining hygiene, preventing infection, supporting
+nutrition and hydration, observing for signs of
+infection and following appropriate infection
+prevention practices.
+</p>
+
+<h3>Summary</h3>
+
+<p>
+Body defense mechanisms protect the individual from
+infection and disease. They include physical
+barriers, nonspecific internal defenses and specific
+immune responses.
+</p>
+
+`;
+
+}
+
+
+// ======================================================
+// TOPIC 6
+// ======================================================
+
+else if (
+topic ===
+"Diagnostic Measures"
+) {
+
+note = `
+
+<h3>Introduction</h3>
+
+<p>
+Diagnostic measures are procedures and investigations
+used to identify, confirm or monitor a patient's
+health condition. Nurses have important
+responsibilities before, during and after many
+diagnostic procedures.
+</p>
+
+<h3>Common Diagnostic Measures</h3>
+
+<ul>
+
+<li>Blood investigations.</li>
+
+<li>Urinalysis.</li>
+
+<li>Stool examination.</li>
+
+<li>X-ray examinations.</li>
+
+<li>Ultrasound.</li>
+
+<li>Computed tomography.</li>
+
+<li>Magnetic resonance imaging.</li>
+
+<li>Electrocardiography.</li>
+
+<li>Endoscopy.</li>
+
+<li>Biopsy.</li>
+
+</ul>
+
+<h3>Laboratory Investigations</h3>
+
+<p>
+Laboratory investigations involve examination of
+blood, urine, stool and other specimens. Correct
+collection, labeling, storage and transportation of
+specimens are important.
+</p>
+
+<h3>Imaging Investigations</h3>
+
+<p>
+Imaging procedures provide information about body
+structures and organs. Different imaging methods are
+selected according to the clinical need.
+</p>
+
+<h3>Role of the Nurse Before Diagnostic Procedures</h3>
+
+<ul>
+
+<li>Explain the procedure to the patient as appropriate.</li>
+
+<li>Provide psychological support.</li>
+
+<li>Check relevant preparation requirements.</li>
+
+<li>Confirm patient identification.</li>
+
+<li>Obtain or confirm required information.</li>
+
+<li>Ensure appropriate consent requirements are met.</li>
+
+</ul>
+
+<h3>Role of the Nurse During the Procedure</h3>
+
+<ul>
+
+<li>Maintain patient safety.</li>
+
+<li>Provide reassurance.</li>
+
+<li>Observe the patient.</li>
+
+<li>Assist the healthcare professional as required.</li>
+
+<li>Maintain appropriate infection prevention measures.</li>
+
+</ul>
+
+<h3>Role of the Nurse After the Procedure</h3>
+
+<ul>
+
+<li>Observe the patient for complications.</li>
+
+<li>Provide appropriate post-procedure care.</li>
+
+<li>Monitor vital signs when indicated.</li>
+
+<li>Document relevant observations.</li>
+
+<li>Report abnormal findings or patient deterioration.</li>
+
+</ul>
+
+<h3>Summary</h3>
+
+<p>
+Diagnostic measures help healthcare professionals
+identify and monitor health conditions. Proper nursing
+care before, during and after diagnostic procedures
+helps promote patient safety and accurate results.
+</p>
+
+`;
+
+}
+
+
+// ======================================================
+// TOPIC 7
+// ======================================================
+
+else if (
+topic ===
+"Principles of Operating Room Nursing"
+) {
+
+note = `
+
+<h3>Introduction</h3>
+
+<p>
+Operating room nursing involves nursing care of
+patients undergoing surgical procedures. The nurse
+has responsibilities related to patient safety,
+infection prevention, preparation and assistance
+during surgery.
+</p>
+
+<h3>Operating Room Nursing Roles</h3>
+
+<h4>Scrub Nurse</h4>
+
+<p>
+The scrub nurse works within the sterile field and
+assists with instruments, equipment and supplies
+needed during the surgical procedure.
+</p>
+
+<h4>Circulating Nurse</h4>
+
+<p>
+The circulating nurse works outside the sterile field.
+The nurse helps coordinate activities, maintains
+patient safety, obtains needed supplies and assists
+with documentation.
+</p>
+
+<h3>Principles of Aseptic Technique</h3>
+
+<p>
+Aseptic technique is used to reduce contamination
+and prevent infection during procedures.
+</p>
+
+<ul>
+
+<li>Maintain the sterility of sterile equipment.</li>
+
+<li>Avoid contamination of sterile items.</li>
+
+<li>Use appropriate surgical hand preparation.</li>
+
+<li>Wear appropriate protective clothing.</li>
+
+<li>Maintain the sterile field.</li>
+
+<li>Use proper handling of sterile instruments.</li>
+
+</ul>
+
+<h3>Patient Safety in the Operating Room</h3>
+
+<ul>
+
+<li>Correct patient identification.</li>
+
+<li>Correct surgical procedure.</li>
+
+<li>Correct surgical site.</li>
+
+<li>Safe positioning.</li>
+
+<li>Prevention of injury.</li>
+
+<li>Accurate counting of instruments and materials.</li>
+
+<li>Effective communication among team members.</li>
+
+</ul>
+
+<h3>Preoperative Preparation</h3>
+
+<p>
+The patient is assessed and prepared according to
+the planned surgical procedure. Psychological support,
+appropriate physical preparation and verification of
+relevant information are important.
+</p>
+
+<h3>Intraoperative Nursing Care</h3>
+
+<p>
+During surgery, the nurse helps maintain a safe
+environment, supports the surgical team, monitors
+the patient as required and helps maintain aseptic
+conditions.
+</p>
+
+<h3>Postoperative Considerations</h3>
+
+<p>
+After surgery, the patient requires continued
+monitoring and appropriate transfer and handover.
+The nurse should communicate relevant information
+to the receiving healthcare team.
+</p>
+
+<h3>Summary</h3>
+
+<p>
+Operating room nursing focuses on patient safety,
+infection prevention, aseptic technique, effective
+teamwork and appropriate care before, during and
+after surgical procedures.
+</p>
+
+`;
+
+}
+
+
+// ======================================================
+// DISPLAY
+// ======================================================
+
+noteContent.innerHTML =
+note;
+
+
+noteSection.style.display =
+"block";
+
+
+messageBox.style.display =
+"none";
+
+
+noteSection.scrollIntoView({
+
+    behavior: "smooth"
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
