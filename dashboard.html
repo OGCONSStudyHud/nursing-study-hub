@@ -21,7 +21,6 @@
             padding: 0;
         }
 
-
         body {
 
             font-family: Arial, sans-serif;
@@ -37,13 +36,11 @@
                 );
 
             color: #172033;
-
         }
 
-
-        /* ==============================
+        /* ================================
            HEADER
-        ============================== */
+        ================================= */
 
         header {
 
@@ -58,12 +55,7 @@
 
             padding: 22px 20px;
 
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.1);
-
         }
-
 
         .header-content {
 
@@ -77,21 +69,19 @@
 
             align-items: center;
 
-            gap: 15px;
+            gap: 20px;
 
         }
 
-
         .logo {
 
-            font-size: 23px;
+            font-size: 22px;
 
             font-weight: bold;
 
         }
 
-
-        .logout-button {
+        .logout {
 
             border: none;
 
@@ -101,7 +91,7 @@
 
             padding: 10px 18px;
 
-            border-radius: 22px;
+            border-radius: 20px;
 
             font-weight: bold;
 
@@ -109,18 +99,16 @@
 
         }
 
-
-        .logout-button:hover {
+        .logout:hover {
 
             background: #f1f1f1;
 
         }
 
 
-
-        /* ==============================
+        /* ================================
            MAIN
-        ============================== */
+        ================================= */
 
         .container {
 
@@ -133,27 +121,21 @@
         }
 
 
-
-        /* ==============================
-           WELCOME
-        ============================== */
-
         .welcome {
 
             background: white;
 
+            padding: 30px;
+
             border-radius: 20px;
 
-            padding: 30px;
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
 
             margin-bottom: 30px;
 
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.08);
-
         }
-
 
         .welcome h1 {
 
@@ -161,59 +143,33 @@
 
             margin-bottom: 10px;
 
-            font-size: 30px;
+            font-size: 28px;
 
         }
 
-
         .welcome p {
 
-            color: #66736c;
+            color: #617568;
 
             line-height: 1.6;
 
         }
 
 
-        #studentName {
-
-            color: #18a058;
-
-        }
-
-
-
-        /* ==============================
-           SECTION TITLE
-        ============================== */
+        /* ================================
+           COURSE SECTION
+        ================================= */
 
         .section-title {
 
             margin-bottom: 20px;
 
-        }
-
-
-        .section-title h2 {
-
             color: #172033;
 
-            margin-bottom: 6px;
+            font-size: 24px;
 
         }
 
-
-        .section-title p {
-
-            color: #667085;
-
-        }
-
-
-
-        /* ==============================
-           COURSE GRID
-        ============================== */
 
         .courses {
 
@@ -227,18 +183,13 @@
         }
 
 
-
-        /* ==============================
-           COURSE CARD
-        ============================== */
-
         .course-card {
 
             background: white;
 
             border-radius: 18px;
 
-            padding: 25px;
+            padding: 25px 20px;
 
             box-shadow:
                 0 8px 22px
@@ -252,7 +203,9 @@
 
             flex-direction: column;
 
-            min-height: 260px;
+            justify-content: space-between;
+
+            min-height: 230px;
 
         }
 
@@ -271,25 +224,29 @@
 
         .course-icon {
 
-            font-size: 50px;
+            font-size: 48px;
 
             margin-bottom: 15px;
 
         }
 
 
-        .course-card h3 {
+        .course-card h2 {
 
             margin-bottom: 10px;
 
+            color: #18a058;
+
             font-size: 21px;
+
+            line-height: 1.3;
 
         }
 
 
         .course-card p {
 
-            color: #667085;
+            color: #617568;
 
             line-height: 1.5;
 
@@ -302,189 +259,164 @@
 
         .course-button {
 
-            display: block;
-
-            width: 100%;
-
-            border: none;
+            display: inline-block;
 
             text-decoration: none;
 
             text-align: center;
 
-            padding: 13px 18px;
-
-            border-radius: 25px;
+            background: #18a058;
 
             color: white;
 
+            padding: 12px 18px;
+
+            border-radius: 22px;
+
             font-weight: bold;
 
-            cursor: pointer;
+            transition: 0.2s;
 
         }
 
 
-        /* ==============================
-           COURSE COLORS
-        ============================== */
-
-        .fon-card h3 {
-
-            color: #18a058;
-
-        }
-
-
-        .fon-button {
-
-            background: #18a058;
-
-        }
-
-
-        .fon-button:hover {
+        .course-button:hover {
 
             background: #117d45;
 
         }
 
 
-        .phc-card h3 {
-
-            color: #2563eb;
-
-        }
-
-
-        .phc-button {
-
-            background: #2563eb;
-
-        }
-
-
-        .phc-button:hover {
-
-            background: #1d4ed8;
-
-        }
-
-
-        .anatomy-card h3 {
-
-            color: #9333ea;
-
-        }
-
-
-        .anatomy-button {
-
-            background: #9333ea;
-
-        }
-
-
-        .anatomy-button:hover {
-
-            background: #7e22ce;
-
-        }
-
-
-        .pharm-card h3 {
-
-            color: #d97706;
-
-        }
-
-
-        .pharm-button {
-
-            background: #d97706;
-
-        }
-
-
-        .pharm-button:hover {
-
-            background: #b45309;
-
-        }
-
-
-        .micro-card h3 {
-
-            color: #0891b2;
-
-        }
-
-
-        .micro-button {
-
-            background: #0891b2;
-
-        }
-
-
-        .micro-button:hover {
-
-            background: #0e7490;
-
-        }
-
-
-        .biology-card h3 {
-
-            color: #16a34a;
-
-        }
-
-
-        .biology-button {
-
-            background: #16a34a;
-
-        }
-
-
-        .biology-button:hover {
-
-            background: #15803d;
-
-        }
-
-
-
-        /* ==============================
+        /* ================================
            COMING SOON
-        ============================== */
+        ================================= */
 
         .coming-soon {
 
-            opacity: 0.75;
+            opacity: 0.85;
 
         }
 
 
-        .coming-button {
+        .coming-soon .course-button {
 
-            background: #6c757d;
+            background: #8a9690;
 
-        }
-
-
-        .coming-button:hover {
-
-            background: #545b62;
+            cursor: default;
 
         }
 
 
+        .coming-soon .course-button:hover {
 
-        /* ==============================
+            background: #8a9690;
+
+        }
+
+
+        /* ================================
+           QUICK INFO
+        ================================= */
+
+        .info-section {
+
+            margin-top: 35px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .info-card {
+
+            background: white;
+
+            padding: 25px 20px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .info-card .icon {
+
+            font-size: 35px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .info-card h3 {
+
+            margin-bottom: 8px;
+
+            color: #18a058;
+
+        }
+
+
+        .info-card p {
+
+            color: #617568;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* ================================
+           LOADING
+        ================================= */
+
+        #loading {
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            font-size: 18px;
+
+            color: #617568;
+
+        }
+
+
+        /* ================================
+           ERROR
+        ================================= */
+
+        #error {
+
+            display: none;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            color: #dc3545;
+
+        }
+
+
+        /* ================================
            FOOTER
-        ============================== */
+        ================================= */
 
         footer {
 
@@ -499,77 +431,20 @@
         }
 
 
-
-        /* ==============================
-           LOADING
-        ============================== */
-
-        #loading {
-
-            position: fixed;
-
-            inset: 0;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #e8fff2,
-                    #e8f4ff,
-                    #f5eaff
-                );
-
-            z-index: 9999;
-
-        }
-
-
-        .loading-box {
-
-            background: white;
-
-            padding: 35px;
-
-            border-radius: 18px;
-
-            text-align: center;
-
-            box-shadow:
-                0 10px 30px
-                rgba(0,0,0,0.1);
-
-        }
-
-
-        .loading-box h2 {
-
-            color: #18a058;
-
-            margin-bottom: 10px;
-
-        }
-
-
-        .loading-box p {
-
-            color: #667085;
-
-        }
-
-
-
-        /* ==============================
+        /* ================================
            MOBILE
-        ============================== */
+        ================================= */
 
         @media (max-width: 850px) {
 
             .courses {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .info-section {
 
                 grid-template-columns:
                     repeat(2, 1fr);
@@ -590,10 +465,16 @@
             }
 
 
-            .container {
+            .courses {
 
-                padding:
-                    25px 15px;
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .info-section {
+
+                grid-template-columns: 1fr;
 
             }
 
@@ -607,21 +488,7 @@
 
             .welcome h1 {
 
-                font-size: 25px;
-
-            }
-
-
-            .courses {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .course-card {
-
-                min-height: auto;
+                font-size: 24px;
 
             }
 
@@ -635,31 +502,9 @@
 <body>
 
 
-<!-- =========================================
-     LOADING
-========================================= -->
-
-<div id="loading">
-
-    <div class="loading-box">
-
-        <h2>
-            🩺 OGCONS Study Hub
-        </h2>
-
-        <p>
-            Loading your dashboard...
-        </p>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================================
+<!-- ==========================================
      HEADER
-========================================= -->
+========================================== -->
 
 <header>
 
@@ -673,7 +518,7 @@
 
 
         <button
-            class="logout-button"
+            class="logout"
             onclick="logout()">
 
             Logout
@@ -686,11 +531,38 @@
 
 
 
-<!-- =========================================
-     MAIN
-========================================= -->
+<!-- ==========================================
+     LOADING
+========================================== -->
 
-<div class="container">
+<div
+    id="loading">
+
+    🔄 Loading your dashboard...
+
+</div>
+
+
+
+<!-- ==========================================
+     ERROR
+========================================== -->
+
+<div
+    id="error">
+
+</div>
+
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<div
+    class="container"
+    id="dashboard"
+    style="display:none;">
 
 
     <!-- WELCOME -->
@@ -710,10 +582,11 @@
 
         <p>
 
-            Welcome to your OGCONS Study Hub.
-            Select a course below to view its
-            topics, study your notes and take
-            quizzes.
+            Welcome to OGCONS Study Hub.
+
+            Choose a course below to begin
+            studying, read your notes, and
+            test your knowledge with quizzes.
 
         </p>
 
@@ -721,54 +594,58 @@
 
 
 
-    <!-- COURSE SECTION -->
+    <!-- ======================================
+         COURSES
+    ======================================= -->
 
-    <div class="section-title">
+    <h2 class="section-title">
 
-        <h2>
-            📚 Your Courses
-        </h2>
+        📚 Courses
 
-        <p>
-            Choose a course to begin studying.
-        </p>
-
-    </div>
-
+    </h2>
 
 
     <div class="courses">
 
 
-        <!-- =================================
+        <!-- ==================================
              FOUNDATIONS OF NURSING
-        ================================== -->
+        =================================== -->
 
-        <div class="course-card fon-card">
+        <div class="course-card">
 
-            <div class="course-icon">
-                🩺
+            <div>
+
+                <div class="course-icon">
+
+                    📚
+
+                </div>
+
+
+                <h2>
+
+                    Foundations of Nursing
+
+                </h2>
+
+
+                <p>
+
+                    Learn the fundamental concepts,
+                    principles and practices of
+                    nursing.
+
+                </p>
+
             </div>
-
-
-            <h3>
-                Foundations of Nursing
-            </h3>
-
-
-            <p>
-
-                Learn the fundamental principles,
-                concepts and skills of nursing.
-
-            </p>
 
 
             <a
                 href="foundations-topics.html"
-                class="course-button fon-button">
+                class="course-button">
 
-                View Topics →
+                Open Course →
 
             </a>
 
@@ -776,37 +653,44 @@
 
 
 
-        <!-- =================================
+        <!-- ==================================
              PRIMARY HEALTH CARE
-        ================================== -->
+        =================================== -->
 
-        <div class="course-card phc-card">
+        <div class="course-card">
 
-            <div class="course-icon">
-                🏥
+            <div>
+
+                <div class="course-icon">
+
+                    🏥
+
+                </div>
+
+
+                <h2>
+
+                    Primary Health Care
+
+                </h2>
+
+
+                <p>
+
+                    Study community health,
+                    disease prevention, health
+                    education and PHC services.
+
+                </p>
+
             </div>
-
-
-            <h3>
-                Primary Health Care
-            </h3>
-
-
-            <p>
-
-                Study community health,
-                health education, prevention,
-                immunization and other PHC
-                principles.
-
-            </p>
 
 
             <a
                 href="phc-topics.html"
-                class="course-button phc-button">
+                class="course-button">
 
-                View Topics →
+                Open Course →
 
             </a>
 
@@ -814,40 +698,44 @@
 
 
 
-        <!-- =================================
-             ANATOMY AND PHYSIOLOGY
-        ================================== -->
+        <!-- ==================================
+             ANATOMY & PHYSIOLOGY
+        =================================== -->
 
-        <div class="course-card anatomy-card">
+        <div class="course-card">
 
-            <div class="course-icon">
-                🫀
+            <div>
+
+                <div class="course-icon">
+
+                    🫀
+
+                </div>
+
+
+                <h2>
+
+                    Anatomy & Physiology
+
+                </h2>
+
+
+                <p>
+
+                    Explore the structures of the
+                    human body and how body systems
+                    function.
+
+                </p>
+
             </div>
 
-
-            <h3>
-                Anatomy & Physiology
-            </h3>
-
-
-            <p>
-
-                Study the structure and function
-                of the human body and its major
-                systems.
-
-            </p>
-
-
-            <!-- IMPORTANT
-                 THIS IS THE CORRECT LINK
-            -->
 
             <a
                 href="anatomy-topics.html"
-                class="course-button anatomy-button">
+                class="course-button">
 
-                View Topics →
+                Open Course →
 
             </a>
 
@@ -855,73 +743,136 @@
 
 
 
-        <!-- =================================
-             PHARMACOLOGY
-        ================================== -->
+        <!-- ==================================
+             MEDICAL/SURGICAL NURSING
+        =================================== -->
 
-        <div class="course-card pharm-card">
+        <div class="course-card">
 
-            <div class="course-icon">
-                💊
+            <div>
+
+                <div class="course-icon">
+
+                    🏥
+
+                </div>
+
+
+                <h2>
+
+                    Medical/Surgical Nursing
+
+                </h2>
+
+
+                <p>
+
+                    Study the principles of
+                    medical and surgical nursing,
+                    patient management, diagnostic
+                    measures and operating room
+                    nursing.
+
+                </p>
+
             </div>
 
 
-            <h3>
-                Pharmacology
-            </h3>
+            <a
+                href="medical-surgical-topics.html"
+                class="course-button">
+
+                Open Course →
+
+            </a>
+
+        </div>
 
 
-            <p>
 
-                Learn about drugs, their actions,
-                uses, side effects and basic
-                pharmacological principles.
+        <!-- ==================================
+             MICROBIOLOGY
+        =================================== -->
 
-            </p>
+        <div class="course-card">
+
+            <div>
+
+                <div class="course-icon">
+
+                    🦠
+
+                </div>
+
+
+                <h2>
+
+                    Microbiology
+
+                </h2>
+
+
+                <p>
+
+                    Learn about microorganisms,
+                    infection, disease-causing
+                    organisms and their control.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="microbiology-topics.html"
+                class="course-button">
+
+                Open Course →
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ==================================
+             PHARMACOLOGY
+        =================================== -->
+
+        <div class="course-card">
+
+            <div>
+
+                <div class="course-icon">
+
+                    💊
+
+                </div>
+
+
+                <h2>
+
+                    Pharmacology
+
+                </h2>
+
+
+                <p>
+
+                    Learn about drugs, their
+                    actions, uses, side effects
+                    and nursing considerations.
+
+                </p>
+
+            </div>
 
 
             <a
                 href="pharmacology.html"
-                class="course-button pharm-button">
+                class="course-button">
 
-                View Topics →
-
-            </a>
-
-        </div>
-
-
-
-        <!-- =================================
-             MICROBIOLOGY
-        ================================== -->
-
-        <div class="course-card micro-card">
-
-            <div class="course-icon">
-                🦠
-            </div>
-
-
-            <h3>
-                Microbiology
-            </h3>
-
-
-            <p>
-
-                Study microorganisms, infection,
-                disease-causing organisms and
-                infection prevention.
-
-            </p>
-
-
-            <a
-                href="microbiology.html"
-                class="course-button micro-button">
-
-                View Topics →
+                Open Course →
 
             </a>
 
@@ -929,38 +880,137 @@
 
 
 
-        <!-- =================================
-             BIOLOGY
-        ================================== -->
+        <!-- ==================================
+             MEDICAL/SURGICAL CONTINUATION
+        =================================== -->
 
-        <div class="course-card biology-card">
+        <div class="course-card coming-soon">
 
-            <div class="course-icon">
-                🧬
+            <div>
+
+                <div class="course-icon">
+
+                    🩺
+
+                </div>
+
+
+                <h2>
+
+                    More Courses
+
+                </h2>
+
+
+                <p>
+
+                    More nursing courses and
+                    learning materials will be
+                    added to OGCONS Study Hub.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="javascript:void(0)"
+                class="course-button">
+
+                Coming Soon
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ======================================
+         QUICK INFORMATION
+    ======================================= -->
+
+    <div class="info-section">
+
+
+        <div class="info-card">
+
+            <div class="icon">
+
+                📖
+
             </div>
 
 
             <h3>
-                Biology
+
+                Study
+
             </h3>
 
 
             <p>
 
-                Review important biological
-                concepts relevant to nursing
-                studies.
+                Read detailed notes and
+                understand your nursing courses.
 
             </p>
 
+        </div>
 
-            <a
-                href="biology.html"
-                class="course-button biology-button">
 
-                View Topics →
 
-            </a>
+        <div class="info-card">
+
+            <div class="icon">
+
+                📝
+
+            </div>
+
+
+            <h3>
+
+                Practice
+
+            </h3>
+
+
+            <p>
+
+                Take quizzes and test your
+                understanding.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="info-card">
+
+            <div class="icon">
+
+                📊
+
+            </div>
+
+
+            <h3>
+
+                Improve
+
+            </h3>
+
+
+            <p>
+
+                Keep practicing and improve
+                your academic performance.
+
+            </p>
 
         </div>
 
@@ -972,13 +1022,13 @@
 
 
 
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
 <footer>
 
     OGCONS Study Hub © 2026
-
-    <br>
-
-    Built for OGCONS students
 
 </footer>
 
@@ -987,9 +1037,9 @@
 <script>
 
 
-// =====================================================
-// SUPABASE
-// =====================================================
+// ==================================================
+// SUPABASE CONNECTION
+// ==================================================
 
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -1010,31 +1060,37 @@ const supabaseClient =
 
 
 
-// =====================================================
-// LOAD CURRENT STUDENT
-// =====================================================
+// ==================================================
+// LOAD STUDENT
+// ==================================================
 
 async function loadStudent() {
 
 
     const {
-        data,
+
+        data: {
+            user
+
+        },
+
         error
+
     } =
+
         await supabaseClient
             .auth
             .getUser();
 
 
 
-    // ================================================
+    // ==============================================
     // NOT LOGGED IN
-    // ================================================
+    // ==============================================
 
     if (
         error ||
-        !data ||
-        !data.user
+        !user
     ) {
 
         window.location.href =
@@ -1046,18 +1102,12 @@ async function loadStudent() {
 
 
 
-    const user =
-        data.user;
-
-
-
-    // ================================================
+    // ==============================================
     // GET STUDENT NAME
-    // ================================================
+    // ==============================================
 
     let name =
         "Student";
-
 
 
     if (
@@ -1092,32 +1142,34 @@ async function loadStudent() {
 
 
     document
-        .getElementById(
-            "studentName"
-        )
+        .getElementById("studentName")
         .textContent =
         name;
 
 
 
-    // ================================================
-    // HIDE LOADING
-    // ================================================
+    // ==============================================
+    // SHOW DASHBOARD
+    // ==============================================
 
     document
-        .getElementById(
-            "loading"
-        )
+        .getElementById("loading")
         .style.display =
         "none";
+
+
+    document
+        .getElementById("dashboard")
+        .style.display =
+        "block";
 
 }
 
 
 
-// =====================================================
+// ==================================================
 // LOGOUT
-// =====================================================
+// ==================================================
 
 async function logout() {
 
@@ -1137,14 +1189,9 @@ async function logout() {
             "Unable to logout. Please try again."
         );
 
-        console.error(
-            error
-        );
-
         return;
 
     }
-
 
 
     window.location.href =
@@ -1154,9 +1201,9 @@ async function logout() {
 
 
 
-// =====================================================
+// ==================================================
 // START
-// =====================================================
+// ==================================================
 
 loadStudent();
 
