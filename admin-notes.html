@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>OGCONS Study Hub - Notes Management</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    font-family:Arial,sans-serif;
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        135deg,
+        #e8fff2,
+        #e8f4ff,
+        #f5eaff
+    );
+
+    color:#172033;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+
+    background:
+    linear-gradient(
+        135deg,
+        #18a058,
+        #2eb7a0
+    );
+
+    color:white;
+
+    padding:25px 20px;
+}
+
+.header-content{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.logo{
+
+    font-size:23px;
+
+    font-weight:bold;
+}
+
+.header-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.header-button{
+
+    border:none;
+
+    background:white;
+
+    color:#18a058;
+
+    padding:10px 17px;
+
+    border-radius:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.header-button:hover{
+
+    background:#f1f1f1;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:35px 20px;
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-title{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 25px
+    rgba(0,0,0,.08);
+
+    text-align:center;
+
+    margin-bottom:25px;
+}
+
+.page-title .icon{
+
+    font-size:55px;
+
+    margin-bottom:10px;
+}
+
+.page-title h1{
+
+    color:#18a058;
+
+    margin-bottom:10px;
+
+    font-size:29px;
+}
+
+.page-title p{
+
+    color:#68756d;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.editor{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.08);
+
+    margin-bottom:30px;
+}
+
+.editor h2{
+
+    color:#18a058;
+
+    margin-bottom:22px;
+}
+
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group{
+
+    margin-bottom:20px;
+}
+
+.form-group label{
+
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+    color:#172033;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea{
+
+    width:100%;
+
+    padding:13px 15px;
+
+    border:1px solid #d8e0dc;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    font-family:Arial,sans-serif;
+
+    outline:none;
+
+    transition:.2s;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus{
+
+    border-color:#18a058;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(24,160,88,.10);
+}
+
+.form-group textarea{
+
+    min-height:350px;
+
+    resize:vertical;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:10px;
+}
+
+.save-button{
+
+    border:none;
+
+    background:#18a058;
+
+    color:white;
+
+    padding:13px 25px;
+
+    border-radius:25px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    font-size:15px;
+}
+
+.save-button:hover{
+
+    background:#117d45;
+}
+
+.clear-button{
+
+    border:none;
+
+    background:#6c757d;
+
+    color:white;
+
+    padding:13px 25px;
+
+    border-radius:25px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    font-size:15px;
+}
+
+.clear-button:hover{
+
+    background:#545b62;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+#status{
+
+    display:none;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-top:20px;
+
+    font-weight:bold;
+}
+
+.status-success{
+
+    background:#e8fff2;
+
+    color:#117d45;
+
+}
+
+.status-error{
+
+    background:#ffe8e8;
+
+    color:#b42318;
+
+}
+
+
+/* =========================
+   NOTES LIST
+========================= */
+
+.notes-section{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.08);
+}
+
+.notes-section h2{
+
+    color:#18a058;
+
+    margin-bottom:20px;
+}
+
+.note-card{
+
+    border:1px solid #e2e8e4;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+    background:#fbfffd;
+}
+
+.note-card:last-child{
+
+    margin-bottom:0;
+}
+
+.note-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    margin-bottom:10px;
+}
+
+.note-card h3{
+
+    color:#18a058;
+
+    margin-bottom:5px;
+
+    line-height:1.4;
+}
+
+.note-course{
+
+    font-size:13px;
+
+    color:#68756d;
+
+    margin-bottom:8px;
+}
+
+.note-preview{
+
+    color:#53635a;
+
+    line-height:1.5;
+
+    white-space:pre-wrap;
+
+    max-height:100px;
+
+    overflow:hidden;
+
+    margin-bottom:15px;
+}
+
+.note-actions{
+
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+}
+
+.edit-button{
+
+    border:none;
+
+    background:#0b5ed7;
+
+    color:white;
+
+    padding:9px 16px;
+
+    border-radius:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.edit-button:hover{
+
+    background:#084da8;
+}
+
+.delete-button{
+
+    border:none;
+
+    background:#dc3545;
+
+    color:white;
+
+    padding:9px 16px;
+
+    border-radius:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.delete-button:hover{
+
+    background:#b02a37;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#68756d;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+
+    text-align:center;
+
+    padding:35px 20px;
+
+    color:#68756d;
+
+    background:#f8faf9;
+
+    border-radius:12px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    text-align:center;
+
+    padding:35px;
+
+    color:#68756d;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .header-content{
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+    .header-buttons{
+
+        justify-content:center;
+    }
+
+    .page-title{
+
+        padding:25px 20px;
+    }
+
+    .editor,
+    .notes-section{
+
+        padding:22px 18px;
+    }
+
+    .note-top{
+
+        flex-direction:column;
+    }
+
+    .buttons{
+
+        flex-direction:column;
+    }
+
+    .save-button,
+    .clear-button{
+
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+
+🩺 OGCONS Study Hub — Admin
+
+</div>
+
+
+<div class="header-buttons">
+
+<button
+    class="header-button"
+    onclick="goToAdmin()">
+
+← Admin Dashboard
+
+</button>
+
+
+<button
+    class="header-button"
+    onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =========================
+     TITLE
+========================= -->
+
+<div class="page-title">
+
+<div class="icon">
+
+📖
+
+</div>
+
+<h1>
+
+Notes Management
+
+</h1>
+
+<p>
+
+Create and manage study notes for the
+exact topics available to students.
+
+</p>
+
+</div>
+
+
+
+<!-- =========================
+     EDITOR
+========================= -->
+
+<div class="editor">
+
+<h2>
+
+✏️ Create / Edit Note
+
+</h2>
+
+
+<!-- COURSE -->
+
+<div class="form-group">
+
+<label for="course">
+
+Course
+
+</label>
+
+
+<select
+    id="course"
+    onchange="loadTopics()">
+
+<option value="">
+
+Select a course
+
+</option>
+
+<option value="Foundations of Nursing">
+
+Foundations of Nursing
+
+</option>
+
+<option value="Primary Health Care">
+
+Primary Health Care
+
+</option>
+
+<option value="Anatomy & Physiology">
+
+Anatomy & Physiology
+
+</option>
+
+<option value="Medical/Surgical Nursing">
+
+Medical/Surgical Nursing
+
+</option>
+
+<option value="Microbiology">
+
+Microbiology
+
+</option>
+
+<option value="Pharmacology">
+
+Pharmacology
+
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- TOPIC -->
+
+<div class="form-group">
+
+<label for="topic">
+
+Topic
+
+</label>
+
+
+<select
+    id="topic">
+
+<option value="">
+
+Select a course first
+
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- TITLE -->
+
+<div class="form-group">
+
+<label for="noteTitle">
+
+Note Title
+
+</label>
+
+
+<input
+    type="text"
+    id="noteTitle"
+    placeholder="Enter the title of the note">
+
+</div>
+
+
+
+<!-- CONTENT -->
+
+<div class="form-group">
+
+<label for="noteContent">
+
+Note Content
+
+</label>
+
+
+<textarea
+    id="noteContent"
+    placeholder="Write or paste your study note here..."></textarea>
+
+</div>
+
+
+
+<div class="buttons">
+
+<button
+    class="save-button"
+    onclick="saveNote()">
+
+💾 Save Note
+
+</button>
+
+
+<button
+    class="clear-button"
+    onclick="clearForm()">
+
+Clear
+
+</button>
+
+</div>
+
+
+
+<div id="status"></div>
+
+</div>
+
+
+
+<!-- =========================
+     SAVED NOTES
+========================= -->
+
+<div class="notes-section">
+
+<h2>
+
+📚 Saved Notes
+
+</h2>
+
+
+<div
+    id="notesContainer">
+
+<div class="loading">
+
+Loading notes...
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<footer>
+
+OGCONS Study Hub © 2026
+
+</footer>
+
+
+
+<script>
+
+
+// ==================================================
+// SUPABASE
+// ==================================================
+
+const SUPABASE_URL =
+"https://bvetmmvpdotifusjkywd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+
+const supabaseClient =
+window.supabase.createClient(
+
+    SUPABASE_URL,
+
+    SUPABASE_PUBLISHABLE_KEY
+
+);
+
+
+
+// ==================================================
+// TOPICS
+// ==================================================
+
+const courseTopics = {
+
+
+// --------------------------------------------------
+// FOUNDATIONS
+// --------------------------------------------------
+
+"Foundations of Nursing": [
+
+"Introduction to Nursing",
+
+"Health Care Institutions",
+
+"Ethico-Legal Issues in Nursing",
+
+"Tools of Nursing",
+
+"Comfort and Safety Measures",
+
+"Emergency Care",
+
+"Administration of Drugs",
+
+"Diagnostic Investigation",
+
+"Aseptic Techniques",
+
+"Unsafe Injection Safety",
+
+"Introduction to Healthcare Waste",
+
+"Legal Aspects of Nursing",
+
+"Nursing Care of Patients with Feeding/Elimination Problems",
+
+"Basic Life Support"
+
+],
+
+
+// --------------------------------------------------
+// PRIMARY HEALTH CARE
+// --------------------------------------------------
+
+"Primary Health Care": [
+
+"Introduction to Primary Health Care",
+
+"The Community",
+
+"Cadre of Health Workers in PHC",
+
+"Community Mobilization",
+
+"Community Diagnosis",
+
+"Health Education",
+
+"Components of Primary Health Care",
+
+"Immunization Against Major Communicable Diseases",
+
+"Prevention and Control of Locally Endemic and Epidemic Diseases",
+
+"Promotion of Mental Health",
+
+"Maternal and Child Health Services",
+
+"Provision of Essential Drugs and Supplies",
+
+"Oral Hygiene and Eye Care",
+
+"Adolescence and Their Problems",
+
+"Referral System in PHC",
+
+"Care of the Aged in the Community",
+
+"Management of Occupational Health",
+
+"Management in Primary Health Care"
+
+],
+
+
+// --------------------------------------------------
+// ANATOMY & PHYSIOLOGY
+// --------------------------------------------------
+
+"Anatomy & Physiology": [
+
+"Introduction to Anatomy",
+
+"The Musculoskeletal System",
+
+"Blood and Cardiovascular System",
+
+"The Respiratory System",
+
+"The Digestive System",
+
+"The Integumentary System",
+
+"The Excretory System",
+
+"The Endocrine System",
+
+"The Female Reproductive System",
+
+"The Male Reproductive System",
+
+"Foetal Development"
+
+],
+
+
+// --------------------------------------------------
+// MEDICAL/SURGICAL
+// --------------------------------------------------
+
+"Medical/Surgical Nursing": [
+
+"Concepts and Terms in Medical-Surgical Nursing",
+
+"Management of Patients with Medical/Surgical Conditions",
+
+"Management of Patients with Medical/Surgical Conditions 2",
+
+"Common Situations That Threaten Adaptation",
+
+"Body Defense Mechanisms",
+
+"Diagnostic Measures",
+
+"Principles of Operating Room Nursing"
+
+],
+
+
+// --------------------------------------------------
+// MICROBIOLOGY
+// --------------------------------------------------
+
+"Microbiology": [
+
+"Introduction to Microbiology",
+
+"Bacteria",
+
+"Viruses",
+
+"Fungi",
+
+"Parasites",
+
+"Immunology",
+
+"Sterilization & Disinfection",
+
+"Healthcare-Associated Infections"
+
+],
+
+
+// --------------------------------------------------
+// PHARMACOLOGY
+// --------------------------------------------------
+
+"Pharmacology": [
+
+"Introduction",
+
+"Sources and Classification of Drugs",
+
+"Preparation of Drugs",
+
+"Routes of Drug Administration",
+
+"Mechanism of Drug Action",
+
+"National Drug Policy",
+
+"Drugs Used in Management of Other Health Conditions",
+
+"Patient Education and Counseling"
+
+]
+
+};
+
+
+
+// ==================================================
+// EDITING STATE
+// ==================================================
+
+let editingNoteId = null;
+
+
+
+// ==================================================
+// CHECK LOGIN
+// ==================================================
+
+async function checkLogin(){
+
+    const {
+        data:{
+            user
+        },
+        error
+    } =
+    await supabaseClient
+        .auth
+        .getUser();
+
+
+    if(error || !user){
+
+        window.location.href =
+        "index.html";
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+
+
+// ==================================================
+// LOAD TOPICS
+// ==================================================
+
+function loadTopics(){
+
+    const course =
+        document.getElementById(
+            "course"
+        ).value;
+
+
+    const topicSelect =
+        document.getElementById(
+            "topic"
+        );
+
+
+    topicSelect.innerHTML = "";
+
+
+    if(!course){
+
+        const option =
+        document.createElement("option");
+
+        option.value = "";
+
+        option.textContent =
+        "Select a course first";
+
+        topicSelect.appendChild(
+            option
+        );
+
+        return;
+
+    }
+
+
+    const firstOption =
+    document.createElement("option");
+
+    firstOption.value = "";
+
+    firstOption.textContent =
+    "Select a topic";
+
+    topicSelect.appendChild(
+        firstOption
+    );
+
+
+    courseTopics[course].forEach(
+    function(topic){
+
+        const option =
+        document.createElement("option");
+
+        option.value =
+        topic;
+
+        option.textContent =
+        topic;
+
+        topicSelect.appendChild(
+        option
+        );
+
+    });
+
+}
+
+
+
+// ==================================================
+// SAVE NOTE
+// ==================================================
+
+async function saveNote(){
+
+    const course =
+        document.getElementById(
+            "course"
+        ).value;
+
+
+    const topic =
+        document.getElementById(
+            "topic"
+        ).value;
+
+
+    const title =
+        document.getElementById(
+            "noteTitle"
+        ).value.trim();
+
+
+    const content =
+        document.getElementById(
+            "noteContent"
+        ).value.trim();
+
+
+
+    // VALIDATION
+
+    if(!course){
+
+        showStatus(
+            "Please select a course.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    if(!topic){
+
+        showStatus(
+            "Please select a topic.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    if(!title){
+
+        showStatus(
+            "Please enter a note title.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    if(!content){
+
+        showStatus(
+            "Please enter the note content.",
+            false
+        );
+
+        return;
+
+    }
+
+
+
+    // UPDATE EXISTING NOTE
+
+    if(editingNoteId){
+
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("notes")
+            .update({
+
+                course:
+                    course,
+
+                topic:
+                    topic,
+
+                title:
+                    title,
+
+                content:
+                    content,
+
+                updated_at:
+                    new Date().toISOString()
+
+            })
+            .eq(
+                "id",
+                editingNoteId
+            );
+
+
+        if(error){
+
+            console.error(error);
+
+            showStatus(
+                "Unable to update note: " +
+                error.message,
+                false
+            );
+
+            return;
+
+        }
+
+
+        showStatus(
+            "Note updated successfully.",
+            true
+        );
+
+    }
+
+
+    // CREATE NEW NOTE
+
+    else{
+
+        const {
+            data:{
+                user
+            }
+        } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+        const {
+            error
+        } =
+        await supabaseClient
+            .from("notes")
+            .insert({
+
+                course:
+                    course,
+
+                topic:
+                    topic,
+
+                title:
+                    title,
+
+                content:
+                    content,
+
+                created_by:
+                    user.id
+
+            });
+
+
+        if(error){
+
+            console.error(error);
+
+            showStatus(
+                "Unable to save note: " +
+                error.message,
+                false
+            );
+
+            return;
+
+        }
+
+
+        showStatus(
+            "Note saved successfully.",
+            true
+        );
+
+    }
+
+
+
+    clearForm();
+
+    loadNotes();
+
+}
+
+
+
+// ==================================================
+// LOAD NOTES
+// ==================================================
+
+async function loadNotes(){
+
+    const container =
+        document.getElementById(
+            "notesContainer"
+        );
+
+
+    container.innerHTML =
+
+        '<div class="loading">Loading notes...</div>';
+
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("notes")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+
+    if(error){
+
+        console.error(error);
+
+        container.innerHTML =
+
+        `<div class="empty">
+
+        Unable to load notes.
+
+        <br><br>
+
+        ${escapeHTML(error.message)}
+
+        </div>`;
+
+        return;
+
+    }
+
+
+
+    if(!data || data.length === 0){
+
+        container.innerHTML =
+
+        `<div class="empty">
+
+        📖 No notes have been added yet.
+
+        </div>`;
+
+        return;
+
+    }
+
+
+
+    container.innerHTML = "";
+
+
+
+    data.forEach(
+    function(note){
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "note-card";
+
+
+        const preview =
+            note.content.length > 300
+
+            ? note.content.substring(
+                0,
+                300
+            ) + "..."
+
+            : note.content;
+
+
+        card.innerHTML = `
+
+            <div class="note-top">
+
+                <div>
+
+                    <h3>
+
+                        ${escapeHTML(note.title)}
+
+                    </h3>
+
+                    <div class="note-course">
+
+                        ${escapeHTML(note.course)}
+                        →
+                        ${escapeHTML(note.topic)}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="note-preview">
+
+                ${escapeHTML(preview)}
+
+            </div>
+
+
+            <div class="note-actions">
+
+                <button
+                    class="edit-button"
+                    onclick="editNote('${note.id}')">
+
+                    ✏️ Edit
+
+                </button>
+
+
+                <button
+                    class="delete-button"
+                    onclick="deleteNote('${note.id}')">
+
+                    🗑️ Delete
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+
+// ==================================================
+// EDIT NOTE
+// ==================================================
+
+async function editNote(id){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("notes")
+        .select("*")
+        .eq(
+            "id",
+            id
+        )
+        .single();
+
+
+    if(error){
+
+        showStatus(
+            "Unable to open note for editing.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    editingNoteId =
+        id;
+
+
+    document.getElementById(
+        "course"
+    ).value =
+        data.course;
+
+
+    loadTopics();
+
+
+    document.getElementById(
+        "topic"
+    ).value =
+        data.topic;
+
+
+    document.getElementById(
+        "noteTitle"
+    ).value =
+        data.title;
+
+
+    document.getElementById(
+        "noteContent"
+    ).value =
+        data.content;
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+
+    showStatus(
+        "You are editing this note. Make your changes and click Save Note.",
+        true
+    );
+
+}
+
+
+
+// ==================================================
+// DELETE NOTE
+// ==================================================
+
+async function deleteNote(id){
+
+    const confirmDelete =
+        confirm(
+            "Are you sure you want to delete this note?"
+        );
+
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("notes")
+        .delete()
+        .eq(
+            "id",
+            id
+        );
+
+
+    if(error){
+
+        console.error(error);
+
+        showStatus(
+            "Unable to delete note: " +
+            error.message,
+            false
+        );
+
+        return;
+
+    }
+
+
+    showStatus(
+        "Note deleted successfully.",
+        true
+    );
+
+
+    loadNotes();
+
+}
+
+
+
+// ==================================================
+// CLEAR FORM
+// ==================================================
+
+function clearForm(){
+
+    editingNoteId =
+        null;
+
+
+    document.getElementById(
+        "course"
+    ).value =
+        "";
+
+
+    loadTopics();
+
+
+    document.getElementById(
+        "noteTitle"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "noteContent"
+    ).value =
+        "";
+
+}
+
+
+
+// ==================================================
+// STATUS
+// ==================================================
+
+function showStatus(
+    message,
+    success
+){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        message;
+
+
+    status.style.display =
+        "block";
+
+
+    status.className =
+        success
+
+        ? "status-success"
+
+        : "status-error";
+
+
+    setTimeout(
+        function(){
+
+            status.style.display =
+                "none";
+
+        },
+        5000
+    );
+
+}
+
+
+
+// ==================================================
+// ADMIN DASHBOARD
+// ==================================================
+
+function goToAdmin(){
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+
+// ==================================================
+// LOGOUT
+// ==================================================
+
+async function logout(){
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+// ==================================================
+// ESCAPE HTML
+// ==================================================
+
+function escapeHTML(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+// ==================================================
+// START
+// ==================================================
+
+async function start(){
+
+    const loggedIn =
+        await checkLogin();
+
+
+    if(!loggedIn){
+
+        return;
+
+    }
+
+
+    loadTopics();
+
+    loadNotes();
+
+}
+
+
+start();
+
+
+</script>
+
+
+</body>
+
+</html>
