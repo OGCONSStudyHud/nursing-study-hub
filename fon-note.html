@@ -3,1806 +3,602 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>OGCONS Study Hub - Foundations of Nursing Notes</title>
+    <title>OGCONS Study Hub - Note</title>
 
-<style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <style>
 
-body{
-    font-family:Arial,sans-serif;
-    background:
-    linear-gradient(135deg,#e8fff2,#e8f4ff,#f5eaff);
-    color:#172033;
-    line-height:1.7;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-header{
-    background:
-    linear-gradient(135deg,#18a058,#2eb7a0);
-    color:white;
-    padding:22px 20px;
-}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f8f6;
+            color: #26332c;
+        }
 
-.header-content{
-    max-width:1100px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
+        header {
+            background: linear-gradient(
+                135deg,
+                #18a058,
+                #0d7a40
+            );
+            color: white;
+            padding: 18px 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
 
-.logo{
-    font-size:22px;
-    font-weight:bold;
-}
+        .header-content {
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
 
-.back-button{
-    border:none;
-    background:white;
-    color:#18a058;
-    padding:10px 18px;
-    border-radius:20px;
-    font-weight:bold;
-    cursor:pointer;
-}
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-.back-button:hover{
-    background:#f0f0f0;
-}
+        .back-button {
+            border: none;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-    padding:35px 20px;
-}
+        .back-button:hover {
+            background: rgba(255,255,255,0.25);
+        }
 
-.topic-header{
-    background:white;
-    padding:35px 25px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    text-align:center;
-    margin-bottom:25px;
-}
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
 
-.topic-icon{
-    font-size:55px;
-    margin-bottom:12px;
-}
+        .note-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
 
-.topic-header h1{
-    color:#18a058;
-    font-size:32px;
-    margin-bottom:10px;
-    line-height:1.3;
-}
+        .course-name {
+            color: #18a058;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
 
-.topic-header p{
-    color:#617568;
-}
+        .topic-name {
+            color: #718077;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
 
-.note-content{
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
+        .note-title {
+            font-size: 30px;
+            line-height: 1.3;
+            margin: 0 0 25px 0;
+            color: #17231c;
+        }
 
-.note-content h2{
-    color:#18a058;
-    margin-top:30px;
-    margin-bottom:15px;
-    font-size:25px;
-    border-bottom:2px solid #e4f4eb;
-    padding-bottom:8px;
-}
+        .note-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #39473f;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
 
-.note-content h2:first-child{
-    margin-top:0;
-}
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #718077;
+            font-size: 16px;
+        }
 
-.note-content h3{
-    color:#167d48;
-    margin-top:22px;
-    margin-bottom:10px;
-    font-size:20px;
-}
+        .error-box {
+            background: #fff0f0;
+            border: 1px solid #f0b4b4;
+            color: #a33a3a;
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
 
-.note-content p{
-    margin-bottom:15px;
-}
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e6ece8;
+        }
 
-.note-content ul,
-.note-content ol{
-    margin-left:28px;
-    margin-bottom:18px;
-}
+        .action-button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
 
-.note-content li{
-    margin-bottom:9px;
-}
+        .topics-button {
+            background: #eef5f0;
+            color: #18a058;
+        }
 
-.definition{
-    background:#eefbf4;
-    border-left:5px solid #18a058;
-    padding:18px;
-    border-radius:8px;
-    margin:15px 0 20px;
-}
+        .quiz-button {
+            background: #18a058;
+            color: white;
+        }
 
-.important{
-    background:#fff8e8;
-    border-left:5px solid #f59e0b;
-    padding:18px;
-    border-radius:8px;
-    margin:18px 0;
-}
+        .topics-button:hover {
+            background: #dcebe1;
+        }
 
-.warning{
-    background:#fff0f0;
-    border-left:5px solid #dc3545;
-    padding:18px;
-    border-radius:8px;
-    margin:18px 0;
-}
+        .quiz-button:hover {
+            background: #117d45;
+        }
 
-.summary{
-    background:#eef6ff;
-    border-left:5px solid #0b5ed7;
-    padding:20px;
-    border-radius:8px;
-    margin-top:30px;
-}
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #718077;
+            font-size: 14px;
+        }
 
-.note-table{
-    width:100%;
-    border-collapse:collapse;
-    margin:20px 0;
-    background:white;
-}
+        @media (max-width: 600px) {
 
-.note-table th,
-.note-table td{
-    border:1px solid #dce5df;
-    padding:12px;
-    text-align:left;
-    vertical-align:top;
-}
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
 
-.note-table th{
-    background:#e8f8ef;
-    color:#176d42;
-}
+            .note-card {
+                padding: 22px;
+            }
 
-.quiz-button{
-    display:block;
-    width:100%;
-    margin-top:25px;
-    padding:15px;
-    border:none;
-    border-radius:25px;
-    background:#18a058;
-    color:white;
-    font-weight:bold;
-    font-size:16px;
-    cursor:pointer;
-}
+            .note-title {
+                font-size: 25px;
+            }
 
-.quiz-button:hover{
-    background:#117d45;
-}
+            .note-content {
+                font-size: 15px;
+            }
 
-footer{
-    text-align:center;
-    padding:35px 20px;
-    color:#718077;
-    font-size:14px;
-}
+            .actions {
+                flex-direction: column;
+            }
 
-.error{
-    background:white;
-    padding:35px;
-    border-radius:18px;
-    text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
+            .action-button {
+                width: 100%;
+            }
 
-@media(max-width:700px){
+        }
 
-    .header-content{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .topic-header h1{
-        font-size:26px;
-    }
-
-    .note-content{
-        padding:22px;
-    }
-
-    .note-content h2{
-        font-size:22px;
-    }
-
-    .note-content h3{
-        font-size:18px;
-    }
-
-    .note-table{
-        font-size:14px;
-    }
-
-}
-
-</style>
+    </style>
 
 </head>
+
 
 <body>
 
 
 <header>
 
-<div class="header-content">
+    <div class="header-content">
 
-<div class="logo">
-🩺 OGCONS Study Hub
-</div>
+        <div class="logo">
+            🩺 OGCONS Study Hub
+        </div>
 
-<button
-class="back-button"
-onclick="goBack()">
+        <button
+            class="back-button"
+            onclick="goBack()">
 
-← Back to Topics
+            ← Back to Topics
 
-</button>
+        </button>
 
-</div>
+    </div>
 
 </header>
 
 
+
 <div class="container">
 
+    <div
+        id="loading"
+        class="loading">
 
-<div class="topic-header">
+        🔄 Loading note...
 
-<div class="topic-icon">
-📚
+    </div>
+
+
+    <div
+        id="errorBox"
+        class="error-box"
+        style="display:none;">
+
+    </div>
+
+
+    <div
+        id="noteCard"
+        class="note-card"
+        style="display:none;">
+
+        <div
+            id="courseName"
+            class="course-name">
+
+            Foundations of Nursing
+
+        </div>
+
+
+        <div
+            id="topicName"
+            class="topic-name">
+
+        </div>
+
+
+        <h1
+            id="noteTitle"
+            class="note-title">
+
+        </h1>
+
+
+        <div
+            id="noteContent"
+            class="note-content">
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="action-button topics-button"
+                onclick="goBack()">
+
+                ← Back to Topics
+
+            </button>
+
+
+            <button
+                class="action-button quiz-button"
+                onclick="takeQuiz()">
+
+                Take Quiz →
+
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<h1 id="topicTitle">
-Foundations of Nursing
-</h1>
-
-<p>
-Detailed Foundations of Nursing study notes
-</p>
-
-</div>
-
-
-<div
-class="note-content"
-id="noteContent">
-
-</div>
-
-
-</div>
 
 
 <footer>
 
-OGCONS Study Hub © 2026
+    OGCONS Study Hub © 2026
 
 </footer>
+
 
 
 <script>
 
 
-// ======================================================
-// GET TOPIC FROM URL
-// ======================================================
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+
+/* =====================================================
+   COURSE
+===================================================== */
+
+const COURSE =
+    "Foundations of Nursing";
+
+
+
+/* =====================================================
+   GET TOPIC FROM URL
+===================================================== */
 
 const urlParams =
-new URLSearchParams(window.location.search);
-
-const topic =
-urlParams.get("topic");
-
-
-// ======================================================
-// HTML ESCAPE
-// ======================================================
-
-function escapeHTML(value){
-
-if(value === null || value === undefined){
-return "";
-}
-
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
+    new URLSearchParams(
+        window.location.search
+    );
 
 
-// ======================================================
-// BACK
-// ======================================================
+const selectedTopic =
+    urlParams.get("topic");
 
-function goBack(){
 
-window.location.href =
-"foundations-topics.html";
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 
 
-// ======================================================
-// NOTES DATABASE
-// ======================================================
 
-const notes = {
+/* =====================================================
+   SHOW ERROR
+===================================================== */
 
+function showError(message) {
 
-// ======================================================
-// 1. INTRODUCTION TO NURSING
-// ======================================================
+    document
+        .getElementById("loading")
+        .style.display = "none";
 
-"Introduction to Nursing":`
 
-<h2>1. Introduction to Nursing</h2>
+    document
+        .getElementById("noteCard")
+        .style.display = "none";
 
-<div class="definition">
 
-<strong>Definition of Nursing:</strong>
+    const errorBox =
+        document.getElementById(
+            "errorBox"
+        );
 
-Nursing is the profession concerned with the promotion of health, prevention of illness, care of sick and injured persons, and assistance to individuals, families and communities in achieving, maintaining or recovering optimal health and quality of life.
 
-</div>
+    errorBox.innerHTML =
+        message;
 
-<h3>Meaning of Nursing</h3>
 
-<p>
-Nursing involves providing physical, psychological, social and emotional care to individuals who are healthy, ill, injured or recovering from illness. The nurse works with patients, families and other members of the healthcare team.
-</p>
-
-<h3>Who is a Nurse?</h3>
-
-<p>
-A nurse is a trained and professionally qualified person who has acquired the knowledge, skills and attitudes required to provide safe and effective nursing care to individuals, families and communities.
-</p>
-
-<h3>Aims of Nursing</h3>
-
-<ul>
-<li>To promote health.</li>
-<li>To prevent illness and complications.</li>
-<li>To care for sick and injured people.</li>
-<li>To assist patients in recovery.</li>
-<li>To relieve pain and suffering.</li>
-<li>To promote independence in activities of daily living.</li>
-<li>To provide emotional and psychological support.</li>
-<li>To educate patients and families about health.</li>
-<li>To assist patients to achieve the highest possible level of wellness.</li>
-</ul>
-
-<h3>Functions of Nursing</h3>
-
-<ol>
-<li><strong>Promotive function:</strong> The nurse helps people maintain and improve their health.</li>
-<li><strong>Preventive function:</strong> The nurse helps prevent diseases and complications.</li>
-<li><strong>Curative function:</strong> The nurse provides care to people who are ill and assists in treatment.</li>
-<li><strong>Rehabilitative function:</strong> The nurse assists patients to regain maximum physical, psychological and social functioning.</li>
-<li><strong>Palliative function:</strong> The nurse provides comfort and relief to patients with serious or terminal conditions.</li>
-</ol>
-
-<h3>Roles of the Nurse</h3>
-
-<ul>
-<li><strong>Caregiver:</strong> Provides direct care to patients.</li>
-<li><strong>Health educator:</strong> Teaches patients and families about health.</li>
-<li><strong>Advocate:</strong> Protects and speaks for the patient's rights and interests.</li>
-<li><strong>Communicator:</strong> Communicates with patients and members of the healthcare team.</li>
-<li><strong>Counsellor:</strong> Provides appropriate emotional support and guidance.</li>
-<li><strong>Collaborator:</strong> Works with other healthcare professionals.</li>
-<li><strong>Leader:</strong> Coordinates and directs nursing activities.</li>
-<li><strong>Researcher:</strong> Uses evidence and participates in activities that improve nursing practice.</li>
-<li><strong>Manager:</strong> Manages patients, resources and nursing activities.</li>
-</ul>
-
-<h3>Qualities of a Good Nurse</h3>
-
-<ul>
-<li>Compassion</li>
-<li>Patience</li>
-<li>Honesty</li>
-<li>Responsibility</li>
-<li>Good communication skills</li>
-<li>Observation skills</li>
-<li>Empathy</li>
-<li>Respect for patients</li>
-<li>Confidentiality</li>
-<li>Emotional stability</li>
-<li>Good judgement</li>
-<li>Professional appearance and behaviour</li>
-</ul>
-
-<h3>Nursing Process</h3>
-
-<p>
-The nursing process is a systematic method used by nurses to provide individualized patient care.
-</p>
-
-<ol>
-<li><strong>Assessment:</strong> Collection of information about the patient.</li>
-<li><strong>Diagnosis:</strong> Identification of actual or potential patient problems within the nursing scope.</li>
-<li><strong>Planning:</strong> Development of goals and nursing interventions.</li>
-<li><strong>Implementation:</strong> Carrying out planned nursing interventions.</li>
-<li><strong>Evaluation:</strong> Determining whether the desired outcomes have been achieved.</li>
-</ol>
-
-<div class="summary">
-
-<strong>Summary:</strong> Nursing is a professional service that combines knowledge, skills, compassion and scientific principles to promote health, prevent illness, care for sick people and support recovery and rehabilitation.
-
-</div>
-`,
-
-
-// ======================================================
-// 2. HEALTH CARE INSTITUTIONS
-// ======================================================
-
-"Health Care Institutions":`
-
-<h2>2. Health Care Institutions</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-A healthcare institution is an organized establishment where healthcare services are provided to individuals, families and communities.
-
-</div>
-
-<h3>Examples of Healthcare Institutions</h3>
-
-<ul>
-<li>Hospitals</li>
-<li>Health centres</li>
-<li>Clinics</li>
-<li>Teaching hospitals</li>
-<li>Specialist hospitals</li>
-<li>Maternity centres</li>
-<li>Psychiatric hospitals</li>
-<li>Rehabilitation centres</li>
-<li>Nursing homes</li>
-</ul>
-
-<h3>Levels of Healthcare</h3>
-
-<h3>1. Primary Healthcare</h3>
-
-<p>
-Primary healthcare is the first level of contact between individuals, families and the health system. It focuses strongly on health promotion, disease prevention and basic treatment.
-</p>
-
-<p>Examples include:</p>
-
-<ul>
-<li>Immunization</li>
-<li>Antenatal care</li>
-<li>Health education</li>
-<li>Family planning</li>
-<li>Treatment of minor illnesses</li>
-<li>Nutrition services</li>
-<li>Community health services</li>
-</ul>
-
-<h3>2. Secondary Healthcare</h3>
-
-<p>
-Secondary healthcare provides more specialized services and usually receives patients referred from primary healthcare facilities.
-</p>
-
-<p>Examples include:</p>
-
-<ul>
-<li>General hospitals</li>
-<li>Specialist outpatient services</li>
-<li>Surgical services</li>
-<li>Specialist consultations</li>
-</ul>
-
-<h3>3. Tertiary Healthcare</h3>
-
-<p>
-Tertiary healthcare provides highly specialized and advanced services, usually in teaching hospitals and specialist centres.
-</p>
-
-<p>Examples include:</p>
-
-<ul>
-<li>Neurosurgery</li>
-<li>Cardiac surgery</li>
-<li>Advanced cancer treatment</li>
-<li>Specialized intensive care</li>
-<li>Advanced diagnostic services</li>
-</ul>
-
-<h3>Functions of a Hospital</h3>
-
-<ul>
-<li>Provision of curative services.</li>
-<li>Prevention of diseases.</li>
-<li>Health promotion.</li>
-<li>Rehabilitation.</li>
-<li>Training of healthcare workers.</li>
-<li>Research.</li>
-<li>Emergency care.</li>
-<li>Provision of diagnostic services.</li>
-</ul>
-
-<h3>Departments Commonly Found in Hospitals</h3>
-
-<ul>
-<li>Emergency department</li>
-<li>Medical ward</li>
-<li>Surgical ward</li>
-<li>Paediatric ward</li>
-<li>Maternity ward</li>
-<li>Operating theatre</li>
-<li>Laboratory</li>
-<li>Pharmacy</li>
-<li>Radiology department</li>
-<li>Medical records department</li>
-</ul>
-
-<div class="summary">
-
-<strong>Summary:</strong> Healthcare institutions provide organized health services at different levels. Primary healthcare is the first point of contact, secondary healthcare provides specialized services, while tertiary healthcare provides highly specialized care.
-
-</div>
-`,
-
-
-// ======================================================
-// 3. ETHICO-LEGAL ISSUES
-// ======================================================
-
-"Ethico-Legal Issues in Nursing":`
-
-<h2>3. Ethico-Legal Issues in Nursing</h2>
-
-<div class="definition">
-
-<strong>Ethics:</strong> Ethics refers to principles that guide what is considered right, proper and morally acceptable behaviour.
-
-</div>
-
-<div class="definition">
-
-<strong>Law:</strong> Law consists of rules and regulations established and enforced by an authority to regulate behaviour and protect individuals and society.
-
-</div>
-
-<h3>Major Ethical Principles in Nursing</h3>
-
-<ul>
-<li><strong>Autonomy:</strong> Respecting the patient's right to make informed decisions about their care.</li>
-<li><strong>Beneficence:</strong> Acting for the benefit of the patient.</li>
-<li><strong>Non-maleficence:</strong> Avoiding harm to the patient.</li>
-<li><strong>Justice:</strong> Treating people fairly and equally.</li>
-<li><strong>Fidelity:</strong> Keeping professional promises and commitments.</li>
-<li><strong>Veracity:</strong> Being truthful.</li>
-<li><strong>Confidentiality:</strong> Protecting private patient information.</li>
-</ul>
-
-<h3>Informed Consent</h3>
-
-<p>
-Informed consent is the voluntary agreement of a competent patient to undergo a procedure or treatment after receiving adequate information about it.
-</p>
-
-<p>The patient should understand:</p>
-
-<ul>
-<li>The nature of the procedure.</li>
-<li>The purpose of the procedure.</li>
-<li>Possible benefits.</li>
-<li>Possible risks.</li>
-<li>Available alternatives.</li>
-<li>The consequences of refusing the procedure.</li>
-</ul>
-
-<h3>Confidentiality</h3>
-
-<p>
-Confidentiality means protecting information obtained about a patient during professional practice and not disclosing it to unauthorized persons.
-</p>
-
-<div class="warning">
-
-<strong>Important:</strong> Patient information should not be discussed carelessly in public places, social media, corridors or with people who are not involved in the patient's care.
-
-</div>
-
-<h3>Common Legal Problems in Nursing</h3>
-
-<ul>
-<li>Negligence</li>
-<li>Malpractice</li>
-<li>Assault</li>
-<li>Battery</li>
-<li>False imprisonment</li>
-<li>Breach of confidentiality</li>
-<li>Defamation</li>
-<li>Failure to obtain appropriate consent</li>
-<li>Failure to document care properly</li>
-</ul>
-
-<h3>Negligence</h3>
-
-<p>
-Negligence occurs when a healthcare professional fails to provide the standard of care that a reasonably competent professional would provide in a similar situation, resulting in harm or risk of harm.
-</p>
-
-<h3>Importance of Proper Documentation</h3>
-
-<ul>
-<li>Provides a record of patient care.</li>
-<li>Promotes communication between healthcare workers.</li>
-<li>Supports continuity of care.</li>
-<li>Helps evaluate patient progress.</li>
-<li>May provide legal evidence of care given.</li>
-</ul>
-
-<div class="summary">
-
-<strong>Summary:</strong> Nurses must understand ethical principles and legal responsibilities because nursing decisions can affect the rights, safety, privacy and wellbeing of patients.
-
-</div>
-`,
-
-
-// ======================================================
-// 4. TOOLS OF NURSING
-// ======================================================
-
-"Tools of Nursing":`
-
-<h2>4. Tools of Nursing</h2>
-
-<div class="definition">
-
-<strong>Meaning:</strong> Tools of nursing are instruments, equipment and materials used by nurses to assess patients, provide care, perform procedures and maintain safety.
-
-</div>
-
-<h3>Examples of Nursing Tools</h3>
-
-<table class="note-table">
-
-<tr>
-<th>Tool</th>
-<th>Use</th>
-</tr>
-
-<tr>
-<td>Thermometer</td>
-<td>Measures body temperature.</td>
-</tr>
-
-<tr>
-<td>Sphygmomanometer</td>
-<td>Measures blood pressure.</td>
-</tr>
-
-<tr>
-<td>Stethoscope</td>
-<td>Used to listen to body sounds such as heart, lung and bowel sounds.</td>
-</tr>
-
-<tr>
-<td>Pulse oximeter</td>
-<td>Measures peripheral oxygen saturation and pulse rate.</td>
-</tr>
-
-<tr>
-<td>Weighing scale</td>
-<td>Measures body weight.</td>
-</tr>
-
-<tr>
-<td>Glucometer</td>
-<td>Measures blood glucose.</td>
-</tr>
-
-<tr>
-<td>Kidney dish</td>
-<td>Used to hold small articles or receive body fluids and waste during procedures.</td>
-</tr>
-
-<tr>
-<td>Bedpan</td>
-<td>Allows a patient confined to bed to pass urine or stool.</td>
-</tr>
-
-<tr>
-<td>Urinal</td>
-<td>Used for urine collection, commonly for patients who cannot easily use a toilet.</td>
-</tr>
-
-<tr>
-<td>Feeding cup</td>
-<td>Used to assist patients with oral fluid or feeding when appropriate.</td>
-</tr>
-
-</table>
-
-<h3>Principles of Using Nursing Equipment</h3>
-
-<ul>
-<li>Know the purpose of the equipment.</li>
-<li>Check that the equipment is clean and functional.</li>
-<li>Use equipment according to instructions.</li>
-<li>Maintain infection prevention measures.</li>
-<li>Handle equipment carefully.</li>
-<li>Clean and store reusable equipment appropriately.</li>
-<li>Report damaged equipment.</li>
-</ul>
-
-<h3>Importance of Nursing Tools</h3>
-
-<ul>
-<li>Assist in patient assessment.</li>
-<li>Improve accuracy of observations.</li>
-<li>Assist in diagnosis and treatment.</li>
-<li>Promote patient comfort.</li>
-<li>Improve efficiency of nursing care.</li>
-<li>Help prevent complications.</li>
-</ul>
-
-<div class="summary">
-
-<strong>Summary:</strong> Nursing tools enable nurses to assess patients, carry out procedures and provide safe and effective care.
-
-</div>
-`,
-
-
-// ======================================================
-// 5. COMFORT AND SAFETY
-// ======================================================
-
-"Comfort and Safety Measures":`
-
-<h2>5. Comfort and Safety Measures</h2>
-
-<div class="definition">
-
-<strong>Comfort:</strong> A state in which a person experiences physical and psychological ease and freedom from unnecessary distress.
-
-</div>
-
-<div class="definition">
-
-<strong>Safety:</strong> Protection of a patient from injury, infection, accidents and preventable harm.
-
-</div>
-
-<h3>Factors Affecting Patient Comfort</h3>
-
-<ul>
-<li>Pain</li>
-<li>Temperature</li>
-<li>Noise</li>
-<li>Lighting</li>
-<li>Cleanliness</li>
-<li>Position</li>
-<li>Privacy</li>
-<li>Emotional condition</li>
-<li>Sleep and rest</li>
-</ul>
-
-<h3>Measures for Promoting Comfort</h3>
-
-<ul>
-<li>Maintain proper positioning.</li>
-<li>Provide clean bed linen.</li>
-<li>Maintain personal hygiene.</li>
-<li>Reduce unnecessary noise.</li>
-<li>Provide appropriate lighting.</li>
-<li>Maintain suitable room temperature.</li>
-<li>Provide privacy.</li>
-<li>Manage pain appropriately.</li>
-<li>Encourage adequate rest and sleep.</li>
-</ul>
-
-<h3>Patient Safety Measures</h3>
-
-<ul>
-<li>Keep the environment clean and uncluttered.</li>
-<li>Keep frequently used items within the patient's reach.</li>
-<li>Use bed rails when indicated and according to policy.</li>
-<li>Keep the bed at an appropriate safe height.</li>
-<li>Ensure adequate lighting.</li>
-<li>Prevent wet floors.</li>
-<li>Use appropriate patient identification.</li>
-<li>Follow medication safety principles.</li>
-<li>Use infection prevention practices.</li>
-</ul>
-
-<h3>Prevention of Falls</h3>
-
-<ul>
-<li>Assess the patient's risk of falling.</li>
-<li>Keep the floor dry.</li>
-<li>Ensure adequate lighting.</li>
-<li>Assist patients who have difficulty walking.</li>
-<li>Provide appropriate footwear.</li>
-<li>Keep essential items within reach.</li>
-<li>Educate the patient about calling for assistance.</li>
-</ul>
-
-<div class="important">
-
-<strong>Nursing responsibility:</strong> Patient safety is a continuous responsibility. The nurse should identify hazards early and take reasonable measures to prevent injury.
-
-</div>
-
-<div class="summary">
-
-<strong>Summary:</strong> Comfort and safety measures aim to reduce pain, anxiety, discomfort, accidents, infection and other preventable complications.
-
-</div>
-`,
-
-
-// ======================================================
-// 6. EMERGENCY CARE
-// ======================================================
-
-"Emergency Care":`
-
-<h2>6. Emergency Care</h2>
-
-<div class="definition">
-
-<strong>Emergency care:</strong> Immediate care given to a person suffering from an injury, illness or condition that may rapidly threaten life or cause serious harm.
-
-</div>
-
-<h3>Examples of Emergencies</h3>
-
-<ul>
-<li>Cardiac arrest</li>
-<li>Respiratory arrest</li>
-<li>Severe bleeding</li>
-<li>Shock</li>
-<li>Severe burns</li>
-<li>Poisoning</li>
-<li>Severe allergic reaction</li>
-<li>Seizures</li>
-<li>Major trauma</li>
-<li>Unconsciousness</li>
-</ul>
-
-<h3>General Principles of Emergency Care</h3>
-
-<ol>
-<li>Ensure your own safety and the safety of the environment.</li>
-<li>Assess the patient's responsiveness.</li>
-<li>Call for assistance.</li>
-<li>Assess airway, breathing and circulation.</li>
-<li>Control life-threatening bleeding.</li>
-<li>Provide appropriate immediate interventions.</li>
-<li>Monitor vital signs and condition.</li>
-<li>Arrange appropriate emergency referral or further treatment.</li>
-<li>Document the care provided.</li>
-</ol>
-
-<h3>Primary Assessment</h3>
-
-<p>
-The initial assessment focuses on conditions that can immediately threaten life.
-</p>
-
-<ul>
-<li><strong>Airway:</strong> Determine whether the airway is open.</li>
-<li><strong>Breathing:</strong> Determine whether the patient is breathing effectively.</li>
-<li><strong>Circulation:</strong> Assess circulation and severe bleeding.</li>
-<li><strong>Disability:</strong> Assess neurological status and level of consciousness.</li>
-<li><strong>Exposure:</strong> Look for additional injuries while maintaining dignity and preventing heat loss.</li>
-</ul>
-
-<h3>Role of the Nurse in Emergency Care</h3>
-
-<ul>
-<li>Recognize emergencies promptly.</li>
-<li>Remain calm.</li>
-<li>Call for assistance.</li>
-<li>Perform immediate assessment.</li>
-<li>Provide appropriate emergency interventions within competence.</li>
-<li>Prepare emergency equipment.</li>
-<li>Monitor the patient.</li>
-<li>Communicate relevant information.</li>
-<li>Document interventions and patient response.</li>
-</ul>
-
-<div class="summary">
-
-<strong>Summary:</strong> Emergency care requires rapid recognition, systematic assessment, immediate intervention, continuous monitoring and effective teamwork.
-
-</div>
-`,
-
-
-// ======================================================
-// 7. ADMINISTRATION OF DRUGS
-// ======================================================
-
-"Administration of Drugs":`
-
-<h2>7. Administration of Drugs</h2>
-
-<div class="definition">
-
-<strong>Drug administration:</strong> The process of safely giving a medication to a patient through an appropriate route, in the prescribed dose and at the correct time.
-
-</div>
-
-<h3>Common Routes of Drug Administration</h3>
-
-<ul>
-<li>Oral</li>
-<li>Sublingual</li>
-<li>Buccal</li>
-<li>Topical</li>
-<li>Inhalation</li>
-<li>Rectal</li>
-<li>Vaginal</li>
-<li>Subcutaneous</li>
-<li>Intramuscular</li>
-<li>Intravenous</li>
-<li>Intradermal</li>
-</ul>
-
-<h3>Rights of Medication Administration</h3>
-
-<ul>
-<li>Right patient</li>
-<li>Right medication</li>
-<li>Right dose</li>
-<li>Right route</li>
-<li>Right time</li>
-<li>Right documentation</li>
-<li>Right reason</li>
-<li>Right response</li>
-<li>Right education</li>
-<li>Right to refuse</li>
-</ul>
-
-<h3>General Steps in Medication Administration</h3>
-
-<ol>
-<li>Check the medication order.</li>
-<li>Identify the patient correctly.</li>
-<li>Check allergies and relevant precautions.</li>
-<li>Perform hand hygiene.</li>
-<li>Prepare the medication carefully.</li>
-<li>Check the medication label against the order according to institutional policy.</li>
-<li>Explain the medication to the patient.</li>
-<li>Administer through the prescribed route.</li>
-<li>Observe the patient for effects and adverse reactions.</li>
-<li>Document administration.</li>
-</ol>
-
-<h3>Medication Errors</h3>
-
-<p>
-A medication error is a preventable event that may lead to inappropriate medication use or patient harm.
-</p>
-
-<p>Examples include:</p>
-
-<ul>
-<li>Wrong patient</li>
-<li>Wrong drug</li>
-<li>Wrong dose</li>
-<li>Wrong route</li>
-<li>Wrong time</li>
-<li>Failure to check allergies</li>
-<li>Failure to document administration</li>
-</ul>
-
-<div class="warning">
-
-<strong>Important:</strong> Nurses should never administer a medication they do not understand or that appears unsafe or unclear. The prescription should be clarified through the appropriate clinical process.
-
-</div>
-
-<div class="summary">
-
-<strong>Summary:</strong> Safe medication administration requires careful checking, correct patient identification, appropriate technique, monitoring and accurate documentation.
-
-</div>
-`,
-
-
-// ======================================================
-// 8. DIAGNOSTIC INVESTIGATION
-// ======================================================
-
-"Diagnostic Investigation":`
-
-<h2>8. Diagnostic Investigation</h2>
-
-<div class="definition">
-
-<strong>Diagnostic investigation:</strong> A test or procedure performed to obtain information about a patient's health condition and assist in diagnosis, treatment planning or monitoring.
-
-</div>
-
-<h3>Examples of Diagnostic Investigations</h3>
-
-<ul>
-<li>Complete blood count</li>
-<li>Blood glucose testing</li>
-<li>Urinalysis</li>
-<li>Stool examination</li>
-<li>Blood culture</li>
-<li>X-ray</li>
-<li>Ultrasound</li>
-<li>Computed tomography scan</li>
-<li>Magnetic resonance imaging</li>
-<li>Electrocardiogram</li>
-<li>Endoscopy</li>
-</ul>
-
-<h3>Nursing Responsibilities Before Investigation</h3>
-
-<ul>
-<li>Verify the investigation requested.</li>
-<li>Identify the patient correctly.</li>
-<li>Explain the procedure in understandable language.</li>
-<li>Check whether preparation is required.</li>
-<li>Check relevant allergies or contraindications according to the procedure.</li>
-<li>Obtain or confirm appropriate consent where required.</li>
-<li>Provide emotional support.</li>
-<li>Prepare the required equipment.</li>
-</ul>
-
-<h3>During the Investigation</h3>
-
-<ul>
-<li>Maintain patient safety.</li>
-<li>Maintain privacy and dignity.</li>
-<li>Assist with positioning.</li>
-<li>Observe for discomfort or adverse reactions.</li>
-<li>Follow infection prevention measures.</li>
-<li>Assist the healthcare professional when required.</li>
-</ul>
-
-<h3>After the Investigation</h3>
-
-<ul>
-<li>Monitor the patient's condition.</li>
-<li>Provide post-procedure care.</li>
-<li>Observe for complications where applicable.</li>
-<li>Ensure specimens are correctly labelled.</li>
-<li>Send specimens promptly according to procedure.</li>
-<li>Document relevant nursing care.</li>
-</ul>
-
-<h3>Specimen Collection</h3>
-
-<p>
-A specimen is a sample of body material collected for examination or testing.
-</p>
-
-<p>Examples include:</p>
-
-<ul>
-<li>Blood</li>
-<li>Urine</li>
-<li>Stool</li>
-<li>Sputum</li>
-<li>Wound swab</li>
-<li>Body fluids</li>
-</ul>
-
-<div class="important">
-
-<strong>Important:</strong> Correct patient identification, correct specimen collection, correct labelling and timely transportation are essential for reliable results.
-
-</div>
-
-<div class="summary">
-
-<strong>Summary:</strong> Nurses play an important role before, during and after diagnostic investigations by preparing patients, maintaining safety, collecting specimens correctly and monitoring patients.
-
-</div>
-`,
-
-
-// ======================================================
-// 9. ASEPTIC TECHNIQUES
-// ======================================================
-
-"Aseptic Techniques":`
-
-<h2>9. Aseptic Techniques</h2>
-
-<div class="definition">
-
-<strong>Asepsis:</strong> The absence or prevention of disease-causing microorganisms from a particular environment, procedure or site.
-
-</div>
-
-<h3>Types of Asepsis</h3>
-
-<h3>Medical Asepsis</h3>
-
-<p>
-Medical asepsis refers to practices used to reduce the number and spread of microorganisms.
-</p>
-
-<p>Examples include:</p>
-
-<ul>
-<li>Hand hygiene</li>
-<li>Cleaning</li>
-<li>Disinfection</li>
-<li>Appropriate use of personal protective equipment</li>
-<li>Safe handling of contaminated materials</li>
-</ul>
-
-<h3>Surgical Asepsis</h3>
-
-<p>
-Surgical asepsis refers to practices used to maintain an environment or object free from microorganisms to the extent required for invasive or sterile procedures.
-</p>
-
-<h3>Principles of Aseptic Technique</h3>
-
-<ul>
-<li>Perform appropriate hand hygiene.</li>
-<li>Use sterile equipment when required.</li>
-<li>Do not touch sterile surfaces with contaminated hands.</li>
-<li>Keep sterile fields within view.</li>
-<li>Do not reach over a sterile field unnecessarily.</li>
-<li>Keep sterile items above waist level where applicable.</li>
-<li>Consider the outside edge of a sterile field contaminated according to institutional policy.</li>
-<li>Replace contaminated sterile items immediately.</li>
-</ul>
-
-<h3>Importance of Aseptic Technique</h3>
-
-<ul>
-<li>Prevents infection.</li>
-<li>Protects patients.</li>
-<li>Protects healthcare workers.</li>
-<li>Reduces healthcare-associated infections.</li>
-<li>Promotes safe invasive procedures.</li>
-</ul>
-
-<h3>Hand Hygiene</h3>
-
-<p>
-Hand hygiene is one of the most important methods of preventing the spread of infection in healthcare settings.
-</p>
-
-<p>
-Hands should be cleaned at appropriate moments before and after patient care and whenever contamination is suspected.
-</p>
-
-<div class="summary">
-
-<strong>Summary:</strong> Aseptic technique aims to prevent microorganisms from entering susceptible sites and to reduce the risk of infection during patient care.
-
-</div>
-`,
-
-
-// ======================================================
-// 10. INJECTION SAFETY
-// ======================================================
-
-"Unsafe Injection Safety":`
-
-<h2>10. Injection Safety</h2>
-
-<div class="definition">
-
-<strong>Injection safety:</strong> Practices that ensure injections are prepared and administered in a manner that protects patients and healthcare workers from infection, injury and medication errors.
-
-</div>
-
-<h3>Why Injection Safety Is Important</h3>
-
-<p>
-Unsafe injection practices can transmit microorganisms between patients or expose healthcare workers to blood and body fluids.
-</p>
-
-<h3>Examples of Unsafe Injection Practices</h3>
-
-<ul>
-<li>Reusing a needle.</li>
-<li>Reusing a syringe.</li>
-<li>Using contaminated equipment.</li>
-<li>Using medication improperly stored or prepared.</li>
-<li>Touching sterile parts of equipment.</li>
-<li>Failing to perform hand hygiene.</li>
-<li>Improper disposal of used needles.</li>
-<li>Recapping needles using unsafe techniques.</li>
-</ul>
-
-<h3>Safe Injection Principles</h3>
-
-<ul>
-<li>Perform hand hygiene.</li>
-<li>Use a new sterile needle and syringe for each injection.</li>
-<li>Prepare medication using aseptic technique.</li>
-<li>Check the medication carefully.</li>
-<li>Use the correct patient, drug, dose and route.</li>
-<li>Clean the injection site appropriately.</li>
-<li>Dispose of used sharps immediately in an appropriate sharps container.</li>
-<li>Do not reuse single-use injection equipment.</li>
-</ul>
-
-<h3>Common Injection Routes</h3>
-
-<ul>
-<li><strong>Intradermal:</strong> Into the dermis.</li>
-<li><strong>Subcutaneous:</strong> Into the tissue beneath the skin.</li>
-<li><strong>Intramuscular:</strong> Into muscle tissue.</li>
-<li><strong>Intravenous:</strong> Into a vein.</li>
-</ul>
-
-<div class="warning">
-
-<strong>Needlestick injury:</strong> A healthcare worker who sustains a needlestick or blood/body-fluid exposure should immediately follow the facility's exposure-management protocol and report the incident promptly.
-
-</div>
-
-<div class="summary">
-
-<strong>Summary:</strong> Safe injections require proper hand hygiene, sterile single-use equipment, correct medication practices, appropriate technique and safe sharps disposal.
-
-</div>
-`,
-
-
-// ======================================================
-// 11. HEALTHCARE WASTE
-// ======================================================
-
-"Introduction to Healthcare Waste":`
-
-<h2>11. Introduction to Healthcare Waste</h2>
-
-<div class="definition">
-
-<strong>Healthcare waste:</strong> Waste generated during healthcare activities, including waste from hospitals, clinics, laboratories and other healthcare facilities.
-
-</div>
-
-<h3>Types of Healthcare Waste</h3>
-
-<ul>
-<li><strong>General/non-hazardous waste:</strong> Waste similar to ordinary household waste.</li>
-<li><strong>Infectious waste:</strong> Waste contaminated or potentially contaminated with infectious materials.</li>
-<li><strong>Sharps:</strong> Needles, blades and other objects capable of causing cuts or punctures.</li>
-<li><strong>Pathological waste:</strong> Human tissues, organs or body parts where applicable.</li>
-<li><strong>Pharmaceutical waste:</strong> Expired, unused or contaminated medicines and related materials.</li>
-<li><strong>Chemical waste:</strong> Waste containing chemicals used in healthcare.</li>
-</ul>
-
-<h3>Risks of Improper Waste Management</h3>
-
-<ul>
-<li>Transmission of infections.</li>
-<li>Needlestick injuries.</li>
-<li>Environmental pollution.</li>
-<li>Exposure to toxic substances.</li>
-<li>Injury to healthcare workers.</li>
-<li>Risk to patients and the public.</li>
-</ul>
-
-<h3>Principles of Healthcare Waste Management</h3>
-
-<ol>
-<li>Waste should be identified and segregated appropriately at the point of generation.</li>
-<li>Waste should be placed in appropriate containers.</li>
-<li>Sharps should be placed in approved puncture-resistant sharps containers.</li>
-<li>Waste should be transported safely.</li>
-<li>Waste should be treated or disposed of according to applicable policy and regulations.</li>
-<li>Healthcare workers should use appropriate personal protective equipment.</li>
-</ol>
-
-<h3>Role of the Nurse</h3>
-
-<ul>
-<li>Segregate waste correctly.</li>
-<li>Dispose of sharps safely.</li>
-<li>Use appropriate PPE.</li>
-<li>Educate patients and relatives where necessary.</li>
-<li>Report unsafe waste-management practices.</li>
-<li>Maintain environmental cleanliness.</li>
-</ul>
-
-<div class="summary">
-
-<strong>Summary:</strong> Proper healthcare waste management protects patients, healthcare workers, waste handlers, the public and the environment.
-
-</div>
-`,
-
-
-// ======================================================
-// 12. LEGAL ASPECTS
-// ======================================================
-
-"Legal Aspects of Nursing":`
-
-<h2>12. Legal Aspects of Nursing</h2>
-
-<div class="definition">
-
-<strong>Legal aspects of nursing:</strong> The laws, regulations, professional standards and legal responsibilities that govern nursing practice.
-
-</div>
-
-<h3>Why Nurses Need Legal Knowledge</h3>
-
-<ul>
-<li>To protect patients.</li>
-<li>To protect themselves professionally.</li>
-<li>To understand their responsibilities.</li>
-<li>To avoid negligence and unsafe practice.</li>
-<li>To maintain professional standards.</li>
-<li>To understand patients' rights.</li>
-</ul>
-
-<h3>Professional Accountability</h3>
-
-<p>
-Accountability means being responsible for one's professional actions, decisions and omissions.
-</p>
-
-<h3>Negligence</h3>
-
-<p>
-Negligence occurs when a nurse fails to provide the expected standard of care and the failure causes or contributes to harm.
-</p>
-
-<h3>Malpractice</h3>
-
-<p>
-Malpractice generally refers to professional negligence by a person acting in a professional capacity.
-</p>
-
-<h3>Assault</h3>
-
-<p>
-Assault involves an intentional act or threat that creates reasonable fear of unwanted physical contact.
-</p>
-
-<h3>Battery</h3>
-
-<p>
-Battery involves intentional physical contact without appropriate consent or legal justification.
-</p>
-
-<h3>False Imprisonment</h3>
-
-<p>
-False imprisonment occurs when a person is restrained or prevented from leaving without legal justification.
-</p>
-
-<h3>Confidentiality</h3>
-
-<p>
-Patient information must be kept private and shared only with authorized persons for appropriate purposes, subject to applicable law and professional policy.
-</p>
-
-<h3>Good Nursing Documentation</h3>
-
-<ul>
-<li>Should be accurate.</li>
-<li>Should be clear.</li>
-<li>Should be factual.</li>
-<li>Should be completed promptly.</li>
-<li>Should contain relevant patient information.</li>
-<li>Should document nursing interventions and patient responses.</li>
-<li>Should follow institutional documentation policy.</li>
-</ul>
-
-<div class="important">
-
-<strong>Remember:</strong> If it is not documented appropriately, it may be difficult to demonstrate that the care was provided.
-
-</div>
-
-<div class="summary">
-
-<strong>Summary:</strong> Legal knowledge helps nurses practise safely, protect patient rights, maintain professional accountability and reduce legal risks.
-
-</div>
-`,
-
-
-// ======================================================
-// 13. FEEDING AND ELIMINATION
-// ======================================================
-
-"Nursing Care of Patients with Feeding/Elimination Problems":`
-
-<h2>13. Nursing Care of Patients with Feeding/Elimination Problems</h2>
-
-<h3>Feeding</h3>
-
-<div class="definition">
-
-<strong>Feeding:</strong> The process of providing food and fluids to meet the nutritional and hydration needs of a person.
-
-</div>
-
-<h3>Factors That May Affect Feeding</h3>
-
-<ul>
-<li>Age</li>
-<li>Illness</li>
-<li>Pain</li>
-<li>Difficulty swallowing</li>
-<li>Reduced appetite</li>
-<li>Nausea and vomiting</li>
-<li>Psychological conditions</li>
-<li>Dental problems</li>
-<li>Level of consciousness</li>
-<li>Medical restrictions</li>
-</ul>
-
-<h3>Nursing Care During Oral Feeding</h3>
-
-<ol>
-<li>Assess the patient's ability to eat and swallow.</li>
-<li>Explain the procedure.</li>
-<li>Perform hand hygiene.</li>
-<li>Position the patient appropriately.</li>
-<li>Ensure food is suitable for the prescribed diet.</li>
-<li>Assist the patient as necessary.</li>
-<li>Encourage appropriate fluid intake if not restricted.</li>
-<li>Observe for choking, coughing or difficulty swallowing.</li>
-<li>Record intake according to the care plan.</li>
-</ol>
-
-<h3>Enteral Feeding</h3>
-
-<p>
-Enteral feeding provides nutrients through the gastrointestinal tract when a patient cannot obtain adequate nutrition orally but the gastrointestinal tract can be used.
-</p>
-
-<p>
-Examples include feeding through a nasogastric or other appropriate feeding tube.
-</p>
-
-<div class="warning">
-
-<strong>Safety:</strong> Tube feeding requires proper patient assessment, confirmation of tube placement according to local policy, appropriate positioning and monitoring for complications.
-
-</div>
-
-<h2>Elimination</h2>
-
-<div class="definition">
-
-<strong>Elimination:</strong> The process by which the body removes waste products, mainly through urine and stool.
-
-</div>
-
-<h3>Urinary Elimination Problems</h3>
-
-<ul>
-<li>Urinary retention</li>
-<li>Urinary incontinence</li>
-<li>Frequency</li>
-<li>Urgency</li>
-<li>Dysuria</li>
-<li>Changes in urine output</li>
-</ul>
-
-<h3>Bowel Elimination Problems</h3>
-
-<ul>
-<li>Constipation</li>
-<li>Diarrhoea</li>
-<li>Faecal incontinence</li>
-<li>Flatulence</li>
-<li>Impaction</li>
-</ul>
-
-<h3>Nursing Management of Constipation</h3>
-
-<ul>
-<li>Assess bowel pattern.</li>
-<li>Encourage adequate fluid intake where appropriate.</li>
-<li>Encourage physical activity when permitted.</li>
-<li>Encourage appropriate dietary fibre when suitable.</li>
-<li>Provide privacy for elimination.</li>
-<li>Administer prescribed treatment when required.</li>
-<li>Monitor bowel movements.</li>
-</ul>
-
-<h3>Nursing Management of Diarrhoea</h3>
-
-<ul>
-<li>Monitor frequency and characteristics of stool.</li>
-<li>Monitor hydration status.</li>
-<li>Encourage appropriate fluid replacement.</li>
-<li>Maintain skin hygiene.</li>
-<li>Use appropriate infection prevention measures.</li>
-<li>Report signs of dehydration or deterioration.</li>
-</ul>
-
-<div class="summary">
-
-<strong>Summary:</strong> Nurses assess nutritional and elimination needs, provide appropriate assistance, monitor intake and output, promote comfort and safety, and identify complications early.
-
-</div>
-`,
-
-
-// ======================================================
-// 14. BASIC LIFE SUPPORT
-// ======================================================
-
-"Basic Life Support":`
-
-<h2>14. Basic Life Support</h2>
-
-<div class="definition">
-
-<strong>Basic Life Support (BLS):</strong> A set of immediate life-saving interventions used to support a person who has cardiac arrest, respiratory arrest or other life-threatening deterioration until advanced care is available.
-
-</div>
-
-<h3>When BLS May Be Required</h3>
-
-<ul>
-<li>Cardiac arrest</li>
-<li>Respiratory arrest</li>
-<li>Sudden collapse</li>
-<li>Unresponsiveness with abnormal or absent breathing</li>
-</ul>
-
-<h3>Initial Approach</h3>
-
-<ol>
-<li>Ensure the scene is safe.</li>
-<li>Check the person's responsiveness.</li>
-<li>Call for help and activate the emergency response system.</li>
-<li>Assess breathing and follow current BLS guidance.</li>
-<li>Begin CPR when indicated.</li>
-<li>Use an automated external defibrillator (AED) as soon as available when indicated.</li>
-<li>Continue resuscitation according to current guidelines and team instructions.</li>
-</ol>
-
-<h3>Chest Compressions</h3>
-
-<p>
-For an adult in cardiac arrest, high-quality chest compressions are performed on the centre of the chest, with adequate depth and rate, allowing complete chest recoil and minimizing interruptions.
-</p>
-
-<h3>Importance of an AED</h3>
-
-<p>
-An automated external defibrillator analyzes the heart rhythm and, when indicated, delivers an electrical shock to help treat certain shockable cardiac rhythms.
-</p>
-
-<h3>Role of the Nurse During BLS</h3>
-
-<ul>
-<li>Recognize cardiac arrest quickly.</li>
-<li>Call for assistance.</li>
-<li>Start appropriate resuscitation measures.</li>
-<li>Perform high-quality chest compressions when trained and indicated.</li>
-<li>Assist with ventilation according to training and available equipment.</li>
-<li>Use the AED when appropriate.</li>
-<li>Work effectively as part of the resuscitation team.</li>
-<li>Monitor the patient.</li>
-<li>Document the event and interventions.</li>
-</ul>
-
-<div class="important">
-
-<strong>Important:</strong> BLS skills should be learned and practised according to current recognized resuscitation guidelines and the protocols of the healthcare institution.
-
-</div>
-
-<h3>Why BLS Is Important</h3>
-
-<ul>
-<li>Maintains circulation during cardiac arrest.</li>
-<li>Provides temporary support for vital organs.</li>
-<li>May improve the chance of survival.</li>
-<li>Provides immediate care while advanced help is being arranged.</li>
-</ul>
-
-<div class="summary">
-
-<strong>Summary:</strong> Basic Life Support provides immediate life-saving care during cardiac and respiratory emergencies. Rapid recognition, activation of emergency help, high-quality CPR and early use of an AED when indicated are essential components.
-
-</div>
-
-`
-
-};
-
-
-// ======================================================
-// DISPLAY NOTE
-// ======================================================
-
-function displayNote(){
-
-const title =
-document.getElementById("topicTitle");
-
-const content =
-document.getElementById("noteContent");
-
-
-if(!topic){
-
-title.textContent =
-"Foundations of Nursing";
-
-content.innerHTML = `
-
-<div class="error">
-
-<h2>⚠️ No Topic Selected</h2>
-
-<p>
-Please return to the Foundations of Nursing
-topic page and select a topic.
-</p>
-
-<br>
-
-<button
-class="quiz-button"
-onclick="goBack()">
-
-← Back to Topics
-
-</button>
-
-</div>
-
-`;
-
-return;
+    errorBox.style.display =
+        "block";
 
 }
 
 
-title.textContent =
-topic;
+
+/* =====================================================
+   LOAD NOTE
+===================================================== */
+
+async function loadNote() {
 
 
-if(notes[topic]){
+    if (!selectedTopic) {
 
-content.innerHTML =
-notes[topic];
+        showError(`
+            <strong>No topic selected.</strong>
+            <br><br>
+            Please go back to the Foundations of Nursing
+            topics and select a topic.
+        `);
+
+        return;
+
+    }
 
 
-// ADD QUIZ BUTTON
+    console.log(
+        "Loading note:",
+        COURSE,
+        selectedTopic
+    );
 
-content.innerHTML += `
 
-<button
-class="quiz-button"
-onclick="takeQuiz()">
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
 
-📝 Take Quiz on ${escapeHTML(topic)}
+            .from("notes")
 
-</button>
+            .select(
+                "course, topic, title, content"
+            )
 
-`;
+            .eq(
+                "course",
+                COURSE
+            )
+
+            .eq(
+                "topic",
+                selectedTopic
+            )
+
+            .maybeSingle();
+
+
+
+    if (error) {
+
+        console.error(
+            "Note loading error:",
+            error
+        );
+
+
+        showError(`
+            <strong>Unable to load this note.</strong>
+            <br><br>
+            ${escapeHTML(error.message)}
+        `);
+
+        return;
+
+    }
+
+
+
+    if (!data) {
+
+        showError(`
+            <strong>Note not available yet.</strong>
+            <br><br>
+            There is currently no note for:
+            <br><br>
+            <strong>${escapeHTML(selectedTopic)}</strong>
+            <br><br>
+            Please check back later.
+        `);
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       DISPLAY NOTE
+    ================================================= */
+
+
+    document
+        .getElementById("loading")
+        .style.display = "none";
+
+
+    document
+        .getElementById("errorBox")
+        .style.display = "none";
+
+
+    document
+        .getElementById("noteCard")
+        .style.display = "block";
+
+
+
+    document
+        .getElementById("courseName")
+        .textContent =
+        data.course || COURSE;
+
+
+
+    document
+        .getElementById("topicName")
+        .textContent =
+        data.topic || selectedTopic;
+
+
+
+    document
+        .getElementById("noteTitle")
+        .textContent =
+        data.title || selectedTopic;
+
+
+
+    document
+        .getElementById("noteContent")
+        .textContent =
+        data.content || "";
 
 }
 
-else{
 
-content.innerHTML = `
 
-<div class="error">
+/* =====================================================
+   BACK TO TOPICS
+===================================================== */
 
-<h2>
-📚 Note Not Found
-</h2>
+function goBack() {
 
-<p>
-There is currently no note available for:
-</p>
-
-<p>
-<strong>
-${escapeHTML(topic)}
-</strong>
-</p>
-
-<br>
-
-<button
-class="quiz-button"
-onclick="goBack()">
-
-← Back to Topics
-
-</button>
-
-</div>
-
-`;
-
-}
+    window.location.href =
+        "foundations-topics.html";
 
 }
 
 
-// ======================================================
-// TAKE QUIZ
-// ======================================================
 
-function takeQuiz(){
+/* =====================================================
+   TAKE QUIZ
+===================================================== */
 
-if(!topic){
+function takeQuiz() {
 
-alert("No topic was selected.");
-
-return;
-
-}
-
-window.location.href =
-"foundations-quiz.html?topic=" +
-encodeURIComponent(topic);
+    window.location.href =
+        "foundations-quiz.html?topic=" +
+        encodeURIComponent(
+            selectedTopic
+        );
 
 }
 
 
-// ======================================================
-// START
-// ======================================================
 
-displayNote();
+/* =====================================================
+   START
+===================================================== */
+
+loadNote();
 
 
 </script>
+
 
 </body>
 
