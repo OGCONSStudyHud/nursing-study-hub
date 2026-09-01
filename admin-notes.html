@@ -9,7 +9,7 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0">
 
-<title>OGCONS Study Hub - Notes Management</title>
+<title>OGCONS Study Hub - Notes Manager</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -39,9 +39,9 @@ body{
 }
 
 
-/* =========================
+/* ==============================
    HEADER
-========================= */
+============================== */
 
 header{
 
@@ -54,12 +54,12 @@ header{
 
     color:white;
 
-    padding:25px 20px;
+    padding:22px 20px;
 }
 
 .header-content{
 
-    max-width:1100px;
+    max-width:1200px;
 
     margin:auto;
 
@@ -103,6 +103,8 @@ header{
     font-weight:bold;
 
     cursor:pointer;
+
+    text-decoration:none;
 }
 
 .header-button:hover{
@@ -111,46 +113,39 @@ header{
 }
 
 
-/* =========================
-   CONTAINER
-========================= */
+/* ==============================
+   MAIN
+============================== */
 
 .container{
 
-    max-width:1100px;
+    max-width:1200px;
 
     margin:auto;
 
-    padding:35px 20px;
+    padding:30px 20px;
 }
 
 
-/* =========================
+/* ==============================
    PAGE TITLE
-========================= */
+============================== */
 
 .page-title{
 
     background:white;
 
-    padding:30px;
+    padding:28px;
 
     border-radius:20px;
 
     box-shadow:
-    0 10px 25px
+    0 8px 25px
     rgba(0,0,0,.08);
 
     text-align:center;
 
     margin-bottom:25px;
-}
-
-.page-title .icon{
-
-    font-size:55px;
-
-    margin-bottom:10px;
 }
 
 .page-title h1{
@@ -159,7 +154,7 @@ header{
 
     margin-bottom:10px;
 
-    font-size:29px;
+    font-size:30px;
 }
 
 .page-title p{
@@ -170,162 +165,9 @@ header{
 }
 
 
-/* =========================
-   FORM
-========================= */
-
-.editor{
-
-    background:white;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.08);
-
-    margin-bottom:30px;
-}
-
-.editor h2{
-
-    color:#18a058;
-
-    margin-bottom:22px;
-}
-
-
-/* =========================
-   FORM GROUP
-========================= */
-
-.form-group{
-
-    margin-bottom:20px;
-}
-
-.form-group label{
-
-    display:block;
-
-    font-weight:bold;
-
-    margin-bottom:8px;
-
-    color:#172033;
-}
-
-.form-group select,
-.form-group input,
-.form-group textarea{
-
-    width:100%;
-
-    padding:13px 15px;
-
-    border:1px solid #d8e0dc;
-
-    border-radius:10px;
-
-    font-size:15px;
-
-    font-family:Arial,sans-serif;
-
-    outline:none;
-
-    transition:.2s;
-}
-
-.form-group select:focus,
-.form-group input:focus,
-.form-group textarea:focus{
-
-    border-color:#18a058;
-
-    box-shadow:
-    0 0 0 3px
-    rgba(24,160,88,.10);
-}
-
-.form-group textarea{
-
-    min-height:350px;
-
-    resize:vertical;
-
-    line-height:1.6;
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-.buttons{
-
-    display:flex;
-
-    gap:12px;
-
-    flex-wrap:wrap;
-
-    margin-top:10px;
-}
-
-.save-button{
-
-    border:none;
-
-    background:#18a058;
-
-    color:white;
-
-    padding:13px 25px;
-
-    border-radius:25px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    font-size:15px;
-}
-
-.save-button:hover{
-
-    background:#117d45;
-}
-
-.clear-button{
-
-    border:none;
-
-    background:#6c757d;
-
-    color:white;
-
-    padding:13px 25px;
-
-    border-radius:25px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    font-size:15px;
-}
-
-.clear-button:hover{
-
-    background:#545b62;
-}
-
-
-/* =========================
+/* ==============================
    STATUS
-========================= */
+============================== */
 
 #status{
 
@@ -335,33 +177,31 @@ header{
 
     border-radius:10px;
 
-    margin-top:20px;
+    margin-bottom:20px;
 
     font-weight:bold;
 }
 
-.status-success{
+.success{
 
-    background:#e8fff2;
+    background:#d1e7dd;
 
-    color:#117d45;
-
+    color:#0f5132;
 }
 
-.status-error{
+.error{
 
-    background:#ffe8e8;
+    background:#f8d7da;
 
-    color:#b42318;
-
+    color:#842029;
 }
 
 
-/* =========================
-   NOTES LIST
-========================= */
+/* ==============================
+   FORM CARD
+============================== */
 
-.notes-section{
+.form-card{
 
     background:white;
 
@@ -372,31 +212,219 @@ header{
     box-shadow:
     0 8px 25px
     rgba(0,0,0,.08);
+
+    margin-bottom:25px;
 }
 
-.notes-section h2{
+.form-card h2{
 
     color:#18a058;
 
     margin-bottom:20px;
 }
 
-.note-card{
+.form-group{
 
-    border:1px solid #e2e8e4;
-
-    border-radius:15px;
-
-    padding:20px;
-
-    margin-bottom:15px;
-
-    background:#fbfffd;
+    margin-bottom:18px;
 }
 
-.note-card:last-child{
+.form-group label{
 
-    margin-bottom:0;
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+
+    color:#26382d;
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:13px;
+
+    border:2px solid #dce4df;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+    font-family:Arial,sans-serif;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#18a058;
+}
+
+textarea{
+
+    min-height:180px;
+
+    resize:vertical;
+
+    line-height:1.6;
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:18px;
+}
+
+.button-row{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+}
+
+button{
+
+    border:none;
+
+    padding:13px 22px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    font-size:15px;
+}
+
+.primary{
+
+    background:#18a058;
+
+    color:white;
+}
+
+.primary:hover{
+
+    background:#117d45;
+}
+
+.secondary{
+
+    background:#6c757d;
+
+    color:white;
+}
+
+.secondary:hover{
+
+    background:#565e64;
+}
+
+
+/* ==============================
+   FILTER CARD
+============================== */
+
+.filter-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.08);
+
+    margin-bottom:25px;
+}
+
+.filter-card h2{
+
+    color:#18a058;
+
+    margin-bottom:18px;
+}
+
+.filter-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:15px;
+}
+
+
+/* ==============================
+   NOTES HEADER
+============================== */
+
+.notes-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:18px;
+}
+
+.notes-header h2{
+
+    color:#18a058;
+}
+
+.note-count{
+
+    background:#e7fff0;
+
+    color:#117d45;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+}
+
+
+/* ==============================
+   NOTE CARD
+============================== */
+
+.note-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.08);
+
+    margin-bottom:18px;
 }
 
 .note-top{
@@ -409,131 +437,153 @@ header{
 
     gap:15px;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
 
-.note-card h3{
+.note-number{
 
     color:#18a058;
 
-    margin-bottom:5px;
+    font-weight:bold;
+
+    font-size:17px;
+}
+
+.course-badge{
+
+    background:#e8f4ff;
+
+    color:#0b5ed7;
+
+    padding:6px 11px;
+
+    border-radius:15px;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+.topic-badge{
+
+    display:inline-block;
+
+    background:#fff4e5;
+
+    color:#b45309;
+
+    padding:7px 11px;
+
+    border-radius:15px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    margin-bottom:12px;
+}
+
+.note-title{
+
+    font-size:21px;
+
+    color:#172033;
+
+    margin-bottom:12px;
 
     line-height:1.4;
 }
 
-.note-course{
+.note-content{
 
-    font-size:13px;
+    color:#526159;
 
-    color:#68756d;
-
-    margin-bottom:8px;
-}
-
-.note-preview{
-
-    color:#53635a;
-
-    line-height:1.5;
+    line-height:1.7;
 
     white-space:pre-wrap;
 
-    max-height:100px;
+    background:#f8faf9;
 
-    overflow:hidden;
+    padding:18px;
 
-    margin-bottom:15px;
+    border-radius:12px;
+
+    border:1px solid #e4ebe7;
+
+    max-height:350px;
+
+    overflow:auto;
+
 }
 
 .note-actions{
 
     display:flex;
 
-    gap:8px;
+    gap:10px;
 
-    flex-wrap:wrap;
+    margin-top:18px;
 }
 
-.edit-button{
-
-    border:none;
+.edit-btn{
 
     background:#0b5ed7;
 
     color:white;
-
-    padding:9px 16px;
-
-    border-radius:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
 }
 
-.edit-button:hover{
+.edit-btn:hover{
 
     background:#084da8;
 }
 
-.delete-button{
-
-    border:none;
+.delete-btn{
 
     background:#dc3545;
 
     color:white;
-
-    padding:9px 16px;
-
-    border-radius:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
 }
 
-.delete-button:hover{
+.delete-btn:hover{
 
-    background:#b02a37;
+    background:#bb2d3b;
 }
 
 
-/* =========================
-   LOADING
-========================= */
+/* ==============================
+   LOADING / EMPTY
+============================== */
 
-.loading{
+#loading{
 
     text-align:center;
 
-    padding:30px;
+    padding:35px;
 
     color:#68756d;
 }
-
-
-/* =========================
-   EMPTY
-========================= */
 
 .empty{
 
-    text-align:center;
+    background:white;
 
-    padding:35px 20px;
+    padding:40px;
+
+    border-radius:18px;
+
+    text-align:center;
 
     color:#68756d;
 
-    background:#f8faf9;
-
-    border-radius:12px;
+    box-shadow:
+    0 8px 20px
+    rgba(0,0,0,.06);
 }
 
 
-/* =========================
+/* ==============================
    FOOTER
-========================= */
+============================== */
 
 footer{
 
@@ -547,11 +597,11 @@ footer{
 }
 
 
-/* =========================
+/* ==============================
    MOBILE
-========================= */
+============================== */
 
-@media(max-width:700px){
+@media(max-width:800px){
 
     .header-content{
 
@@ -560,20 +610,14 @@ footer{
         text-align:center;
     }
 
-    .header-buttons{
+    .form-grid{
 
-        justify-content:center;
+        grid-template-columns:1fr;
     }
 
-    .page-title{
+    .filter-grid{
 
-        padding:25px 20px;
-    }
-
-    .editor,
-    .notes-section{
-
-        padding:22px 18px;
+        grid-template-columns:1fr;
     }
 
     .note-top{
@@ -581,13 +625,34 @@ footer{
         flex-direction:column;
     }
 
-    .buttons{
+}
+
+@media(max-width:600px){
+
+    .container{
+
+        padding:20px 15px;
+    }
+
+    .form-card,
+    .filter-card{
+
+        padding:20px;
+    }
+
+    .notes-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .note-actions{
 
         flex-direction:column;
     }
 
-    .save-button,
-    .clear-button{
+    .note-actions button{
 
         width:100%;
     }
@@ -602,9 +667,9 @@ footer{
 <body>
 
 
-<!-- =========================
+<!-- ==============================
      HEADER
-========================= -->
+============================== -->
 
 <header>
 
@@ -612,20 +677,20 @@ footer{
 
 <div class="logo">
 
-🩺 OGCONS Study Hub — Admin
+🩺 OGCONS Study Hub — Notes Manager
 
 </div>
 
 
 <div class="header-buttons">
 
-<button
-    class="header-button"
-    onclick="goToAdmin()">
+<a
+    href="admin.html"
+    class="header-button">
 
 ← Admin Dashboard
 
-</button>
+</a>
 
 
 <button
@@ -647,28 +712,22 @@ Logout
 <div class="container">
 
 
-<!-- =========================
-     TITLE
-========================= -->
+<!-- ==============================
+     PAGE TITLE
+============================== -->
 
 <div class="page-title">
 
-<div class="icon">
-
-📖
-
-</div>
-
 <h1>
 
-Notes Management
+📖 Notes Management
 
 </h1>
 
 <p>
 
-Create and manage study notes for the
-exact topics available to students.
+Create, edit, search, filter and delete
+study notes for all OGCONS courses and topics.
 
 </p>
 
@@ -676,37 +735,212 @@ exact topics available to students.
 
 
 
-<!-- =========================
-     EDITOR
-========================= -->
+<div id="status"></div>
 
-<div class="editor">
 
-<h2>
 
-✏️ Create / Edit Note
+<!-- ==============================
+     ADD / EDIT NOTE
+============================== -->
+
+<div class="form-card">
+
+<h2 id="formTitle">
+
+➕ Add New Note
 
 </h2>
+
+
+<div class="form-grid">
 
 
 <!-- COURSE -->
 
 <div class="form-group">
 
-<label for="course">
+<label>
 
 Course
 
 </label>
 
-
 <select
     id="course"
-    onchange="loadTopics()">
+    onchange="updateTopics()">
 
 <option value="">
 
-Select a course
+Select Course
+
+</option>
+
+<option value="Foundations of Nursing">
+
+Foundations of Nursing
+
+</option>
+
+<option value="Primary Health Care">
+
+Primary Health Care
+
+</option>
+
+<option value="Anatomy & Physiology">
+
+Anatomy & Physiology
+
+</option>
+
+<option value="Medical/Surgical Nursing">
+
+Medical/Surgical Nursing
+
+</option>
+
+<option value="Microbiology">
+
+Microbiology
+
+</option>
+
+<option value="Pharmacology">
+
+Pharmacology
+
+</option>
+
+</select>
+
+</div>
+
+
+<!-- TOPIC -->
+
+<div class="form-group">
+
+<label>
+
+Topic
+
+</label>
+
+<select id="topic">
+
+<option value="">
+
+Select a course first
+
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+
+<!-- NOTE TITLE -->
+
+<div class="form-group">
+
+<label>
+
+Note Title
+
+</label>
+
+<input
+    type="text"
+    id="title"
+    placeholder="Enter note title">
+
+</div>
+
+
+
+<!-- NOTE CONTENT -->
+
+<div class="form-group">
+
+<label>
+
+Note Content
+
+</label>
+
+<textarea
+    id="content"
+    placeholder="Write the study note here..."></textarea>
+
+</div>
+
+
+
+<div class="button-row">
+
+<button
+    class="primary"
+    id="saveButton"
+    onclick="saveNote()">
+
+➕ Add Note
+
+</button>
+
+
+<button
+    class="secondary"
+    id="cancelButton"
+    onclick="cancelEdit()"
+    style="display:none;">
+
+Cancel Edit
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- ==============================
+     FILTERS
+============================== -->
+
+<div class="filter-card">
+
+<h2>
+
+🔍 Find Notes
+
+</h2>
+
+
+<div class="filter-grid">
+
+
+<!-- COURSE FILTER -->
+
+<div class="form-group">
+
+<label>
+
+Course
+
+</label>
+
+<select
+    id="filterCourse"
+    onchange="updateFilterTopics(); filterNotes();">
+
+<option value="">
+
+All Courses
 
 </option>
 
@@ -752,23 +986,23 @@ Pharmacology
 
 
 
-<!-- TOPIC -->
+<!-- TOPIC FILTER -->
 
 <div class="form-group">
 
-<label for="topic">
+<label>
 
 Topic
 
 </label>
 
-
 <select
-    id="topic">
+    id="filterTopic"
+    onchange="filterNotes()">
 
 <option value="">
 
-Select a course first
+All Topics
 
 </option>
 
@@ -778,99 +1012,63 @@ Select a course first
 
 
 
-<!-- TITLE -->
+<!-- SEARCH -->
 
 <div class="form-group">
 
-<label for="noteTitle">
+<label>
 
-Note Title
+Search
 
 </label>
-
 
 <input
     type="text"
-    id="noteTitle"
-    placeholder="Enter the title of the note">
+    id="searchInput"
+    placeholder="Search notes..."
+    oninput="filterNotes()">
+
+</div>
+
+
+</div>
 
 </div>
 
 
 
-<!-- CONTENT -->
+<!-- ==============================
+     NOTES
+============================== -->
 
-<div class="form-group">
-
-<label for="noteContent">
-
-Note Content
-
-</label>
-
-
-<textarea
-    id="noteContent"
-    placeholder="Write or paste your study note here..."></textarea>
-
-</div>
-
-
-
-<div class="buttons">
-
-<button
-    class="save-button"
-    onclick="saveNote()">
-
-💾 Save Note
-
-</button>
-
-
-<button
-    class="clear-button"
-    onclick="clearForm()">
-
-Clear
-
-</button>
-
-</div>
-
-
-
-<div id="status"></div>
-
-</div>
-
-
-
-<!-- =========================
-     SAVED NOTES
-========================= -->
-
-<div class="notes-section">
+<div class="notes-header">
 
 <h2>
 
-📚 Saved Notes
+📋 All Notes
 
 </h2>
 
 
 <div
-    id="notesContainer">
+    class="note-count"
+    id="noteCount">
 
-<div class="loading">
-
-Loading notes...
-
-</div>
+0 Notes
 
 </div>
 
 </div>
+
+
+<div id="loading">
+
+🔄 Loading notes...
+
+</div>
+
+
+<div id="notesList"></div>
 
 
 </div>
@@ -888,9 +1086,9 @@ OGCONS Study Hub © 2026
 <script>
 
 
-// ==================================================
-// SUPABASE
-// ==================================================
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
 "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -911,16 +1109,22 @@ window.supabase.createClient(
 
 
 
-// ==================================================
-// TOPICS
-// ==================================================
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let allNotes = [];
+
+let editingId = null;
+
+
+
+/* =====================================================
+   COURSE TOPICS
+===================================================== */
 
 const courseTopics = {
 
-
-// --------------------------------------------------
-// FOUNDATIONS
-// --------------------------------------------------
 
 "Foundations of Nursing": [
 
@@ -954,10 +1158,6 @@ const courseTopics = {
 
 ],
 
-
-// --------------------------------------------------
-// PRIMARY HEALTH CARE
-// --------------------------------------------------
 
 "Primary Health Care": [
 
@@ -1000,10 +1200,6 @@ const courseTopics = {
 ],
 
 
-// --------------------------------------------------
-// ANATOMY & PHYSIOLOGY
-// --------------------------------------------------
-
 "Anatomy & Physiology": [
 
 "Introduction to Anatomy",
@@ -1031,10 +1227,6 @@ const courseTopics = {
 ],
 
 
-// --------------------------------------------------
-// MEDICAL/SURGICAL
-// --------------------------------------------------
-
 "Medical/Surgical Nursing": [
 
 "Concepts and Terms in Medical-Surgical Nursing",
@@ -1053,10 +1245,6 @@ const courseTopics = {
 
 ],
 
-
-// --------------------------------------------------
-// MICROBIOLOGY
-// --------------------------------------------------
 
 "Microbiology": [
 
@@ -1078,10 +1266,6 @@ const courseTopics = {
 
 ],
 
-
-// --------------------------------------------------
-// PHARMACOLOGY
-// --------------------------------------------------
 
 "Pharmacology": [
 
@@ -1107,25 +1291,134 @@ const courseTopics = {
 
 
 
-// ==================================================
-// EDITING STATE
-// ==================================================
+/* =====================================================
+   UPDATE ADD/EDIT TOPICS
+===================================================== */
 
-let editingNoteId = null;
+function updateTopics(selectedTopic = "") {
+
+    const course =
+        document.getElementById("course").value;
+
+    const topicSelect =
+        document.getElementById("topic");
+
+
+    topicSelect.innerHTML =
+        `<option value="">Select Topic</option>`;
+
+
+    if(!course){
+
+        return;
+
+    }
+
+
+    const topics =
+        courseTopics[course] || [];
+
+
+    topics.forEach(function(topic){
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            topic;
+
+        option.textContent =
+            topic;
+
+
+        if(topic === selectedTopic){
+
+            option.selected =
+                true;
+
+        }
+
+
+        topicSelect.appendChild(option);
+
+    });
+
+}
 
 
 
-// ==================================================
-// CHECK LOGIN
-// ==================================================
+/* =====================================================
+   UPDATE FILTER TOPICS
+===================================================== */
+
+function updateFilterTopics(selectedTopic = "") {
+
+    const course =
+        document.getElementById("filterCourse").value;
+
+    const topicSelect =
+        document.getElementById("filterTopic");
+
+
+    topicSelect.innerHTML =
+        `<option value="">All Topics</option>`;
+
+
+    if(!course){
+
+        return;
+
+    }
+
+
+    const topics =
+        courseTopics[course] || [];
+
+
+    topics.forEach(function(topic){
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            topic;
+
+        option.textContent =
+            topic;
+
+
+        if(topic === selectedTopic){
+
+            option.selected =
+                true;
+
+        }
+
+
+        topicSelect.appendChild(option);
+
+    });
+
+}
+
+
+
+/* =====================================================
+   CHECK LOGIN
+===================================================== */
 
 async function checkLogin(){
 
     const {
+
         data:{
             user
         },
+
         error
+
     } =
     await supabaseClient
         .auth
@@ -1135,11 +1428,12 @@ async function checkLogin(){
     if(error || !user){
 
         window.location.href =
-        "index.html";
+            "index.html";
 
         return false;
 
     }
+
 
     return true;
 
@@ -1147,74 +1441,328 @@ async function checkLogin(){
 
 
 
-// ==================================================
-// LOAD TOPICS
-// ==================================================
+/* =====================================================
+   LOAD NOTES
+===================================================== */
 
-function loadTopics(){
+async function loadNotes(){
 
-    const course =
-        document.getElementById(
-            "course"
-        ).value;
+    const loading =
+        document.getElementById("loading");
 
 
-    const topicSelect =
-        document.getElementById(
-            "topic"
+    loading.style.display =
+        "block";
+
+
+    const {
+
+        data,
+
+        error
+
+    } =
+    await supabaseClient
+        .from("notes")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
         );
 
 
-    topicSelect.innerHTML = "";
+    if(error){
+
+        console.error(error);
 
 
-    if(!course){
+        showStatus(
 
-        const option =
-        document.createElement("option");
+            "Unable to load notes: " +
+            error.message,
 
-        option.value = "";
+            "error"
 
-        option.textContent =
-        "Select a course first";
-
-        topicSelect.appendChild(
-            option
         );
+
+
+        loading.style.display =
+            "none";
+
 
         return;
 
     }
 
 
-    const firstOption =
-    document.createElement("option");
-
-    firstOption.value = "";
-
-    firstOption.textContent =
-    "Select a topic";
-
-    topicSelect.appendChild(
-        firstOption
-    );
+    allNotes =
+        data || [];
 
 
-    courseTopics[course].forEach(
-    function(topic){
+    loading.style.display =
+        "none";
 
-        const option =
-        document.createElement("option");
 
-        option.value =
-        topic;
+    filterNotes();
 
-        option.textContent =
-        topic;
+}
 
-        topicSelect.appendChild(
-        option
+
+
+/* =====================================================
+   FILTER NOTES
+===================================================== */
+
+function filterNotes(){
+
+    const course =
+        document.getElementById(
+            "filterCourse"
+        ).value;
+
+
+    const topic =
+        document.getElementById(
+            "filterTopic"
+        ).value;
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        allNotes.filter(function(note){
+
+            const noteCourse =
+                String(
+                    note.course || ""
+                );
+
+
+            const noteTopic =
+                String(
+                    note.topic || ""
+                );
+
+
+            const noteTitle =
+                String(
+                    note.title || ""
+                );
+
+
+            const noteContent =
+                String(
+                    note.content || ""
+                );
+
+
+            const matchesCourse =
+                !course ||
+                noteCourse === course;
+
+
+            const matchesTopic =
+                !topic ||
+                noteTopic === topic;
+
+
+            const matchesSearch =
+                !search ||
+
+                noteTitle
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                noteContent
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                noteCourse
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                noteTopic
+                    .toLowerCase()
+                    .includes(search);
+
+
+            return (
+
+                matchesCourse &&
+
+                matchesTopic &&
+
+                matchesSearch
+
+            );
+
+        });
+
+
+    displayNotes(filtered);
+
+}
+
+
+
+/* =====================================================
+   DISPLAY NOTES
+===================================================== */
+
+function displayNotes(notes){
+
+    const container =
+        document.getElementById(
+            "notesList"
         );
+
+
+    container.innerHTML =
+        "";
+
+
+    document
+        .getElementById("noteCount")
+        .textContent =
+            notes.length +
+            (
+                notes.length === 1
+                    ? " Note"
+                    : " Notes"
+            );
+
+
+    if(notes.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <h2>
+
+                    📭 No Notes Found
+
+                </h2>
+
+                <p style="margin-top:10px;">
+
+                    No notes match your
+                    selected filters.
+
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    notes.forEach(function(note,index){
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "note-card";
+
+
+        card.innerHTML = `
+
+            <div class="note-top">
+
+                <div class="note-number">
+
+                    Note ${index + 1}
+
+                </div>
+
+
+                <div class="course-badge">
+
+                    ${escapeHTML(
+                        note.course || ""
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <div class="topic-badge">
+
+                ${escapeHTML(
+                    note.topic || "No Topic"
+                )}
+
+            </div>
+
+
+            <div class="note-title">
+
+                ${escapeHTML(
+                    note.title ||
+                    "Untitled Note"
+                )}
+
+            </div>
+
+
+            <div class="note-content">
+
+                ${escapeHTML(
+                    note.content ||
+                    "No content available."
+                )}
+
+            </div>
+
+
+            <div class="note-actions">
+
+
+                <button
+                    class="edit-btn"
+                    onclick="editNote('${note.id}')">
+
+                    ✏️ Edit
+
+                </button>
+
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteNote('${note.id}')">
+
+                    🗑️ Delete
+
+                </button>
+
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
 
     });
 
@@ -1222,9 +1770,9 @@ function loadTopics(){
 
 
 
-// ==================================================
-// SAVE NOTE
-// ==================================================
+/* =====================================================
+   SAVE NOTE
+===================================================== */
 
 async function saveNote(){
 
@@ -1242,60 +1790,41 @@ async function saveNote(){
 
     const title =
         document.getElementById(
-            "noteTitle"
-        ).value.trim();
+            "title"
+        )
+        .value
+        .trim();
 
 
     const content =
         document.getElementById(
-            "noteContent"
-        ).value.trim();
+            "content"
+        )
+        .value
+        .trim();
 
 
 
-    // VALIDATION
+    /* REQUIRED FIELDS */
 
-    if(!course){
+    if(
 
-        showStatus(
-            "Please select a course.",
-            false
-        );
+        !course ||
 
-        return;
+        !topic ||
 
-    }
+        !title ||
 
+        !content
 
-    if(!topic){
-
-        showStatus(
-            "Please select a topic.",
-            false
-        );
-
-        return;
-
-    }
-
-
-    if(!title){
+    ){
 
         showStatus(
-            "Please enter a note title.",
-            false
-        );
 
-        return;
+            "Please complete Course, Topic, Note Title and Note Content.",
 
-    }
+            "error"
 
-
-    if(!content){
-
-        showStatus(
-            "Please enter the note content.",
-            false
         );
 
         return;
@@ -1304,36 +1833,37 @@ async function saveNote(){
 
 
 
-    // UPDATE EXISTING NOTE
+    const noteData = {
 
-    if(editingNoteId){
+        course: course,
+
+        topic: topic,
+
+        title: title,
+
+        content: content
+
+    };
+
+
+
+    /* =================================================
+       EDIT
+    ================================================= */
+
+    if(editingId){
 
         const {
+
             error
+
         } =
         await supabaseClient
             .from("notes")
-            .update({
-
-                course:
-                    course,
-
-                topic:
-                    topic,
-
-                title:
-                    title,
-
-                content:
-                    content,
-
-                updated_at:
-                    new Date().toISOString()
-
-            })
+            .update(noteData)
             .eq(
                 "id",
-                editingNoteId
+                editingId
             );
 
 
@@ -1341,10 +1871,14 @@ async function saveNote(){
 
             console.error(error);
 
+
             showStatus(
+
                 "Unable to update note: " +
                 error.message,
-                false
+
+                "error"
+
             );
 
             return;
@@ -1353,270 +1887,62 @@ async function saveNote(){
 
 
         showStatus(
-            "Note updated successfully.",
-            true
+
+            "✅ Note updated successfully.",
+
+            "success"
+
         );
 
-    }
+
+        editingId =
+            null;
 
 
-    // CREATE NEW NOTE
+        resetEditMode();
 
-    else{
-
-        const {
-            data:{
-                user
-            }
-        } =
-        await supabaseClient
-            .auth
-            .getUser();
+        clearForm();
 
 
-        const {
-            error
-        } =
-        await supabaseClient
-            .from("notes")
-            .insert({
-
-                course:
-                    course,
-
-                topic:
-                    topic,
-
-                title:
-                    title,
-
-                content:
-                    content,
-
-                created_by:
-                    user.id
-
-            });
+        await loadNotes();
 
 
-        if(error){
-
-            console.error(error);
-
-            showStatus(
-                "Unable to save note: " +
-                error.message,
-                false
-            );
-
-            return;
-
-        }
-
-
-        showStatus(
-            "Note saved successfully.",
-            true
-        );
+        return;
 
     }
 
 
 
-    clearForm();
-
-    loadNotes();
-
-}
-
-
-
-// ==================================================
-// LOAD NOTES
-// ==================================================
-
-async function loadNotes(){
-
-    const container =
-        document.getElementById(
-            "notesContainer"
-        );
-
-
-    container.innerHTML =
-
-        '<div class="loading">Loading notes...</div>';
-
-
+    /* =================================================
+       ADD
+    ================================================= */
 
     const {
-        data,
+
         error
+
     } =
     await supabaseClient
         .from("notes")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
+        .insert([
 
+            noteData
+
+        ]);
 
 
     if(error){
 
         console.error(error);
 
-        container.innerHTML =
-
-        `<div class="empty">
-
-        Unable to load notes.
-
-        <br><br>
-
-        ${escapeHTML(error.message)}
-
-        </div>`;
-
-        return;
-
-    }
-
-
-
-    if(!data || data.length === 0){
-
-        container.innerHTML =
-
-        `<div class="empty">
-
-        📖 No notes have been added yet.
-
-        </div>`;
-
-        return;
-
-    }
-
-
-
-    container.innerHTML = "";
-
-
-
-    data.forEach(
-    function(note){
-
-        const card =
-            document.createElement("div");
-
-        card.className =
-            "note-card";
-
-
-        const preview =
-            note.content.length > 300
-
-            ? note.content.substring(
-                0,
-                300
-            ) + "..."
-
-            : note.content;
-
-
-        card.innerHTML = `
-
-            <div class="note-top">
-
-                <div>
-
-                    <h3>
-
-                        ${escapeHTML(note.title)}
-
-                    </h3>
-
-                    <div class="note-course">
-
-                        ${escapeHTML(note.course)}
-                        →
-                        ${escapeHTML(note.topic)}
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="note-preview">
-
-                ${escapeHTML(preview)}
-
-            </div>
-
-
-            <div class="note-actions">
-
-                <button
-                    class="edit-button"
-                    onclick="editNote('${note.id}')">
-
-                    ✏️ Edit
-
-                </button>
-
-
-                <button
-                    class="delete-button"
-                    onclick="deleteNote('${note.id}')">
-
-                    🗑️ Delete
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        container.appendChild(card);
-
-    });
-
-}
-
-
-
-// ==================================================
-// EDIT NOTE
-// ==================================================
-
-async function editNote(id){
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("notes")
-        .select("*")
-        .eq(
-            "id",
-            id
-        )
-        .single();
-
-
-    if(error){
 
         showStatus(
-            "Unable to open note for editing.",
-            false
+
+            "Unable to add note: " +
+            error.message,
+
+            "error"
+
         );
 
         return;
@@ -1624,35 +1950,89 @@ async function editNote(id){
     }
 
 
-    editingNoteId =
-        id;
+    showStatus(
+
+        "✅ Note added successfully.",
+
+        "success"
+
+    );
 
 
-    document.getElementById(
-        "course"
-    ).value =
-        data.course;
+    clearForm();
 
 
-    loadTopics();
+    await loadNotes();
+
+}
 
 
-    document.getElementById(
-        "topic"
-    ).value =
-        data.topic;
+
+/* =====================================================
+   EDIT NOTE
+===================================================== */
+
+function editNote(id){
+
+    const note =
+        allNotes.find(function(item){
+
+            return String(item.id) ===
+                   String(id);
+
+        });
 
 
-    document.getElementById(
-        "noteTitle"
-    ).value =
-        data.title;
+    if(!note){
+
+        return;
+
+    }
 
 
-    document.getElementById(
-        "noteContent"
-    ).value =
-        data.content;
+    editingId =
+        note.id;
+
+
+    document
+        .getElementById("formTitle")
+        .textContent =
+            "✏️ Edit Note";
+
+
+    document
+        .getElementById("saveButton")
+        .textContent =
+            "💾 Update Note";
+
+
+    document
+        .getElementById("cancelButton")
+        .style.display =
+            "inline-block";
+
+
+    document
+        .getElementById("course")
+        .value =
+            note.course || "";
+
+
+    updateTopics(
+        note.topic || ""
+    );
+
+
+    document
+        .getElementById("title")
+        .value =
+            note.title || "";
+
+
+    document
+        .getElementById("content")
+        .value =
+            note.content || "";
 
 
     window.scrollTo({
@@ -1663,29 +2043,131 @@ async function editNote(id){
 
     });
 
+}
 
-    showStatus(
-        "You are editing this note. Make your changes and click Save Note.",
-        true
-    );
+
+
+/* =====================================================
+   CANCEL EDIT
+===================================================== */
+
+function cancelEdit(){
+
+    editingId =
+        null;
+
+
+    resetEditMode();
+
+    clearForm();
 
 }
 
 
 
-// ==================================================
-// DELETE NOTE
-// ==================================================
+/* =====================================================
+   RESET EDIT MODE
+===================================================== */
+
+function resetEditMode(){
+
+    document
+        .getElementById("formTitle")
+        .textContent =
+            "➕ Add New Note";
+
+
+    document
+        .getElementById("saveButton")
+        .textContent =
+            "➕ Add Note";
+
+
+    document
+        .getElementById("cancelButton")
+        .style.display =
+            "none";
+
+}
+
+
+
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm(){
+
+    document
+        .getElementById("course")
+        .value =
+            "";
+
+
+    document
+        .getElementById("topic")
+        .innerHTML = `
+
+            <option value="">
+
+                Select a course first
+
+            </option>
+
+        `;
+
+
+    document
+        .getElementById("title")
+        .value =
+            "";
+
+
+    document
+        .getElementById("content")
+        .value =
+            "";
+
+}
+
+
+
+/* =====================================================
+   DELETE NOTE
+===================================================== */
 
 async function deleteNote(id){
 
-    const confirmDelete =
+    const note =
+        allNotes.find(function(item){
+
+            return String(item.id) ===
+                   String(id);
+
+        });
+
+
+    if(!note){
+
+        return;
+
+    }
+
+
+    const confirmed =
         confirm(
-            "Are you sure you want to delete this note?"
+
+            "Are you sure you want to delete this note?\n\n" +
+
+            (
+                note.title ||
+                "Untitled Note"
+            )
+
         );
 
 
-    if(!confirmDelete){
+    if(!confirmed){
 
         return;
 
@@ -1693,7 +2175,9 @@ async function deleteNote(id){
 
 
     const {
+
         error
+
     } =
     await supabaseClient
         .from("notes")
@@ -1708,10 +2192,14 @@ async function deleteNote(id){
 
         console.error(error);
 
+
         showStatus(
+
             "Unable to delete note: " +
             error.message,
-            false
+
+            "error"
+
         );
 
         return;
@@ -1720,58 +2208,27 @@ async function deleteNote(id){
 
 
     showStatus(
-        "Note deleted successfully.",
-        true
+
+        "✅ Note deleted successfully.",
+
+        "success"
+
     );
 
 
-    loadNotes();
+    await loadNotes();
 
 }
 
 
 
-// ==================================================
-// CLEAR FORM
-// ==================================================
-
-function clearForm(){
-
-    editingNoteId =
-        null;
-
-
-    document.getElementById(
-        "course"
-    ).value =
-        "";
-
-
-    loadTopics();
-
-
-    document.getElementById(
-        "noteTitle"
-    ).value =
-        "";
-
-
-    document.getElementById(
-        "noteContent"
-    ).value =
-        "";
-
-}
-
-
-
-// ==================================================
-// STATUS
-// ==================================================
+/* =====================================================
+   STATUS
+===================================================== */
 
 function showStatus(
     message,
-    success
+    type
 ){
 
     const status =
@@ -1784,72 +2241,37 @@ function showStatus(
         message;
 
 
+    status.className =
+        type;
+
+
     status.style.display =
         "block";
 
 
-    status.className =
-        success
+    setTimeout(function(){
 
-        ? "status-success"
+        status.style.display =
+            "none";
 
-        : "status-error";
-
-
-    setTimeout(
-        function(){
-
-            status.style.display =
-                "none";
-
-        },
-        5000
-    );
+    },4000);
 
 }
 
 
 
-// ==================================================
-// ADMIN DASHBOARD
-// ==================================================
-
-function goToAdmin(){
-
-    window.location.href =
-        "admin.html";
-
-}
-
-
-
-// ==================================================
-// LOGOUT
-// ==================================================
-
-async function logout(){
-
-    await supabaseClient
-        .auth
-        .signOut();
-
-
-    window.location.href =
-        "index.html";
-
-}
-
-
-
-// ==================================================
-// ESCAPE HTML
-// ==================================================
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
 function escapeHTML(value){
 
     if(
+
         value === null ||
+
         value === undefined
+
     ){
 
         return "";
@@ -1888,11 +2310,29 @@ function escapeHTML(value){
 
 
 
-// ==================================================
-// START
-// ==================================================
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-async function start(){
+async function logout(){
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+async function startAdmin(){
 
     const loggedIn =
         await checkLogin();
@@ -1905,15 +2345,14 @@ async function start(){
     }
 
 
-    loadTopics();
+    updateFilterTopics();
 
-    loadNotes();
+    await loadNotes();
 
 }
 
 
-start();
-
+startAdmin();
 
 </script>
 
