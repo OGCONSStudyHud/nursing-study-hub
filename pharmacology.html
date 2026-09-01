@@ -3,675 +3,652 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>OGCONS Study Hub - Pharmacology</title>
+<title>OGCONS Study Hub - Pharmacology</title>
 
+<style>
 
-    <style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+body {
 
+    font-family: Arial, sans-serif;
 
-        body {
+    min-height: 100vh;
 
-            margin: 0;
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
 
-            font-family: Arial, sans-serif;
+    color: #172033;
+}
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #fff4e6,
-                    #e8f4ff,
-                    #f5eaff
-                );
+header {
 
-            color: #172033;
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #18a058,
+            #2eb7a0
+        );
 
+    color: white;
 
-        /* ==========================================
-           HEADER
-        ========================================== */
+    padding: 30px 20px;
 
-        header {
+    text-align: center;
+}
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #f08a24,
-                    #e85d04
-                );
+header h1 {
 
-            color: white;
+    font-size: 28px;
 
-            text-align: center;
+    margin-bottom: 8px;
+}
 
-            padding: 35px 20px;
-        }
+header p {
 
+    font-size: 16px;
+}
 
-        header h1 {
+.container {
 
-            margin: 0;
+    max-width: 1100px;
 
-            font-size: 34px;
-        }
+    margin: auto;
 
+    padding: 30px 20px;
+}
 
-        header p {
+.back {
 
-            margin-top: 10px;
+    display: inline-block;
 
-            font-size: 17px;
-        }
+    margin-bottom: 25px;
 
+    color: #18a058;
 
-        /* ==========================================
-           CONTAINER
-        ========================================== */
+    text-decoration: none;
 
-        .container {
+    font-weight: bold;
+}
 
-            max-width: 1100px;
+.back:hover {
 
-            margin: auto;
+    text-decoration: underline;
+}
 
-            padding: 30px 20px;
-        }
+.intro {
 
+    background: white;
 
-        /* ==========================================
-           BACK BUTTON
-        ========================================== */
+    padding: 30px;
 
-        .back {
+    border-radius: 18px;
 
-            display: inline-block;
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
 
-            margin-bottom: 25px;
+    text-align: center;
 
-            color: #e85d04;
+    margin-bottom: 30px;
+}
 
-            text-decoration: none;
+.intro h2 {
 
-            font-weight: bold;
-        }
+    color: #18a058;
 
+    margin-bottom: 10px;
+}
 
-        .back:hover {
+.intro p {
 
-            text-decoration: underline;
-        }
+    color: #617568;
 
+    line-height: 1.6;
+}
 
-        /* ==========================================
-           INTRO
-        ========================================== */
+.topics {
 
-        .intro {
+    display: grid;
 
-            background: white;
+    grid-template-columns:
+        repeat(2, 1fr);
 
-            padding: 25px;
+    gap: 20px;
+}
 
-            border-radius: 18px;
+.topic-card {
 
-            text-align: center;
+    background: white;
 
-            margin-bottom: 30px;
+    border-radius: 18px;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.08);
-        }
+    padding: 25px;
 
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
 
-        .intro h2 {
+    transition: 0.2s;
+}
 
-            margin-bottom: 10px;
-        }
+.topic-card:hover {
 
+    transform:
+        translateY(-5px);
 
-        .intro p {
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,0.12);
+}
 
-            color: #667085;
+.topic-number {
 
-            line-height: 1.6;
-        }
+    width: 42px;
 
+    height: 42px;
 
-        /* ==========================================
-           TOPICS GRID
-        ========================================== */
+    border-radius: 50%;
 
-        .topics {
+    background: #e8fff2;
 
-            display: grid;
+    color: #18a058;
 
-            grid-template-columns:
-                repeat(3, 1fr);
+    display: flex;
 
-            gap: 20px;
-        }
+    align-items: center;
 
+    justify-content: center;
 
-        /* ==========================================
-           TOPIC CARD
-        ========================================== */
+    font-weight: bold;
 
-        .topic {
+    margin-bottom: 15px;
+}
 
-            background: white;
+.topic-card h2 {
 
-            padding: 25px;
+    color: #18a058;
 
-            border-radius: 18px;
+    font-size: 20px;
 
-            text-align: center;
+    line-height: 1.4;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.08);
+    margin-bottom: 10px;
+}
 
-            transition: 0.2s;
-        }
+.topic-card p {
 
+    color: #617568;
 
-        .topic:hover {
+    line-height: 1.5;
 
-            transform:
-                translateY(-5px);
-        }
+    margin-bottom: 20px;
+}
 
+.buttons {
 
-        /* ==========================================
-           ICON
-        ========================================== */
+    display: flex;
 
-        .icon {
+    gap: 10px;
 
-            font-size: 45px;
+    flex-wrap: wrap;
+}
 
-            margin-bottom: 12px;
-        }
+.btn {
 
+    flex: 1;
 
-        /* ==========================================
-           TITLE
-        ========================================== */
+    min-width: 120px;
 
-        .topic h3 {
+    text-align: center;
 
-            margin-bottom: 10px;
+    text-decoration: none;
 
-            line-height: 1.4;
-        }
+    padding: 12px 15px;
 
+    border-radius: 10px;
 
-        /* ==========================================
-           DESCRIPTION
-        ========================================== */
+    font-weight: bold;
 
-        .topic p {
+    transition: 0.2s;
+}
 
-            color: #667085;
+.note-btn {
 
-            min-height: 65px;
+    background: #0b5ed7;
 
-            line-height: 1.5;
-        }
+    color: white;
+}
 
+.note-btn:hover {
 
-        /* ==========================================
-           BUTTON
-        ========================================== */
+    background: #084da8;
+}
 
-        .topic button {
+.quiz-btn {
 
-            border: none;
+    background: #18a058;
 
-            background: #e85d04;
+    color: white;
+}
 
-            color: white;
+.quiz-btn:hover {
 
-            padding: 12px 20px;
+    background: #117d45;
+}
 
-            border-radius: 25px;
+footer {
 
-            font-weight: bold;
+    text-align: center;
 
-            cursor: pointer;
+    padding: 35px 20px;
 
-            margin-top: 10px;
+    color: #68756d;
 
-            transition: 0.2s;
-        }
+    font-size: 14px;
+}
 
+@media(max-width:700px) {
 
-        .topic button:hover {
+    .topics {
 
-            background: #c94d00;
+        grid-template-columns: 1fr;
+    }
 
-            transform:
-                translateY(-2px);
-        }
+    .topic-card {
 
+        padding: 20px;
+    }
 
-        /* ==========================================
-           FOOTER
-        ========================================== */
+    .buttons {
 
-        footer {
+        flex-direction: column;
+    }
 
-            text-align: center;
+    .btn {
 
-            padding: 35px;
+        width: 100%;
+    }
+}
 
-            color: #667085;
-        }
-
-
-        /* ==========================================
-           TABLET
-        ========================================== */
-
-        @media (max-width: 800px) {
-
-            .topics {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-        }
-
-
-        /* ==========================================
-           MOBILE
-        ========================================== */
-
-        @media (max-width: 550px) {
-
-            .topics {
-
-                grid-template-columns: 1fr;
-            }
-
-
-            header h1 {
-
-                font-size: 28px;
-            }
-
-
-            .container {
-
-                padding: 20px 12px;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
 
-
 <body>
-
-
-<!-- ==========================================
-     HEADER
-========================================== -->
 
 <header>
 
-    <h1>
-        💊 Pharmacology
-    </h1>
+<h1>
+💊 OGCONS Study Hub
+</h1>
 
-    <p>
-        Choose a topic to begin studying
-    </p>
+<p>
+Pharmacology
+</p>
 
 </header>
 
 
-
 <div class="container">
 
+<a href="dashboard.html"
+   class="back">
 
-    <!-- ==========================================
-         BACK TO DASHBOARD
-    ========================================== -->
+← Back to Courses
 
-    <a
-        href="dashboard.html"
-        class="back">
+</a>
 
-        ← Back to Dashboard
 
-    </a>
+<div class="intro">
 
+<h2>
+💊 Pharmacology
+</h2>
 
+<p>
 
-    <!-- ==========================================
-         INTRODUCTION
-    ========================================== -->
+Study the basic principles of drugs,
+their preparation, administration,
+mechanism of action, policies,
+therapeutic uses and patient education.
 
-    <div class="intro">
-
-        <h2>
-            📚 Pharmacology Topics
-        </h2>
-
-        <p>
-
-            Select a topic below to study
-            and test your knowledge.
-
-            Questions will be provided through
-            the OGCONS Study Hub quiz system.
-
-        </p>
-
-    </div>
-
-
-
-    <!-- ==========================================
-         TOPICS
-    ========================================== -->
-
-    <div class="topics">
-
-
-        <!-- 1. INTRODUCTION -->
-
-        <div class="topic">
-
-            <div class="icon">
-                💊
-            </div>
-
-            <h3>
-                Introduction
-            </h3>
-
-            <p>
-
-                Learn the basic concepts,
-                terms and principles of
-                pharmacology.
-
-            </p>
-
-            <button
-                onclick="openTopic('Introduction')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-
-        <!-- 2. SOURCES AND CLASSIFICATION -->
-
-        <div class="topic">
-
-            <div class="icon">
-                🌿
-            </div>
-
-            <h3>
-                Sources and Classification of Drugs
-            </h3>
-
-            <p>
-
-                Study the sources of drugs
-                and how drugs are classified.
-
-            </p>
-
-            <button
-                onclick="openTopic('Sources and Classification of Drugs')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-
-        <!-- 3. PREPARATION OF DRUGS -->
-
-        <div class="topic">
-
-            <div class="icon">
-                🧪
-            </div>
-
-            <h3>
-                Preparation of Drugs
-            </h3>
-
-            <p>
-
-                Learn about different
-                pharmaceutical preparations
-                and dosage forms.
-
-            </p>
-
-            <button
-                onclick="openTopic('Preparation of Drugs')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-
-        <!-- 4. ROUTES -->
-
-        <div class="topic">
-
-            <div class="icon">
-                💉
-            </div>
-
-            <h3>
-                Routes of Drug Administration
-            </h3>
-
-            <p>
-
-                Study the different routes
-                through which medicines
-                are administered.
-
-            </p>
-
-            <button
-                onclick="openTopic('Routes of Drug Administration')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-
-        <!-- 5. MECHANISM -->
-
-        <div class="topic">
-
-            <div class="icon">
-                ⚙️
-            </div>
-
-            <h3>
-                Mechanism of Drug Action
-            </h3>
-
-            <p>
-
-                Understand how drugs interact
-                with the body to produce
-                their effects.
-
-            </p>
-
-            <button
-                onclick="openTopic('Mechanism of Drug Action')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-
-        <!-- 6. NATIONAL DRUG POLICY -->
-
-        <div class="topic">
-
-            <div class="icon">
-                🇳🇬
-            </div>
-
-            <h3>
-                National Drug Policy
-            </h3>
-
-            <p>
-
-                Learn about the principles
-                and objectives of Nigeria's
-                National Drug Policy.
-
-            </p>
-
-            <button
-                onclick="openTopic('National Drug Policy')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-
-        <!-- 7. DRUGS USED IN MANAGEMENT -->
-
-        <div class="topic">
-
-            <div class="icon">
-                🏥
-            </div>
-
-            <h3>
-                Drugs Used in Management of Other Health Conditions
-            </h3>
-
-            <p>
-
-                Study medicines used in the
-                management of different
-                health conditions.
-
-            </p>
-
-            <button
-                onclick="openTopic('Drugs used in management of other health conditions')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-
-        <!-- 8. PATIENT EDUCATION -->
-
-        <div class="topic">
-
-            <div class="icon">
-                🗣️
-            </div>
-
-            <h3>
-                Patient Education and Counseling
-            </h3>
-
-            <p>
-
-                Learn how nurses educate
-                and counsel patients about
-                safe and effective drug use.
-
-            </p>
-
-            <button
-                onclick="openTopic('Patient Education and Counseling')">
-
-                Start Topic
-
-            </button>
-
-        </div>
-
-
-    </div>
+</p>
 
 </div>
 
 
+<div class="topics">
+
+
+<!-- 1 -->
+
+<div class="topic-card">
+
+<div class="topic-number">1</div>
+
+<h2>
+Introduction
+</h2>
+
+<p>
+Introduction to pharmacology and
+the basic concepts of drugs.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=Introduction"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=Introduction"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="topic-card">
+
+<div class="topic-number">2</div>
+
+<h2>
+Sources and Classification of Drugs
+</h2>
+
+<p>
+Learn where drugs come from and how
+drugs are classified.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=Sources%20and%20Classification%20of%20Drugs"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=Sources%20and%20Classification%20of%20Drugs"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="topic-card">
+
+<div class="topic-number">3</div>
+
+<h2>
+Preparation of Drugs
+</h2>
+
+<p>
+Learn about different forms and
+preparations in which drugs are supplied.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=Preparation%20of%20Drugs"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=Preparation%20of%20Drugs"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="topic-card">
+
+<div class="topic-number">4</div>
+
+<h2>
+Routes of Drug Administration
+</h2>
+
+<p>
+Study the different routes through
+which medicines are administered.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=Routes%20of%20Drug%20Administration"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=Routes%20of%20Drug%20Administration"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="topic-card">
+
+<div class="topic-number">5</div>
+
+<h2>
+Mechanism of Drug Action
+</h2>
+
+<p>
+Understand how drugs produce their
+effects in the body.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=Mechanism%20of%20Drug%20Action"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=Mechanism%20of%20Drug%20Action"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- 6 -->
+
+<div class="topic-card">
+
+<div class="topic-number">6</div>
+
+<h2>
+National Drug Policy
+</h2>
+
+<p>
+Study the principles and importance
+of national drug policy.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=National%20Drug%20Policy"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=National%20Drug%20Policy"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- 7 -->
+
+<div class="topic-card">
+
+<div class="topic-number">7</div>
+
+<h2>
+Drugs Used in Management of Other Health Conditions
+</h2>
+
+<p>
+Study commonly used drugs and their
+roles in managing health conditions.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=Drugs%20Used%20in%20Management%20of%20Other%20Health%20Conditions"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=Drugs%20Used%20in%20Management%20of%20Other%20Health%20Conditions"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- 8 -->
+
+<div class="topic-card">
+
+<div class="topic-number">8</div>
+
+<h2>
+Patient Education and Counseling
+</h2>
+
+<p>
+Learn how nurses educate and counsel
+patients about medicines.
+</p>
+
+<div class="buttons">
+
+<a
+href="pharmacology-notes.html?topic=Patient%20Education%20and%20Counseling"
+class="btn note-btn">
+
+📖 Read Note
+
+</a>
+
+<a
+href="pharmacology-quiz.html?topic=Patient%20Education%20and%20Counseling"
+class="btn quiz-btn">
+
+📝 Take Quiz
+
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 <footer>
 
-    © 2026 OGCONS Study Hub
-    • Built for students
+OGCONS Study Hub © 2026
 
 </footer>
-
-
-
-<script>
-
-
-// ==========================================
-// OPEN SELECTED TOPIC
-// ==========================================
-
-function openTopic(topic) {
-
-    window.location.href =
-        "pharmacology-quiz.html?topic=" +
-        encodeURIComponent(topic);
-
-}
-
-
-</script>
-
 
 </body>
 
