@@ -3,872 +3,771 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>
-        OGCONS Study Hub - Pharmacology Quiz
-    </title>
+<title>
+OGCONS Study Hub - Pharmacology Quiz
+</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
+body {
 
-        body {
+    margin: 0;
 
-            margin: 0;
+    font-family: Arial, sans-serif;
 
-            font-family: Arial, sans-serif;
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #fff4e8,
-                    #e8f4ff,
-                    #f5eaff
-                );
+    color: #172033;
+}
 
-            color: #172033;
-        }
+header {
 
+    background:
+        linear-gradient(
+            135deg,
+            #18a058,
+            #2eb7a0
+        );
 
-        header {
+    color: white;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #d97706,
-                    #f59e0b
-                );
+    padding: 30px 20px;
 
-            color: white;
+    text-align: center;
+}
 
-            padding: 30px 20px;
+header h1 {
 
-            text-align: center;
-        }
+    margin: 0;
 
+    font-size: 28px;
+}
 
-        header h1 {
+header p {
 
-            margin: 0;
+    margin: 8px 0 0;
 
-            font-size: 28px;
-        }
+    font-size: 16px;
+}
 
+.container {
 
-        header p {
+    max-width: 850px;
 
-            margin: 8px 0 0;
+    margin: 30px auto;
 
-            font-size: 16px;
-        }
+    padding: 20px;
+}
 
+.back {
 
-        .container {
+    display: inline-block;
 
-            max-width: 850px;
+    margin-bottom: 20px;
 
-            margin: 30px auto;
+    color: #18a058;
 
-            padding: 20px;
-        }
+    text-decoration: none;
 
+    font-weight: bold;
+}
 
-        .back {
+.back:hover {
 
-            display: inline-block;
+    text-decoration: underline;
+}
 
-            margin-bottom: 20px;
+.card {
 
-            color: #d97706;
+    background: white;
 
-            text-decoration: none;
+    border-radius: 18px;
 
-            font-weight: bold;
-        }
+    padding: 30px;
 
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+}
 
-        .back:hover {
+.course-title {
 
-            text-decoration: underline;
-        }
+    text-align: center;
 
+    margin-bottom: 20px;
+}
 
-        .card {
+.course-title h2 {
 
-            background: white;
+    margin: 0 0 8px;
 
-            border-radius: 18px;
+    color: #163020;
+}
 
-            padding: 30px;
+.course-title p {
 
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.08);
-        }
+    margin: 0;
 
+    color: #617568;
+}
 
-        .course-title {
+.topic-name {
 
-            text-align: center;
+    text-align: center;
 
-            margin-bottom: 20px;
-        }
+    background: #e8fff2;
 
+    color: #16834a;
 
-        .course-title h2 {
+    padding: 12px;
 
-            margin: 0 0 8px;
+    border-radius: 10px;
 
-            color: #7c4100;
-        }
+    font-weight: bold;
 
+    margin-bottom: 20px;
+}
 
-        .course-title p {
+.counter {
 
-            margin: 0;
+    text-align: center;
 
-            color: #667085;
-        }
+    color: #667085;
 
+    font-weight: bold;
 
-        .topic-name {
+    margin-bottom: 10px;
+}
 
-            text-align: center;
+.score {
 
-            background: #fff4e5;
+    text-align: center;
 
-            color: #b45309;
+    color: #18a058;
 
-            padding: 12px;
+    font-weight: bold;
 
-            border-radius: 10px;
+    margin-bottom: 25px;
+}
 
-            font-weight: bold;
+.question {
 
-            margin-bottom: 20px;
-        }
+    font-size: 21px;
 
+    font-weight: bold;
 
-        .counter {
+    line-height: 1.5;
 
-            text-align: center;
+    margin-bottom: 25px;
+}
 
-            color: #667085;
+.options {
 
-            font-weight: bold;
+    display: grid;
 
-            margin-bottom: 10px;
-        }
+    gap: 12px;
+}
 
+.option {
 
-        .score {
+    width: 100%;
 
-            text-align: center;
+    text-align: left;
 
-            color: #d97706;
+    background: #f7f9fc;
 
-            font-weight: bold;
+    border: 2px solid #d8dee8;
 
-            margin-bottom: 25px;
-        }
+    border-radius: 12px;
 
+    padding: 16px;
 
-        .question {
+    font-size: 16px;
 
-            font-size: 21px;
+    cursor: pointer;
 
-            font-weight: bold;
+    transition: 0.2s;
+}
 
-            line-height: 1.5;
+.option:hover:not(:disabled) {
 
-            margin-bottom: 25px;
-        }
+    background: #eefaf4;
 
+    border-color: #18a058;
+}
 
-        .options {
+.option strong {
 
-            display: grid;
+    margin-right: 8px;
+}
 
-            gap: 12px;
-        }
+.option.correct {
 
+    background: #d1e7dd;
 
-        .option {
+    border-color: #198754;
 
-            width: 100%;
+    color: #0f5132;
+}
 
-            text-align: left;
+.option.wrong {
 
-            background: #f7f9fc;
+    background: #f8d7da;
 
-            border: 2px solid #d8dee8;
+    border-color: #dc3545;
 
-            border-radius: 12px;
+    color: #842029;
+}
 
-            padding: 16px;
+.option.disabled {
 
-            font-size: 16px;
+    cursor: not-allowed;
+}
 
-            cursor: pointer;
+.feedback {
 
-            transition: 0.2s;
-        }
+    margin-top: 20px;
 
+    padding: 18px;
 
-        .option:hover {
+    border-radius: 12px;
 
-            background: #fff8ed;
+    display: none;
 
-            border-color: #d97706;
-        }
+    font-weight: bold;
+}
 
+.correct-feedback {
 
-        .option strong {
+    background: #d1e7dd;
 
-            margin-right: 8px;
-        }
+    color: #0f5132;
+}
 
+.wrong-feedback {
 
-        .option.correct {
+    background: #f8d7da;
 
-            background: #d1e7dd;
+    color: #842029;
+}
 
-            border-color: #198754;
+.answer {
 
-            color: #0f5132;
-        }
+    margin-top: 15px;
 
+    padding: 18px;
 
-        .option.wrong {
+    background: #eef6ff;
 
-            background: #f8d7da;
+    border-radius: 12px;
 
-            border-color: #dc3545;
+    display: none;
 
-            color: #842029;
-        }
+    line-height: 1.6;
+}
 
+.answer strong {
 
-        .option.disabled {
+    color: #0b5ed7;
+}
 
-            cursor: not-allowed;
-        }
+.buttons {
 
+    display: flex;
 
-        .feedback {
+    justify-content: space-between;
 
-            margin-top: 20px;
+    gap: 12px;
 
-            padding: 18px;
+    margin-top: 25px;
+}
 
-            border-radius: 12px;
+button {
 
-            display: none;
+    border: none;
 
-            font-weight: bold;
-        }
+    border-radius: 10px;
 
+    padding: 13px 20px;
 
-        .correct-feedback {
+    font-size: 15px;
 
-            background: #d1e7dd;
+    font-weight: bold;
 
-            color: #0f5132;
-        }
+    cursor: pointer;
+}
 
+.primary {
 
-        .wrong-feedback {
+    background: #18a058;
 
-            background: #f8d7da;
+    color: white;
+}
 
-            color: #842029;
-        }
+.primary:hover {
 
+    background: #117d45;
+}
 
-        .answer {
+.secondary {
 
-            margin-top: 15px;
+    background: #e9edf3;
 
-            padding: 18px;
+    color: #172033;
+}
 
-            background: #eef6ff;
+button:disabled {
 
-            border-radius: 12px;
+    opacity: 0.5;
 
-            display: none;
+    cursor: not-allowed;
+}
 
-            line-height: 1.6;
-        }
+#loading,
+#error,
+#empty {
 
+    background: white;
 
-        .answer strong {
+    border-radius: 18px;
 
-            color: #0b5ed7;
-        }
+    padding: 35px;
 
+    text-align: center;
 
-        .buttons {
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+}
 
-            display: flex;
+#error {
 
-            justify-content: space-between;
+    color: #dc3545;
+}
 
-            gap: 12px;
+.result {
 
-            margin-top: 25px;
-        }
+    text-align: center;
 
+    display: none;
+}
 
-        button {
+.result-icon {
 
-            border: none;
+    font-size: 65px;
 
-            border-radius: 10px;
+    margin-bottom: 15px;
+}
 
-            padding: 13px 20px;
+.result h2 {
 
-            font-size: 15px;
+    margin-bottom: 10px;
+}
 
-            font-weight: bold;
+.final-score {
 
-            cursor: pointer;
-        }
+    font-size: 42px;
 
+    font-weight: bold;
 
-        .primary {
+    color: #18a058;
 
-            background: #d97706;
+    margin: 20px 0;
+}
 
-            color: white;
-        }
+.result button {
 
+    background: #18a058;
 
-        .primary:hover {
+    color: white;
 
-            background: #b45309;
-        }
+    margin-top: 10px;
+}
 
+.result .back-topic {
 
-        .secondary {
+    background: #6c757d;
+}
 
-            background: #e9edf3;
+footer {
 
-            color: #172033;
-        }
+    text-align: center;
 
+    padding: 35px;
 
-        button:disabled {
+    color: #527060;
+}
 
-            opacity: 0.5;
+@media(max-width:600px) {
 
-            cursor: not-allowed;
-        }
+    .container {
 
+        padding: 12px;
+    }
 
-        #loading,
-        #error,
-        #empty {
+    .card {
 
-            background: white;
+        padding: 20px;
+    }
 
-            border-radius: 18px;
+    .question {
 
-            padding: 35px;
+        font-size: 19px;
+    }
 
-            text-align: center;
+    .buttons {
 
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,0.08);
-        }
+        flex-direction: column;
+    }
 
+    button {
 
-        #error {
+        width: 100%;
+    }
 
-            color: #dc3545;
-        }
+}
 
-
-        .result {
-
-            text-align: center;
-
-            display: none;
-        }
-
-
-        .result-icon {
-
-            font-size: 65px;
-
-            margin-bottom: 15px;
-        }
-
-
-        .result h2 {
-
-            margin-bottom: 10px;
-        }
-
-
-        .final-score {
-
-            font-size: 42px;
-
-            font-weight: bold;
-
-            color: #d97706;
-
-            margin: 20px 0;
-        }
-
-
-        .result button {
-
-            background: #d97706;
-
-            color: white;
-
-            margin-top: 10px;
-        }
-
-
-        .result .back-topic {
-
-            background: #6c757d;
-        }
-
-
-        footer {
-
-            text-align: center;
-
-            padding: 35px;
-
-            color: #667085;
-        }
-
-
-        @media (max-width: 600px) {
-
-            .container {
-
-                padding: 12px;
-            }
-
-
-            .card {
-
-                padding: 20px;
-            }
-
-
-            .question {
-
-                font-size: 19px;
-            }
-
-
-            .buttons {
-
-                flex-direction: column;
-            }
-
-
-            button {
-
-                width: 100%;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
-    <h1>
-        💊 OGCONS Study Hub
-    </h1>
+<h1>
+💊 OGCONS Study Hub
+</h1>
 
-    <p>
-        Pharmacology Quiz
-    </p>
+<p>
+Pharmacology Quiz
+</p>
 
 </header>
-
 
 
 <div class="container">
 
 
-    <a
-        href="pharmacology.html"
-        class="back">
+<a
+href="pharmacology.html"
+class="back">
 
-        ← Back to Pharmacology Topics
+← Back to Pharmacology Topics
 
-    </a>
+</a>
 
 
+<div id="loading">
 
-    <div
-        id="loading">
+<h2>
+🔄 Loading questions...
+</h2>
 
-        <h2>
-            🔄 Loading questions...
-        </h2>
-
-        <p>
-            Please wait while we prepare your quiz.
-        </p>
-
-    </div>
-
-
-
-    <div
-        id="error"
-        style="display:none;">
-    </div>
-
-
-
-    <div
-        id="empty"
-        style="display:none;">
-
-        <h2>
-            📚 No Questions Yet
-        </h2>
-
-        <p id="emptyMessage">
-
-            There are currently no questions
-            available for this topic.
-
-        </p>
-
-    </div>
-
-
-
-    <!-- QUIZ -->
-
-    <div
-        class="card"
-        id="quizCard"
-        style="display:none;">
-
-
-        <div class="course-title">
-
-            <h2>
-                💊 Pharmacology
-            </h2>
-
-            <p>
-                Test your knowledge
-            </p>
-
-        </div>
-
-
-
-        <div
-            class="topic-name"
-            id="topicName">
-        </div>
-
-
-
-        <div
-            class="counter"
-            id="counter">
-        </div>
-
-
-
-        <div
-            class="score"
-            id="score">
-
-            Score: 0
-
-        </div>
-
-
-
-        <div
-            class="question"
-            id="question">
-        </div>
-
-
-
-        <div class="options">
-
-
-            <button
-                class="option"
-                id="option_a"
-                onclick="selectAnswer('A')">
-
-                <strong>A.</strong>
-
-                <span id="text_a"></span>
-
-            </button>
-
-
-
-            <button
-                class="option"
-                id="option_b"
-                onclick="selectAnswer('B')">
-
-                <strong>B.</strong>
-
-                <span id="text_b"></span>
-
-            </button>
-
-
-
-            <button
-                class="option"
-                id="option_c"
-                onclick="selectAnswer('C')">
-
-                <strong>C.</strong>
-
-                <span id="text_c"></span>
-
-            </button>
-
-
-
-            <button
-                class="option"
-                id="option_d"
-                onclick="selectAnswer('D')">
-
-                <strong>D.</strong>
-
-                <span id="text_d"></span>
-
-            </button>
-
-
-        </div>
-
-
-
-        <!-- FEEDBACK -->
-
-        <div
-            class="feedback"
-            id="feedback">
-        </div>
-
-
-
-        <!-- ANSWER -->
-
-        <div
-            class="answer"
-            id="answer">
-
-
-            <p>
-
-                <strong>
-                    Correct Answer:
-                </strong>
-
-                <span id="correct_answer"></span>
-
-            </p>
-
-
-
-            <p>
-
-                <strong>
-                    Explanation:
-                </strong>
-
-                <span id="explanation"></span>
-
-            </p>
-
-
-        </div>
-
-
-
-        <div class="buttons">
-
-
-            <button
-                class="secondary"
-                id="previousButton"
-                onclick="previousQuestion()">
-
-                ← Previous
-
-            </button>
-
-
-
-            <button
-                class="primary"
-                id="nextButton"
-                onclick="nextQuestion()"
-                disabled>
-
-                Next →
-
-            </button>
-
-
-        </div>
-
-
-    </div>
-
-
-
-    <!-- RESULT -->
-
-    <div
-        class="card result"
-        id="result">
-
-
-        <div class="result-icon">
-            🏆
-        </div>
-
-
-        <h2>
-            Quiz Completed!
-        </h2>
-
-
-        <p>
-
-            You have completed the
-
-            <span id="resultTopic">
-                Pharmacology
-            </span>
-
-            quiz.
-
-        </p>
-
-
-
-        <div
-            class="final-score"
-            id="finalScore">
-
-            0 / 0
-
-        </div>
-
-
-
-        <p id="percentage">
-
-            Your score: 0%
-
-        </p>
-
-
-
-        <button
-            onclick="restartQuiz()">
-
-            🔄 Try Again
-
-        </button>
-
-
-        <br>
-
-
-        <button
-            class="back-topic"
-            onclick="window.location.href='pharmacology.html'">
-
-            ← Back to Topics
-
-        </button>
-
-
-    </div>
-
+<p>
+Please wait while we prepare your quiz.
+</p>
 
 </div>
 
 
+<div
+id="error"
+style="display:none;">
+</div>
+
+
+<div
+id="empty"
+style="display:none;">
+
+<h2>
+📚 No Questions Yet
+</h2>
+
+<p id="emptyMessage">
+
+There are currently no questions
+available for this topic.
+
+</p>
+
+</div>
+
+
+<div
+class="card"
+id="quizCard"
+style="display:none;">
+
+
+<div class="course-title">
+
+<h2>
+💊 Pharmacology
+</h2>
+
+<p>
+Test your knowledge
+</p>
+
+</div>
+
+
+<div
+class="topic-name"
+id="topicName">
+</div>
+
+
+<div
+class="counter"
+id="counter">
+</div>
+
+
+<div
+class="score"
+id="score">
+
+Score: 0
+
+</div>
+
+
+<div
+class="question"
+id="question">
+</div>
+
+
+<div class="options">
+
+
+<button
+class="option"
+id="option_a"
+onclick="selectAnswer('A')">
+
+<strong>A.</strong>
+
+<span id="text_a"></span>
+
+</button>
+
+
+<button
+class="option"
+id="option_b"
+onclick="selectAnswer('B')">
+
+<strong>B.</strong>
+
+<span id="text_b"></span>
+
+</button>
+
+
+<button
+class="option"
+id="option_c"
+onclick="selectAnswer('C')">
+
+<strong>C.</strong>
+
+<span id="text_c"></span>
+
+</button>
+
+
+<button
+class="option"
+id="option_d"
+onclick="selectAnswer('D')">
+
+<strong>D.</strong>
+
+<span id="text_d"></span>
+
+</button>
+
+</div>
+
+
+<div
+class="feedback"
+id="feedback">
+</div>
+
+
+<div
+class="answer"
+id="answer">
+
+<p>
+
+<strong>
+Correct Answer:
+</strong>
+
+<span id="correct_answer"></span>
+
+</p>
+
+
+<p>
+
+<strong>
+Explanation:
+</strong>
+
+<span id="explanation"></span>
+
+</p>
+
+</div>
+
+
+<div class="buttons">
+
+<button
+class="secondary"
+id="previousButton"
+onclick="previousQuestion()">
+
+← Previous
+
+</button>
+
+
+<button
+class="primary"
+id="nextButton"
+onclick="nextQuestion()"
+disabled>
+
+Next →
+
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="card result"
+id="result">
+
+<div class="result-icon">
+🏆
+</div>
+
+<h2>
+Quiz Completed!
+</h2>
+
+<p>
+
+You have completed the
+
+<span id="resultTopic">
+Pharmacology
+</span>
+
+quiz.
+
+</p>
+
+
+<div
+class="final-score"
+id="finalScore">
+
+0 / 0
+
+</div>
+
+
+<p id="percentage">
+
+Your score: 0%
+
+</p>
+
+
+<button
+onclick="restartQuiz()">
+
+🔄 Try Again
+
+</button>
+
+
+<br>
+
+
+<button
+class="back-topic"
+onclick="window.location.href='pharmacology.html'">
+
+← Back to Topics
+
+</button>
+
+</div>
+
+</div>
+
 
 <footer>
 
-    © 2026 OGCONS Study Hub
-    • Built for students
+© 2026 OGCONS Study Hub
+• Built for students
 
 </footer>
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 <script>
 
-
 // ======================================================
-// SUPABASE CONNECTION
+// SUPABASE
 // ======================================================
 
 const SUPABASE_URL =
-    "https://bvetmmvpdotifusjkywd.supabase.co";
+"https://bvetmmvpdotifusjkywd.supabase.co";
 
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+"sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
 
 const supabaseClient =
-    window.supabase.createClient(
-
-        SUPABASE_URL,
-
-        SUPABASE_PUBLISHABLE_KEY
-
-    );
-
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
 
 
 // ======================================================
-// QUIZ VARIABLES
+// VARIABLES
 // ======================================================
 
 let questions = [];
@@ -877,40 +776,24 @@ let currentQuestion = 0;
 
 let score = 0;
 
-
-// IMPORTANT:
-// This stores the student's answer
-// for every question.
-//
-// Example:
-//
-// answeredQuestions[0] = "B"
-// answeredQuestions[1] = "A"
-//
-// This prevents a student from answering
-// the same question again after clicking Previous.
-
-let answeredQuestions = [];
-
+let userAnswers = [];
 
 
 // ======================================================
-// GET TOPIC FROM URL
+// TOPIC
 // ======================================================
 
 const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
-
+new URLSearchParams(
+    window.location.search
+);
 
 const selectedTopic =
-    urlParams.get("topic");
-
+urlParams.get("topic");
 
 
 // ======================================================
-// SHUFFLE QUESTIONS
+// SHUFFLE
 // ======================================================
 
 function shuffleQuestions(array) {
@@ -941,9 +824,7 @@ function shuffleQuestions(array) {
     }
 
     return shuffled;
-
 }
-
 
 
 // ======================================================
@@ -952,27 +833,18 @@ function shuffleQuestions(array) {
 
 async function loadQuestions() {
 
-
     const loading =
         document.getElementById("loading");
-
 
     const quizCard =
         document.getElementById("quizCard");
 
-
     const empty =
         document.getElementById("empty");
-
 
     const error =
         document.getElementById("error");
 
-
-
-    // ==================================================
-    // CHECK TOPIC
-    // ==================================================
 
     if (!selectedTopic) {
 
@@ -984,21 +856,19 @@ async function loadQuestions() {
 
         error.innerHTML = `
 
-            <h2>
-                ⚠️ No Topic Selected
-            </h2>
+        <h2>
+        ⚠️ No Topic Selected
+        </h2>
 
-            <p>
-                Please return to Pharmacology
-                and select a topic.
-            </p>
+        <p>
+        Please return to Pharmacology
+        and select a topic.
+        </p>
 
         `;
 
         return;
-
     }
-
 
 
     document
@@ -1008,12 +878,10 @@ async function loadQuestions() {
         selectedTopic;
 
 
-
     document
         .getElementById("resultTopic")
         .textContent =
         selectedTopic;
-
 
 
     // ==================================================
@@ -1024,10 +892,9 @@ async function loadQuestions() {
         data: { user },
         error: userError
     } =
-        await supabaseClient
-            .auth
-            .getUser();
-
+    await supabaseClient
+        .auth
+        .getUser();
 
 
     if (userError || !user) {
@@ -1036,47 +903,40 @@ async function loadQuestions() {
             "login.html";
 
         return;
-
     }
 
 
-
     // ==================================================
-    // GET QUESTIONS
+    // GET PHARMACOLOGY QUESTIONS
     // ==================================================
 
     const {
         data,
         error: databaseError
     } =
-        await supabaseClient
+    await supabaseClient
 
-            .from("questions")
+        .from("questions")
 
-            .select("*")
+        .select("*")
 
-            .eq(
-                "course",
-                "Pharmacology"
-            )
+        .eq(
+            "course",
+            "Pharmacology"
+        )
 
-            .ilike(
-                "topic",
-                selectedTopic
-            )
+        .ilike(
+            "topic",
+            selectedTopic
+        )
 
-            .order(
-                "created_at",
-                {
-                    ascending: true
-                }
-            );
+        .order(
+            "created_at",
+            {
+                ascending: true
+            }
+        );
 
-
-
-    // ==================================================
-    // DATABASE ERROR
-    // ==================================================
 
     if (databaseError) {
 
@@ -1085,70 +945,47 @@ async function loadQuestions() {
             databaseError
         );
 
-
         loading.style.display =
             "none";
-
 
         error.style.display =
             "block";
 
-
         error.innerHTML = `
 
-            <h2>
-                ❌ Unable to Load Questions
-            </h2>
+        <h2>
+        ❌ Unable to Load Questions
+        </h2>
 
-            <p>
-                ${databaseError.message}
-            </p>
+        <p>
+        ${databaseError.message}
+        </p>
 
         `;
 
         return;
-
     }
 
 
-
-    // ==================================================
-    // STORE QUESTIONS
-    // ==================================================
-
-    questions =
-        data || [];
-
-
-
-    // ==================================================
-    // SHUFFLE QUESTIONS
-    // ==================================================
-
     questions =
         shuffleQuestions(
-            questions
+            data || []
         );
-
 
 
     loading.style.display =
         "none";
 
 
-
-    // ==================================================
-    // NO QUESTIONS
-    // ==================================================
-
     if (questions.length === 0) {
 
         empty.style.display =
             "block";
 
-
         document
-            .getElementById("emptyMessage")
+            .getElementById(
+                "emptyMessage"
+            )
             .textContent =
 
             "There are currently no questions for " +
@@ -1156,34 +993,21 @@ async function loadQuestions() {
             ". Add questions from the Admin Dashboard.";
 
         return;
-
     }
 
 
-
-    // ==================================================
-    // CREATE ANSWER STORAGE
-    // ==================================================
-
-    answeredQuestions =
+    userAnswers =
         new Array(
             questions.length
         ).fill(null);
 
-
-
-    // ==================================================
-    // SHOW QUIZ
-    // ==================================================
 
     quizCard.style.display =
         "block";
 
 
     showQuestion();
-
 }
-
 
 
 // ======================================================
@@ -1192,9 +1016,11 @@ async function loadQuestions() {
 
 function showQuestion() {
 
-
     const q =
         questions[currentQuestion];
+
+    const savedAnswer =
+        userAnswers[currentQuestion];
 
 
     document
@@ -1207,7 +1033,6 @@ function showQuestion() {
         questions.length;
 
 
-
     document
         .getElementById("score")
         .textContent =
@@ -1216,12 +1041,10 @@ function showQuestion() {
         score;
 
 
-
     document
         .getElementById("question")
         .textContent =
         q.question;
-
 
 
     document
@@ -1230,12 +1053,10 @@ function showQuestion() {
         q.option_a;
 
 
-
     document
         .getElementById("text_b")
         .textContent =
         q.option_b;
-
 
 
     document
@@ -1244,12 +1065,10 @@ function showQuestion() {
         q.option_c;
 
 
-
     document
         .getElementById("text_d")
         .textContent =
         q.option_d;
-
 
 
     const options = [
@@ -1264,11 +1083,6 @@ function showQuestion() {
 
     ];
 
-
-
-    // ==================================================
-    // RESET OPTIONS
-    // ==================================================
 
     options.forEach(function(option) {
 
@@ -1284,11 +1098,6 @@ function showQuestion() {
     });
 
 
-
-    // ==================================================
-    // RESET FEEDBACK
-    // ==================================================
-
     document
         .getElementById("feedback")
         .style.display =
@@ -1301,31 +1110,7 @@ function showQuestion() {
         "none";
 
 
-
-    // ==================================================
-    // CHECK IF QUESTION WAS ALREADY ANSWERED
-    // ==================================================
-
-    const previousAnswer =
-        answeredQuestions[
-            currentQuestion
-        ];
-
-
-
-    if (previousAnswer) {
-
-        // The question was already answered.
-
-        restoreAnsweredQuestion(
-            previousAnswer
-        );
-
-    }
-
-    else {
-
-        // New question.
+    if (savedAnswer === null) {
 
         document
             .getElementById("nextButton")
@@ -1334,199 +1119,18 @@ function showQuestion() {
 
     }
 
+    else {
 
+        showSavedAnswer();
 
-    // ==================================================
-    // PREVIOUS BUTTON
-    // ==================================================
+    }
+
 
     document
         .getElementById("previousButton")
         .disabled =
         currentQuestion === 0;
-
 }
-
-
-
-// ======================================================
-// RESTORE PREVIOUSLY ANSWERED QUESTION
-// ======================================================
-
-function restoreAnsweredQuestion(
-    selected
-) {
-
-
-    const q =
-        questions[currentQuestion];
-
-
-    const correct =
-        String(
-            q.correct_answer
-        )
-        .trim()
-        .toUpperCase();
-
-
-
-    const selectedButton =
-        document.getElementById(
-            "option_" +
-            selected.toLowerCase()
-        );
-
-
-
-    const correctButton =
-        document.getElementById(
-            "option_" +
-            correct.toLowerCase()
-        );
-
-
-
-    const options = [
-
-        document.getElementById("option_a"),
-
-        document.getElementById("option_b"),
-
-        document.getElementById("option_c"),
-
-        document.getElementById("option_d")
-
-    ];
-
-
-
-    // Disable all options.
-
-    options.forEach(function(option) {
-
-        option.disabled =
-            true;
-
-        option.classList.add(
-            "disabled"
-        );
-
-    });
-
-
-
-    // ==================================================
-    // SHOW CORRECT / WRONG
-    // ==================================================
-
-    if (
-        selected === correct
-    ) {
-
-        selectedButton.classList.add(
-            "correct"
-        );
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-            "✅ Correct! Well done.";
-
-
-        feedback.className =
-            "feedback correct-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-    else {
-
-        selectedButton.classList.add(
-            "wrong"
-        );
-
-
-        if (correctButton) {
-
-            correctButton.classList.add(
-                "correct"
-            );
-
-        }
-
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
-        feedback.textContent =
-
-            "❌ Wrong answer. " +
-            "The correct answer is " +
-            correct +
-            ".";
-
-
-        feedback.className =
-            "feedback wrong-feedback";
-
-
-        feedback.style.display =
-            "block";
-
-    }
-
-
-
-    // ==================================================
-    // SHOW EXPLANATION
-    // ==================================================
-
-    document
-        .getElementById("correct_answer")
-        .textContent =
-        correct;
-
-
-
-    document
-        .getElementById("explanation")
-        .textContent =
-
-        q.explanation ||
-        "No explanation provided.";
-
-
-
-    document
-        .getElementById("answer")
-        .style.display =
-        "block";
-
-
-
-    // ==================================================
-    // ENABLE NEXT
-    // ==================================================
-
-    document
-        .getElementById("nextButton")
-        .disabled =
-        false;
-
-}
-
 
 
 // ======================================================
@@ -1535,25 +1139,12 @@ function restoreAnsweredQuestion(
 
 function selectAnswer(selected) {
 
-
-    // ==================================================
-    // IMPORTANT
-    // ==================================================
-    //
-    // If the question already has an answer,
-    // do absolutely nothing.
-    //
-
     if (
-        answeredQuestions[
-            currentQuestion
-        ]
+        userAnswers[currentQuestion] !== null
     ) {
 
         return;
-
     }
-
 
 
     const q =
@@ -1568,16 +1159,52 @@ function selectAnswer(selected) {
         .toUpperCase();
 
 
-
-    // ==================================================
-    // SAVE THE ANSWER
-    // ==================================================
-
-    answeredQuestions[
-        currentQuestion
-    ] =
+    userAnswers[currentQuestion] =
         selected;
 
+
+    if (selected === correct) {
+
+        score++;
+
+    }
+
+
+    showSavedAnswer();
+
+
+    document
+        .getElementById("nextButton")
+        .disabled =
+        false;
+}
+
+
+// ======================================================
+// SHOW SAVED ANSWER
+// ======================================================
+
+function showSavedAnswer() {
+
+    const q =
+        questions[currentQuestion];
+
+    const selected =
+        userAnswers[currentQuestion];
+
+
+    if (selected === null) {
+
+        return;
+    }
+
+
+    const correct =
+        String(
+            q.correct_answer
+        )
+        .trim()
+        .toUpperCase();
 
 
     const selectedButton =
@@ -1594,7 +1221,6 @@ function selectAnswer(selected) {
         );
 
 
-
     const options = [
 
         document.getElementById("option_a"),
@@ -1608,11 +1234,6 @@ function selectAnswer(selected) {
     ];
 
 
-
-    // ==================================================
-    // DISABLE ALL OPTIONS
-    // ==================================================
-
     options.forEach(function(option) {
 
         option.disabled =
@@ -1625,54 +1246,31 @@ function selectAnswer(selected) {
     });
 
 
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
 
-    // ==================================================
-    // CORRECT ANSWER
-    // ==================================================
 
-    if (
-        selected === correct
-    ) {
-
-        score++;
-
+    if (selected === correct) {
 
         selectedButton.classList.add(
             "correct"
         );
 
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
         feedback.textContent =
             "✅ Correct! Well done.";
-
 
         feedback.className =
             "feedback correct-feedback";
 
-
-        feedback.style.display =
-            "block";
-
     }
-
-
-
-    // ==================================================
-    // WRONG ANSWER
-    // ==================================================
 
     else {
 
         selectedButton.classList.add(
             "wrong"
         );
-
 
         if (correctButton) {
 
@@ -1682,13 +1280,6 @@ function selectAnswer(selected) {
 
         }
 
-
-        const feedback =
-            document.getElementById(
-                "feedback"
-            );
-
-
         feedback.textContent =
 
             "❌ Wrong answer. " +
@@ -1696,27 +1287,20 @@ function selectAnswer(selected) {
             correct +
             ".";
 
-
         feedback.className =
             "feedback wrong-feedback";
-
-
-        feedback.style.display =
-            "block";
 
     }
 
 
+    feedback.style.display =
+        "block";
 
-    // ==================================================
-    // EXPLANATION
-    // ==================================================
 
     document
         .getElementById("correct_answer")
         .textContent =
         correct;
-
 
 
     document
@@ -1727,17 +1311,11 @@ function selectAnswer(selected) {
         "No explanation provided.";
 
 
-
     document
         .getElementById("answer")
         .style.display =
         "block";
 
-
-
-    // ==================================================
-    // UPDATE SCORE
-    // ==================================================
 
     document
         .getElementById("score")
@@ -1747,73 +1325,74 @@ function selectAnswer(selected) {
         score;
 
 
-
-    // ==================================================
-    // ENABLE NEXT
-    // ==================================================
-
     document
         .getElementById("nextButton")
         .disabled =
         false;
-
 }
 
 
-
 // ======================================================
-// NEXT QUESTION
+// NEXT
 // ======================================================
 
 function nextQuestion() {
-
 
     if (
         currentQuestion <
         questions.length - 1
     ) {
 
-
         currentQuestion++;
 
-
         showQuestion();
-
 
     }
 
     else {
 
+        const unanswered =
+            userAnswers.some(
+                function(answer) {
+
+                    return answer === null;
+
+                }
+            );
+
+
+        if (unanswered) {
+
+            alert(
+                "Please answer all questions before completing the quiz."
+            );
+
+            return;
+        }
+
 
         showResult();
 
     }
-
 }
 
 
-
 // ======================================================
-// PREVIOUS QUESTION
+// PREVIOUS
 // ======================================================
 
 function previousQuestion() {
-
 
     if (
         currentQuestion > 0
     ) {
 
-
         currentQuestion--;
-
 
         showQuestion();
 
     }
-
 }
-
 
 
 // ======================================================
@@ -1821,7 +1400,6 @@ function previousQuestion() {
 // ======================================================
 
 async function showResult() {
-
 
     document
         .getElementById("quizCard")
@@ -1835,17 +1413,14 @@ async function showResult() {
         "block";
 
 
-
     const total =
         questions.length;
-
 
 
     const percentage =
         Math.round(
             (score / total) * 100
         );
-
 
 
     document
@@ -1857,7 +1432,6 @@ async function showResult() {
         total;
 
 
-
     document
         .getElementById("percentage")
         .textContent =
@@ -1867,62 +1441,45 @@ async function showResult() {
         "%";
 
 
-
-    // ==================================================
-    // GET CURRENT USER
-    // ==================================================
-
     const {
         data: { user }
     } =
-        await supabaseClient
-            .auth
-            .getUser();
-
+    await supabaseClient
+        .auth
+        .getUser();
 
 
     if (!user) {
 
-        console.log(
-            "Student is not logged in."
-        );
-
         return;
-
     }
 
-
-
-    // ==================================================
-    // SAVE RESULT
-    // ==================================================
 
     const {
         error: saveError
     } =
-        await supabaseClient
+    await supabaseClient
 
-            .from("quiz_results")
+        .from("quiz_results")
 
-            .insert({
+        .insert({
 
-                user_id:
-                    user.id,
+            user_id:
+                user.id,
 
-                course:
-                    "Pharmacology",
+            course:
+                "Pharmacology",
 
-                score:
-                    score,
+            score:
+                score,
 
-                total_questions:
-                    total,
+            total_questions:
+                total,
 
-                percentage:
-                    percentage
+            percentage:
+                percentage
 
-            });
-
+        });
 
 
     if (saveError) {
@@ -1933,39 +1490,30 @@ async function showResult() {
         );
 
     }
-
-    else {
-
-        console.log(
-            "Pharmacology quiz result saved successfully."
-        );
-
-    }
-
 }
 
 
-
 // ======================================================
-// RESTART QUIZ
+// RESTART
 // ======================================================
 
 function restartQuiz() {
 
+    questions =
+        shuffleQuestions(
+            questions
+        );
 
     currentQuestion =
         0;
 
-
     score =
         0;
 
-
-    answeredQuestions =
+    userAnswers =
         new Array(
             questions.length
         ).fill(null);
-
 
 
     document
@@ -1980,29 +1528,17 @@ function restartQuiz() {
         "block";
 
 
-    // Shuffle again when restarting.
-
-    questions =
-        shuffleQuestions(
-            questions
-        );
-
-
     showQuestion();
-
 }
 
 
-
 // ======================================================
-// START QUIZ
+// START
 // ======================================================
 
 loadQuestions();
 
-
 </script>
-
 
 </body>
 
