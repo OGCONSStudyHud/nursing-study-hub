@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>
+OGCONS Study Hub - Manage Quiz
+</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8fff2,
+            #e8f4ff,
+            #f5eaff
+        );
+
+    color: #172033;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #18a058,
+            #2eb7a0
+        );
+
+    color: white;
+
+    padding: 25px 20px;
+}
+
+.header-content {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.logo {
+
+    font-size: 23px;
+
+    font-weight: bold;
+}
+
+.header-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.header-btn {
+
+    border: none;
+
+    background: white;
+
+    color: #18a058;
+
+    padding: 10px 17px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.header-btn:hover {
+
+    background: #f1f1f1;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 30px 20px;
+}
+
+
+/* =========================================
+   PAGE TITLE
+========================================= */
+
+.page-title {
+
+    background: white;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.page-title h1 {
+
+    color: #18a058;
+
+    margin-bottom: 8px;
+
+    font-size: 30px;
+}
+
+.page-title p {
+
+    color: #68756d;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+#status {
+
+    display: none;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+    font-weight: bold;
+}
+
+.success {
+
+    display: block;
+
+    background: #d1e7dd;
+
+    color: #0f5132;
+}
+
+.error {
+
+    display: block;
+
+    background: #f8d7da;
+
+    color: #842029;
+}
+
+
+/* =========================================
+   FILTER CARD
+========================================= */
+
+.filter-card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+
+    margin-bottom: 25px;
+}
+
+.filter-card h2 {
+
+    color: #18a058;
+
+    margin-bottom: 18px;
+}
+
+.filters {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap: 15px;
+}
+
+.form-group label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+
+    color: #26382d;
+}
+
+select,
+input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 2px solid #dce4df;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    background: white;
+}
+
+select:focus,
+input:focus {
+
+    border-color: #18a058;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.stat-card {
+
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0,0,0,0.07);
+
+    text-align: center;
+}
+
+.stat-icon {
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+.stat-number {
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    color: #18a058;
+
+    margin-bottom: 5px;
+}
+
+.stat-label {
+
+    color: #68756d;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   QUESTIONS HEADER
+========================================= */
+
+.questions-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.questions-header h2 {
+
+    color: #18a058;
+}
+
+.question-count {
+
+    background: #e7fff0;
+
+    color: #117d45;
+
+    padding: 8px 15px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   QUESTION CARD
+========================================= */
+
+.question-card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.08);
+
+    margin-bottom: 18px;
+
+    border-left: 5px solid #18a058;
+}
+
+.question-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+}
+
+.question-number {
+
+    color: #18a058;
+
+    font-weight: bold;
+
+    font-size: 17px;
+}
+
+.course-badge {
+
+    background: #e8f4ff;
+
+    color: #0b5ed7;
+
+    padding: 7px 12px;
+
+    border-radius: 15px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.topic-badge {
+
+    display: inline-block;
+
+    background: #fff4e5;
+
+    color: #b45309;
+
+    padding: 7px 12px;
+
+    border-radius: 15px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 14px;
+}
+
+.question-text {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================
+   OPTIONS
+========================================= */
+
+.options {
+
+    display: grid;
+
+    gap: 9px;
+
+    margin-bottom: 15px;
+}
+
+.option {
+
+    background: #f7f9fc;
+
+    border: 1px solid #e1e6ec;
+
+    padding: 12px 15px;
+
+    border-radius: 9px;
+
+    line-height: 1.4;
+}
+
+.correct-option {
+
+    background: #d1e7dd;
+
+    border-color: #198754;
+
+    color: #0f5132;
+
+    font-weight: bold;
+}
+
+.correct-label {
+
+    display: inline-block;
+
+    margin-left: 8px;
+
+    font-size: 12px;
+
+    background: #198754;
+
+    color: white;
+
+    padding: 3px 7px;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   EXPLANATION
+========================================= */
+
+.explanation-box {
+
+    background: #eef6ff;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    line-height: 1.5;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.question-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    flex-wrap: wrap;
+}
+
+.edit-btn {
+
+    background: #0b5ed7;
+
+    color: white;
+}
+
+.delete-btn {
+
+    background: #dc3545;
+
+    color: white;
+}
+
+.preview-btn {
+
+    background: #18a058;
+
+    color: white;
+}
+
+.action-btn {
+
+    border: none;
+
+    padding: 10px 17px;
+
+    border-radius: 9px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.action-btn:hover {
+
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   EMPTY / LOADING
+========================================= */
+
+#loading {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    color: #68756d;
+
+    margin-bottom: 20px;
+}
+
+.empty {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    color: #68756d;
+}
+
+.empty h2 {
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 35px 20px;
+
+    color: #68756d;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:800px) {
+
+    .filters {
+
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .question-top {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .stats {
+
+        grid-template-columns: 1fr;
+    }
+
+    .questions-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .question-card {
+
+        padding: 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+
+🩺 OGCONS Study Hub — Quiz Manager
+
+</div>
+
+
+<div class="header-buttons">
+
+<button
+    class="header-btn"
+    onclick="goToAdmin()">
+
+← Admin Dashboard
+
+</button>
+
+
+<button
+    class="header-btn"
+    onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<div class="container">
+
+
+<div class="page-title">
+
+<h1>
+📝 Quiz Management
+</h1>
+
+<p>
+
+Manage, search and review all quiz questions
+for every course and topic.
+
+</p>
+
+</div>
+
+
+<div id="status"></div>
+
+
+
+<!-- =========================================
+     FILTERS
+========================================= -->
+
+<div class="filter-card">
+
+<h2>
+🔍 Find Quiz Questions
+</h2>
+
+
+<div class="filters">
+
+
+<div class="form-group">
+
+<label>
+Course
+</label>
+
+<select
+    id="courseFilter"
+    onchange="updateTopicFilter()">
+
+<option value="">
+All Courses
+</option>
+
+<option value="Foundations of Nursing">
+Foundations of Nursing
+</option>
+
+<option value="Primary Health Care">
+Primary Health Care
+</option>
+
+<option value="Anatomy & Physiology">
+Anatomy & Physiology
+</option>
+
+<option value="Medical/Surgical Nursing">
+Medical/Surgical Nursing
+</option>
+
+<option value="Microbiology">
+Microbiology
+</option>
+
+<option value="Pharmacology">
+Pharmacology
+</option>
+
+</select>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+Topic
+</label>
+
+<select
+    id="topicFilter"
+    onchange="filterQuestions()">
+
+<option value="">
+All Topics
+</option>
+
+</select>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label>
+Search
+</label>
+
+<input
+    id="searchInput"
+    type="text"
+    placeholder="Search question..."
+    oninput="filterQuestions()">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================
+     STATS
+========================================= -->
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📚
+</div>
+
+<div
+    class="stat-number"
+    id="totalQuestions">
+
+0
+
+</div>
+
+<div class="stat-label">
+Total Questions
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🏥
+</div>
+
+<div
+    class="stat-number"
+    id="totalCourses">
+
+0
+
+</div>
+
+<div class="stat-label">
+Courses
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📖
+</div>
+
+<div
+    class="stat-number"
+    id="totalTopics">
+
+0
+
+</div>
+
+<div class="stat-label">
+Topics
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+✅
+</div>
+
+<div
+    class="stat-number"
+    id="filteredQuestions">
+
+0
+
+</div>
+
+<div class="stat-label">
+Showing
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     QUESTIONS
+========================================= -->
+
+<div class="questions-header">
+
+<h2>
+📋 Quiz Questions
+</h2>
+
+
+<div
+    class="question-count"
+    id="questionCount">
+
+0 Questions
+
+</div>
+
+</div>
+
+
+
+<div id="loading">
+
+🔄 Loading quiz questions...
+
+</div>
+
+
+
+<div id="questionsList"></div>
+
+
+</div>
+
+
+
+<footer>
+
+OGCONS Study Hub © 2026
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+"https://bvetmmvpdotifusjkywd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let allQuestions = [];
+
+
+
+/* =====================================================
+   COURSE TOPICS
+===================================================== */
+
+const courseTopics = {
+
+
+"Foundations of Nursing": [
+
+"Introduction to Nursing",
+
+"Health Care Institutions",
+
+"Ethico-Legal Issues in Nursing",
+
+"Tools of Nursing",
+
+"Comfort and Safety Measures",
+
+"Emergency Care",
+
+"Administration of Drugs",
+
+"Diagnostic Investigation",
+
+"Aseptic Techniques",
+
+"Unsafe Injection Safety",
+
+"Introduction to Healthcare Waste",
+
+"Legal Aspects of Nursing",
+
+"Nursing Care of Patients with Feeding/Elimination Problems",
+
+"Basic Life Support"
+
+],
+
+
+
+"Primary Health Care": [
+
+"Introduction to Primary Health Care",
+
+"The Community",
+
+"Cadre of Health Workers in PHC",
+
+"Community Mobilization",
+
+"Community Diagnosis",
+
+"Health Education",
+
+"Components of Primary Health Care",
+
+"Immunization Against Major Communicable Diseases",
+
+"Prevention and Control of Locally Endemic and Epidemic Diseases",
+
+"Promotion of Mental Health",
+
+"Maternal and Child Health Services",
+
+"Provision of Essential Drugs and Supplies",
+
+"Oral Hygiene and Eye Care",
+
+"Adolescence and Their Problems",
+
+"Referral System in PHC",
+
+"Care of the Aged in the Community",
+
+"Management of Occupational Health",
+
+"Management in Primary Health Care"
+
+],
+
+
+
+"Anatomy & Physiology": [
+
+"Introduction to Anatomy",
+
+"The Musculoskeletal System",
+
+"Blood and Cardiovascular System",
+
+"The Respiratory System",
+
+"The Digestive System",
+
+"The Integumentary System",
+
+"The Excretory System",
+
+"The Endocrine System",
+
+"The Female Reproductive System",
+
+"The Male Reproductive System",
+
+"Foetal Development"
+
+],
+
+
+
+"Medical/Surgical Nursing": [
+
+"Concepts and Terms in Medical-Surgical Nursing",
+
+"Management of Patients with Medical/Surgical Conditions",
+
+"Management of Patients with Medical/Surgical Conditions 2",
+
+"Common Situations That Threaten Adaptation",
+
+"Body Defense Mechanisms",
+
+"Diagnostic Measures",
+
+"Principles of Operating Room Nursing"
+
+],
+
+
+
+"Microbiology": [
+
+"Introduction to Microbiology",
+
+"Bacteria",
+
+"Viruses",
+
+"Fungi",
+
+"Parasites",
+
+"Immunology",
+
+"Sterilization & Disinfection",
+
+"Healthcare-Associated Infections"
+
+],
+
+
+
+"Pharmacology": [
+
+"Introduction",
+
+"Sources and Classification of Drugs",
+
+"Preparation of Drugs",
+
+"Routes of Drug Administration",
+
+"Mechanism of Drug Action",
+
+"National Drug Policy",
+
+"Drugs Used in Management of Other Health Conditions",
+
+"Patient Education and Counseling"
+
+]
+
+};
+
+
+
+/* =====================================================
+   CHECK LOGIN
+===================================================== */
+
+async function checkLogin() {
+
+    const {
+
+        data: { user },
+
+        error
+
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+    if (
+        error ||
+        !user
+    ) {
+
+        window.location.href =
+            "index.html";
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   LOAD QUESTIONS
+===================================================== */
+
+async function loadQuestions() {
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    loading.style.display =
+        "block";
+
+
+    const {
+
+        data,
+
+        error
+
+    } =
+        await supabaseClient
+            .from("questions")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+
+        loading.innerHTML =
+            "❌ Unable to load questions: " +
+            error.message;
+
+
+        showStatus(
+            "Unable to load questions: " +
+            error.message,
+            "error"
+        );
+
+
+        return;
+
+    }
+
+
+    allQuestions =
+        data || [];
+
+
+    loading.style.display =
+        "none";
+
+
+    updateStats();
+
+
+    updateTopicFilter();
+
+
+    filterQuestions();
+
+}
+
+
+
+/* =====================================================
+   UPDATE TOPIC FILTER
+===================================================== */
+
+function updateTopicFilter() {
+
+    const course =
+        document
+            .getElementById(
+                "courseFilter"
+            )
+            .value;
+
+
+    const topicFilter =
+        document
+            .getElementById(
+                "topicFilter"
+            );
+
+
+    topicFilter.innerHTML = `
+
+        <option value="">
+            All Topics
+        </option>
+
+    `;
+
+
+    let topics = [];
+
+
+    if (course) {
+
+        topics =
+            courseTopics[course] || [];
+
+    } else {
+
+        Object.values(
+            courseTopics
+        )
+        .forEach(
+            function(courseTopicList) {
+
+                topics =
+                    topics.concat(
+                        courseTopicList
+                    );
+
+            }
+        );
+
+    }
+
+
+    topics =
+        [...new Set(topics)];
+
+
+    topics.forEach(
+        function(topic) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                topic;
+
+
+            option.textContent =
+                topic;
+
+
+            topicFilter.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    filterQuestions();
+
+}
+
+
+
+/* =====================================================
+   FILTER QUESTIONS
+===================================================== */
+
+function filterQuestions() {
+
+    const course =
+        document
+            .getElementById(
+                "courseFilter"
+            )
+            .value;
+
+
+    const topic =
+        document
+            .getElementById(
+                "topicFilter"
+            )
+            .value;
+
+
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const filtered =
+        allQuestions.filter(
+            function(q) {
+
+                const matchesCourse =
+                    !course ||
+                    String(
+                        q.course || ""
+                    ) === course;
+
+
+                const matchesTopic =
+                    !topic ||
+                    String(
+                        q.topic || ""
+                    ) === topic;
+
+
+                const searchableText =
+
+                    String(
+                        q.question || ""
+                    ) +
+
+                    " " +
+
+                    String(
+                        q.option_a || ""
+                    ) +
+
+                    " " +
+
+                    String(
+                        q.option_b || ""
+                    ) +
+
+                    " " +
+
+                    String(
+                        q.option_c || ""
+                    ) +
+
+                    " " +
+
+                    String(
+                        q.option_d || ""
+                    );
+
+
+                const matchesSearch =
+                    !search ||
+                    searchableText
+                        .toLowerCase()
+                        .includes(search);
+
+
+                return (
+
+                    matchesCourse &&
+
+                    matchesTopic &&
+
+                    matchesSearch
+
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "filteredQuestions"
+        )
+        .textContent =
+            filtered.length;
+
+
+    displayQuestions(
+        filtered
+    );
+
+}
+
+
+
+/* =====================================================
+   DISPLAY QUESTIONS
+===================================================== */
+
+function displayQuestions(
+    questions
+) {
+
+    const container =
+        document.getElementById(
+            "questionsList"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    document
+        .getElementById(
+            "questionCount"
+        )
+        .textContent =
+            questions.length +
+            (
+                questions.length === 1
+                    ? " Question"
+                    : " Questions"
+            );
+
+
+    if (
+        questions.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <h2>
+                    📭 No Questions Found
+                </h2>
+
+                <p>
+                    No quiz questions match
+                    your selected filters.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    questions.forEach(
+        function(q, index) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "question-card";
+
+
+            const correct =
+                String(
+                    q.correct_answer || ""
+                )
+                .trim()
+                .toUpperCase();
+
+
+            card.innerHTML = `
+
+                <div class="question-top">
+
+                    <div class="question-number">
+
+                        Question ${index + 1}
+
+                    </div>
+
+
+                    <div class="course-badge">
+
+                        ${escapeHTML(
+                            q.course || ""
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="topic-badge">
+
+                    ${escapeHTML(
+                        q.topic ||
+                        "No Topic"
+                    )}
+
+                </div>
+
+
+                <div class="question-text">
+
+                    ${escapeHTML(
+                        q.question || ""
+                    )}
+
+                </div>
+
+
+                <div class="options">
+
+
+                    <div class="option ${
+                        correct === "A"
+                            ? "correct-option"
+                            : ""
+                    }">
+
+                        <strong>A.</strong>
+
+                        ${escapeHTML(
+                            q.option_a || ""
+                        )}
+
+                        ${
+                            correct === "A"
+                                ? `
+                                    <span
+                                        class="correct-label">
+
+                                        Correct Answer
+
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+
+
+                    <div class="option ${
+                        correct === "B"
+                            ? "correct-option"
+                            : ""
+                    }">
+
+                        <strong>B.</strong>
+
+                        ${escapeHTML(
+                            q.option_b || ""
+                        )}
+
+                        ${
+                            correct === "B"
+                                ? `
+                                    <span
+                                        class="correct-label">
+
+                                        Correct Answer
+
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+
+
+                    <div class="option ${
+                        correct === "C"
+                            ? "correct-option"
+                            : ""
+                    }">
+
+                        <strong>C.</strong>
+
+                        ${escapeHTML(
+                            q.option_c || ""
+                        )}
+
+                        ${
+                            correct === "C"
+                                ? `
+                                    <span
+                                        class="correct-label">
+
+                                        Correct Answer
+
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+
+
+                    <div class="option ${
+                        correct === "D"
+                            ? "correct-option"
+                            : ""
+                    }">
+
+                        <strong>D.</strong>
+
+                        ${escapeHTML(
+                            q.option_d || ""
+                        )}
+
+                        ${
+                            correct === "D"
+                                ? `
+                                    <span
+                                        class="correct-label">
+
+                                        Correct Answer
+
+                                    </span>
+                                  `
+                                : ""
+                        }
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="explanation-box">
+
+                    <strong>
+                        💡 Explanation
+                    </strong>
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        q.explanation ||
+                        "No explanation provided."
+                    )}
+
+                </div>
+
+
+                <div class="question-actions">
+
+
+                    <button
+                        class="action-btn edit-btn"
+                        onclick="editQuestion('${q.id}')">
+
+                        ✏️ Edit
+
+                    </button>
+
+
+                    <button
+                        class="action-btn delete-btn"
+                        onclick="deleteQuestion('${q.id}')">
+
+                        🗑️ Delete
+
+                    </button>
+
+
+                    <button
+                        class="action-btn preview-btn"
+                        onclick="previewQuestion('${q.id}')">
+
+                        👁️ Preview
+
+                    </button>
+
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   UPDATE STATS
+===================================================== */
+
+function updateStats() {
+
+    document
+        .getElementById(
+            "totalQuestions"
+        )
+        .textContent =
+            allQuestions.length;
+
+
+    const courses =
+        new Set();
+
+
+    const topics =
+        new Set();
+
+
+    allQuestions.forEach(
+        function(q) {
+
+            if (q.course) {
+
+                courses.add(
+                    q.course
+                );
+
+            }
+
+            if (q.topic) {
+
+                topics.add(
+                    q.topic
+                );
+
+            }
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "totalCourses"
+        )
+        .textContent =
+            courses.size;
+
+
+    document
+        .getElementById(
+            "totalTopics"
+        )
+        .textContent =
+            topics.size;
+
+}
+
+
+
+/* =====================================================
+   EDIT QUESTION
+===================================================== */
+
+function editQuestion(id) {
+
+    /*
+       The existing admin question manager
+       handles editing.
+
+       We send the administrator back there
+       with the question ID.
+    */
+
+    window.location.href =
+        "admin.html?edit=" +
+        encodeURIComponent(id);
+
+}
+
+
+
+/* =====================================================
+   DELETE QUESTION
+===================================================== */
+
+async function deleteQuestion(id) {
+
+    const question =
+        allQuestions.find(
+            function(q) {
+
+                return String(q.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if (!question) {
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+
+            "Are you sure you want to delete this question?\n\n" +
+
+            question.question
+
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    const {
+
+        error
+
+    } =
+        await supabaseClient
+            .from("questions")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
+
+
+    if (error) {
+
+        console.error(error);
+
+
+        showStatus(
+
+            "Unable to delete question: " +
+            error.message,
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    showStatus(
+
+        "✅ Question deleted successfully.",
+
+        "success"
+
+    );
+
+
+    await loadQuestions();
+
+}
+
+
+
+/* =====================================================
+   PREVIEW QUESTION
+===================================================== */
+
+function previewQuestion(id) {
+
+    const question =
+        allQuestions.find(
+            function(q) {
+
+                return String(q.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if (!question) {
+
+        return;
+
+    }
+
+
+    const correct =
+        String(
+            question.correct_answer || ""
+        )
+        .trim()
+        .toUpperCase();
+
+
+    const options = {
+
+        A: question.option_a,
+
+        B: question.option_b,
+
+        C: question.option_c,
+
+        D: question.option_d
+
+    };
+
+
+    let message =
+
+        "COURSE: " +
+        question.course +
+
+        "\n\n" +
+
+        "TOPIC: " +
+        question.topic +
+
+        "\n\n" +
+
+        question.question +
+
+        "\n\n";
+
+
+    message +=
+
+        "A. " +
+        options.A +
+
+        "\n" +
+
+        "B. " +
+        options.B +
+
+        "\n" +
+
+        "C. " +
+        options.C +
+
+        "\n" +
+
+        "D. " +
+        options.D +
+
+        "\n\n" +
+
+        "Correct Answer: " +
+        correct +
+
+        "\n\n" +
+
+        "Explanation:\n" +
+
+        (
+            question.explanation ||
+            "No explanation provided."
+        );
+
+
+    alert(message);
+
+}
+
+
+
+/* =====================================================
+   STATUS MESSAGE
+===================================================== */
+
+function showStatus(
+    message,
+    type
+) {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        message;
+
+
+    status.className =
+        type;
+
+
+    status.style.display =
+        "block";
+
+
+    setTimeout(
+        function() {
+
+            status.style.display =
+                "none";
+
+        },
+        4000
+    );
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goToAdmin() {
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout() {
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+async function startPage() {
+
+    const loggedIn =
+        await checkLogin();
+
+
+    if (!loggedIn) {
+
+        return;
+
+    }
+
+
+    await loadQuestions();
+
+}
+
+
+startPage();
+
+</script>
+
+
+</body>
+
+</html>
