@@ -89,6 +89,11 @@ header {
     cursor: pointer;
 }
 
+.logout:hover {
+
+    background: #f1f1f1;
+}
+
 .container {
 
     max-width: 1200px;
@@ -195,7 +200,7 @@ textarea:focus {
 
 textarea {
 
-    min-height: 100px;
+    min-height: 110px;
 
     resize: vertical;
 }
@@ -404,6 +409,8 @@ button {
     border-radius: 8px;
 
     border: 1px solid #e1e6ec;
+
+    line-height: 1.5;
 }
 
 .correct-option {
@@ -464,6 +471,8 @@ button {
     margin-bottom: 20px;
 
     font-weight: bold;
+
+    line-height: 1.5;
 }
 
 .success {
@@ -517,6 +526,8 @@ footer {
 
         flex-direction: column;
 
+        gap: 15px;
+
         text-align: center;
     }
 
@@ -540,13 +551,24 @@ footer {
         flex-direction: column;
     }
 
+    .questions-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -571,6 +593,7 @@ Logout
 </header>
 
 
+
 <div class="container">
 
 
@@ -582,14 +605,20 @@ Logout
 
 <p>
 Add, search, edit and delete questions
-for OGCONS Study Hub.
+for all OGCONS Study Hub courses.
 </p>
 
 </div>
 
 
+
 <div id="status"></div>
 
+
+
+<!-- =====================================================
+     ADD QUESTION FORM
+===================================================== -->
 
 <div class="form-card">
 
@@ -597,6 +626,9 @@ for OGCONS Study Hub.
 ➕ Add New Question
 </h2>
 
+
+
+<!-- COURSE -->
 
 <div class="form-group">
 
@@ -616,19 +648,9 @@ Select Course
 Foundations of Nursing
 </option>
 
-<option value="Pharmacology">
-Pharmacology
-</option>
-
-<option value="Microbiology">
-Microbiology
-</option>
-
 <option value="Primary Health Care">
 Primary Health Care
 </option>
-
-<!-- IMPORTANT -->
 
 <option value="Anatomy & Physiology">
 Anatomy & Physiology
@@ -638,10 +660,21 @@ Anatomy & Physiology
 Medical/Surgical Nursing
 </option>
 
+<option value="Microbiology">
+Microbiology
+</option>
+
+<option value="Pharmacology">
+Pharmacology
+</option>
+
 </select>
 
 </div>
 
+
+
+<!-- TOPIC -->
 
 <div class="form-group">
 
@@ -660,6 +693,9 @@ Select a course first
 </div>
 
 
+
+<!-- QUESTION -->
+
 <div class="form-group">
 
 <label>
@@ -669,12 +705,17 @@ Question
 <textarea
     id="question"
     placeholder="Enter the question">
+
 </textarea>
 
 </div>
 
 
+
+<!-- OPTIONS -->
+
 <div class="options-grid">
+
 
 <div class="form-group">
 
@@ -688,6 +729,7 @@ Option A
     placeholder="Enter option A">
 
 </div>
+
 
 
 <div class="form-group">
@@ -704,6 +746,7 @@ Option B
 </div>
 
 
+
 <div class="form-group">
 
 <label>
@@ -716,6 +759,7 @@ Option C
     placeholder="Enter option C">
 
 </div>
+
 
 
 <div class="form-group">
@@ -731,8 +775,12 @@ Option D
 
 </div>
 
+
 </div>
 
+
+
+<!-- CORRECT ANSWER -->
 
 <div class="form-group">
 
@@ -747,14 +795,20 @@ Select Correct Answer
 </option>
 
 <option value="A">A</option>
+
 <option value="B">B</option>
+
 <option value="C">C</option>
+
 <option value="D">D</option>
 
 </select>
 
 </div>
 
+
+
+<!-- EXPLANATION -->
 
 <div class="form-group">
 
@@ -765,9 +819,11 @@ Explanation
 <textarea
     id="explanation"
     placeholder="Explain why the answer is correct">
+
 </textarea>
 
 </div>
+
 
 
 <div class="button-row">
@@ -780,6 +836,7 @@ Explanation
 ➕ Add Question
 
 </button>
+
 
 <button
     class="secondary"
@@ -796,6 +853,11 @@ Cancel Edit
 </div>
 
 
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
 <div class="search-card">
 
 <h2>
@@ -810,6 +872,11 @@ Cancel Edit
 
 </div>
 
+
+
+<!-- =====================================================
+     QUESTION HEADER
+===================================================== -->
 
 <div class="questions-header">
 
@@ -828,6 +895,7 @@ Cancel Edit
 </div>
 
 
+
 <div id="loading">
 
 🔄 Loading questions...
@@ -835,10 +903,13 @@ Cancel Edit
 </div>
 
 
+
 <div id="questionsList"></div>
 
 
+
 </div>
+
 
 
 <footer>
@@ -848,19 +919,31 @@ OGCONS Study Hub © 2026
 </footer>
 
 
+
 <script>
+
+
+// =====================================================
+// SUPABASE
+// =====================================================
 
 const SUPABASE_URL =
 "https://bvetmmvpdotifusjkywd.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
+
 const supabaseClient =
 window.supabase.createClient(
+
     SUPABASE_URL,
+
     SUPABASE_PUBLISHABLE_KEY
+
 );
+
 
 
 let allQuestions = [];
@@ -868,150 +951,251 @@ let allQuestions = [];
 let editingId = null;
 
 
-/* =====================================================
-   COURSE TOPICS
-===================================================== */
+
+// =====================================================
+// EXACT COURSE TOPICS
+// =====================================================
 
 const courseTopics = {
 
-"Foundations of Nursing": [
 
-"Introduction to Nursing",
-"History of Nursing",
-"Nursing as a Profession",
-"Basic Nursing Concepts",
-"Nursing Process",
-"Health and Illness",
-"Admission and Discharge",
-"Vital Signs",
-"Bed Making",
-"Personal Hygiene",
-"Patient Comfort",
-"Patient Safety",
-"Nutrition and Feeding",
-"Elimination",
-"Medication Administration",
-"Pain Management",
-"Communication in Nursing",
-"Documentation and Reporting",
-"First Aid",
-"Basic Life Support"
+    // =================================================
+    // FOUNDATIONS OF NURSING
+    // =================================================
 
-],
+    "Foundations of Nursing": [
 
+        "Introduction to Nursing",
 
-"Pharmacology": [
+        "History of Nursing",
 
-"Introduction to Pharmacology",
-"General Principles of Pharmacology",
-"Routes of Drug Administration",
-"Drug Forms and Preparations",
-"Drug Absorption",
-"Drug Distribution",
-"Drug Metabolism",
-"Drug Excretion",
-"Drug Receptors",
-"Adverse Drug Reactions",
-"Drug Interactions",
-"Antibiotics",
-"Analgesics",
-"Antihypertensive Drugs",
-"Antidiabetic Drugs"
+        "Nursing as a Profession",
 
-],
+        "Basic Nursing Concepts",
 
+        "Nursing Process",
 
-"Microbiology": [
+        "Health and Illness",
 
-"Introduction to Microbiology",
-"Classification of Microorganisms",
-"Bacteria",
-"Viruses",
-"Fungi",
-"Protozoa",
-"Pathogenic Microorganisms",
-"Sterilization and Disinfection",
-"Infection Prevention and Control",
-"Immunity"
+        "Admission and Discharge",
 
-],
+        "Vital Signs",
+
+        "Bed Making",
+
+        "Personal Hygiene",
+
+        "Patient Comfort",
+
+        "Patient Safety",
+
+        "Nutrition and Feeding",
+
+        "Elimination",
+
+        "Medication Administration",
+
+        "Pain Management",
+
+        "Communication in Nursing",
+
+        "Documentation and Reporting",
+
+        "First Aid",
+
+        "Basic Life Support"
+
+    ],
 
 
-"Primary Health Care": [
 
-"Introduction to Primary Health Care",
-"The Community",
-"Cadre of Health Workers in PHC",
-"Community Mobilization",
-"Community Diagnosis",
-"Health Education",
-"Components of Primary Health Care",
-"Immunization Against Major Communicable Diseases",
-"Prevention and Control of Locally Endemic and Epidemic Diseases",
-"Promotion of Mental Health",
-"Maternal and Child Health Services",
-"Provision of Essential Drugs and Supplies",
-"Oral Hygiene and Eye Care",
-"Adolescence and Their Problems",
-"Referral System in PHC",
-"Care of the Aged in the Community",
-"Management of Occupational Health",
-"Management in Primary Health Care"
+    // =================================================
+    // PRIMARY HEALTH CARE
+    // =================================================
 
-],
+    "Primary Health Care": [
+
+        "Introduction to Primary Health Care",
+
+        "The Community",
+
+        "Cadre of Health Workers in PHC",
+
+        "Community Mobilization",
+
+        "Community Diagnosis",
+
+        "Health Education",
+
+        "Components of Primary Health Care",
+
+        "Immunization Against Major Communicable Diseases",
+
+        "Prevention and Control of Locally Endemic and Epidemic Diseases",
+
+        "Promotion of Mental Health",
+
+        "Maternal and Child Health Services",
+
+        "Provision of Essential Drugs and Supplies",
+
+        "Oral Hygiene and Eye Care",
+
+        "Adolescence and Their Problems",
+
+        "Referral System in PHC",
+
+        "Care of the Aged in the Community",
+
+        "Management of Occupational Health",
+
+        "Management in Primary Health Care"
+
+    ],
 
 
-/* IMPORTANT */
 
-"Anatomy & Physiology": [
+    // =================================================
+    // ANATOMY & PHYSIOLOGY
+    // =================================================
 
-"Introduction to Anatomy",
-"The Musculoskeletal System",
-"Blood and Cardiovascular System",
-"The Respiratory System",
-"The Digestive System",
-"The Integumentary System",
-"The Excretory System",
-"The Endocrine System",
-"The Female Reproductive System",
-"The Male Reproductive System",
-"Foetal Development"
+    "Anatomy & Physiology": [
 
-],
+        "Introduction to Anatomy",
+
+        "The Musculoskeletal System",
+
+        "Blood and Cardiovascular System",
+
+        "The Respiratory System",
+
+        "The Digestive System",
+
+        "The Integumentary System",
+
+        "The Excretory System",
+
+        "The Endocrine System",
+
+        "The Female Reproductive System",
+
+        "The Male Reproductive System",
+
+        "Foetal Development"
+
+    ],
 
 
-"Medical/Surgical Nursing": [
 
-"Concepts and Terms in Medical Surgical Nursing",
-"Management of Patients with Medical/Surgical Conditions",
-"Common Situations That Threaten Adaptation",
-"Body Defense Mechanisms",
-"Diagnostic Measures",
-"Principles of Operating Room Nursing"
+    // =================================================
+    // MEDICAL/SURGICAL NURSING
+    // EXACTLY FROM YOUR PAGE
+    // =================================================
 
-]
+    "Medical/Surgical Nursing": [
+
+        "Concepts and Terms in Medical-Surgical Nursing",
+
+        "Management of Patients with Medical/Surgical Conditions",
+
+        "Management of Patients with Medical/Surgical Conditions 2",
+
+        "Common Situations That Threaten Adaptation",
+
+        "Body Defense Mechanisms",
+
+        "Diagnostic Measures",
+
+        "Principles of Operating Room Nursing"
+
+    ],
+
+
+
+    // =================================================
+    // MICROBIOLOGY
+    // EXACTLY FROM YOUR PAGE
+    // =================================================
+
+    "Microbiology": [
+
+        "Introduction to Microbiology",
+
+        "Bacteria",
+
+        "Viruses",
+
+        "Fungi",
+
+        "Parasites",
+
+        "Immunology",
+
+        "Sterilization & Disinfection",
+
+        "Healthcare-Associated Infections"
+
+    ],
+
+
+
+    // =================================================
+    // PHARMACOLOGY
+    // EXACTLY FROM YOUR TOPIC LIST
+    // =================================================
+
+    "Pharmacology": [
+
+        "Introduction",
+
+        "Sources and Classification of Drugs",
+
+        "Preparation of Drugs",
+
+        "Routes of Drug Administration",
+
+        "Mechanism of Drug Action",
+
+        "National Drug Policy",
+
+        "Drugs Used in Management of Other Health Conditions",
+
+        "Patient Education and Counseling"
+
+    ]
 
 };
 
 
-/* =====================================================
-   UPDATE TOPICS
-===================================================== */
+
+// =====================================================
+// UPDATE TOPICS
+// =====================================================
 
 function updateTopics(selectedTopic = "") {
+
 
     const course =
         document.getElementById("course").value;
 
+
     const topicSelect =
         document.getElementById("topic");
 
-    topicSelect.innerHTML =
-        `<option value="">Select Topic</option>`;
+
+    topicSelect.innerHTML = `
+
+        <option value="">
+            Select Topic
+        </option>
+
+    `;
 
 
     if (!course) {
+
         return;
+
     }
 
 
@@ -1021,42 +1205,62 @@ function updateTopics(selectedTopic = "") {
 
     topics.forEach(function(topic) {
 
+
         const option =
             document.createElement("option");
 
-        option.value = topic;
 
-        option.textContent = topic;
+        option.value =
+            topic;
+
+
+        option.textContent =
+            topic;
+
 
         if (topic === selectedTopic) {
 
-            option.selected = true;
+            option.selected =
+                true;
 
         }
 
-        topicSelect.appendChild(option);
+
+        topicSelect.appendChild(
+            option
+        );
 
     });
 
 }
 
 
-/* =====================================================
-   CHECK LOGIN
-===================================================== */
+
+// =====================================================
+// CHECK LOGIN
+// =====================================================
 
 async function checkLogin() {
 
+
     const {
-        data: { user },
+
+        data: {
+            user
+        },
+
         error
+
     } =
         await supabaseClient
             .auth
             .getUser();
 
 
-    if (error || !user) {
+    if (
+        error ||
+        !user
+    ) {
 
         window.location.href =
             "index.html";
@@ -1065,30 +1269,43 @@ async function checkLogin() {
 
     }
 
+
     return true;
 
 }
 
 
-/* =====================================================
-   LOAD QUESTIONS
-===================================================== */
+
+// =====================================================
+// LOAD QUESTIONS
+// =====================================================
 
 async function loadQuestions() {
 
-    const loading =
-        document.getElementById("loading");
 
-    loading.style.display = "block";
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    loading.style.display =
+        "block";
 
 
     const {
+
         data,
+
         error
+
     } =
         await supabaseClient
+
             .from("questions")
+
             .select("*")
+
             .order(
                 "created_at",
                 {
@@ -1099,15 +1316,23 @@ async function loadQuestions() {
 
     if (error) {
 
+
         console.error(error);
 
+
         showStatus(
+
             "Unable to load questions: " +
             error.message,
+
             "error"
+
         );
 
-        loading.style.display = "none";
+
+        loading.style.display =
+            "none";
+
 
         return;
 
@@ -1129,11 +1354,15 @@ async function loadQuestions() {
 }
 
 
-/* =====================================================
-   DISPLAY QUESTIONS
-===================================================== */
 
-function displayQuestions(questions) {
+// =====================================================
+// DISPLAY QUESTIONS
+// =====================================================
+
+function displayQuestions(
+    questions
+) {
+
 
     const container =
         document.getElementById(
@@ -1141,21 +1370,31 @@ function displayQuestions(questions) {
         );
 
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
 
 
     document
-        .getElementById("questionCount")
+        .getElementById(
+            "questionCount"
+        )
         .textContent =
+
             questions.length +
+
             (
                 questions.length === 1
+
                     ? " Question"
+
                     : " Questions"
             );
 
 
-    if (questions.length === 0) {
+    if (
+        questions.length === 0
+    ) {
+
 
         container.innerHTML = `
 
@@ -1166,23 +1405,31 @@ function displayQuestions(questions) {
                 </h2>
 
                 <p style="margin-top:10px;">
-                    There are currently no questions.
+
+                    There are currently no
+                    questions.
+
                 </p>
 
             </div>
 
         `;
 
+
         return;
 
     }
 
 
+
     questions.forEach(
         function(q, index) {
 
+
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             card.className =
@@ -1197,6 +1444,7 @@ function displayQuestions(questions) {
                 .toUpperCase();
 
 
+
             card.innerHTML = `
 
                 <div class="question-top">
@@ -1206,6 +1454,7 @@ function displayQuestions(questions) {
                         Question ${index + 1}
 
                     </div>
+
 
                     <div class="course-badge">
 
@@ -1221,7 +1470,8 @@ function displayQuestions(questions) {
                 <div class="topic-badge">
 
                     ${escapeHTML(
-                        q.topic || "No Topic"
+                        q.topic ||
+                        "No Topic"
                     )}
 
                 </div>
@@ -1238,54 +1488,72 @@ function displayQuestions(questions) {
 
                 <div class="options">
 
+
                     <div class="option ${
                         correct === "A"
-                        ? "correct-option"
-                        : ""
+                            ? "correct-option"
+                            : ""
                     }">
 
                         <strong>A.</strong>
-                        ${escapeHTML(q.option_a || "")}
+
+                        ${escapeHTML(
+                            q.option_a || ""
+                        )}
 
                     </div>
+
 
 
                     <div class="option ${
                         correct === "B"
-                        ? "correct-option"
-                        : ""
+                            ? "correct-option"
+                            : ""
                     }">
 
                         <strong>B.</strong>
-                        ${escapeHTML(q.option_b || "")}
+
+                        ${escapeHTML(
+                            q.option_b || ""
+                        )}
 
                     </div>
+
 
 
                     <div class="option ${
                         correct === "C"
-                        ? "correct-option"
-                        : ""
+                            ? "correct-option"
+                            : ""
                     }">
 
                         <strong>C.</strong>
-                        ${escapeHTML(q.option_c || "")}
+
+                        ${escapeHTML(
+                            q.option_c || ""
+                        )}
 
                     </div>
+
 
 
                     <div class="option ${
                         correct === "D"
-                        ? "correct-option"
-                        : ""
+                            ? "correct-option"
+                            : ""
                     }">
 
                         <strong>D.</strong>
-                        ${escapeHTML(q.option_d || "")}
+
+                        ${escapeHTML(
+                            q.option_d || ""
+                        )}
 
                     </div>
 
+
                 </div>
+
 
 
                 <div class="explanation-box">
@@ -1304,7 +1572,9 @@ function displayQuestions(questions) {
                 </div>
 
 
+
                 <div class="question-actions">
+
 
                     <button
                         class="edit-btn"
@@ -1315,6 +1585,7 @@ function displayQuestions(questions) {
                     </button>
 
 
+
                     <button
                         class="delete-btn"
                         onclick="deleteQuestion('${q.id}')">
@@ -1323,12 +1594,15 @@ function displayQuestions(questions) {
 
                     </button>
 
+
                 </div>
 
             `;
 
 
-            container.appendChild(card);
+            container.appendChild(
+                card
+            );
 
         }
     );
@@ -1336,15 +1610,19 @@ function displayQuestions(questions) {
 }
 
 
-/* =====================================================
-   SEARCH
-===================================================== */
+
+// =====================================================
+// SEARCH
+// =====================================================
 
 function filterQuestions() {
 
+
     const search =
         document
-            .getElementById("searchInput")
+            .getElementById(
+                "searchInput"
+            )
             .value
             .toLowerCase()
             .trim();
@@ -1352,7 +1630,9 @@ function filterQuestions() {
 
     if (!search) {
 
-        displayQuestions(allQuestions);
+        displayQuestions(
+            allQuestions
+        );
 
         return;
 
@@ -1363,47 +1643,74 @@ function filterQuestions() {
         allQuestions.filter(
             function(q) {
 
+
                 return (
 
-                    String(q.question || "")
-                        .toLowerCase()
-                        .includes(search)
+                    String(
+                        q.question || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
 
                     ||
 
-                    String(q.course || "")
-                        .toLowerCase()
-                        .includes(search)
+
+                    String(
+                        q.course || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
 
                     ||
 
-                    String(q.topic || "")
-                        .toLowerCase()
-                        .includes(search)
+
+                    String(
+                        q.topic || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
 
                     ||
 
-                    String(q.option_a || "")
-                        .toLowerCase()
-                        .includes(search)
+
+                    String(
+                        q.option_a || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
 
                     ||
 
-                    String(q.option_b || "")
-                        .toLowerCase()
-                        .includes(search)
+
+                    String(
+                        q.option_b || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
 
                     ||
 
-                    String(q.option_c || "")
-                        .toLowerCase()
-                        .includes(search)
+
+                    String(
+                        q.option_c || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
 
                     ||
 
-                    String(q.option_d || "")
-                        .toLowerCase()
-                        .includes(search)
+
+                    String(
+                        q.option_d || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
 
                 );
 
@@ -1411,122 +1718,191 @@ function filterQuestions() {
         );
 
 
-    displayQuestions(filtered);
+    displayQuestions(
+        filtered
+    );
 
 }
 
 
-/* =====================================================
-   SAVE QUESTION
-===================================================== */
+
+// =====================================================
+// SAVE QUESTION
+// =====================================================
 
 async function saveQuestion() {
 
+
     const course =
-        document.getElementById("course").value;
-
-    const topic =
-        document.getElementById("topic").value;
-
-    const question =
-        document.getElementById("question")
-            .value
-            .trim();
-
-    const option_a =
-        document.getElementById("option_a")
-            .value
-            .trim();
-
-    const option_b =
-        document.getElementById("option_b")
-            .value
-            .trim();
-
-    const option_c =
-        document.getElementById("option_c")
-            .value
-            .trim();
-
-    const option_d =
-        document.getElementById("option_d")
-            .value
-            .trim();
-
-    const correct_answer =
-        document.getElementById("correct_answer")
+        document
+            .getElementById("course")
             .value;
 
-    const explanation =
-        document.getElementById("explanation")
+
+    const topic =
+        document
+            .getElementById("topic")
+            .value;
+
+
+    const question =
+        document
+            .getElementById("question")
             .value
             .trim();
+
+
+    const option_a =
+        document
+            .getElementById("option_a")
+            .value
+            .trim();
+
+
+    const option_b =
+        document
+            .getElementById("option_b")
+            .value
+            .trim();
+
+
+    const option_c =
+        document
+            .getElementById("option_c")
+            .value
+            .trim();
+
+
+    const option_d =
+        document
+            .getElementById("option_d")
+            .value
+            .trim();
+
+
+    const correct_answer =
+        document
+            .getElementById(
+                "correct_answer"
+            )
+            .value;
+
+
+    const explanation =
+        document
+            .getElementById("explanation")
+            .value
+            .trim();
+
 
 
     if (
+
         !course ||
+
         !topic ||
+
         !question ||
+
         !option_a ||
+
         !option_b ||
+
         !option_c ||
+
         !option_d ||
+
         !correct_answer
+
     ) {
 
+
         showStatus(
+
             "Please complete all required fields.",
+
             "error"
+
         );
+
 
         return;
 
     }
 
 
+
     const questionData = {
 
-        course: course,
+        course:
+            course,
 
-        topic: topic,
+        topic:
+            topic,
 
-        question: question,
+        question:
+            question,
 
-        option_a: option_a,
+        option_a:
+            option_a,
 
-        option_b: option_b,
+        option_b:
+            option_b,
 
-        option_c: option_c,
+        option_c:
+            option_c,
 
-        option_d: option_d,
+        option_d:
+            option_d,
 
-        correct_answer: correct_answer,
+        correct_answer:
+            correct_answer,
 
-        explanation: explanation
+        explanation:
+            explanation
 
     };
 
 
-    /* EDIT */
+
+    // =================================================
+    // EDIT EXISTING QUESTION
+    // =================================================
 
     if (editingId) {
 
+
         const {
+
             error
+
         } =
             await supabaseClient
+
                 .from("questions")
-                .update(questionData)
-                .eq("id", editingId);
+
+                .update(
+                    questionData
+                )
+
+                .eq(
+                    "id",
+                    editingId
+                );
 
 
         if (error) {
 
+
             showStatus(
+
                 "Unable to update question: " +
                 error.message,
+
                 "error"
+
             );
+
 
             return;
 
@@ -1534,52 +1910,80 @@ async function saveQuestion() {
 
 
         showStatus(
+
             "✅ Question updated successfully.",
+
             "success"
+
         );
 
 
-        editingId = null;
+        editingId =
+            null;
 
 
         resetEditMode();
 
 
+        clearForm();
+
+
         await loadQuestions();
+
 
         return;
 
     }
 
 
-    /* ADD */
+
+    // =================================================
+    // ADD NEW QUESTION
+    // =================================================
 
     const {
+
         error
+
     } =
         await supabaseClient
+
             .from("questions")
-            .insert([questionData]);
+
+            .insert([
+                questionData
+            ]);
+
 
 
     if (error) {
 
+
         console.error(error);
 
+
         showStatus(
+
             "Unable to add question: " +
             error.message,
+
             "error"
+
         );
+
 
         return;
 
     }
 
 
+
     showStatus(
+
         "✅ Question added successfully.",
+
         "success"
+
     );
 
 
@@ -1591,20 +1995,26 @@ async function saveQuestion() {
 }
 
 
-/* =====================================================
-   EDIT
-===================================================== */
+
+// =====================================================
+// EDIT QUESTION
+// =====================================================
 
 function editQuestion(id) {
 
+
     const question =
         allQuestions.find(
-            q => String(q.id) === String(id)
+            q =>
+                String(q.id) ===
+                String(id)
         );
 
 
     if (!question) {
+
         return;
+
     }
 
 
@@ -1612,209 +2022,373 @@ function editQuestion(id) {
         question.id;
 
 
+
     document
-        .getElementById("formTitle")
+        .getElementById(
+            "formTitle"
+        )
         .textContent =
-        "✏️ Edit Question";
+
+            "✏️ Edit Question";
+
 
 
     document
-        .getElementById("saveButton")
+        .getElementById(
+            "saveButton"
+        )
         .textContent =
-        "💾 Update Question";
+
+            "💾 Update Question";
+
 
 
     document
-        .getElementById("cancelButton")
+        .getElementById(
+            "cancelButton"
+        )
         .style.display =
-        "inline-block";
+
+            "inline-block";
+
 
 
     document
-        .getElementById("course")
+        .getElementById(
+            "course"
+        )
         .value =
-        question.course || "";
+
+            question.course ||
+            "";
+
 
 
     updateTopics(
-        question.topic || ""
+        question.topic ||
+        ""
     );
 
 
-    document
-        .getElementById("question")
-        .value =
-        question.question || "";
-
 
     document
-        .getElementById("option_a")
+        .getElementById(
+            "question"
+        )
         .value =
-        question.option_a || "";
 
+            question.question ||
+            "";
 
-    document
-        .getElementById("option_b")
-        .value =
-        question.option_b || "";
 
 
     document
-        .getElementById("option_c")
+        .getElementById(
+            "option_a"
+        )
         .value =
-        question.option_c || "";
+
+            question.option_a ||
+            "";
+
 
 
     document
-        .getElementById("option_d")
+        .getElementById(
+            "option_b"
+        )
         .value =
-        question.option_d || "";
+
+            question.option_b ||
+            "";
+
 
 
     document
-        .getElementById("correct_answer")
+        .getElementById(
+            "option_c"
+        )
         .value =
-        question.correct_answer || "";
+
+            question.option_c ||
+            "";
+
 
 
     document
-        .getElementById("explanation")
+        .getElementById(
+            "option_d"
+        )
         .value =
-        question.explanation || "";
+
+            question.option_d ||
+            "";
+
+
+
+    document
+        .getElementById(
+            "correct_answer"
+        )
+        .value =
+
+            question.correct_answer ||
+            "";
+
+
+
+    document
+        .getElementById(
+            "explanation"
+        )
+        .value =
+
+            question.explanation ||
+            "";
+
 
 
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
 
 }
 
 
-/* =====================================================
-   CANCEL EDIT
-===================================================== */
+
+// =====================================================
+// CANCEL EDIT
+// =====================================================
 
 function cancelEdit() {
 
-    editingId = null;
+
+    editingId =
+        null;
+
 
     resetEditMode();
+
 
     clearForm();
 
 }
 
 
+
+// =====================================================
+// RESET EDIT MODE
+// =====================================================
+
 function resetEditMode() {
 
+
     document
-        .getElementById("formTitle")
+        .getElementById(
+            "formTitle"
+        )
         .textContent =
-        "➕ Add New Question";
+
+            "➕ Add New Question";
 
 
     document
-        .getElementById("saveButton")
+        .getElementById(
+            "saveButton"
+        )
         .textContent =
-        "➕ Add Question";
+
+            "➕ Add Question";
 
 
     document
-        .getElementById("cancelButton")
+        .getElementById(
+            "cancelButton"
+        )
         .style.display =
-        "none";
+
+            "none";
 
 }
 
 
-/* =====================================================
-   CLEAR
-===================================================== */
+
+// =====================================================
+// CLEAR FORM
+// =====================================================
 
 function clearForm() {
 
-    document.getElementById("course").value = "";
 
-    document.getElementById("topic").innerHTML = `
+    document
+        .getElementById(
+            "course"
+        )
+        .value =
+            "";
 
-        <option value="">
-            Select a course first
-        </option>
 
-    `;
+    document
+        .getElementById(
+            "topic"
+        )
+        .innerHTML = `
 
-    document.getElementById("question").value = "";
+            <option value="">
 
-    document.getElementById("option_a").value = "";
+                Select a course first
 
-    document.getElementById("option_b").value = "";
+            </option>
 
-    document.getElementById("option_c").value = "";
+        `;
 
-    document.getElementById("option_d").value = "";
 
-    document.getElementById("correct_answer").value = "";
+    document
+        .getElementById(
+            "question"
+        )
+        .value =
+            "";
 
-    document.getElementById("explanation").value = "";
+
+    document
+        .getElementById(
+            "option_a"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "option_b"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "option_c"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "option_d"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "correct_answer"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "explanation"
+        )
+        .value =
+            "";
 
 }
 
 
-/* =====================================================
-   DELETE
-===================================================== */
+
+// =====================================================
+// DELETE QUESTION
+// =====================================================
 
 async function deleteQuestion(id) {
 
+
     const question =
         allQuestions.find(
-            q => String(q.id) === String(id)
+            q =>
+                String(q.id) ===
+                String(id)
         );
 
 
     if (!question) {
+
         return;
+
     }
 
 
     const confirmed =
         confirm(
+
             "Are you sure you want to delete this question?\n\n" +
+
             question.question
+
         );
 
 
     if (!confirmed) {
+
         return;
+
     }
 
 
+
     const {
+
         error
+
     } =
         await supabaseClient
+
             .from("questions")
+
             .delete()
-            .eq("id", id);
+
+            .eq(
+                "id",
+                id
+            );
+
 
 
     if (error) {
 
+
         showStatus(
+
             "Unable to delete question: " +
             error.message,
+
             "error"
+
         );
+
 
         return;
 
     }
 
 
+
     showStatus(
+
         "✅ Question deleted successfully.",
+
         "success"
+
     );
 
 
@@ -1823,14 +2397,21 @@ async function deleteQuestion(id) {
 }
 
 
-/* =====================================================
-   STATUS
-===================================================== */
 
-function showStatus(message, type) {
+// =====================================================
+// STATUS MESSAGE
+// =====================================================
+
+function showStatus(
+    message,
+    type
+) {
+
 
     const status =
-        document.getElementById("status");
+        document.getElementById(
+            "status"
+        );
 
 
     status.textContent =
@@ -1845,25 +2426,33 @@ function showStatus(message, type) {
         "block";
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        status.style.display =
-            "none";
+            status.style.display =
+                "none";
 
-    }, 4000);
+        },
+        4000
+    );
 
 }
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
 
 function escapeHTML(value) {
 
+
     if (
+
         value === null ||
+
         value === undefined
+
     ) {
 
         return "";
@@ -1873,24 +2462,41 @@ function escapeHTML(value) {
 
     return String(value)
 
-        .replace(/&/g, "&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-        .replace(/</g, "&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-        .replace(/>/g, "&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-        .replace(/"/g, "&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        .replace(/'/g, "&#039;");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+
+// =====================================================
+// LOGOUT
+// =====================================================
 
 async function logout() {
+
 
     await supabaseClient
         .auth
@@ -1903,18 +2509,22 @@ async function logout() {
 }
 
 
-/* =====================================================
-   START
-===================================================== */
+
+// =====================================================
+// START ADMIN
+// =====================================================
 
 async function startAdmin() {
+
 
     const loggedIn =
         await checkLogin();
 
 
     if (!loggedIn) {
+
         return;
+
     }
 
 
