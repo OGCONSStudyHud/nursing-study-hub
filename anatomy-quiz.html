@@ -812,12 +812,14 @@ async function loadQuestions() {
     // ---------------------------------------------
 
     /*
-       IMPORTANT FIX:
+       IMPORTANT:
 
-       We use the EXACT course name that
-       your Admin Dashboard stores:
+       The Admin Quiz Dashboard saves
+       the course name inside the
+       "subject" column of the questions table.
 
-       "Anatomy & Physiology"
+       Therefore the student quiz must
+       also search the "subject" column.
     */
 
     const {
@@ -831,7 +833,7 @@ async function loadQuestions() {
             .select("*")
 
             .eq(
-                "course",
+                "subject",
                 "Anatomy & Physiology"
             )
 
