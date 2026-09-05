@@ -10,6 +10,8 @@
 
 <title>OGCONS Study Hub - Pharmacology Notes</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 * {
@@ -239,6 +241,21 @@ header h1 {
     color: #dc3545;
 }
 
+#loading {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    color: #18a058;
+
+    font-weight: bold;
+}
+
 footer {
 
     text-align: center;
@@ -269,6 +286,7 @@ footer {
 
         text-align: center;
     }
+
 }
 
 </style>
@@ -301,6 +319,18 @@ class="back">
 </a>
 
 
+<!-- LOADING MESSAGE -->
+
+<div
+id="loading">
+
+Loading note...
+
+</div>
+
+
+<!-- ERROR MESSAGE -->
+
 <div
 id="error"
 style="display:none;">
@@ -308,9 +338,12 @@ style="display:none;">
 </div>
 
 
+<!-- NOTE CARD -->
+
 <div
 class="note-card"
-id="noteCard">
+id="noteCard"
+style="display:none;">
 
 
 <div class="topic-title">
@@ -365,6 +398,35 @@ OGCONS Study Hub © 2026
 
 <script>
 
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
+
+const SUPABASE_URL =
+"https://bvetmmvpdotifusjkywd.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+// ==========================================
+// COURSE
+// ==========================================
+
+const COURSE =
+"Pharmacology";
+
+
+// ==========================================
+// GET TOPIC FROM URL
+// ==========================================
+
 const urlParams =
 new URLSearchParams(
     window.location.search
@@ -373,6 +435,10 @@ new URLSearchParams(
 const topic =
 urlParams.get("topic");
 
+
+// ==========================================
+// ELEMENTS
+// ==========================================
 
 const topicTitle =
 document.getElementById(
@@ -389,32 +455,85 @@ document.getElementById(
     "quizLink"
 );
 
+const noteCard =
+document.getElementById(
+    "noteCard"
+);
+
 const error =
 document.getElementById(
     "error"
 );
 
+const loading =
+document.getElementById(
+    "loading"
+);
 
-if (!topic) {
 
-    document
-        .getElementById("noteCard")
-        .style.display = "none";
+// ==========================================
+// NORMALIZE TEXT
+// ==========================================
 
-    error.style.display = "block";
+function normalizeText(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+
+}
+
+
+// ==========================================
+// SHOW ERROR
+// ==========================================
+
+function showError(title, message) {
+
+    loading.style.display =
+        "none";
+
+    noteCard.style.display =
+        "none";
+
+    error.style.display =
+        "block";
 
     error.innerHTML = `
 
         <h2>
-        ⚠️ No Topic Selected
+        ${title}
         </h2>
 
         <p style="margin-top:10px;">
-        Please return to Pharmacology and
-        select a topic.
+        ${message}
         </p>
 
     `;
+
+}
+
+
+// ==========================================
+// CHECK TOPIC
+// ==========================================
+
+if (!topic) {
+
+    showError(
+        "⚠️ No Topic Selected",
+        "Please return to Pharmacology and select a topic."
+    );
 
 } else {
 
@@ -430,823 +549,154 @@ if (!topic) {
 }
 
 
-function loadNote(topic) {
+// ==========================================
+// LOAD NOTE FROM SUPABASE
+// ==========================================
 
-    let html = "";
+async function loadNote(selectedTopic) {
 
+    loading.style.display =
+        "block";
 
-    // =========================================
-    // INTRODUCTION
-    // =========================================
+    try {
 
-    if (topic === "Introduction") {
+        const {
+            data,
+            error: supabaseError
+        } = await supabaseClient
 
-        html = `
+            .from("notes")
 
-        <div class="note-section">
+            .select(
+                "course, topic, title, content"
+            )
 
-        <h3>Meaning of Pharmacology</h3>
-
-        <p>
-
-        Pharmacology is the scientific study of
-        drugs and their effects on living organisms.
-        It deals with the source, properties, actions,
-        uses, side effects and fate of drugs in the body.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>What is a Drug?</h3>
-
-        <p>
-
-        A drug is a substance that is used to prevent,
-        diagnose, treat or relieve disease or abnormal
-        conditions in the body.
-
-        </p>
-
-        <div class="highlight">
-
-        <strong>Remember:</strong>
-
-        A drug can produce a desired therapeutic effect,
-        but it may also produce unwanted effects.
-
-        </div>
-
-        </div>
+            .eq(
+                "course",
+                COURSE
+            );
 
 
-        <div class="note-section">
+        // ==================================
+        // SUPABASE ERROR
+        // ==================================
 
-        <h3>Branches of Pharmacology</h3>
+        if (supabaseError) {
 
-        <ul>
+            console.error(
+                "Supabase error:",
+                supabaseError
+            );
 
-        <li>
-        <strong>Pharmacokinetics:</strong>
-        What the body does to the drug.
-        </li>
+            showError(
+                "⚠️ Unable to Load Note",
+                "There was a problem connecting to the notes database."
+            );
 
-        <li>
-        <strong>Pharmacodynamics:</strong>
-        What the drug does to the body.
-        </li>
+            return;
 
-        <li>
-        <strong>Pharmacotherapeutics:</strong>
-        Use of drugs in the prevention and treatment of disease.
-        </li>
-
-        <li>
-        <strong>Toxicology:</strong>
-        Study of harmful effects of chemicals and drugs.
-        </li>
-
-        </ul>
-
-        </div>
+        }
 
 
-        <div class="note-section">
+        // ==================================
+        // FIND SELECTED TOPIC
+        // ==================================
 
-        <h3>Importance of Pharmacology to Nursing</h3>
+        const wantedTopic =
+            normalizeText(
+                selectedTopic
+            );
 
-        <ul>
 
-        <li>Safe administration of medicines.</li>
+        const selectedNote =
+            (data || []).find(
+                note =>
+                    normalizeText(
+                        note.topic
+                    ) === wantedTopic
+            );
 
-        <li>Recognition of adverse drug reactions.</li>
 
-        <li>Patient education about medications.</li>
+        // ==================================
+        // NOTE NOT FOUND
+        // ==================================
 
-        <li>Monitoring therapeutic effects.</li>
+        if (!selectedNote) {
 
-        <li>Prevention of medication errors.</li>
+            showError(
+                "📚 Note Not Available",
+                `A note for "${selectedTopic}" has not been added yet.`
+            );
 
-        </ul>
+            return;
 
-        </div>
+        }
 
-        `;
+
+        // ==================================
+        // DISPLAY NOTE
+        // ==================================
+
+        loading.style.display =
+            "none";
+
+        error.style.display =
+            "none";
+
+        noteCard.style.display =
+            "block";
+
+
+        topicTitle.textContent =
+            selectedNote.title ||
+            selectedNote.topic ||
+            selectedTopic;
+
+
+        noteContent.innerHTML =
+            selectedNote.content || `
+
+                <div class="note-section">
+
+                    <h3>
+                    No Content Available
+                    </h3>
+
+                    <p>
+                    This note has been created,
+                    but no content has been added yet.
+                    </p>
+
+                </div>
+
+            `;
+
+
+        // ==================================
+        // QUIZ LINK
+        // ==================================
+
+        quizLink.href =
+            "pharmacology-quiz.html?topic=" +
+            encodeURIComponent(
+                selectedNote.topic ||
+                selectedTopic
+            );
+
+
+    } catch (err) {
+
+        console.error(
+            "Unexpected error:",
+            err
+        );
+
+        showError(
+            "⚠️ Something Went Wrong",
+            "The note could not be loaded. Please try again."
+        );
 
     }
-
-
-    // =========================================
-    // SOURCES AND CLASSIFICATION
-    // =========================================
-
-    else if (
-        topic ===
-        "Sources and Classification of Drugs"
-    ) {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>Sources of Drugs</h3>
-
-        <p>
-        Drugs can be obtained from natural sources
-        or produced synthetically.
-        </p>
-
-        <h4>1. Plant Sources</h4>
-
-        <p>
-        Some drugs are obtained from plants.
-        Examples include digitalis and some alkaloids.
-        </p>
-
-        <h4>2. Animal Sources</h4>
-
-        <p>
-        Some medicinal substances are obtained from
-        animals or animal products.
-        </p>
-
-        <h4>3. Mineral Sources</h4>
-
-        <p>
-        Some drugs and medicinal substances come
-        from minerals.
-        </p>
-
-        <h4>4. Microorganisms</h4>
-
-        <p>
-        Some drugs, especially certain antibiotics,
-        are obtained from microorganisms.
-        </p>
-
-        <h4>5. Synthetic Sources</h4>
-
-        <p>
-        Drugs can be manufactured through chemical
-        synthesis in laboratories.
-        </p>
-
-        <h4>6. Semi-synthetic Sources</h4>
-
-        <p>
-        These drugs are produced by chemically
-        modifying naturally occurring substances.
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Classification of Drugs</h3>
-
-        <p>
-        Drugs may be classified according to different
-        criteria.
-        </p>
-
-        <ul>
-
-        <li>
-        Classification according to source.
-        </li>
-
-        <li>
-        Classification according to therapeutic use.
-        </li>
-
-        <li>
-        Classification according to pharmacological action.
-        </li>
-
-        <li>
-        Classification according to chemical structure.
-        </li>
-
-        <li>
-        Classification according to body system affected.
-        </li>
-
-        </ul>
-
-        </div>
-
-        `;
-
-    }
-
-
-    // =========================================
-    // PREPARATION OF DRUGS
-    // =========================================
-
-    else if (
-        topic === "Preparation of Drugs"
-    ) {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>Meaning</h3>
-
-        <p>
-
-        Drug preparation refers to the physical form
-        in which a drug is produced and supplied for
-        administration to a patient.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Common Drug Preparations</h3>
-
-        <h4>Tablets</h4>
-
-        <p>
-        Solid preparations intended to be swallowed
-        or used through other appropriate routes.
-        </p>
-
-        <h4>Capsules</h4>
-
-        <p>
-        Drugs enclosed in a soluble shell.
-        </p>
-
-        <h4>Solutions</h4>
-
-        <p>
-        Liquid preparations in which the drug is
-        completely dissolved.
-        </p>
-
-        <h4>Suspensions</h4>
-
-        <p>
-        Liquid preparations containing finely divided
-        drug particles that are not completely dissolved.
-        </p>
-
-        <h4>Syrups</h4>
-
-        <p>
-        Sweetened liquid preparations containing
-        medicinal substances.
-        </p>
-
-        <h4>Injections</h4>
-
-        <p>
-        Sterile preparations administered by injection,
-        such as intravenous, intramuscular or subcutaneous
-        routes.
-        </p>
-
-        <h4>Creams and Ointments</h4>
-
-        <p>
-        Semi-solid preparations usually applied to
-        the skin or other appropriate surfaces.
-        </p>
-
-        </div>
-
-
-        <div class="warning">
-
-        <strong>Nursing point:</strong>
-
-        Always check the drug name, strength,
-        formulation, expiry date and prescribed dose
-        before administration.
-
-        </div>
-
-        `;
-
-    }
-
-
-    // =========================================
-    // ROUTES
-    // =========================================
-
-    else if (
-        topic ===
-        "Routes of Drug Administration"
-    ) {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>Meaning</h3>
-
-        <p>
-
-        The route of drug administration is the path
-        through which a drug is introduced into the body.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Enteral Routes</h3>
-
-        <ul>
-
-        <li>
-        <strong>Oral:</strong>
-        Drug is swallowed and absorbed through the
-        gastrointestinal tract.
-        </li>
-
-        <li>
-        <strong>Sublingual:</strong>
-        Drug is placed under the tongue.
-        </li>
-
-        <li>
-        <strong>Rectal:</strong>
-        Drug is administered through the rectum.
-        </li>
-
-        </ul>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Parenteral Routes</h3>
-
-        <ul>
-
-        <li>
-        <strong>Intravenous (IV):</strong>
-        Drug is administered directly into a vein.
-        </li>
-
-        <li>
-        <strong>Intramuscular (IM):</strong>
-        Drug is injected into a muscle.
-        </li>
-
-        <li>
-        <strong>Subcutaneous (SC):</strong>
-        Drug is injected into the tissue beneath the skin.
-        </li>
-
-        <li>
-        <strong>Intradermal:</strong>
-        Drug is injected into the dermis.
-        </li>
-
-        </ul>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Other Routes</h3>
-
-        <ul>
-
-        <li>Topical</li>
-
-        <li>Transdermal</li>
-
-        <li>Inhalational</li>
-
-        <li>Ophthalmic</li>
-
-        <li>Otic</li>
-
-        <li>Nasal</li>
-
-        <li>Vaginal</li>
-
-        </ul>
-
-        </div>
-
-        `;
-
-    }
-
-
-    // =========================================
-    // MECHANISM
-    // =========================================
-
-    else if (
-        topic ===
-        "Mechanism of Drug Action"
-    ) {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>Meaning</h3>
-
-        <p>
-
-        Mechanism of drug action refers to the way
-        a drug produces its effect in the body.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Drug Receptors</h3>
-
-        <p>
-
-        Many drugs produce their effects by binding
-        to specific receptors on or inside cells.
-
-        </p>
-
-        <div class="highlight">
-
-        Drug + Receptor → Drug-Receptor Interaction → Biological Effect
-
-        </div>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Agonists</h3>
-
-        <p>
-
-        An agonist is a drug that binds to a receptor
-        and activates it to produce a response.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Antagonists</h3>
-
-        <p>
-
-        An antagonist binds to a receptor and prevents
-        or reduces the action of an agonist or another
-        substance.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Other Mechanisms</h3>
-
-        <ul>
-
-        <li>
-        Enzyme inhibition
-        </li>
-
-        <li>
-        Ion channel modification
-        </li>
-
-        <li>
-        Transporter inhibition
-        </li>
-
-        <li>
-        Alteration of cell membrane function
-        </li>
-
-        </ul>
-
-        </div>
-
-        `;
-
-    }
-
-
-    // =========================================
-    // NATIONAL DRUG POLICY
-    // =========================================
-
-    else if (
-        topic === "National Drug Policy"
-    ) {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>Meaning</h3>
-
-        <p>
-
-        A national drug policy is a framework developed
-        by a country to guide the availability, quality,
-        safety, affordability and rational use of medicines.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Importance</h3>
-
-        <ul>
-
-        <li>
-        Promotes access to essential medicines.
-        </li>
-
-        <li>
-        Promotes safe and effective use of medicines.
-        </li>
-
-        <li>
-        Helps maintain medicine quality.
-        </li>
-
-        <li>
-        Encourages rational prescribing and use.
-        </li>
-
-        <li>
-        Helps reduce inappropriate use of medicines.
-        </li>
-
-        </ul>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Essential Medicines</h3>
-
-        <p>
-
-        Essential medicines are medicines that satisfy
-        the priority health-care needs of a population.
-
-        </p>
-
-        </div>
-
-        `;
-
-    }
-
-
-    // =========================================
-    // OTHER HEALTH CONDITIONS
-    // =========================================
-
-    else if (
-        topic ===
-        "Drugs Used in Management of Other Health Conditions"
-    ) {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>Introduction</h3>
-
-        <p>
-
-        Different health conditions require different
-        groups of medicines. The choice of drug depends
-        on the patient's condition, diagnosis, age,
-        allergies, other medicines and other clinical factors.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Examples of Drug Groups</h3>
-
-        <ul>
-
-        <li>
-        <strong>Analgesics:</strong>
-        Used to relieve pain.
-        </li>
-
-        <li>
-        <strong>Antipyretics:</strong>
-        Used to reduce fever.
-        </li>
-
-        <li>
-        <strong>Antibiotics:</strong>
-        Used to treat susceptible bacterial infections.
-        </li>
-
-        <li>
-        <strong>Antihypertensives:</strong>
-        Used in the management of hypertension.
-        </li>
-
-        <li>
-        <strong>Antidiabetic drugs:</strong>
-        Used in the management of diabetes.
-        </li>
-
-        <li>
-        <strong>Anti-inflammatory drugs:</strong>
-        Used to reduce inflammation in appropriate conditions.
-        </li>
-
-        </ul>
-
-        </div>
-
-
-        <div class="warning">
-
-        Drug selection and dosing should be based on
-        the patient's prescription and appropriate
-        clinical guidance.
-
-        </div>
-
-        `;
-
-    }
-
-
-    // =========================================
-    // PATIENT EDUCATION
-    // =========================================
-
-    else if (
-        topic ===
-        "Patient Education and Counseling"
-    ) {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>Meaning</h3>
-
-        <p>
-
-        Patient education and counseling involve providing
-        patients with understandable information about
-        their medicines so that they can use them safely
-        and effectively.
-
-        </p>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Important Information to Explain</h3>
-
-        <ul>
-
-        <li>
-        Name of the medicine.
-        </li>
-
-        <li>
-        Purpose of the medicine.
-        </li>
-
-        <li>
-        Dose and frequency.
-        </li>
-
-        <li>
-        Route of administration.
-        </li>
-
-        <li>
-        Duration of treatment.
-        </li>
-
-        <li>
-        Important side effects.
-        </li>
-
-        <li>
-        Important precautions.
-        </li>
-
-        <li>
-        What to do if a dose is missed.
-        </li>
-
-        </ul>
-
-        </div>
-
-
-        <div class="note-section">
-
-        <h3>Nurse's Role</h3>
-
-        <ul>
-
-        <li>
-        Explain medication instructions clearly.
-        </li>
-
-        <li>
-        Check the patient's understanding.
-        </li>
-
-        <li>
-        Encourage adherence to the prescribed regimen.
-        </li>
-
-        <li>
-        Teach appropriate storage where relevant.
-        </li>
-
-        <li>
-        Encourage patients to report significant
-        or unexpected reactions.
-        </li>
-
-        </ul>
-
-        </div>
-
-        `;
-
-    }
-
-
-    // =========================================
-    // UNKNOWN TOPIC
-    // =========================================
-
-    else {
-
-        html = `
-
-        <div class="note-section">
-
-        <h3>
-        Topic Not Found
-        </h3>
-
-        <p>
-
-        Notes for this topic have not been added yet.
-
-        </p>
-
-        </div>
-
-        `;
-
-    }
-
-
-    noteContent.innerHTML =
-        html;
 
 }
 
