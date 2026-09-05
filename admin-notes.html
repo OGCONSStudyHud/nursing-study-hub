@@ -1,1681 +1,1106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<title>OGCONS Study Hub - Notes Manager</title>
+<title>OGCONS Study Hub - Notes Admin</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    font-family:Arial,sans-serif;
-    min-height:100vh;
-    background:
-    linear-gradient(
-        135deg,
-        #e8fff2,
-        #e8f4ff,
-        #f5eaff
-    );
-    color:#172033;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
-header{
-    background:
-    linear-gradient(
-        135deg,
-        #18a058,
-        #2eb7a0
-    );
-    color:white;
-    padding:22px 20px;
+header {
+    background: linear-gradient(135deg, #064e3b, #0f766e);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.header-content{
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
+header h1 {
+    margin: 0;
+    font-size: 25px;
 }
 
-.logo{
-    font-size:23px;
-    font-weight:bold;
+header button {
+    border: none;
+    background: white;
+    color: #064e3b;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.header-buttons{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.header-button{
-    border:none;
-    background:white;
-    color:#18a058;
-    padding:10px 17px;
-    border-radius:22px;
-    font-weight:bold;
-    cursor:pointer;
-    text-decoration:none;
-}
-
-.header-button:hover{
-    background:#f1f1f1;
-}
-
-/* MAIN */
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 20px;
-}
-
-/* TITLE */
-
-.page-title{
-    background:white;
-    padding:28px;
-    border-radius:20px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.page-title h1{
-    color:#18a058;
-    margin-bottom:10px;
-    font-size:30px;
-}
-
-.page-title p{
-    color:#68756d;
-    line-height:1.6;
-}
-
-/* STATUS */
-
-#status{
-    display:none;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:20px;
-    font-weight:bold;
-}
-
-.success{
-    background:#d1e7dd;
-    color:#0f5132;
-}
-
-.error{
-    background:#f8d7da;
-    color:#842029;
-}
-
-/* FORM */
-
-.form-card{
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    margin-bottom:25px;
-}
-
-.form-card h2{
-    color:#18a058;
-    margin-bottom:20px;
-}
-
-.form-group{
-    margin-bottom:18px;
-}
-
-.form-group label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:7px;
-    color:#26382d;
-}
-
-input,
-select{
-    width:100%;
-    padding:13px;
-    border:2px solid #dce4df;
-    border-radius:10px;
-    font-size:15px;
-    outline:none;
-    font-family:Arial,sans-serif;
-}
-
-input:focus,
-select:focus{
-    border-color:#18a058;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
-
-/* BUTTONS */
-
-.button-row{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:20px;
-}
-
-button{
-    border:none;
-    padding:13px 22px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:15px;
-}
-
-.primary{
-    background:#18a058;
-    color:white;
-}
-
-.primary:hover{
-    background:#117d45;
-}
-
-.secondary{
-    background:#6c757d;
-    color:white;
-}
-
-.secondary:hover{
-    background:#565e64;
-}
-
-/* EDITOR */
-
-.editor-wrapper{
-    border:2px solid #dce4df;
-    border-radius:12px;
-    overflow:hidden;
-    background:white;
-    transition:.2s;
-}
-
-.editor-wrapper:focus-within{
-    border-color:#18a058;
-    box-shadow:0 0 0 3px rgba(24,160,88,.10);
-}
-
-/* TOOLBAR */
-
-.editor-toolbar{
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:5px;
-    padding:10px;
-    background:#f4f8f5;
-    border-bottom:1px solid #dce4df;
-    position:relative;
-    z-index:1000;
-}
+/* =========================
+   PAGE
+========================= */
 
-.toolbar-group{
-    display:flex;
-    align-items:center;
-    gap:4px;
-    padding-right:7px;
-    margin-right:5px;
-    border-right:1px solid #ccd8d1;
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 25px auto;
 }
 
-.toolbar-group:last-child{
-    border-right:none;
-}
-
-.toolbar-button{
-    min-width:38px;
-    height:36px;
-    padding:6px 9px;
-    border:1px solid #d6e0da;
-    background:white;
-    color:#26382d;
-    border-radius:7px;
-    font-size:14px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.toolbar-button:hover{
-    background:#e8fff2;
-    border-color:#18a058;
-    color:#117d45;
-}
-
-.toolbar-select{
-    height:36px;
-    border:1px solid #d6e0da;
-    background:white;
-    border-radius:7px;
-    padding:5px 8px;
-    font-size:14px;
-    cursor:pointer;
-    outline:none;
-}
-
-/* COLORS */
-
-.color-control{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    background:white;
-    border:1px solid #d6e0da;
-    border-radius:7px;
-    padding:3px 6px;
-    height:36px;
-}
+/* =========================
+   CARD
+========================= */
 
-.color-control span{
-    font-size:12px;
-    font-weight:bold;
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
 }
 
-.color-control input{
-    width:27px;
-    height:27px;
-    padding:0;
-    border:none;
-    cursor:pointer;
+.card h2 {
+    margin-top: 0;
 }
 
-/* CANVAS */
+/* =========================
+   FORM
+========================= */
 
-.rich-editor{
-    min-height:650px;
-    position:relative;
-    padding:20px;
-    outline:none;
-    font-size:16px;
-    line-height:1.7;
-    color:#26382d;
-    overflow:auto;
-    background:white;
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
 }
 
-.rich-editor:empty:before{
-    content:
-    "Write your study note here or use the Text Box, Image and Shape buttons...";
-    color:#9aa79f;
-    pointer-events:none;
+select,
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 15px;
 }
 
-/* NORMAL TEXT */
-
-.rich-editor p{
-    margin-bottom:12px;
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
-.rich-editor h1{
-    font-size:32px;
-    color:#172033;
-    margin:18px 0 12px;
-}
+/* =========================
+   TOOLBAR
+========================= */
 
-.rich-editor h2{
-    font-size:27px;
-    color:#172033;
-    margin:18px 0 12px;
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    background: #eef2f7;
+    border: 1px solid #d1d5db;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
 }
 
-.rich-editor h3{
-    font-size:23px;
-    color:#172033;
-    margin:16px 0 10px;
+.toolbar button,
+.toolbar select {
+    width: auto;
+    margin: 0;
+    padding: 7px 9px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
 }
 
-.rich-editor ul,
-.rich-editor ol{
-    margin:10px 0 15px 30px;
+.toolbar button:hover {
+    background: #e5e7eb;
 }
 
-.rich-editor li{
-    margin-bottom:6px;
+.toolbar .danger {
+    color: #b91c1c;
 }
 
-.rich-editor table{
-    width:100%;
-    border-collapse:collapse;
-    margin:18px 0;
-    background:white;
+.toolbar-separator {
+    width: 1px;
+    background: #cbd5e1;
+    margin: 0 3px;
 }
 
-.rich-editor th,
-.rich-editor td{
-    border:1px solid #aebdb4;
-    padding:10px;
-    min-width:80px;
-    vertical-align:top;
-}
+/* =========================
+   RICH EDITOR
+========================= */
 
-.rich-editor th{
-    background:#e8fff2;
-    font-weight:bold;
+.rich-editor {
+    position: relative;
+    min-height: 650px;
+    border: 1px solid #d1d5db;
+    border-radius: 0 0 10px 10px;
+    padding: 25px;
+    background: white;
+    overflow: hidden;
+    outline: none;
+    line-height: 1.6;
 }
 
-.rich-editor blockquote{
-    border-left:4px solid #18a058;
-    margin:15px 0;
-    padding:10px 15px;
-    background:#f4faf6;
-    color:#526159;
+.rich-editor:focus {
+    border-color: #0f766e;
 }
 
-/* DESIGN OBJECT */
-
-.design-object{
-    position:absolute;
-    min-width:30px;
-    min-height:30px;
-    transform-origin:center center;
-    z-index:20;
+/* Normal text */
+.rich-editor > p {
+    margin: 10px 0;
 }
 
-/* SELECTED */
+/* =========================
+   DESIGN OBJECT
+========================= */
 
-.design-object.selected{
-    outline:2px solid #18a058;
-    outline-offset:4px;
+.design-object {
+    position: absolute;
+    user-select: none;
+    z-index: 10;
 }
-
-/* TEXT BOX */
 
-.text-object{
-    width:280px;
-    min-height:60px;
-    background:transparent;
-    color:#172033;
-    border:1px dashed transparent;
-    user-select:none;
-    cursor:move;
-    padding:4px;
+.design-object.selected {
+    outline: 2px dashed #0f766e;
 }
 
-.text-object.selected{
-    border:1px dashed #18a058;
+.design-object.editing {
+    outline: 2px solid #0f766e;
 }
 
-/*
-   This is the important part.
+/* =========================
+   TEXT OBJECT
+========================= */
 
-   The outer box is NOT editable.
-   The inner area IS editable.
-
-   Therefore:
-   - drag border = move
-   - click text = edit
-*/
-
-.text-drag-area{
-    width:100%;
-    height:100%;
-    min-height:50px;
-    padding:8px;
-    outline:none;
-    cursor:text;
-    user-select:text;
-    white-space:pre-wrap;
-    word-break:break-word;
-    overflow-wrap:anywhere;
+.text-object {
+    width: 280px;
+    min-height: 55px;
+    padding: 0;
+    background: transparent;
+    cursor: move;
+    transform-origin: center center;
 }
 
-.text-drag-area:focus{
-    outline:none;
+.text-object .text-content {
+    width: 100%;
+    min-height: 55px;
+    padding: 8px 10px;
+    outline: none;
+    border: none;
+    background: transparent;
+    white-space: pre-wrap;
+    word-break: break-word;
+    cursor: move;
+    user-select: none;
 }
-
-/* IMAGE */
 
-.image-object{
-    width:300px;
-    min-height:50px;
-    background:white;
+.text-object.editing .text-content {
+    cursor: text;
+    user-select: text;
+    background: rgba(255,255,255,0.35);
 }
 
-.image-object img{
-    width:100%;
-    height:auto;
-    display:block;
-    border-radius:8px;
-    pointer-events:none;
+.text-object .text-content:focus {
+    outline: none;
 }
 
-/* SHAPES */
+/* =========================
+   IMAGE OBJECT
+========================= */
 
-.shape-object{
-    width:220px;
-    height:100px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.image-object {
+    cursor: move;
+    transform-origin: center center;
 }
 
-.shape-object svg{
-    width:100%;
-    height:100%;
-    display:block;
-    overflow:visible;
-    pointer-events:none;
+.image-object img {
+    display: block;
+    max-width: 100%;
+    width: 250px;
+    height: auto;
+    pointer-events: none;
 }
 
-/* OBJECT CONTROLS */
+/* =========================
+   SHAPES
+========================= */
 
-.object-controls{
-    position:absolute;
-    left:50%;
-    top:-48px;
-    transform:translateX(-50%);
-    display:none;
-    gap:4px;
-    background:#172033;
-    padding:5px;
-    border-radius:8px;
-    z-index:100;
-    white-space:nowrap;
+.shape-object {
+    cursor: move;
+    transform-origin: center center;
 }
 
-.design-object.selected .object-controls{
-    display:flex;
+.shape-rectangle {
+    width: 180px;
+    height: 100px;
+    border: 3px solid #0f766e;
+    background: rgba(15,118,110,0.08);
 }
 
-.object-control{
-    width:30px;
-    height:30px;
-    padding:0;
-    border-radius:5px;
-    background:white;
-    color:#172033;
-    font-size:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.shape-circle {
+    width: 130px;
+    height: 130px;
+    border: 3px solid #0f766e;
+    border-radius: 50%;
+    background: rgba(15,118,110,0.08);
 }
 
-.object-control:hover{
-    background:#e8fff2;
+.shape-line {
+    width: 180px;
+    height: 4px;
+    background: #111827;
+    transform-origin: left center;
 }
-
-/* ROTATE HANDLE */
-
-.rotate-handle{
-    position:absolute;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#18a058;
-    border:3px solid white;
-    box-shadow:0 2px 6px rgba(0,0,0,.25);
-    left:50%;
-    top:-35px;
-    transform:translateX(-50%);
-    display:none;
-    cursor:grab;
-    z-index:110;
-}
-
-.design-object.selected .rotate-handle{
-    display:block;
-}
-
-/* RESIZE HANDLE */
 
-.resize-handle{
-    position:absolute;
-    width:14px;
-    height:14px;
-    background:#18a058;
-    border:2px solid white;
-    right:-7px;
-    bottom:-7px;
-    border-radius:3px;
-    display:none;
-    cursor:nwse-resize;
-    z-index:110;
+.shape-arrow {
+    width: 180px;
+    height: 4px;
+    background: #111827;
+    position: relative;
+    transform-origin: left center;
 }
 
-.design-object.selected .resize-handle{
-    display:block;
+.shape-arrow::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    top: -7px;
+    width: 15px;
+    height: 15px;
+    border-top: 4px solid #111827;
+    border-right: 4px solid #111827;
+    transform: rotate(45deg);
 }
 
-/* PREVIEW */
+/* =========================
+   OBJECT CONTROLS
+========================= */
 
-.preview-box{
-    display:none;
-    margin-top:18px;
-    padding:25px;
-    border:2px dashed #18a058;
-    border-radius:12px;
-    background:#fbfffc;
+.object-controls {
+    position: absolute;
+    top: -35px;
+    left: 0;
+    display: none;
+    gap: 4px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    z-index: 100;
 }
 
-.preview-box.show{
-    display:block;
+.design-object.selected .object-controls {
+    display: flex;
 }
 
-.preview-label{
-    color:#18a058;
-    font-weight:bold;
-    margin-bottom:15px;
+.object-controls button {
+    border: none;
+    background: #f8fafc;
+    padding: 4px 7px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 13px;
 }
 
-.preview-content{
-    line-height:1.7;
-    color:#26382d;
-    position:relative;
-    min-height:400px;
+.object-controls button:hover {
+    background: #e2e8f0;
 }
 
-.preview-content img{
-    max-width:100%;
-    height:auto;
-}
+/* =========================
+   ROTATE HANDLE
+========================= */
 
-.preview-content table{
-    width:100%;
-    border-collapse:collapse;
-    margin:18px 0;
+.rotate-handle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #0f766e;
+    border: 2px solid white;
+    top: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: grab;
+    display: none;
+    z-index: 101;
 }
 
-.preview-content th,
-.preview-content td{
-    border:1px solid #aebdb4;
-    padding:10px;
+.design-object.selected .rotate-handle {
+    display: block;
 }
 
-.preview-content th{
-    background:#e8fff2;
-}
+/* =========================
+   RESIZE HANDLE
+========================= */
 
-.preview-content ul,
-.preview-content ol{
-    margin:10px 0 15px 30px;
+.resize-handle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    right: -7px;
+    bottom: -7px;
+    background: #0f766e;
+    border: 2px solid white;
+    border-radius: 3px;
+    cursor: nwse-resize;
+    display: none;
+    z-index: 101;
 }
-
-/* HELP */
 
-.editor-help{
-    padding:12px 15px;
-    background:#f4f8f5;
-    border-top:1px solid #dce4df;
-    color:#68756d;
-    font-size:13px;
-    line-height:1.6;
+.design-object.selected .resize-handle {
+    display: block;
 }
 
-/* FILTER */
+/* =========================
+   BUTTONS
+========================= */
 
-.filter-card{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    margin-bottom:25px;
+.primary-btn {
+    border: none;
+    background: #0f766e;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.filter-card h2{
-    color:#18a058;
-    margin-bottom:18px;
+.primary-btn:hover {
+    background: #115e59;
 }
-
-.filter-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-/* NOTES */
 
-.notes-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:18px;
+.secondary-btn {
+    border: none;
+    background: #475569;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.notes-header h2{
-    color:#18a058;
+.delete-btn {
+    border: none;
+    background: #dc2626;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 7px;
+    cursor: pointer;
 }
 
-.note-count{
-    background:#e7fff0;
-    color:#117d45;
-    padding:8px 14px;
-    border-radius:20px;
-    font-weight:bold;
-}
+/* =========================
+   NOTE LIST
+========================= */
 
-.note-card{
-    background:white;
-    padding:25px;
-    border-radius:18px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    margin-bottom:18px;
+.note-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
 }
 
-.note-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-    margin-bottom:12px;
+.note-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 15px;
+    background: white;
 }
 
-.note-number{
-    color:#18a058;
-    font-weight:bold;
-    font-size:17px;
+.note-card h3 {
+    margin-top: 0;
+    color: #064e3b;
 }
 
-.course-badge{
-    background:#e8f4ff;
-    color:#0b5ed7;
-    padding:6px 11px;
-    border-radius:15px;
-    font-size:13px;
-    font-weight:bold;
+.note-preview {
+    max-height: 180px;
+    overflow: hidden;
+    font-size: 14px;
 }
 
-.topic-badge{
-    display:inline-block;
-    background:#fff4e5;
-    color:#b45309;
-    padding:7px 11px;
-    border-radius:15px;
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:12px;
+.note-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
 }
 
-.note-title{
-    font-size:21px;
-    color:#172033;
-    margin-bottom:12px;
-    line-height:1.4;
+.note-actions button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-.note-content{
-    color:#526159;
-    line-height:1.7;
-    background:#f8faf9;
-    padding:18px;
-    border-radius:12px;
-    border:1px solid #e4ebe7;
-    overflow:auto;
-    min-height:100px;
+.edit-note {
+    background: #dbeafe;
+    color: #1d4ed8;
 }
 
-.note-content img{
-    max-width:100%;
-    height:auto;
+.delete-note {
+    background: #fee2e2;
+    color: #b91c1c;
 }
 
-.note-content table{
-    width:100%;
-    border-collapse:collapse;
-    margin:12px 0;
-}
+/* =========================
+   PREVIEW
+========================= */
 
-.note-content th,
-.note-content td{
-    border:1px solid #aebdb4;
-    padding:8px;
+.preview-box {
+    display: none;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 20px;
 }
 
-.note-content th{
-    background:#e8fff2;
+.preview-box.show {
+    display: block;
 }
 
-.note-content ul,
-.note-content ol{
-    margin:8px 0 10px 25px;
-}
+/* =========================
+   TABLE
+========================= */
 
-.note-content h1{
-    font-size:28px;
-    margin:12px 0;
+.rich-editor table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
 }
 
-.note-content h2{
-    font-size:24px;
-    margin:12px 0;
+.rich-editor table td,
+.rich-editor table th {
+    border: 1px solid #94a3b8;
+    padding: 8px;
+    min-width: 50px;
 }
 
-.note-content h3{
-    font-size:21px;
-    margin:10px 0;
-}
+/* =========================
+   BLOCKQUOTE
+========================= */
 
-.note-actions{
-    display:flex;
-    gap:10px;
-    margin-top:18px;
+.rich-editor blockquote {
+    border-left: 5px solid #0f766e;
+    margin: 15px 0;
+    padding-left: 15px;
+    color: #475569;
 }
 
-.edit-btn{
-    background:#0b5ed7;
-    color:white;
-}
+/* =========================
+   IMAGE
+========================= */
 
-.delete-btn{
-    background:#dc3545;
-    color:white;
+.rich-editor img {
+    max-width: 100%;
 }
 
-/* LOADING */
+/* =========================
+   STATUS
+========================= */
 
-#loading{
-    text-align:center;
-    padding:35px;
-    color:#68756d;
+#status {
+    margin-top: 12px;
+    font-weight: bold;
 }
 
-.empty{
-    background:white;
-    padding:40px;
-    border-radius:18px;
-    text-align:center;
-    color:#68756d;
-    box-shadow:0 8px 20px rgba(0,0,0,.06);
+.success {
+    color: #15803d;
 }
-
-/* FOOTER */
 
-footer{
-    text-align:center;
-    padding:35px;
-    color:#68756d;
-    font-size:14px;
+.error {
+    color: #b91c1c;
 }
 
-/* MOBILE */
+/* =========================
+   RESPONSIVE
+========================= */
 
-@media(max-width:800px){
+@media(max-width: 700px) {
 
-    .header-content{
-        flex-direction:column;
-        text-align:center;
+    .form-row {
+        grid-template-columns: 1fr;
     }
 
-    .form-grid{
-        grid-template-columns:1fr;
+    header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
     }
 
-    .filter-grid{
-        grid-template-columns:1fr;
-    }
-
-    .note-top{
-        flex-direction:column;
-    }
-
-    .rich-editor{
-        min-height:550px;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .container{
-        padding:20px 15px;
-    }
-
-    .form-card,
-    .filter-card{
-        padding:20px;
-    }
-
-    .notes-header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .note-actions{
-        flex-direction:column;
-    }
-
-    .note-actions button{
-        width:100%;
-    }
-
-    .editor-toolbar{
-        gap:3px;
-    }
-
-    .toolbar-group{
-        border-right:none;
-        margin-right:0;
-        padding-right:0;
-    }
-
-    .toolbar-button{
-        min-width:34px;
-        height:34px;
-        padding:5px 7px;
+    .rich-editor {
+        min-height: 500px;
+        padding: 15px;
     }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
 
-<div class="header-content">
+    <h1>OGCONS Study Hub — Notes Admin</h1>
 
-<div class="logo">
-🩺 OGCONS Study Hub — Notes Manager
-</div>
-
-<div class="header-buttons">
-
-<a href="admin.html" class="header-button">
-← Admin Dashboard
-</a>
-
-<button class="header-button" onclick="logout()">
-Logout
-</button>
-
-</div>
-
-</div>
+    <button onclick="window.location.href='admin.html'">
+        Back to Admin
+    </button>
 
 </header>
 
+
 <div class="container">
 
-<div class="page-title">
+    <!-- =========================
+         NOTE EDITOR
+    ========================== -->
 
-<h1>
-📖 Notes Management
-</h1>
+    <div class="card">
 
-<p>
-Create, edit, format and design study notes for all OGCONS courses and topics.
-</p>
+        <h2 id="editorTitle">Create New Note</h2>
+
+        <div class="form-row">
+
+            <div>
+
+                <label>Course</label>
+
+                <select id="course">
+                    <option value="">Select Course</option>
+
+                    <option value="Foundations of Nursing">
+                        Foundations of Nursing
+                    </option>
+
+                    <option value="Anatomy & Physiology">
+                        Anatomy & Physiology
+                    </option>
+
+                    <option value="Pharmacology">
+                        Pharmacology
+                    </option>
+
+                    <option value="Primary Health Care">
+                        Primary Health Care
+                    </option>
+
+                    <option value="Medical/Surgical Nursing">
+                        Medical/Surgical Nursing
+                    </option>
+
+                    <option value="Microbiology">
+                        Microbiology
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Topic</label>
+
+                <select id="topic">
+
+                    <option value="">
+                        Select Topic
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <label>Note Title</label>
+
+        <input
+            type="text"
+            id="title"
+            placeholder="Enter note title"
+        >
+
+
+        <!-- =========================
+             TOOLBAR
+        ========================== -->
+
+        <div class="toolbar">
+
+            <button onclick="formatText('bold')" title="Bold">
+                <b>B</b>
+            </button>
+
+            <button onclick="formatText('italic')" title="Italic">
+                <i>I</i>
+            </button>
+
+            <button onclick="formatText('underline')" title="Underline">
+                <u>U</u>
+            </button>
+
+            <span class="toolbar-separator"></span>
+
+            <select onchange="formatBlock(this.value); this.value=''">
+
+                <option value="">
+                    Heading
+                </option>
+
+                <option value="h1">
+                    Heading 1
+                </option>
+
+                <option value="h2">
+                    Heading 2
+                </option>
+
+                <option value="h3">
+                    Heading 3
+                </option>
+
+                <option value="p">
+                    Normal
+                </option>
+
+            </select>
+
+
+            <select onchange="changeFontSize(this.value); this.value=''">
+
+                <option value="">
+                    Font Size
+                </option>
+
+                <option value="1">
+                    Small
+                </option>
+
+                <option value="3">
+                    Normal
+                </option>
+
+                <option value="5">
+                    Large
+                </option>
+
+                <option value="7">
+                    Very Large
+                </option>
+
+            </select>
+
+
+            <span class="toolbar-separator"></span>
+
+
+            <button onclick="formatText('justifyLeft')">
+                Left
+            </button>
+
+            <button onclick="formatText('justifyCenter')">
+                Center
+            </button>
+
+            <button onclick="formatText('justifyRight')">
+                Right
+            </button>
+
+
+            <span class="toolbar-separator"></span>
+
+
+            <button onclick="formatText('insertUnorderedList')">
+                • List
+            </button>
+
+            <button onclick="formatText('insertOrderedList')">
+                1. List
+            </button>
+
+
+            <span class="toolbar-separator"></span>
+
+
+            <button onclick="changeTextColor()">
+                Text Color
+            </button>
+
+            <button onclick="changeHighlightColor()">
+                Highlight
+            </button>
+
+
+            <span class="toolbar-separator"></span>
+
+
+            <button onclick="insertTable()">
+                Table
+            </button>
+
+            <button onclick="insertImage()">
+                Image
+            </button>
+
+            <button onclick="insertImageURL()">
+                Image URL
+            </button>
+
+
+            <span class="toolbar-separator"></span>
+
+
+            <button onclick="addTextBox()">
+                Text Box
+            </button>
+
+            <button onclick="addShape('arrow')">
+                Arrow
+            </button>
+
+            <button onclick="addShape('line')">
+                Line
+            </button>
+
+            <button onclick="addShape('rectangle')">
+                Rectangle
+            </button>
+
+            <button onclick="addShape('circle')">
+                Circle
+            </button>
+
+
+            <span class="toolbar-separator"></span>
+
+
+            <button onclick="insertLink()">
+                Link
+            </button>
+
+            <button onclick="formatText('insertHorizontalRule')">
+                HR
+            </button>
+
+            <button onclick="formatText('formatBlock','blockquote')">
+                Quote
+            </button>
+
+
+            <span class="toolbar-separator"></span>
+
+
+            <button onclick="undoAction()">
+                Undo
+            </button>
+
+            <button onclick="redoAction()">
+                Redo
+            </button>
+
+            <button onclick="togglePreview()">
+                Preview
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             EDITOR
+        ========================== -->
+
+        <div
+            id="content"
+            class="rich-editor"
+            contenteditable="true"
+            spellcheck="true"
+        ></div>
+
+
+        <div id="previewBox" class="preview-box"></div>
+
+
+        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+
+            <button
+                class="primary-btn"
+                onclick="saveNote()"
+            >
+                Save Note
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="clearEditor()"
+            >
+                Clear
+            </button>
+
+        </div>
+
+
+        <div id="status"></div>
+
+    </div>
+
+
+    <!-- =========================
+         NOTES
+    ========================== -->
+
+    <div class="card">
+
+        <h2>Existing Notes</h2>
+
+        <div
+            id="notesList"
+            class="note-list"
+        ></div>
+
+    </div>
 
 </div>
 
-<div id="status"></div>
-
-<div class="form-card">
-
-<h2 id="formTitle">
-➕ Add New Note
-</h2>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Course</label>
-
-<select id="course" onchange="updateTopics()">
-
-<option value="">Select Course</option>
-
-<option value="Foundations of Nursing">
-Foundations of Nursing
-</option>
-
-<option value="Primary Health Care">
-Primary Health Care
-</option>
-
-<option value="Anatomy & Physiology">
-Anatomy & Physiology
-</option>
-
-<option value="Medical/Surgical Nursing">
-Medical/Surgical Nursing
-</option>
-
-<option value="Microbiology">
-Microbiology
-</option>
-
-<option value="Pharmacology">
-Pharmacology
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Topic</label>
-
-<select id="topic">
-
-<option value="">
-Select a course first
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label>Note Title</label>
-
-<input
-    type="text"
-    id="title"
-    placeholder="Enter note title">
-
-</div>
-
-<div class="form-group">
-
-<label>Note Content</label>
-
-<div class="editor-wrapper">
-
-<div class="editor-toolbar">
-
-<!-- BASIC TEXT -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('bold')"
-    title="Bold">
-<b>B</b>
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('italic')"
-    title="Italic">
-<i>I</i>
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('underline')"
-    title="Underline">
-<u>U</u>
-</button>
-
-</div>
-
-<!-- HEADINGS -->
-
-<div class="toolbar-group">
-
-<select
-    class="toolbar-select"
-    onchange="changeBlock(this.value);this.selectedIndex=0;">
-
-<option value="">Heading</option>
-
-<option value="h1">Heading 1</option>
-
-<option value="h2">Heading 2</option>
-
-<option value="h3">Heading 3</option>
-
-<option value="p">Normal Text</option>
-
-</select>
-
-</div>
-
-<!-- FONT SIZE -->
-
-<div class="toolbar-group">
-
-<select
-    class="toolbar-select"
-    onchange="changeFontSize(this.value);this.selectedIndex=0;">
-
-<option value="">Text Size</option>
-
-<option value="1">Small</option>
-
-<option value="3">Normal</option>
-
-<option value="5">Large</option>
-
-<option value="7">Very Large</option>
-
-</select>
-
-</div>
-
-<!-- ALIGNMENT -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('justifyLeft')"
-    title="Left">
-⬅
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('justifyCenter')"
-    title="Center">
-↔
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('justifyRight')"
-    title="Right">
-➡
-</button>
-
-</div>
-
-<!-- LIST -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('insertUnorderedList')"
-    title="Bullet List">
-•
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('insertOrderedList')"
-    title="Numbered List">
-1.
-</button>
-
-</div>
-
-<!-- COLORS -->
-
-<div class="toolbar-group">
-
-<div class="color-control">
-
-<span>Text</span>
-
-<input
-    type="color"
-    id="textColor"
-    value="#172033"
-    onchange="changeColor(this.value)">
-
-</div>
-
-<div class="color-control">
-
-<span>Highlight</span>
-
-<input
-    type="color"
-    id="highlightColor"
-    value="#fff59d"
-    onchange="changeHighlight(this.value)">
-
-</div>
-
-</div>
-
-<!-- DESIGN -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addTextBox()"
-    title="Add movable Canva-style text box">
-📝
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addImage()"
-    title="Add movable image">
-🖼️
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addImageURL()"
-    title="Add image from URL">
-🌐
-</button>
-
-</div>
-
-<!-- SHAPES -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addShape('arrow')"
-    title="Add Arrow">
-➡️
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addShape('line')"
-    title="Add Line">
-━
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addShape('rectangle')"
-    title="Add Rectangle">
-▭
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addShape('circle')"
-    title="Add Circle">
-○
-</button>
-
-</div>
-
-<!-- TABLE/LINK -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addTable()"
-    title="Add Table">
-▦
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="addLink()"
-    title="Add Link">
-🔗
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('insertHorizontalRule')"
-    title="Horizontal Line">
-―
-</button>
-
-</div>
-
-<!-- QUOTE -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="changeBlock('blockquote')"
-    title="Quote">
-❝
-</button>
-
-</div>
-
-<!-- UNDO -->
-
-<div class="toolbar-group">
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('undo')"
-    title="Undo">
-↶
-</button>
-
-<button
-    type="button"
-    class="toolbar-button"
-    onclick="formatText('redo')"
-    title="Redo">
-↷
-</button>
-
-</div>
-
-</div>
-
-<!-- CANVAS -->
-
-<div
-    id="content"
-    class="rich-editor"
-    contenteditable="true"
-    spellcheck="true">
-</div>
-
-<div class="editor-help">
-
-💡 <b>Text Box:</b>
-Click inside the text to edit it. Drag the border or empty area to move it.
-
-&nbsp;&nbsp;
-
-<b>Images:</b>
-Drag, resize or rotate.
-
-&nbsp;&nbsp;
-
-<b>Shapes:</b>
-Drag, resize or rotate.
-
-<br>
-
-After selecting an object:
-
-<b>↺</b> rotate left,
-<b>↻</b> rotate right,
-<b>＋</b> enlarge,
-<b>−</b> reduce,
-<b>🗑️</b> delete.
-
-</div>
-
-</div>
-
-<div
-    id="previewBox"
-    class="preview-box">
-
-<div class="preview-label">
-👁️ Note Preview
-</div>
-
-<div
-    id="previewContent"
-    class="preview-content">
-</div>
-
-</div>
-
-</div>
-
-<div class="button-row">
-
-<button
-    class="primary"
-    id="saveButton"
-    onclick="saveNote()">
-➕ Add Note
-</button>
-
-<button
-    class="secondary"
-    id="previewButton"
-    onclick="togglePreview()">
-👁️ Preview
-</button>
-
-<button
-    class="secondary"
-    id="cancelButton"
-    onclick="cancelEdit()"
-    style="display:none;">
-Cancel Edit
-</button>
-
-</div>
-
-</div>
-
-<!-- FILTERS -->
-
-<div class="filter-card">
-
-<h2>
-🔍 Find Notes
-</h2>
-
-<div class="filter-grid">
-
-<div class="form-group">
-
-<label>Course</label>
-
-<select
-    id="filterCourse"
-    onchange="updateFilterTopics();filterNotes();">
-
-<option value="">All Courses</option>
-
-<option value="Foundations of Nursing">
-Foundations of Nursing
-</option>
-
-<option value="Primary Health Care">
-Primary Health Care
-</option>
-
-<option value="Anatomy & Physiology">
-Anatomy & Physiology
-</option>
-
-<option value="Medical/Surgical Nursing">
-Medical/Surgical Nursing
-</option>
-
-<option value="Microbiology">
-Microbiology
-</option>
-
-<option value="Pharmacology">
-Pharmacology
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Topic</label>
-
-<select
-    id="filterTopic"
-    onchange="filterNotes()">
-
-<option value="">All Topics</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Search</label>
-
-<input
-    type="text"
-    id="searchInput"
-    placeholder="Search notes..."
-    oninput="filterNotes()">
-
-</div>
-
-</div>
-
-</div>
-
-<div class="notes-header">
-
-<h2>
-📋 All Notes
-</h2>
-
-<div
-    class="note-count"
-    id="noteCount">
-0 Notes
-</div>
-
-</div>
-
-<div id="loading">
-🔄 Loading notes...
-</div>
-
-<div id="notesList"></div>
-
-</div>
-
-<footer>
-OGCONS Study Hub © 2026
-</footer>
 
 <script>
 
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
-"https://bvetmmvpdotifusjkywd.supabase.co";
+    "https://bvetmmvpdotifusjkywd.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+const SUPABASE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
 const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-let allNotes = [];
-
-let editingId = null;
-
-let savedSelection = null;
-
-let selectedObject = null;
-
-let draggingObject = null;
-
-let resizingObject = null;
-
-let rotatingObject = null;
-
-let dragOffsetX = 0;
-
-let dragOffsetY = 0;
-
-let resizeStartX = 0;
-
-let resizeStartY = 0;
-
-let resizeStartWidth = 0;
-
-let resizeStartHeight = 0;
-
-let rotateCenterX = 0;
-
-let rotateCenterY = 0;
-
-let rotateStartAngle = 0;
-
-let rotateOriginal = 0;
-
-
-/* =====================================================
+/* =========================================================
    COURSE TOPICS
-===================================================== */
+========================================================= */
 
 const courseTopics = {
 
-"Foundations of Nursing":[
-"Introduction to Nursing",
-"Health Care Institutions",
-"Ethico-Legal Issues in Nursing",
-"Tools of Nursing",
-"Comfort and Safety Measures",
-"Emergency Care",
-"Administration of Drugs",
-"Diagnostic Investigation",
-"Aseptic Techniques",
-"Unsafe Injection Safety",
-"Introduction to Healthcare Waste",
-"Legal Aspects of Nursing",
-"Nursing Care of Patients with Feeding/Elimination Problems",
-"Basic Life Support"
-],
+    "Foundations of Nursing": [
 
-"Primary Health Care":[
-"Introduction to Primary Health Care",
-"The Community",
-"Cadre of Health Workers in PHC",
-"Community Mobilization",
-"Community Diagnosis",
-"Health Education",
-"Components of Primary Health Care",
-"Immunization Against Major Communicable Diseases",
-"Prevention and Control of Locally Endemic and Epidemic Diseases",
-"Promotion of Mental Health",
-"Maternal and Child Health Services",
-"Provision of Essential Drugs and Supplies",
-"Oral Hygiene and Eye Care",
-"Adolescence and Their Problems",
-"Referral System in PHC",
-"Care of the Aged in the Community",
-"Management of Occupational Health",
-"Management in Primary Health Care"
-],
+        "Introduction to Nursing",
+        "Health Care Institutions",
+        "Ethico-Legal Issues in Nursing",
+        "Tools of Nursing",
+        "Comfort and Safety Measures",
+        "Emergency Care",
+        "Administration of Drugs",
+        "Diagnostic Investigation",
+        "Aseptic Techniques",
+        "Unsafe Injection Safety",
+        "Introduction to Healthcare Waste",
+        "Legal Aspects of Nursing",
+        "Nursing Care of Patients with Feeding/Elimination Problems",
+        "Basic Life Support"
 
-"Anatomy & Physiology":[
-"Introduction to Anatomy",
-"The Musculoskeletal System",
-"Blood and Cardiovascular System",
-"The Respiratory System",
-"The Digestive System",
-"The Integumentary System",
-"The Excretory System",
-"The Endocrine System",
-"The Female Reproductive System",
-"The Male Reproductive System",
-"Foetal Development"
-],
+    ],
 
-"Medical/Surgical Nursing":[
-"Concepts and Terms in Medical-Surgical Nursing",
-"Management of Patients with Medical/Surgical Conditions",
-"Management of Patients with Medical/Surgical Conditions 2",
-"Common Situations That Threaten Adaptation",
-"Body Defense Mechanisms",
-"Diagnostic Measures",
-"Principles of Operating Room Nursing"
-],
 
-"Microbiology":[
-"Introduction to Microbiology",
-"Bacteria",
-"Viruses",
-"Fungi",
-"Parasites",
-"Immunology",
-"Sterilization & Disinfection",
-"Healthcare-Associated Infections"
-],
+    "Anatomy & Physiology": [
 
-"Pharmacology":[
-"Introduction",
-"Sources and Classification of Drugs",
-"Preparation of Drugs",
-"Routes of Drug Administration",
-"Mechanism of Drug Action",
-"National Drug Policy",
-"Drugs Used in Management of Other Health Conditions",
-"Patient Education and Counseling"
-]
+        "Introduction to Anatomy",
+        "The Musculoskeletal System",
+        "Blood and Cardiovascular System",
+        "The Respiratory System",
+        "The Digestive System",
+        "The Integumentary System",
+        "The Excretory System",
+        "The Endocrine System",
+        "The Female Reproductive System",
+        "The Male Reproductive System",
+        "Foetal Development"
+
+    ],
+
+
+    "Pharmacology": [
+
+        "Introduction",
+        "Sources and Classification of Drugs",
+        "Preparation of Drugs",
+        "Routes of Drug Administration",
+        "Mechanism of Drug Action",
+        "National Drug Policy",
+        "Drugs Used in Management of Other Health Conditions",
+        "Patient Education and Counseling"
+
+    ],
+
+
+    "Primary Health Care": [
+
+        "Introduction to Primary Health Care",
+        "The Community",
+        "Cadre of Health Workers in PHC",
+        "Community Mobilization",
+        "Community Diagnosis",
+        "Health Education",
+        "Components of Primary Health Care",
+        "Immunization Against Major Communicable Diseases",
+        "Prevention and Control of Locally Endemic and Epidemic Diseases",
+        "Promotion of Mental Health",
+        "Maternal and Child Health Services",
+        "Provision of Essential Drugs and Supplies",
+        "Oral Hygiene and Eye Care",
+        "Adolescence and Their Problems",
+        "Referral System in PHC",
+        "Care of the Aged in the Community",
+        "Management of Occupational Health",
+        "Management in Primary Health Care"
+
+    ],
+
+
+    "Medical/Surgical Nursing": [
+
+        "Concepts and Terms in Medical-Surgical Nursing",
+        "Management of Patients with Medical/Surgical Conditions",
+        "Management of Patients with Medical/Surgical Conditions 2",
+        "Common Situations That Threaten Adaptation",
+        "Body Defense Mechanisms",
+        "Diagnostic Measures",
+        "Principles of Operating Room Nursing"
+
+    ],
+
+
+    "Microbiology": [
+
+        "Introduction to Microbiology",
+        "Bacteria",
+        "Viruses",
+        "Fungi",
+        "Parasites",
+        "Immunology",
+        "Sterilization & Disinfection",
+        "Healthcare-Associated Infections"
+
+    ]
 
 };
 
 
-/* =====================================================
-   EDITOR
-===================================================== */
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
 
-function getEditor(){
+let editingNoteId = null;
 
-    return document.getElementById("content");
+let selectedObject = null;
+
+let savedSelection = null;
+
+let dragData = null;
+
+let resizeData = null;
+
+let rotateData = null;
+
+
+/* =========================================================
+   COURSE CHANGE
+========================================================= */
+
+document
+.getElementById("course")
+.addEventListener("change", function () {
+
+    const course = this.value;
+
+    const topicSelect =
+        document.getElementById("topic");
+
+    topicSelect.innerHTML =
+        '<option value="">Select Topic</option>';
+
+    if (!course || !courseTopics[course]) {
+        return;
+    }
+
+    courseTopics[course].forEach(function(topic) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = topic;
+
+        option.textContent = topic;
+
+        topicSelect.appendChild(option);
+
+    });
+
+});
+
+
+/* =========================================================
+   NORMALIZE TOPIC
+========================================================= */
+
+function normalizeTopic(value) {
+
+    return String(value || "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
 
 }
 
 
-/* =====================================================
-   SELECTION
-===================================================== */
+/* =========================================================
+   SAVE SELECTION
+========================================================= */
 
-function saveSelection(){
+function saveSelection() {
 
     const selection =
         window.getSelection();
 
-    if(!selection.rangeCount){
+    if (!selection.rangeCount) {
         return;
     }
 
     const range =
         selection.getRangeAt(0);
 
-    if(
-        getEditor().contains(
-            range.commonAncestorContainer
-        )
-    ){
+    if (
+        document
+        .getElementById("content")
+        .contains(range.commonAncestorContainer)
+    ) {
 
         savedSelection =
             range.cloneRange();
@@ -1685,14 +1110,14 @@ function saveSelection(){
 }
 
 
-function restoreSelection(){
+/* =========================================================
+   RESTORE SELECTION
+========================================================= */
 
-    if(!savedSelection){
+function restoreSelection() {
 
-        getEditor().focus();
-
+    if (!savedSelection) {
         return;
-
     }
 
     const selection =
@@ -1704,16 +1129,33 @@ function restoreSelection(){
         savedSelection
     );
 
-    getEditor().focus();
-
 }
 
 
-/* =====================================================
-   FORMATTING
-===================================================== */
+/* =========================================================
+   EDITOR FOCUS
+========================================================= */
 
-function formatText(command,value=null){
+document
+.getElementById("content")
+.addEventListener(
+    "keyup",
+    saveSelection
+);
+
+document
+.getElementById("content")
+.addEventListener(
+    "mouseup",
+    saveSelection
+);
+
+
+/* =========================================================
+   FORMAT TEXT
+========================================================= */
+
+function formatText(command, value = null) {
 
     restoreSelection();
 
@@ -1725,16 +1167,16 @@ function formatText(command,value=null){
 
     saveSelection();
 
-    getEditor().focus();
-
 }
 
 
-function changeBlock(tag){
+/* =========================================================
+   FORMAT BLOCK
+========================================================= */
 
-    if(!tag){
-        return;
-    }
+function formatBlock(tag) {
+
+    if (!tag) return;
 
     restoreSelection();
 
@@ -1746,16 +1188,16 @@ function changeBlock(tag){
 
     saveSelection();
 
-    getEditor().focus();
-
 }
 
 
-function changeFontSize(size){
+/* =========================================================
+   FONT SIZE
+========================================================= */
 
-    if(!size){
-        return;
-    }
+function changeFontSize(size) {
+
+    if (!size) return;
 
     restoreSelection();
 
@@ -1767,12 +1209,21 @@ function changeFontSize(size){
 
     saveSelection();
 
-    getEditor().focus();
-
 }
 
 
-function changeColor(color){
+/* =========================================================
+   TEXT COLOR
+========================================================= */
+
+function changeTextColor() {
+
+    const color =
+        prompt(
+            "Enter text color:\n\nExample: red, blue, #0f766e"
+        );
+
+    if (!color) return;
 
     restoreSelection();
 
@@ -1787,7 +1238,18 @@ function changeColor(color){
 }
 
 
-function changeHighlight(color){
+/* =========================================================
+   HIGHLIGHT
+========================================================= */
+
+function changeHighlightColor() {
+
+    const color =
+        prompt(
+            "Enter highlight color:\n\nExample: yellow, #fef08a"
+        );
+
+    if (!color) return;
 
     restoreSelection();
 
@@ -1802,22 +1264,18 @@ function changeHighlight(color){
 }
 
 
-/* =====================================================
-   LINK
-===================================================== */
+/* =========================================================
+   INSERT LINK
+========================================================= */
 
-function addLink(){
-
-    saveSelection();
+function insertLink() {
 
     const url =
         prompt(
-            "Enter the website URL:"
+            "Enter URL:"
         );
 
-    if(!url){
-        return;
-    }
+    if (!url) return;
 
     restoreSelection();
 
@@ -1832,188 +1290,108 @@ function addLink(){
 }
 
 
-/* =====================================================
-   ADD CANVA-STYLE TEXT BOX
-===================================================== */
+/* =========================================================
+   INSERT TABLE
+========================================================= */
 
-function addTextBox(){
+function insertTable() {
 
-    const editor =
-        getEditor();
+    const rows =
+        parseInt(
+            prompt("Number of rows:", "3")
+        );
 
-    const object =
-        document.createElement("div");
+    const cols =
+        parseInt(
+            prompt("Number of columns:", "3")
+        );
 
-    object.className =
-        "design-object text-object";
+    if (
+        !rows ||
+        !cols ||
+        rows < 1 ||
+        cols < 1
+    ) {
+        return;
+    }
 
-    object.setAttribute(
-        "data-object-type",
-        "text"
-    );
+    let html =
+        '<table><tbody>';
 
-    object.setAttribute(
-        "data-rotation",
-        "0"
-    );
+    for (
+        let r = 0;
+        r < rows;
+        r++
+    ) {
 
-    object.style.left =
-        "60px";
+        html += "<tr>";
 
-    object.style.top =
-        "60px";
+        for (
+            let c = 0;
+            c < cols;
+            c++
+        ) {
 
-    object.style.width =
-        "280px";
+            html +=
+                "<td>&nbsp;</td>";
 
-    object.style.minHeight =
-        "60px";
+        }
 
+        html += "</tr>";
 
-    /*
-       INNER EDITABLE AREA
+    }
 
-       This is what makes the text box behave
-       like Canva.
+    html +=
+        "</tbody></table><p><br></p>";
 
-       The OUTER object moves.
-       The INNER area edits text.
-    */
+    restoreSelection();
 
-    const textArea =
-        document.createElement("div");
-
-    textArea.className =
-        "text-drag-area";
-
-    textArea.contentEditable =
-        "true";
-
-    textArea.spellcheck =
-        true;
-
-    textArea.innerHTML =
-        "Type your text here...";
-
-
-    textArea.style.fontSize =
-        "18px";
-
-    textArea.style.color =
-        "#172033";
-
-
-    object.appendChild(
-        textArea
-    );
-
-
-    createObjectControls(
-        object
-    );
-
-    editor.appendChild(
-        object
-    );
-
-    makeObjectInteractive(
-        object
-    );
-
-    selectObject(
-        object
-    );
-
-
-    /*
-       Put cursor inside the new text.
-    */
-
-    setTimeout(
-        function(){
-
-            textArea.focus();
-
-            const range =
-                document.createRange();
-
-            range.selectNodeContents(
-                textArea
-            );
-
-            range.collapse(false);
-
-            const selection =
-                window.getSelection();
-
-            selection.removeAllRanges();
-
-            selection.addRange(
-                range
-            );
-
-            saveSelection();
-
-        },
-        50
+    document.execCommand(
+        "insertHTML",
+        false,
+        html
     );
 
 }
 
 
-/* =====================================================
-   IMAGE
-===================================================== */
+/* =========================================================
+   INSERT IMAGE FROM COMPUTER
+========================================================= */
 
-function addImage(){
+function insertImage() {
 
     const input =
         document.createElement("input");
 
-    input.type =
-        "file";
+    input.type = "file";
 
     input.accept =
         "image/*";
 
     input.onchange =
-        function(){
+        function () {
 
             const file =
                 input.files[0];
 
-            if(!file){
-                return;
-            }
-
-            if(
-                !file.type.startsWith(
-                    "image/"
-                )
-            ){
-
-                showStatus(
-                    "Please select an image file.",
-                    "error"
-                );
-
-                return;
-
-            }
+            if (!file) return;
 
             const reader =
                 new FileReader();
 
             reader.onload =
-                function(event){
+                function (event) {
 
-                    createImageObject(
+                    addImageObject(
                         event.target.result
                     );
 
                 };
 
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(
+                file
+            );
 
         };
 
@@ -2022,36 +1400,32 @@ function addImage(){
 }
 
 
-/* =====================================================
-   IMAGE URL
-===================================================== */
+/* =========================================================
+   INSERT IMAGE URL
+========================================================= */
 
-function addImageURL(){
+function insertImageURL() {
 
     const url =
         prompt(
             "Enter image URL:"
         );
 
-    if(!url){
-        return;
-    }
+    if (!url) return;
 
-    createImageObject(
-        url
-    );
+    addImageObject(url);
 
 }
 
 
-/* =====================================================
-   CREATE IMAGE
-===================================================== */
+/* =========================================================
+   ADD IMAGE OBJECT
+========================================================= */
 
-function createImageObject(src){
+function addImageObject(src) {
 
     const editor =
-        getEditor();
+        document.getElementById("content");
 
     const object =
         document.createElement("div");
@@ -2059,642 +1433,415 @@ function createImageObject(src){
     object.className =
         "design-object image-object";
 
-    object.setAttribute(
-        "data-object-type",
-        "image"
-    );
-
-    object.setAttribute(
-        "data-rotation",
-        "0"
-    );
+    object.dataset.objectType =
+        "image";
 
     object.style.left =
-        "70px";
+        "80px";
 
     object.style.top =
-        "70px";
+        "100px";
 
-    object.style.width =
-        "300px";
+    object.innerHTML = `
 
+        <img
+            src="${escapeAttribute(src)}"
+        >
 
-    const img =
-        document.createElement("img");
+        ${objectControlsHTML()}
 
-    img.src =
-        src;
+        <div class="rotate-handle"></div>
 
-    object.appendChild(
-        img
-    );
+        <div class="resize-handle"></div>
 
-    createObjectControls(
-        object
-    );
+    `;
 
-    editor.appendChild(
-        object
-    );
+    editor.appendChild(object);
 
-    makeObjectInteractive(
-        object
-    );
+    makeObjectInteractive(object);
 
-    selectObject(
-        object
-    );
-
-
-    img.onload =
-        function(){
-
-            const ratio =
-                img.naturalHeight /
-                img.naturalWidth;
-
-            if(ratio){
-
-                object.style.height =
-                    (
-                        object.offsetWidth *
-                        ratio
-                    ) +
-                    "px";
-
-            }
-
-        };
+    selectObject(object);
 
 }
 
 
-/* =====================================================
-   SHAPES
-===================================================== */
+/* =========================================================
+   TEXT BOX
+========================================================= */
 
-function addShape(type){
+function addTextBox() {
 
     const editor =
-        getEditor();
+        document.getElementById("content");
 
     const object =
         document.createElement("div");
 
     object.className =
-        "design-object shape-object";
+        "design-object text-object editing";
 
-    object.setAttribute(
-        "data-object-type",
-        "shape"
-    );
-
-    object.setAttribute(
-        "data-shape",
-        type
-    );
-
-    object.setAttribute(
-        "data-rotation",
-        "0"
-    );
+    object.dataset.objectType =
+        "text";
 
     object.style.left =
-        "100px";
+        "80px";
 
     object.style.top =
         "100px";
 
-    object.style.width =
-        type === "arrow"
-            ? "240px"
-            : "180px";
-
-    object.style.height =
-        type === "arrow"
-            ? "70px"
-            : "120px";
-
-
-    const svg =
-        document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "svg"
-        );
-
-    svg.setAttribute(
-        "viewBox",
-        "0 0 240 120"
+    object.setAttribute(
+        "contenteditable",
+        "false"
     );
 
-    svg.setAttribute(
-        "preserveAspectRatio",
-        "none"
-    );
+    object.innerHTML = `
 
+        <div
+            class="text-content"
+            contenteditable="true"
+        >Type your text here...</div>
 
-    if(type === "arrow"){
+        ${objectControlsHTML()}
 
-        svg.innerHTML = `
+        <div class="rotate-handle"></div>
 
-            <line
-                x1="15"
-                y1="60"
-                x2="205"
-                y2="60"
-                stroke="#18a058"
-                stroke-width="8"
-                stroke-linecap="round">
-            </line>
+        <div class="resize-handle"></div>
 
-            <polygon
-                points="200,35 235,60 200,85"
-                fill="#18a058">
-            </polygon>
+    `;
 
-        `;
+    editor.appendChild(object);
 
-    }
+    makeObjectInteractive(object);
 
+    selectObject(object);
 
-    if(type === "line"){
-
-        svg.innerHTML = `
-
-            <line
-                x1="10"
-                y1="60"
-                x2="230"
-                y2="60"
-                stroke="#172033"
-                stroke-width="7"
-                stroke-linecap="round">
-            </line>
-
-        `;
-
-    }
-
-
-    if(type === "rectangle"){
-
-        svg.innerHTML = `
-
-            <rect
-                x="10"
-                y="10"
-                width="220"
-                height="100"
-                fill="transparent"
-                stroke="#18a058"
-                stroke-width="7">
-            </rect>
-
-        `;
-
-    }
-
-
-    if(type === "circle"){
-
-        svg.innerHTML = `
-
-            <ellipse
-                cx="120"
-                cy="60"
-                rx="105"
-                ry="50"
-                fill="transparent"
-                stroke="#18a058"
-                stroke-width="7">
-            </ellipse>
-
-        `;
-
-    }
-
-
-    object.appendChild(
-        svg
-    );
-
-    createObjectControls(
-        object
-    );
-
-    editor.appendChild(
-        object
-    );
-
-    makeObjectInteractive(
-        object
-    );
-
-    selectObject(
-        object
-    );
+    enterTextEdit(object);
 
 }
 
 
-/* =====================================================
-   OBJECT CONTROLS
-===================================================== */
+/* =========================================================
+   TEXT EDIT
+========================================================= */
 
-function createObjectControls(object){
+function enterTextEdit(object) {
 
-    if(
-        object.querySelector(
-            ".object-controls"
+    if (!object) return;
+
+    if (
+        !object.classList.contains(
+            "text-object"
         )
-    ){
+    ) {
         return;
     }
 
-    const controls =
-        document.createElement("div");
+    exitAllTextEditing(
+        object
+    );
 
-    controls.className =
-        "object-controls";
+    object.classList.add(
+        "editing"
+    );
 
-
-    const left =
-        createControl(
-            "←",
-            "Move Left"
+    const text =
+        object.querySelector(
+            ".text-content"
         );
 
-    left.onclick =
-        function(e){
+    if (!text) return;
 
-            e.stopPropagation();
+    text.setAttribute(
+        "contenteditable",
+        "true"
+    );
 
-            moveObject(
-                object,
-                -10,
-                0
-            );
+    text.focus();
 
-        };
+    placeCaretAtEnd(text);
+
+}
 
 
-    const right =
-        createControl(
-            "→",
-            "Move Right"
+/* =========================================================
+   EXIT TEXT EDIT
+========================================================= */
+
+function exitTextEdit(object) {
+
+    if (!object) return;
+
+    object.classList.remove(
+        "editing"
+    );
+
+    const text =
+        object.querySelector(
+            ".text-content"
         );
 
-    right.onclick =
-        function(e){
+    if (text) {
 
-            e.stopPropagation();
-
-            moveObject(
-                object,
-                10,
-                0
-            );
-
-        };
-
-
-    const up =
-        createControl(
-            "↑",
-            "Move Up"
+        text.setAttribute(
+            "contenteditable",
+            "false"
         );
 
-    up.onclick =
-        function(e){
+    }
 
-            e.stopPropagation();
+    savedSelection = null;
 
-            moveObject(
-                object,
-                0,
-                -10
-            );
-
-        };
+}
 
 
-    const down =
-        createControl(
-            "↓",
-            "Move Down"
-        );
+/* =========================================================
+   EXIT ALL TEXT EDITING
+========================================================= */
 
-    down.onclick =
-        function(e){
+function exitAllTextEditing(except = null) {
 
-            e.stopPropagation();
+    document
+    .querySelectorAll(
+        ".text-object.editing"
+    )
+    .forEach(function(object) {
 
-            moveObject(
-                object,
-                0,
-                10
-            );
+        if (
+            object !== except
+        ) {
 
-        };
-
-
-    const smaller =
-        createControl(
-            "−",
-            "Smaller"
-        );
-
-    smaller.onclick =
-        function(e){
-
-            e.stopPropagation();
-
-            resizeByButton(
-                object,
-                -20
-            );
-
-        };
-
-
-    const bigger =
-        createControl(
-            "＋",
-            "Bigger"
-        );
-
-    bigger.onclick =
-        function(e){
-
-            e.stopPropagation();
-
-            resizeByButton(
-                object,
-                20
-            );
-
-        };
-
-
-    const rotateLeft =
-        createControl(
-            "↺",
-            "Rotate left"
-        );
-
-    rotateLeft.onclick =
-        function(e){
-
-            e.stopPropagation();
-
-            rotateObject(
-                object,
-                -15
-            );
-
-        };
-
-
-    const rotateRight =
-        createControl(
-            "↻",
-            "Rotate right"
-        );
-
-    rotateRight.onclick =
-        function(e){
-
-            e.stopPropagation();
-
-            rotateObject(
-                object,
-                15
-            );
-
-        };
-
-
-    const deleteButton =
-        createControl(
-            "🗑️",
-            "Delete"
-        );
-
-    deleteButton.onclick =
-        function(e){
-
-            e.stopPropagation();
-
-            deleteObject(
+            exitTextEdit(
                 object
             );
 
-        };
-
-
-    controls.appendChild(left);
-    controls.appendChild(right);
-    controls.appendChild(up);
-    controls.appendChild(down);
-    controls.appendChild(smaller);
-    controls.appendChild(bigger);
-    controls.appendChild(rotateLeft);
-    controls.appendChild(rotateRight);
-    controls.appendChild(deleteButton);
-
-
-    object.appendChild(
-        controls
-    );
-
-
-    /* ROTATE HANDLE */
-
-    const rotateHandle =
-        document.createElement("div");
-
-    rotateHandle.className =
-        "rotate-handle";
-
-    rotateHandle.title =
-        "Drag to rotate";
-
-    object.appendChild(
-        rotateHandle
-    );
-
-    rotateHandle.addEventListener(
-        "mousedown",
-        startRotate
-    );
-
-
-    /* RESIZE HANDLE */
-
-    const resizeHandle =
-        document.createElement("div");
-
-    resizeHandle.className =
-        "resize-handle";
-
-    resizeHandle.title =
-        "Drag to resize";
-
-    object.appendChild(
-        resizeHandle
-    );
-
-    resizeHandle.addEventListener(
-        "mousedown",
-        startResize
-    );
-
-}
-
-
-/* =====================================================
-   CONTROL BUTTON
-===================================================== */
-
-function createControl(text,title){
-
-    const button =
-        document.createElement("button");
-
-    button.type =
-        "button";
-
-    button.className =
-        "object-control";
-
-    button.textContent =
-        text;
-
-    button.title =
-        title;
-
-    button.addEventListener(
-        "mousedown",
-        function(e){
-
-            e.preventDefault();
-
         }
-    );
 
-    return button;
+    });
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   CARET AT END
+========================================================= */
+
+function placeCaretAtEnd(element) {
+
+    const range =
+        document.createRange();
+
+    range.selectNodeContents(
+        element
+    );
+
+    range.collapse(false);
+
+    const selection =
+        window.getSelection();
+
+    selection.removeAllRanges();
+
+    selection.addRange(
+        range
+    );
+
+}
+
+
+/* =========================================================
+   OBJECT CONTROLS HTML
+========================================================= */
+
+function objectControlsHTML() {
+
+    return `
+
+        <div class="object-controls">
+
+            <button
+                type="button"
+                onclick="moveObjectLeft(event)"
+                title="Move left"
+            >
+                ←
+            </button>
+
+            <button
+                type="button"
+                onclick="moveObjectCenter(event)"
+                title="Center"
+            >
+                ↔
+            </button>
+
+            <button
+                type="button"
+                onclick="moveObjectRight(event)"
+                title="Move right"
+            >
+                →
+            </button>
+
+            <button
+                type="button"
+                onclick="rotateObjectLeft(event)"
+                title="Rotate left"
+            >
+                ↶
+            </button>
+
+            <button
+                type="button"
+                onclick="rotateObjectRight(event)"
+                title="Rotate right"
+            >
+                ↷
+            </button>
+
+            <button
+                type="button"
+                onclick="deleteSelectedObject(event)"
+                title="Delete"
+            >
+                🗑
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
    SELECT OBJECT
-===================================================== */
+========================================================= */
 
-function selectObject(object){
+function selectObject(object) {
 
-    if(selectedObject){
+    if (!object) return;
 
-        selectedObject.classList.remove(
+    document
+    .querySelectorAll(
+        ".design-object.selected"
+    )
+    .forEach(function(item) {
+
+        item.classList.remove(
             "selected"
         );
 
-    }
+    });
 
     selectedObject =
-        object || null;
+        object;
 
-    if(object){
-
-        object.classList.add(
-            "selected"
-        );
-
-    }
+    object.classList.add(
+        "selected"
+    );
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   DESELECT ALL
+========================================================= */
+
+function deselectAll() {
+
+    document
+    .querySelectorAll(
+        ".design-object.selected"
+    )
+    .forEach(function(object) {
+
+        object.classList.remove(
+            "selected"
+        );
+
+    });
+
+    selectedObject = null;
+
+}
+
+
+/* =========================================================
    OBJECT INTERACTION
-===================================================== */
+========================================================= */
 
-function makeObjectInteractive(object){
+function makeObjectInteractive(object) {
 
-    /*
-       Prevent duplicate listeners when editing.
-    */
-
-    if(
-        object.dataset.interactive ===
-        "true"
-    ){
-        return;
-    }
-
-    object.dataset.interactive =
-        "true";
-
+    /* -----------------------------------------
+       NORMAL OBJECT POINTER DOWN
+    ----------------------------------------- */
 
     object.addEventListener(
-        "mousedown",
-        function(e){
+        "pointerdown",
+        function(e) {
 
-            /*
-               Controls do their own work.
-            */
-
-            if(
+            if (
                 e.target.closest(
                     ".object-controls"
                 )
-            ){
+            ) {
                 return;
             }
 
-
-            /*
-               Resize handle.
-            */
-
-            if(
-                e.target.closest(
-                    ".resize-handle"
-                )
-            ){
-                return;
-            }
-
-
-            /*
-               Rotate handle.
-            */
-
-            if(
+            if (
                 e.target.closest(
                     ".rotate-handle"
                 )
-            ){
+            ) {
                 return;
             }
 
-
-            /*
-               TEXT AREA
-
-               Clicking directly on the text should
-               NOT move the object.
-
-               It should remain editable.
-            */
-
-            if(
+            if (
                 e.target.closest(
-                    ".text-drag-area"
+                    ".resize-handle"
                 )
-            ){
+            ) {
+                return;
+            }
 
-                selectObject(
+            selectObject(
+                object
+            );
+
+
+            /* ---------------------------------
+               TEXT OBJECT
+            --------------------------------- */
+
+            if (
+                object.classList.contains(
+                    "text-object"
+                )
+            ) {
+
+                /*
+                    When editing:
+                    allow normal text selection.
+                */
+
+                if (
+                    object.classList.contains(
+                        "editing"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+                /*
+                    When not editing:
+                    clicking/dragging the box
+                    moves it like Canva.
+                */
+
+                beginDrag(
+                    e,
                     object
                 );
 
@@ -2703,19 +1850,11 @@ function makeObjectInteractive(object){
             }
 
 
-            /*
-               Everything else on the object is
-               a drag area.
+            /* ---------------------------------
+               IMAGE / SHAPE
+            --------------------------------- */
 
-               This includes the border/padding
-               of the text box.
-            */
-
-            selectObject(
-                object
-            );
-
-            startDrag(
+            beginDrag(
                 e,
                 object
             );
@@ -2723,244 +1862,359 @@ function makeObjectInteractive(object){
         }
     );
 
-}
 
+    /* -----------------------------------------
+       DOUBLE CLICK TEXT TO EDIT
+    ----------------------------------------- */
 
-/* =====================================================
-   DRAG
-===================================================== */
+    if (
+        object.classList.contains(
+            "text-object"
+        )
+    ) {
 
-function startDrag(e,object){
+        object.addEventListener(
+            "dblclick",
+            function(e) {
 
-    e.preventDefault();
+                if (
+                    e.target.closest(
+                        ".object-controls"
+                    )
+                ) {
+                    return;
+                }
 
-    e.stopPropagation();
+                if (
+                    e.target.closest(
+                        ".rotate-handle"
+                    )
+                ) {
+                    return;
+                }
 
-    draggingObject =
-        object;
+                if (
+                    e.target.closest(
+                        ".resize-handle"
+                    )
+                ) {
+                    return;
+                }
 
+                enterTextEdit(
+                    object
+                );
 
-    const rect =
-        object.getBoundingClientRect();
+            }
+        );
 
-    const editorRect =
-        getEditor().getBoundingClientRect();
-
-
-    dragOffsetX =
-        e.clientX -
-        rect.left;
-
-    dragOffsetY =
-        e.clientY -
-        rect.top;
-
-
-    document.addEventListener(
-        "mousemove",
-        dragMove
-    );
-
-    document.addEventListener(
-        "mouseup",
-        stopDrag
-    );
-
-}
-
-
-function dragMove(e){
-
-    if(!draggingObject){
-        return;
     }
 
 
-    const editorRect =
-        getEditor().getBoundingClientRect();
+    /* -----------------------------------------
+       ROTATE
+    ----------------------------------------- */
 
-
-    let left =
-        e.clientX -
-        editorRect.left -
-        dragOffsetX +
-        getEditor().scrollLeft;
-
-
-    let top =
-        e.clientY -
-        editorRect.top -
-        dragOffsetY +
-        getEditor().scrollTop;
-
-
-    left =
-        Math.max(
-            0,
-            left
+    const rotateHandle =
+        object.querySelector(
+            ".rotate-handle"
         );
 
-    top =
-        Math.max(
-            0,
-            top
+    if (rotateHandle) {
+
+        rotateHandle.addEventListener(
+            "pointerdown",
+            function(e) {
+
+                e.stopPropagation();
+
+                selectObject(
+                    object
+                );
+
+                beginRotate(
+                    e,
+                    object
+                );
+
+            }
         );
 
-
-    draggingObject.style.left =
-        left +
-        "px";
-
-    draggingObject.style.top =
-        top +
-        "px";
+    }
 
 
-    updateCanvasHeight();
+    /* -----------------------------------------
+       RESIZE
+    ----------------------------------------- */
 
-}
+    const resizeHandle =
+        object.querySelector(
+            ".resize-handle"
+        );
 
+    if (resizeHandle) {
 
-function stopDrag(){
+        resizeHandle.addEventListener(
+            "pointerdown",
+            function(e) {
 
-    draggingObject =
-        null;
+                e.stopPropagation();
 
-    document.removeEventListener(
-        "mousemove",
-        dragMove
-    );
+                selectObject(
+                    object
+                );
 
-    document.removeEventListener(
-        "mouseup",
-        stopDrag
-    );
+                beginResize(
+                    e,
+                    object
+                );
 
-}
+            }
+        );
 
-
-/* =====================================================
-   MOVE BUTTON
-===================================================== */
-
-function moveObject(object,dx,dy){
-
-    let left =
-        parseFloat(
-            object.style.left
-        ) || 0;
-
-    let top =
-        parseFloat(
-            object.style.top
-        ) || 0;
-
-
-    left += dx;
-
-    top += dy;
-
-
-    object.style.left =
-        Math.max(
-            0,
-            left
-        ) +
-        "px";
-
-    object.style.top =
-        Math.max(
-            0,
-            top
-        ) +
-        "px";
-
-
-    selectObject(
-        object
-    );
-
-    updateCanvasHeight();
+    }
 
 }
 
 
-/* =====================================================
-   RESIZE
-===================================================== */
+/* =========================================================
+   BEGIN DRAG
+========================================================= */
 
-function startResize(e){
+function beginDrag(e, object) {
 
     e.preventDefault();
 
-    e.stopPropagation();
+    const editor =
+        document.getElementById("content");
 
+    const editorRect =
+        editor.getBoundingClientRect();
 
-    resizingObject =
-        e.target.parentElement;
+    const objectRect =
+        object.getBoundingClientRect();
 
+    const scrollLeft =
+        editor.scrollLeft;
 
-    selectObject(
-        resizingObject
-    );
+    const scrollTop =
+        editor.scrollTop;
 
+    dragData = {
 
-    resizeStartX =
-        e.clientX;
+        object,
 
-    resizeStartY =
-        e.clientY;
+        startX:
+            e.clientX,
 
+        startY:
+            e.clientY,
 
-    resizeStartWidth =
-        resizingObject.offsetWidth;
+        startLeft:
+            object.offsetLeft,
 
-    resizeStartHeight =
-        resizingObject.offsetHeight;
+        startTop:
+            object.offsetTop,
+
+        editorRect,
+
+        scrollLeft,
+
+        scrollTop
+
+    };
 
 
     document.addEventListener(
-        "mousemove",
+        "pointermove",
+        dragMove
+    );
+
+    document.addEventListener(
+        "pointerup",
+        endDrag,
+        {
+            once: true
+        }
+    );
+
+}
+
+
+/* =========================================================
+   DRAG MOVE
+========================================================= */
+
+function dragMove(e) {
+
+    if (!dragData) {
+        return;
+    }
+
+    const dx =
+        e.clientX -
+        dragData.startX;
+
+    const dy =
+        e.clientY -
+        dragData.startY;
+
+    let newLeft =
+        dragData.startLeft +
+        dx;
+
+    let newTop =
+        dragData.startTop +
+        dy;
+
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const maxLeft =
+        editor.scrollWidth -
+        dragData.object.offsetWidth -
+        5;
+
+    const maxTop =
+        Math.max(
+            editor.scrollHeight,
+            editor.clientHeight
+        ) -
+        dragData.object.offsetHeight -
+        5;
+
+
+    newLeft =
+        Math.max(
+            0,
+            Math.min(
+                newLeft,
+                Math.max(
+                    0,
+                    maxLeft
+                )
+            )
+        );
+
+    newTop =
+        Math.max(
+            0,
+            Math.min(
+                newTop,
+                Math.max(
+                    0,
+                    maxTop
+                )
+            )
+        );
+
+
+    dragData.object.style.left =
+        newLeft + "px";
+
+    dragData.object.style.top =
+        newTop + "px";
+
+}
+
+
+/* =========================================================
+   END DRAG
+========================================================= */
+
+function endDrag() {
+
+    document.removeEventListener(
+        "pointermove",
+        dragMove
+    );
+
+    dragData = null;
+
+}
+
+
+/* =========================================================
+   BEGIN RESIZE
+========================================================= */
+
+function beginResize(e, object) {
+
+    e.preventDefault();
+
+    resizeData = {
+
+        object,
+
+        startX:
+            e.clientX,
+
+        startY:
+            e.clientY,
+
+        startWidth:
+            object.offsetWidth,
+
+        startHeight:
+            object.offsetHeight
+
+    };
+
+
+    document.addEventListener(
+        "pointermove",
         resizeMove
     );
 
     document.addEventListener(
-        "mouseup",
-        stopResize
+        "pointerup",
+        endResize,
+        {
+            once: true
+        }
     );
 
 }
 
 
-function resizeMove(e){
+/* =========================================================
+   RESIZE MOVE
+========================================================= */
 
-    if(!resizingObject){
+function resizeMove(e) {
+
+    if (!resizeData) {
         return;
     }
 
-
     const dx =
         e.clientX -
-        resizeStartX;
-
+        resizeData.startX;
 
     const dy =
         e.clientY -
-        resizeStartY;
+        resizeData.startY;
+
+    const object =
+        resizeData.object;
 
 
     let newWidth =
-        resizeStartWidth +
+        resizeData.startWidth +
         dx;
 
     let newHeight =
-        resizeStartHeight +
+        resizeData.startHeight +
         dy;
 
 
     newWidth =
         Math.max(
-            50,
+            60,
             newWidth
         );
 
@@ -2971,415 +2225,527 @@ function resizeMove(e){
         );
 
 
+    object.style.width =
+        newWidth + "px";
+
+
     /*
-       Images keep their proportions.
+       Text boxes can resize vertically.
     */
 
-    if(
-        resizingObject.dataset.objectType ===
-        "image"
-    ){
+    if (
+        object.classList.contains(
+            "text-object"
+        )
+    ) {
 
-        const img =
-            resizingObject.querySelector(
-                "img"
-            );
-
-        if(img){
-
-            const ratio =
-                img.naturalHeight /
-                img.naturalWidth;
-
-            if(ratio){
-
-                newHeight =
-                    newWidth *
-                    ratio;
-
-            }
-
-        }
+        object.style.minHeight =
+            newHeight + "px";
 
     }
 
-
-    /*
-       Text boxes can be resized freely.
-    */
-
-    resizingObject.style.width =
-        newWidth +
-        "px";
-
-    resizingObject.style.height =
-        newHeight +
-        "px";
-
-
-    updateCanvasHeight();
-
-}
-
-
-function stopResize(){
-
-    resizingObject =
-        null;
-
-    document.removeEventListener(
-        "mousemove",
-        resizeMove
-    );
-
-    document.removeEventListener(
-        "mouseup",
-        stopResize
-    );
-
-}
-
-
-/* =====================================================
-   RESIZE BUTTON
-===================================================== */
-
-function resizeByButton(object,amount){
-
-    let width =
-        object.offsetWidth +
-        amount;
-
-
-    width =
-        Math.max(
-            50,
-            width
-        );
-
-
-    object.style.width =
-        width +
-        "px";
-
-
-    if(
-        object.dataset.objectType ===
-        "image"
-    ){
+    else if (
+        object.classList.contains(
+            "image-object"
+        )
+    ) {
 
         const img =
             object.querySelector(
                 "img"
             );
 
-        if(img){
+        if (img) {
 
-            const ratio =
-                img.naturalHeight /
-                img.naturalWidth;
-
-            if(ratio){
-
-                object.style.height =
-                    (
-                        width *
-                        ratio
-                    ) +
-                    "px";
-
-            }
+            img.style.width =
+                newWidth + "px";
 
         }
 
     }
 
+    else {
 
-    selectObject(
-        object
-    );
+        object.style.width =
+            newWidth + "px";
 
-    updateCanvasHeight();
+        object.style.height =
+            newHeight + "px";
 
-}
-
-
-/* =====================================================
-   ROTATION
-===================================================== */
-
-function getRotation(object){
-
-    return parseFloat(
-        object.getAttribute(
-            "data-rotation"
-        ) || "0"
-    );
+    }
 
 }
 
 
-function setRotation(object,angle){
+/* =========================================================
+   END RESIZE
+========================================================= */
 
-    object.setAttribute(
-        "data-rotation",
-        String(angle)
+function endResize() {
+
+    document.removeEventListener(
+        "pointermove",
+        resizeMove
     );
 
-    object.style.transform =
-        "rotate(" +
-        angle +
-        "deg)";
+    resizeData = null;
 
 }
 
 
-function rotateObject(object,degrees){
+/* =========================================================
+   BEGIN ROTATE
+========================================================= */
 
-    const current =
-        getRotation(
-            object
-        );
-
-
-    setRotation(
-        object,
-        current + degrees
-    );
-
-
-    selectObject(
-        object
-    );
-
-}
-
-
-/* =====================================================
-   FREE ROTATION
-===================================================== */
-
-function startRotate(e){
+function beginRotate(e, object) {
 
     e.preventDefault();
 
-    e.stopPropagation();
-
-
-    rotatingObject =
-        e.target.parentElement;
-
-
-    selectObject(
-        rotatingObject
-    );
-
-
     const rect =
-        rotatingObject.getBoundingClientRect();
+        object.getBoundingClientRect();
 
-
-    rotateCenterX =
+    const centerX =
         rect.left +
         rect.width / 2;
 
-    rotateCenterY =
+    const centerY =
         rect.top +
         rect.height / 2;
 
-
-    rotateOriginal =
-        getRotation(
-            rotatingObject
-        );
-
-
-    rotateStartAngle =
+    const startAngle =
         Math.atan2(
-            e.clientY -
-            rotateCenterY,
-            e.clientX -
-            rotateCenterX
+            e.clientY - centerY,
+            e.clientX - centerX
         ) *
         180 /
         Math.PI;
 
 
+    const currentRotation =
+        getRotation(object);
+
+
+    rotateData = {
+
+        object,
+
+        centerX,
+
+        centerY,
+
+        startAngle,
+
+        currentRotation
+
+    };
+
+
     document.addEventListener(
-        "mousemove",
+        "pointermove",
         rotateMove
     );
 
     document.addEventListener(
-        "mouseup",
-        stopRotate
+        "pointerup",
+        endRotate,
+        {
+            once: true
+        }
     );
 
 }
 
 
-function rotateMove(e){
+/* =========================================================
+   ROTATE MOVE
+========================================================= */
 
-    if(!rotatingObject){
+function rotateMove(e) {
+
+    if (!rotateData) {
         return;
     }
 
-
-    const currentAngle =
+    const angle =
         Math.atan2(
             e.clientY -
-            rotateCenterY,
+                rotateData.centerY,
+
             e.clientX -
-            rotateCenterX
+                rotateData.centerX
         ) *
         180 /
         Math.PI;
 
 
-    const difference =
-        currentAngle -
-        rotateStartAngle;
-
-
-    setRotation(
-        rotatingObject,
-        rotateOriginal +
-        difference
-    );
-
-}
-
-
-function stopRotate(){
-
-    rotatingObject =
-        null;
-
-    document.removeEventListener(
-        "mousemove",
-        rotateMove
-    );
-
-    document.removeEventListener(
-        "mouseup",
-        stopRotate
-    );
-
-}
-
-
-/* =====================================================
-   DELETE OBJECT
-===================================================== */
-
-function deleteObject(object){
-
-    if(!object){
-        return;
-    }
-
-
-    const confirmed =
-        confirm(
-            "Delete this object?"
+    const rotation =
+        rotateData.currentRotation +
+        (
+            angle -
+            rotateData.startAngle
         );
 
 
-    if(!confirmed){
-        return;
-    }
-
-
-    object.remove();
-
-
-    if(
-        selectedObject ===
-        object
-    ){
-
-        selectedObject =
-            null;
-
-    }
-
-
-    updateCanvasHeight();
+    rotateData.object.style.transform =
+        `rotate(${rotation}deg)`;
 
 }
 
 
-/* =====================================================
-   CANVAS HEIGHT
-===================================================== */
+/* =========================================================
+   END ROTATE
+========================================================= */
 
-function updateCanvasHeight(){
+function endRotate() {
+
+    document.removeEventListener(
+        "pointermove",
+        rotateMove
+    );
+
+    rotateData = null;
+
+}
+
+
+/* =========================================================
+   GET ROTATION
+========================================================= */
+
+function getRotation(object) {
+
+    const transform =
+        window.getComputedStyle(
+            object
+        ).transform;
+
+    if (
+        !transform ||
+        transform === "none"
+    ) {
+        return 0;
+    }
+
+    const values =
+        transform
+        .match(
+            /matrix\(([^)]+)\)/
+        );
+
+    if (!values) {
+        return 0;
+    }
+
+    const parts =
+        values[1]
+        .split(",")
+        .map(Number);
+
+    const a =
+        parts[0];
+
+    const b =
+        parts[1];
+
+    let angle =
+        Math.round(
+            Math.atan2(
+                b,
+                a
+            ) *
+            180 /
+            Math.PI
+        );
+
+    return angle;
+
+}
+
+
+/* =========================================================
+   MOVE OBJECT LEFT
+========================================================= */
+
+function moveObjectLeft(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+    selectedObject.style.left =
+        Math.max(
+            0,
+            selectedObject.offsetLeft - 10
+        ) + "px";
+
+}
+
+
+/* =========================================================
+   MOVE OBJECT CENTER
+========================================================= */
+
+function moveObjectCenter(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
 
     const editor =
-        getEditor();
-
-    let maxBottom =
-        650;
-
-
-    editor
-        .querySelectorAll(
-            ":scope > .design-object"
-        )
-        .forEach(
-            function(object){
-
-                const top =
-                    parseFloat(
-                        object.style.top
-                    ) || 0;
-
-                const height =
-                    object.offsetHeight ||
-                    50;
-
-                maxBottom =
-                    Math.max(
-                        maxBottom,
-                        top +
-                        height +
-                        80
-                    );
-
-            }
+        document.getElementById(
+            "content"
         );
 
+    const left =
+        (
+            editor.clientWidth -
+            selectedObject.offsetWidth
+        ) / 2;
 
-    editor.style.minHeight =
-        maxBottom +
-        "px";
+    selectedObject.style.left =
+        Math.max(
+            0,
+            left
+        ) + "px";
 
 }
 
 
-/* =====================================================
-   EMPTY EDITOR
-===================================================== */
+/* =========================================================
+   MOVE OBJECT RIGHT
+========================================================= */
 
-getEditor().addEventListener(
-    "click",
-    function(e){
+function moveObjectRight(e) {
 
-        if(
-            e.target ===
-            getEditor()
-        ){
+    e.stopPropagation();
 
-            if(selectedObject){
+    if (!selectedObject) return;
 
-                selectedObject.classList.remove(
-                    "selected"
-                );
+    const editor =
+        document.getElementById(
+            "content"
+        );
 
-            }
+    const left =
+        editor.clientWidth -
+        selectedObject.offsetWidth -
+        10;
 
-            selectedObject =
-                null;
+    selectedObject.style.left =
+        Math.max(
+            0,
+            left
+        ) + "px";
+
+}
+
+
+/* =========================================================
+   ROTATE LEFT
+========================================================= */
+
+function rotateObjectLeft(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+    const rotation =
+        getRotation(
+            selectedObject
+        );
+
+    selectedObject.style.transform =
+        `rotate(${rotation - 15}deg)`;
+
+}
+
+
+/* =========================================================
+   ROTATE RIGHT
+========================================================= */
+
+function rotateObjectRight(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+    const rotation =
+        getRotation(
+            selectedObject
+        );
+
+    selectedObject.style.transform =
+        `rotate(${rotation + 15}deg)`;
+
+}
+
+
+/* =========================================================
+   DELETE OBJECT
+========================================================= */
+
+function deleteSelectedObject(e) {
+
+    if (e) {
+        e.stopPropagation();
+    }
+
+    if (!selectedObject) return;
+
+    selectedObject.remove();
+
+    selectedObject = null;
+
+}
+
+
+/* =========================================================
+   ADD SHAPE
+========================================================= */
+
+function addShape(type) {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+    const object =
+        document.createElement("div");
+
+    object.className =
+        "design-object shape-object";
+
+    object.dataset.objectType =
+        "shape";
+
+    object.dataset.shape =
+        type;
+
+    object.style.left =
+        "100px";
+
+    object.style.top =
+        "150px";
+
+
+    if (
+        type === "arrow"
+    ) {
+
+        object.classList.add(
+            "shape-arrow"
+        );
+
+    }
+
+    else if (
+        type === "line"
+    ) {
+
+        object.classList.add(
+            "shape-line"
+        );
+
+    }
+
+    else if (
+        type === "rectangle"
+    ) {
+
+        object.classList.add(
+            "shape-rectangle"
+        );
+
+    }
+
+    else if (
+        type === "circle"
+    ) {
+
+        object.classList.add(
+            "shape-circle"
+        );
+
+    }
+
+
+    object.innerHTML +=
+        objectControlsHTML();
+
+    object.innerHTML +=
+        '<div class="rotate-handle"></div>';
+
+    object.innerHTML +=
+        '<div class="resize-handle"></div>';
+
+
+    editor.appendChild(
+        object
+    );
+
+    makeObjectInteractive(
+        object
+    );
+
+    selectObject(
+        object
+    );
+
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE OBJECT
+========================================================= */
+
+document.addEventListener(
+    "pointerdown",
+    function(e) {
+
+        const editor =
+            document.getElementById(
+                "content"
+            );
+
+        /*
+           If currently editing a text box
+           and user clicks outside it,
+           save/finish editing.
+        */
+
+        const editingObject =
+            document.querySelector(
+                ".text-object.editing"
+            );
+
+
+        if (
+            editingObject &&
+            !editingObject.contains(e.target)
+        ) {
+
+            exitTextEdit(
+                editingObject
+            );
+
+        }
+
+
+        /*
+           If clicking completely outside
+           an object, deselect it.
+        */
+
+        if (
+            !e.target.closest(
+                ".design-object"
+            )
+        ) {
+
+            deselectAll();
 
         }
 
@@ -3387,866 +2753,880 @@ getEditor().addEventListener(
 );
 
 
-/* =====================================================
-   TABLE
-===================================================== */
+/* =========================================================
+   PREVENT EDITOR FROM TREATING OBJECT
+   AS NORMAL TEXT
+========================================================= */
 
-function addTable(){
+document
+.getElementById("content")
+.addEventListener(
+    "keydown",
+    function(e) {
 
-    const rowsInput =
-        prompt(
-            "How many rows?"
-        );
+        if (
+            e.key === "Delete" ||
+            e.key === "Backspace"
+        ) {
 
-    if(!rowsInput){
-        return;
-    }
+            if (
+                selectedObject &&
+                !document
+                .querySelector(
+                    ".text-object.editing"
+                )
+            ) {
 
+                /*
+                   Delete object only if the
+                   normal editor is not being typed into.
+                */
 
-    const colsInput =
-        prompt(
-            "How many columns?"
-        );
-
-    if(!colsInput){
-        return;
-    }
-
-
-    const rows =
-        parseInt(
-            rowsInput
-        );
-
-    const cols =
-        parseInt(
-            colsInput
-        );
-
-
-    if(
-        isNaN(rows) ||
-        isNaN(cols) ||
-        rows < 1 ||
-        cols < 1 ||
-        rows > 20 ||
-        cols > 10
-    ){
-
-        showStatus(
-            "Maximum is 20 rows × 10 columns.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    let html =
-        "<table><tbody>";
-
-
-    for(
-        let r=0;
-        r<rows;
-        r++
-    ){
-
-        html +=
-            "<tr>";
-
-
-        for(
-            let c=0;
-            c<cols;
-            c++
-        ){
-
-            html +=
-                r === 0
-                    ? "<th>Heading</th>"
-                    : "<td>Cell</td>";
+            }
 
         }
 
-
-        html +=
-            "</tr>";
-
     }
+);
 
 
-    html +=
-        "</tbody></table><p><br></p>";
-
-
-    restoreSelection();
-
-    document.execCommand(
-        "insertHTML",
-        false,
-        html
-    );
-
-    saveSelection();
-
-}
-
-
-/* =====================================================
+/* =========================================================
    PREVIEW
-===================================================== */
+========================================================= */
 
-function togglePreview(){
+function togglePreview() {
 
-    const box =
+    const preview =
         document.getElementById(
             "previewBox"
         );
 
-    const preview =
-        document.getElementById(
-            "previewContent"
-        );
-
-
-    if(
-        box.classList.contains(
+    if (
+        preview.classList.contains(
             "show"
         )
-    ){
+    ) {
 
-        box.classList.remove(
+        preview.classList.remove(
             "show"
         );
 
-        document.getElementById(
-            "previewButton"
-        ).textContent =
-            "👁️ Preview";
+        preview.innerHTML =
+            "";
 
         return;
 
     }
 
 
-    const cloned =
-        getEditor().cloneNode(
-            true
+    const html =
+        prepareHTMLForSaving(
+            false
         );
 
-
-    prepareHTMLForSaving(
-        cloned
-    );
-
-
     preview.innerHTML =
-        cloned.innerHTML;
+        html;
 
-
-    box.classList.add(
+    preview.classList.add(
         "show"
     );
 
+}
 
-    document.getElementById(
-        "previewButton"
-    ).textContent =
-        "❌ Hide Preview";
+
+/* =========================================================
+   UNDO
+========================================================= */
+
+function undoAction() {
+
+    document.execCommand(
+        "undo"
+    );
 
 }
 
 
-/* =====================================================
-   PREPARE HTML
-===================================================== */
+/* =========================================================
+   REDO
+========================================================= */
 
-function prepareHTMLForSaving(editorClone){
+function redoAction() {
 
-    /*
-       Remove editor controls.
-    */
+    document.execCommand(
+        "redo"
+    );
 
-    editorClone
-        .querySelectorAll(
-            ".object-controls,.rotate-handle,.resize-handle"
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttribute(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
         )
-        .forEach(
-            function(element){
-
-                element.remove();
-
-            }
-        );
-
-
-    /*
-       Remove selection.
-    */
-
-    editorClone
-        .querySelectorAll(
-            ".selected"
+        .replace(
+            /"/g,
+            "&quot;"
         )
-        .forEach(
-            function(element){
-
-                element.classList.remove(
-                    "selected"
-                );
-
-            }
-        );
-
-
-    /*
-       IMPORTANT:
-       Remove editor-only classes that are not
-       required for the student view.
-    */
-
-    editorClone
-        .querySelectorAll(
-            ".design-object"
+        .replace(
+            /</g,
+            "&lt;"
         )
-        .forEach(
-            function(object){
-
-                object.style.position =
-                    "absolute";
-
-                object.style.margin =
-                    "0";
-
-                object.style.cursor =
-                    "default";
-
-                object.style.userSelect =
-                    "auto";
-
-                object.style.transformOrigin =
-                    "center center";
-
-            }
-        );
-
-
-    /*
-       TEXT BOX
-
-       Convert the inner editable area into
-       normal display content.
-
-       The text itself stays exactly where
-       the administrator positioned it.
-    */
-
-    editorClone
-        .querySelectorAll(
-            ".text-object"
-        )
-        .forEach(
-            function(textObject){
-
-                textObject.style.display =
-                    "block";
-
-                textObject.style.background =
-                    textObject.style.background ||
-                    "transparent";
-
-                textObject
-                    .querySelectorAll(
-                        ".text-drag-area"
-                    )
-                    .forEach(
-                        function(textArea){
-
-                            textArea.removeAttribute(
-                                "contenteditable"
-                            );
-
-                            textArea.style.cursor =
-                                "default";
-
-                            textArea.style.userSelect =
-                                "text";
-
-                        }
-                    );
-
-            }
-        );
-
-
-    /*
-       IMAGES
-    */
-
-    editorClone
-        .querySelectorAll(
-            ".image-object img"
-        )
-        .forEach(
-            function(img){
-
-                img.style.maxWidth =
-                    "none";
-
-                img.style.width =
-                    "100%";
-
-                img.style.height =
-                    "auto";
-
-                img.style.display =
-                    "block";
-
-            }
-        );
-
-
-    /*
-       SHAPES
-    */
-
-    editorClone
-        .querySelectorAll(
-            ".shape-object svg"
-        )
-        .forEach(
-            function(svg){
-
-                svg.style.width =
-                    "100%";
-
-                svg.style.height =
-                    "100%";
-
-                svg.style.display =
-                    "block";
-
-                svg.style.pointerEvents =
-                    "none";
-
-            }
+        .replace(
+            />/g,
+            "&gt;"
         );
 
 }
 
 
-/* =====================================================
-   CONTENT TO SAVE
-===================================================== */
+/* =========================================================
+   PREPARE HTML FOR SAVING
+========================================================= */
 
-function getContentForSaving(){
+function prepareHTMLForSaving(
+    wrapCanvas = true
+) {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
 
     const clone =
-        getEditor().cloneNode(
+        editor.cloneNode(
             true
         );
 
 
-    prepareHTMLForSaving(
-        clone
-    );
+    /*
+       Remove editing controls.
+    */
+
+    clone
+    .querySelectorAll(
+        ".object-controls, .rotate-handle, .resize-handle"
+    )
+    .forEach(function(element) {
+
+        element.remove();
+
+    });
 
 
     /*
-       Make the saved content self-contained.
-
-       This is important because the student page
-       does not have the admin page's CSS.
+       Clean text objects.
     */
 
-    const wrapper =
-        document.createElement(
-            "div"
+    clone
+    .querySelectorAll(
+        ".text-object"
+    )
+    .forEach(function(object) {
+
+        object.classList.remove(
+            "selected"
         );
 
-    wrapper.style.position =
-        "relative";
+        object.classList.remove(
+            "editing"
+        );
 
-    wrapper.style.minHeight =
+        object.removeAttribute(
+            "contenteditable"
+        );
+
+        const text =
+            object.querySelector(
+                ".text-content"
+            );
+
+        if (text) {
+
+            text.removeAttribute(
+                "contenteditable"
+            );
+
+            text.style.userSelect =
+                "";
+
+        }
+
+    });
+
+
+    /*
+       Remove editor-only selection styles.
+    */
+
+    clone
+    .querySelectorAll(
+        ".selected"
+    )
+    .forEach(function(element) {
+
+        element.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    const html =
+        clone.innerHTML.trim();
+
+
+    if (!wrapCanvas) {
+
+        return html;
+
+    }
+
+
+    /*
+       Put everything inside a
+       self-contained relative canvas.
+    */
+
+    const hasObjects =
+        clone.querySelector(
+            ".design-object"
+        );
+
+
+    if (!hasObjects) {
+
+        return html;
+
+    }
+
+
+    /*
+       Find the lowest object so that
+       student pages have enough height.
+    */
+
+    let maxBottom = 0;
+
+    clone
+    .querySelectorAll(
+        ".design-object"
+    )
+    .forEach(function(object) {
+
+        const top =
+            parseFloat(
+                object.style.top
+            ) || 0;
+
+        const height =
+            object.offsetHeight ||
+            parseFloat(
+                object.style.height
+            ) ||
+            100;
+
+        maxBottom =
+            Math.max(
+                maxBottom,
+                top + height
+            );
+
+    });
+
+
+    const canvasHeight =
         Math.max(
-            650,
-            getEditor().scrollHeight
-        ) +
-        "px";
-
-    wrapper.style.width =
-        "100%";
-
-    wrapper.innerHTML =
-        clone.innerHTML;
+            500,
+            maxBottom + 80
+        );
 
 
-    return wrapper.outerHTML.trim();
+    return `
+
+        <div
+            class="ogcons-note-canvas"
+            style="
+                position:relative;
+                min-height:${canvasHeight}px;
+                width:100%;
+            "
+        >
+
+            ${html}
+
+        </div>
+
+    `;
 
 }
 
 
-/* =====================================================
-   TOPICS
-===================================================== */
+/* =========================================================
+   LOAD EDITOR CONTENT
+========================================================= */
 
-function updateTopics(selectedTopic=""){
+function loadEditorContent(html) {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+    editor.innerHTML =
+        html || "";
+
+
+    /*
+       If this is a previously saved
+       canvas, unwrap it.
+    */
+
+    const canvas =
+        editor.querySelector(
+            ":scope > .ogcons-note-canvas"
+        );
+
+
+    if (canvas) {
+
+        editor.innerHTML =
+            canvas.innerHTML;
+
+    }
+
+
+    /*
+       Prepare saved text objects.
+    */
+
+    editor
+    .querySelectorAll(
+        ".text-object"
+    )
+    .forEach(function(object) {
+
+        convertOldTextObject(
+            object
+        );
+
+        makeObjectInteractive(
+            object
+        );
+
+    });
+
+
+    /*
+       Prepare saved image objects.
+    */
+
+    editor
+    .querySelectorAll(
+        ".image-object"
+    )
+    .forEach(function(object) {
+
+        addControlsIfMissing(
+            object
+        );
+
+        makeObjectInteractive(
+            object
+        );
+
+    });
+
+
+    /*
+       Prepare saved shapes.
+    */
+
+    editor
+    .querySelectorAll(
+        ".shape-object"
+    )
+    .forEach(function(object) {
+
+        addControlsIfMissing(
+            object
+        );
+
+        makeObjectInteractive(
+            object
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   CONVERT OLD TEXT OBJECT
+========================================================= */
+
+function convertOldTextObject(object) {
+
+    if (
+        object.querySelector(
+            ".text-content"
+        )
+    ) {
+
+        object.setAttribute(
+            "contenteditable",
+            "false"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Old version may have text directly
+       inside the object.
+    */
+
+    const children =
+        Array.from(
+            object.childNodes
+        );
+
+
+    let oldHTML = "";
+
+
+    children.forEach(function(node) {
+
+        if (
+            node.nodeType ===
+            Node.TEXT_NODE
+        ) {
+
+            oldHTML +=
+                node.textContent;
+
+        }
+
+        else if (
+            node.nodeType ===
+            Node.ELEMENT_NODE
+        ) {
+
+            if (
+                !node.classList.contains(
+                    "object-controls"
+                ) &&
+                !node.classList.contains(
+                    "rotate-handle"
+                ) &&
+                !node.classList.contains(
+                    "resize-handle"
+                )
+            ) {
+
+                oldHTML +=
+                    node.outerHTML;
+
+            }
+
+        }
+
+    });
+
+
+    object.innerHTML =
+        `
+
+        <div
+            class="text-content"
+            contenteditable="false"
+        >
+            ${oldHTML || "Type your text here..."}
+        </div>
+
+        ${objectControlsHTML()}
+
+        <div class="rotate-handle"></div>
+
+        <div class="resize-handle"></div>
+
+        `;
+
+    object.setAttribute(
+        "contenteditable",
+        "false"
+    );
+
+}
+
+
+/* =========================================================
+   ADD CONTROLS IF MISSING
+========================================================= */
+
+function addControlsIfMissing(object) {
+
+    if (
+        !object.querySelector(
+            ".object-controls"
+        )
+    ) {
+
+        object.insertAdjacentHTML(
+            "beforeend",
+            objectControlsHTML()
+        );
+
+    }
+
+
+    if (
+        !object.querySelector(
+            ".rotate-handle"
+        )
+    ) {
+
+        object.insertAdjacentHTML(
+            "beforeend",
+            '<div class="rotate-handle"></div>'
+        );
+
+    }
+
+
+    if (
+        !object.querySelector(
+            ".resize-handle"
+        )
+    ) {
+
+        object.insertAdjacentHTML(
+            "beforeend",
+            '<div class="resize-handle"></div>'
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE NOTE
+========================================================= */
+
+async function saveNote() {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        "Saving...";
+
+    status.className =
+        "";
+
+
+    /*
+       Finish any active text editing.
+    */
+
+    exitAllTextEditing();
+
 
     const course =
         document.getElementById(
             "course"
         ).value;
 
-
-    const topicSelect =
-        document.getElementById(
-            "topic"
-        );
-
-
-    topicSelect.innerHTML =
-        `<option value="">Select Topic</option>`;
-
-
-    if(!course){
-        return;
-    }
-
-
-    (
-        courseTopics[course] || []
-    )
-    .forEach(
-        function(topic){
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                topic;
-
-            option.textContent =
-                topic;
-
-
-            if(
-                topic ===
-                selectedTopic
-            ){
-
-                option.selected =
-                    true;
-
-            }
-
-
-            topicSelect.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   FILTER TOPICS
-===================================================== */
-
-function updateFilterTopics(selectedTopic=""){
-
-    const course =
-        document.getElementById(
-            "filterCourse"
-        ).value;
-
-
-    const select =
-        document.getElementById(
-            "filterTopic"
-        );
-
-
-    select.innerHTML =
-        `<option value="">All Topics</option>`;
-
-
-    if(!course){
-        return;
-    }
-
-
-    (
-        courseTopics[course] || []
-    )
-    .forEach(
-        function(topic){
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                topic;
-
-            option.textContent =
-                topic;
-
-
-            if(
-                topic ===
-                selectedTopic
-            ){
-
-                option.selected =
-                    true;
-
-            }
-
-
-            select.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-async function checkLogin(){
-
-    const {
-        data:{
-            user
-        },
-        error
-    } =
-    await supabaseClient
-        .auth
-        .getUser();
-
-
-    if(
-        error ||
-        !user
-    ){
-
-        window.location.href =
-            "index.html";
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =====================================================
-   LOAD NOTES
-===================================================== */
-
-async function loadNotes(){
-
-    const loading =
-        document.getElementById(
-            "loading"
-        );
-
-
-    loading.style.display =
-        "block";
-
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("notes")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        console.error(error);
-
-        showStatus(
-            "Unable to load notes: " +
-            error.message,
-            "error"
-        );
-
-        loading.style.display =
-            "none";
-
-        return;
-
-    }
-
-
-    allNotes =
-        data || [];
-
-
-    loading.style.display =
-        "none";
-
-
-    filterNotes();
-
-}
-
-
-/* =====================================================
-   FILTER NOTES
-===================================================== */
-
-function filterNotes(){
-
-    const course =
-        document.getElementById(
-            "filterCourse"
-        ).value;
-
-
     const topic =
         document.getElementById(
-            "filterTopic"
+            "topic"
         ).value;
 
-
-    const search =
+    const title =
         document.getElementById(
-            "searchInput"
-        )
-        .value
-        .toLowerCase()
-        .trim();
+            "title"
+        ).value.trim();
 
 
-    const filtered =
-        allNotes.filter(
-            function(note){
+    if (!course) {
 
-                const noteCourse =
-                    String(
-                        note.course || ""
-                    );
+        status.textContent =
+            "Please select a course.";
 
-                const noteTopic =
-                    String(
-                        note.topic || ""
-                    );
+        status.className =
+            "error";
 
-                const noteTitle =
-                    String(
-                        note.title || ""
-                    );
+        return;
 
-                const noteContent =
-                    String(
-                        note.content || ""
-                    );
+    }
 
 
-                const plainContent =
-                    getPlainText(
-                        noteContent
-                    );
+    if (!topic) {
+
+        status.textContent =
+            "Please select a topic.";
+
+        status.className =
+            "error";
+
+        return;
+
+    }
 
 
-                return (
+    if (!title) {
 
-                    (!course ||
-                    noteCourse === course)
+        status.textContent =
+            "Please enter a note title.";
 
-                    &&
+        status.className =
+            "error";
 
-                    (!topic ||
-                    noteTopic === topic)
+        return;
 
-                    &&
+    }
 
-                    (
-                        !search ||
 
-                        noteTitle
-                            .toLowerCase()
-                            .includes(search)
-
-                        ||
-
-                        plainContent
-                            .toLowerCase()
-                            .includes(search)
-
-                        ||
-
-                        noteCourse
-                            .toLowerCase()
-                            .includes(search)
-
-                        ||
-
-                        noteTopic
-                            .toLowerCase()
-                            .includes(search)
-                    )
-
-                );
-
-            }
+    const content =
+        prepareHTMLForSaving(
+            true
         );
 
 
-    displayNotes(
-        filtered
-    );
+    if (!content.trim()) {
+
+        status.textContent =
+            "Please enter some note content.";
+
+        status.className =
+            "error";
+
+        return;
+
+    }
+
+
+    try {
+
+        let result;
+
+
+        if (editingNoteId) {
+
+            result =
+                await supabaseClient
+                .from("notes")
+                .update({
+
+                    course:
+                        course,
+
+                    topic:
+                        topic,
+
+                    title:
+                        title,
+
+                    content:
+                        content,
+
+                    updated_at:
+                        new Date().toISOString()
+
+                })
+                .eq(
+                    "id",
+                    editingNoteId
+                );
+
+        }
+
+        else {
+
+            result =
+                await supabaseClient
+                .from("notes")
+                .insert({
+
+                    course:
+                        course,
+
+                    topic:
+                        topic,
+
+                    title:
+                        title,
+
+                    content:
+                        content
+
+                });
+
+        }
+
+
+        if (result.error) {
+
+            throw result.error;
+
+        }
+
+
+        status.textContent =
+            editingNoteId
+                ? "Note updated successfully."
+                : "Note saved successfully.";
+
+        status.className =
+            "success";
+
+
+        await loadNotes();
+
+        clearEditor();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+        status.textContent =
+            "Error: " +
+            error.message;
+
+        status.className =
+            "error";
+
+    }
 
 }
 
 
-/* =====================================================
-   DISPLAY NOTES
-===================================================== */
+/* =========================================================
+   LOAD NOTES
+========================================================= */
 
-function displayNotes(notes){
+async function loadNotes() {
 
-    const container =
+    const list =
         document.getElementById(
             "notesList"
         );
 
-
-    container.innerHTML =
-        "";
-
-
-    document.getElementById(
-        "noteCount"
-    ).textContent =
-        notes.length +
-        (
-            notes.length === 1
-                ? " Note"
-                : " Notes"
-        );
+    list.innerHTML =
+        "<p>Loading notes...</p>";
 
 
-    if(notes.length === 0){
+    try {
 
-        container.innerHTML = `
-
-            <div class="empty">
-
-                <h2>
-                    📭 No Notes Found
-                </h2>
-
-                <p style="margin-top:10px;">
-                    No notes match your selected filters.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .from("notes")
+            .select(
+                "id, course, topic, title, content, created_at, updated_at"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
 
 
-    notes.forEach(
-        function(note,index){
+        if (error) {
+            throw error;
+        }
+
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            list.innerHTML =
+                "<p>No notes found.</p>";
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            "";
+
+
+        data.forEach(function(note) {
 
             const card =
                 document.createElement(
                     "div"
                 );
 
-
             card.className =
                 "note-card";
 
 
+            const preview =
+                note.content || "";
+
+
             card.innerHTML = `
 
-                <div class="note-top">
-
-                    <div class="note-number">
-                        Note ${index+1}
-                    </div>
-
-                    <div class="course-badge">
-                        ${escapeHTML(
-                            note.course || ""
-                        )}
-                    </div>
-
-                </div>
-
-                <div class="topic-badge">
-
+                <h3>
                     ${escapeHTML(
-                        note.topic || ""
+                        note.title
                     )}
+                </h3>
 
-                </div>
-
-                <div class="note-title">
-
+                <strong>
                     ${escapeHTML(
-                        note.title ||
-                        "Untitled Note"
+                        note.course
                     )}
+                </strong>
 
-                </div>
-
-                <div class="note-content">
-
-                    ${renderNoteContent(
-                        note.content ||
-                        "No content available."
+                <p>
+                    ${escapeHTML(
+                        note.topic
                     )}
+                </p>
 
+                <div class="note-preview">
+                    ${preview}
                 </div>
 
                 <div class="note-actions">
 
                     <button
-                        class="edit-btn"
-                        onclick="editNote('${note.id}')">
-
-                        ✏️ Edit
-
+                        class="edit-note"
+                        onclick="editNote('${note.id}')"
+                    >
+                        Edit
                     </button>
 
                     <button
-                        class="delete-btn"
-                        onclick="deleteNote('${note.id}')">
-
-                        🗑️ Delete
-
+                        class="delete-note"
+                        onclick="deleteNote('${note.id}')"
+                    >
+                        Delete
                     </button>
 
                 </div>
@@ -4254,472 +3634,202 @@ function displayNotes(notes){
             `;
 
 
-            container.appendChild(
+            list.appendChild(
                 card
             );
 
+        });
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+        list.innerHTML =
+            `<p class="error">
+                ${escapeHTML(
+                    error.message
+                )}
+            </p>`;
+
+    }
+
+}
+
+
+/* =========================================================
+   EDIT NOTE
+========================================================= */
+
+async function editNote(id) {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .from("notes")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
+
+
+        if (error) {
+            throw error;
         }
-    );
-
-}
 
 
-/* =====================================================
-   RENDER NOTE
-===================================================== */
-
-function renderNoteContent(content){
-
-    if(!content){
-
-        return "No content available.";
-
-    }
+        editingNoteId =
+            data.id;
 
 
-    if(
-        !/<[a-z][\s\S]*>/i.test(
-            content
-        )
-    ){
-
-        return escapeHTML(
-            content
-        ).replace(
-            /\n/g,
-            "<br>"
-        );
-
-    }
+        document.getElementById(
+            "editorTitle"
+        ).textContent =
+            "Edit Note";
 
 
-    return content;
-
-}
-
-
-/* =====================================================
-   PLAIN TEXT
-===================================================== */
-
-function getPlainText(content){
-
-    const temp =
-        document.createElement(
-            "div"
-        );
-
-
-    temp.innerHTML =
-        content;
-
-
-    return (
-        temp.textContent ||
-        temp.innerText ||
-        ""
-    );
-
-}
-
-
-/* =====================================================
-   SAVE NOTE
-===================================================== */
-
-async function saveNote(){
-
-    const course =
         document.getElementById(
             "course"
-        ).value;
+        ).value =
+            data.course;
 
 
-    const topic =
-        document.getElementById(
-            "topic"
-        ).value;
+        /*
+           Trigger course topic loading.
+        */
 
-
-    const title =
-        document.getElementById(
-            "title"
+        document
+        .getElementById(
+            "course"
         )
-        .value
-        .trim();
-
-
-    const content =
-        getContentForSaving();
-
-
-    if(
-        !course ||
-        !topic ||
-        !title ||
-        !content
-    ){
-
-        showStatus(
-            "Please complete Course, Topic, Note Title and Note Content.",
-            "error"
+        .dispatchEvent(
+            new Event("change")
         );
 
-        return;
+
+        const topicSelect =
+            document.getElementById(
+                "topic"
+            );
+
+
+        /*
+           Match topic safely.
+        */
+
+        let foundTopic =
+            courseTopics[
+                data.course
+            ]?.find(function(topic) {
+
+                return normalizeTopic(
+                    topic
+                ) ===
+                normalizeTopic(
+                    data.topic
+                );
+
+            });
+
+
+        if (foundTopic) {
+
+            topicSelect.value =
+                foundTopic;
+
+        }
+        else {
+
+            topicSelect.value =
+                data.topic;
+
+        }
+
+
+        document.getElementById(
+            "title"
+        ).value =
+            data.title || "";
+
+
+        loadEditorContent(
+            data.content || ""
+        );
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
     }
 
+    catch(error) {
 
-    const noteData = {
+        alert(
+            "Error loading note: " +
+            error.message
+        );
 
-        course:course,
+    }
 
-        topic:topic,
-
-        title:title,
-
-        content:content
-
-    };
+}
 
 
-    if(editingId){
+/* =========================================================
+   DELETE NOTE
+========================================================= */
+
+async function deleteNote(id) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this note?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
 
         const {
             error
         } =
-        await supabaseClient
+            await supabaseClient
             .from("notes")
-            .update(noteData)
+            .delete()
             .eq(
                 "id",
-                editingId
+                id
             );
 
 
-        if(error){
-
-            console.error(error);
-
-            showStatus(
-                "Unable to update note: " +
-                error.message,
-                "error"
-            );
-
-            return;
-
+        if (error) {
+            throw error;
         }
 
 
-        showStatus(
-            "✅ Note updated successfully.",
-            "success"
-        );
-
-
-        editingId =
-            null;
-
-
-        resetEditMode();
-
-        clearForm();
-
         await loadNotes();
 
-        return;
-
     }
 
-
-    const {
-        error
-    } =
-    await supabaseClient
-        .from("notes")
-        .insert([
-            noteData
-        ]);
-
-
-    if(error){
-
-        console.error(error);
-
-        showStatus(
-            "Unable to add note: " +
-            error.message,
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    showStatus(
-        "✅ Note added successfully.",
-        "success"
-    );
-
-
-    clearForm();
-
-    await loadNotes();
-
-}
-
-
-/* =====================================================
-   EDIT NOTE
-===================================================== */
-
-function editNote(id){
-
-    const note =
-        allNotes.find(
-            function(item){
-
-                return String(item.id) ===
-                       String(id);
-
-            }
-        );
-
-
-    if(!note){
-        return;
-    }
-
-
-    editingId =
-        note.id;
-
-
-    document.getElementById(
-        "formTitle"
-    ).textContent =
-        "✏️ Edit Note";
-
-
-    document.getElementById(
-        "saveButton"
-    ).textContent =
-        "💾 Update Note";
-
-
-    document.getElementById(
-        "cancelButton"
-    ).style.display =
-        "inline-block";
-
-
-    document.getElementById(
-        "course"
-    ).value =
-        note.course || "";
-
-
-    updateTopics(
-        note.topic || ""
-    );
-
-
-    document.getElementById(
-        "title"
-    ).value =
-        note.title || "";
-
-
-    /*
-       Load saved content.
-
-       If the saved content is wrapped in our
-       positioning container, load its INNER HTML
-       into the editor so we don't create wrappers
-       inside wrappers.
-    */
-
-    getEditor().innerHTML =
-        note.content || "";
-
-
-    const editor =
-        getEditor();
-
-
-    /*
-       If there is a saved wrapper, unwrap it.
-    */
-
-    const firstElement =
-        editor.firstElementChild;
-
-
-    if(
-        firstElement &&
-        firstElement.tagName ===
-        "DIV" &&
-        firstElement.style.position ===
-        "relative"
-    ){
-
-        /*
-           Only unwrap if this looks like our
-           saved canvas wrapper.
-        */
-
-        const children =
-            Array.from(
-                firstElement.childNodes
-            );
-
-
-        editor.innerHTML =
-            "";
-
-        children.forEach(
-            function(child){
-
-                editor.appendChild(
-                    child
-                );
-
-            }
-        );
-
-    }
-
-
-    /*
-       Re-enable all saved design objects.
-    */
-
-    editor
-        .querySelectorAll(
-            ".design-object"
-        )
-        .forEach(
-            function(object){
-
-                createObjectControlsIfMissing(
-                    object
-                );
-
-                makeObjectInteractive(
-                    object
-                );
-
-
-                /*
-                   Restore rotation.
-                */
-
-                const rotation =
-                    parseFloat(
-                        object.getAttribute(
-                            "data-rotation"
-                        ) || "0"
-                    );
-
-
-                setRotation(
-                    object,
-                    rotation
-                );
-
-
-                /*
-                   Old text objects from your
-                   previous version may have the
-                   text directly in the object.
-
-                   Convert them into the new
-                   editable text area.
-                */
-
-                if(
-                    object.dataset.objectType ===
-                    "text" &&
-                    !object.querySelector(
-                        ".text-drag-area"
-                    )
-                ){
-
-                    const oldHTML =
-                        object.innerHTML;
-
-
-                    object.innerHTML =
-                        "";
-
-
-                    const textArea =
-                        document.createElement(
-                            "div"
-                        );
-
-                    textArea.className =
-                        "text-drag-area";
-
-                    textArea.contentEditable =
-                        "true";
-
-                    textArea.innerHTML =
-                        oldHTML;
-
-
-                    object.appendChild(
-                        textArea
-                    );
-
-
-                    createObjectControls(
-                        object
-                    );
-
-                }
-
-            }
-        );
-
-
-    updateCanvasHeight();
-
-
-    document.getElementById(
-        "previewBox"
-    ).classList.remove(
-        "show"
-    );
-
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-}
-
-
-/* =====================================================
-   CONTROLS WHEN EDITING
-===================================================== */
-
-function createObjectControlsIfMissing(object){
-
-    if(
-        !object.querySelector(
-            ".object-controls"
-        )
-    ){
-
-        createObjectControls(
-            object
+    catch(error) {
+
+        alert(
+            "Error deleting note: " +
+            error.message
         );
 
     }
@@ -4727,53 +3837,21 @@ function createObjectControlsIfMissing(object){
 }
 
 
-/* =====================================================
-   CANCEL
-===================================================== */
+/* =========================================================
+   CLEAR EDITOR
+========================================================= */
 
-function cancelEdit(){
+function clearEditor() {
 
-    editingId =
+    editingNoteId =
         null;
 
-    resetEditMode();
-
-    clearForm();
-
-}
-
-
-/* =====================================================
-   RESET EDIT MODE
-===================================================== */
-
-function resetEditMode(){
 
     document.getElementById(
-        "formTitle"
+        "editorTitle"
     ).textContent =
-        "➕ Add New Note";
+        "Create New Note";
 
-
-    document.getElementById(
-        "saveButton"
-    ).textContent =
-        "➕ Add Note";
-
-
-    document.getElementById(
-        "cancelButton"
-    ).style.display =
-        "none";
-
-}
-
-
-/* =====================================================
-   CLEAR FORM
-===================================================== */
-
-function clearForm(){
 
     document.getElementById(
         "course"
@@ -4784,9 +3862,7 @@ function clearForm(){
     document.getElementById(
         "topic"
     ).innerHTML =
-        `<option value="">
-            Select a course first
-        </option>`;
+        '<option value="">Select Topic</option>';
 
 
     document.getElementById(
@@ -4795,20 +3871,10 @@ function clearForm(){
         "";
 
 
-    getEditor().innerHTML =
+    document.getElementById(
+        "content"
+    ).innerHTML =
         "";
-
-
-    getEditor().style.minHeight =
-        "650px";
-
-
-    selectedObject =
-        null;
-
-
-    savedSelection =
-        null;
 
 
     document.getElementById(
@@ -4819,161 +3885,44 @@ function clearForm(){
 
 
     document.getElementById(
-        "previewButton"
-    ).textContent =
-        "👁️ Preview";
+        "previewBox"
+    ).innerHTML =
+        "";
+
+
+    selectedObject =
+        null;
+
+
+    savedSelection =
+        null;
 
 }
 
 
-/* =====================================================
-   DELETE NOTE
-===================================================== */
-
-async function deleteNote(id){
-
-    const note =
-        allNotes.find(
-            function(item){
-
-                return String(item.id) ===
-                       String(id);
-
-            }
-        );
-
-
-    if(!note){
-        return;
-    }
-
-
-    const confirmed =
-        confirm(
-            "Are you sure you want to delete this note?\n\n" +
-            (
-                note.title ||
-                "Untitled Note"
-            )
-        );
-
-
-    if(!confirmed){
-        return;
-    }
-
-
-    const {
-        error
-    } =
-    await supabaseClient
-        .from("notes")
-        .delete()
-        .eq(
-            "id",
-            id
-        );
-
-
-    if(error){
-
-        showStatus(
-            "Unable to delete note: " +
-            error.message,
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    showStatus(
-        "✅ Note deleted successfully.",
-        "success"
-    );
-
-
-    await loadNotes();
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function showStatus(message,type){
-
-    const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    status.textContent =
-        message;
-
-
-    status.className =
-        type;
-
-
-    status.style.display =
-        "block";
-
-
-    setTimeout(
-        function(){
-
-            status.style.display =
-                "none";
-
-        },
-        4000
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(value) {
 
-    if(
-        value === null ||
-        value === undefined
-    ){
-
-        return "";
-
-    }
-
-
-    return String(value)
-
+    return String(value || "")
         .replace(
             /&/g,
             "&amp;"
         )
-
         .replace(
             /</g,
             "&lt;"
         )
-
         .replace(
             />/g,
             "&gt;"
         )
-
         .replace(
             /"/g,
             "&quot;"
         )
-
         .replace(
             /'/g,
             "&#039;"
@@ -4982,175 +3931,97 @@ function escapeHTML(value){
 }
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
 
-async function logout(){
-
-    await supabaseClient
-        .auth
-        .signOut();
+loadNotes();
 
 
-    window.location.href =
-        "index.html";
-
-}
-
-
-/* =====================================================
-   EDITOR EVENTS
-===================================================== */
-
-getEditor().addEventListener(
-    "mouseup",
-    function(e){
-
-        /*
-           Don't overwrite the text selection
-           when interacting with design objects.
-        */
-
-        if(
-            e.target.closest(
-                ".design-object"
-            )
-        ){
-            return;
-        }
-
-        saveSelection();
-
-    }
-);
-
-
-getEditor().addEventListener(
-    "keyup",
-    function(e){
-
-        if(
-            e.target.closest(
-                ".text-drag-area"
-            )
-        ){
-
-            saveSelection();
-
-            return;
-
-        }
-
-        saveSelection();
-
-    }
-);
-
-
-/* =====================================================
-   KEYBOARD DELETE
-===================================================== */
+/* =========================================================
+   KEYBOARD SHORTCUTS
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    function(e){
+    function(e) {
 
         /*
-           Don't delete an object when the user
-           is typing inside a text box.
+           Escape exits text editing.
         */
 
-        const active =
-            document.activeElement;
+        if (
+            e.key === "Escape"
+        ) {
 
+            const editingObject =
+                document.querySelector(
+                    ".text-object.editing"
+                );
 
-        const editingText =
-            active &&
-            active.closest &&
-            active.closest(
-                ".text-drag-area"
-            );
+            if (editingObject) {
 
+                exitTextEdit(
+                    editingObject
+                );
 
-        if(
-            selectedObject &&
-            e.key === "Delete" &&
-            !editingText
-        ){
-
-            e.preventDefault();
-
-            deleteObject(
-                selectedObject
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   CLICK OUTSIDE
-===================================================== */
-
-document.addEventListener(
-    "mousedown",
-    function(e){
-
-        if(
-            !e.target.closest(
-                ".design-object"
-            ) &&
-            !e.target.closest(
-                ".editor-toolbar"
-            )
-        ){
-
-            if(selectedObject){
-
-                selectedObject.classList.remove(
-                    "selected"
+                selectObject(
+                    editingObject
                 );
 
             }
 
-            selectedObject =
-                null;
+        }
+
+
+        /*
+           Delete selected object.
+        */
+
+        if (
+            e.key === "Delete"
+        ) {
+
+            const editingObject =
+                document.querySelector(
+                    ".text-object.editing"
+                );
+
+
+            if (
+                !editingObject &&
+                selectedObject
+            ) {
+
+                /*
+                   Only delete if the user
+                   is not typing in the editor.
+                */
+
+                const active =
+                    document.activeElement;
+
+                if (
+                    active ===
+                    document.getElementById(
+                        "content"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+                deleteSelectedObject();
+
+            }
 
         }
 
     }
 );
 
-
-/* =====================================================
-   START
-===================================================== */
-
-async function startAdmin(){
-
-    const loggedIn =
-        await checkLogin();
-
-
-    if(!loggedIn){
-        return;
-    }
-
-
-    updateFilterTopics();
-
-    await loadNotes();
-
-}
-
-
-startAdmin();
-
 </script>
 
 </body>
-
 </html>
