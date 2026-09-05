@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OGCONS Study Hub - Notes Admin</title>
 
@@ -53,6 +50,7 @@ header button {
     font-weight: bold;
 }
 
+
 /* =========================
    PAGE
 ========================= */
@@ -62,6 +60,7 @@ header button {
     max-width: 1400px;
     margin: 25px auto;
 }
+
 
 /* =========================
    CARD
@@ -78,6 +77,7 @@ header button {
 .card h2 {
     margin-top: 0;
 }
+
 
 /* =========================
    FORM
@@ -104,6 +104,57 @@ input[type="text"] {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-area input {
+    flex: 1;
+    margin: 0;
+}
+
+.search-btn {
+    border: none;
+    background: #0f766e;
+    color: white;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-btn:hover {
+    background: #115e59;
+}
+
+.clear-search-btn {
+    border: none;
+    background: #64748b;
+    color: white;
+    padding: 0 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-search-btn:hover {
+    background: #475569;
+}
+
+.search-info {
+    margin-bottom: 15px;
+    color: #64748b;
+    font-size: 14px;
+}
+
 
 /* =========================
    TOOLBAR
@@ -136,15 +187,12 @@ input[type="text"] {
     background: #e5e7eb;
 }
 
-.toolbar .danger {
-    color: #b91c1c;
-}
-
 .toolbar-separator {
     width: 1px;
     background: #cbd5e1;
     margin: 0 3px;
 }
+
 
 /* =========================
    RICH EDITOR
@@ -166,10 +214,10 @@ input[type="text"] {
     border-color: #0f766e;
 }
 
-/* Normal text */
 .rich-editor > p {
     margin: 10px 0;
 }
+
 
 /* =========================
    DESIGN OBJECT
@@ -188,6 +236,7 @@ input[type="text"] {
 .design-object.editing {
     outline: 2px solid #0f766e;
 }
+
 
 /* =========================
    TEXT OBJECT
@@ -225,6 +274,7 @@ input[type="text"] {
     outline: none;
 }
 
+
 /* =========================
    IMAGE OBJECT
 ========================= */
@@ -241,6 +291,7 @@ input[type="text"] {
     height: auto;
     pointer-events: none;
 }
+
 
 /* =========================
    SHAPES
@@ -293,6 +344,7 @@ input[type="text"] {
     transform: rotate(45deg);
 }
 
+
 /* =========================
    OBJECT CONTROLS
 ========================= */
@@ -328,6 +380,7 @@ input[type="text"] {
     background: #e2e8f0;
 }
 
+
 /* =========================
    ROTATE HANDLE
 ========================= */
@@ -351,6 +404,7 @@ input[type="text"] {
     display: block;
 }
 
+
 /* =========================
    RESIZE HANDLE
 ========================= */
@@ -372,6 +426,7 @@ input[type="text"] {
 .design-object.selected .resize-handle {
     display: block;
 }
+
 
 /* =========================
    BUTTONS
@@ -409,6 +464,7 @@ input[type="text"] {
     cursor: pointer;
 }
 
+
 /* =========================
    NOTE LIST
 ========================= */
@@ -431,10 +487,24 @@ input[type="text"] {
     color: #064e3b;
 }
 
+.note-course {
+    font-weight: bold;
+    color: #0f766e;
+    margin-bottom: 5px;
+}
+
+.note-topic {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
 .note-preview {
     max-height: 180px;
     overflow: hidden;
     font-size: 14px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 10px;
 }
 
 .note-actions {
@@ -448,6 +518,7 @@ input[type="text"] {
     padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .edit-note {
@@ -455,10 +526,19 @@ input[type="text"] {
     color: #1d4ed8;
 }
 
+.edit-note:hover {
+    background: #bfdbfe;
+}
+
 .delete-note {
     background: #fee2e2;
     color: #b91c1c;
 }
+
+.delete-note:hover {
+    background: #fecaca;
+}
+
 
 /* =========================
    PREVIEW
@@ -477,6 +557,7 @@ input[type="text"] {
     display: block;
 }
 
+
 /* =========================
    TABLE
 ========================= */
@@ -494,6 +575,7 @@ input[type="text"] {
     min-width: 50px;
 }
 
+
 /* =========================
    BLOCKQUOTE
 ========================= */
@@ -505,13 +587,6 @@ input[type="text"] {
     color: #475569;
 }
 
-/* =========================
-   IMAGE
-========================= */
-
-.rich-editor img {
-    max-width: 100%;
-}
 
 /* =========================
    STATUS
@@ -530,6 +605,7 @@ input[type="text"] {
     color: #b91c1c;
 }
 
+
 /* =========================
    RESPONSIVE
 ========================= */
@@ -538,6 +614,15 @@ input[type="text"] {
 
     .form-row {
         grid-template-columns: 1fr;
+    }
+
+    .search-area {
+        flex-direction: column;
+    }
+
+    .search-btn,
+    .clear-search-btn {
+        height: 45px;
     }
 
     header {
@@ -556,7 +641,9 @@ input[type="text"] {
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -571,320 +658,392 @@ input[type="text"] {
 
 <div class="container">
 
-    <!-- =========================
-         NOTE EDITOR
-    ========================== -->
 
-    <div class="card">
+<!-- =====================================================
+     NOTE EDITOR
+====================================================== -->
 
-        <h2 id="editorTitle">Create New Note</h2>
+<div class="card">
 
-        <div class="form-row">
-
-            <div>
-
-                <label>Course</label>
-
-                <select id="course">
-                    <option value="">Select Course</option>
-
-                    <option value="Foundations of Nursing">
-                        Foundations of Nursing
-                    </option>
-
-                    <option value="Anatomy & Physiology">
-                        Anatomy & Physiology
-                    </option>
-
-                    <option value="Pharmacology">
-                        Pharmacology
-                    </option>
-
-                    <option value="Primary Health Care">
-                        Primary Health Care
-                    </option>
-
-                    <option value="Medical/Surgical Nursing">
-                        Medical/Surgical Nursing
-                    </option>
-
-                    <option value="Microbiology">
-                        Microbiology
-                    </option>
-
-                </select>
-
-            </div>
+    <h2 id="editorTitle">
+        Create New Note
+    </h2>
 
 
-            <div>
+    <div class="form-row">
 
-                <label>Topic</label>
+        <div>
 
-                <select id="topic">
+            <label>
+                Course
+            </label>
 
-                    <option value="">
-                        Select Topic
-                    </option>
+            <select id="course">
 
-                </select>
+                <option value="">
+                    Select Course
+                </option>
 
-            </div>
+                <option value="Foundations of Nursing">
+                    Foundations of Nursing
+                </option>
+
+                <option value="Anatomy & Physiology">
+                    Anatomy & Physiology
+                </option>
+
+                <option value="Pharmacology">
+                    Pharmacology
+                </option>
+
+                <option value="Primary Health Care">
+                    Primary Health Care
+                </option>
+
+                <option value="Medical/Surgical Nursing">
+                    Medical/Surgical Nursing
+                </option>
+
+                <option value="Microbiology">
+                    Microbiology
+                </option>
+
+            </select>
 
         </div>
 
 
-        <label>Note Title</label>
+        <div>
 
-        <input
-            type="text"
-            id="title"
-            placeholder="Enter note title"
+            <label>
+                Topic
+            </label>
+
+            <select id="topic">
+
+                <option value="">
+                    Select Topic
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <label>
+        Note Title
+    </label>
+
+    <input
+        type="text"
+        id="title"
+        placeholder="Enter note title"
+    >
+
+
+    <!-- =================================================
+         TOOLBAR
+    ================================================== -->
+
+    <div class="toolbar">
+
+        <button onclick="formatText('bold')">
+            <b>B</b>
+        </button>
+
+        <button onclick="formatText('italic')">
+            <i>I</i>
+        </button>
+
+        <button onclick="formatText('underline')">
+            <u>U</u>
+        </button>
+
+        <span class="toolbar-separator"></span>
+
+
+        <select
+            onchange="formatBlock(this.value); this.value=''"
         >
 
+            <option value="">
+                Heading
+            </option>
 
-        <!-- =========================
-             TOOLBAR
-        ========================== -->
+            <option value="h1">
+                Heading 1
+            </option>
 
-        <div class="toolbar">
+            <option value="h2">
+                Heading 2
+            </option>
 
-            <button onclick="formatText('bold')" title="Bold">
-                <b>B</b>
-            </button>
+            <option value="h3">
+                Heading 3
+            </option>
 
-            <button onclick="formatText('italic')" title="Italic">
-                <i>I</i>
-            </button>
+            <option value="p">
+                Normal
+            </option>
 
-            <button onclick="formatText('underline')" title="Underline">
-                <u>U</u>
-            </button>
+        </select>
 
-            <span class="toolbar-separator"></span>
 
-            <select onchange="formatBlock(this.value); this.value=''">
+        <select
+            onchange="changeFontSize(this.value); this.value=''"
+        >
 
-                <option value="">
-                    Heading
-                </option>
+            <option value="">
+                Font Size
+            </option>
 
-                <option value="h1">
-                    Heading 1
-                </option>
+            <option value="1">
+                Small
+            </option>
 
-                <option value="h2">
-                    Heading 2
-                </option>
+            <option value="3">
+                Normal
+            </option>
 
-                <option value="h3">
-                    Heading 3
-                </option>
+            <option value="5">
+                Large
+            </option>
 
-                <option value="p">
-                    Normal
-                </option>
+            <option value="7">
+                Very Large
+            </option>
 
-            </select>
+        </select>
 
 
-            <select onchange="changeFontSize(this.value); this.value=''">
+        <span class="toolbar-separator"></span>
 
-                <option value="">
-                    Font Size
-                </option>
 
-                <option value="1">
-                    Small
-                </option>
+        <button onclick="formatText('justifyLeft')">
+            Left
+        </button>
 
-                <option value="3">
-                    Normal
-                </option>
+        <button onclick="formatText('justifyCenter')">
+            Center
+        </button>
 
-                <option value="5">
-                    Large
-                </option>
+        <button onclick="formatText('justifyRight')">
+            Right
+        </button>
 
-                <option value="7">
-                    Very Large
-                </option>
 
-            </select>
+        <span class="toolbar-separator"></span>
 
 
-            <span class="toolbar-separator"></span>
+        <button onclick="formatText('insertUnorderedList')">
+            • List
+        </button>
 
+        <button onclick="formatText('insertOrderedList')">
+            1. List
+        </button>
 
-            <button onclick="formatText('justifyLeft')">
-                Left
-            </button>
 
-            <button onclick="formatText('justifyCenter')">
-                Center
-            </button>
+        <span class="toolbar-separator"></span>
 
-            <button onclick="formatText('justifyRight')">
-                Right
-            </button>
 
+        <button onclick="changeTextColor()">
+            Text Color
+        </button>
 
-            <span class="toolbar-separator"></span>
+        <button onclick="changeHighlightColor()">
+            Highlight
+        </button>
 
 
-            <button onclick="formatText('insertUnorderedList')">
-                • List
-            </button>
+        <span class="toolbar-separator"></span>
 
-            <button onclick="formatText('insertOrderedList')">
-                1. List
-            </button>
 
+        <button onclick="insertTable()">
+            Table
+        </button>
 
-            <span class="toolbar-separator"></span>
+        <button onclick="insertImage()">
+            Image
+        </button>
 
+        <button onclick="insertImageURL()">
+            Image URL
+        </button>
 
-            <button onclick="changeTextColor()">
-                Text Color
-            </button>
 
-            <button onclick="changeHighlightColor()">
-                Highlight
-            </button>
+        <span class="toolbar-separator"></span>
 
 
-            <span class="toolbar-separator"></span>
+        <button onclick="addTextBox()">
+            Text Box
+        </button>
 
+        <button onclick="addShape('arrow')">
+            Arrow
+        </button>
 
-            <button onclick="insertTable()">
-                Table
-            </button>
+        <button onclick="addShape('line')">
+            Line
+        </button>
 
-            <button onclick="insertImage()">
-                Image
-            </button>
+        <button onclick="addShape('rectangle')">
+            Rectangle
+        </button>
 
-            <button onclick="insertImageURL()">
-                Image URL
-            </button>
+        <button onclick="addShape('circle')">
+            Circle
+        </button>
 
 
-            <span class="toolbar-separator"></span>
+        <span class="toolbar-separator"></span>
 
 
-            <button onclick="addTextBox()">
-                Text Box
-            </button>
+        <button onclick="insertLink()">
+            Link
+        </button>
 
-            <button onclick="addShape('arrow')">
-                Arrow
-            </button>
+        <button onclick="formatText('insertHorizontalRule')">
+            HR
+        </button>
 
-            <button onclick="addShape('line')">
-                Line
-            </button>
+        <button onclick="formatBlock('blockquote')">
+            Quote
+        </button>
 
-            <button onclick="addShape('rectangle')">
-                Rectangle
-            </button>
 
-            <button onclick="addShape('circle')">
-                Circle
-            </button>
+        <span class="toolbar-separator"></span>
 
 
-            <span class="toolbar-separator"></span>
+        <button onclick="undoAction()">
+            Undo
+        </button>
 
+        <button onclick="redoAction()">
+            Redo
+        </button>
 
-            <button onclick="insertLink()">
-                Link
-            </button>
-
-            <button onclick="formatText('insertHorizontalRule')">
-                HR
-            </button>
-
-            <button onclick="formatText('formatBlock','blockquote')">
-                Quote
-            </button>
-
-
-            <span class="toolbar-separator"></span>
-
-
-            <button onclick="undoAction()">
-                Undo
-            </button>
-
-            <button onclick="redoAction()">
-                Redo
-            </button>
-
-            <button onclick="togglePreview()">
-                Preview
-            </button>
-
-        </div>
-
-
-        <!-- =========================
-             EDITOR
-        ========================== -->
-
-        <div
-            id="content"
-            class="rich-editor"
-            contenteditable="true"
-            spellcheck="true"
-        ></div>
-
-
-        <div id="previewBox" class="preview-box"></div>
-
-
-        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
-
-            <button
-                class="primary-btn"
-                onclick="saveNote()"
-            >
-                Save Note
-            </button>
-
-            <button
-                class="secondary-btn"
-                onclick="clearEditor()"
-            >
-                Clear
-            </button>
-
-        </div>
-
-
-        <div id="status"></div>
+        <button onclick="togglePreview()">
+            Preview
+        </button>
 
     </div>
 
 
-    <!-- =========================
-         NOTES
-    ========================== -->
+    <!-- =================================================
+         EDITOR
+    ================================================== -->
 
-    <div class="card">
+    <div
+        id="content"
+        class="rich-editor"
+        contenteditable="true"
+        spellcheck="true"
+    ></div>
 
-        <h2>Existing Notes</h2>
 
-        <div
-            id="notesList"
-            class="note-list"
-        ></div>
+    <div
+        id="previewBox"
+        class="preview-box"
+    ></div>
+
+
+    <div
+        style="
+            margin-top:20px;
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+        "
+    >
+
+        <button
+            class="primary-btn"
+            onclick="saveNote()"
+        >
+            Save Note
+        </button>
+
+
+        <button
+            class="secondary-btn"
+            onclick="clearEditor()"
+        >
+            Clear
+        </button>
 
     </div>
+
+
+    <div id="status"></div>
 
 </div>
 
 
+
+<!-- =====================================================
+     SEARCH NOTES
+====================================================== -->
+
+<div class="card">
+
+    <h2>
+        Search Notes
+    </h2>
+
+
+    <div class="search-area">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by note title, course or topic..."
+            autocomplete="off"
+        >
+
+
+        <button
+            class="search-btn"
+            onclick="searchNotes()"
+        >
+            Search
+        </button>
+
+
+        <button
+            class="clear-search-btn"
+            onclick="clearSearch()"
+        >
+            Clear
+        </button>
+
+    </div>
+
+
+    <div
+        id="searchInfo"
+        class="search-info"
+    >
+        Showing all notes.
+    </div>
+
+
+    <div
+        id="notesList"
+        class="note-list"
+    ></div>
+
+</div>
+
+
+</div>
+
+
+
 <script>
+
 
 /* =========================================================
    SUPABASE
@@ -1029,6 +1188,8 @@ let resizeData = null;
 
 let rotateData = null;
 
+let allNotes = [];
+
 
 /* =========================================================
    COURSE CHANGE
@@ -1036,38 +1197,56 @@ let rotateData = null;
 
 document
 .getElementById("course")
-.addEventListener("change", function () {
+.addEventListener(
+    "change",
+    function() {
 
-    const course = this.value;
+        const course =
+            this.value;
 
-    const topicSelect =
-        document.getElementById("topic");
+        const topicSelect =
+            document.getElementById(
+                "topic"
+            );
 
-    topicSelect.innerHTML =
-        '<option value="">Select Topic</option>';
+        topicSelect.innerHTML =
+            '<option value="">Select Topic</option>';
 
-    if (!course || !courseTopics[course]) {
-        return;
+
+        if (
+            !course ||
+            !courseTopics[course]
+        ) {
+            return;
+        }
+
+
+        courseTopics[course]
+        .forEach(function(topic) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                topic;
+
+            option.textContent =
+                topic;
+
+            topicSelect.appendChild(
+                option
+            );
+
+        });
+
     }
-
-    courseTopics[course].forEach(function(topic) {
-
-        const option =
-            document.createElement("option");
-
-        option.value = topic;
-
-        option.textContent = topic;
-
-        topicSelect.appendChild(option);
-
-    });
-
-});
+);
 
 
 /* =========================================================
-   NORMALIZE TOPIC
+   NORMALIZE
 ========================================================= */
 
 function normalizeTopic(value) {
@@ -1089,17 +1268,23 @@ function saveSelection() {
     const selection =
         window.getSelection();
 
-    if (!selection.rangeCount) {
+    if (
+        !selection.rangeCount
+    ) {
         return;
     }
+
 
     const range =
         selection.getRangeAt(0);
 
+
     if (
         document
         .getElementById("content")
-        .contains(range.commonAncestorContainer)
+        .contains(
+            range.commonAncestorContainer
+        )
     ) {
 
         savedSelection =
@@ -1116,9 +1301,12 @@ function saveSelection() {
 
 function restoreSelection() {
 
-    if (!savedSelection) {
+    if (
+        !savedSelection
+    ) {
         return;
     }
+
 
     const selection =
         window.getSelection();
@@ -1133,7 +1321,7 @@ function restoreSelection() {
 
 
 /* =========================================================
-   EDITOR FOCUS
+   EDITOR EVENTS
 ========================================================= */
 
 document
@@ -1152,10 +1340,13 @@ document
 
 
 /* =========================================================
-   FORMAT TEXT
+   FORMAT
 ========================================================= */
 
-function formatText(command, value = null) {
+function formatText(
+    command,
+    value = null
+) {
 
     restoreSelection();
 
@@ -1265,7 +1456,7 @@ function changeHighlightColor() {
 
 
 /* =========================================================
-   INSERT LINK
+   LINK
 ========================================================= */
 
 function insertLink() {
@@ -1291,20 +1482,27 @@ function insertLink() {
 
 
 /* =========================================================
-   INSERT TABLE
+   TABLE
 ========================================================= */
 
 function insertTable() {
 
     const rows =
         parseInt(
-            prompt("Number of rows:", "3")
+            prompt(
+                "Number of rows:",
+                "3"
+            )
         );
 
     const cols =
         parseInt(
-            prompt("Number of columns:", "3")
+            prompt(
+                "Number of columns:",
+                "3"
+            )
         );
+
 
     if (
         !rows ||
@@ -1315,8 +1513,10 @@ function insertTable() {
         return;
     }
 
+
     let html =
-        '<table><tbody>';
+        "<table><tbody>";
+
 
     for (
         let r = 0;
@@ -1325,6 +1525,7 @@ function insertTable() {
     ) {
 
         html += "<tr>";
+
 
         for (
             let c = 0;
@@ -1337,14 +1538,18 @@ function insertTable() {
 
         }
 
+
         html += "</tr>";
 
     }
 
+
     html +=
         "</tbody></table><p><br></p>";
 
+
     restoreSelection();
+
 
     document.execCommand(
         "insertHTML",
@@ -1356,32 +1561,38 @@ function insertTable() {
 
 
 /* =========================================================
-   INSERT IMAGE FROM COMPUTER
+   IMAGE FROM COMPUTER
 ========================================================= */
 
 function insertImage() {
 
     const input =
-        document.createElement("input");
+        document.createElement(
+            "input"
+        );
 
-    input.type = "file";
+    input.type =
+        "file";
 
     input.accept =
         "image/*";
 
+
     input.onchange =
-        function () {
+        function() {
 
             const file =
                 input.files[0];
 
             if (!file) return;
 
+
             const reader =
                 new FileReader();
 
+
             reader.onload =
-                function (event) {
+                function(event) {
 
                     addImageObject(
                         event.target.result
@@ -1389,11 +1600,13 @@ function insertImage() {
 
                 };
 
+
             reader.readAsDataURL(
                 file
             );
 
         };
+
 
     input.click();
 
@@ -1401,7 +1614,7 @@ function insertImage() {
 
 
 /* =========================================================
-   INSERT IMAGE URL
+   IMAGE URL
 ========================================================= */
 
 function insertImageURL() {
@@ -1413,7 +1626,9 @@ function insertImageURL() {
 
     if (!url) return;
 
-    addImageObject(url);
+    addImageObject(
+        url
+    );
 
 }
 
@@ -1425,22 +1640,31 @@ function insertImageURL() {
 function addImageObject(src) {
 
     const editor =
-        document.getElementById("content");
+        document.getElementById(
+            "content"
+        );
+
 
     const object =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     object.className =
         "design-object image-object";
 
+
     object.dataset.objectType =
         "image";
+
 
     object.style.left =
         "80px";
 
     object.style.top =
         "100px";
+
 
     object.innerHTML = `
 
@@ -1456,11 +1680,20 @@ function addImageObject(src) {
 
     `;
 
-    editor.appendChild(object);
 
-    makeObjectInteractive(object);
+    editor.appendChild(
+        object
+    );
 
-    selectObject(object);
+
+    makeObjectInteractive(
+        object
+    );
+
+
+    selectObject(
+        object
+    );
 
 }
 
@@ -1472,16 +1705,24 @@ function addImageObject(src) {
 function addTextBox() {
 
     const editor =
-        document.getElementById("content");
+        document.getElementById(
+            "content"
+        );
+
 
     const object =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     object.className =
         "design-object text-object editing";
 
+
     object.dataset.objectType =
         "text";
+
 
     object.style.left =
         "80px";
@@ -1489,10 +1730,12 @@ function addTextBox() {
     object.style.top =
         "100px";
 
+
     object.setAttribute(
         "contenteditable",
         "false"
     );
+
 
     object.innerHTML = `
 
@@ -1509,24 +1752,37 @@ function addTextBox() {
 
     `;
 
-    editor.appendChild(object);
 
-    makeObjectInteractive(object);
+    editor.appendChild(
+        object
+    );
 
-    selectObject(object);
 
-    enterTextEdit(object);
+    makeObjectInteractive(
+        object
+    );
+
+
+    selectObject(
+        object
+    );
+
+
+    enterTextEdit(
+        object
+    );
 
 }
 
 
 /* =========================================================
-   TEXT EDIT
+   ENTER TEXT EDIT
 ========================================================= */
 
 function enterTextEdit(object) {
 
     if (!object) return;
+
 
     if (
         !object.classList.contains(
@@ -1536,29 +1792,38 @@ function enterTextEdit(object) {
         return;
     }
 
+
     exitAllTextEditing(
         object
     );
 
+
     object.classList.add(
         "editing"
     );
+
 
     const text =
         object.querySelector(
             ".text-content"
         );
 
+
     if (!text) return;
+
 
     text.setAttribute(
         "contenteditable",
         "true"
     );
 
+
     text.focus();
 
-    placeCaretAtEnd(text);
+
+    placeCaretAtEnd(
+        text
+    );
 
 }
 
@@ -1571,14 +1836,17 @@ function exitTextEdit(object) {
 
     if (!object) return;
 
+
     object.classList.remove(
         "editing"
     );
+
 
     const text =
         object.querySelector(
             ".text-content"
         );
+
 
     if (text) {
 
@@ -1589,43 +1857,51 @@ function exitTextEdit(object) {
 
     }
 
-    savedSelection = null;
+
+    savedSelection =
+        null;
 
 }
 
 
 /* =========================================================
-   EXIT ALL TEXT EDITING
+   EXIT ALL
 ========================================================= */
 
-function exitAllTextEditing(except = null) {
+function exitAllTextEditing(
+    except = null
+) {
 
     document
     .querySelectorAll(
         ".text-object.editing"
     )
-    .forEach(function(object) {
+    .forEach(
+        function(object) {
 
-        if (
-            object !== except
-        ) {
+            if (
+                object !== except
+            ) {
 
-            exitTextEdit(
-                object
-            );
+                exitTextEdit(
+                    object
+                );
+
+            }
 
         }
-
-    });
+    );
 
 }
 
 
 /* =========================================================
-   CARET AT END
+   CARET
 ========================================================= */
 
-function placeCaretAtEnd(element) {
+function placeCaretAtEnd(
+    element
+) {
 
     const range =
         document.createRange();
@@ -1634,7 +1910,10 @@ function placeCaretAtEnd(element) {
         element
     );
 
-    range.collapse(false);
+    range.collapse(
+        false
+    );
+
 
     const selection =
         window.getSelection();
@@ -1649,7 +1928,7 @@ function placeCaretAtEnd(element) {
 
 
 /* =========================================================
-   OBJECT CONTROLS HTML
+   OBJECT CONTROLS
 ========================================================= */
 
 function objectControlsHTML() {
@@ -1661,7 +1940,6 @@ function objectControlsHTML() {
             <button
                 type="button"
                 onclick="moveObjectLeft(event)"
-                title="Move left"
             >
                 ←
             </button>
@@ -1669,7 +1947,6 @@ function objectControlsHTML() {
             <button
                 type="button"
                 onclick="moveObjectCenter(event)"
-                title="Center"
             >
                 ↔
             </button>
@@ -1677,7 +1954,6 @@ function objectControlsHTML() {
             <button
                 type="button"
                 onclick="moveObjectRight(event)"
-                title="Move right"
             >
                 →
             </button>
@@ -1685,7 +1961,6 @@ function objectControlsHTML() {
             <button
                 type="button"
                 onclick="rotateObjectLeft(event)"
-                title="Rotate left"
             >
                 ↶
             </button>
@@ -1693,7 +1968,6 @@ function objectControlsHTML() {
             <button
                 type="button"
                 onclick="rotateObjectRight(event)"
-                title="Rotate right"
             >
                 ↷
             </button>
@@ -1701,7 +1975,6 @@ function objectControlsHTML() {
             <button
                 type="button"
                 onclick="deleteSelectedObject(event)"
-                title="Delete"
             >
                 🗑
             </button>
@@ -1721,20 +1994,25 @@ function selectObject(object) {
 
     if (!object) return;
 
+
     document
     .querySelectorAll(
         ".design-object.selected"
     )
-    .forEach(function(item) {
+    .forEach(
+        function(item) {
 
-        item.classList.remove(
-            "selected"
-        );
+            item.classList.remove(
+                "selected"
+            );
 
-    });
+        }
+    );
+
 
     selectedObject =
         object;
+
 
     object.classList.add(
         "selected"
@@ -1744,7 +2022,7 @@ function selectObject(object) {
 
 
 /* =========================================================
-   DESELECT ALL
+   DESELECT
 ========================================================= */
 
 function deselectAll() {
@@ -1753,15 +2031,19 @@ function deselectAll() {
     .querySelectorAll(
         ".design-object.selected"
     )
-    .forEach(function(object) {
+    .forEach(
+        function(object) {
 
-        object.classList.remove(
-            "selected"
-        );
+            object.classList.remove(
+                "selected"
+            );
 
-    });
+        }
+    );
 
-    selectedObject = null;
+
+    selectedObject =
+        null;
 
 }
 
@@ -1770,11 +2052,9 @@ function deselectAll() {
    OBJECT INTERACTION
 ========================================================= */
 
-function makeObjectInteractive(object) {
-
-    /* -----------------------------------------
-       NORMAL OBJECT POINTER DOWN
-    ----------------------------------------- */
+function makeObjectInteractive(
+    object
+) {
 
     object.addEventListener(
         "pointerdown",
@@ -1788,6 +2068,7 @@ function makeObjectInteractive(object) {
                 return;
             }
 
+
             if (
                 e.target.closest(
                     ".rotate-handle"
@@ -1795,6 +2076,7 @@ function makeObjectInteractive(object) {
             ) {
                 return;
             }
+
 
             if (
                 e.target.closest(
@@ -1804,25 +2086,17 @@ function makeObjectInteractive(object) {
                 return;
             }
 
+
             selectObject(
                 object
             );
 
-
-            /* ---------------------------------
-               TEXT OBJECT
-            --------------------------------- */
 
             if (
                 object.classList.contains(
                     "text-object"
                 )
             ) {
-
-                /*
-                    When editing:
-                    allow normal text selection.
-                */
 
                 if (
                     object.classList.contains(
@@ -1834,11 +2108,6 @@ function makeObjectInteractive(object) {
 
                 }
 
-                /*
-                    When not editing:
-                    clicking/dragging the box
-                    moves it like Canva.
-                */
 
                 beginDrag(
                     e,
@@ -1850,10 +2119,6 @@ function makeObjectInteractive(object) {
             }
 
 
-            /* ---------------------------------
-               IMAGE / SHAPE
-            --------------------------------- */
-
             beginDrag(
                 e,
                 object
@@ -1862,10 +2127,6 @@ function makeObjectInteractive(object) {
         }
     );
 
-
-    /* -----------------------------------------
-       DOUBLE CLICK TEXT TO EDIT
-    ----------------------------------------- */
 
     if (
         object.classList.contains(
@@ -1885,6 +2146,7 @@ function makeObjectInteractive(object) {
                     return;
                 }
 
+
                 if (
                     e.target.closest(
                         ".rotate-handle"
@@ -1893,6 +2155,7 @@ function makeObjectInteractive(object) {
                     return;
                 }
 
+
                 if (
                     e.target.closest(
                         ".resize-handle"
@@ -1900,6 +2163,7 @@ function makeObjectInteractive(object) {
                 ) {
                     return;
                 }
+
 
                 enterTextEdit(
                     object
@@ -1911,14 +2175,11 @@ function makeObjectInteractive(object) {
     }
 
 
-    /* -----------------------------------------
-       ROTATE
-    ----------------------------------------- */
-
     const rotateHandle =
         object.querySelector(
             ".rotate-handle"
         );
+
 
     if (rotateHandle) {
 
@@ -1943,14 +2204,11 @@ function makeObjectInteractive(object) {
     }
 
 
-    /* -----------------------------------------
-       RESIZE
-    ----------------------------------------- */
-
     const resizeHandle =
         object.querySelector(
             ".resize-handle"
         );
+
 
     if (resizeHandle) {
 
@@ -1978,27 +2236,16 @@ function makeObjectInteractive(object) {
 
 
 /* =========================================================
-   BEGIN DRAG
+   DRAG
 ========================================================= */
 
-function beginDrag(e, object) {
+function beginDrag(
+    e,
+    object
+) {
 
     e.preventDefault();
 
-    const editor =
-        document.getElementById("content");
-
-    const editorRect =
-        editor.getBoundingClientRect();
-
-    const objectRect =
-        object.getBoundingClientRect();
-
-    const scrollLeft =
-        editor.scrollLeft;
-
-    const scrollTop =
-        editor.scrollTop;
 
     dragData = {
 
@@ -2014,13 +2261,7 @@ function beginDrag(e, object) {
             object.offsetLeft,
 
         startTop:
-            object.offsetTop,
-
-        editorRect,
-
-        scrollLeft,
-
-        scrollTop
+            object.offsetTop
 
     };
 
@@ -2029,6 +2270,7 @@ function beginDrag(e, object) {
         "pointermove",
         dragMove
     );
+
 
     document.addEventListener(
         "pointerup",
@@ -2041,27 +2283,25 @@ function beginDrag(e, object) {
 }
 
 
-/* =========================================================
-   DRAG MOVE
-========================================================= */
-
 function dragMove(e) {
 
-    if (!dragData) {
-        return;
-    }
+    if (!dragData) return;
+
 
     const dx =
         e.clientX -
         dragData.startX;
 
+
     const dy =
         e.clientY -
         dragData.startY;
 
+
     let newLeft =
         dragData.startLeft +
         dx;
+
 
     let newTop =
         dragData.startTop +
@@ -2078,6 +2318,7 @@ function dragMove(e) {
         editor.scrollWidth -
         dragData.object.offsetWidth -
         5;
+
 
     const maxTop =
         Math.max(
@@ -2100,6 +2341,7 @@ function dragMove(e) {
             )
         );
 
+
     newTop =
         Math.max(
             0,
@@ -2116,15 +2358,12 @@ function dragMove(e) {
     dragData.object.style.left =
         newLeft + "px";
 
+
     dragData.object.style.top =
         newTop + "px";
 
 }
 
-
-/* =========================================================
-   END DRAG
-========================================================= */
 
 function endDrag() {
 
@@ -2133,18 +2372,23 @@ function endDrag() {
         dragMove
     );
 
-    dragData = null;
+    dragData =
+        null;
 
 }
 
 
 /* =========================================================
-   BEGIN RESIZE
+   RESIZE
 ========================================================= */
 
-function beginResize(e, object) {
+function beginResize(
+    e,
+    object
+) {
 
     e.preventDefault();
+
 
     resizeData = {
 
@@ -2170,6 +2414,7 @@ function beginResize(e, object) {
         resizeMove
     );
 
+
     document.addEventListener(
         "pointerup",
         endResize,
@@ -2181,57 +2426,42 @@ function beginResize(e, object) {
 }
 
 
-/* =========================================================
-   RESIZE MOVE
-========================================================= */
-
 function resizeMove(e) {
 
-    if (!resizeData) {
-        return;
-    }
+    if (!resizeData) return;
+
 
     const dx =
         e.clientX -
         resizeData.startX;
 
+
     const dy =
         e.clientY -
         resizeData.startY;
+
 
     const object =
         resizeData.object;
 
 
     let newWidth =
-        resizeData.startWidth +
-        dx;
-
-    let newHeight =
-        resizeData.startHeight +
-        dy;
-
-
-    newWidth =
         Math.max(
             60,
-            newWidth
+            resizeData.startWidth + dx
         );
 
-    newHeight =
+
+    let newHeight =
         Math.max(
             40,
-            newHeight
+            resizeData.startHeight + dy
         );
 
 
     object.style.width =
         newWidth + "px";
 
-
-    /*
-       Text boxes can resize vertically.
-    */
 
     if (
         object.classList.contains(
@@ -2277,10 +2507,6 @@ function resizeMove(e) {
 }
 
 
-/* =========================================================
-   END RESIZE
-========================================================= */
-
 function endResize() {
 
     document.removeEventListener(
@@ -2288,29 +2514,37 @@ function endResize() {
         resizeMove
     );
 
-    resizeData = null;
+    resizeData =
+        null;
 
 }
 
 
 /* =========================================================
-   BEGIN ROTATE
+   ROTATE
 ========================================================= */
 
-function beginRotate(e, object) {
+function beginRotate(
+    e,
+    object
+) {
 
     e.preventDefault();
 
+
     const rect =
         object.getBoundingClientRect();
+
 
     const centerX =
         rect.left +
         rect.width / 2;
 
+
     const centerY =
         rect.top +
         rect.height / 2;
+
 
     const startAngle =
         Math.atan2(
@@ -2322,7 +2556,9 @@ function beginRotate(e, object) {
 
 
     const currentRotation =
-        getRotation(object);
+        getRotation(
+            object
+        );
 
 
     rotateData = {
@@ -2345,6 +2581,7 @@ function beginRotate(e, object) {
         rotateMove
     );
 
+
     document.addEventListener(
         "pointerup",
         endRotate,
@@ -2356,15 +2593,10 @@ function beginRotate(e, object) {
 }
 
 
-/* =========================================================
-   ROTATE MOVE
-========================================================= */
-
 function rotateMove(e) {
 
-    if (!rotateData) {
-        return;
-    }
+    if (!rotateData) return;
+
 
     const angle =
         Math.atan2(
@@ -2392,10 +2624,6 @@ function rotateMove(e) {
 }
 
 
-/* =========================================================
-   END ROTATE
-========================================================= */
-
 function endRotate() {
 
     document.removeEventListener(
@@ -2403,14 +2631,11 @@ function endRotate() {
         rotateMove
     );
 
-    rotateData = null;
+    rotateData =
+        null;
 
 }
 
-
-/* =========================================================
-   GET ROTATION
-========================================================= */
 
 function getRotation(object) {
 
@@ -2419,6 +2644,7 @@ function getRotation(object) {
             object
         ).transform;
 
+
     if (
         !transform ||
         transform === "none"
@@ -2426,20 +2652,23 @@ function getRotation(object) {
         return 0;
     }
 
+
     const values =
-        transform
-        .match(
+        transform.match(
             /matrix\(([^)]+)\)/
         );
+
 
     if (!values) {
         return 0;
     }
 
+
     const parts =
         values[1]
         .split(",")
         .map(Number);
+
 
     const a =
         parts[0];
@@ -2447,23 +2676,21 @@ function getRotation(object) {
     const b =
         parts[1];
 
-    let angle =
-        Math.round(
-            Math.atan2(
-                b,
-                a
-            ) *
-            180 /
-            Math.PI
-        );
 
-    return angle;
+    return Math.round(
+        Math.atan2(
+            b,
+            a
+        ) *
+        180 /
+        Math.PI
+    );
 
 }
 
 
 /* =========================================================
-   MOVE OBJECT LEFT
+   OBJECT MOVEMENT
 ========================================================= */
 
 function moveObjectLeft(e) {
@@ -2471,6 +2698,7 @@ function moveObjectLeft(e) {
     e.stopPropagation();
 
     if (!selectedObject) return;
+
 
     selectedObject.style.left =
         Math.max(
@@ -2481,20 +2709,18 @@ function moveObjectLeft(e) {
 }
 
 
-/* =========================================================
-   MOVE OBJECT CENTER
-========================================================= */
-
 function moveObjectCenter(e) {
 
     e.stopPropagation();
 
     if (!selectedObject) return;
 
+
     const editor =
         document.getElementById(
             "content"
         );
+
 
     const left =
         (
@@ -2502,6 +2728,7 @@ function moveObjectCenter(e) {
             selectedObject.offsetWidth
         ) / 2;
 
+
     selectedObject.style.left =
         Math.max(
             0,
@@ -2510,10 +2737,6 @@ function moveObjectCenter(e) {
 
 }
 
-
-/* =========================================================
-   MOVE OBJECT RIGHT
-========================================================= */
 
 function moveObjectRight(e) {
 
@@ -2521,15 +2744,18 @@ function moveObjectRight(e) {
 
     if (!selectedObject) return;
 
+
     const editor =
         document.getElementById(
             "content"
         );
 
+
     const left =
         editor.clientWidth -
         selectedObject.offsetWidth -
         10;
+
 
     selectedObject.style.left =
         Math.max(
@@ -2541,7 +2767,7 @@ function moveObjectRight(e) {
 
 
 /* =========================================================
-   ROTATE LEFT
+   ROTATION BUTTONS
 ========================================================= */
 
 function rotateObjectLeft(e) {
@@ -2550,10 +2776,12 @@ function rotateObjectLeft(e) {
 
     if (!selectedObject) return;
 
+
     const rotation =
         getRotation(
             selectedObject
         );
+
 
     selectedObject.style.transform =
         `rotate(${rotation - 15}deg)`;
@@ -2561,20 +2789,18 @@ function rotateObjectLeft(e) {
 }
 
 
-/* =========================================================
-   ROTATE RIGHT
-========================================================= */
-
 function rotateObjectRight(e) {
 
     e.stopPropagation();
 
     if (!selectedObject) return;
 
+
     const rotation =
         getRotation(
             selectedObject
         );
+
 
     selectedObject.style.transform =
         `rotate(${rotation + 15}deg)`;
@@ -2592,17 +2818,20 @@ function deleteSelectedObject(e) {
         e.stopPropagation();
     }
 
+
     if (!selectedObject) return;
+
 
     selectedObject.remove();
 
-    selectedObject = null;
+    selectedObject =
+        null;
 
 }
 
 
 /* =========================================================
-   ADD SHAPE
+   SHAPES
 ========================================================= */
 
 function addShape(type) {
@@ -2612,17 +2841,24 @@ function addShape(type) {
             "content"
         );
 
+
     const object =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     object.className =
         "design-object shape-object";
 
+
     object.dataset.objectType =
         "shape";
 
+
     object.dataset.shape =
         type;
+
 
     object.style.left =
         "100px";
@@ -2675,8 +2911,10 @@ function addShape(type) {
     object.innerHTML +=
         objectControlsHTML();
 
+
     object.innerHTML +=
         '<div class="rotate-handle"></div>';
+
 
     object.innerHTML +=
         '<div class="resize-handle"></div>';
@@ -2686,9 +2924,11 @@ function addShape(type) {
         object
     );
 
+
     makeObjectInteractive(
         object
     );
+
 
     selectObject(
         object
@@ -2698,23 +2938,12 @@ function addShape(type) {
 
 
 /* =========================================================
-   CLICK OUTSIDE OBJECT
+   CLICK OUTSIDE
 ========================================================= */
 
 document.addEventListener(
     "pointerdown",
     function(e) {
-
-        const editor =
-            document.getElementById(
-                "content"
-            );
-
-        /*
-           If currently editing a text box
-           and user clicks outside it,
-           save/finish editing.
-        */
 
         const editingObject =
             document.querySelector(
@@ -2724,7 +2953,9 @@ document.addEventListener(
 
         if (
             editingObject &&
-            !editingObject.contains(e.target)
+            !editingObject.contains(
+                e.target
+            )
         ) {
 
             exitTextEdit(
@@ -2734,11 +2965,6 @@ document.addEventListener(
         }
 
 
-        /*
-           If clicking completely outside
-           an object, deselect it.
-        */
-
         if (
             !e.target.closest(
                 ".design-object"
@@ -2746,43 +2972,6 @@ document.addEventListener(
         ) {
 
             deselectAll();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   PREVENT EDITOR FROM TREATING OBJECT
-   AS NORMAL TEXT
-========================================================= */
-
-document
-.getElementById("content")
-.addEventListener(
-    "keydown",
-    function(e) {
-
-        if (
-            e.key === "Delete" ||
-            e.key === "Backspace"
-        ) {
-
-            if (
-                selectedObject &&
-                !document
-                .querySelector(
-                    ".text-object.editing"
-                )
-            ) {
-
-                /*
-                   Delete object only if the
-                   normal editor is not being typed into.
-                */
-
-            }
 
         }
 
@@ -2800,6 +2989,7 @@ function togglePreview() {
         document.getElementById(
             "previewBox"
         );
+
 
     if (
         preview.classList.contains(
@@ -2819,13 +3009,11 @@ function togglePreview() {
     }
 
 
-    const html =
+    preview.innerHTML =
         prepareHTMLForSaving(
             false
         );
 
-    preview.innerHTML =
-        html;
 
     preview.classList.add(
         "show"
@@ -2835,7 +3023,7 @@ function togglePreview() {
 
 
 /* =========================================================
-   UNDO
+   UNDO / REDO
 ========================================================= */
 
 function undoAction() {
@@ -2846,10 +3034,6 @@ function undoAction() {
 
 }
 
-
-/* =========================================================
-   REDO
-========================================================= */
 
 function redoAction() {
 
@@ -2888,7 +3072,7 @@ function escapeAttribute(value) {
 
 
 /* =========================================================
-   PREPARE HTML FOR SAVING
+   PREPARE HTML
 ========================================================= */
 
 function prepareHTMLForSaving(
@@ -2900,83 +3084,80 @@ function prepareHTMLForSaving(
             "content"
         );
 
+
     const clone =
         editor.cloneNode(
             true
         );
 
 
-    /*
-       Remove editing controls.
-    */
-
     clone
     .querySelectorAll(
         ".object-controls, .rotate-handle, .resize-handle"
     )
-    .forEach(function(element) {
+    .forEach(
+        function(element) {
 
-        element.remove();
+            element.remove();
 
-    });
+        }
+    );
 
-
-    /*
-       Clean text objects.
-    */
 
     clone
     .querySelectorAll(
         ".text-object"
     )
-    .forEach(function(object) {
+    .forEach(
+        function(object) {
 
-        object.classList.remove(
-            "selected"
-        );
-
-        object.classList.remove(
-            "editing"
-        );
-
-        object.removeAttribute(
-            "contenteditable"
-        );
-
-        const text =
-            object.querySelector(
-                ".text-content"
+            object.classList.remove(
+                "selected"
             );
 
-        if (text) {
+            object.classList.remove(
+                "editing"
+            );
 
-            text.removeAttribute(
+            object.removeAttribute(
                 "contenteditable"
             );
 
-            text.style.userSelect =
-                "";
+
+            const text =
+                object.querySelector(
+                    ".text-content"
+                );
+
+
+            if (text) {
+
+                text.removeAttribute(
+                    "contenteditable"
+                );
+
+                text.style.userSelect =
+                    "";
+
+            }
 
         }
+    );
 
-    });
-
-
-    /*
-       Remove editor-only selection styles.
-    */
 
     clone
     .querySelectorAll(
         ".selected"
     )
-    .forEach(function(element) {
+    .forEach(
+        function(element) {
 
-        element.classList.remove(
-            "selected"
-        );
+            element.classList.remove(
+                "selected"
+            );
 
-    });
+        }
+    );
 
 
     const html =
@@ -2989,11 +3170,6 @@ function prepareHTMLForSaving(
 
     }
 
-
-    /*
-       Put everything inside a
-       self-contained relative canvas.
-    */
 
     const hasObjects =
         clone.querySelector(
@@ -3008,38 +3184,39 @@ function prepareHTMLForSaving(
     }
 
 
-    /*
-       Find the lowest object so that
-       student pages have enough height.
-    */
+    let maxBottom =
+        0;
 
-    let maxBottom = 0;
 
     clone
     .querySelectorAll(
         ".design-object"
     )
-    .forEach(function(object) {
+    .forEach(
+        function(object) {
 
-        const top =
-            parseFloat(
-                object.style.top
-            ) || 0;
+            const top =
+                parseFloat(
+                    object.style.top
+                ) || 0;
 
-        const height =
-            object.offsetHeight ||
-            parseFloat(
-                object.style.height
-            ) ||
-            100;
 
-        maxBottom =
-            Math.max(
-                maxBottom,
-                top + height
-            );
+            const height =
+                object.offsetHeight ||
+                parseFloat(
+                    object.style.height
+                ) ||
+                100;
 
-    });
+
+            maxBottom =
+                Math.max(
+                    maxBottom,
+                    top + height
+                );
+
+        }
+    );
 
 
     const canvasHeight =
@@ -3080,14 +3257,10 @@ function loadEditorContent(html) {
             "content"
         );
 
+
     editor.innerHTML =
         html || "";
 
-
-    /*
-       If this is a previously saved
-       canvas, unwrap it.
-    */
 
     const canvas =
         editor.querySelector(
@@ -3103,76 +3276,76 @@ function loadEditorContent(html) {
     }
 
 
-    /*
-       Prepare saved text objects.
-    */
-
     editor
     .querySelectorAll(
         ".text-object"
     )
-    .forEach(function(object) {
+    .forEach(
+        function(object) {
 
-        convertOldTextObject(
-            object
-        );
+            convertOldTextObject(
+                object
+            );
 
-        makeObjectInteractive(
-            object
-        );
+            addControlsIfMissing(
+                object
+            );
 
-    });
+            makeObjectInteractive(
+                object
+            );
 
+        }
+    );
 
-    /*
-       Prepare saved image objects.
-    */
 
     editor
     .querySelectorAll(
         ".image-object"
     )
-    .forEach(function(object) {
+    .forEach(
+        function(object) {
 
-        addControlsIfMissing(
-            object
-        );
+            addControlsIfMissing(
+                object
+            );
 
-        makeObjectInteractive(
-            object
-        );
+            makeObjectInteractive(
+                object
+            );
 
-    });
+        }
+    );
 
-
-    /*
-       Prepare saved shapes.
-    */
 
     editor
     .querySelectorAll(
         ".shape-object"
     )
-    .forEach(function(object) {
+    .forEach(
+        function(object) {
 
-        addControlsIfMissing(
-            object
-        );
+            addControlsIfMissing(
+                object
+            );
 
-        makeObjectInteractive(
-            object
-        );
+            makeObjectInteractive(
+                object
+            );
 
-    });
+        }
+    );
 
 }
 
 
 /* =========================================================
-   CONVERT OLD TEXT OBJECT
+   OLD TEXT OBJECT CONVERSION
 ========================================================= */
 
-function convertOldTextObject(object) {
+function convertOldTextObject(
+    object
+) {
 
     if (
         object.querySelector(
@@ -3190,67 +3363,67 @@ function convertOldTextObject(object) {
     }
 
 
-    /*
-       Old version may have text directly
-       inside the object.
-    */
-
     const children =
         Array.from(
             object.childNodes
         );
 
 
-    let oldHTML = "";
+    let oldHTML =
+        "";
 
 
-    children.forEach(function(node) {
-
-        if (
-            node.nodeType ===
-            Node.TEXT_NODE
-        ) {
-
-            oldHTML +=
-                node.textContent;
-
-        }
-
-        else if (
-            node.nodeType ===
-            Node.ELEMENT_NODE
-        ) {
+    children.forEach(
+        function(node) {
 
             if (
-                !node.classList.contains(
-                    "object-controls"
-                ) &&
-                !node.classList.contains(
-                    "rotate-handle"
-                ) &&
-                !node.classList.contains(
-                    "resize-handle"
-                )
+                node.nodeType ===
+                Node.TEXT_NODE
             ) {
 
                 oldHTML +=
-                    node.outerHTML;
+                    node.textContent;
+
+            }
+
+            else if (
+                node.nodeType ===
+                Node.ELEMENT_NODE
+            ) {
+
+                if (
+                    !node.classList.contains(
+                        "object-controls"
+                    ) &&
+                    !node.classList.contains(
+                        "rotate-handle"
+                    ) &&
+                    !node.classList.contains(
+                        "resize-handle"
+                    )
+                ) {
+
+                    oldHTML +=
+                        node.outerHTML;
+
+                }
 
             }
 
         }
+    );
 
-    });
 
-
-    object.innerHTML =
-        `
+    object.innerHTML = `
 
         <div
             class="text-content"
             contenteditable="false"
         >
-            ${oldHTML || "Type your text here..."}
+            ${
+                oldHTML ||
+                "Type your text here..."
+            }
         </div>
 
         ${objectControlsHTML()}
@@ -3259,7 +3432,8 @@ function convertOldTextObject(object) {
 
         <div class="resize-handle"></div>
 
-        `;
+    `;
+
 
     object.setAttribute(
         "contenteditable",
@@ -3270,10 +3444,12 @@ function convertOldTextObject(object) {
 
 
 /* =========================================================
-   ADD CONTROLS IF MISSING
+   ADD CONTROLS
 ========================================================= */
 
-function addControlsIfMissing(object) {
+function addControlsIfMissing(
+    object
+) {
 
     if (
         !object.querySelector(
@@ -3338,10 +3514,6 @@ async function saveNote() {
         "";
 
 
-    /*
-       Finish any active text editing.
-    */
-
     exitAllTextEditing();
 
 
@@ -3350,10 +3522,12 @@ async function saveNote() {
             "course"
         ).value;
 
+
     const topic =
         document.getElementById(
             "topic"
         ).value;
+
 
     const title =
         document.getElementById(
@@ -3490,11 +3664,13 @@ async function saveNote() {
                 ? "Note updated successfully."
                 : "Note saved successfully.";
 
+
         status.className =
             "success";
 
 
         await loadNotes();
+
 
         clearEditor();
 
@@ -3506,9 +3682,11 @@ async function saveNote() {
             error
         );
 
+
         status.textContent =
             "Error: " +
             error.message;
+
 
         status.className =
             "error";
@@ -3519,7 +3697,7 @@ async function saveNote() {
 
 
 /* =========================================================
-   LOAD NOTES
+   LOAD ALL NOTES
 ========================================================= */
 
 async function loadNotes() {
@@ -3528,6 +3706,7 @@ async function loadNotes() {
         document.getElementById(
             "notesList"
         );
+
 
     list.innerHTML =
         "<p>Loading notes...</p>";
@@ -3553,33 +3732,86 @@ async function loadNotes() {
 
 
         if (error) {
+
             throw error;
-        }
-
-
-        if (
-            !data ||
-            data.length === 0
-        ) {
-
-            list.innerHTML =
-                "<p>No notes found.</p>";
-
-            return;
 
         }
+
+
+        allNotes =
+            data || [];
+
+
+        displayNotes(
+            allNotes
+        );
+
+
+        updateSearchInfo(
+            allNotes.length,
+            ""
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
 
 
         list.innerHTML =
-            "";
+            `<p class="error">
+                ${escapeHTML(
+                    error.message
+                )}
+            </p>`;
+
+    }
+
+}
 
 
-        data.forEach(function(note) {
+/* =========================================================
+   DISPLAY NOTES
+========================================================= */
+
+function displayNotes(
+    notes
+) {
+
+    const list =
+        document.getElementById(
+            "notesList"
+        );
+
+
+    list.innerHTML =
+        "";
+
+
+    if (
+        !notes ||
+        notes.length === 0
+    ) {
+
+        list.innerHTML =
+            "<p>No notes found.</p>";
+
+        return;
+
+    }
+
+
+    notes.forEach(
+        function(note) {
 
             const card =
                 document.createElement(
                     "div"
                 );
+
 
             card.className =
                 "note-card";
@@ -3597,17 +3829,17 @@ async function loadNotes() {
                     )}
                 </h3>
 
-                <strong>
+                <div class="note-course">
                     ${escapeHTML(
                         note.course
                     )}
-                </strong>
+                </div>
 
-                <p>
+                <div class="note-topic">
                     ${escapeHTML(
                         note.topic
                     )}
-                </p>
+                </div>
 
                 <div class="note-preview">
                     ${preview}
@@ -3619,14 +3851,14 @@ async function loadNotes() {
                         class="edit-note"
                         onclick="editNote('${note.id}')"
                     >
-                        Edit
+                        ✏️ Edit
                     </button>
 
                     <button
                         class="delete-note"
                         onclick="deleteNote('${note.id}')"
                     >
-                        Delete
+                        🗑 Delete
                     </button>
 
                 </div>
@@ -3638,24 +3870,198 @@ async function loadNotes() {
                 card
             );
 
-        });
+        }
+    );
 
-    }
+}
 
-    catch(error) {
 
-        console.error(
-            error
+/* =========================================================
+   SEARCH NOTES
+========================================================= */
+
+function searchNotes() {
+
+    const searchInput =
+        document.getElementById(
+            "searchInput"
         );
 
-        list.innerHTML =
-            `<p class="error">
-                ${escapeHTML(
-                    error.message
-                )}
-            </p>`;
+
+    const search =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    if (!search) {
+
+        displayNotes(
+            allNotes
+        );
+
+
+        updateSearchInfo(
+            allNotes.length,
+            ""
+        );
+
+
+        return;
 
     }
+
+
+    const filtered =
+        allNotes.filter(
+            function(note) {
+
+                const title =
+                    String(
+                        note.title || ""
+                    ).toLowerCase();
+
+
+                const course =
+                    String(
+                        note.course || ""
+                    ).toLowerCase();
+
+
+                const topic =
+                    String(
+                        note.topic || ""
+                    ).toLowerCase();
+
+
+                return (
+                    title.includes(search) ||
+                    course.includes(search) ||
+                    topic.includes(search)
+                );
+
+            }
+        );
+
+
+    displayNotes(
+        filtered
+    );
+
+
+    updateSearchInfo(
+        filtered.length,
+        search
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH AS YOU TYPE
+========================================================= */
+
+document
+.getElementById(
+    "searchInput"
+)
+.addEventListener(
+    "input",
+    function() {
+
+        searchNotes();
+
+    }
+);
+
+
+/* =========================================================
+   ENTER TO SEARCH
+========================================================= */
+
+document
+.getElementById(
+    "searchInput"
+)
+.addEventListener(
+    "keydown",
+    function(e) {
+
+        if (
+            e.key === "Enter"
+        ) {
+
+            e.preventDefault();
+
+            searchNotes();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SEARCH INFORMATION
+========================================================= */
+
+function updateSearchInfo(
+    count,
+    search
+) {
+
+    const info =
+        document.getElementById(
+            "searchInfo"
+        );
+
+
+    if (search) {
+
+        info.textContent =
+            `${count} note${
+                count === 1
+                    ? ""
+                    : "s"
+            } found for "${search}".`;
+
+    }
+
+    else {
+
+        info.textContent =
+            `Showing ${count} note${
+                count === 1
+                    ? ""
+                    : "s"
+            }.`;
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+========================================================= */
+
+function clearSearch() {
+
+    document.getElementById(
+        "searchInput"
+    ).value =
+        "";
+
+
+    displayNotes(
+        allNotes
+    );
+
+
+    updateSearchInfo(
+        allNotes.length,
+        ""
+    );
 
 }
 
@@ -3664,7 +4070,9 @@ async function loadNotes() {
    EDIT NOTE
 ========================================================= */
 
-async function editNote(id) {
+async function editNote(
+    id
+) {
 
     try {
 
@@ -3683,7 +4091,9 @@ async function editNote(id) {
 
 
         if (error) {
+
             throw error;
+
         }
 
 
@@ -3703,56 +4113,39 @@ async function editNote(id) {
             data.course;
 
 
-        /*
-           Trigger course topic loading.
-        */
-
         document
         .getElementById(
             "course"
         )
         .dispatchEvent(
-            new Event("change")
+            new Event(
+                "change"
+            )
         );
 
 
-        const topicSelect =
-            document.getElementById(
-                "topic"
+        const foundTopic =
+            courseTopics[
+                data.course
+            ]?.find(
+                function(topic) {
+
+                    return normalizeTopic(
+                        topic
+                    ) ===
+                    normalizeTopic(
+                        data.topic
+                    );
+
+                }
             );
 
 
-        /*
-           Match topic safely.
-        */
-
-        let foundTopic =
-            courseTopics[
-                data.course
-            ]?.find(function(topic) {
-
-                return normalizeTopic(
-                    topic
-                ) ===
-                normalizeTopic(
-                    data.topic
-                );
-
-            });
-
-
-        if (foundTopic) {
-
-            topicSelect.value =
-                foundTopic;
-
-        }
-        else {
-
-            topicSelect.value =
-                data.topic;
-
-        }
+        document.getElementById(
+            "topic"
+        ).value =
+            foundTopic ||
+            data.topic;
 
 
         document.getElementById(
@@ -3766,6 +4159,18 @@ async function editNote(id) {
         );
 
 
+        document.getElementById(
+            "status"
+        ).textContent =
+            "Editing selected note.";
+
+
+        document.getElementById(
+            "status"
+        ).className =
+            "";
+
+
         window.scrollTo({
             top: 0,
             behavior: "smooth"
@@ -3774,6 +4179,11 @@ async function editNote(id) {
     }
 
     catch(error) {
+
+        console.error(
+            error
+        );
+
 
         alert(
             "Error loading note: " +
@@ -3789,11 +4199,29 @@ async function editNote(id) {
    DELETE NOTE
 ========================================================= */
 
-async function deleteNote(id) {
+async function deleteNote(
+    id
+) {
+
+    const note =
+        allNotes.find(
+            function(item) {
+
+                return item.id === id;
+
+            }
+        );
+
+
+    const noteName =
+        note
+            ? note.title
+            : "this note";
+
 
     const confirmed =
         confirm(
-            "Are you sure you want to delete this note?"
+            `Are you sure you want to delete "${noteName}"?`
         );
 
 
@@ -3817,15 +4245,49 @@ async function deleteNote(id) {
 
 
         if (error) {
+
             throw error;
+
+        }
+
+
+        /*
+           If the deleted note is currently
+           being edited, clear the editor.
+        */
+
+        if (
+            editingNoteId === id
+        ) {
+
+            clearEditor();
+
         }
 
 
         await loadNotes();
 
+
+        const currentSearch =
+            document.getElementById(
+                "searchInput"
+            ).value.trim();
+
+
+        if (currentSearch) {
+
+            searchNotes();
+
+        }
+
     }
 
     catch(error) {
+
+        console.error(
+            error
+        );
+
 
         alert(
             "Error deleting note: " +
@@ -3890,6 +4352,12 @@ function clearEditor() {
         "";
 
 
+    document.getElementById(
+        "status"
+    ).textContent =
+        "";
+
+
     selectedObject =
         null;
 
@@ -3906,27 +4374,29 @@ function clearEditor() {
 
 function escapeHTML(value) {
 
-    return String(value || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    return String(
+        value || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
@@ -3939,16 +4409,12 @@ loadNotes();
 
 
 /* =========================================================
-   KEYBOARD SHORTCUTS
+   KEYBOARD
 ========================================================= */
 
 document.addEventListener(
     "keydown",
     function(e) {
-
-        /*
-           Escape exits text editing.
-        */
 
         if (
             e.key === "Escape"
@@ -3959,60 +4425,17 @@ document.addEventListener(
                     ".text-object.editing"
                 );
 
+
             if (editingObject) {
 
                 exitTextEdit(
                     editingObject
                 );
 
+
                 selectObject(
                     editingObject
                 );
-
-            }
-
-        }
-
-
-        /*
-           Delete selected object.
-        */
-
-        if (
-            e.key === "Delete"
-        ) {
-
-            const editingObject =
-                document.querySelector(
-                    ".text-object.editing"
-                );
-
-
-            if (
-                !editingObject &&
-                selectedObject
-            ) {
-
-                /*
-                   Only delete if the user
-                   is not typing in the editor.
-                */
-
-                const active =
-                    document.activeElement;
-
-                if (
-                    active ===
-                    document.getElementById(
-                        "content"
-                    )
-                ) {
-
-                    return;
-
-                }
-
-                deleteSelectedObject();
 
             }
 
