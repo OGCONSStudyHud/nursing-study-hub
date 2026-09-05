@@ -240,8 +240,7 @@ header{
 }
 
 input,
-select,
-textarea{
+select{
 
     width:100%;
 
@@ -259,19 +258,9 @@ textarea{
 }
 
 input:focus,
-select:focus,
-textarea:focus{
+select:focus{
 
     border-color:#18a058;
-}
-
-textarea{
-
-    min-height:180px;
-
-    resize:vertical;
-
-    line-height:1.6;
 }
 
 .form-grid{
@@ -332,6 +321,458 @@ button{
 .secondary:hover{
 
     background:#565e64;
+}
+
+
+/* ==============================
+   RICH TEXT EDITOR
+============================== */
+
+.editor-wrapper{
+
+    border:2px solid #dce4df;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    background:white;
+
+    transition:.2s;
+}
+
+.editor-wrapper:focus-within{
+
+    border-color:#18a058;
+
+    box-shadow:
+    0 0 0 3px rgba(24,160,88,.10);
+}
+
+
+/* TOOLBAR */
+
+.editor-toolbar{
+
+    display:flex;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:5px;
+
+    padding:10px;
+
+    background:#f4f8f5;
+
+    border-bottom:1px solid #dce4df;
+}
+
+.toolbar-group{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    padding-right:7px;
+
+    margin-right:5px;
+
+    border-right:1px solid #ccd8d1;
+}
+
+.toolbar-group:last-child{
+
+    border-right:none;
+
+}
+
+.toolbar-button{
+
+    min-width:38px;
+
+    height:36px;
+
+    padding:6px 9px;
+
+    border:1px solid #d6e0da;
+
+    background:white;
+
+    color:#26382d;
+
+    border-radius:7px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.toolbar-button:hover{
+
+    background:#e8fff2;
+
+    border-color:#18a058;
+
+    color:#117d45;
+}
+
+.toolbar-button.active{
+
+    background:#18a058;
+
+    color:white;
+
+    border-color:#18a058;
+}
+
+.toolbar-select{
+
+    height:36px;
+
+    border:1px solid #d6e0da;
+
+    background:white;
+
+    border-radius:7px;
+
+    padding:5px 8px;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    outline:none;
+}
+
+.toolbar-select:focus{
+
+    border-color:#18a058;
+}
+
+
+/* COLOR PICKERS */
+
+.color-control{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    background:white;
+
+    border:1px solid #d6e0da;
+
+    border-radius:7px;
+
+    padding:3px 6px;
+
+    height:36px;
+
+}
+
+.color-control span{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+.color-control input{
+
+    width:27px;
+
+    height:27px;
+
+    padding:0;
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+
+/* CONTENT AREA */
+
+.rich-editor{
+
+    min-height:350px;
+
+    padding:20px;
+
+    outline:none;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    color:#26382d;
+
+    overflow:auto;
+
+}
+
+.rich-editor:empty:before{
+
+    content:
+    "Write your study note here...";
+
+    color:#9aa79f;
+
+    pointer-events:none;
+}
+
+.rich-editor h1{
+
+    font-size:32px;
+
+    color:#172033;
+
+    margin:
+    18px 0 12px;
+}
+
+.rich-editor h2{
+
+    font-size:27px;
+
+    color:#172033;
+
+    margin:
+    18px 0 12px;
+}
+
+.rich-editor h3{
+
+    font-size:23px;
+
+    color:#172033;
+
+    margin:
+    16px 0 10px;
+}
+
+.rich-editor p{
+
+    margin-bottom:12px;
+}
+
+.rich-editor ul,
+.rich-editor ol{
+
+    margin:
+    10px 0 15px 30px;
+}
+
+.rich-editor li{
+
+    margin-bottom:6px;
+}
+
+.rich-editor img{
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+    margin:15px auto;
+
+    border-radius:10px;
+}
+
+.rich-editor table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin:18px 0;
+
+    background:white;
+}
+
+.rich-editor th,
+.rich-editor td{
+
+    border:1px solid #aebdb4;
+
+    padding:10px;
+
+    min-width:80px;
+
+    vertical-align:top;
+}
+
+.rich-editor th{
+
+    background:#e8fff2;
+
+    font-weight:bold;
+}
+
+.rich-editor blockquote{
+
+    border-left:
+    4px solid #18a058;
+
+    margin:
+    15px 0;
+
+    padding:
+    10px 15px;
+
+    background:#f4faf6;
+
+    color:#526159;
+}
+
+.rich-editor a{
+
+    color:#0b5ed7;
+
+    text-decoration:underline;
+}
+
+
+/* ==============================
+   EDITOR HELP
+============================== */
+
+.editor-help{
+
+    background:#f8faf9;
+
+    border:
+    1px solid #e1e8e4;
+
+    border-top:none;
+
+    padding:10px 15px;
+
+    color:#68756d;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+
+/* ==============================
+   PREVIEW
+============================== */
+
+.preview-box{
+
+    display:none;
+
+    margin-top:18px;
+
+    padding:25px;
+
+    border:
+    2px dashed #18a058;
+
+    border-radius:12px;
+
+    background:#fbfffc;
+}
+
+.preview-box.show{
+
+    display:block;
+}
+
+.preview-label{
+
+    color:#18a058;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+}
+
+.preview-content{
+
+    line-height:1.7;
+
+    color:#26382d;
+}
+
+.preview-content h1{
+
+    font-size:32px;
+
+    margin:
+    18px 0 12px;
+}
+
+.preview-content h2{
+
+    font-size:27px;
+
+    margin:
+    18px 0 12px;
+}
+
+.preview-content h3{
+
+    font-size:23px;
+
+    margin:
+    16px 0 10px;
+}
+
+.preview-content img{
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+    margin:15px auto;
+
+    border-radius:10px;
+}
+
+.preview-content table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin:18px 0;
+}
+
+.preview-content th,
+.preview-content td{
+
+    border:1px solid #aebdb4;
+
+    padding:10px;
+}
+
+.preview-content th{
+
+    background:#e8fff2;
+}
+
+.preview-content ul,
+.preview-content ol{
+
+    margin:
+    10px 0 15px 30px;
 }
 
 
@@ -500,8 +941,6 @@ button{
 
     line-height:1.7;
 
-    white-space:pre-wrap;
-
     background:#f8faf9;
 
     padding:18px;
@@ -513,7 +952,72 @@ button{
     max-height:350px;
 
     overflow:auto;
+}
 
+.note-content img{
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+    margin:12px auto;
+
+    border-radius:8px;
+}
+
+.note-content table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin:12px 0;
+}
+
+.note-content th,
+.note-content td{
+
+    border:1px solid #aebdb4;
+
+    padding:8px;
+}
+
+.note-content th{
+
+    background:#e8fff2;
+}
+
+.note-content ul,
+.note-content ol{
+
+    margin:
+    8px 0 10px 25px;
+}
+
+.note-content h1{
+
+    font-size:28px;
+
+    margin:
+    12px 0;
+}
+
+.note-content h2{
+
+    font-size:24px;
+
+    margin:
+    12px 0;
+}
+
+.note-content h3{
+
+    font-size:21px;
+
+    margin:
+    10px 0;
 }
 
 .note-actions{
@@ -625,6 +1129,20 @@ footer{
         flex-direction:column;
     }
 
+    .editor-toolbar{
+
+        gap:4px;
+    }
+
+    .toolbar-group{
+
+        border-right:none;
+
+        margin-right:0;
+
+        padding-right:0;
+    }
+
 }
 
 @media(max-width:600px){
@@ -655,6 +1173,29 @@ footer{
     .note-actions button{
 
         width:100%;
+    }
+
+    .rich-editor{
+
+        min-height:300px;
+
+        padding:15px;
+    }
+
+    .toolbar-button{
+
+        min-width:34px;
+
+        height:34px;
+
+        padding:5px 7px;
+    }
+
+    .toolbar-select{
+
+        height:34px;
+
+        max-width:120px;
     }
 
 }
@@ -726,7 +1267,7 @@ Logout
 
 <p>
 
-Create, edit, search, filter and delete
+Create, edit, format, search, filter and delete
 study notes for all OGCONS courses and topics.
 
 </p>
@@ -872,9 +1413,407 @@ Note Content
 
 </label>
 
-<textarea
+
+<div class="editor-wrapper">
+
+
+<!-- TOOLBAR -->
+
+<div class="editor-toolbar">
+
+
+<!-- TEXT STYLE -->
+
+<div class="toolbar-group">
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('bold')"
+    title="Bold">
+
+<b>B</b>
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('italic')"
+    title="Italic">
+
+<i>I</i>
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('underline')"
+    title="Underline">
+
+<u>U</u>
+
+</button>
+
+</div>
+
+
+
+<!-- HEADINGS -->
+
+<div class="toolbar-group">
+
+<select
+    class="toolbar-select"
+    onchange="changeBlock(this.value); this.selectedIndex=0;">
+
+<option value="">
+
+Heading
+
+</option>
+
+<option value="h1">
+
+Heading 1
+
+</option>
+
+<option value="h2">
+
+Heading 2
+
+</option>
+
+<option value="h3">
+
+Heading 3
+
+</option>
+
+<option value="p">
+
+Normal Text
+
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- FONT SIZE -->
+
+<div class="toolbar-group">
+
+<select
+    class="toolbar-select"
+    onchange="changeFontSize(this.value); this.selectedIndex=0;">
+
+<option value="">
+
+Text Size
+
+</option>
+
+<option value="1">
+
+Small
+
+</option>
+
+<option value="3">
+
+Normal
+
+</option>
+
+<option value="5">
+
+Large
+
+</option>
+
+<option value="7">
+
+Very Large
+
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- ALIGNMENT -->
+
+<div class="toolbar-group">
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('justifyLeft')"
+    title="Align Left">
+
+≡
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('justifyCenter')"
+    title="Center">
+
+☰
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('justifyRight')"
+    title="Align Right">
+
+≡
+
+</button>
+
+</div>
+
+
+
+<!-- LISTS -->
+
+<div class="toolbar-group">
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('insertUnorderedList')"
+    title="Bullet List">
+
+•
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('insertOrderedList')"
+    title="Numbered List">
+
+1.
+
+</button>
+
+</div>
+
+
+
+<!-- COLORS -->
+
+<div class="toolbar-group">
+
+<div class="color-control">
+
+<span>
+
+Text
+
+</span>
+
+<input
+    type="color"
+    id="textColor"
+    value="#172033"
+    onchange="changeColor(this.value)">
+
+</div>
+
+
+<div class="color-control">
+
+<span>
+
+Highlight
+
+</span>
+
+<input
+    type="color"
+    id="highlightColor"
+    value="#fff59d"
+    onchange="changeHighlight(this.value)">
+
+</div>
+
+</div>
+
+
+
+<!-- INSERT -->
+
+<div class="toolbar-group">
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="addTable()"
+    title="Add Table">
+
+▦
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="addImage()"
+    title="Add Image">
+
+🖼️
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="addImageURL()"
+    title="Add Image URL">
+
+🔗
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="addLink()"
+    title="Add Link">
+
+🔗
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('insertHorizontalRule')"
+    title="Horizontal Line">
+
+―
+
+</button>
+
+</div>
+
+
+
+<!-- QUOTE -->
+
+<div class="toolbar-group">
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="changeBlock('blockquote')"
+    title="Quote">
+
+❝
+
+</button>
+
+</div>
+
+
+
+<!-- UNDO -->
+
+<div class="toolbar-group">
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('undo')"
+    title="Undo">
+
+↶
+
+</button>
+
+
+<button
+    type="button"
+    class="toolbar-button"
+    onclick="formatText('redo')"
+    title="Redo">
+
+↷
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+<!-- EDITOR -->
+
+<div
     id="content"
-    placeholder="Write the study note here..."></textarea>
+    class="rich-editor"
+    contenteditable="true"
+    spellcheck="true">
+
+</div>
+
+
+<div class="editor-help">
+
+💡 Select text before using formatting buttons.
+Use <b>▦</b> to create tables and <b>🖼️</b> to add images.
+
+</div>
+
+
+</div>
+
+
+<!-- PREVIEW -->
+
+<div
+    id="previewBox"
+    class="preview-box">
+
+<div class="preview-label">
+
+👁️ Note Preview
+
+</div>
+
+<div
+    id="previewContent"
+    class="preview-content">
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -888,6 +1827,16 @@ Note Content
     onclick="saveNote()">
 
 ➕ Add Note
+
+</button>
+
+
+<button
+    class="secondary"
+    id="previewButton"
+    onclick="togglePreview()">
+
+👁️ Preview
 
 </button>
 
@@ -1117,6 +2066,8 @@ let allNotes = [];
 
 let editingId = null;
 
+let savedSelection = null;
+
 
 
 /* =====================================================
@@ -1289,6 +2240,523 @@ const courseTopics = {
 
 };
 
+
+
+/* =====================================================
+   EDITOR
+===================================================== */
+
+function getEditor(){
+
+    return document.getElementById("content");
+
+}
+
+
+/* =====================================================
+   SAVE CURRENT SELECTION
+===================================================== */
+
+function saveSelection(){
+
+    const selection =
+        window.getSelection();
+
+    if(!selection.rangeCount){
+
+        return;
+
+    }
+
+    const range =
+        selection.getRangeAt(0);
+
+    if(
+        getEditor().contains(
+            range.commonAncestorContainer
+        )
+    ){
+
+        savedSelection =
+            range.cloneRange();
+
+    }
+
+}
+
+
+/* =====================================================
+   RESTORE SELECTION
+===================================================== */
+
+function restoreSelection(){
+
+    if(!savedSelection){
+
+        getEditor().focus();
+
+        return;
+
+    }
+
+    const selection =
+        window.getSelection();
+
+    selection.removeAllRanges();
+
+    selection.addRange(
+        savedSelection
+    );
+
+    getEditor().focus();
+
+}
+
+
+/* =====================================================
+   EXECUTE FORMAT
+===================================================== */
+
+function formatText(command, value = null){
+
+    restoreSelection();
+
+    document.execCommand(
+        command,
+        false,
+        value
+    );
+
+    saveSelection();
+
+    getEditor().focus();
+
+}
+
+
+/* =====================================================
+   BLOCK FORMAT
+===================================================== */
+
+function changeBlock(tag){
+
+    restoreSelection();
+
+    if(!tag){
+
+        return;
+
+    }
+
+    document.execCommand(
+        "formatBlock",
+        false,
+        tag
+    );
+
+    saveSelection();
+
+    getEditor().focus();
+
+}
+
+
+/* =====================================================
+   FONT SIZE
+===================================================== */
+
+function changeFontSize(size){
+
+    restoreSelection();
+
+    if(!size){
+
+        return;
+
+    }
+
+    document.execCommand(
+        "fontSize",
+        false,
+        size
+    );
+
+    saveSelection();
+
+    getEditor().focus();
+
+}
+
+
+/* =====================================================
+   TEXT COLOR
+===================================================== */
+
+function changeColor(color){
+
+    restoreSelection();
+
+    document.execCommand(
+        "foreColor",
+        false,
+        color
+    );
+
+    saveSelection();
+
+    getEditor().focus();
+
+}
+
+
+/* =====================================================
+   HIGHLIGHT
+===================================================== */
+
+function changeHighlight(color){
+
+    restoreSelection();
+
+    document.execCommand(
+        "hiliteColor",
+        false,
+        color
+    );
+
+    saveSelection();
+
+    getEditor().focus();
+
+}
+
+
+/* =====================================================
+   LINK
+===================================================== */
+
+function addLink(){
+
+    saveSelection();
+
+    const url =
+        prompt(
+            "Enter the website URL:"
+        );
+
+    if(!url){
+
+        return;
+
+    }
+
+    restoreSelection();
+
+    document.execCommand(
+        "createLink",
+        false,
+        url
+    );
+
+    saveSelection();
+
+}
+
+
+/* =====================================================
+   IMAGE FROM COMPUTER
+===================================================== */
+
+function addImage(){
+
+    saveSelection();
+
+    const input =
+        document.createElement("input");
+
+    input.type =
+        "file";
+
+    input.accept =
+        "image/*";
+
+
+    input.onchange =
+        function(){
+
+            const file =
+                input.files[0];
+
+            if(!file){
+
+                return;
+
+            }
+
+
+            if(
+                !file.type.startsWith(
+                    "image/"
+                )
+            ){
+
+                showStatus(
+                    "Please select an image file.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event){
+
+                    restoreSelection();
+
+                    document.execCommand(
+                        "insertImage",
+                        false,
+                        event.target.result
+                    );
+
+                    saveSelection();
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        };
+
+
+    input.click();
+
+}
+
+
+/* =====================================================
+   IMAGE FROM URL
+===================================================== */
+
+function addImageURL(){
+
+    saveSelection();
+
+    const url =
+        prompt(
+            "Enter the image URL:"
+        );
+
+    if(!url){
+
+        return;
+
+    }
+
+    restoreSelection();
+
+    document.execCommand(
+        "insertImage",
+        false,
+        url
+    );
+
+    saveSelection();
+
+}
+
+
+/* =====================================================
+   ADD TABLE
+===================================================== */
+
+function addTable(){
+
+    saveSelection();
+
+    const rowsInput =
+        prompt(
+            "How many rows?\nExample: 4"
+        );
+
+    if(!rowsInput){
+
+        return;
+
+    }
+
+    const colsInput =
+        prompt(
+            "How many columns?\nExample: 3"
+        );
+
+    if(!colsInput){
+
+        return;
+
+    }
+
+
+    const rows =
+        parseInt(rowsInput);
+
+    const cols =
+        parseInt(colsInput);
+
+
+    if(
+
+        isNaN(rows) ||
+
+        isNaN(cols) ||
+
+        rows < 1 ||
+
+        cols < 1 ||
+
+        rows > 20 ||
+
+        cols > 10
+
+    ){
+
+        showStatus(
+            "Please enter valid table dimensions. Maximum is 20 rows × 10 columns.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    let html =
+        "<table><tbody>";
+
+
+    for(
+        let r = 0;
+        r < rows;
+        r++
+    ){
+
+        html +=
+            "<tr>";
+
+
+        for(
+            let c = 0;
+            c < cols;
+            c++
+        ){
+
+            if(r === 0){
+
+                html +=
+                    "<th>Heading</th>";
+
+            }else{
+
+                html +=
+                    "<td>Cell</td>";
+
+            }
+
+        }
+
+
+        html +=
+            "</tr>";
+
+    }
+
+
+    html +=
+        "</tbody></table><p><br></p>";
+
+
+    restoreSelection();
+
+
+    document.execCommand(
+        "insertHTML",
+        false,
+        html
+    );
+
+
+    saveSelection();
+
+    getEditor().focus();
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+function togglePreview(){
+
+    const previewBox =
+        document.getElementById(
+            "previewBox"
+        );
+
+    const previewContent =
+        document.getElementById(
+            "previewContent"
+        );
+
+    if(
+        previewBox.classList.contains(
+            "show"
+        )
+    ){
+
+        previewBox.classList.remove(
+            "show"
+        );
+
+        document.getElementById(
+            "previewButton"
+        ).textContent =
+            "👁️ Preview";
+
+        return;
+
+    }
+
+
+    previewContent.innerHTML =
+        getEditor().innerHTML;
+
+
+    previewBox.classList.add(
+        "show"
+    );
+
+
+    document.getElementById(
+        "previewButton"
+    ).textContent =
+        "❌ Hide Preview";
+
+
+    previewBox.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+}
 
 
 /* =====================================================
@@ -1565,6 +3033,12 @@ function filterNotes(){
                 );
 
 
+            const plainContent =
+                getPlainText(
+                    noteContent
+                );
+
+
             const matchesCourse =
                 !course ||
                 noteCourse === course;
@@ -1584,7 +3058,7 @@ function filterNotes(){
 
                 ||
 
-                noteContent
+                plainContent
                     .toLowerCase()
                     .includes(search)
 
@@ -1728,7 +3202,7 @@ function displayNotes(notes){
 
             <div class="note-content">
 
-                ${escapeHTML(
+                ${renderNoteContent(
                     note.content ||
                     "No content available."
                 )}
@@ -1771,6 +3245,65 @@ function displayNotes(notes){
 
 
 /* =====================================================
+   RENDER NOTE CONTENT
+===================================================== */
+
+function renderNoteContent(content){
+
+    if(!content){
+
+        return "No content available.";
+
+    }
+
+
+    /*
+       If this is an old plain-text note,
+       preserve its line breaks.
+    */
+
+    if(!/<[a-z][\s\S]*>/i.test(content)){
+
+        return escapeHTML(
+            content
+        ).replace(
+            /\n/g,
+            "<br>"
+        );
+
+    }
+
+
+    return content;
+
+}
+
+
+/* =====================================================
+   PLAIN TEXT FOR SEARCH
+===================================================== */
+
+function getPlainText(content){
+
+    const temporary =
+        document.createElement(
+            "div"
+        );
+
+    temporary.innerHTML =
+        content;
+
+    return (
+        temporary.textContent ||
+        temporary.innerText ||
+        ""
+    );
+
+}
+
+
+
+/* =====================================================
    SAVE NOTE
 ===================================================== */
 
@@ -1797,10 +3330,8 @@ async function saveNote(){
 
 
     const content =
-        document.getElementById(
-            "content"
-        )
-        .value
+        getEditor()
+        .innerHTML
         .trim();
 
 
@@ -2029,10 +3560,43 @@ function editNote(id){
             note.title || "";
 
 
-    document
-        .getElementById("content")
-        .value =
+    /*
+       Load existing HTML into editor.
+
+       Old plain-text notes are converted
+       into paragraphs/line breaks.
+    */
+
+    if(
+        /<[a-z][\s\S]*>/i.test(
+            note.content || ""
+        )
+    ){
+
+        getEditor().innerHTML =
             note.content || "";
+
+    }else{
+
+        getEditor().innerHTML =
+            escapeHTML(
+                note.content || ""
+            )
+            .replace(
+                /\n/g,
+                "<br>"
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "previewBox"
+        )
+        .classList.remove(
+            "show"
+        );
 
 
     window.scrollTo({
@@ -2123,10 +3687,25 @@ function clearForm(){
             "";
 
 
+    getEditor().innerHTML =
+        "";
+
+
     document
-        .getElementById("content")
-        .value =
-            "";
+        .getElementById(
+            "previewBox"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "previewButton"
+        )
+        .textContent =
+            "👁️ Preview";
 
 }
 
@@ -2325,6 +3904,27 @@ async function logout(){
         "index.html";
 
 }
+
+
+
+/* =====================================================
+   SAVE SELECTION WHEN CLICKING EDITOR
+===================================================== */
+
+getEditor().addEventListener(
+    "mouseup",
+    saveSelection
+);
+
+getEditor().addEventListener(
+    "keyup",
+    saveSelection
+);
+
+getEditor().addEventListener(
+    "click",
+    saveSelection
+);
 
 
 
