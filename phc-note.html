@@ -9,13 +9,9 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>
-        OGCONS Study Hub - Primary Health Care
-    </title>
-
+    <title>OGCONS Study Hub - Primary Health Care</title>
 
     <!-- SUPABASE -->
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -44,7 +40,6 @@
 
             color: #163020;
         }
-
 
 
         /* ================================
@@ -114,9 +109,8 @@
         }
 
 
-
         /* ================================
-           MAIN CONTAINER
+           MAIN
         ================================= */
 
         .container {
@@ -127,7 +121,6 @@
 
             padding: 35px 20px;
         }
-
 
 
         /* ================================
@@ -178,7 +171,6 @@
 
             line-height: 1.6;
         }
-
 
 
         /* ================================
@@ -286,7 +278,6 @@
         }
 
 
-
         /* ================================
            NOTE SECTION
         ================================= */
@@ -328,6 +319,26 @@
             color: #26382d;
 
             font-size: 16px;
+        }
+
+
+        .note-content h1 {
+
+            color: #18a058;
+
+            margin-top: 30px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .note-content h2 {
+
+            color: #18a058;
+
+            margin-top: 30px;
+
+            margin-bottom: 15px;
         }
 
 
@@ -389,6 +400,35 @@
         }
 
 
+        .note-content table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin: 20px 0;
+        }
+
+
+        .note-content th,
+        .note-content td {
+
+            border: 1px solid #d8e5dc;
+
+            padding: 10px;
+
+            text-align: left;
+        }
+
+
+        .note-content th {
+
+            background: #e9fff2;
+
+            color: #176b45;
+        }
+
+
         .important {
 
             background: #eef8ff;
@@ -423,7 +463,6 @@
         }
 
 
-
         /* ================================
            LOADING
         ================================= */
@@ -448,7 +487,6 @@
 
             margin-top: 25px;
         }
-
 
 
         /* ================================
@@ -487,7 +525,6 @@
         }
 
 
-
         /* ================================
            ERROR
         ================================= */
@@ -507,6 +544,20 @@
                 rgba(0,0,0,0.07);
 
             color: #dc3545;
+        }
+
+
+        .error h2 {
+
+            margin-bottom: 10px;
+        }
+
+
+        .error p {
+
+            color: #617568;
+
+            line-height: 1.6;
         }
 
 
@@ -530,7 +581,6 @@
         }
 
 
-
         /* ================================
            FOOTER
         ================================= */
@@ -545,7 +595,6 @@
 
             font-size: 14px;
         }
-
 
 
         /* ================================
@@ -585,6 +634,14 @@
                 font-size: 15px;
             }
 
+
+            .note-content table {
+
+                display: block;
+
+                overflow-x: auto;
+            }
+
         }
 
     </style>
@@ -592,9 +649,7 @@
 </head>
 
 
-
 <body>
-
 
 
 <!-- ==========================================
@@ -633,7 +688,6 @@
 <div class="container">
 
 
-
     <!-- ======================================
          TOPIC HEADER
     ======================================= -->
@@ -670,7 +724,6 @@
     ======================================= -->
 
     <div class="actions">
-
 
 
         <!-- READ NOTE -->
@@ -759,7 +812,7 @@
         id="loading"
         class="loading">
 
-        🔄 Loading note...
+        🔄 Checking for your note...
 
     </div>
 
@@ -839,8 +892,7 @@
 
 
         <p
-            id="errorMessage"
-            style="margin-top:10px;">
+            id="errorMessage">
 
         </p>
 
@@ -853,7 +905,6 @@
         </button>
 
     </div>
-
 
 
 </div>
@@ -973,7 +1024,7 @@ const errorMessage =
 
 
 /* ==================================================
-   SHOW TOPIC
+   SHOW SELECTED TOPIC
 ================================================== */
 
 
@@ -987,15 +1038,27 @@ if (topic) {
 
 
 /* ==================================================
-   LOAD NOTE FROM SUPABASE
+   SELECTED NOTE
 ================================================== */
 
 
 let selectedNote = null;
 
 
+
+/* ==================================================
+   LOAD NOTE
+================================================== */
+
+
 async function loadNote() {
 
+
+    /*
+    ------------------------------------------
+    NO TOPIC
+    ------------------------------------------
+    */
 
     if (!topic) {
 
@@ -1012,53 +1075,223 @@ async function loadNote() {
             "No topic was selected. Please return to PHC Topics and select a topic.";
 
         return;
-
     }
 
 
+    console.log(
+        "PHC NOTE PAGE"
+    );
 
     console.log(
-        "Loading PHC note:",
+        "Selected topic:",
         topic
     );
 
+    console.log(
+        "Course:",
+        COURSE
+    );
 
 
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
+    /*
+    ------------------------------------------
+    LOAD ALL PHC NOTES
+    ------------------------------------------
+    */
 
-            .from("notes")
+    try {
 
-            .select(
-                "course, topic, title, content"
-            )
-
-            .eq(
-                "course",
-                COURSE
-            )
-
-            .eq(
-                "topic",
-                topic
-            )
-
-            .maybeSingle();
-
-
-
-    /* ==========================================
-       ERROR
-    ========================================== */
-
-    if (error) {
-
-        console.error(
-            "Supabase note error:",
+        const {
+            data,
             error
+        } =
+            await supabaseClient
+
+                .from("notes")
+
+                .select(
+                    "course, topic, title, content"
+                )
+
+                .eq(
+                    "course",
+                    COURSE
+                );
+
+
+        /*
+        --------------------------------------
+        SUPABASE ERROR
+        --------------------------------------
+        */
+
+        if (error) {
+
+            console.error(
+                "Supabase error:",
+                error
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "Unable to load the Primary Health Care notes.<br><br>" +
+
+                escapeHTML(
+                    error.message
+                );
+
+            return;
+        }
+
+
+        /*
+        --------------------------------------
+        NO NOTES AT ALL
+        --------------------------------------
+        */
+
+        if (!data || data.length === 0) {
+
+            console.log(
+                "No PHC notes returned."
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "No Primary Health Care notes have been added yet.";
+
+            return;
+        }
+
+
+        /*
+        --------------------------------------
+        NORMALIZE TOPIC
+        --------------------------------------
+        */
+
+        const selectedTopic =
+            topic
+                .trim()
+                .replace(
+                    /\s+/g,
+                    " "
+                )
+                .toLowerCase();
+
+
+        /*
+        --------------------------------------
+        FIND MATCHING NOTE
+        --------------------------------------
+        */
+
+        selectedNote =
+            data.find(
+                function(note) {
+
+                    if (!note.topic) {
+
+                        return false;
+
+                    }
+
+
+                    const databaseTopic =
+                        note.topic
+                            .trim()
+                            .replace(
+                                /\s+/g,
+                                " "
+                            )
+                            .toLowerCase();
+
+
+                    return (
+                        databaseTopic ===
+                        selectedTopic
+                    );
+
+                }
+            );
+
+
+        /*
+        --------------------------------------
+        NOTE NOT FOUND
+        --------------------------------------
+        */
+
+        if (!selectedNote) {
+
+            console.error(
+                "Topic not found:",
+                topic
+            );
+
+
+            console.log(
+                "Available PHC topics:",
+                data.map(
+                    note =>
+                        note.topic
+                )
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "The note for <strong>" +
+
+                escapeHTML(topic) +
+
+                "</strong> has not been added yet.";
+
+            return;
+        }
+
+
+        /*
+        --------------------------------------
+        NOTE FOUND
+        --------------------------------------
+        */
+
+        console.log(
+            "NOTE FOUND:",
+            selectedNote
         );
 
 
@@ -1066,39 +1299,27 @@ async function loadNote() {
             "none";
 
 
-        messageBox.style.display =
-            "none";
-
-
-        errorBox.style.display =
-            "block";
-
-
-        errorMessage.innerHTML =
-            "Unable to load this note.<br><br>" +
-            escapeHTML(
-                error.message
-            );
-
-        return;
+        /*
+        Keep the note hidden until
+        Read Note is clicked.
+        */
 
     }
 
 
+    catch (err) {
 
-    /* ==========================================
-       NOTE DOES NOT EXIST
-    ========================================== */
+        console.error(
+            "Unexpected error:",
+            err
+        );
 
-    if (!data) {
 
         loading.style.display =
             "none";
 
-
         messageBox.style.display =
             "none";
-
 
         errorBox.style.display =
             "block";
@@ -1106,35 +1327,13 @@ async function loadNote() {
 
         errorMessage.innerHTML =
 
-            "The note for <strong>" +
+            "An unexpected error occurred while loading the note.<br><br>" +
 
-            escapeHTML(topic) +
-
-            "</strong> has not been added yet.";
-
-        return;
+            escapeHTML(
+                err.message
+            );
 
     }
-
-
-
-    /* ==========================================
-       NOTE FOUND
-    ========================================== */
-
-
-    selectedNote =
-        data;
-
-
-
-    loading.style.display =
-        "none";
-
-
-
-    /* Keep the page waiting for
-       the student to click Read Note */
 
 }
 
@@ -1148,6 +1347,12 @@ async function loadNote() {
 function showNote() {
 
 
+    /*
+    ------------------------------------------
+    MAKE SURE NOTE EXISTS
+    ------------------------------------------
+    */
+
     if (!selectedNote) {
 
         alert(
@@ -1155,40 +1360,53 @@ function showNote() {
         );
 
         return;
-
     }
 
 
+    /*
+    ------------------------------------------
+    TITLE
+    ------------------------------------------
+    */
 
     noteTitle.textContent =
+
         selectedNote.title ||
+
         selectedNote.topic ||
+
         topic;
 
 
-
     /*
-       IMPORTANT:
+    ------------------------------------------
+    CONTENT
+    ------------------------------------------
+    
+    Admin notes may contain HTML such as:
 
-       content is inserted as HTML because
-       Admin Notes can contain things like:
+    <h3>
+    <p>
+    <ul>
+    <li>
+    <strong>
+    <div>
 
-       <h3>
-       <p>
-       <ul>
-       <li>
-       <strong>
-       <div>
-
-       This allows your formatted notes
-       to display correctly.
+    So we use innerHTML here.
     */
 
-
     noteContent.innerHTML =
-        selectedNote.content || "";
+
+        selectedNote.content ||
+
+        "<p>No note content has been added yet.</p>";
 
 
+    /*
+    ------------------------------------------
+    SHOW NOTE
+    ------------------------------------------
+    */
 
     noteSection.style.display =
         "block";
@@ -1202,9 +1420,17 @@ function showNote() {
         "none";
 
 
+    /*
+    ------------------------------------------
+    SCROLL TO NOTE
+    ------------------------------------------
+    */
+
     noteSection.scrollIntoView({
 
-        behavior: "smooth"
+        behavior: "smooth",
+
+        block: "start"
 
     });
 
@@ -1227,9 +1453,7 @@ function takeQuiz() {
         );
 
         return;
-
     }
-
 
 
     const quizURL =
@@ -1239,7 +1463,6 @@ function takeQuiz() {
         encodeURIComponent(
             topic
         );
-
 
 
     window.location.href =
@@ -1277,7 +1500,6 @@ function escapeHTML(value) {
     ) {
 
         return "";
-
     }
 
 
@@ -1321,7 +1543,6 @@ loadNote();
 
 
 </script>
-
 
 
 </body>
