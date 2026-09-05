@@ -14,6 +14,11 @@
     </title>
 
 
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
     <style>
 
         * {
@@ -352,6 +357,17 @@
         }
 
 
+        .note-content h1 {
+
+            color: #9333ea;
+
+            margin-top: 30px;
+
+            margin-bottom: 15px;
+
+        }
+
+
         .note-content h2 {
 
             color: #9333ea;
@@ -426,6 +442,13 @@
         }
 
 
+        .note-content strong {
+
+            color: #312e81;
+
+        }
+
+
         .definition {
 
             background: #f5eaff;
@@ -435,8 +458,7 @@
 
             padding: 16px;
 
-            margin:
-                18px 0;
+            margin: 18px 0;
 
             border-radius: 8px;
 
@@ -452,8 +474,7 @@
 
             padding: 16px;
 
-            margin:
-                18px 0;
+            margin: 18px 0;
 
             border-radius: 8px;
 
@@ -469,8 +490,7 @@
 
             padding: 16px;
 
-            margin:
-                18px 0;
+            margin: 18px 0;
 
             border-radius: 8px;
 
@@ -506,8 +526,7 @@
 
             overflow-x: auto;
 
-            margin:
-                20px 0;
+            margin: 20px 0;
 
         }
 
@@ -554,7 +573,35 @@
 
 
         /* =========================================
-           DEFAULT MESSAGE
+           LOADING
+        ========================================= */
+
+        .loading {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+            color: #667085;
+
+            font-size: 16px;
+
+            margin-top: 25px;
+
+        }
+
+
+
+        /* =========================================
+           MESSAGE
         ========================================= */
 
         .message {
@@ -586,6 +633,69 @@
         .message p {
 
             color: #667085;
+
+        }
+
+
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        .error {
+
+            display: none;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .error h2 {
+
+            color: #dc3545;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .error p {
+
+            color: #667085;
+
+            line-height: 1.6;
+
+        }
+
+
+        .error button {
+
+            margin-top: 20px;
+
+            border: none;
+
+            background: #9333ea;
+
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 22px;
+
+            font-weight: bold;
+
+            cursor: pointer;
 
         }
 
@@ -815,17 +925,33 @@
 
 
     <!-- ======================================
-         NOTE
+         LOADING
+    ======================================= -->
+
+    <div
+        id="loading"
+        class="loading">
+
+        🔄 Checking for your note...
+
+    </div>
+
+
+
+    <!-- ======================================
+         NOTE SECTION
     ======================================= -->
 
     <div id="noteSection">
 
-
         <h2>
 
             📖
+
             <span id="noteTitle">
+
                 Topic Note
+
             </span>
 
         </h2>
@@ -868,6 +994,38 @@
     </div>
 
 
+
+    <!-- ======================================
+         ERROR
+    ======================================= -->
+
+    <div
+        class="error"
+        id="errorBox">
+
+        <h2>
+
+            📚 Note Not Available Yet
+
+        </h2>
+
+
+        <p
+            id="errorMessage">
+
+        </p>
+
+
+        <button
+            onclick="goBack()">
+
+            ← Back to Anatomy & Physiology Topics
+
+        </button>
+
+    </div>
+
+
 </div>
 
 
@@ -883,9 +1041,41 @@
 <script>
 
 
-// ==================================================
-// GET TOPIC FROM URL
-// ==================================================
+/* ==================================================
+   SUPABASE
+================================================== */
+
+
+const SUPABASE_URL =
+    "https://bvetmmvpdotifusjkywd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+
+/* ==================================================
+   COURSE
+================================================== */
+
+
+const COURSE =
+    "Anatomy & Physiology";
+
+
+
+/* ==================================================
+   GET TOPIC FROM URL
+================================================== */
+
 
 const urlParams =
     new URLSearchParams(
@@ -896,6 +1086,11 @@ const urlParams =
 const topic =
     urlParams.get("topic");
 
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
 
 
 const topicTitle =
@@ -910,1747 +1105,474 @@ const noteTitle =
     );
 
 
-
-const selectedTopic =
-
-    topic ||
-
-    "Introduction to Anatomy";
+const noteContent =
+    document.getElementById(
+        "noteContent"
+    );
 
 
-
-topicTitle.textContent =
-    selectedTopic;
-
-
-noteTitle.textContent =
-    selectedTopic;
+const noteSection =
+    document.getElementById(
+        "noteSection"
+    );
 
 
+const loading =
+    document.getElementById(
+        "loading"
+    );
 
-// ==================================================
-// GO BACK
-// ==================================================
 
-function goBack() {
+const messageBox =
+    document.getElementById(
+        "messageBox"
+    );
 
-    window.location.href =
-        "anatomy-topics.html";
+
+const errorBox =
+    document.getElementById(
+        "errorBox"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
+
+
+
+/* ==================================================
+   SHOW TOPIC
+================================================== */
+
+
+if (topic) {
+
+    topicTitle.textContent =
+        topic;
 
 }
 
 
 
-// ==================================================
-// TAKE QUIZ
-// ==================================================
-
-function takeQuiz() {
+/* ==================================================
+   SELECTED NOTE
+================================================== */
 
 
-    const quizURL =
+let selectedNote = null;
 
-        "anatomy-quiz.html?topic=" +
 
-        encodeURIComponent(
-            selectedTopic
+
+/* ==================================================
+   NORMALIZE TEXT
+================================================== */
+
+
+function normalizeText(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .trim()
+
+        .replace(
+            /\s+/g,
+            " "
+        )
+
+        .toLowerCase();
+
+}
+
+
+
+/* ==================================================
+   LOAD NOTE FROM SUPABASE
+================================================== */
+
+
+async function loadNote() {
+
+
+    /*
+    ------------------------------------------
+    NO TOPIC SELECTED
+    ------------------------------------------
+    */
+
+    if (!topic) {
+
+        loading.style.display =
+            "none";
+
+        messageBox.style.display =
+            "none";
+
+        errorBox.style.display =
+            "block";
+
+        errorMessage.innerHTML =
+            "No topic was selected. Please return to Anatomy & Physiology Topics and select a topic.";
+
+        return;
+
+    }
+
+
+
+    console.log(
+        "================================="
+    );
+
+    console.log(
+        "ANATOMY & PHYSIOLOGY NOTE PAGE"
+    );
+
+    console.log(
+        "Selected topic:",
+        topic
+    );
+
+    console.log(
+        "Course:",
+        COURSE
+    );
+
+    console.log(
+        "================================="
+    );
+
+
+
+    try {
+
+
+        /*
+        --------------------------------------
+        GET ALL NOTES FOR THIS COURSE
+        --------------------------------------
+        */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("notes")
+
+                .select(
+                    "course, topic, title, content"
+                )
+
+                .eq(
+                    "course",
+                    COURSE
+                );
+
+
+
+        /*
+        --------------------------------------
+        SUPABASE ERROR
+        --------------------------------------
+        */
+
+        if (error) {
+
+            console.error(
+                "Supabase note error:",
+                error
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "Unable to load the Anatomy & Physiology notes.<br><br>" +
+
+                escapeHTML(
+                    error.message
+                );
+
+            return;
+
+        }
+
+
+
+        /*
+        --------------------------------------
+        NO NOTES
+        --------------------------------------
+        */
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            console.log(
+                "No Anatomy & Physiology notes found."
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "No Anatomy & Physiology notes have been added yet.";
+
+            return;
+
+        }
+
+
+
+        /*
+        --------------------------------------
+        NORMALIZE SELECTED TOPIC
+        --------------------------------------
+        */
+
+        const selectedTopic =
+            normalizeText(
+                topic
+            );
+
+
+
+        /*
+        --------------------------------------
+        FIND MATCHING NOTE
+        --------------------------------------
+        */
+
+        selectedNote =
+            data.find(
+                function(note) {
+
+                    return (
+                        normalizeText(
+                            note.topic
+                        )
+                        ===
+                        selectedTopic
+                    );
+
+                }
+            );
+
+
+
+        /*
+        --------------------------------------
+        NOTE NOT FOUND
+        --------------------------------------
+        */
+
+        if (!selectedNote) {
+
+            console.error(
+                "Anatomy topic not found:",
+                topic
+            );
+
+
+            console.log(
+                "Available Anatomy & Physiology topics:",
+                data.map(
+                    function(note) {
+                        return note.topic;
+                    }
+                )
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "The note for <strong>" +
+
+                escapeHTML(
+                    topic
+                ) +
+
+                "</strong> has not been added yet.";
+
+            return;
+
+        }
+
+
+
+        /*
+        --------------------------------------
+        NOTE FOUND
+        --------------------------------------
+        */
+
+        console.log(
+            "Anatomy & Physiology note found:",
+            selectedNote
         );
 
 
-    window.location.href =
-        quizURL;
+        loading.style.display =
+            "none";
+
+
+        /*
+        Keep the note hidden until
+        the student clicks Read Note.
+        */
+
+    }
+
+
+    catch (err) {
+
+        console.error(
+            "Unexpected Anatomy & Physiology error:",
+            err
+        );
+
+
+        loading.style.display =
+            "none";
+
+        messageBox.style.display =
+            "none";
+
+        errorBox.style.display =
+            "block";
+
+
+        errorMessage.innerHTML =
+
+            "An unexpected error occurred while loading the note.<br><br>" +
+
+            escapeHTML(
+                err.message
+            );
+
+    }
 
 }
 
 
 
-// ==================================================
-// SHOW NOTE
-// ==================================================
+/* ==================================================
+   SHOW NOTE
+================================================== */
+
 
 function showNote() {
 
 
-    const noteSection =
-        document.getElementById(
-            "noteSection"
+    /*
+    ------------------------------------------
+    CHECK NOTE
+    ------------------------------------------
+    */
+
+    if (!selectedNote) {
+
+        alert(
+            "This note is not available yet."
         );
 
-
-    const messageBox =
-        document.getElementById(
-            "messageBox"
-        );
-
-
-    const noteContent =
-        document.getElementById(
-            "noteContent"
-        );
-
-
-
-    const notes = {
-
-
-
-// ======================================================
-// 1. INTRODUCTION TO ANATOMY
-// ======================================================
-
-"Introduction to Anatomy": `
-
-<h2>1. Introduction to Anatomy</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-Anatomy is the scientific study of the structure of the human body and the relationship between its different parts.
-
-Physiology is the study of how the structures of the body function and work together to maintain life.
-
-</div>
-
-
-<h3>Branches of Anatomy</h3>
-
-<ul>
-
-<li>
-<strong>Gross anatomy:</strong>
-Study of body structures that can be seen with the naked eye.
-</li>
-
-<li>
-<strong>Microscopic anatomy:</strong>
-Study of structures that require a microscope.
-</li>
-
-<li>
-<strong>Histology:</strong>
-Study of tissues.
-</li>
-
-<li>
-<strong>Cytology:</strong>
-Study of cells.
-</li>
-
-<li>
-<strong>Developmental anatomy:</strong>
-Study of structural changes from fertilization through adulthood.
-</li>
-
-</ul>
-
-
-<h3>Anatomical Position</h3>
-
-<p>
-
-The anatomical position is the standard position used when describing the location of body structures.
-
-In this position, the person stands upright, faces forward, keeps the arms at the sides, and has the palms facing forward.
-
-</p>
-
-
-<h3>Directional Terms</h3>
-
-<div class="table-wrapper">
-
-<table class="note-table">
-
-<tr>
-<th>Term</th>
-<th>Meaning</th>
-</tr>
-
-<tr>
-<td>Superior</td>
-<td>Toward the head or above</td>
-</tr>
-
-<tr>
-<td>Inferior</td>
-<td>Away from the head or below</td>
-</tr>
-
-<tr>
-<td>Anterior</td>
-<td>Toward the front</td>
-</tr>
-
-<tr>
-<td>Posterior</td>
-<td>Toward the back</td>
-</tr>
-
-<tr>
-<td>Medial</td>
-<td>Toward the midline</td>
-</tr>
-
-<tr>
-<td>Lateral</td>
-<td>Away from the midline</td>
-</tr>
-
-<tr>
-<td>Proximal</td>
-<td>Nearer to the point of attachment</td>
-</tr>
-
-<tr>
-<td>Distal</td>
-<td>Farther from the point of attachment</td>
-</tr>
-
-<tr>
-<td>Superficial</td>
-<td>Near the surface</td>
-</tr>
-
-<tr>
-<td>Deep</td>
-<td>Farther from the surface</td>
-</tr>
-
-</table>
-
-</div>
-
-
-<h3>Body Planes</h3>
-
-<ul>
-
-<li>
-<strong>Sagittal plane:</strong>
-Divides the body into right and left portions.
-</li>
-
-<li>
-<strong>Frontal or coronal plane:</strong>
-Divides the body into anterior and posterior portions.
-</li>
-
-<li>
-<strong>Transverse plane:</strong>
-Divides the body into superior and inferior portions.
-</li>
-
-</ul>
-
-
-<h3>Levels of Organization</h3>
-
-<ol>
-
-<li>Cells</li>
-
-<li>Tissues</li>
-
-<li>Organs</li>
-
-<li>Organ systems</li>
-
-<li>Organism</li>
-
-</ol>
-
-
-<h3>Major Body Cavities</h3>
-
-<ul>
-
-<li>Cranial cavity</li>
-
-<li>Vertebral cavity</li>
-
-<li>Thoracic cavity</li>
-
-<li>Abdominal cavity</li>
-
-<li>Pelvic cavity</li>
-
-</ul>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-Anatomy deals mainly with body structure, while physiology deals with body function. Understanding anatomical terminology and body organization is essential for studying all the body systems.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 2. MUSCULOSKELETAL SYSTEM
-// ======================================================
-
-"The Musculoskeletal System": `
-
-<h2>2. The Musculoskeletal System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The musculoskeletal system consists mainly of bones, muscles, joints, cartilage, ligaments and tendons. It provides support, protection, movement and stability to the body.
-
-</div>
-
-
-<h3>Functions of the Skeletal System</h3>
-
-<ul>
-
-<li>Provides support for the body.</li>
-
-<li>Protects internal organs.</li>
-
-<li>Allows movement by providing attachment sites for muscles.</li>
-
-<li>Stores minerals such as calcium and phosphorus.</li>
-
-<li>Produces blood cells in the bone marrow.</li>
-
-<li>Stores fat in yellow bone marrow.</li>
-
-</ul>
-
-
-<h3>Types of Bones</h3>
-
-<ul>
-
-<li>
-<strong>Long bones:</strong>
-Examples include femur and humerus.
-</li>
-
-<li>
-<strong>Short bones:</strong>
-Examples include wrist and ankle bones.
-</li>
-
-<li>
-<strong>Flat bones:</strong>
-Examples include skull bones, sternum and ribs.
-</li>
-
-<li>
-<strong>Irregular bones:</strong>
-Examples include vertebrae.
-</li>
-
-</ul>
-
-
-<h3>Structure of a Long Bone</h3>
-
-<ul>
-
-<li>Diaphysis – shaft of the bone.</li>
-
-<li>Epiphysis – ends of the bone.</li>
-
-<li>Periosteum – outer covering of bone.</li>
-
-<li>Compact bone – dense outer bone.</li>
-
-<li>Spongy bone – lighter internal bone.</li>
-
-<li>Bone marrow – found inside bone cavities.</li>
-
-</ul>
-
-
-<h3>Joints</h3>
-
-<p>
-
-A joint is the place where two or more bones meet.
-
-</p>
-
-<p>
-
-Joints allow movement and provide stability.
-
-</p>
-
-
-<h3>Types of Joints</h3>
-
-<ul>
-
-<li>
-<strong>Fibrous joints:</strong>
-Usually allow little or no movement.
-</li>
-
-<li>
-<strong>Cartilaginous joints:</strong>
-Allow limited movement.
-</li>
-
-<li>
-<strong>Synovial joints:</strong>
-Freely movable joints.
-</li>
-
-</ul>
-
-
-<h3>Types of Muscles</h3>
-
-<ul>
-
-<li>
-<strong>Skeletal muscle:</strong>
-Attached to bones and mainly responsible for voluntary movement.
-</li>
-
-<li>
-<strong>Smooth muscle:</strong>
-Found in organs such as the intestine and blood vessels.
-</li>
-
-<li>
-<strong>Cardiac muscle:</strong>
-Found only in the heart.
-</li>
-
-</ul>
-
-
-<h3>Tendons and Ligaments</h3>
-
-<p>
-
-A tendon connects muscle to bone.
-
-A ligament connects bone to bone.
-
-</p>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Common disorders of the musculoskeletal system include fractures, arthritis, osteoporosis, sprains and muscle injuries.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The musculoskeletal system provides support, protects organs and enables movement. Bones provide the framework while muscles provide the force needed for movement.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 3. BLOOD AND CARDIOVASCULAR SYSTEM
-// ======================================================
-
-"Blood and Cardiovascular System": `
-
-<h2>3. Blood and Cardiovascular System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The cardiovascular system consists of the heart, blood and blood vessels. Its major function is to transport oxygen, nutrients, hormones and waste products throughout the body.
-
-</div>
-
-
-<h3>Components of Blood</h3>
-
-<ul>
-
-<li>
-<strong>Plasma:</strong>
-Liquid portion of blood.
-</li>
-
-<li>
-<strong>Red blood cells:</strong>
-Transport oxygen mainly through haemoglobin.
-</li>
-
-<li>
-<strong>White blood cells:</strong>
-Help defend the body against infection.
-</li>
-
-<li>
-<strong>Platelets:</strong>
-Important in blood clotting.
-</li>
-
-</ul>
-
-
-<h3>The Heart</h3>
-
-<p>
-
-The heart is a muscular organ located in the thoracic cavity between the lungs. It pumps blood throughout the body.
-
-</p>
-
-
-<h3>Chambers of the Heart</h3>
-
-<ul>
-
-<li>Right atrium</li>
-
-<li>Right ventricle</li>
-
-<li>Left atrium</li>
-
-<li>Left ventricle</li>
-
-</ul>
-
-
-<h3>Heart Valves</h3>
-
-<ul>
-
-<li>Tricuspid valve</li>
-
-<li>Pulmonary valve</li>
-
-<li>Mitral valve</li>
-
-<li>Aortic valve</li>
-
-</ul>
-
-
-<h3>Blood Vessels</h3>
-
-<ul>
-
-<li>
-<strong>Arteries:</strong>
-Carry blood away from the heart.
-</li>
-
-<li>
-<strong>Veins:</strong>
-Carry blood toward the heart.
-</li>
-
-<li>
-<strong>Capillaries:</strong>
-Small vessels where exchange of substances occurs between blood and tissues.
-</li>
-
-</ul>
-
-
-<h3>Circulation</h3>
-
-<p>
-
-<strong>Pulmonary circulation</strong> carries blood between the heart and lungs.
-
-</p>
-
-<p>
-
-<strong>Systemic circulation</strong> carries blood between the heart and the rest of the body.
-
-</p>
-
-<div class="important">
-
-<strong>Important:</strong>
-
-The right side of the heart mainly handles deoxygenated blood, while the left side mainly handles oxygenated blood.
-
-</div>
-
-
-<h3>Functions of the Cardiovascular System</h3>
-
-<ul>
-
-<li>Transport of oxygen.</li>
-
-<li>Transport of nutrients.</li>
-
-<li>Removal of carbon dioxide and metabolic wastes.</li>
-
-<li>Transport of hormones.</li>
-
-<li>Regulation of body temperature.</li>
-
-<li>Protection through blood clotting and immune cells.</li>
-
-</ul>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Important cardiovascular conditions include hypertension, heart failure, coronary artery disease, myocardial infarction and stroke.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The cardiovascular system maintains circulation of blood throughout the body. The heart acts as the pump while blood vessels provide the pathways for blood flow.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 4. RESPIRATORY SYSTEM
-// ======================================================
-
-"The Respiratory System": `
-
-<h2>4. The Respiratory System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The respiratory system is responsible for taking oxygen into the body and removing carbon dioxide.
-
-</div>
-
-
-<h3>Major Respiratory Organs</h3>
-
-<ul>
-
-<li>Nose and nasal cavity</li>
-
-<li>Pharynx</li>
-
-<li>Larynx</li>
-
-<li>Trachea</li>
-
-<li>Bronchi</li>
-
-<li>Bronchioles</li>
-
-<li>Lungs</li>
-
-<li>Alveoli</li>
-
-</ul>
-
-
-<h3>Functions of the Respiratory System</h3>
-
-<ul>
-
-<li>Provides oxygen to the body.</li>
-
-<li>Removes carbon dioxide.</li>
-
-<li>Helps maintain acid-base balance.</li>
-
-<li>Produces sound through the larynx.</li>
-
-<li>Helps regulate body temperature and moisture.</li>
-
-</ul>
-
-
-<h3>Mechanism of Breathing</h3>
-
-<p>
-
-<strong>Inspiration</strong> is the process of breathing air into the lungs.
-
-During inspiration, the diaphragm contracts and moves downward while the chest cavity expands.
-
-</p>
-
-
-<p>
-
-<strong>Expiration</strong> is the process of breathing air out of the lungs.
-
-The diaphragm relaxes and moves upward while the thoracic cavity decreases in volume.
-
-</p>
-
-
-<h3>Gas Exchange</h3>
-
-<p>
-
-Gas exchange occurs mainly in the alveoli.
-
-Oxygen moves from the alveoli into the blood, while carbon dioxide moves from the blood into the alveoli and is then exhaled.
-
-</p>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Respiratory disorders include asthma, pneumonia, tuberculosis, chronic obstructive pulmonary disease and respiratory failure.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The respiratory system supplies oxygen and removes carbon dioxide. The lungs and alveoli are particularly important for gas exchange.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 5. DIGESTIVE SYSTEM
-// ======================================================
-
-"The Digestive System": `
-
-<h2>5. The Digestive System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The digestive system breaks food down into smaller substances that can be absorbed and used by the body.
-
-</div>
-
-
-<h3>Major Organs</h3>
-
-<ul>
-
-<li>Mouth</li>
-
-<li>Pharynx</li>
-
-<li>Oesophagus</li>
-
-<li>Stomach</li>
-
-<li>Small intestine</li>
-
-<li>Large intestine</li>
-
-<li>Rectum</li>
-
-<li>Anus</li>
-
-</ul>
-
-
-<h3>Accessory Organs</h3>
-
-<ul>
-
-<li>Liver</li>
-
-<li>Gallbladder</li>
-
-<li>Pancreas</li>
-
-</ul>
-
-
-<h3>Major Functions</h3>
-
-<ul>
-
-<li>Ingestion of food.</li>
-
-<li>Mechanical digestion.</li>
-
-<li>Chemical digestion.</li>
-
-<li>Absorption of nutrients.</li>
-
-<li>Elimination of waste.</li>
-
-</ul>
-
-
-<h3>Digestion in the Mouth</h3>
-
-<p>
-
-Digestion begins in the mouth.
-
-The teeth mechanically break food into smaller pieces while saliva moistens the food and begins carbohydrate digestion.
-
-</p>
-
-
-<h3>Stomach</h3>
-
-<p>
-
-The stomach stores food, mixes it and begins significant protein digestion.
-
-Gastric secretions include hydrochloric acid and digestive enzymes.
-
-</p>
-
-
-<h3>Small Intestine</h3>
-
-<p>
-
-The small intestine is the major site of digestion and nutrient absorption.
-
-Its lining contains numerous villi that increase the surface area available for absorption.
-
-</p>
-
-
-<h3>Large Intestine</h3>
-
-<p>
-
-The large intestine mainly absorbs water and electrolytes and forms faeces.
-
-</p>
-
-
-<h3>Liver</h3>
-
-<p>
-
-The liver performs many functions including production of bile, metabolism of nutrients, detoxification and storage of certain substances.
-
-</p>
-
-
-<h3>Pancreas</h3>
-
-<p>
-
-The pancreas produces digestive enzymes and also produces hormones involved in blood glucose regulation.
-
-</p>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Common digestive conditions include peptic ulcer disease, appendicitis, diarrhoea, constipation, hepatitis and intestinal obstruction.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The digestive system processes food, absorbs nutrients and eliminates waste. Digestion involves mechanical and chemical processes.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 6. INTEGUMENTARY SYSTEM
-// ======================================================
-
-"The Integumentary System": `
-
-<h2>6. The Integumentary System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The integumentary system consists mainly of the skin, hair, nails, sweat glands and sebaceous glands.
-
-</div>
-
-
-<h3>Functions of the Skin</h3>
-
-<ul>
-
-<li>Protection from injury and microorganisms.</li>
-
-<li>Prevention of excessive water loss.</li>
-
-<li>Temperature regulation.</li>
-
-<li>Sensation.</li>
-
-<li>Vitamin D synthesis.</li>
-
-<li>Excretion through sweat.</li>
-
-</ul>
-
-
-<h3>Layers of the Skin</h3>
-
-<ul>
-
-<li>
-<strong>Epidermis:</strong>
-Outer layer of the skin.
-</li>
-
-<li>
-<strong>Dermis:</strong>
-Layer containing blood vessels, nerves, glands and hair follicles.
-</li>
-
-<li>
-<strong>Subcutaneous layer:</strong>
-Contains mainly connective tissue and fat.
-</li>
-
-</ul>
-
-
-<h3>Skin Appendages</h3>
-
-<ul>
-
-<li>Hair</li>
-
-<li>Nails</li>
-
-<li>Sweat glands</li>
-
-<li>Sebaceous glands</li>
-
-</ul>
-
-
-<h3>Temperature Regulation</h3>
-
-<p>
-
-The skin helps regulate body temperature through sweating and changes in blood flow to the skin.
-
-When the body is hot, sweating increases and skin blood vessels dilate.
-
-</p>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Examples of integumentary problems include burns, wounds, pressure ulcers, dermatitis, acne and skin infections.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The integumentary system protects the body, provides sensation, assists temperature regulation and contributes to several other important functions.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 7. EXCRETORY SYSTEM
-// ======================================================
-
-"The Excretory System": `
-
-<h2>7. The Excretory System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The excretory system removes metabolic wastes from the body and helps maintain fluid, electrolyte and acid-base balance.
-
-</div>
-
-
-<h3>Main Organs</h3>
-
-<ul>
-
-<li>Kidneys</li>
-
-<li>Ureters</li>
-
-<li>Urinary bladder</li>
-
-<li>Urethra</li>
-
-</ul>
-
-
-<h3>Functions of the Kidneys</h3>
-
-<ul>
-
-<li>Remove metabolic wastes from blood.</li>
-
-<li>Regulate water balance.</li>
-
-<li>Regulate electrolytes.</li>
-
-<li>Help maintain acid-base balance.</li>
-
-<li>Help regulate blood pressure.</li>
-
-<li>Produce erythropoietin.</li>
-
-<li>Activate vitamin D.</li>
-
-</ul>
-
-
-<h3>The Nephron</h3>
-
-<p>
-
-The nephron is the functional unit of the kidney.
-
-Each kidney contains many nephrons.
-
-</p>
-
-
-<h3>Urine Formation</h3>
-
-<p>
-
-Urine formation involves three major processes:
-
-</p>
-
-<ol>
-
-<li>
-<strong>Filtration:</strong>
-Blood is filtered in the renal corpuscle.
-</li>
-
-<li>
-<strong>Reabsorption:</strong>
-Useful substances and water are returned to the blood.
-</li>
-
-<li>
-<strong>Secretion:</strong>
-Additional substances are transferred into the tubular fluid for elimination.
-</li>
-
-</ol>
-
-
-<h3>Pathway of Urine</h3>
-
-<p>
-
-Kidney → ureter → urinary bladder → urethra → outside the body.
-
-</p>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Common urinary problems include urinary tract infection, kidney stones, acute kidney injury and chronic kidney disease.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The urinary system removes waste and maintains internal balance. The kidneys are the major organs responsible for urine formation and regulation of body fluids.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 8. ENDOCRINE SYSTEM
-// ======================================================
-
-"The Endocrine System": `
-
-<h2>8. The Endocrine System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The endocrine system consists of glands that produce hormones. Hormones are chemical messengers that travel through the blood to target cells and organs.
-
-</div>
-
-
-<h3>Major Endocrine Glands</h3>
-
-<ul>
-
-<li>Hypothalamus</li>
-
-<li>Pituitary gland</li>
-
-<li>Thyroid gland</li>
-
-<li>Parathyroid glands</li>
-
-<li>Adrenal glands</li>
-
-<li>Pancreas</li>
-
-<li>Ovaries</li>
-
-<li>Testes</li>
-
-<li>Pineal gland</li>
-
-</ul>
-
-
-<h3>Functions of the Endocrine System</h3>
-
-<ul>
-
-<li>Regulates growth and development.</li>
-
-<li>Controls metabolism.</li>
-
-<li>Helps regulate reproduction.</li>
-
-<li>Maintains fluid and electrolyte balance.</li>
-
-<li>Helps the body respond to stress.</li>
-
-<li>Regulates blood glucose.</li>
-
-</ul>
-
-
-<h3>Important Hormones</h3>
-
-<div class="table-wrapper">
-
-<table class="note-table">
-
-<tr>
-
-<th>Gland</th>
-
-<th>Hormone</th>
-
-<th>Main Function</th>
-
-</tr>
-
-<tr>
-
-<td>Thyroid</td>
-
-<td>Thyroxine</td>
-
-<td>Regulates metabolism</td>
-
-</tr>
-
-<tr>
-
-<td>Pancreas</td>
-
-<td>Insulin</td>
-
-<td>Lowers blood glucose</td>
-
-</tr>
-
-<tr>
-
-<td>Pancreas</td>
-
-<td>Glucagon</td>
-
-<td>Raises blood glucose</td>
-
-</tr>
-
-<tr>
-
-<td>Adrenal</td>
-
-<td>Cortisol</td>
-
-<td>Helps regulate stress response and metabolism</td>
-
-</tr>
-
-<tr>
-
-<td>Pituitary</td>
-
-<td>Growth hormone</td>
-
-<td>Promotes growth</td>
-
-</tr>
-
-</table>
-
-</div>
-
-
-<h3>Hormonal Regulation</h3>
-
-<p>
-
-Many endocrine processes are regulated through negative feedback. When the desired level of a hormone or its effect is reached, signals that stimulated its production are reduced.
-
-</p>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Endocrine disorders include diabetes mellitus, thyroid disorders, Cushing syndrome and disorders of growth hormone.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The endocrine system controls many body functions through hormones. Its activities are closely coordinated with the nervous system.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 9. FEMALE REPRODUCTIVE SYSTEM
-// ======================================================
-
-"The Female Reproductive System": `
-
-<h2>9. The Female Reproductive System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The female reproductive system consists of organs involved in production of ova, fertilization, pregnancy, childbirth and reproductive hormone production.
-
-</div>
-
-
-<h3>Major Female Reproductive Organs</h3>
-
-<ul>
-
-<li>Ovaries</li>
-
-<li>Fallopian tubes</li>
-
-<li>Uterus</li>
-
-<li>Cervix</li>
-
-<li>Vagina</li>
-
-<li>External genitalia</li>
-
-</ul>
-
-
-<h3>Ovaries</h3>
-
-<p>
-
-The ovaries produce ova and reproductive hormones, mainly oestrogen and progesterone.
-
-</p>
-
-
-<h3>Fallopian Tubes</h3>
-
-<p>
-
-The fallopian tubes transport the ovum toward the uterus. Fertilization commonly occurs in the fallopian tube.
-
-</p>
-
-
-<h3>Uterus</h3>
-
-<p>
-
-The uterus is a muscular organ where implantation occurs and where the fetus develops during pregnancy.
-
-</p>
-
-
-<h3>Menstrual Cycle</h3>
-
-<p>
-
-The menstrual cycle involves coordinated changes in the ovaries and uterus under hormonal control.
-
-Major phases include:
-
-</p>
-
-<ul>
-
-<li>Menstrual phase</li>
-
-<li>Follicular/proliferative phase</li>
-
-<li>Ovulation</li>
-
-<li>Luteal/secretory phase</li>
-
-</ul>
-
-
-<h3>Important Hormones</h3>
-
-<ul>
-
-<li>Follicle-stimulating hormone</li>
-
-<li>Luteinizing hormone</li>
-
-<li>Oestrogen</li>
-
-<li>Progesterone</li>
-
-</ul>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Common female reproductive problems include menstrual disorders, pelvic inflammatory disease, ovarian cysts, uterine fibroids and infertility.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The female reproductive system produces ova and reproductive hormones and provides the organs necessary for fertilization, pregnancy and childbirth.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 10. MALE REPRODUCTIVE SYSTEM
-// ======================================================
-
-"The Male Reproductive System": `
-
-<h2>10. The Male Reproductive System</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-The male reproductive system consists of organs responsible for producing sperm, producing male reproductive hormones and delivering sperm for reproduction.
-
-</div>
-
-
-<h3>Major Male Reproductive Organs</h3>
-
-<ul>
-
-<li>Testes</li>
-
-<li>Epididymis</li>
-
-<li>Vas deferens</li>
-
-<li>Seminal vesicles</li>
-
-<li>Prostate gland</li>
-
-<li>Bulbourethral glands</li>
-
-<li>Penis</li>
-
-<li>Scrotum</li>
-
-</ul>
-
-
-<h3>Testes</h3>
-
-<p>
-
-The testes produce sperm and testosterone.
-
-Sperm production occurs in the seminiferous tubules.
-
-</p>
-
-
-<h3>Epididymis</h3>
-
-<p>
-
-The epididymis is where sperm mature and are stored temporarily.
-
-</p>
-
-
-<h3>Vas Deferens</h3>
-
-<p>
-
-The vas deferens transports sperm from the epididymis toward the ejaculatory ducts.
-
-</p>
-
-
-<h3>Accessory Glands</h3>
-
-<p>
-
-The seminal vesicles, prostate gland and bulbourethral glands contribute fluids that form semen and support sperm function.
-
-</p>
-
-
-<h3>Testosterone</h3>
-
-<p>
-
-Testosterone is the principal male sex hormone. It contributes to development of male reproductive structures, secondary sexual characteristics and supports sperm production.
-
-</p>
-
-
-<h3>Sperm Production</h3>
-
-<p>
-
-Spermatogenesis is the process through which sperm cells are produced in the testes.
-
-</p>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Problems of the male reproductive system include infertility, prostatitis, benign prostatic enlargement, testicular disorders and sexually transmitted infections.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-The male reproductive system produces sperm and testosterone and provides the structures needed for reproduction.
-
-</p>
-
-</div>
-
-`,
-
-
-// ======================================================
-// 11. FOETAL DEVELOPMENT
-// ======================================================
-
-"Foetal Development": `
-
-<h2>11. Foetal Development</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-Foetal development refers to the growth and maturation of the developing human from the embryonic period through the fetal period until birth.
-
-</div>
-
-
-<h3>Fertilization</h3>
-
-<p>
-
-Fertilization occurs when a sperm cell fuses with an ovum, producing a zygote.
-
-The zygote begins repeated cell division as it travels toward the uterus.
-
-</p>
-
-
-<h3>Implantation</h3>
-
-<p>
-
-Implantation occurs when the developing blastocyst attaches to and becomes embedded in the lining of the uterus.
-
-</p>
-
-
-<h3>Embryonic Period</h3>
-
-<p>
-
-The embryonic period is an important stage of development during which major organs and body structures begin to form.
-
-</p>
-
-
-<h3>Fetal Period</h3>
-
-<p>
-
-The fetal period is characterized mainly by growth and maturation of organs and body systems.
-
-</p>
-
-
-<h3>Placenta</h3>
-
-<p>
-
-The placenta develops during pregnancy and provides an important interface between maternal and fetal circulation.
-
-It is involved in exchange of oxygen, nutrients and waste products and also produces hormones that support pregnancy.
-
-</p>
-
-
-<h3>Umbilical Cord</h3>
-
-<p>
-
-The umbilical cord connects the fetus to the placenta and contains blood vessels that transport blood between them.
-
-</p>
-
-
-<h3>Fetal Circulation</h3>
-
-<p>
-
-Before birth, the fetus receives oxygenated blood from the placenta rather than directly from the lungs.
-
-Special fetal circulatory pathways help direct blood around the developing lungs.
-
-</p>
-
-
-<h3>Factors Affecting Foetal Development</h3>
-
-<ul>
-
-<li>Maternal nutrition</li>
-
-<li>Maternal health</li>
-
-<li>Infections</li>
-
-<li>Alcohol and certain drugs</li>
-
-<li>Smoking and tobacco exposure</li>
-
-<li>Genetic factors</li>
-
-<li>Environmental factors</li>
-
-</ul>
-
-
-<h3>Stages of Pregnancy</h3>
-
-<p>
-
-Pregnancy is commonly divided into three trimesters.
-
-</p>
-
-<ul>
-
-<li>
-<strong>First trimester:</strong>
-Early development and formation of major structures.
-</li>
-
-<li>
-<strong>Second trimester:</strong>
-Continued growth and maturation.
-</li>
-
-<li>
-<strong>Third trimester:</strong>
-Rapid growth and preparation of organs for life after birth.
-</li>
-
-</ul>
-
-
-<div class="clinical">
-
-<strong>Clinical relevance:</strong>
-
-Adequate antenatal care, proper nutrition, prevention of infections, avoidance of harmful substances and monitoring of maternal and fetal health are important for healthy pregnancy outcomes.
-
-</div>
-
-
-<div class="summary">
-
-<h3>Summary</h3>
-
-<p>
-
-Foetal development begins after fertilization and continues through implantation, embryonic development, fetal growth and maturation until birth. The placenta and umbilical cord play major roles in supporting the developing fetus.
-
-</p>
-
-</div>
-
-`
-
-    };
-
-
-
-    // ==================================================
-    // GET SELECTED NOTE
-    // ==================================================
-
-    if (
-        notes[selectedTopic]
-    ) {
-
-        noteContent.innerHTML =
-            notes[selectedTopic];
-
-    }
-
-    else {
-
-        noteContent.innerHTML = `
-
-            <div class="definition">
-
-                <strong>
-                    Topic not found
-                </strong>
-
-                <p>
-
-                    The note for
-                    <strong>
-                        ${escapeHTML(selectedTopic)}
-                    </strong>
-                    has not been added yet.
-
-                </p>
-
-            </div>
-
-        `;
+        return;
 
     }
 
 
+
+    /*
+    ------------------------------------------
+    NOTE TITLE
+    ------------------------------------------
+    */
+
+    noteTitle.textContent =
+
+        selectedNote.title ||
+
+        selectedNote.topic ||
+
+        topic;
+
+
+
+    /*
+    ------------------------------------------
+    NOTE CONTENT
+    ------------------------------------------
+    
+    Admin Notes can contain HTML such as:
+
+    <h2>
+    <h3>
+    <p>
+    <ul>
+    <li>
+    <strong>
+    <table>
+    <div>
+
+    Therefore innerHTML is used.
+    */
+
+    noteContent.innerHTML =
+
+        selectedNote.content ||
+
+        "<p>No note content has been added yet.</p>";
+
+
+
+    /*
+    ------------------------------------------
+    SHOW NOTE SECTION
+    ------------------------------------------
+    */
 
     noteSection.style.display =
         "block";
@@ -2659,6 +1581,17 @@ Foetal development begins after fertilization and continues through implantation
     messageBox.style.display =
         "none";
 
+
+    errorBox.style.display =
+        "none";
+
+
+
+    /*
+    ------------------------------------------
+    SCROLL TO NOTE
+    ------------------------------------------
+    */
 
     noteSection.scrollIntoView({
 
@@ -2672,9 +1605,59 @@ Foetal development begins after fertilization and continues through implantation
 
 
 
-// ==================================================
-// ESCAPE HTML
-// ==================================================
+/* ==================================================
+   TAKE QUIZ
+================================================== */
+
+
+function takeQuiz() {
+
+
+    if (!topic) {
+
+        alert(
+            "No topic was selected. Please return to Anatomy & Physiology Topics and select a topic."
+        );
+
+        return;
+
+    }
+
+
+    const quizURL =
+
+        "anatomy-quiz.html?topic=" +
+
+        encodeURIComponent(
+            topic
+        );
+
+
+    window.location.href =
+        quizURL;
+
+}
+
+
+
+/* ==================================================
+   BACK TO TOPICS
+================================================== */
+
+
+function goBack() {
+
+    window.location.href =
+        "anatomy-topics.html";
+
+}
+
+
+
+/* ==================================================
+   ESCAPE HTML
+================================================== */
+
 
 function escapeHTML(value) {
 
@@ -2717,6 +1700,15 @@ function escapeHTML(value) {
         );
 
 }
+
+
+
+/* ==================================================
+   START
+================================================== */
+
+
+loadNote();
 
 
 </script>
