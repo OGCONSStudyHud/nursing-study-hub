@@ -3,430 +3,767 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>
-OGCONS Study Hub - Medical/Surgical Nursing
-</title>
+    <title>
+        OGCONS Study Hub - Medical/Surgical Nursing
+    </title>
 
-<style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <!-- SUPABASE -->
 
-body {
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    font-family: Arial, sans-serif;
 
-    min-height: 100vh;
+    <style>
 
-    background:
-        linear-gradient(
-            135deg,
-            #e8fff2,
-            #e8f4ff,
-            #f5eaff
-        );
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    color: #172033;
 
-}
+        body {
 
-header {
+            font-family: Arial, sans-serif;
 
-    background:
-        linear-gradient(
-            135deg,
-            #18a058,
-            #2eb7a0
-        );
+            min-height: 100vh;
 
-    color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8fff2,
+                    #e8f4ff,
+                    #f5eaff
+                );
 
-    padding: 22px 20px;
+            color: #172033;
 
-}
+            line-height: 1.7;
 
-.header-content {
+        }
 
-    max-width: 1100px;
 
-    margin: auto;
+        /* =========================================
+           HEADER
+        ========================================= */
 
-    display: flex;
+        header {
 
-    justify-content: space-between;
+            background:
+                linear-gradient(
+                    135deg,
+                    #18a058,
+                    #2eb7a0
+                );
 
-    align-items: center;
+            color: white;
 
-    gap: 15px;
+            padding: 22px 20px;
 
-}
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.10);
 
-.logo {
+        }
 
-    font-size: 22px;
 
-    font-weight: bold;
+        .header-content {
 
-}
+            max-width: 1100px;
 
-.back-button {
+            margin: auto;
 
-    border: none;
+            display: flex;
 
-    background: white;
+            justify-content: space-between;
 
-    color: #18a058;
+            align-items: center;
 
-    padding: 10px 18px;
+            gap: 15px;
 
-    border-radius: 20px;
+        }
 
-    font-weight: bold;
 
-    cursor: pointer;
+        .logo {
 
-}
+            font-size: 22px;
 
-.container {
+            font-weight: bold;
 
-    max-width: 950px;
+        }
 
-    margin: auto;
 
-    padding: 35px 20px;
+        .back-button {
 
-}
+            border: none;
 
-.topic-header {
+            background: white;
 
-    background: white;
+            color: #18a058;
 
-    padding: 35px 25px;
+            padding: 10px 18px;
 
-    border-radius: 20px;
+            border-radius: 22px;
 
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.08);
+            font-weight: bold;
 
-    text-align: center;
+            cursor: pointer;
 
-    margin-bottom: 25px;
+        }
 
-}
 
-.topic-icon {
+        .back-button:hover {
 
-    font-size: 55px;
+            background: #f3f3f3;
 
-    margin-bottom: 15px;
+        }
 
-}
 
-.topic-header h1 {
 
-    color: #18a058;
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
 
-    font-size: 30px;
+        .container {
 
-    line-height: 1.4;
+            max-width: 1000px;
 
-    margin-bottom: 10px;
+            margin: auto;
 
-}
+            padding: 35px 20px;
 
-.topic-header p {
+        }
 
-    color: #617568;
 
-    line-height: 1.6;
 
-}
+        /* =========================================
+           TOPIC HEADER
+        ========================================= */
 
-.actions {
+        .topic-header {
 
-    display: grid;
+            background: white;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+            padding: 35px 25px;
 
-    gap: 20px;
+            border-radius: 20px;
 
-    margin-bottom: 25px;
+            text-align: center;
 
-}
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,0.08);
 
-.action-card {
+            margin-bottom: 25px;
 
-    background: white;
+        }
 
-    padding: 28px 20px;
 
-    border-radius: 18px;
+        .topic-icon {
 
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
+            font-size: 60px;
 
-    text-align: center;
+            margin-bottom: 12px;
 
-}
+        }
 
-.action-icon {
 
-    font-size: 42px;
+        .topic-header h1 {
 
-    margin-bottom: 12px;
+            color: #18a058;
 
-}
+            font-size: 31px;
 
-.action-card h2 {
+            line-height: 1.3;
 
-    margin-bottom: 8px;
+            margin-bottom: 10px;
 
-}
+        }
 
-.action-card p {
 
-    color: #617568;
+        .topic-header p {
 
-    line-height: 1.5;
+            color: #617568;
 
-    margin-bottom: 18px;
+            line-height: 1.6;
 
-}
+        }
 
-.action-button {
 
-    border: none;
 
-    background: #18a058;
+        /* =========================================
+           ACTION CARDS
+        ========================================= */
 
-    color: white;
+        .actions {
 
-    padding: 12px 22px;
+            display: grid;
 
-    border-radius: 22px;
+            grid-template-columns:
+                repeat(2, 1fr);
 
-    font-weight: bold;
+            gap: 20px;
 
-    cursor: pointer;
+            margin-bottom: 25px;
 
-    font-size: 15px;
+        }
 
-}
 
-.action-button:hover {
+        .action-card {
 
-    background: #117d45;
+            background: white;
 
-}
+            padding: 28px 20px;
 
-.quiz-button {
+            border-radius: 18px;
 
-    display: inline-block;
+            text-align: center;
 
-    text-decoration: none;
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
 
-    background: #0b5ed7;
+        }
 
-    color: white;
 
-    padding: 12px 22px;
+        .action-icon {
 
-    border-radius: 22px;
+            font-size: 43px;
 
-    font-weight: bold;
+            margin-bottom: 12px;
 
-}
+        }
 
-.quiz-button:hover {
 
-    background: #084298;
+        .action-card h2 {
 
-}
+            margin-bottom: 8px;
 
-#noteSection {
+            font-size: 20px;
 
-    display: none;
+        }
 
-    background: white;
 
-    padding: 35px;
+        .action-card p {
 
-    border-radius: 20px;
+            color: #617568;
 
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.08);
+            line-height: 1.5;
 
-}
+            margin-bottom: 18px;
 
-#noteSection h2 {
+        }
 
-    color: #18a058;
 
-    margin-bottom: 25px;
+        .action-button {
 
-}
+            border: none;
 
-.note-content {
+            color: white;
 
-    line-height: 1.8;
+            padding: 12px 22px;
 
-    color: #26382d;
+            border-radius: 22px;
 
-    font-size: 16px;
+            font-weight: bold;
 
-}
+            cursor: pointer;
 
-.note-content h3 {
+            font-size: 15px;
 
-    color: #18a058;
+        }
 
-    margin-top: 30px;
 
-    margin-bottom: 12px;
+        .read-button {
 
-    font-size: 21px;
+            background: #18a058;
 
-}
+        }
 
-.note-content h4 {
 
-    color: #2d6248;
+        .read-button:hover {
 
-    margin-top: 20px;
+            background: #117d45;
 
-    margin-bottom: 8px;
+        }
 
-}
 
-.note-content p {
+        .quiz-button {
 
-    margin-bottom: 16px;
+            background: #2563eb;
 
-}
+        }
 
-.note-content ul,
-.note-content ol {
 
-    margin-left: 28px;
+        .quiz-button:hover {
 
-    margin-bottom: 18px;
+            background: #1d4ed8;
 
-}
+        }
 
-.note-content li {
 
-    margin-bottom: 9px;
 
-}
+        /* =========================================
+           NOTE SECTION
+        ========================================= */
 
-.note-content strong {
+        #noteSection {
 
-    color: #163020;
+            display: none;
 
-}
+            background: white;
 
-.message {
+            padding: 35px;
 
-    background: white;
+            border-radius: 20px;
 
-    padding: 30px;
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.08);
 
-    border-radius: 18px;
+            margin-top: 25px;
 
-    text-align: center;
+        }
 
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
 
-}
+        #noteSection > h2 {
 
-.message h2 {
+            color: #18a058;
 
-    color: #18a058;
+            font-size: 27px;
 
-    margin-bottom: 10px;
+            margin-bottom: 25px;
 
-}
+            padding-bottom: 15px;
 
-.message p {
+            border-bottom:
+                2px solid #eee;
 
-    color: #617568;
+        }
 
-    line-height: 1.6;
 
-}
+        .note-content {
 
-.message.error h2 {
+            color: #263238;
 
-    color: #dc3545;
+            font-size: 16px;
 
-}
+        }
 
-footer {
 
-    text-align: center;
+        .note-content h1 {
 
-    padding: 35px;
+            color: #18a058;
 
-    color: #718077;
+            margin-top: 30px;
 
-}
+            margin-bottom: 15px;
 
-.loading {
+        }
 
-    text-align: center;
 
-    padding: 30px;
+        .note-content h2 {
 
-    color: #617568;
+            color: #18a058;
 
-}
+            font-size: 25px;
 
-@media (max-width: 700px) {
+            margin-top: 35px;
 
-    .header-content {
+            margin-bottom: 15px;
 
-        flex-direction: column;
+            padding-bottom: 8px;
 
-        text-align: center;
+            border-bottom:
+                2px solid #d9f5e7;
 
-    }
+        }
 
-    .actions {
 
-        grid-template-columns: 1fr;
+        .note-content h3 {
 
-    }
+            color: #168a4b;
 
-    .topic-header h1 {
+            font-size: 20px;
 
-        font-size: 24px;
+            margin-top: 27px;
 
-    }
+            margin-bottom: 10px;
 
-    #noteSection {
+        }
 
-        padding: 22px;
 
-    }
+        .note-content h4 {
 
-}
+            color: #2d6248;
 
-</style>
+            margin-top: 20px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .note-content p {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .note-content ul {
+
+            margin-left: 25px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .note-content ol {
+
+            margin-left: 25px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .note-content li {
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .note-content strong {
+
+            color: #163020;
+
+        }
+
+
+        .definition {
+
+            background: #e8fff2;
+
+            border-left:
+                5px solid #18a058;
+
+            padding: 16px;
+
+            margin: 18px 0;
+
+            border-radius: 8px;
+
+        }
+
+
+        .important {
+
+            background: #fff8e1;
+
+            border-left:
+                5px solid #f59e0b;
+
+            padding: 16px;
+
+            margin: 18px 0;
+
+            border-radius: 8px;
+
+        }
+
+
+        .clinical {
+
+            background: #e8f4ff;
+
+            border-left:
+                5px solid #2563eb;
+
+            padding: 16px;
+
+            margin: 18px 0;
+
+            border-radius: 8px;
+
+        }
+
+
+        .summary {
+
+            background: #e8fff2;
+
+            border-left:
+                5px solid #18a058;
+
+            padding: 18px;
+
+            margin-top: 25px;
+
+            border-radius: 8px;
+
+        }
+
+
+        .summary h3 {
+
+            color: #168a4b;
+
+            margin-top: 0;
+
+        }
+
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+            margin: 20px 0;
+
+        }
+
+
+        .note-table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 600px;
+
+        }
+
+
+        .note-table th,
+        .note-table td {
+
+            border:
+                1px solid #ddd;
+
+            padding: 12px;
+
+            text-align: left;
+
+        }
+
+
+        .note-table th {
+
+            background: #18a058;
+
+            color: white;
+
+        }
+
+
+        .note-table tr:nth-child(even) {
+
+            background: #fafafa;
+
+        }
+
+
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .loading {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+            color: #617568;
+
+            font-size: 16px;
+
+            margin-top: 25px;
+
+        }
+
+
+
+        /* =========================================
+           MESSAGE
+        ========================================= */
+
+        .message {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .message h2 {
+
+            color: #18a058;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .message p {
+
+            color: #617568;
+
+        }
+
+
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        .error {
+
+            display: none;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .error h2 {
+
+            color: #dc3545;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .error p {
+
+            color: #617568;
+
+            line-height: 1.6;
+
+        }
+
+
+        .error button {
+
+            margin-top: 20px;
+
+            border: none;
+
+            background: #18a058;
+
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 22px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #718077;
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .header-content {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+
+            .actions {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            #noteSection {
+
+                padding: 22px 18px;
+
+            }
+
+
+            .topic-header h1 {
+
+                font-size: 25px;
+
+            }
+
+
+            .note-content {
+
+                font-size: 15px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -434,236 +771,404 @@ footer {
 <body>
 
 
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <header>
 
-<div class="header-content">
+    <div class="header-content">
 
-<div class="logo">
-🩺 OGCONS Study Hub
-</div>
+        <div class="logo">
 
-<button
-class="back-button"
-onclick="goBack()">
+            🩺 OGCONS Study Hub
 
-← Back to Topics
+        </div>
 
-</button>
 
-</div>
+        <button
+            class="back-button"
+            onclick="goBack()">
+
+            ← Back to Topics
+
+        </button>
+
+    </div>
 
 </header>
 
 
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
 <div class="container">
 
 
-<div class="topic-header">
+    <!-- ======================================
+         TOPIC HEADER
+    ======================================= -->
 
-<div class="topic-icon">
-🏥
+    <div class="topic-header">
+
+        <div class="topic-icon">
+
+            🏥
+
+        </div>
+
+
+        <h1 id="topicTitle">
+
+            Medical/Surgical Nursing
+
+        </h1>
+
+
+        <p>
+
+            Study medical and surgical nursing
+            topics and test your understanding
+            with a quiz.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- ======================================
+         ACTIONS
+    ======================================= -->
+
+    <div class="actions">
+
+
+        <!-- READ NOTE -->
+
+        <div class="action-card">
+
+            <div class="action-icon">
+
+                📖
+
+            </div>
+
+
+            <h2>
+
+                Read Note
+
+            </h2>
+
+
+            <p>
+
+                Study the full and detailed
+                note for the selected topic.
+
+            </p>
+
+
+            <button
+                class="action-button read-button"
+                onclick="showNote()">
+
+                📖 Read Note
+
+            </button>
+
+        </div>
+
+
+
+        <!-- QUIZ -->
+
+        <div class="action-card">
+
+            <div class="action-icon">
+
+                📝
+
+            </div>
+
+
+            <h2>
+
+                Take Quiz
+
+            </h2>
+
+
+            <p>
+
+                Test your knowledge of this
+                Medical/Surgical Nursing topic.
+
+            </p>
+
+
+            <button
+                class="action-button quiz-button"
+                onclick="takeQuiz()">
+
+                📝 Take Quiz
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================
+         LOADING
+    ======================================= -->
+
+    <div
+        id="loading"
+        class="loading">
+
+        🔄 Checking for your note...
+
+    </div>
+
+
+
+    <!-- ======================================
+         NOTE SECTION
+    ======================================= -->
+
+    <div id="noteSection">
+
+        <h2>
+
+            📖
+
+            <span id="noteTitle">
+
+                Topic Note
+
+            </span>
+
+        </h2>
+
+
+        <div
+            class="note-content"
+            id="noteContent">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================
+         DEFAULT MESSAGE
+    ======================================= -->
+
+    <div
+        class="message"
+        id="messageBox">
+
+        <h2>
+
+            📚 Ready to Study?
+
+        </h2>
+
+
+        <p>
+
+            Select <strong>Read Note</strong>
+            to study the topic or
+            <strong>Take Quiz</strong>
+            to test your knowledge.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- ======================================
+         ERROR
+    ======================================= -->
+
+    <div
+        class="error"
+        id="errorBox">
+
+        <h2>
+
+            📚 Note Not Available Yet
+
+        </h2>
+
+
+        <p
+            id="errorMessage">
+
+        </p>
+
+
+        <button
+            onclick="goBack()">
+
+            ← Back to Medical/Surgical Topics
+
+        </button>
+
+    </div>
+
+
 </div>
 
-<h1 id="topicTitle">
-Medical/Surgical Nursing
-</h1>
-
-<p>
-Study this topic and test your understanding
-with a quiz.
-</p>
-
-</div>
-
-
-<div class="actions">
-
-
-<!-- READ NOTE -->
-
-<div class="action-card">
-
-<div class="action-icon">
-📖
-</div>
-
-<h2>
-Read Note
-</h2>
-
-<p>
-Study the detailed note for this topic.
-</p>
-
-<button
-class="action-button"
-onclick="showNote()">
-
-Read Note
-
-</button>
-
-</div>
-
-
-<!-- QUIZ -->
-
-<div class="action-card">
-
-<div class="action-icon">
-📝
-</div>
-
-<h2>
-Take Quiz
-</h2>
-
-<p>
-Test your knowledge of this topic.
-</p>
-
-<a
-id="quizButton"
-class="quiz-button"
-href="#">
-
-Take Quiz
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- NOTE -->
-
-<div id="noteSection">
-
-<h2>
-📖
-<span id="noteTitle">
-Topic Note
-</span>
-</h2>
-
-<div
-class="note-content"
-id="noteContent">
-
-</div>
-
-</div>
-
-
-<!-- MESSAGE -->
-
-<div
-class="message"
-id="messageBox">
-
-<h2>
-📚 Ready to Study?
-</h2>
-
-<p>
-Choose <strong>Read Note</strong>
-to study or
-<strong>Take Quiz</strong>
-to test your knowledge.
-</p>
-
-</div>
-
-
-</div>
 
 
 <footer>
 
-OGCONS Study Hub © 2026
+    OGCONS Study Hub © 2026
 
 </footer>
 
-
-<!-- =====================================================
-     SUPABASE
-===================================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
 
-// ======================================================
-// SUPABASE CONNECTION
-// ======================================================
+/* ==================================================
+   SUPABASE
+================================================== */
+
 
 const SUPABASE_URL =
-"https://bvetmmvpdotifusjkywd.supabase.co";
+    "https://bvetmmvpdotifusjkywd.supabase.co";
 
 
-const SUPABASE_KEY =
-"YOUR_EXISTING_SUPABASE_PUBLISHABLE_KEY";
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
 
 const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
 
 
-// ======================================================
-// COURSE
-// ======================================================
+
+/* ==================================================
+   COURSE
+================================================== */
+
 
 const COURSE =
-"Medical/Surgical Nursing";
+    "Medical/Surgical Nursing";
 
 
-// ======================================================
-// GET TOPIC FROM URL
-// ======================================================
 
-const params =
-new URLSearchParams(
-    window.location.search
-);
+/* ==================================================
+   GET TOPIC FROM URL
+================================================== */
+
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
 
 
 const topic =
-params.get("topic") ||
-"Medical/Surgical Nursing";
+    urlParams.get("topic");
 
 
-document
-.getElementById("topicTitle")
-.textContent =
-topic;
+
+/* ==================================================
+   ELEMENTS
+================================================== */
 
 
-document
-.getElementById("noteTitle")
-.textContent =
-topic;
+const topicTitle =
+    document.getElementById(
+        "topicTitle"
+    );
 
 
-// ======================================================
-// QUIZ BUTTON
-// ======================================================
-
-document
-.getElementById("quizButton")
-.href =
-"medical-surgical-quiz.html?topic=" +
-encodeURIComponent(topic);
+const noteTitle =
+    document.getElementById(
+        "noteTitle"
+    );
 
 
-// ======================================================
-// NORMALIZE TEXT
-// ======================================================
+const noteContent =
+    document.getElementById(
+        "noteContent"
+    );
+
+
+const noteSection =
+    document.getElementById(
+        "noteSection"
+    );
+
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+
+const messageBox =
+    document.getElementById(
+        "messageBox"
+    );
+
+
+const errorBox =
+    document.getElementById(
+        "errorBox"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
+
+
+
+/* ==================================================
+   SHOW TOPIC
+================================================== */
+
+
+if (topic) {
+
+    topicTitle.textContent =
+        topic;
+
+}
+
+
+
+/* ==================================================
+   SELECTED NOTE
+================================================== */
+
+
+let selectedNote = null;
+
+
+
+/* ==================================================
+   NORMALIZE TEXT
+================================================== */
+
 
 function normalizeText(value) {
 
@@ -676,228 +1181,351 @@ function normalizeText(value) {
 
     }
 
+
     return String(value)
+
         .trim()
-        .replace(/\s+/g, " ")
+
+        .replace(
+            /\s+/g,
+            " "
+        )
+
         .toLowerCase();
 
 }
 
 
-// ======================================================
-// LOAD NOTE FROM SUPABASE
-// ======================================================
 
-let selectedNote = null;
+/* ==================================================
+   LOAD NOTE FROM SUPABASE
+================================================== */
 
 
 async function loadNote() {
 
-    const messageBox =
-        document.getElementById(
-            "messageBox"
-        );
 
+    /* ------------------------------------------
+       NO TOPIC
+    ------------------------------------------ */
 
-    const noteSection =
-        document.getElementById(
-            "noteSection"
-        );
+    if (!topic) {
 
+        loading.style.display =
+            "none";
 
-    const noteContent =
-        document.getElementById(
-            "noteContent"
-        );
+        messageBox.style.display =
+            "none";
 
+        errorBox.style.display =
+            "block";
 
-    try {
-
-        messageBox.innerHTML = `
-            <h2>⏳ Loading Note...</h2>
-            <p>Please wait while we load your study note.</p>
-        `;
-
-
-        const {
-            data,
-            error
-        } = await supabaseClient
-
-            .from("notes")
-
-            .select(
-                "course, topic, title, content"
-            )
-
-            .eq(
-                "course",
-                COURSE
-            );
-
-
-        if (error) {
-
-            console.error(
-                "Supabase error:",
-                error
-            );
-
-            messageBox.classList.add(
-                "error"
-            );
-
-            messageBox.innerHTML = `
-                <h2>⚠️ Unable to Load Note</h2>
-
-                <p>
-                There was a problem connecting
-                to the study notes.
-                </p>
-            `;
-
-            return;
-
-        }
-
-
-        // ==================================================
-        // FIND SELECTED TOPIC
-        // ==================================================
-
-        selectedNote =
-            (data || []).find(
-                item =>
-                    normalizeText(
-                        item.topic
-                    ) ===
-                    normalizeText(
-                        topic
-                    )
-            );
-
-
-        // ==================================================
-        // NO NOTE FOUND
-        // ==================================================
-
-        if (!selectedNote) {
-
-            messageBox.classList.add(
-                "error"
-            );
-
-            messageBox.innerHTML = `
-                <h2>📚 Note Not Available Yet</h2>
-
-                <p>
-                A note for
-                <strong>
-                ${escapeHTML(topic)}
-                </strong>
-                has not been added yet.
-                </p>
-            `;
-
-            return;
-
-        }
-
-
-        // ==================================================
-        // NOTE FOUND
-        // ==================================================
-
-        messageBox.innerHTML = `
-            <h2>📚 Ready to Study?</h2>
-
-            <p>
-            Choose <strong>Read Note</strong>
-            to study or
-            <strong>Take Quiz</strong>
-            to test your knowledge.
-            </p>
-        `;
-
-
-        noteContent.innerHTML =
-            selectedNote.content || "";
-
-
-        // Note remains hidden until
-        // user clicks Read Note
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Unexpected error:",
-            error
-        );
-
-
-        messageBox.classList.add(
-            "error"
-        );
-
-
-        messageBox.innerHTML = `
-            <h2>⚠️ Something Went Wrong</h2>
-
-            <p>
-            We could not load this note.
-            Please refresh the page and try again.
-            </p>
-        `;
-
-    }
-
-}
-
-
-// ======================================================
-// SHOW NOTE
-// ======================================================
-
-function showNote() {
-
-    if (!selectedNote) {
-
-        const messageBox =
-            document.getElementById(
-                "messageBox"
-            );
-
-        messageBox.classList.add(
-            "error"
-        );
-
-        messageBox.innerHTML = `
-            <h2>📚 Note Not Available Yet</h2>
-
-            <p>
-            The note for this topic has not
-            been added yet.
-            </p>
-        `;
+        errorMessage.innerHTML =
+            "No topic was selected. Please return to Medical/Surgical Nursing Topics and select a topic.";
 
         return;
 
     }
 
 
-    const noteSection =
-        document.getElementById(
-            "noteSection"
+
+    console.log(
+        "================================="
+    );
+
+    console.log(
+        "MEDICAL/SURGICAL NURSING NOTE PAGE"
+    );
+
+    console.log(
+        "Selected topic:",
+        topic
+    );
+
+    console.log(
+        "Course:",
+        COURSE
+    );
+
+    console.log(
+        "================================="
+    );
+
+
+
+    try {
+
+
+        /* --------------------------------------
+           GET ALL NOTES FOR COURSE
+        -------------------------------------- */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("notes")
+
+                .select(
+                    "course, topic, title, content"
+                )
+
+                .eq(
+                    "course",
+                    COURSE
+                );
+
+
+
+        /* --------------------------------------
+           SUPABASE ERROR
+        -------------------------------------- */
+
+        if (error) {
+
+            console.error(
+                "Supabase note error:",
+                error
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "Unable to load the Medical/Surgical Nursing notes.<br><br>" +
+
+                escapeHTML(
+                    error.message
+                );
+
+            return;
+
+        }
+
+
+
+        /* --------------------------------------
+           NO NOTES
+        -------------------------------------- */
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            console.log(
+                "No Medical/Surgical Nursing notes found."
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "No Medical/Surgical Nursing notes have been added yet.";
+
+            return;
+
+        }
+
+
+
+        /* --------------------------------------
+           NORMALIZE SELECTED TOPIC
+        -------------------------------------- */
+
+        const selectedTopic =
+            normalizeText(
+                topic
+            );
+
+
+
+        /* --------------------------------------
+           FIND MATCHING NOTE
+        -------------------------------------- */
+
+        selectedNote =
+            data.find(
+                function(note) {
+
+                    return (
+                        normalizeText(
+                            note.topic
+                        )
+                        ===
+                        selectedTopic
+                    );
+
+                }
+            );
+
+
+
+        /* --------------------------------------
+           NOTE NOT FOUND
+        -------------------------------------- */
+
+        if (!selectedNote) {
+
+            console.error(
+                "Medical/Surgical topic not found:",
+                topic
+            );
+
+
+            console.log(
+                "Available Medical/Surgical Nursing topics:",
+                data.map(
+                    function(note) {
+                        return note.topic;
+                    }
+                )
+            );
+
+
+            loading.style.display =
+                "none";
+
+            messageBox.style.display =
+                "none";
+
+            errorBox.style.display =
+                "block";
+
+
+            errorMessage.innerHTML =
+
+                "The note for <strong>" +
+
+                escapeHTML(
+                    topic
+                ) +
+
+                "</strong> has not been added yet.";
+
+            return;
+
+        }
+
+
+
+        /* --------------------------------------
+           NOTE FOUND
+        -------------------------------------- */
+
+        console.log(
+            "Medical/Surgical Nursing note found:",
+            selectedNote
         );
 
 
-    const messageBox =
-        document.getElementById(
-            "messageBox"
+        loading.style.display =
+            "none";
+
+    }
+
+
+    catch (err) {
+
+        console.error(
+            "Unexpected Medical/Surgical error:",
+            err
         );
 
+
+        loading.style.display =
+            "none";
+
+        messageBox.style.display =
+            "none";
+
+        errorBox.style.display =
+            "block";
+
+
+        errorMessage.innerHTML =
+
+            "An unexpected error occurred while loading the note.<br><br>" +
+
+            escapeHTML(
+                err.message
+            );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   SHOW NOTE
+================================================== */
+
+
+function showNote() {
+
+
+    if (!selectedNote) {
+
+        alert(
+            "This note is not available yet."
+        );
+
+        return;
+
+    }
+
+
+
+    /* ------------------------------------------
+       NOTE TITLE
+    ------------------------------------------ */
+
+    noteTitle.textContent =
+
+        selectedNote.title ||
+
+        selectedNote.topic ||
+
+        topic;
+
+
+
+    /* ------------------------------------------
+       NOTE CONTENT
+    ------------------------------------------ */
+
+    noteContent.innerHTML =
+
+        selectedNote.content ||
+
+        "<p>No note content has been added yet.</p>";
+
+
+
+    /* ------------------------------------------
+       SHOW NOTE
+    ------------------------------------------ */
 
     noteSection.style.display =
         "block";
@@ -907,18 +1535,66 @@ function showNote() {
         "none";
 
 
+    errorBox.style.display =
+        "none";
+
+
+
+    /* ------------------------------------------
+       SCROLL
+    ------------------------------------------ */
+
     noteSection.scrollIntoView({
 
-        behavior: "smooth"
+        behavior: "smooth",
+
+        block: "start"
 
     });
 
 }
 
 
-// ======================================================
-// BACK BUTTON
-// ======================================================
+
+/* ==================================================
+   TAKE QUIZ
+================================================== */
+
+
+function takeQuiz() {
+
+
+    if (!topic) {
+
+        alert(
+            "No topic was selected. Please return to Medical/Surgical Nursing Topics and select a topic."
+        );
+
+        return;
+
+    }
+
+
+    const quizURL =
+
+        "medical-surgical-quiz.html?topic=" +
+
+        encodeURIComponent(
+            topic
+        );
+
+
+    window.location.href =
+        quizURL;
+
+}
+
+
+
+/* ==================================================
+   BACK
+================================================== */
+
 
 function goBack() {
 
@@ -928,11 +1604,24 @@ function goBack() {
 }
 
 
-// ======================================================
-// ESCAPE HTML
-// ======================================================
+
+/* ==================================================
+   ESCAPE HTML
+================================================== */
+
 
 function escapeHTML(value) {
+
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
 
     return String(value)
 
@@ -964,9 +1653,11 @@ function escapeHTML(value) {
 }
 
 
-// ======================================================
-// START
-// ======================================================
+
+/* ==================================================
+   START
+================================================== */
+
 
 loadNote();
 
