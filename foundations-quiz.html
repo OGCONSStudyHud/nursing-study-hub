@@ -1111,8 +1111,12 @@ async function loadQuestions() {
 
             .select("*")
 
+            // IMPORTANT:
+            // Admin saves questions using
+            // the "subject" column.
+
             .eq(
-                "course",
+                "subject",
                 "Foundations of Nursing"
             )
 
