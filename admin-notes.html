@@ -6,8 +6,7 @@
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    content="width=device-width, initial-scale=1.0">
 
 <title>OGCONS Study Hub - Admin Notes</title>
 
@@ -15,655 +14,731 @@
 
 <style>
 
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f3f5f9;
-    color:#222;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f3f6;
+    color: #222;
 }
 
 /* =========================
    HEADER
 ========================= */
 
-header{
-    background:#0b5ed7;
-    color:white;
-    padding:18px;
-    text-align:center;
+.header {
+    background: #0b5ed7;
+    color: white;
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.back-admin-button {
+    display: inline-block;
+    padding: 14px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    color: #0b5ed7;
+    cursor: pointer;
+}
+
+.back-admin-button:hover {
+    background: #e8f0ff;
 }
 
 /* =========================
-   BACK ADMIN BUTTON
+   MAIN
 ========================= */
 
-.back-admin-button{
-    display:inline-block;
-    background:white;
-    color:#0b5ed7;
-    border:2px solid #0b5ed7;
-    border-radius:10px;
-    padding:14px 24px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-bottom:15px;
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 25px auto;
 }
 
-.back-admin-button:hover{
-    background:#eaf2ff;
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.panel h2 {
+    margin-top: 0;
+    color: #0b5ed7;
 }
 
 /* =========================
-   GENERAL
+   FORM
 ========================= */
 
-.container{
-    max-width:1400px;
-    margin:auto;
-    padding:20px;
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.panel{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
+.form-group {
+    flex: 1;
+    min-width: 220px;
 }
 
-h2{
-    margin-top:0;
-}
-
-label{
-    font-weight:bold;
-    display:block;
-    margin-bottom:6px;
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
 }
 
 select,
-input{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:7px;
-    font-size:15px;
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 7px;
+    font-size: 15px;
 }
 
-.row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+button {
+    font-family: inherit;
 }
 
-button{
-    border:0;
-    border-radius:6px;
-    padding:10px 14px;
-    cursor:pointer;
-    font-weight:bold;
+.main-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    background: #0b5ed7;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.primary{
-    background:#0b5ed7;
-    color:white;
+.main-button:hover {
+    background: #084298;
 }
 
-.success{
-    background:#198754;
-    color:white;
+.danger-button {
+    background: #dc3545;
 }
 
-.danger{
-    background:#dc3545;
-    color:white;
+.danger-button:hover {
+    background: #bb2d3b;
 }
 
-.secondary{
-    background:#6c757d;
-    color:white;
+.success-button {
+    background: #198754;
+}
+
+.success-button:hover {
+    background: #146c43;
 }
 
 /* =========================
    TOOLBAR
 ========================= */
 
-.toolbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    padding:10px;
-    border:1px solid #ddd;
-    background:#f7f7f7;
-    border-radius:8px 8px 0 0;
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    background: #f0f2f5;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
 }
 
 .toolbar button,
-.toolbar select{
-    width:auto;
-    padding:7px 9px;
-    font-size:13px;
+.toolbar select {
+    padding: 8px 10px;
+    border: 1px solid #bbb;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.toolbar button:hover {
+    background: #e9ecef;
+}
+
+.toolbar-separator {
+    width: 1px;
+    background: #bbb;
+    margin: 0 4px;
 }
 
 /* =========================
-   EDITOR WRAP
+   EDITOR STAGE
+   IMPORTANT:
+   FIXED STARTING HEIGHT.
+   DOES NOT GROW WITH TYPING.
 ========================= */
 
-.editor-wrap{
-    overflow:auto;
-    border:1px solid #ccc;
-    border-top:0;
-    background:#ddd;
-    padding:20px;
+.editor-wrapper {
+    width: 100%;
+    overflow: auto;
+    padding: 10px 0;
 }
 
 /*
-IMPORTANT:
+    THIS IS THE WHITE PAPER.
 
-The stage can now grow vertically.
+    It starts at 700px.
+    It does NOT automatically grow.
 
-The width remains 1000px so your Canva-style
-coordinate system remains unchanged.
+    The admin can manually expand it vertically
+    using the resize handle at the bottom-right.
 */
 
-.editor-stage{
-    position:relative;
+.editor-stage {
+    position: relative;
 
-    width:1000px;
+    width: 100%;
+    max-width: 1000px;
 
-    min-height:900px;
+    height: 700px;
+    min-height: 500px;
 
-    height:auto;
+    margin: 0 auto;
 
-    margin:auto;
+    background: #ffffff;
 
-    background:white;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
 
-    box-shadow:0 2px 10px rgba(0,0,0,.15);
+    overflow: auto;
 
-    overflow:visible;
+    resize: vertical;
 
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
-
-
-/* =========================
-   NORMAL WRITING AREA
-========================= */
 
 /*
-The writing area is still positioned at the
-top of the design, but it is now allowed to
-grow with the amount of text.
+    NORMAL WRITING AREA.
+
+    It fills the current editor size.
+    It DOES NOT increase the editor height.
 */
 
-.writing-area{
+.writing-area {
+    position: absolute;
 
-    position:absolute;
+    left: 0;
+    top: 0;
 
-    left:0;
+    width: 100%;
+    height: 100%;
 
-    top:0;
+    min-height: 100%;
 
-    width:100%;
+    padding: 35px;
 
-    min-height:900px;
+    background: #ffffff;
 
-    height:auto;
+    outline: none;
 
-    padding:35px;
+    overflow: visible;
 
-    outline:none;
+    z-index: 1;
 
-    z-index:1;
-
-    overflow:visible;
-
-    background:white;
-
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
-
 
 /* =========================
-   OBJECTS LAYER
+   OBJECT LAYER
 ========================= */
 
-.objects-layer{
+.objects-layer {
+    position: absolute;
 
-    position:absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 
-    left:0;
+    width: 100%;
+    height: 100%;
 
-    top:0;
+    z-index: 5;
 
-    width:100%;
-
-    height:100%;
-
-    z-index:5;
-
-    pointer-events:none;
-
+    pointer-events: none;
 }
 
+.design-object {
+    position: absolute;
 
-/* =========================
-   DESIGN OBJECTS
-========================= */
+    pointer-events: auto;
 
-.design-object{
+    user-select: none;
 
-    position:absolute;
-
-    pointer-events:auto;
-
-    user-select:none;
-
+    box-sizing: border-box;
 }
 
-.design-object.selected{
-
-    outline:2px solid #0b5ed7;
-
+.design-object.selected {
+    outline: 2px solid #0b5ed7;
 }
-
-
-/* =========================
-   OBJECT CONTROLS
-========================= */
-
-.object-controls{
-
-    position:absolute;
-
-    top:-38px;
-
-    left:0;
-
-    display:none;
-
-    background:#0b5ed7;
-
-    padding:4px;
-
-    border-radius:5px;
-
-    gap:3px;
-
-    z-index:9999;
-
-    white-space:nowrap;
-
-}
-
-.design-object.selected .object-controls{
-
-    display:flex;
-
-}
-
-.object-controls button{
-
-    padding:4px 7px;
-
-    font-size:11px;
-
-    background:white;
-
-    color:#222;
-
-}
-
-
-/* =========================
-   RESIZE HANDLE
-========================= */
-
-.resize-handle{
-
-    display:none;
-
-    position:absolute;
-
-    width:12px;
-
-    height:12px;
-
-    right:-6px;
-
-    bottom:-6px;
-
-    background:#0b5ed7;
-
-    border:2px solid white;
-
-    border-radius:50%;
-
-    cursor:nwse-resize;
-
-    z-index:10000;
-
-}
-
-.design-object.selected .resize-handle{
-
-    display:block;
-
-}
-
-
-/* =========================
-   ROTATE HANDLE
-========================= */
-
-.rotate-handle{
-
-    display:none;
-
-    position:absolute;
-
-    top:-28px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:18px;
-
-    height:18px;
-
-    border-radius:50%;
-
-    background:#198754;
-
-    border:2px solid white;
-
-    cursor:grab;
-
-    z-index:10000;
-
-}
-
-.design-object.selected .rotate-handle{
-
-    display:block;
-
-}
-
-
-/* =========================
-   IMAGE
-========================= */
-
-.image-object img{
-
-    display:block;
-
-    width:100%;
-
-    height:auto;
-
-    pointer-events:none;
-
-}
-
 
 /* =========================
    TEXT BOX
 ========================= */
 
-.text-object{
+.text-object {
+    min-width: 120px;
+    min-height: 40px;
 
-    min-width:120px;
+    padding: 8px;
 
-    min-height:45px;
+    background: transparent;
 
+    cursor: move;
 }
 
-.text-content{
-
-    width:100%;
-
-    min-height:40px;
-
-    padding:8px;
-
-    outline:none;
-
-    white-space:pre-wrap;
-
-    word-break:break-word;
-
-    background:transparent;
-
-    cursor:text;
-
+.text-object.editing {
+    cursor: text;
 }
 
-.text-object:not(.editing) .text-content{
+.text-content {
+    width: 100%;
+    min-height: 25px;
 
-    cursor:move;
+    outline: none;
 
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
 }
 
-.text-object.editing{
-
-    outline:2px dashed #198754;
-
+.text-object.editing .text-content {
+    cursor: text;
 }
 
+/* =========================
+   IMAGE
+========================= */
+
+.image-object {
+    cursor: move;
+}
+
+.image-object img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+}
 
 /* =========================
    TABLE
 ========================= */
 
-.table-object{
+.table-object {
+    cursor: move;
 
-    min-width:300px;
+    background: white;
 
+    overflow: visible;
 }
 
-.table-object table{
+.table-object table {
+    width: 100%;
+    height: 100%;
 
-    width:100%;
+    border-collapse: collapse;
 
-    border-collapse:collapse;
-
-    background:white;
-
+    background: white;
 }
 
 .table-object td,
-.table-object th{
+.table-object th {
+    border: 1px solid #333;
 
-    border:1px solid #333;
+    padding: 8px;
 
-    padding:8px;
+    min-width: 50px;
 
-    min-width:70px;
-
-    min-height:30px;
-
+    outline: none;
 }
 
-.table-object td[contenteditable="true"],
-.table-object th[contenteditable="true"]{
-
-    cursor:text;
-
+.table-object td:focus,
+.table-object th:focus {
+    background: #eef5ff;
 }
-
 
 /* =========================
    SHAPES
 ========================= */
 
-.shape-object{
-
-    min-width:100px;
-
-    min-height:80px;
-
+.shape-object {
+    cursor: move;
 }
 
-.shape{
+.rectangle-shape {
+    width: 100%;
+    height: 100%;
 
-    width:100%;
+    border: 3px solid #0b5ed7;
 
-    height:100%;
-
+    background: rgba(11,94,215,0.05);
 }
 
-.rectangle{
+.circle-shape {
+    width: 100%;
+    height: 100%;
 
-    border:4px solid #0b5ed7;
+    border: 3px solid #198754;
 
+    border-radius: 50%;
+
+    background: rgba(25,135,84,0.05);
 }
 
-.circle{
+.line-shape {
+    width: 100%;
+    height: 4px;
 
-    border:4px solid #dc3545;
-
-    border-radius:50%;
-
+    background: #222;
 }
 
-.line{
+.arrow-shape {
+    width: 100%;
+    height: 4px;
 
-    height:4px;
+    background: #dc3545;
 
-    background:#222;
-
+    position: relative;
 }
 
-.arrow{
+.arrow-shape::after {
+    content: "";
 
-    height:4px;
+    position: absolute;
 
-    background:#222;
+    right: -2px;
+    top: -7px;
 
-    position:relative;
+    width: 0;
+    height: 0;
 
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 16px solid #dc3545;
 }
-
-.arrow:after{
-
-    content:"";
-
-    position:absolute;
-
-    right:-1px;
-
-    top:50%;
-
-    transform:
-        translateY(-50%)
-        rotate(45deg);
-
-    width:14px;
-
-    height:14px;
-
-    border-top:4px solid #222;
-
-    border-right:4px solid #222;
-
-}
-
 
 /* =========================
-   NOTES
+   OBJECT CONTROLS
 ========================= */
 
-.notes-grid{
+.object-controls {
+    position: absolute;
 
-    display:grid;
+    top: -35px;
+    left: 0;
+
+    display: flex;
+
+    gap: 4px;
+
+    background: #0b5ed7;
+
+    padding: 4px;
+
+    border-radius: 5px;
+
+    z-index: 1000;
+}
+
+.object-controls button {
+    border: none;
+
+    background: white;
+
+    color: #222;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.object-controls button:hover {
+    background: #e9ecef;
+}
+
+/* =========================
+   RESIZE HANDLE
+========================= */
+
+.resize-handle {
+    position: absolute;
+
+    right: -7px;
+    bottom: -7px;
+
+    width: 14px;
+    height: 14px;
+
+    background: #0b5ed7;
+
+    border: 2px solid white;
+
+    border-radius: 50%;
+
+    cursor: nwse-resize;
+
+    z-index: 1001;
+}
+
+/* =========================
+   ROTATE HANDLE
+========================= */
+
+.rotate-handle {
+    position: absolute;
+
+    left: 50%;
+    top: -35px;
+
+    transform: translateX(-50%);
+
+    width: 18px;
+    height: 18px;
+
+    background: #198754;
+
+    border: 2px solid white;
+
+    border-radius: 50%;
+
+    cursor: grab;
+
+    z-index: 1001;
+}
+
+.rotate-handle::after {
+    content: "↻";
+
+    position: absolute;
+
+    color: white;
+
+    font-size: 12px;
+
+    left: 1px;
+    top: -1px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-row input {
+    flex: 1;
+    min-width: 250px;
+}
+
+.note-count {
+    margin-top: 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* =========================
+   NOTES LIST
+========================= */
+
+.notes-grid {
+    display: grid;
 
     grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(280px,1fr)
-        );
+        repeat(auto-fill, minmax(280px, 1fr));
 
-    gap:15px;
+    gap: 15px;
 
+    margin-top: 15px;
 }
 
-.note-card{
+.note-card {
+    border: 1px solid #ddd;
 
-    background:#fff;
+    border-radius: 10px;
 
-    border:1px solid #ddd;
+    padding: 15px;
 
-    border-radius:10px;
-
-    padding:15px;
-
+    background: white;
 }
 
-.note-card h3{
+.note-card h3 {
+    margin-top: 0;
 
-    margin-top:0;
-
+    color: #0b5ed7;
 }
 
-.note-preview{
-
-    max-height:180px;
-
-    overflow:hidden;
-
-    background:#fafafa;
-
-    padding:10px;
-
-    border-radius:6px;
-
+.note-card p {
+    color: #666;
 }
 
-.search-row{
+.note-preview {
+    max-height: 150px;
 
-    display:grid;
+    overflow: hidden;
 
-    grid-template-columns:1fr auto;
+    margin-bottom: 12px;
 
-    gap:10px;
-
+    font-size: 14px;
 }
 
-.status{
+.note-card-buttons {
+    display: flex;
 
-    margin-top:10px;
+    gap: 8px;
 
-    font-weight:bold;
-
+    flex-wrap: wrap;
 }
 
+/* =========================
+   STATUS
+========================= */
+
+.status {
+    margin-top: 15px;
+
+    padding: 10px;
+
+    border-radius: 6px;
+
+    display: none;
+}
+
+.status.success {
+    display: block;
+
+    background: #d1e7dd;
+
+    color: #0f5132;
+}
+
+.status.error {
+    display: block;
+
+    background: #f8d7da;
+
+    color: #842029;
+}
+
+/* =========================
+   PREVIEW
+========================= */
+
+.preview-box {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.7);
+
+    z-index: 5000;
+
+    overflow: auto;
+
+    padding: 30px;
+}
+
+.preview-inner {
+    background: white;
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 30px;
+
+    min-height: 500px;
+}
+
+.close-preview {
+    position: fixed;
+
+    top: 15px;
+    right: 20px;
+
+    background: #dc3545;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    z-index: 5001;
+}
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:700px){
+@media(max-width:700px) {
 
-    .row{
-
-        grid-template-columns:1fr;
-
+    .header {
+        padding: 15px;
     }
 
-    .back-admin-button{
+    .header h1 {
+        font-size: 20px;
+    }
 
-        width:100%;
+    .back-admin-button {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
 
-        font-size:18px;
+    .container {
+        width: 98%;
+    }
 
+    .editor-stage {
+        height: 700px;
+    }
+
+    .writing-area {
+        padding: 20px;
     }
 
 }
@@ -672,22 +747,23 @@ grow with the amount of text.
 
 </head>
 
-
 <body>
 
+<!-- =========================
+     HEADER
+========================= -->
 
-<header>
+<header class="header">
+
+    <h1>OGCONS Study Hub - Admin Notes</h1>
 
     <button
         class="back-admin-button"
-        onclick="window.location.href='admin.html'"
-    >
+        onclick="window.location.href='admin.html'">
+
         ← Back to Main Admin
+
     </button>
-
-    <h1>OGCONS Study Hub</h1>
-
-    <p>Admin Notes Management</p>
 
 </header>
 
@@ -701,373 +777,377 @@ grow with the amount of text.
 
 <div class="panel">
 
-<h2>Note Information</h2>
+    <h2>Note Information</h2>
 
-<div class="row">
+    <div class="form-row">
 
+        <div class="form-group">
 
-<div>
+            <label>Course</label>
 
-<label>Course</label>
+            <select id="course">
 
-<select id="course">
+                <option value="">Select Course</option>
 
-<option value="">
-Select Course
-</option>
+                <option value="Foundations of Nursing">
+                    Foundations of Nursing
+                </option>
 
-<option value="Foundations of Nursing">
-Foundations of Nursing
-</option>
+                <option value="Anatomy & Physiology">
+                    Anatomy & Physiology
+                </option>
 
-<option value="Anatomy & Physiology">
-Anatomy & Physiology
-</option>
+                <option value="Pharmacology">
+                    Pharmacology
+                </option>
 
-<option value="Pharmacology">
-Pharmacology
-</option>
+                <option value="Primary Health Care">
+                    Primary Health Care
+                </option>
 
-<option value="Primary Health Care">
-Primary Health Care
-</option>
+                <option value="Medical/Surgical Nursing">
+                    Medical/Surgical Nursing
+                </option>
 
-<option value="Medical/Surgical Nursing">
-Medical/Surgical Nursing
-</option>
+                <option value="Microbiology">
+                    Microbiology
+                </option>
 
-<option value="Microbiology">
-Microbiology
-</option>
+            </select>
 
-</select>
-
-</div>
+        </div>
 
 
-<div>
+        <div class="form-group">
 
-<label>Topic</label>
+            <label>Topic</label>
 
-<select id="topic">
+            <select id="topic">
 
-<option value="">
-Select Topic
-</option>
+                <option value="">Select Topic</option>
 
-</select>
+            </select>
 
-</div>
+        </div>
 
 
-</div>
+        <div class="form-group">
 
+            <label>Note Title</label>
 
-<br>
+            <input
+                type="text"
+                id="title"
+                placeholder="Enter note title">
 
+        </div>
 
-<label>Note Title</label>
-
-<input
-    id="title"
-    placeholder="Enter note title"
->
-
+    </div>
 
 </div>
 
 
 <!-- =========================
-     NOTE EDITOR
+     EDITOR
 ========================= -->
 
 <div class="panel">
 
-<h2>Note Editor</h2>
+    <h2>Note Editor</h2>
 
 
-<div class="toolbar">
+    <div class="toolbar">
 
+        <button onclick="formatText('bold')">
+            <b>B</b>
+        </button>
 
-<button onclick="format('bold')">
-<b>B</b>
-</button>
+        <button onclick="formatText('italic')">
+            <i>I</i>
+        </button>
 
+        <button onclick="formatText('underline')">
+            <u>U</u>
+        </button>
 
-<button onclick="format('italic')">
-<i>I</i>
-</button>
 
+        <select onchange="formatBlock(this.value); this.selectedIndex=0;">
 
-<button onclick="format('underline')">
-<u>U</u>
-</button>
+            <option value="">Heading</option>
 
+            <option value="h1">Heading 1</option>
 
-<select
-    onchange="format('formatBlock',this.value)"
->
+            <option value="h2">Heading 2</option>
 
-<option value="">
-Heading
-</option>
+            <option value="h3">Heading 3</option>
 
-<option value="H1">
-Heading 1
-</option>
+            <option value="p">Normal</option>
 
-<option value="H2">
-Heading 2
-</option>
+        </select>
 
-<option value="H3">
-Heading 3
-</option>
 
-<option value="P">
-Normal
-</option>
+        <select onchange="changeFontSize(this.value); this.selectedIndex=0;">
 
-</select>
+            <option value="">Text Size</option>
 
+            <option value="1">Small</option>
 
-<select
-    onchange="format('fontSize',this.value)"
->
+            <option value="3">Normal</option>
 
-<option value="">
-Size
-</option>
+            <option value="5">Large</option>
 
-<option value="1">
-Small
-</option>
+            <option value="6">Very Large</option>
 
-<option value="3">
-Normal
-</option>
+            <option value="7">Huge</option>
 
-<option value="5">
-Large
-</option>
+        </select>
 
-<option value="7">
-Very Large
-</option>
 
-</select>
+        <div class="toolbar-separator"></div>
 
 
-<button onclick="format('justifyLeft')">
-Left
-</button>
+        <button onclick="formatText('justifyLeft')">
+            ⬅
+        </button>
 
-<button onclick="format('justifyCenter')">
-Center
-</button>
+        <button onclick="formatText('justifyCenter')">
+            ↔
+        </button>
 
-<button onclick="format('justifyRight')">
-Right
-</button>
+        <button onclick="formatText('justifyRight')">
+            ➡
+        </button>
 
 
-<button onclick="format('insertUnorderedList')">
-• List
-</button>
+        <button onclick="formatText('insertUnorderedList')">
+            • List
+        </button>
 
-<button onclick="format('insertOrderedList')">
-1. List
-</button>
+        <button onclick="formatText('insertOrderedList')">
+            1. List
+        </button>
 
 
-<button onclick="addTextBox()">
-Text Box
-</button>
+        <div class="toolbar-separator"></div>
 
-<button onclick="addImage()">
-Image
-</button>
 
-<button onclick="addTable()">
-Table
-</button>
+        <button onclick="addTextBox()">
+            Text Box
+        </button>
 
+        <button onclick="addImage()">
+            Image
+        </button>
 
-<button onclick="addShape('rectangle')">
-Rectangle
-</button>
+        <button onclick="addTable()">
+            Table
+        </button>
 
-<button onclick="addShape('circle')">
-Circle
-</button>
 
-<button onclick="addShape('line')">
-Line
-</button>
+        <div class="toolbar-separator"></div>
 
-<button onclick="addShape('arrow')">
-Arrow
-</button>
 
+        <button onclick="addShape('rectangle')">
+            Rectangle
+        </button>
 
-<button onclick="format('insertHorizontalRule')">
-Line
-</button>
+        <button onclick="addShape('circle')">
+            Circle
+        </button>
 
-<button onclick="addLink()">
-Link
-</button>
+        <button onclick="addShape('line')">
+            Line
+        </button>
 
-<button onclick="format('formatBlock','blockquote')">
-Quote
-</button>
+        <button onclick="addShape('arrow')">
+            Arrow
+        </button>
 
 
-<button onclick="undo()">
-Undo
-</button>
+        <div class="toolbar-separator"></div>
 
-<button onclick="redo()">
-Redo
-</button>
 
+        <button onclick="formatText('insertHorizontalRule')">
+            ─ Line
+        </button>
 
-<button onclick="previewNote()">
-Preview
-</button>
+        <button onclick="addLink()">
+            Link
+        </button>
 
+        <button onclick="formatText('formatBlock','blockquote')">
+            Quote
+        </button>
 
-</div>
 
+        <div class="toolbar-separator"></div>
 
-<div class="editor-wrap">
 
+        <button onclick="formatText('undo')">
+            ↶ Undo
+        </button>
 
-<div
-    id="editorStage"
-    class="editor-stage"
->
+        <button onclick="formatText('redo')">
+            ↷ Redo
+        </button>
 
 
-<div
-    id="writingArea"
-    class="writing-area"
-    contenteditable="true"
-    spellcheck="true"
->
-</div>
+        <button onclick="previewNote()">
+            Preview
+        </button>
 
+    </div>
 
-<div
-    id="objectsLayer"
-    class="objects-layer"
->
-</div>
 
+    <!--
+        IMPORTANT:
 
-</div>
+        This editor starts at 700px.
 
+        It WILL NOT grow when typing.
 
-</div>
+        The admin manually expands it using
+        the resize handle at the bottom-right.
+    -->
 
+    <div class="editor-wrapper">
 
-<br>
+        <div
+            id="editorStage"
+            class="editor-stage">
 
+            <div
+                id="writingArea"
+                class="writing-area"
+                contenteditable="true">
 
-<button
-    class="success"
-    onclick="saveNote()"
->
-Save Note
-</button>
+            </div>
 
 
-<button
-    class="secondary"
-    onclick="clearEditor()"
->
-Clear
-</button>
+            <div
+                id="objectsLayer"
+                class="objects-layer">
 
+            </div>
 
-<div
-    id="status"
-    class="status"
->
-</div>
+        </div>
 
+    </div>
+
+
+    <br>
+
+
+    <div>
+
+        <button
+            class="main-button success-button"
+            onclick="saveNote()">
+
+            Save Note
+
+        </button>
+
+
+        <button
+            class="main-button"
+            onclick="clearEditor()">
+
+            Clear
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="status"
+        class="status">
+
+    </div>
 
 </div>
 
 
 <!-- =========================
-     SEARCH
+     SEARCH NOTES
 ========================= -->
 
 <div class="panel">
 
-<h2>Search Notes</h2>
+    <h2>Search Notes</h2>
+
+    <div class="search-row">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by title, course or topic..."
+            oninput="loadNotes()">
 
 
-<div class="search-row">
+        <button
+            class="main-button"
+            onclick="clearSearch()">
+
+            Clear Search
+
+        </button>
+
+    </div>
 
 
-<input
-    id="searchInput"
-    placeholder="Search by title, course or topic..."
-    oninput="searchNotes()"
->
+    <div
+        id="noteCount"
+        class="note-count">
+
+        Loading notes...
+
+    </div>
 
 
-<button
-    class="secondary"
-    onclick="clearSearch()"
->
-Clear
-</button>
+    <div
+        id="notesList"
+        class="notes-grid">
 
+    </div>
 
 </div>
-
-
-<br>
-
-
-<div id="noteCount"></div>
-
 
 </div>
 
 
 <!-- =========================
-     SAVED NOTES
+     PREVIEW
 ========================= -->
 
-<div class="panel">
-
-<h2>Saved Notes</h2>
-
-
 <div
-    id="notesList"
-    class="notes-grid"
->
-Loading notes...
-</div>
+    id="previewBox"
+    class="preview-box">
+
+    <button
+        class="close-preview"
+        onclick="closePreview()">
+
+        Close
+
+    </button>
 
 
-</div>
+    <div
+        id="previewInner"
+        class="preview-inner">
 
+    </div>
 
 </div>
 
 
 <script>
 
-
-/* =========================
+/* =====================================================
    SUPABASE
-========================= */
+===================================================== */
 
 const SUPABASE_URL =
 "https://bvetmmvpdotifusjkywd.supabase.co";
@@ -1075,476 +1155,449 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
 
-
-const { createClient } =
-supabase;
-
-
-const db =
-createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-/* =========================
-   EXACT COURSE TOPICS
-========================= */
+/* =====================================================
+   COURSE TOPICS
+===================================================== */
 
 const courseTopics = {
 
-"Foundations of Nursing":[
+    "Foundations of Nursing": [
 
-"Introduction to Nursing",
+        "Introduction to Nursing",
 
-"Health Care Institutions",
+        "Health Care Institutions",
 
-"Ethico-Legal Issues in Nursing",
+        "Ethico-Legal Issues in Nursing",
 
-"Tools of Nursing",
+        "Tools of Nursing",
 
-"Comfort and Safety Measures",
+        "Comfort and Safety Measures",
 
-"Emergency Care",
+        "Emergency Care",
 
-"Administration of Drugs",
+        "Administration of Drugs",
 
-"Diagnostic Investigation",
+        "Diagnostic Investigation",
 
-"Aseptic Techniques",
+        "Aseptic Techniques",
 
-"Unsafe Injection Safety",
+        "Unsafe Injection Safety",
 
-"Introduction to Healthcare Waste",
+        "Introduction to Healthcare Waste",
 
-"Legal Aspects of Nursing",
+        "Legal Aspects of Nursing",
 
-"Nursing Care of Patients with Feeding/Elimination Problems",
+        "Nursing Care of Patients with Feeding/Elimination Problems",
 
-"Basic Life Support"
+        "Basic Life Support"
 
-],
+    ],
 
 
-"Anatomy & Physiology":[
+    "Anatomy & Physiology": [
 
-"Introduction to Anatomy",
+        "Introduction to Anatomy",
 
-"The Musculoskeletal System",
+        "The Musculoskeletal System",
 
-"Blood and Cardiovascular System",
+        "Blood and Cardiovascular System",
 
-"The Respiratory System",
+        "The Respiratory System",
 
-"The Digestive System",
+        "The Digestive System",
 
-"The Integumentary System",
+        "The Integumentary System",
 
-"The Excretory System",
+        "The Excretory System",
 
-"The Endocrine System",
+        "The Endocrine System",
 
-"The Female Reproductive System",
+        "The Female Reproductive System",
 
-"The Male Reproductive System",
+        "The Male Reproductive System",
 
-"Foetal Development"
+        "Foetal Development"
 
-],
+    ],
 
 
-"Pharmacology":[
+    "Pharmacology": [
 
-"Introduction",
+        "Introduction",
 
-"Sources and Classification of Drugs",
+        "Sources and Classification of Drugs",
 
-"Preparation of Drugs",
+        "Preparation of Drugs",
 
-"Routes of Drug Administration",
+        "Routes of Drug Administration",
 
-"Mechanism of Drug Action",
+        "Mechanism of Drug Action",
 
-"National Drug Policy",
+        "National Drug Policy",
 
-"Drugs Used in Management of Other Health Conditions",
+        "Drugs Used in Management of Other Health Conditions",
 
-"Patient Education and Counseling"
+        "Patient Education and Counseling"
 
-],
+    ],
 
 
-"Primary Health Care":[
+    "Primary Health Care": [
 
-"Introduction to Primary Health Care",
+        "Introduction to Primary Health Care",
 
-"The Community",
+        "The Community",
 
-"Cadre of Health Workers in PHC",
+        "Cadre of Health Workers in PHC",
 
-"Community Mobilization",
+        "Community Mobilization",
 
-"Community Diagnosis",
+        "Community Diagnosis",
 
-"Health Education",
+        "Health Education",
 
-"Components of Primary Health Care",
+        "Components of Primary Health Care",
 
-"Immunization Against Major Communicable Diseases",
+        "Immunization Against Major Communicable Diseases",
 
-"Prevention and Control of Locally Endemic and Epidemic Diseases",
+        "Prevention and Control of Locally Endemic and Epidemic Diseases",
 
-"Promotion of Mental Health",
+        "Promotion of Mental Health",
 
-"Maternal and Child Health Services",
+        "Maternal and Child Health Services",
 
-"Provision of Essential Drugs and Supplies",
+        "Provision of Essential Drugs and Supplies",
 
-"Oral Hygiene and Eye Care",
+        "Oral Hygiene and Eye Care",
 
-"Adolescence and Their Problems",
+        "Adolescence and Their Problems",
 
-"Referral System in PHC",
+        "Referral System in PHC",
 
-"Care of the Aged in the Community",
+        "Care of the Aged in the Community",
 
-"Management of Occupational Health",
+        "Management of Occupational Health",
 
-"Management in Primary Health Care"
+        "Management in Primary Health Care"
 
-],
+    ],
 
 
-"Medical/Surgical Nursing":[
+    "Medical/Surgical Nursing": [
 
-"Concepts and Terms in Medical-Surgical Nursing",
+        "Concepts and Terms in Medical-Surgical Nursing",
 
-"Management of Patients with Medical/Surgical Conditions",
+        "Management of Patients with Medical/Surgical Conditions",
 
-"Management of Patients with Medical/Surgical Conditions 2",
+        "Management of Patients with Medical/Surgical Conditions 2",
 
-"Common Situations That Threaten Adaptation",
+        "Common Situations That Threaten Adaptation",
 
-"Body Defense Mechanisms",
+        "Body Defense Mechanisms",
 
-"Diagnostic Measures",
+        "Diagnostic Measures",
 
-"Principles of Operating Room Nursing"
+        "Principles of Operating Room Nursing"
 
-],
+    ],
 
 
-"Microbiology":[
+    "Microbiology": [
 
-"Introduction to Microbiology",
+        "Introduction to Microbiology",
 
-"Bacteria",
+        "Bacteria",
 
-"Viruses",
+        "Viruses",
 
-"Fungi",
+        "Fungi",
 
-"Parasites",
+        "Parasites",
 
-"Immunology",
+        "Immunology",
 
-"Sterilization & Disinfection",
+        "Sterilization & Disinfection",
 
-"Healthcare-Associated Infections"
+        "Healthcare-Associated Infections"
 
-]
+    ]
 
 };
 
 
-/* =========================
-   GLOBALS
-========================= */
+/* =====================================================
+   CURRENT NOTE
+===================================================== */
 
-let editingId = null;
+let currentNoteId = null;
 
 let selectedObject = null;
 
-let dragData = null;
+let dragging = false;
 
-let resizeData = null;
+let resizing = false;
 
-let rotateData = null;
+let rotating = false;
 
-let savedNotes = [];
+let dragStartX = 0;
 
-const DESIGN_WIDTH = 1000;
+let dragStartY = 0;
+
+let objectStartX = 0;
+
+let objectStartY = 0;
+
+let objectStartWidth = 0;
+
+let objectStartHeight = 0;
+
+let startAngle = 0;
 
 
-/* =========================
-   COURSE / TOPIC
-========================= */
+/* =====================================================
+   COURSE CHANGE
+===================================================== */
 
 document
-.getElementById("course")
-.addEventListener(
-    "change",
-    function(){
+    .getElementById("course")
+    .addEventListener("change", function(){
 
-        const topic =
-        document.getElementById("topic");
+        const course = this.value;
 
-        topic.innerHTML =
-        '<option value="">Select Topic</option>';
+        const topicSelect =
+            document.getElementById("topic");
 
-
-        const list =
-        courseTopics[this.value] || [];
+        topicSelect.innerHTML =
+            '<option value="">Select Topic</option>';
 
 
-        list.forEach(item=>{
+        if (!course) return;
+
+
+        courseTopics[course].forEach(function(topic){
 
             const option =
-            document.createElement("option");
+                document.createElement("option");
 
-            option.value=item;
+            option.value = topic;
 
-            option.textContent=item;
+            option.textContent = topic;
 
-            topic.appendChild(option);
+            topicSelect.appendChild(option);
 
         });
 
-    }
-);
+    });
 
 
-/* =========================
-   EDITOR FORMATTING
-========================= */
+/* =====================================================
+   BASIC TEXT FORMATTING
+===================================================== */
 
-function format(command,value=null){
+function formatText(command, value = null){
 
     document
-    .getElementById("writingArea")
-    .focus();
+        .getElementById("writingArea")
+        .focus();
 
     document.execCommand(
         command,
         false,
         value
     );
-
-    updateEditorHeight();
-
 }
 
 
-function undo(){
+function formatBlock(value){
 
-    document.execCommand("undo");
+    if (!value) return;
 
-    updateEditorHeight();
+    document
+        .getElementById("writingArea")
+        .focus();
 
+    document.execCommand(
+        "formatBlock",
+        false,
+        value
+    );
 }
 
 
-function redo(){
+function changeFontSize(value){
 
-    document.execCommand("redo");
+    if (!value) return;
 
-    updateEditorHeight();
+    document
+        .getElementById("writingArea")
+        .focus();
 
+    document.execCommand(
+        "fontSize",
+        false,
+        value
+    );
 }
 
+
+/* =====================================================
+   LINK
+===================================================== */
 
 function addLink(){
 
     const url =
-    prompt("Enter URL:");
+        prompt("Enter the link:");
 
-    if(!url) return;
+    if (!url) return;
 
-    format(
+    formatText(
         "createLink",
         url
     );
-
 }
 
 
-/* =========================
-   TEXT BOX
-========================= */
+/* =====================================================
+   ADD TEXT BOX
+===================================================== */
 
 function addTextBox(){
 
+    const stage =
+        document.getElementById("editorStage");
+
     const layer =
-    document.getElementById(
-        "objectsLayer"
-    );
+        document.getElementById("objectsLayer");
 
 
-    const obj =
-    document.createElement("div");
+    const box =
+        document.createElement("div");
 
+    box.className =
+        "design-object text-object";
 
-    obj.className =
-    "design-object text-object editing";
+    box.style.left = "100px";
 
+    box.style.top = "100px";
 
-    obj.style.left="100px";
+    box.style.width = "300px";
 
-    obj.style.top="100px";
-
-    obj.style.width="300px";
-
-    obj.style.minHeight="60px";
-
-
-    obj.dataset.type="text";
-
-
-    const controls =
-    createControls();
+    box.style.minHeight = "50px";
 
 
     const content =
-    document.createElement("div");
+        document.createElement("div");
+
+    content.className =
+        "text-content";
+
+    content.contentEditable = "true";
+
+    content.innerHTML =
+        "Type your text here";
 
 
-    content.className=
-    "text-content";
+    box.appendChild(content);
+
+    layer.appendChild(box);
 
 
-    content.contentEditable="true";
+    makeObjectInteractive(box);
 
+    selectObject(box);
 
-    content.innerHTML=
-    "Type here...";
-
-
-    obj.appendChild(controls);
-
-    obj.appendChild(content);
-
-
-    addResizeHandle(obj);
-
-    addRotateHandle(obj);
-
-
-    layer.appendChild(obj);
-
-
-    makeInteractive(obj);
-
-    selectObject(obj);
-
-
-    content.focus();
-
-
-    const range =
-    document.createRange();
-
-
-    range.selectNodeContents(content);
-
-
-    const selection =
-    window.getSelection();
-
-
-    selection.removeAllRanges();
-
-    selection.addRange(range);
+    enterTextEdit(box);
 
 }
 
 
-/* =========================
-   IMAGE
-========================= */
+/* =====================================================
+   ADD IMAGE
+===================================================== */
 
 function addImage(){
 
     const input =
-    document.createElement("input");
+        document.createElement("input");
+
+    input.type = "file";
+
+    input.accept =
+        "image/*";
 
 
-    input.type="file";
+    input.onchange =
+        function(){
 
-    input.accept="image/*";
+            const file =
+                this.files[0];
 
-
-    input.onchange=function(){
-
-        const file =
-        input.files[0];
+            if (!file) return;
 
 
-        if(!file) return;
+            const reader =
+                new FileReader();
 
 
-        const reader =
-        new FileReader();
+            reader.onload =
+                function(e){
+
+                    const layer =
+                        document.getElementById(
+                            "objectsLayer"
+                        );
 
 
-        reader.onload=function(e){
+                    const box =
+                        document.createElement("div");
 
-            const obj =
-            document.createElement("div");
-
-
-            obj.className=
-            "design-object image-object";
+                    box.className =
+                        "design-object image-object";
 
 
-            obj.style.left="100px";
+                    box.style.left =
+                        "100px";
 
-            obj.style.top="100px";
+                    box.style.top =
+                        "100px";
 
-            obj.style.width="400px";
+                    box.style.width =
+                        "350px";
 
-
-            obj.dataset.type="image";
-
-
-            const controls =
-            createControls();
-
-
-            const img =
-            document.createElement("img");
+                    box.style.height =
+                        "250px";
 
 
-            img.src=e.target.result;
+                    const img =
+                        document.createElement("img");
+
+                    img.src =
+                        e.target.result;
 
 
-            obj.appendChild(controls);
+                    box.appendChild(img);
 
-            obj.appendChild(img);
-
-
-            addResizeHandle(obj);
-
-            addRotateHandle(obj);
+                    layer.appendChild(box);
 
 
-            document
-            .getElementById("objectsLayer")
-            .appendChild(obj);
+                    makeObjectInteractive(box);
+
+                    selectObject(box);
+
+                };
 
 
-            makeInteractive(obj);
-
-            selectObject(obj);
-
-
-            updateEditorHeight();
+            reader.readAsDataURL(file);
 
         };
-
-
-        reader.readAsDataURL(file);
-
-    };
 
 
     input.click();
@@ -1552,95 +1605,78 @@ function addImage(){
 }
 
 
-/* =========================
-   TABLE
-========================= */
+/* =====================================================
+   ADD TABLE
+===================================================== */
 
 function addTable(){
 
     const rows =
-    parseInt(
-        prompt(
-            "Number of rows:",
-            "3"
-        )
-    );
+        parseInt(
+            prompt("Number of rows:", "3")
+        );
 
 
     const cols =
-    parseInt(
-        prompt(
-            "Number of columns:",
-            "3"
-        )
-    );
+        parseInt(
+            prompt("Number of columns:", "3")
+        );
 
 
-    if(
+    if (
         !rows ||
         !cols ||
-        rows<1 ||
-        cols<1
+        rows < 1 ||
+        cols < 1
     ) return;
 
 
-    const obj =
-    document.createElement("div");
+    const layer =
+        document.getElementById(
+            "objectsLayer"
+        );
 
 
-    obj.className=
-    "design-object table-object";
+    const box =
+        document.createElement("div");
+
+    box.className =
+        "design-object table-object";
 
 
-    obj.dataset.type="table";
+    box.style.left =
+        "100px";
 
+    box.style.top =
+        "100px";
 
-    obj.style.left="100px";
+    box.style.width =
+        "500px";
 
-    obj.style.top="150px";
-
-    obj.style.width="500px";
-
-
-    const controls =
-    createControls();
+    box.style.height =
+        "250px";
 
 
     const table =
-    document.createElement("table");
+        document.createElement("table");
 
 
-    for(
-        let r=0;
-        r<rows;
-        r++
-    ){
+    for(let r = 0; r < rows; r++){
 
         const tr =
-        document.createElement("tr");
+            document.createElement("tr");
 
 
-        for(
-            let c=0;
-            c<cols;
-            c++
-        ){
+        for(let c = 0; c < cols; c++){
 
             const td =
-            document.createElement(
-                r===0
-                ? "th"
-                : "td"
-            );
+                document.createElement("td");
 
+            td.contentEditable =
+                "true";
 
-            td.contentEditable="true";
-
-
-            td.textContent =
-            r===0
-            ? "Heading"
-            : "Write here";
+            td.innerHTML =
+                "Cell";
 
 
             tr.appendChild(td);
@@ -1653,296 +1689,287 @@ function addTable(){
     }
 
 
-    obj.appendChild(controls);
+    box.appendChild(table);
 
-    obj.appendChild(table);
-
-
-    addResizeHandle(obj);
-
-    addRotateHandle(obj);
+    layer.appendChild(box);
 
 
-    document
-    .getElementById("objectsLayer")
-    .appendChild(obj);
+    makeObjectInteractive(box);
 
-
-    makeInteractive(obj);
-
-    selectObject(obj);
-
-
-    updateEditorHeight();
+    selectObject(box);
 
 }
 
 
-/* =========================
-   SHAPES
-========================= */
+/* =====================================================
+   ADD SHAPE
+===================================================== */
 
 function addShape(type){
 
-    const obj =
-    document.createElement("div");
+    const layer =
+        document.getElementById(
+            "objectsLayer"
+        );
 
 
-    obj.className=
-    "design-object shape-object";
+    const box =
+        document.createElement("div");
 
 
-    obj.dataset.type="shape";
-
-    obj.dataset.shape=type;
-
-
-    obj.style.left="150px";
-
-    obj.style.top="200px";
+    box.className =
+        "design-object shape-object";
 
 
-    if(
-        type==="line" ||
-        type==="arrow"
-    ){
+    box.style.left =
+        "150px";
 
-        obj.style.width="300px";
+    box.style.top =
+        "150px";
 
-        obj.style.height="5px";
+    box.style.width =
+        type === "line" ||
+        type === "arrow"
+            ? "300px"
+            : "200px";
 
-    }else{
 
-        obj.style.width="180px";
+    box.style.height =
+        type === "line" ||
+        type === "arrow"
+            ? "20px"
+            : "150px";
 
-        obj.style.height="120px";
+
+    const shape =
+        document.createElement("div");
+
+
+    if(type === "rectangle"){
+
+        shape.className =
+            "rectangle-shape";
+
+    }
+
+    if(type === "circle"){
+
+        shape.className =
+            "circle-shape";
+
+    }
+
+    if(type === "line"){
+
+        shape.className =
+            "line-shape";
+
+    }
+
+    if(type === "arrow"){
+
+        shape.className =
+            "arrow-shape";
 
     }
 
 
-    const controls =
-    createControls();
+    box.appendChild(shape);
+
+    layer.appendChild(box);
 
 
-    const shape =
-    document.createElement("div");
+    makeObjectInteractive(box);
 
-
-    shape.className=
-    "shape "+type;
-
-
-    obj.appendChild(controls);
-
-    obj.appendChild(shape);
-
-
-    addResizeHandle(obj);
-
-    addRotateHandle(obj);
-
-
-    document
-    .getElementById("objectsLayer")
-    .appendChild(obj);
-
-
-    makeInteractive(obj);
-
-    selectObject(obj);
-
-
-    updateEditorHeight();
+    selectObject(box);
 
 }
 
 
-/* =========================
-   OBJECT CONTROLS
-========================= */
+/* =====================================================
+   SELECT OBJECT
+===================================================== */
 
-function createControls(){
+function selectObject(object){
+
+    if(selectedObject){
+
+        selectedObject.classList
+            .remove("selected");
+
+        removeControls(
+            selectedObject
+        );
+
+    }
+
+
+    selectedObject =
+        object;
+
+
+    object.classList
+        .add("selected");
+
+
+    addControls(object);
+
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+function addControls(object){
+
+    removeControls(object);
+
 
     const controls =
-    document.createElement("div");
+        document.createElement("div");
 
-
-    controls.className=
-    "object-controls";
+    controls.className =
+        "object-controls";
 
 
     const left =
-    document.createElement("button");
+        document.createElement("button");
+
+    left.textContent =
+        "←";
+
+    left.onclick =
+        function(e){
+
+            e.stopPropagation();
+
+            object.style.left =
+                Math.max(
+                    0,
+                    object.offsetLeft - 10
+                ) + "px";
+
+        };
 
 
-    left.textContent="←";
+    const center =
+        document.createElement("button");
 
+    center.textContent =
+        "↔";
 
-    left.onclick=e=>{
+    center.onclick =
+        function(e){
 
-        e.stopPropagation();
+            e.stopPropagation();
 
-        moveObject(-10,0);
+            const stage =
+                document.getElementById(
+                    "editorStage"
+                );
 
-    };
+            object.style.left =
+                Math.max(
+                    0,
+                    (stage.clientWidth -
+                        object.offsetWidth) / 2
+                ) + "px";
+
+        };
 
 
     const right =
-    document.createElement("button");
+        document.createElement("button");
+
+    right.textContent =
+        "→";
+
+    right.onclick =
+        function(e){
+
+            e.stopPropagation();
+
+            const stage =
+                document.getElementById(
+                    "editorStage"
+                );
+
+            object.style.left =
+                Math.max(
+                    0,
+                    stage.clientWidth -
+                    object.offsetWidth -
+                    10
+                ) + "px";
+
+        };
 
 
-    right.textContent="→";
+    const deleteButton =
+        document.createElement("button");
+
+    deleteButton.textContent =
+        "🗑";
+
+    deleteButton.onclick =
+        function(e){
+
+            e.stopPropagation();
+
+            object.remove();
+
+            selectedObject =
+                null;
+
+        };
 
 
-    right.onclick=e=>{
+    controls.appendChild(left);
 
-        e.stopPropagation();
+    controls.appendChild(center);
 
-        moveObject(10,0);
+    controls.appendChild(right);
 
-    };
-
-
-    const up =
-    document.createElement("button");
+    controls.appendChild(deleteButton);
 
 
-    up.textContent="↑";
-
-
-    up.onclick=e=>{
-
-        e.stopPropagation();
-
-        moveObject(0,-10);
-
-    };
-
-
-    const down =
-    document.createElement("button");
-
-
-    down.textContent="↓";
-
-
-    down.onclick=e=>{
-
-        e.stopPropagation();
-
-        moveObject(0,10);
-
-    };
-
-
-    const rotateLeft =
-    document.createElement("button");
-
-
-    rotateLeft.textContent="↶";
-
-
-    rotateLeft.onclick=e=>{
-
-        e.stopPropagation();
-
-        rotateObject(-10);
-
-    };
-
-
-    const rotateRight =
-    document.createElement("button");
-
-
-    rotateRight.textContent="↷";
-
-
-    rotateRight.onclick=e=>{
-
-        e.stopPropagation();
-
-        rotateObject(10);
-
-    };
-
-
-    const del =
-    document.createElement("button");
-
-
-    del.textContent="Delete";
-
-
-    del.onclick=e=>{
-
-        e.stopPropagation();
-
-
-        if(selectedObject){
-
-            selectedObject.remove();
-
-            selectedObject=null;
-
-            updateEditorHeight();
-
-        }
-
-    };
-
-
-    controls.append(
-        left,
-        right,
-        up,
-        down,
-        rotateLeft,
-        rotateRight,
-        del
+    object.appendChild(
+        controls
     );
 
 
-    return controls;
+    const resize =
+        document.createElement("div");
 
-}
-
-
-function addResizeHandle(obj){
-
-    const handle =
-    document.createElement("div");
+    resize.className =
+        "resize-handle";
 
 
-    handle.className=
-    "resize-handle";
+    object.appendChild(
+        resize
+    );
 
 
-    obj.appendChild(handle);
+    const rotate =
+        document.createElement("div");
+
+    rotate.className =
+        "rotate-handle";
 
 
-    handle.addEventListener(
+    object.appendChild(
+        rotate
+    );
+
+
+    resize.addEventListener(
         "mousedown",
         startResize
     );
 
-}
 
-
-function addRotateHandle(obj){
-
-    const handle =
-    document.createElement("div");
-
-
-    handle.className=
-    "rotate-handle";
-
-
-    obj.appendChild(handle);
-
-
-    handle.addEventListener(
+    rotate.addEventListener(
         "mousedown",
         startRotate
     );
@@ -1950,49 +1977,120 @@ function addRotateHandle(obj){
 }
 
 
-/* =========================
-   SELECT OBJECT
-========================= */
+/* =====================================================
+   REMOVE CONTROLS
+===================================================== */
 
-function selectObject(obj){
+function removeControls(object){
 
-    if(selectedObject){
+    if(!object) return;
 
-        selectedObject.classList.remove(
-            "selected"
+    object
+        .querySelectorAll(
+            ".object-controls,.resize-handle,.rotate-handle"
+        )
+        .forEach(function(el){
+
+            el.remove();
+
+        });
+
+}
+
+
+/* =====================================================
+   TEXT EDITING
+===================================================== */
+
+function enterTextEdit(object){
+
+    if(
+        !object.classList.contains(
+            "text-object"
+        )
+    ) return;
+
+
+    object.classList
+        .add("editing");
+
+
+    const content =
+        object.querySelector(
+            ".text-content"
         );
 
-    }
+
+    if(content){
+
+        content.contentEditable =
+            "true";
+
+        content.focus();
 
 
-    selectedObject=obj;
+        const range =
+            document.createRange();
 
-
-    if(obj){
-
-        obj.classList.add(
-            "selected"
+        range.selectNodeContents(
+            content
         );
+
+        range.collapse(false);
+
+
+        const selection =
+            window.getSelection();
+
+        selection.removeAllRanges();
+
+        selection.addRange(range);
 
     }
 
 }
 
 
-/* =========================
-   INTERACTION
-========================= */
+function exitTextEdit(object){
 
-function makeInteractive(obj){
+    if(!object) return;
 
-    obj.addEventListener(
+
+    if(
+        !object.classList.contains(
+            "text-object"
+        )
+    ) return;
+
+
+    object.classList
+        .remove("editing");
+
+
+    const content =
+        object.querySelector(
+            ".text-content"
+        );
+
+
+    if(content){
+
+        content.contentEditable =
+            "false";
+
+    }
+
+}
+
+
+/* =====================================================
+   OBJECT INTERACTION
+===================================================== */
+
+function makeObjectInteractive(object){
+
+    object.addEventListener(
         "mousedown",
-        startDrag
-    );
-
-
-    obj.addEventListener(
-        "click",
         function(e){
 
             if(
@@ -2005,647 +2103,328 @@ function makeInteractive(obj){
                 e.target.closest(
                     ".rotate-handle"
                 )
-            ) return;
+            ){
+
+                return;
+
+            }
 
 
-            selectObject(obj);
+            if(
+                object.classList.contains(
+                    "text-object"
+                ) &&
+                object.classList.contains(
+                    "editing"
+                )
+            ){
+
+                return;
+
+            }
+
+
+            e.preventDefault();
+
+            selectObject(object);
+
+
+            dragging = true;
+
+
+            dragStartX =
+                e.clientX;
+
+            dragStartY =
+                e.clientY;
+
+
+            objectStartX =
+                object.offsetLeft;
+
+            objectStartY =
+                object.offsetTop;
 
         }
     );
 
 
-    if(
-        obj.dataset.type==="text"
-    ){
+    object.addEventListener(
+        "dblclick",
+        function(e){
 
-        const content =
-        obj.querySelector(
-            ".text-content"
-        );
+            if(
+                object.classList.contains(
+                    "text-object"
+                )
+            ){
 
+                e.stopPropagation();
 
-        content.addEventListener(
-            "mousedown",
-            e=>{
-
-                if(
-                    obj.classList.contains(
-                        "editing"
-                    )
-                ){
-
-                    e.stopPropagation();
-
-                }
+                enterTextEdit(object);
 
             }
-        );
+
+        }
+    );
+
+}
 
 
-        obj.addEventListener(
-            "dblclick",
-            e=>{
+/* =====================================================
+   GLOBAL MOUSE MOVE
+===================================================== */
 
-                if(
-                    e.target.closest(
-                        ".text-content"
-                    )
-                ){
+document.addEventListener(
+    "mousemove",
+    function(e){
 
-                    obj.classList.add(
-                        "editing"
-                    );
+        if(!selectedObject)
+            return;
 
 
-                    content.contentEditable=
-                    "true";
+        if(dragging){
+
+            const dx =
+                e.clientX -
+                dragStartX;
+
+            const dy =
+                e.clientY -
+                dragStartY;
 
 
-                    content.focus();
-
-                }
-
-            }
-        );
-
-
-        content.addEventListener(
-            "blur",
-            ()=>{
-
-                setTimeout(()=>{
-
-                    if(
-                        !obj.matches(
-                            ":hover"
-                        )
-                    ){
-
-                        obj.classList.remove(
-                            "editing"
-                        );
+            selectedObject.style.left =
+                Math.max(
+                    0,
+                    objectStartX + dx
+                ) + "px";
 
 
-                        content.contentEditable=
-                        "false";
+            selectedObject.style.top =
+                Math.max(
+                    0,
+                    objectStartY + dy
+                ) + "px";
 
-                    }
+        }
 
-                },100);
 
-            }
-        );
+        if(resizing){
+
+            const dx =
+                e.clientX -
+                dragStartX;
+
+            const dy =
+                e.clientY -
+                dragStartY;
+
+
+            selectedObject.style.width =
+                Math.max(
+                    50,
+                    objectStartWidth + dx
+                ) + "px";
+
+
+            selectedObject.style.height =
+                Math.max(
+                    30,
+                    objectStartHeight + dy
+                ) + "px";
+
+        }
+
+
+        if(rotating){
+
+            const rect =
+                selectedObject.getBoundingClientRect();
+
+
+            const centerX =
+                rect.left +
+                rect.width / 2;
+
+
+            const centerY =
+                rect.top +
+                rect.height / 2;
+
+
+            const angle =
+                Math.atan2(
+                    e.clientY - centerY,
+                    e.clientX - centerX
+                ) *
+                180 /
+                Math.PI;
+
+
+            const rotation =
+                angle -
+                startAngle;
+
+
+            selectedObject.dataset.rotation =
+                rotation;
+
+
+            selectedObject.style.transform =
+                "rotate(" +
+                rotation +
+                "deg)";
+
+        }
 
     }
-
-}
-
-
-/* =========================
-   DRAG
-========================= */
-
-function startDrag(e){
-
-    if(
-        e.target.closest(
-            ".object-controls"
-        ) ||
-        e.target.closest(
-            ".resize-handle"
-        ) ||
-        e.target.closest(
-            ".rotate-handle"
-        )
-    ) return;
+);
 
 
-    const obj =
-    e.currentTarget;
+/* =====================================================
+   GLOBAL MOUSE UP
+===================================================== */
 
+document.addEventListener(
+    "mouseup",
+    function(){
 
-    if(
-        obj.dataset.type==="text" &&
-        obj.classList.contains("editing")
-    ){
+        dragging = false;
 
-        return;
+        resizing = false;
+
+        rotating = false;
 
     }
+);
 
 
-    selectObject(obj);
-
-
-    dragData={
-
-        obj,
-
-        startX:e.clientX,
-
-        startY:e.clientY,
-
-        startLeft:
-        obj.offsetLeft,
-
-        startTop:
-        obj.offsetTop
-
-    };
-
-
-    document.addEventListener(
-        "mousemove",
-        dragMove
-    );
-
-
-    document.addEventListener(
-        "mouseup",
-        stopDrag
-    );
-
-}
-
-
-function dragMove(e){
-
-    if(!dragData) return;
-
-
-    const dx =
-    e.clientX -
-    dragData.startX;
-
-
-    const dy =
-    e.clientY -
-    dragData.startY;
-
-
-    dragData.obj.style.left=
-    (
-        dragData.startLeft+
-        dx
-    )+"px";
-
-
-    dragData.obj.style.top=
-    (
-        dragData.startTop+
-        dy
-    )+"px";
-
-
-    updateEditorHeight();
-
-}
-
-
-function stopDrag(){
-
-    document.removeEventListener(
-        "mousemove",
-        dragMove
-    );
-
-
-    document.removeEventListener(
-        "mouseup",
-        stopDrag
-    );
-
-
-    dragData=null;
-
-}
-
-
-/* =========================
+/* =====================================================
    RESIZE
-========================= */
+===================================================== */
 
 function startResize(e){
 
-    e.stopPropagation();
-
-
-    const obj =
-    e.currentTarget.parentElement;
-
-
-    selectObject(obj);
-
-
-    resizeData={
-
-        obj,
-
-        startX:e.clientX,
-
-        startWidth:
-        obj.offsetWidth
-
-    };
-
-
-    document.addEventListener(
-        "mousemove",
-        resizeMove
-    );
-
-
-    document.addEventListener(
-        "mouseup",
-        stopResize
-    );
-
-}
-
-
-function resizeMove(e){
-
-    if(!resizeData) return;
-
-
-    let width =
-    resizeData.startWidth+
-    (
-        e.clientX-
-        resizeData.startX
-    );
-
-
-    width =
-    Math.max(
-        80,
-        width
-    );
-
-
-    resizeData.obj.style.width=
-    width+"px";
-
-
-    updateEditorHeight();
-
-}
-
-
-function stopResize(){
-
-    document.removeEventListener(
-        "mousemove",
-        resizeMove
-    );
-
-
-    document.removeEventListener(
-        "mouseup",
-        stopResize
-    );
-
-
-    resizeData=null;
-
-}
-
-
-/* =========================
-   ROTATE
-========================= */
-
-function rotateObject(amount){
-
-    if(!selectedObject) return;
-
-
-    let current =
-    parseFloat(
-        selectedObject.dataset.rotation ||
-        0
-    );
-
-
-    current+=amount;
-
-
-    selectedObject.dataset.rotation=
-    current;
-
-
-    selectedObject.style.transform=
-    "rotate("+current+"deg)";
-
-}
-
-
-function startRotate(e){
+    e.preventDefault();
 
     e.stopPropagation();
 
 
-    const obj =
-    e.currentTarget.parentElement;
-
-
-    selectObject(obj);
-
-
-    const rect =
-    obj.getBoundingClientRect();
-
-
-    const centerX =
-    rect.left+
-    rect.width/2;
-
-
-    const centerY =
-    rect.top+
-    rect.height/2;
-
-
-    rotateData={
-
-        obj,
-
-        centerX,
-
-        centerY
-
-    };
-
-
-    document.addEventListener(
-        "mousemove",
-        rotateMove
-    );
-
-
-    document.addEventListener(
-        "mouseup",
-        stopRotate
-    );
-
-}
-
-
-function rotateMove(e){
-
-    if(!rotateData) return;
-
-
-    const angle =
-    Math.atan2(
-
-        e.clientY-
-        rotateData.centerY,
-
-        e.clientX-
-        rotateData.centerX
-
-    )*
-    180/
-    Math.PI;
-
-
-    rotateData.obj.style.transform=
-    "rotate("+angle+"deg)";
-
-
-    rotateData.obj.dataset.rotation=
-    angle;
-
-}
-
-
-function stopRotate(){
-
-    document.removeEventListener(
-        "mousemove",
-        rotateMove
-    );
-
-
-    document.removeEventListener(
-        "mouseup",
-        stopRotate
-    );
-
-
-    rotateData=null;
-
-}
-
-
-function moveObject(x,y){
-
-    if(!selectedObject) return;
-
-
-    selectedObject.style.left=
-    (
-        selectedObject.offsetLeft+
-        x
-    )+"px";
-
-
-    selectedObject.style.top=
-    (
-        selectedObject.offsetTop+
-        y
-    )+"px";
-
-
-    updateEditorHeight();
-
-}
-
-
-/* =========================
-   UPDATE WHITE EDITOR HEIGHT
-========================= */
-
-/*
-This is the main correction.
-
-The white editor now automatically becomes
-tall enough for:
-
-1. Normal writing
-2. Images
-3. Text boxes
-4. Tables
-5. Shapes
-6. Anything moved lower on the page
-*/
-
-function updateEditorHeight(){
-
-    const stage =
-    document.getElementById(
-        "editorStage"
-    );
-
-
-    const writing =
-    document.getElementById(
-        "writingArea"
-    );
-
-
-    const objects =
-    document.getElementById(
-        "objectsLayer"
-    );
-
-
-    if(!stage || !writing)
+    if(!selectedObject)
         return;
 
 
-    let requiredHeight=900;
+    resizing = true;
 
 
-    /*
-      Normal text height.
-    */
+    dragStartX =
+        e.clientX;
 
-    requiredHeight=
-    Math.max(
-        requiredHeight,
-        writing.scrollHeight+
-        70
-    );
+    dragStartY =
+        e.clientY;
 
 
-    /*
-      Movable objects.
-    */
+    objectStartWidth =
+        selectedObject.offsetWidth;
 
-    if(objects){
-
-        objects
-        .querySelectorAll(
-            ".design-object"
-        )
-        .forEach(obj=>{
-
-            const bottom =
-            obj.offsetTop+
-            obj.offsetHeight+
-            70;
-
-
-            if(bottom>
-                requiredHeight
-            ){
-
-                requiredHeight=
-                bottom;
-
-            }
-
-        });
-
-    }
-
-
-    stage.style.height=
-    requiredHeight+
-    "px";
-
-
-    stage.style.minHeight=
-    requiredHeight+
-    "px";
-
-
-    writing.style.height=
-    requiredHeight+
-    "px";
-
-
-    if(objects){
-
-        objects.style.height=
-        requiredHeight+
-        "px";
-
-    }
+    objectStartHeight =
+        selectedObject.offsetHeight;
 
 }
 
 
-/*
-Watch the writing area automatically.
+/* =====================================================
+   ROTATE
+===================================================== */
 
-So when you type more text, the white area
-grows automatically.
-*/
+function startRotate(e){
 
-const writingObserver =
-new ResizeObserver(
-    function(){
+    e.preventDefault();
 
-        updateEditorHeight();
-
-    }
-);
+    e.stopPropagation();
 
 
-writingObserver.observe(
-    document.getElementById(
-        "writingArea"
-    )
-);
+    if(!selectedObject)
+        return;
 
 
-/* =========================
+    rotating = true;
+
+
+    const rect =
+        selectedObject.getBoundingClientRect();
+
+
+    const centerX =
+        rect.left +
+        rect.width / 2;
+
+
+    const centerY =
+        rect.top +
+        rect.height / 2;
+
+
+    startAngle =
+        Math.atan2(
+            e.clientY - centerY,
+            e.clientX - centerX
+        ) *
+        180 /
+        Math.PI;
+
+}
+
+
+/* =====================================================
    CLICK OUTSIDE
-========================= */
+===================================================== */
+
+document
+    .getElementById("editorStage")
+    .addEventListener(
+        "mousedown",
+        function(e){
+
+            if(
+                e.target ===
+                document.getElementById(
+                    "editorStage"
+                )
+            ){
+
+                if(selectedObject){
+
+                    exitTextEdit(
+                        selectedObject
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
 
 document.addEventListener(
     "mousedown",
     function(e){
 
         if(
-            !e.target.closest(
-                ".design-object"
-            )
+            selectedObject &&
+            !selectedObject.contains(e.target)
         ){
 
-            if(selectedObject){
+            if(
+                selectedObject.classList
+                    .contains("editing")
+            ){
 
-                if(
-                    selectedObject.dataset.type===
-                    "text"
-                ){
-
-                    const content=
-                    selectedObject.querySelector(
-                        ".text-content"
-                    );
-
-
-                    content.contentEditable=
-                    "false";
-
-
-                    selectedObject.classList.remove(
-                        "editing"
-                    );
-
-                }
-
-
-                selectedObject.classList.remove(
-                    "selected"
+                exitTextEdit(
+                    selectedObject
                 );
-
-
-                selectedObject=null;
 
             }
 
@@ -2655,396 +2434,59 @@ document.addEventListener(
 );
 
 
-/* =========================
-   SAVE
-========================= */
-
-function prepareHTMLForSaving(){
-
-    updateEditorHeight();
-
-
-    const writing =
-    document.getElementById(
-        "writingArea"
-    );
-
-
-    const objects =
-    document.getElementById(
-        "objectsLayer"
-    );
-
-
-    let designHeight =
-    Math.max(
-        900,
-        writing.scrollHeight+
-        70
-    );
-
-
-    objects
-    .querySelectorAll(
-        ".design-object"
-    )
-    .forEach(obj=>{
-
-        const bottom =
-        obj.offsetTop+
-        obj.offsetHeight+
-        70;
-
-
-        if(bottom>
-            designHeight
-        ){
-
-            designHeight=
-            bottom;
-
-        }
-
-    });
-
-
-    const canvas =
-    document.createElement("div");
-
-
-    canvas.className=
-    "ogcons-note-canvas";
-
-
-    canvas.dataset.coordinateMode=
-    "fixed-px";
-
-
-    canvas.dataset.designWidth=
-    DESIGN_WIDTH;
-
-
-    canvas.dataset.designHeight=
-    designHeight;
-
-
-    canvas.style.cssText=
-    `
-    position:relative;
-    width:${DESIGN_WIDTH}px;
-    height:${designHeight}px;
-    min-height:${designHeight}px;
-    overflow:hidden;
-    background:#fff;
-    `;
-
-
-    /*
-      NORMAL WRITING
-    */
-
-    const flow =
-    document.createElement("div");
-
-
-    flow.className=
-    "ogcons-writing-layer";
-
-
-    flow.innerHTML=
-    writing.innerHTML;
-
-
-    flow.style.cssText=
-    `
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:${designHeight}px;
-    min-height:${designHeight}px;
-    padding:35px;
-    overflow:visible;
-    z-index:1;
-    background:#fff;
-    `;
-
-
-    canvas.appendChild(flow);
-
-
-    /*
-      MOVABLE OBJECTS
-    */
-
-    const objectLayer =
-    document.createElement("div");
-
-
-    objectLayer.className=
-    "ogcons-objects-layer";
-
-
-    objectLayer.style.cssText=
-    `
-    position:absolute;
-    left:0;
-    top:0;
-    width:${DESIGN_WIDTH}px;
-    height:${designHeight}px;
-    z-index:5;
-    pointer-events:none;
-    `;
-
-
-    objects
-    .querySelectorAll(
-        ".design-object"
-    )
-    .forEach(original=>{
-
-        const clone =
-        original.cloneNode(true);
-
-
-        clone
-        .querySelectorAll(
-            ".object-controls,.resize-handle,.rotate-handle"
-        )
-        .forEach(
-            el=>el.remove()
-        );
-
-
-        clone.classList.remove(
-            "selected",
-            "editing"
-        );
-
-
-        clone
-        .querySelectorAll(
-            "[contenteditable]"
-        )
-        .forEach(
-            el=>{
-                el.removeAttribute(
-                    "contenteditable"
-                );
-            }
-        );
-
-
-        clone.style.position=
-        "absolute";
-
-
-        clone.style.left=
-        original.offsetLeft+
-        "px";
-
-
-        clone.style.top=
-        original.offsetTop+
-        "px";
-
-
-        clone.style.width=
-        original.offsetWidth+
-        "px";
-
-
-        if(
-            original.dataset.type!=="image"
-        ){
-
-            clone.style.height=
-            original.offsetHeight+
-            "px";
-
-        }
-
-
-        clone.style.transform=
-        original.style.transform ||
-        "none";
-
-
-        clone.style.margin="0";
-
-
-        clone.style.pointerEvents=
-        "auto";
-
-
-        objectLayer.appendChild(
-            clone
-        );
-
-    });
-
-
-    canvas.appendChild(
-        objectLayer
-    );
-
-
-    /*
-      SELF-CONTAINED CSS
-    */
-
-    const style =
-    document.createElement("style");
-
-
-    style.textContent=`
-
-    .ogcons-note-canvas{
-        position:relative!important;
-        box-sizing:border-box!important;
-        overflow:hidden!important;
-        background:#fff!important;
-    }
-
-    .ogcons-writing-layer{
-        position:absolute!important;
-        left:0!important;
-        top:0!important;
-        width:100%!important;
-        box-sizing:border-box!important;
-        background:#fff!important;
-        overflow:visible!important;
-    }
-
-    .ogcons-objects-layer{
-        position:absolute!important;
-        left:0!important;
-        top:0!important;
-        width:100%!important;
-        pointer-events:none!important;
-    }
-
-    .ogcons-objects-layer .design-object{
-        position:absolute!important;
-        box-sizing:border-box!important;
-        pointer-events:auto!important;
-        user-select:none!important;
-    }
-
-    .ogcons-objects-layer .image-object img{
-        display:block!important;
-        width:100%!important;
-        height:auto!important;
-        max-width:none!important;
-    }
-
-    .ogcons-objects-layer .text-object{
-        min-width:0!important;
-    }
-
-    .ogcons-objects-layer .text-content{
-        width:100%!important;
-        box-sizing:border-box!important;
-        white-space:pre-wrap!important;
-        word-break:break-word!important;
-        padding:8px!important;
-    }
-
-    .ogcons-objects-layer .table-object table{
-        width:100%!important;
-        border-collapse:collapse!important;
-        background:white!important;
-    }
-
-    .ogcons-objects-layer .table-object td,
-    .ogcons-objects-layer .table-object th{
-        border:1px solid #333!important;
-        padding:8px!important;
-    }
-
-    .ogcons-objects-layer .shape{
-        width:100%!important;
-        height:100%!important;
-    }
-
-    .ogcons-objects-layer .rectangle{
-        border:4px solid #0b5ed7!important;
-    }
-
-    .ogcons-objects-layer .circle{
-        border:4px solid #dc3545!important;
-        border-radius:50%!important;
-    }
-
-    .ogcons-objects-layer .line{
-        height:4px!important;
-        background:#222!important;
-    }
-
-    .ogcons-objects-layer .arrow{
-        height:4px!important;
-        background:#222!important;
-        position:relative!important;
-    }
-
-    .ogcons-objects-layer .arrow:after{
-        content:""!important;
-        position:absolute!important;
-        right:-1px!important;
-        top:50%!important;
-        transform:
-            translateY(-50%)
-            rotate(45deg)!important;
-        width:14px!important;
-        height:14px!important;
-        border-top:4px solid #222!important;
-        border-right:4px solid #222!important;
-    }
-
-    `;
-
-
-    canvas.appendChild(style);
-
-
-    return canvas.outerHTML;
-
-}
-
-
-/* =========================
+/* =====================================================
    SAVE NOTE
-========================= */
+===================================================== */
 
 async function saveNote(){
 
     const course =
-    document.getElementById(
-        "course"
-    ).value;
+        document.getElementById(
+            "course"
+        ).value;
 
 
     const topic =
-    document.getElementById(
-        "topic"
-    ).value;
+        document.getElementById(
+            "topic"
+        ).value;
 
 
     const title =
-    document.getElementById(
-        "title"
-    ).value.trim();
+        document.getElementById(
+            "title"
+        ).value.trim();
 
 
-    if(
-        !course ||
-        !topic ||
-        !title
-    ){
+    if(!course){
 
         showStatus(
-            "Please select course, topic and title.",
-            "red"
+            "Please select a course.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!topic){
+
+        showStatus(
+            "Please select a topic.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!title){
+
+        showStatus(
+            "Please enter a note title.",
+            "error"
         );
 
         return;
@@ -3053,373 +2495,742 @@ async function saveNote(){
 
 
     const content =
-    prepareHTMLForSaving();
+        prepareHTMLForSaving();
 
 
-    const data={
+    if(!content){
 
-        course,
-
-        topic,
-
-        title,
-
-        content,
-
-        updated_at:
-        new Date().toISOString()
-
-    };
-
-
-    let result;
-
-
-    if(editingId){
-
-        result=
-        await db
-        .from("notes")
-        .update(data)
-        .eq(
-            "id",
-            editingId
+        showStatus(
+            "Please enter some note content.",
+            "error"
         );
 
-    }else{
-
-        result=
-        await db
-        .from("notes")
-        .insert([
-            data
-        ]);
+        return;
 
     }
+
+
+    try{
+
+        let result;
+
+
+        if(currentNoteId){
+
+            result =
+                await supabaseClient
+                    .from("notes")
+                    .update({
+
+                        course:
+                            course,
+
+                        topic:
+                            topic,
+
+                        title:
+                            title,
+
+                        content:
+                            content,
+
+                        updated_at:
+                            new Date().toISOString()
+
+                    })
+                    .eq(
+                        "id",
+                        currentNoteId
+                    );
+
+        }else{
+
+            result =
+                await supabaseClient
+                    .from("notes")
+                    .insert({
+
+                        course:
+                            course,
+
+                        topic:
+                            topic,
+
+                        title:
+                            title,
+
+                        content:
+                            content
+
+                    });
+
+        }
+
+
+        if(result.error)
+            throw result.error;
+
+
+        showStatus(
+            "Note saved successfully.",
+            "success"
+        );
+
+
+        currentNoteId =
+            null;
+
+
+        loadNotes();
+
+    }catch(error){
+
+        console.error(error);
+
+        showStatus(
+            error.message ||
+            "Unable to save note.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PREPARE HTML
+===================================================== */
+
+function prepareHTMLForSaving(){
+
+    const stage =
+        document.getElementById(
+            "editorStage"
+        );
+
+
+    const writing =
+        document.getElementById(
+            "writingArea"
+        );
+
+
+    const objects =
+        document.getElementById(
+            "objectsLayer"
+        );
+
+
+    /*
+        IMPORTANT:
+
+        Use the CURRENT manually chosen height.
+
+        DO NOT use scrollHeight.
+
+        This means the admin controls
+        the note page height.
+    */
+
+    const designHeight =
+        stage.clientHeight;
+
+
+    if(
+        !writing.innerHTML.trim() &&
+        objects.children.length === 0
+    ){
+
+        return "";
+
+    }
+
+
+    const canvas =
+        document.createElement("div");
+
+
+    canvas.className =
+        "ogcons-note-canvas";
+
+
+    canvas.style.position =
+        "relative";
+
+
+    canvas.style.width =
+        "1000px";
+
+
+    canvas.style.height =
+        designHeight + "px";
+
+
+    canvas.style.minHeight =
+        designHeight + "px";
+
+
+    canvas.style.background =
+        "#ffffff";
+
+
+    canvas.style.boxSizing =
+        "border-box";
+
+
+    canvas.style.overflow =
+        "visible";
+
+
+    /*
+        WRITING LAYER
+    */
+
+    const savedWriting =
+        document.createElement("div");
+
+
+    savedWriting.className =
+        "ogcons-writing-layer";
+
+
+    savedWriting.innerHTML =
+        writing.innerHTML;
+
+
+    savedWriting.style.position =
+        "absolute";
+
+
+    savedWriting.style.left =
+        "0";
+
+
+    savedWriting.style.top =
+        "0";
+
+
+    savedWriting.style.width =
+        "100%";
+
+
+    savedWriting.style.height =
+        "100%";
+
+
+    savedWriting.style.padding =
+        "35px";
+
+
+    savedWriting.style.boxSizing =
+        "border-box";
+
+
+    savedWriting.style.background =
+        "#ffffff";
+
+
+    canvas.appendChild(
+        savedWriting
+    );
+
+
+    /*
+        OBJECTS LAYER
+    */
+
+    const savedObjects =
+        document.createElement("div");
+
+
+    savedObjects.className =
+        "ogcons-objects-layer";
+
+
+    savedObjects.style.position =
+        "absolute";
+
+
+    savedObjects.style.left =
+        "0";
+
+
+    savedObjects.style.top =
+        "0";
+
+
+    savedObjects.style.width =
+        "100%";
+
+
+    savedObjects.style.height =
+        "100%";
+
+
+    savedObjects.style.pointerEvents =
+        "none";
+
+
+    canvas.appendChild(
+        savedObjects
+    );
+
+
+    /*
+        COPY DESIGN OBJECTS
+    */
+
+    Array.from(
+        objects.children
+    ).forEach(function(object){
+
+        const clone =
+            object.cloneNode(true);
+
+
+        clone
+            .querySelectorAll(
+                ".object-controls,.resize-handle,.rotate-handle"
+            )
+            .forEach(function(el){
+
+                el.remove();
+
+            });
+
+
+        clone.style.pointerEvents =
+            "auto";
+
+
+        clone.style.position =
+            "absolute";
+
+
+        clone.style.left =
+            object.offsetLeft + "px";
+
+
+        clone.style.top =
+            object.offsetTop + "px";
+
+
+        clone.style.width =
+            object.offsetWidth + "px";
+
+
+        clone.style.height =
+            object.offsetHeight + "px";
+
+
+        if(
+            object.dataset.rotation
+        ){
+
+            clone.style.transform =
+                "rotate(" +
+                object.dataset.rotation +
+                "deg)";
+
+        }
+
+
+        savedObjects.appendChild(
+            clone
+        );
+
+    });
+
+
+    /*
+        RESPONSIVE DISPLAY CSS
+    */
+
+    const style =
+        document.createElement("style");
+
+
+    style.textContent = `
+
+        .ogcons-note-canvas {
+            position: relative;
+            width: 1000px;
+            max-width: 100%;
+            background: #ffffff;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+
+        .ogcons-writing-layer {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background: #ffffff;
+        }
+
+        .ogcons-objects-layer {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ogcons-objects-layer > * {
+            pointer-events: auto;
+        }
+
+        .text-object {
+            position: absolute;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+        }
+
+        .image-object img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .table-object table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-object td,
+        .table-object th {
+            border: 1px solid #333;
+            padding: 8px;
+        }
+
+        .rectangle-shape {
+            width: 100%;
+            height: 100%;
+            border: 3px solid #0b5ed7;
+            background: rgba(11,94,215,0.05);
+        }
+
+        .circle-shape {
+            width: 100%;
+            height: 100%;
+            border: 3px solid #198754;
+            border-radius: 50%;
+            background: rgba(25,135,84,0.05);
+        }
+
+        .line-shape {
+            width: 100%;
+            height: 4px;
+            background: #222;
+        }
+
+        .arrow-shape {
+            width: 100%;
+            height: 4px;
+            background: #dc3545;
+            position: relative;
+        }
+
+        .arrow-shape::after {
+            content: "";
+            position: absolute;
+            right: -2px;
+            top: -7px;
+            width: 0;
+            height: 0;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            border-left: 16px solid #dc3545;
+        }
+
+    `;
+
+
+    canvas.appendChild(
+        style
+    );
+
+
+    return canvas.outerHTML;
+
+}
+
+
+/* =====================================================
+   LOAD NOTES
+===================================================== */
+
+async function loadNotes(){
+
+    const list =
+        document.getElementById(
+            "notesList"
+        );
+
+
+    const count =
+        document.getElementById(
+            "noteCount"
+        );
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    list.innerHTML =
+        "Loading...";
+
+
+    let query =
+        supabaseClient
+            .from("notes")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    const result =
+        await query;
 
 
     if(result.error){
 
-        console.error(
-            result.error
-        );
-
-
-        showStatus(
-            result.error.message,
-            "red"
-        );
-
+        list.innerHTML =
+            "<p>Unable to load notes.</p>";
 
         return;
 
     }
 
 
-    showStatus(
-        "Note saved successfully.",
-        "green"
-    );
+    let notes =
+        result.data || [];
 
 
-    editingId=null;
+    if(search){
 
+        notes =
+            notes.filter(function(note){
 
-    loadNotes();
+                return (
 
-}
+                    String(
+                        note.title || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
 
+                    ||
 
-/* =========================
-   LOAD NOTES
-========================= */
+                    String(
+                        note.course || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
 
-async function loadNotes(){
+                    ||
 
-    const {
-        data,
-        error
-    }=
-    await db
-    .from("notes")
-    .select("*")
-    .order(
-        "created_at",
-        {
-            ascending:false
-        }
-    );
+                    String(
+                        note.topic || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
 
+                );
 
-    if(error){
-
-        document.getElementById(
-            "notesList"
-        ).textContent=
-        error.message;
-
-
-        return;
+            });
 
     }
 
 
-    savedNotes=
-    data || [];
-
-
-    renderNotes(
-        savedNotes
-    );
-
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-function searchNotes(){
-
-    const search =
-    document
-    .getElementById(
-        "searchInput"
-    )
-    .value
-    .trim()
-    .toLowerCase();
-
-
-    if(!search){
-
-        renderNotes(
-            savedNotes
-        );
-
-        return;
-
-    }
-
-
-    const filtered =
-    savedNotes.filter(
-        note=>{
-
-            return (
-
-                (note.title || "")
-                .toLowerCase()
-                .includes(search)
-
-                ||
-
-                (note.course || "")
-                .toLowerCase()
-                .includes(search)
-
-                ||
-
-                (note.topic || "")
-                .toLowerCase()
-                .includes(search)
-
-            );
-
-        }
-    );
-
-
-    renderNotes(
-        filtered
-    );
-
-}
-
-
-function clearSearch(){
-
-    document.getElementById(
-        "searchInput"
-    ).value="";
-
-
-    renderNotes(
-        savedNotes
-    );
-
-}
-
-
-/* =========================
-   RENDER NOTES
-========================= */
-
-function renderNotes(notes){
-
-    const list =
-    document.getElementById(
-        "notesList"
-    );
-
-
-    document.getElementById(
-        "noteCount"
-    ).textContent=
-    notes.length+
-    " note(s) found.";
+    count.textContent =
+        notes.length +
+        " note(s) found";
 
 
     if(!notes.length){
 
-        list.innerHTML=
-        "<p>No notes found.</p>";
+        list.innerHTML =
+            "<p>No notes found.</p>";
 
         return;
 
     }
 
 
-    list.innerHTML="";
+    list.innerHTML = "";
 
 
-    notes.forEach(
-        note=>{
+    notes.forEach(function(note){
 
-            const card =
-            document.createElement(
-                "div"
-            );
+        const card =
+            document.createElement("div");
 
 
-            card.className=
+        card.className =
             "note-card";
 
 
-            const title =
-            document.createElement(
-                "h3"
-            );
+        const heading =
+            document.createElement("h3");
 
 
-            title.textContent=
+        heading.textContent =
             note.title;
 
 
-            const info =
-            document.createElement(
-                "p"
+        const course =
+            document.createElement("p");
+
+
+        course.innerHTML =
+            "<strong>Course:</strong> " +
+            escapeHTML(
+                note.course
             );
 
 
-            info.innerHTML=
-            "<b>Course:</b> "+
-            escapeHTML(
-                note.course
-            )+
-            "<br><b>Topic:</b> "+
+        const topic =
+            document.createElement("p");
+
+
+        topic.innerHTML =
+            "<strong>Topic:</strong> " +
             escapeHTML(
                 note.topic
             );
 
 
-            const preview =
-            document.createElement(
-                "div"
-            );
+        const preview =
+            document.createElement("div");
 
 
-            preview.className=
+        preview.className =
             "note-preview";
 
 
-            preview.innerHTML=
+        preview.innerHTML =
             note.content || "";
 
 
-            const edit =
-            document.createElement(
-                "button"
-            );
+        const buttons =
+            document.createElement("div");
 
 
-            edit.className=
-            "primary";
+        buttons.className =
+            "note-card-buttons";
 
 
-            edit.textContent=
+        const edit =
+            document.createElement("button");
+
+
+        edit.className =
+            "main-button";
+
+
+        edit.textContent =
             "Edit";
 
 
-            edit.onclick=
-            ()=>editNote(note);
+        edit.onclick =
+            function(){
+
+                editNote(note);
+
+            };
 
 
-            const del =
-            document.createElement(
-                "button"
-            );
+        const remove =
+            document.createElement("button");
 
 
-            del.className=
-            "danger";
+        remove.className =
+            "main-button danger-button";
 
 
-            del.textContent=
+        remove.textContent =
             "Delete";
 
 
-            del.onclick=
-            ()=>deleteNote(
-                note.id
-            );
+        remove.onclick =
+            function(){
+
+                deleteNote(note.id);
+
+            };
 
 
-            card.append(
+        buttons.appendChild(
+            edit
+        );
 
-                title,
-
-                info,
-
-                preview,
-
-                document.createElement(
-                    "br"
-                ),
-
-                edit,
-
-                " ",
-
-                del
-
-            );
+        buttons.appendChild(
+            remove
+        );
 
 
-            list.appendChild(
-                card
-            );
+        card.appendChild(
+            heading
+        );
 
-        }
-    );
+        card.appendChild(
+            course
+        );
+
+        card.appendChild(
+            topic
+        );
+
+        card.appendChild(
+            preview
+        );
+
+        card.appendChild(
+            buttons
+        );
+
+
+        list.appendChild(
+            card
+        );
+
+    });
 
 }
 
 
-/* =========================
+/* =====================================================
    EDIT NOTE
-========================= */
+===================================================== */
 
 function editNote(note){
 
-    editingId=
-    note.id;
+    currentNoteId =
+        note.id;
 
 
     document.getElementById(
         "course"
-    ).value=
-    note.course;
+    ).value =
+        note.course;
 
 
     document.getElementById(
@@ -3431,240 +3242,205 @@ function editNote(note){
 
     document.getElementById(
         "topic"
-    ).value=
-    note.topic;
+    ).value =
+        note.topic;
 
 
     document.getElementById(
         "title"
-    ).value=
-    note.title;
+    ).value =
+        note.title;
 
 
-    const temp =
-    document.createElement(
-        "div"
-    );
-
-
-    temp.innerHTML=
-    note.content || "";
-
-
-    const canvas =
-    temp.querySelector(
-        ".ogcons-note-canvas"
-    );
+    const stage =
+        document.getElementById(
+            "editorStage"
+        );
 
 
     const writing =
-    document.getElementById(
-        "writingArea"
-    );
+        document.getElementById(
+            "writingArea"
+        );
 
 
     const objects =
-    document.getElementById(
-        "objectsLayer"
-    );
+        document.getElementById(
+            "objectsLayer"
+        );
 
 
-    writing.innerHTML="";
+    writing.innerHTML =
+        "";
 
-    objects.innerHTML="";
+
+    objects.innerHTML =
+        "";
+
+
+    /*
+        If the saved note is our canvas,
+        reconstruct it.
+    */
+
+    const temporary =
+        document.createElement("div");
+
+
+    temporary.innerHTML =
+        note.content || "";
+
+
+    const canvas =
+        temporary.querySelector(
+            ".ogcons-note-canvas"
+        );
 
 
     if(canvas){
 
-        const flow =
-        canvas.querySelector(
-            ".ogcons-writing-layer"
-        );
+        /*
+            Restore the manually chosen
+            editor height.
+        */
+
+        const savedHeight =
+            parseInt(
+                canvas.style.height
+            );
 
 
-        if(flow){
+        if(
+            savedHeight &&
+            !isNaN(savedHeight)
+        ){
 
-            writing.innerHTML=
-            flow.innerHTML;
+            stage.style.height =
+                savedHeight + "px";
+
+        }else{
+
+            stage.style.height =
+                "700px";
 
         }
 
 
-        const layer =
-        canvas.querySelector(
-            ".ogcons-objects-layer"
-        );
+        const savedWriting =
+            canvas.querySelector(
+                ".ogcons-writing-layer"
+            );
 
 
-        if(layer){
-
-            layer
-            .querySelectorAll(
-                ".design-object"
-            )
-            .forEach(
-                original=>{
-
-                    const clone =
-                    original.cloneNode(
-                        true
-                    );
+        const savedObjects =
+            canvas.querySelector(
+                ".ogcons-objects-layer"
+            );
 
 
-                    clone
+        if(savedWriting){
+
+            writing.innerHTML =
+                savedWriting.innerHTML;
+
+        }
+
+
+        if(savedObjects){
+
+            Array.from(
+                savedObjects.children
+            ).forEach(function(child){
+
+                const clone =
+                    child.cloneNode(true);
+
+
+                clone
                     .querySelectorAll(
                         ".object-controls,.resize-handle,.rotate-handle"
                     )
-                    .forEach(
-                        el=>el.remove()
-                    );
+                    .forEach(function(el){
+
+                        el.remove();
+
+                    });
 
 
+                objects.appendChild(
                     clone
-                    .querySelectorAll(
-                        "[contenteditable]"
-                    )
-                    .forEach(
-                        el=>{
-
-                            el.setAttribute(
-                                "contenteditable",
-                                "true"
-                            );
-
-                        }
-                    );
+                );
 
 
-                    const controls =
-                    createControls();
+                makeObjectInteractive(
+                    clone
+                );
 
-
-                    clone.prepend(
-                        controls
-                    );
-
-
-                    addResizeHandle(
-                        clone
-                    );
-
-
-                    addRotateHandle(
-                        clone
-                    );
-
-
-                    clone.style.position=
-                    "absolute";
-
-
-                    clone.style.left=
-                    parseFloat(
-                        original.style.left
-                    )+
-                    "px";
-
-
-                    clone.style.top=
-                    parseFloat(
-                        original.style.top
-                    )+
-                    "px";
-
-
-                    clone.style.width=
-                    parseFloat(
-                        original.style.width
-                    )+
-                    "px";
-
-
-                    if(
-                        original.style.height
-                    ){
-
-                        clone.style.height=
-                        parseFloat(
-                            original.style.height
-                        )+
-                        "px";
-
-                    }
-
-
-                    objects.appendChild(
-                        clone
-                    );
-
-
-                    makeInteractive(
-                        clone
-                    );
-
-                }
-            );
+            });
 
         }
 
     }else{
 
-        writing.innerHTML=
-        note.content || "";
+        /*
+            Old notes without canvas.
+        */
+
+        stage.style.height =
+            "700px";
+
+
+        writing.innerHTML =
+            note.content || "";
 
     }
 
 
-    updateEditorHeight();
-
-
     window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
+        top: 0,
+        behavior: "smooth"
     });
 
 
     showStatus(
-
-        "Editing note. Save it again after making your changes.",
-
-        "blue"
-
+        "Note loaded for editing.",
+        "success"
     );
 
 }
 
 
-/* =========================
-   DELETE
-========================= */
+/* =====================================================
+   DELETE NOTE
+===================================================== */
 
 async function deleteNote(id){
 
-    if(
-        !confirm(
+    const confirmDelete =
+        confirm(
             "Are you sure you want to delete this note?"
-        )
-    ) return;
+        );
 
 
-    const {error}=
-    await db
-    .from("notes")
-    .delete()
-    .eq(
-        "id",
-        id
-    );
+    if(!confirmDelete)
+        return;
 
 
-    if(error){
+    const result =
+        await supabaseClient
+            .from("notes")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
-        alert(
-            error.message
+
+    if(result.error){
+
+        showStatus(
+            result.error.message,
+            "error"
         );
 
         return;
@@ -3672,228 +3448,219 @@ async function deleteNote(id){
     }
 
 
+    if(
+        currentNoteId === id
+    ){
+
+        clearEditor();
+
+    }
+
+
+    showStatus(
+        "Note deleted successfully.",
+        "success"
+    );
+
+
     loadNotes();
 
 }
 
 
-/* =========================
+/* =====================================================
    CLEAR EDITOR
-========================= */
+===================================================== */
 
 function clearEditor(){
 
-    editingId=null;
+    currentNoteId =
+        null;
 
 
     document.getElementById(
         "course"
-    ).value="";
+    ).value =
+        "";
 
 
     document.getElementById(
         "topic"
-    ).innerHTML=
-    '<option value="">Select Topic</option>';
+    ).innerHTML =
+        '<option value="">Select Topic</option>';
 
 
     document.getElementById(
         "title"
-    ).value="";
+    ).value =
+        "";
 
 
     document.getElementById(
         "writingArea"
-    ).innerHTML="";
+    ).innerHTML =
+        "";
 
 
     document.getElementById(
         "objectsLayer"
-    ).innerHTML="";
+    ).innerHTML =
+        "";
 
 
-    selectedObject=null;
+    /*
+        Return to normal starting height.
+    */
+
+    document.getElementById(
+        "editorStage"
+    ).style.height =
+        "700px";
 
 
-    updateEditorHeight();
-
-
-    showStatus(
-        "Editor cleared.",
-        "blue"
-    );
-
-}
-
-
-/* =========================
-   PREVIEW
-========================= */
-
-function previewNote(){
-
-    const html =
-    prepareHTMLForSaving();
-
-
-    const win =
-    window.open(
-        "",
-        "_blank"
-    );
-
-
-    win.document.write(`
-
-    <!DOCTYPE html>
-
-    <html>
-
-    <head>
-
-    <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1"
-    >
-
-    <title>
-        Note Preview
-    </title>
-
-
-    <style>
-
-    body{
-
-        margin:0;
-
-        background:#eee;
-
-        font-family:
-            Arial,
-            sans-serif;
-
-    }
-
-
-    .preview-wrap{
-
-        width:100%;
-
-        overflow:auto;
-
-        padding:20px;
-
-    }
-
-
-    .ogcons-note-canvas{
-
-        margin:auto;
-
-    }
-
-    </style>
-
-
-    </head>
-
-
-    <body>
-
-    <div class="preview-wrap">
-
-    ${html}
-
-    </div>
-
-    </body>
-
-    </html>
-
-    `);
-
-
-    win.document.close();
+    selectedObject =
+        null;
 
 }
 
 
-/* =========================
-   HELPERS
-========================= */
+/* =====================================================
+   SEARCH
+===================================================== */
 
-function escapeHTML(value){
+function clearSearch(){
 
-    return String(
-        value || ""
-    )
+    document.getElementById(
+        "searchInput"
+    ).value =
+        "";
 
-    .replace(
-        /&/g,
-        "&amp;"
-    )
 
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+    loadNotes();
 
 }
 
+
+/* =====================================================
+   STATUS
+===================================================== */
 
 function showStatus(
     message,
-    color
+    type
 ){
 
     const status =
-    document.getElementById(
-        "status"
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        message;
+
+
+    status.className =
+        "status " +
+        type;
+
+
+    setTimeout(
+        function(){
+
+            status.className =
+                "status";
+
+        },
+        4000
     );
-
-
-    status.textContent=
-    message;
-
-
-    status.style.color=
-    color;
 
 }
 
 
-/* =========================
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+function previewNote(){
+
+    const content =
+        prepareHTMLForSaving();
+
+
+    if(!content){
+
+        alert(
+            "There is nothing to preview."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "previewInner"
+    ).innerHTML =
+        content;
+
+
+    document.getElementById(
+        "previewBox"
+    ).style.display =
+        "block";
+
+}
+
+
+function closePreview(){
+
+    document.getElementById(
+        "previewBox"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =====================================================
    START
-========================= */
+===================================================== */
 
 loadNotes();
 
-
-// Make sure the white editor
-// starts with the correct height.
-setTimeout(
-    updateEditorHeight,
-    100
-);
-
 </script>
-
 
 </body>
 </html>
