@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OGCONS Study Hub - Admin Notes</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f5f9;
+    color:#222;
+}
+
+header{
+    background:#0b5ed7;
+    color:white;
+    padding:18px;
+    text-align:center;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
+}
+
+.panel{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+h2{
+    margin-top:0;
+}
+
+label{
+    font-weight:bold;
+    display:block;
+    margin-bottom:6px;
+}
+
+select,
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+button{
+    border:0;
+    border-radius:6px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.primary{
+    background:#0b5ed7;
+    color:white;
+}
+
+.success{
+    background:#198754;
+    color:white;
+}
+
+.danger{
+    background:#dc3545;
+    color:white;
+}
+
+.secondary{
+    background:#6c757d;
+    color:white;
+}
+
+.toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    padding:10px;
+    border:1px solid #ddd;
+    background:#f7f7f7;
+    border-radius:8px 8px 0 0;
+}
+
+.toolbar button,
+.toolbar select{
+    width:auto;
+    padding:7px 9px;
+    font-size:13px;
+}
+
+.editor-wrap{
+    overflow:auto;
+    border:1px solid #ccc;
+    border-top:0;
+    background:#ddd;
+    padding:20px;
+}
+
+/*
+    IMPORTANT:
+    This is the fixed logical design area.
+    Everything movable is positioned inside this 1000px coordinate system.
+*/
+.editor-stage{
+    position:relative;
+    width:1000px;
+    min-height:900px;
+    margin:auto;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.writing-area{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    min-height:900px;
+    padding:35px;
+    outline:none;
+    z-index:1;
+    overflow:hidden;
+}
+
+.objects-layer{
+    position:absolute;
+    inset:0;
+    z-index:5;
+    pointer-events:none;
+}
+
+.design-object{
+    position:absolute;
+    pointer-events:auto;
+    user-select:none;
+}
+
+.design-object.selected{
+    outline:2px solid #0b5ed7;
+}
+
+.object-controls{
+    position:absolute;
+    top:-38px;
+    left:0;
+    display:none;
+    background:#0b5ed7;
+    padding:4px;
+    border-radius:5px;
+    gap:3px;
+    z-index:9999;
+    white-space:nowrap;
+}
+
+.design-object.selected .object-controls{
+    display:flex;
+}
+
+.object-controls button{
+    padding:4px 7px;
+    font-size:11px;
+    background:white;
+    color:#222;
+}
+
+.resize-handle{
+    display:none;
+    position:absolute;
+    width:12px;
+    height:12px;
+    right:-6px;
+    bottom:-6px;
+    background:#0b5ed7;
+    border:2px solid white;
+    border-radius:50%;
+    cursor:nwse-resize;
+    z-index:10000;
+}
+
+.design-object.selected .resize-handle{
+    display:block;
+}
+
+.rotate-handle{
+    display:none;
+    position:absolute;
+    top:-28px;
+    left:50%;
+    transform:translateX(-50%);
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#198754;
+    border:2px solid white;
+    cursor:grab;
+    z-index:10000;
+}
+
+.design-object.selected .rotate-handle{
+    display:block;
+}
+
+.image-object img{
+    display:block;
+    width:100%;
+    height:auto;
+    pointer-events:none;
+}
+
+.text-object{
+    min-width:120px;
+    min-height:45px;
+}
+
+.text-content{
+    width:100%;
+    min-height:40px;
+    padding:8px;
+    outline:none;
+    white-space:pre-wrap;
+    word-break:break-word;
+    background:transparent;
+    cursor:text;
+}
+
+.text-object:not(.editing) .text-content{
+    cursor:move;
+}
+
+.text-object.editing{
+    outline:2px dashed #198754;
+}
+
+.table-object{
+    min-width:300px;
+}
+
+.table-object table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+.table-object td,
+.table-object th{
+    border:1px solid #333;
+    padding:8px;
+    min-width:70px;
+    min-height:30px;
+}
+
+.table-object td[contenteditable="true"],
+.table-object th[contenteditable="true"]{
+    cursor:text;
+}
+
+.shape-object{
+    min-width:100px;
+    min-height:80px;
+}
+
+.shape{
+    width:100%;
+    height:100%;
+}
+
+.rectangle{
+    border:4px solid #0b5ed7;
+}
+
+.circle{
+    border:4px solid #dc3545;
+    border-radius:50%;
+}
+
+.line{
+    height:4px;
+    background:#222;
+}
+
+.arrow{
+    height:4px;
+    background:#222;
+    position:relative;
+}
+
+.arrow:after{
+    content:"";
+    position:absolute;
+    right:-1px;
+    top:50%;
+    transform:translateY(-50%) rotate(45deg);
+    width:14px;
+    height:14px;
+    border-top:4px solid #222;
+    border-right:4px solid #222;
+}
+
+.notes-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:15px;
+}
+
+.note-card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:15px;
+}
+
+.note-card h3{
+    margin-top:0;
+}
+
+.note-preview{
+    max-height:180px;
+    overflow:hidden;
+    background:#fafafa;
+    padding:10px;
+    border-radius:6px;
+}
+
+.search-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+}
+
+.status{
+    margin-top:10px;
+    font-weight:bold;
+}
+
+@media(max-width:700px){
+    .row{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>OGCONS Study Hub</h1>
+    <p>Admin Notes Management</p>
+</header>
+
+<div class="container">
+
+<div class="panel">
+
+<h2>Note Information</h2>
+
+<div class="row">
+
+<div>
+<label>Course</label>
+<select id="course">
+<option value="">Select Course</option>
+<option value="Foundations of Nursing">Foundations of Nursing</option>
+<option value="Anatomy & Physiology">Anatomy & Physiology</option>
+<option value="Pharmacology">Pharmacology</option>
+<option value="Primary Health Care">Primary Health Care</option>
+<option value="Medical/Surgical Nursing">Medical/Surgical Nursing</option>
+<option value="Microbiology">Microbiology</option>
+</select>
+</div>
+
+<div>
+<label>Topic</label>
+<select id="topic">
+<option value="">Select Topic</option>
+</select>
+</div>
+
+</div>
+
+<br>
+
+<label>Note Title</label>
+<input id="title" placeholder="Enter note title">
+
+</div>
+
+
+<div class="panel">
+
+<h2>Note Editor</h2>
+
+<div class="toolbar">
+
+<button onclick="format('bold')"><b>B</b></button>
+<button onclick="format('italic')"><i>I</i></button>
+<button onclick="format('underline')"><u>U</u></button>
+
+<select onchange="format('formatBlock',this.value)">
+<option value="">Heading</option>
+<option value="H1">Heading 1</option>
+<option value="H2">Heading 2</option>
+<option value="H3">Heading 3</option>
+<option value="P">Normal</option>
+</select>
+
+<select onchange="format('fontSize',this.value)">
+<option value="">Size</option>
+<option value="1">Small</option>
+<option value="3">Normal</option>
+<option value="5">Large</option>
+<option value="7">Very Large</option>
+</select>
+
+<button onclick="format('justifyLeft')">Left</button>
+<button onclick="format('justifyCenter')">Center</button>
+<button onclick="format('justifyRight')">Right</button>
+
+<button onclick="format('insertUnorderedList')">• List</button>
+<button onclick="format('insertOrderedList')">1. List</button>
+
+<button onclick="addTextBox()">Text Box</button>
+<button onclick="addImage()">Image</button>
+<button onclick="addTable()">Table</button>
+
+<button onclick="addShape('rectangle')">Rectangle</button>
+<button onclick="addShape('circle')">Circle</button>
+<button onclick="addShape('line')">Line</button>
+<button onclick="addShape('arrow')">Arrow</button>
+
+<button onclick="format('insertHorizontalRule')">Line</button>
+<button onclick="addLink()">Link</button>
+<button onclick="format('formatBlock','blockquote')">Quote</button>
+
+<button onclick="undo()">Undo</button>
+<button onclick="redo()">Redo</button>
+
+<button onclick="previewNote()">Preview</button>
+
+</div>
+
+<div class="editor-wrap">
+
+<div id="editorStage" class="editor-stage">
+
+<div
+    id="writingArea"
+    class="writing-area"
+    contenteditable="true"
+    spellcheck="true"
+>
+</div>
+
+<div id="objectsLayer" class="objects-layer"></div>
+
+</div>
+
+</div>
+
+<br>
+
+<button class="success" onclick="saveNote()">Save Note</button>
+<button class="secondary" onclick="clearEditor()">Clear</button>
+
+<div id="status" class="status"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>Search Notes</h2>
+
+<div class="search-row">
+
+<input
+    id="searchInput"
+    placeholder="Search by title, course or topic..."
+    oninput="searchNotes()"
+>
+
+<button class="secondary" onclick="clearSearch()">Clear</button>
+
+</div>
+
+<br>
+
+<div id="noteCount"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>Saved Notes</h2>
+
+<div id="notesList" class="notes-grid">
+Loading notes...
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://bvetmmvpdotifusjkywd.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+const { createClient } =
+supabase;
+
+const db =
+createClient(SUPABASE_URL,SUPABASE_KEY);
+
+
+/* =========================
+   EXACT COURSE TOPICS
+========================= */
+
+const courseTopics = {
+
+"Foundations of Nursing":[
+"Introduction to Nursing",
+"Health Care Institutions",
+"Ethico-Legal Issues in Nursing",
+"Tools of Nursing",
+"Comfort and Safety Measures",
+"Emergency Care",
+"Administration of Drugs",
+"Diagnostic Investigation",
+"Aseptic Techniques",
+"Unsafe Injection Safety",
+"Introduction to Healthcare Waste",
+"Legal Aspects of Nursing",
+"Nursing Care of Patients with Feeding/Elimination Problems",
+"Basic Life Support"
+],
+
+"Anatomy & Physiology":[
+"Introduction to Anatomy",
+"The Musculoskeletal System",
+"Blood and Cardiovascular System",
+"The Respiratory System",
+"The Digestive System",
+"The Integumentary System",
+"The Excretory System",
+"The Endocrine System",
+"The Female Reproductive System",
+"The Male Reproductive System",
+"Foetal Development"
+],
+
+"Pharmacology":[
+"Introduction",
+"Sources and Classification of Drugs",
+"Preparation of Drugs",
+"Routes of Drug Administration",
+"Mechanism of Drug Action",
+"National Drug Policy",
+"Drugs Used in Management of Other Health Conditions",
+"Patient Education and Counseling"
+],
+
+"Primary Health Care":[
+"Introduction to Primary Health Care",
+"The Community",
+"Cadre of Health Workers in PHC",
+"Community Mobilization",
+"Community Diagnosis",
+"Health Education",
+"Components of Primary Health Care",
+"Immunization Against Major Communicable Diseases",
+"Prevention and Control of Locally Endemic and Epidemic Diseases",
+"Promotion of Mental Health",
+"Maternal and Child Health Services",
+"Provision of Essential Drugs and Supplies",
+"Oral Hygiene and Eye Care",
+"Adolescence and Their Problems",
+"Referral System in PHC",
+"Care of the Aged in the Community",
+"Management of Occupational Health",
+"Management in Primary Health Care"
+],
+
+"Medical/Surgical Nursing":[
+"Concepts and Terms in Medical-Surgical Nursing",
+"Management of Patients with Medical/Surgical Conditions",
+"Management of Patients with Medical/Surgical Conditions 2",
+"Common Situations That Threaten Adaptation",
+"Body Defense Mechanisms",
+"Diagnostic Measures",
+"Principles of Operating Room Nursing"
+],
+
+"Microbiology":[
+"Introduction to Microbiology",
+"Bacteria",
+"Viruses",
+"Fungi",
+"Parasites",
+"Immunology",
+"Sterilization & Disinfection",
+"Healthcare-Associated Infections"
+]
+
+};
+
+
+/* =========================
+   GLOBALS
+========================= */
+
+let editingId = null;
+let selectedObject = null;
+let dragData = null;
+let resizeData = null;
+let rotateData = null;
+let savedNotes = [];
+
+const DESIGN_WIDTH = 1000;
+
+
+/* =========================
+   COURSE / TOPIC
+========================= */
+
+document.getElementById("course")
+.addEventListener("change",function(){
+
+    const topic =
+    document.getElementById("topic");
+
+    topic.innerHTML =
+    '<option value="">Select Topic</option>';
+
+    const list =
+    courseTopics[this.value] || [];
+
+    list.forEach(item=>{
+
+        const option =
+        document.createElement("option");
+
+        option.value=item;
+        option.textContent=item;
+
+        topic.appendChild(option);
+
+    });
+
+});
+
+
+/* =========================
+   EDITOR FORMATTING
+========================= */
+
+function format(command,value=null){
+
+    document.getElementById("writingArea").focus();
+
+    document.execCommand(command,false,value);
+
+}
+
+
+function undo(){
+    document.execCommand("undo");
+}
+
+
+function redo(){
+    document.execCommand("redo");
+}
+
+
+function addLink(){
+
+    const url =
+    prompt("Enter URL:");
+
+    if(!url) return;
+
+    format("createLink",url);
+
+}
+
+
+/* =========================
+   TEXT BOX
+========================= */
+
+function addTextBox(){
+
+    const layer =
+    document.getElementById("objectsLayer");
+
+    const obj =
+    document.createElement("div");
+
+    obj.className =
+    "design-object text-object editing";
+
+    obj.style.left="100px";
+    obj.style.top="100px";
+    obj.style.width="300px";
+    obj.style.minHeight="60px";
+
+    obj.dataset.type="text";
+
+    const controls =
+    createControls();
+
+    const content =
+    document.createElement("div");
+
+    content.className="text-content";
+
+    content.contentEditable="true";
+
+    content.innerHTML="Type here...";
+
+    obj.appendChild(controls);
+    obj.appendChild(content);
+
+    addResizeHandle(obj);
+    addRotateHandle(obj);
+
+    layer.appendChild(obj);
+
+    makeInteractive(obj);
+
+    selectObject(obj);
+
+    content.focus();
+
+    const range =
+    document.createRange();
+
+    range.selectNodeContents(content);
+
+    const selection =
+    window.getSelection();
+
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+function addImage(){
+
+    const input =
+    document.createElement("input");
+
+    input.type="file";
+    input.accept="image/*";
+
+    input.onchange=function(){
+
+        const file =
+        input.files[0];
+
+        if(!file) return;
+
+        const reader =
+        new FileReader();
+
+        reader.onload=function(e){
+
+            const obj =
+            document.createElement("div");
+
+            obj.className=
+            "design-object image-object";
+
+            obj.style.left="100px";
+            obj.style.top="100px";
+            obj.style.width="400px";
+
+            obj.dataset.type="image";
+
+            const controls =
+            createControls();
+
+            const img =
+            document.createElement("img");
+
+            img.src=e.target.result;
+
+            obj.appendChild(controls);
+            obj.appendChild(img);
+
+            addResizeHandle(obj);
+            addRotateHandle(obj);
+
+            document
+            .getElementById("objectsLayer")
+            .appendChild(obj);
+
+            makeInteractive(obj);
+            selectObject(obj);
+
+        };
+
+        reader.readAsDataURL(file);
+
+    };
+
+    input.click();
+
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+function addTable(){
+
+    const rows =
+    parseInt(prompt("Number of rows:", "3"));
+
+    const cols =
+    parseInt(prompt("Number of columns:", "3"));
+
+    if(
+        !rows ||
+        !cols ||
+        rows<1 ||
+        cols<1
+    ) return;
+
+    const obj =
+    document.createElement("div");
+
+    obj.className=
+    "design-object table-object";
+
+    obj.dataset.type="table";
+
+    obj.style.left="100px";
+    obj.style.top="150px";
+    obj.style.width="500px";
+
+    const controls =
+    createControls();
+
+    const table =
+    document.createElement("table");
+
+    for(let r=0;r<rows;r++){
+
+        const tr =
+        document.createElement("tr");
+
+        for(let c=0;c<cols;c++){
+
+            const td =
+            document.createElement(
+                r===0 ? "th" : "td"
+            );
+
+            td.contentEditable="true";
+
+            td.textContent =
+            r===0
+            ? "Heading"
+            : "Write here";
+
+            tr.appendChild(td);
+
+        }
+
+        table.appendChild(tr);
+
+    }
+
+    obj.appendChild(controls);
+    obj.appendChild(table);
+
+    addResizeHandle(obj);
+    addRotateHandle(obj);
+
+    document
+    .getElementById("objectsLayer")
+    .appendChild(obj);
+
+    makeInteractive(obj);
+    selectObject(obj);
+
+}
+
+
+/* =========================
+   SHAPES
+========================= */
+
+function addShape(type){
+
+    const obj =
+    document.createElement("div");
+
+    obj.className=
+    "design-object shape-object";
+
+    obj.dataset.type="shape";
+
+    obj.dataset.shape=type;
+
+    obj.style.left="150px";
+    obj.style.top="200px";
+
+    if(type==="line" || type==="arrow"){
+
+        obj.style.width="300px";
+        obj.style.height="5px";
+
+    }else{
+
+        obj.style.width="180px";
+        obj.style.height="120px";
+
+    }
+
+    const controls =
+    createControls();
+
+    const shape =
+    document.createElement("div");
+
+    shape.className=
+    "shape "+type;
+
+    obj.appendChild(controls);
+    obj.appendChild(shape);
+
+    addResizeHandle(obj);
+    addRotateHandle(obj);
+
+    document
+    .getElementById("objectsLayer")
+    .appendChild(obj);
+
+    makeInteractive(obj);
+    selectObject(obj);
+
+}
+
+
+/* =========================
+   OBJECT CONTROLS
+========================= */
+
+function createControls(){
+
+    const controls =
+    document.createElement("div");
+
+    controls.className=
+    "object-controls";
+
+    const left =
+    document.createElement("button");
+
+    left.textContent="←";
+
+    left.onclick=e=>{
+        e.stopPropagation();
+        moveObject(-10,0);
+    };
+
+    const right =
+    document.createElement("button");
+
+    right.textContent="→";
+
+    right.onclick=e=>{
+        e.stopPropagation();
+        moveObject(10,0);
+    };
+
+    const up =
+    document.createElement("button");
+
+    up.textContent="↑";
+
+    up.onclick=e=>{
+        e.stopPropagation();
+        moveObject(0,-10);
+    };
+
+    const down =
+    document.createElement("button");
+
+    down.textContent="↓";
+
+    down.onclick=e=>{
+        e.stopPropagation();
+        moveObject(0,10);
+    };
+
+    const rotateLeft =
+    document.createElement("button");
+
+    rotateLeft.textContent="↶";
+
+    rotateLeft.onclick=e=>{
+        e.stopPropagation();
+        rotateObject(-10);
+    };
+
+    const rotateRight =
+    document.createElement("button");
+
+    rotateRight.textContent="↷";
+
+    rotateRight.onclick=e=>{
+        e.stopPropagation();
+        rotateObject(10);
+    };
+
+    const del =
+    document.createElement("button");
+
+    del.textContent="Delete";
+
+    del.onclick=e=>{
+        e.stopPropagation();
+
+        if(selectedObject){
+            selectedObject.remove();
+            selectedObject=null;
+        }
+
+    };
+
+    controls.append(
+        left,
+        right,
+        up,
+        down,
+        rotateLeft,
+        rotateRight,
+        del
+    );
+
+    return controls;
+
+}
+
+
+function addResizeHandle(obj){
+
+    const handle =
+    document.createElement("div");
+
+    handle.className="resize-handle";
+
+    obj.appendChild(handle);
+
+    handle.addEventListener(
+        "mousedown",
+        startResize
+    );
+
+}
+
+
+function addRotateHandle(obj){
+
+    const handle =
+    document.createElement("div");
+
+    handle.className="rotate-handle";
+
+    obj.appendChild(handle);
+
+    handle.addEventListener(
+        "mousedown",
+        startRotate
+    );
+
+}
+
+
+/* =========================
+   SELECT OBJECT
+========================= */
+
+function selectObject(obj){
+
+    if(selectedObject)
+        selectedObject.classList.remove("selected");
+
+    selectedObject=obj;
+
+    if(obj)
+        obj.classList.add("selected");
+
+}
+
+
+/* =========================
+   INTERACTION
+========================= */
+
+function makeInteractive(obj){
+
+    obj.addEventListener(
+        "mousedown",
+        startDrag
+    );
+
+    obj.addEventListener(
+        "click",
+        function(e){
+
+            if(
+                e.target.closest(
+                    ".object-controls"
+                ) ||
+                e.target.closest(
+                    ".resize-handle"
+                ) ||
+                e.target.closest(
+                    ".rotate-handle"
+                )
+            ) return;
+
+            selectObject(obj);
+
+        }
+    );
+
+    if(obj.dataset.type==="text"){
+
+        const content =
+        obj.querySelector(".text-content");
+
+        content.addEventListener(
+            "mousedown",
+            e=>{
+                if(obj.classList.contains("editing")){
+                    e.stopPropagation();
+                }
+            }
+        );
+
+        obj.addEventListener(
+            "dblclick",
+            e=>{
+
+                if(
+                    e.target.closest(
+                        ".text-content"
+                    )
+                ){
+
+                    obj.classList.add("editing");
+
+                    content.contentEditable="true";
+
+                    content.focus();
+
+                }
+
+            }
+        );
+
+        content.addEventListener(
+            "blur",
+            ()=>{
+
+                setTimeout(()=>{
+
+                    if(
+                        !obj.matches(":hover")
+                    ){
+
+                        obj.classList.remove(
+                            "editing"
+                        );
+
+                        content.contentEditable=
+                        "false";
+
+                    }
+
+                },100);
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================
+   DRAG
+========================= */
+
+function startDrag(e){
+
+    if(
+        e.target.closest(
+            ".object-controls"
+        ) ||
+        e.target.closest(
+            ".resize-handle"
+        ) ||
+        e.target.closest(
+            ".rotate-handle"
+        )
+    ) return;
+
+    const obj =
+    e.currentTarget;
+
+    if(
+        obj.dataset.type==="text" &&
+        obj.classList.contains("editing")
+    ){
+
+        return;
+
+    }
+
+    selectObject(obj);
+
+    const stage =
+    document.getElementById(
+        "editorStage"
+    );
+
+    const rect =
+    stage.getBoundingClientRect();
+
+    const objRect =
+    obj.getBoundingClientRect();
+
+    dragData={
+
+        obj,
+
+        startX:e.clientX,
+        startY:e.clientY,
+
+        startLeft:
+        obj.offsetLeft,
+
+        startTop:
+        obj.offsetTop
+
+    };
+
+    document.addEventListener(
+        "mousemove",
+        dragMove
+    );
+
+    document.addEventListener(
+        "mouseup",
+        stopDrag
+    );
+
+}
+
+
+function dragMove(e){
+
+    if(!dragData) return;
+
+    const dx =
+    e.clientX -
+    dragData.startX;
+
+    const dy =
+    e.clientY -
+    dragData.startY;
+
+    dragData.obj.style.left=
+    (dragData.startLeft+dx)+"px";
+
+    dragData.obj.style.top=
+    (dragData.startTop+dy)+"px";
+
+}
+
+
+function stopDrag(){
+
+    document.removeEventListener(
+        "mousemove",
+        dragMove
+    );
+
+    document.removeEventListener(
+        "mouseup",
+        stopDrag
+    );
+
+    dragData=null;
+
+}
+
+
+/* =========================
+   RESIZE
+========================= */
+
+function startResize(e){
+
+    e.stopPropagation();
+
+    const obj =
+    e.currentTarget.parentElement;
+
+    selectObject(obj);
+
+    resizeData={
+
+        obj,
+
+        startX:e.clientX,
+
+        startWidth:
+        obj.offsetWidth
+
+    };
+
+    document.addEventListener(
+        "mousemove",
+        resizeMove
+    );
+
+    document.addEventListener(
+        "mouseup",
+        stopResize
+    );
+
+}
+
+
+function resizeMove(e){
+
+    if(!resizeData) return;
+
+    let width =
+    resizeData.startWidth +
+    (
+        e.clientX -
+        resizeData.startX
+    );
+
+    width =
+    Math.max(80,width);
+
+    resizeData.obj.style.width=
+    width+"px";
+
+}
+
+
+function stopResize(){
+
+    document.removeEventListener(
+        "mousemove",
+        resizeMove
+    );
+
+    document.removeEventListener(
+        "mouseup",
+        stopResize
+    );
+
+    resizeData=null;
+
+}
+
+
+/* =========================
+   ROTATE
+========================= */
+
+function rotateObject(amount){
+
+    if(!selectedObject) return;
+
+    let current =
+    parseFloat(
+        selectedObject.dataset.rotation || 0
+    );
+
+    current += amount;
+
+    selectedObject.dataset.rotation=
+    current;
+
+    selectedObject.style.transform=
+    "rotate("+current+"deg)";
+
+}
+
+
+function startRotate(e){
+
+    e.stopPropagation();
+
+    const obj =
+    e.currentTarget.parentElement;
+
+    selectObject(obj);
+
+    const rect =
+    obj.getBoundingClientRect();
+
+    const centerX =
+    rect.left+
+    rect.width/2;
+
+    const centerY =
+    rect.top+
+    rect.height/2;
+
+    rotateData={
+
+        obj,
+        centerX,
+        centerY
+
+    };
+
+    document.addEventListener(
+        "mousemove",
+        rotateMove
+    );
+
+    document.addEventListener(
+        "mouseup",
+        stopRotate
+    );
+
+}
+
+
+function rotateMove(e){
+
+    if(!rotateData) return;
+
+    const angle =
+    Math.atan2(
+        e.clientY-
+        rotateData.centerY,
+
+        e.clientX-
+        rotateData.centerX
+    ) *
+    180/Math.PI;
+
+    rotateData.obj.style.transform=
+    "rotate("+angle+"deg)";
+
+    rotateData.obj.dataset.rotation=
+    angle;
+
+}
+
+
+function stopRotate(){
+
+    document.removeEventListener(
+        "mousemove",
+        rotateMove
+    );
+
+    document.removeEventListener(
+        "mouseup",
+        stopRotate
+    );
+
+    rotateData=null;
+
+}
+
+
+function moveObject(x,y){
+
+    if(!selectedObject) return;
+
+    selectedObject.style.left=
+    (
+        selectedObject.offsetLeft+x
+    )+"px";
+
+    selectedObject.style.top=
+    (
+        selectedObject.offsetTop+y
+    )+"px";
+
+}
+
+
+/* =========================
+   CLICK OUTSIDE
+========================= */
+
+document.addEventListener(
+    "mousedown",
+    function(e){
+
+        if(
+            !e.target.closest(".design-object")
+        ){
+
+            if(selectedObject){
+
+                if(
+                    selectedObject.dataset.type===
+                    "text"
+                ){
+
+                    const content=
+                    selectedObject.querySelector(
+                        ".text-content"
+                    );
+
+                    content.contentEditable=
+                    "false";
+
+                    selectedObject.classList.remove(
+                        "editing"
+                    );
+
+                }
+
+                selectedObject.classList.remove(
+                    "selected"
+                );
+
+                selectedObject=null;
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================
+   SAVE
+   FIXED COORDINATE SYSTEM
+========================= */
+
+function prepareHTMLForSaving(){
+
+    const writing =
+    document.getElementById(
+        "writingArea"
+    );
+
+    const objects =
+    document.getElementById(
+        "objectsLayer"
+    );
+
+    /*
+      Calculate enough height for normal writing
+      AND every movable object.
+    */
+
+    let designHeight =
+    Math.max(
+        900,
+        writing.scrollHeight + 50
+    );
+
+    objects
+    .querySelectorAll(".design-object")
+    .forEach(obj=>{
+
+        const bottom =
+        obj.offsetTop +
+        obj.offsetHeight +
+        50;
+
+        if(bottom>designHeight)
+            designHeight=bottom;
+
+    });
+
+
+    const canvas =
+    document.createElement("div");
+
+    canvas.className=
+    "ogcons-note-canvas";
+
+    canvas.dataset.coordinateMode=
+    "fixed-px";
+
+    canvas.dataset.designWidth=
+    DESIGN_WIDTH;
+
+    canvas.dataset.designHeight=
+    designHeight;
+
+    canvas.style.cssText=
+    `
+    position:relative;
+    width:${DESIGN_WIDTH}px;
+    height:${designHeight}px;
+    min-height:${designHeight}px;
+    overflow:hidden;
+    background:#fff;
+    `;
+
+
+    /*
+      NORMAL WRITING
+    */
+
+    const flow =
+    document.createElement("div");
+
+    flow.className=
+    "ogcons-writing-layer";
+
+    flow.innerHTML=
+    writing.innerHTML;
+
+    flow.style.cssText=
+    `
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    min-height:${designHeight}px;
+    padding:35px;
+    overflow:hidden;
+    z-index:1;
+    `;
+
+    canvas.appendChild(flow);
+
+
+    /*
+      MOVABLE OBJECTS
+    */
+
+    const objectLayer =
+    document.createElement("div");
+
+    objectLayer.className=
+    "ogcons-objects-layer";
+
+    objectLayer.style.cssText=
+    `
+    position:absolute;
+    inset:0;
+    width:${DESIGN_WIDTH}px;
+    height:${designHeight}px;
+    z-index:5;
+    pointer-events:none;
+    `;
+
+
+    objects
+    .querySelectorAll(".design-object")
+    .forEach(original=>{
+
+        const clone =
+        original.cloneNode(true);
+
+        /*
+          Remove admin-only controls.
+        */
+
+        clone
+        .querySelectorAll(
+            ".object-controls,.resize-handle,.rotate-handle"
+        )
+        .forEach(el=>el.remove());
+
+
+        clone.classList.remove(
+            "selected",
+            "editing"
+        );
+
+
+        clone
+        .querySelectorAll(
+            "[contenteditable]"
+        )
+        .forEach(el=>{
+
+            el.removeAttribute(
+                "contenteditable"
+            );
+
+        });
+
+
+        /*
+          MOST IMPORTANT PART:
+          KEEP THE EXACT PIXEL POSITION.
+        */
+
+        clone.style.position=
+        "absolute";
+
+        clone.style.left=
+        original.offsetLeft+"px";
+
+        clone.style.top=
+        original.offsetTop+"px";
+
+        clone.style.width=
+        original.offsetWidth+"px";
+
+        if(
+            original.dataset.type!=="image"
+        ){
+
+            clone.style.height=
+            original.offsetHeight+"px";
+
+        }
+
+        clone.style.transform=
+        original.style.transform || "none";
+
+        clone.style.margin="0";
+
+        clone.style.pointerEvents=
+        "auto";
+
+        objectLayer.appendChild(
+            clone
+        );
+
+    });
+
+
+    canvas.appendChild(
+        objectLayer
+    );
+
+
+    /*
+      SELF-CONTAINED CSS
+      so student page doesn't destroy
+      the design.
+    */
+
+    const style =
+    document.createElement("style");
+
+    style.textContent=`
+
+    .ogcons-note-canvas{
+        position:relative!important;
+        box-sizing:border-box!important;
+        overflow:hidden!important;
+        background:#fff!important;
+    }
+
+    .ogcons-writing-layer{
+        position:absolute!important;
+        left:0!important;
+        top:0!important;
+        width:100%!important;
+        box-sizing:border-box!important;
+    }
+
+    .ogcons-objects-layer{
+        position:absolute!important;
+        left:0!important;
+        top:0!important;
+        width:100%!important;
+        pointer-events:none!important;
+    }
+
+    .ogcons-objects-layer .design-object{
+        position:absolute!important;
+        box-sizing:border-box!important;
+        pointer-events:auto!important;
+        user-select:none!important;
+    }
+
+    .ogcons-objects-layer .image-object img{
+        display:block!important;
+        width:100%!important;
+        height:auto!important;
+        max-width:none!important;
+    }
+
+    .ogcons-objects-layer .text-object{
+        min-width:0!important;
+    }
+
+    .ogcons-objects-layer .text-content{
+        width:100%!important;
+        box-sizing:border-box!important;
+        white-space:pre-wrap!important;
+        word-break:break-word!important;
+        padding:8px!important;
+    }
+
+    .ogcons-objects-layer .table-object table{
+        width:100%!important;
+        border-collapse:collapse!important;
+        background:white!important;
+    }
+
+    .ogcons-objects-layer .table-object td,
+    .ogcons-objects-layer .table-object th{
+        border:1px solid #333!important;
+        padding:8px!important;
+    }
+
+    .ogcons-objects-layer .shape{
+        width:100%!important;
+        height:100%!important;
+    }
+
+    .ogcons-objects-layer .rectangle{
+        border:4px solid #0b5ed7!important;
+    }
+
+    .ogcons-objects-layer .circle{
+        border:4px solid #dc3545!important;
+        border-radius:50%!important;
+    }
+
+    .ogcons-objects-layer .line{
+        height:4px!important;
+        background:#222!important;
+    }
+
+    .ogcons-objects-layer .arrow{
+        height:4px!important;
+        background:#222!important;
+        position:relative!important;
+    }
+
+    .ogcons-objects-layer .arrow:after{
+        content:""!important;
+        position:absolute!important;
+        right:-1px!important;
+        top:50%!important;
+        transform:translateY(-50%) rotate(45deg)!important;
+        width:14px!important;
+        height:14px!important;
+        border-top:4px solid #222!important;
+        border-right:4px solid #222!important;
+    }
+    `;
+
+    canvas.appendChild(style);
+
+    return canvas.outerHTML;
+
+}
+
+
+/* =========================
+   SAVE NOTE
+========================= */
+
+async function saveNote(){
+
+    const course =
+    document.getElementById("course").value;
+
+    const topic =
+    document.getElementById("topic").value;
+
+    const title =
+    document.getElementById("title").value.trim();
+
+    if(!course || !topic || !title){
+
+        showStatus(
+            "Please select course, topic and title.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    const content =
+    prepareHTMLForSaving();
+
+
+    const data={
+
+        course,
+        topic,
+        title,
+        content,
+        updated_at:
+        new Date().toISOString()
+
+    };
+
+
+    let result;
+
+    if(editingId){
+
+        result=
+        await db
+        .from("notes")
+        .update(data)
+        .eq("id",editingId);
+
+    }else{
+
+        result=
+        await db
+        .from("notes")
+        .insert([data]);
+
+    }
+
+
+    if(result.error){
+
+        console.error(result.error);
+
+        showStatus(
+            result.error.message,
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    showStatus(
+        "Note saved successfully.",
+        "green"
+    );
+
+
+    editingId=null;
+
+    loadNotes();
+
+}
+
+
+/* =========================
+   LOAD NOTES
+========================= */
+
+async function loadNotes(){
+
+    const {data,error}=
+    await db
+    .from("notes")
+    .select("*")
+    .order(
+        "created_at",
+        {ascending:false}
+    );
+
+    if(error){
+
+        document.getElementById(
+            "notesList"
+        ).textContent=
+        error.message;
+
+        return;
+
+    }
+
+    savedNotes=data || [];
+
+    renderNotes(savedNotes);
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchNotes(){
+
+    const search =
+    document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+    if(!search){
+
+        renderNotes(savedNotes);
+        return;
+
+    }
+
+
+    const filtered =
+    savedNotes.filter(note=>{
+
+        return (
+
+            (note.title || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (note.course || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (note.topic || "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+    });
+
+
+    renderNotes(filtered);
+
+}
+
+
+function clearSearch(){
+
+    document.getElementById(
+        "searchInput"
+    ).value="";
+
+    renderNotes(savedNotes);
+
+}
+
+
+/* =========================
+   RENDER NOTES
+========================= */
+
+function renderNotes(notes){
+
+    const list =
+    document.getElementById(
+        "notesList"
+    );
+
+    document.getElementById(
+        "noteCount"
+    ).textContent=
+    notes.length+
+    " note(s) found.";
+
+
+    if(!notes.length){
+
+        list.innerHTML=
+        "<p>No notes found.</p>";
+
+        return;
+
+    }
+
+
+    list.innerHTML="";
+
+
+    notes.forEach(note=>{
+
+        const card =
+        document.createElement("div");
+
+        card.className=
+        "note-card";
+
+
+        const title =
+        document.createElement("h3");
+
+        title.textContent=
+        note.title;
+
+
+        const info =
+        document.createElement("p");
+
+        info.innerHTML=
+        "<b>Course:</b> "+
+        escapeHTML(note.course)+
+        "<br><b>Topic:</b> "+
+        escapeHTML(note.topic);
+
+
+        const preview =
+        document.createElement("div");
+
+        preview.className=
+        "note-preview";
+
+        preview.innerHTML=
+        note.content || "";
+
+
+        const edit =
+        document.createElement("button");
+
+        edit.className="primary";
+
+        edit.textContent="Edit";
+
+        edit.onclick=
+        ()=>editNote(note);
+
+
+        const del =
+        document.createElement("button");
+
+        del.className="danger";
+
+        del.textContent="Delete";
+
+        del.onclick=
+        ()=>deleteNote(note.id);
+
+
+        card.append(
+            title,
+            info,
+            preview,
+            document.createElement("br"),
+            edit,
+            " ",
+            del
+        );
+
+
+        list.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   EDIT
+========================= */
+
+function editNote(note){
+
+    editingId=note.id;
+
+    document.getElementById(
+        "course"
+    ).value=note.course;
+
+
+    document.getElementById(
+        "course"
+    ).dispatchEvent(
+        new Event("change")
+    );
+
+
+    document.getElementById(
+        "topic"
+    ).value=note.topic;
+
+
+    document.getElementById(
+        "title"
+    ).value=note.title;
+
+
+    /*
+      Read saved canvas and rebuild
+      the admin editor.
+    */
+
+    const temp =
+    document.createElement("div");
+
+    temp.innerHTML=
+    note.content || "";
+
+
+    const canvas =
+    temp.querySelector(
+        ".ogcons-note-canvas"
+    );
+
+
+    const writing =
+    document.getElementById(
+        "writingArea"
+    );
+
+    const objects =
+    document.getElementById(
+        "objectsLayer"
+    );
+
+
+    writing.innerHTML="";
+
+    objects.innerHTML="";
+
+
+    if(canvas){
+
+        const flow =
+        canvas.querySelector(
+            ".ogcons-writing-layer"
+        );
+
+        if(flow)
+            writing.innerHTML=
+            flow.innerHTML;
+
+
+        const layer =
+        canvas.querySelector(
+            ".ogcons-objects-layer"
+        );
+
+
+        if(layer){
+
+            layer
+            .querySelectorAll(
+                ".design-object"
+            )
+            .forEach(original=>{
+
+                const clone =
+                original.cloneNode(true);
+
+                clone
+                .querySelectorAll(
+                    ".object-controls,.resize-handle,.rotate-handle"
+                )
+                .forEach(el=>el.remove());
+
+
+                clone
+                .querySelectorAll(
+                    "[contenteditable]"
+                )
+                .forEach(el=>{
+
+                    el.setAttribute(
+                        "contenteditable",
+                        "true"
+                    );
+
+                });
+
+
+                /*
+                  Rebuild admin controls.
+                */
+
+                const controls =
+                createControls();
+
+                clone.prepend(
+                    controls
+                );
+
+                addResizeHandle(
+                    clone
+                );
+
+                addRotateHandle(
+                    clone
+                );
+
+                clone.style.position=
+                "absolute";
+
+
+                /*
+                  Keep EXACT pixel coordinates.
+                */
+
+                clone.style.left=
+                parseFloat(
+                    original.style.left
+                )+"px";
+
+
+                clone.style.top=
+                parseFloat(
+                    original.style.top
+                )+"px";
+
+
+                clone.style.width=
+                parseFloat(
+                    original.style.width
+                )+"px";
+
+
+                if(original.style.height){
+
+                    clone.style.height=
+                    parseFloat(
+                        original.style.height
+                    )+"px";
+
+                }
+
+
+                objects.appendChild(
+                    clone
+                );
+
+                makeInteractive(
+                    clone
+                );
+
+            });
+
+        }
+
+    }else{
+
+        /*
+          Old plain notes.
+        */
+
+        writing.innerHTML=
+        note.content || "";
+
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    showStatus(
+        "Editing note. Save it again after making your changes.",
+        "blue"
+    );
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+async function deleteNote(id){
+
+    if(
+        !confirm(
+            "Are you sure you want to delete this note?"
+        )
+    ) return;
+
+
+    const {error}=
+    await db
+    .from("notes")
+    .delete()
+    .eq("id",id);
+
+
+    if(error){
+
+        alert(error.message);
+        return;
+
+    }
+
+
+    loadNotes();
+
+}
+
+
+/* =========================
+   CLEAR EDITOR
+========================= */
+
+function clearEditor(){
+
+    editingId=null;
+
+    document.getElementById(
+        "course"
+    ).value="";
+
+    document.getElementById(
+        "topic"
+    ).innerHTML=
+    '<option value="">Select Topic</option>';
+
+    document.getElementById(
+        "title"
+    ).value="";
+
+    document.getElementById(
+        "writingArea"
+    ).innerHTML="";
+
+    document.getElementById(
+        "objectsLayer"
+    ).innerHTML="";
+
+    selectedObject=null;
+
+    showStatus(
+        "Editor cleared.",
+        "blue"
+    );
+
+}
+
+
+/* =========================
+   PREVIEW
+========================= */
+
+function previewNote(){
+
+    const html =
+    prepareHTMLForSaving();
+
+    const win =
+    window.open(
+        "",
+        "_blank"
+    );
+
+    win.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1">
+    <title>Note Preview</title>
+
+    <style>
+    body{
+        margin:0;
+        background:#eee;
+        font-family:Arial,sans-serif;
+    }
+
+    .preview-wrap{
+        width:100%;
+        overflow:auto;
+        padding:20px;
+    }
+
+    .ogcons-note-canvas{
+        margin:auto;
+    }
+    </style>
+
+    </head>
+
+    <body>
+
+    <div class="preview-wrap">
+    ${html}
+    </div>
+
+    </body>
+    </html>
+    `);
+
+    win.document.close();
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHTML(value){
+
+    return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function showStatus(message,color){
+
+    const status =
+    document.getElementById(
+        "status"
+    );
+
+    status.textContent=message;
+
+    status.style.color=color;
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadNotes();
+
+</script>
+
+</body>
+</html>
