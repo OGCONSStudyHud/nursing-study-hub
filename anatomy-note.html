@@ -3,777 +3,965 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-    <title>
-        OGCONS Study Hub - Anatomy & Physiology
-    </title>
+<title>OGCONS Study Hub - Anatomy & Physiology</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- SUPABASE -->
+<style>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+body {
 
-    <style>
+    font-family: Arial, sans-serif;
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    min-height: 100vh;
 
+    background:
+        linear-gradient(
+            135deg,
+            #f5eaff,
+            #e8f4ff,
+            #e8fff2
+        );
 
-        body {
+    color: #172033;
 
-            font-family: Arial, sans-serif;
+    line-height: 1.7;
+}
 
-            min-height: 100vh;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #f5eaff,
-                    #e8f4ff,
-                    #e8fff2
-                );
+/* =========================================
+   HEADER
+========================================= */
 
-            color: #172033;
+header {
 
-            line-height: 1.7;
+    background:
+        linear-gradient(
+            135deg,
+            #9333ea,
+            #6366f1
+        );
 
-        }
+    color: white;
 
+    padding: 22px 20px;
 
-        /* =========================================
-           HEADER
-        ========================================= */
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.10);
+}
 
-        header {
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #9333ea,
-                    #6366f1
-                );
+.header-content {
 
-            color: white;
+    max-width: 1100px;
 
-            padding: 22px 20px;
+    margin: auto;
 
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.10);
+    display: flex;
 
-        }
+    justify-content: space-between;
 
+    align-items: center;
 
-        .header-content {
+    gap: 15px;
+}
 
-            max-width: 1100px;
 
-            margin: auto;
+.logo {
 
-            display: flex;
+    font-size: 22px;
 
-            justify-content: space-between;
+    font-weight: bold;
+}
 
-            align-items: center;
 
-            gap: 15px;
+.back-button {
 
-        }
+    border: none;
 
+    background: white;
 
-        .logo {
+    color: #9333ea;
 
-            font-size: 22px;
+    padding: 10px 18px;
 
-            font-weight: bold;
+    border-radius: 22px;
 
-        }
+    font-weight: bold;
 
+    cursor: pointer;
+}
 
-        .back-button {
 
-            border: none;
+.back-button:hover {
 
-            background: white;
+    background: #f3f3f3;
+}
 
-            color: #9333ea;
 
-            padding: 10px 18px;
+/* =========================================
+   MAIN
+========================================= */
 
-            border-radius: 22px;
+.container {
 
-            font-weight: bold;
+    max-width: 1000px;
 
-            cursor: pointer;
+    margin: auto;
 
-        }
+    padding: 35px 20px;
+}
 
 
-        .back-button:hover {
+/* =========================================
+   TOPIC HEADER
+========================================= */
 
-            background: #f3f3f3;
+.topic-header {
 
-        }
+    background: white;
 
+    padding: 35px 25px;
 
+    border-radius: 20px;
 
-        /* =========================================
-           MAIN CONTAINER
-        ========================================= */
+    text-align: center;
 
-        .container {
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.08);
 
-            max-width: 1000px;
+    margin-bottom: 25px;
+}
 
-            margin: auto;
 
-            padding: 35px 20px;
+.topic-icon {
 
-        }
+    font-size: 60px;
 
+    margin-bottom: 12px;
+}
 
 
-        /* =========================================
-           TOPIC HEADER
-        ========================================= */
+.topic-header h1 {
 
-        .topic-header {
+    color: #9333ea;
 
-            background: white;
+    font-size: 31px;
 
-            padding: 35px 25px;
+    line-height: 1.3;
 
-            border-radius: 20px;
+    margin-bottom: 10px;
+}
 
-            text-align: center;
 
-            box-shadow:
-                0 10px 25px
-                rgba(0,0,0,0.08);
+.topic-header p {
 
-            margin-bottom: 25px;
+    color: #667085;
 
-        }
+    line-height: 1.6;
+}
 
 
-        .topic-icon {
+/* =========================================
+   ACTIONS
+========================================= */
 
-            font-size: 60px;
+.actions {
 
-            margin-bottom: 12px;
+    display: grid;
 
-        }
+    grid-template-columns:
+        repeat(2, 1fr);
 
+    gap: 20px;
 
-        .topic-header h1 {
+    margin-bottom: 25px;
+}
 
-            color: #9333ea;
 
-            font-size: 31px;
+.action-card {
 
-            line-height: 1.3;
+    background: white;
 
-            margin-bottom: 10px;
+    padding: 28px 20px;
 
-        }
+    border-radius: 18px;
 
+    text-align: center;
 
-        .topic-header p {
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
+}
 
-            color: #667085;
 
-            line-height: 1.6;
+.action-icon {
 
-        }
+    font-size: 43px;
 
+    margin-bottom: 12px;
+}
 
 
-        /* =========================================
-           ACTION CARDS
-        ========================================= */
+.action-card h2 {
 
-        .actions {
+    margin-bottom: 8px;
 
-            display: grid;
+    font-size: 20px;
+}
 
-            grid-template-columns:
-                repeat(2, 1fr);
 
-            gap: 20px;
+.action-card p {
 
-            margin-bottom: 25px;
+    color: #667085;
 
-        }
+    line-height: 1.5;
 
+    margin-bottom: 18px;
+}
 
-        .action-card {
 
-            background: white;
+.action-button {
 
-            padding: 28px 20px;
+    border: none;
 
-            border-radius: 18px;
+    color: white;
 
-            text-align: center;
+    padding: 12px 22px;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.07);
+    border-radius: 22px;
 
-        }
+    font-weight: bold;
 
+    cursor: pointer;
 
-        .action-icon {
+    font-size: 15px;
+}
 
-            font-size: 43px;
 
-            margin-bottom: 12px;
+.read-button {
 
-        }
+    background: #9333ea;
+}
 
 
-        .action-card h2 {
+.read-button:hover {
 
-            margin-bottom: 8px;
+    background: #7e22ce;
+}
 
-            font-size: 20px;
 
-        }
+.quiz-button {
 
+    background: #2563eb;
+}
 
-        .action-card p {
 
-            color: #667085;
+.quiz-button:hover {
 
-            line-height: 1.5;
+    background: #1d4ed8;
+}
 
-            margin-bottom: 18px;
 
-        }
+/* =========================================
+   NOTE SECTION
+========================================= */
 
+#noteSection {
 
-        .action-button {
+    display: none;
 
-            border: none;
+    background: white;
 
-            color: white;
+    padding: 35px;
 
-            padding: 12px 22px;
+    border-radius: 20px;
 
-            border-radius: 22px;
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.08);
 
-            font-weight: bold;
+    margin-top: 25px;
 
-            cursor: pointer;
+    overflow: hidden;
+}
 
-            font-size: 15px;
 
-        }
+#noteSection > h2 {
 
+    color: #9333ea;
 
-        .read-button {
+    font-size: 27px;
 
-            background: #9333ea;
+    margin-bottom: 25px;
 
-        }
+    padding-bottom: 15px;
 
+    border-bottom:
+        2px solid #eee;
+}
 
-        .read-button:hover {
 
-            background: #7e22ce;
+.note-content {
 
-        }
+    color: #263238;
 
+    font-size: 16px;
 
-        .quiz-button {
+    width: 100%;
 
-            background: #2563eb;
+    overflow: hidden;
+}
 
-        }
 
+/* =========================================
+   NORMAL NOTE CONTENT
+========================================= */
 
-        .quiz-button:hover {
+.note-content h1 {
 
-            background: #1d4ed8;
+    color: #9333ea;
 
-        }
+    margin-top: 30px;
 
+    margin-bottom: 15px;
+}
 
 
-        /* =========================================
-           NOTE SECTION
-        ========================================= */
+.note-content h2 {
 
-        #noteSection {
+    color: #9333ea;
 
-            display: none;
+    font-size: 25px;
 
-            background: white;
+    margin-top: 35px;
 
-            padding: 35px;
+    margin-bottom: 15px;
 
-            border-radius: 20px;
+    padding-bottom: 8px;
 
-            box-shadow:
-                0 10px 30px
-                rgba(0,0,0,0.08);
+    border-bottom:
+        2px solid #eadcff;
+}
 
-            margin-top: 25px;
 
-        }
+.note-content h3 {
 
+    color: #6d28d9;
 
-        #noteSection > h2 {
+    font-size: 20px;
 
-            color: #9333ea;
+    margin-top: 27px;
 
-            font-size: 27px;
+    margin-bottom: 10px;
+}
 
-            margin-bottom: 25px;
 
-            padding-bottom: 15px;
+.note-content h4 {
 
-            border-bottom:
-                2px solid #eee;
+    color: #4c1d95;
 
-        }
+    margin-top: 20px;
 
+    margin-bottom: 8px;
+}
 
-        .note-content {
 
-            color: #263238;
+.note-content p {
 
-            font-size: 16px;
+    margin-bottom: 15px;
+}
 
-        }
 
+.note-content ul {
 
-        .note-content h1 {
+    margin-left: 25px;
 
-            color: #9333ea;
+    margin-bottom: 18px;
+}
 
-            margin-top: 30px;
 
-            margin-bottom: 15px;
+.note-content ol {
 
-        }
+    margin-left: 25px;
 
+    margin-bottom: 18px;
+}
 
-        .note-content h2 {
 
-            color: #9333ea;
+.note-content li {
 
-            font-size: 25px;
+    margin-bottom: 8px;
+}
 
-            margin-top: 35px;
 
-            margin-bottom: 15px;
+.note-content strong {
 
-            padding-bottom: 8px;
+    color: #312e81;
+}
 
-            border-bottom:
-                2px solid #eadcff;
 
-        }
+/* =========================================
+   SPECIAL BOXES
+========================================= */
 
+.definition {
 
-        .note-content h3 {
+    background: #f5eaff;
 
-            color: #6d28d9;
+    border-left:
+        5px solid #9333ea;
 
-            font-size: 20px;
+    padding: 16px;
 
-            margin-top: 27px;
+    margin: 18px 0;
 
-            margin-bottom: 10px;
+    border-radius: 8px;
+}
 
-        }
 
+.important {
 
-        .note-content h4 {
+    background: #fff8e1;
 
-            color: #4c1d95;
+    border-left:
+        5px solid #f59e0b;
 
-            margin-top: 20px;
+    padding: 16px;
 
-            margin-bottom: 8px;
+    margin: 18px 0;
 
-        }
+    border-radius: 8px;
+}
 
 
-        .note-content p {
+.clinical {
 
-            margin-bottom: 15px;
+    background: #e8f4ff;
 
-        }
+    border-left:
+        5px solid #2563eb;
 
+    padding: 16px;
 
-        .note-content ul {
+    margin: 18px 0;
 
-            margin-left: 25px;
+    border-radius: 8px;
+}
 
-            margin-bottom: 18px;
 
-        }
+.summary {
 
+    background: #e8fff2;
 
-        .note-content ol {
+    border-left:
+        5px solid #18a058;
 
-            margin-left: 25px;
+    padding: 18px;
 
-            margin-bottom: 18px;
+    margin-top: 25px;
 
-        }
+    border-radius: 8px;
+}
 
 
-        .note-content li {
+.summary h3 {
 
-            margin-bottom: 8px;
+    color: #168a4b;
 
-        }
+    margin-top: 0;
+}
 
 
-        .note-content strong {
+/* =========================================
+   NORMAL TABLES
+========================================= */
 
-            color: #312e81;
+.table-wrapper {
 
-        }
+    width: 100%;
 
+    overflow-x: auto;
 
-        .definition {
+    margin: 20px 0;
+}
 
-            background: #f5eaff;
 
-            border-left:
-                5px solid #9333ea;
+.note-table {
 
-            padding: 16px;
+    width: 100%;
 
-            margin: 18px 0;
+    border-collapse: collapse;
 
-            border-radius: 8px;
+    min-width: 600px;
+}
 
-        }
 
+.note-table th,
+.note-table td {
 
-        .important {
+    border:
+        1px solid #ddd;
 
-            background: #fff8e1;
+    padding: 12px;
 
-            border-left:
-                5px solid #f59e0b;
+    text-align: left;
+}
 
-            padding: 16px;
 
-            margin: 18px 0;
+.note-table th {
 
-            border-radius: 8px;
+    background: #9333ea;
 
-        }
+    color: white;
+}
 
 
-        .clinical {
+.note-table tr:nth-child(even) {
 
-            background: #e8f4ff;
+    background: #fafafa;
+}
 
-            border-left:
-                5px solid #2563eb;
 
-            padding: 16px;
+/* =========================================================
+   IMPORTANT:
+   SAVED CANVA-STYLE NOTE DESIGN
+========================================================= */
 
-            margin: 18px 0;
+/*
+    The admin editor creates a fixed 1000px design.
 
-            border-radius: 8px;
+    DO NOT allow the design itself to become
+    width:100% because that changes the coordinate
+    system used by absolute-positioned objects.
 
-        }
+    Instead:
 
+    1000px design
+           ↓
+    whole design is scaled
+           ↓
+    fits student's screen
+*/
 
-        .summary {
 
-            background: #e8fff2;
+.note-design-viewport {
 
-            border-left:
-                5px solid #18a058;
+    width: 100%;
 
-            padding: 18px;
+    overflow: hidden;
 
-            margin-top: 25px;
+    position: relative;
 
-            border-radius: 8px;
+    margin: 0 auto;
+}
 
-        }
 
+.note-design-scaler {
 
-        .summary h3 {
+    position: relative;
 
-            color: #168a4b;
+    width: 1000px;
 
-            margin-top: 0;
+    transform-origin: top left;
+}
 
-        }
 
+.ogcons-note-canvas {
 
-        .table-wrapper {
+    position: relative !important;
 
-            overflow-x: auto;
+    width: 1000px !important;
 
-            margin: 20px 0;
+    max-width: none !important;
 
-        }
+    margin: 0 !important;
 
+    padding: 0 !important;
 
-        .note-table {
+    overflow: hidden !important;
+}
 
-            width: 100%;
 
-            border-collapse: collapse;
+/* =========================================
+   SAVED WRITING LAYER
+========================================= */
 
-            min-width: 600px;
+.ogcons-writing-layer {
 
-        }
+    position: absolute !important;
 
+    left: 0 !important;
 
-        .note-table th,
-        .note-table td {
+    top: 0 !important;
 
-            border:
-                1px solid #ddd;
+    width: 1000px !important;
 
-            padding: 12px;
+    min-height: 100%;
 
-            text-align: left;
+    z-index: 1;
+}
 
-        }
 
+/* =========================================
+   SAVED OBJECT LAYER
+========================================= */
 
-        .note-table th {
+.ogcons-objects-layer {
 
-            background: #9333ea;
+    position: absolute !important;
 
-            color: white;
+    left: 0 !important;
 
-        }
+    top: 0 !important;
 
+    width: 1000px !important;
 
-        .note-table tr:nth-child(even) {
+    height: 100%;
 
-            background: #fafafa;
+    z-index: 10;
 
-        }
+    pointer-events: none;
+}
 
 
+/*
+    Objects themselves remain interactive-looking
+    but students cannot accidentally drag them.
+*/
 
-        /* =========================================
-           LOADING
-        ========================================= */
+.ogcons-objects-layer .design-object {
 
-        .loading {
+    pointer-events: none !important;
+}
 
-            text-align: center;
 
-            background: white;
+/* =========================================
+   SAVED IMAGES
+========================================= */
 
-            padding: 30px;
+.ogcons-note-canvas img {
 
-            border-radius: 18px;
+    max-width: none;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.07);
+    height: auto;
+}
 
-            color: #667085;
 
-            font-size: 16px;
+.ogcons-note-canvas .image-object {
 
-            margin-top: 25px;
+    position: absolute !important;
 
-        }
+    display: block;
 
+    object-fit: contain;
 
+    max-width: none !important;
 
-        /* =========================================
-           MESSAGE
-        ========================================= */
+    margin: 0 !important;
+}
 
-        .message {
 
-            text-align: center;
+/* =========================================
+   SAVED TEXT BOXES
+========================================= */
 
-            background: white;
+.ogcons-note-canvas .text-object {
 
-            padding: 30px;
+    position: absolute !important;
 
-            border-radius: 18px;
+    margin: 0 !important;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.07);
+    padding: 0 !important;
 
-        }
+    background: transparent;
 
+    overflow: visible;
+}
 
-        .message h2 {
 
-            color: #9333ea;
+.ogcons-note-canvas .text-content {
 
-            margin-bottom: 10px;
+    width: 100%;
 
-        }
+    height: 100%;
 
+    overflow-wrap: break-word;
 
-        .message p {
+    word-wrap: break-word;
 
-            color: #667085;
+    white-space: normal;
+}
 
-        }
 
+/* =========================================
+   SAVED SHAPES
+========================================= */
 
+.ogcons-note-canvas .shape-object {
 
-        /* =========================================
-           ERROR
-        ========================================= */
+    position: absolute !important;
 
-        .error {
+    margin: 0 !important;
 
-            display: none;
+    pointer-events: none !important;
+}
 
-            background: white;
 
-            padding: 35px;
+/* =========================================
+   SAVED TABLES
+========================================= */
 
-            border-radius: 18px;
+.ogcons-note-canvas table {
 
-            text-align: center;
+    max-width: none;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.07);
+    border-collapse: collapse;
+}
 
-        }
 
+.ogcons-note-canvas td,
+.ogcons-note-canvas th {
 
-        .error h2 {
+    box-sizing: border-box;
+}
 
-            color: #dc3545;
 
-            margin-bottom: 10px;
+/* =========================================
+   REMOVE ADMIN CONTROLS
+========================================= */
 
-        }
+.ogcons-note-canvas
+.object-controls,
 
+.ogcons-note-canvas
+.resize-handle,
 
-        .error p {
+.ogcons-note-canvas
+.rotate-handle,
 
-            color: #667085;
+.ogcons-note-canvas
+.selection-box {
 
-            line-height: 1.6;
+    display: none !important;
+}
 
-        }
 
+/* =========================================
+   LOADING
+========================================= */
 
-        .error button {
+.loading {
 
-            margin-top: 20px;
+    text-align: center;
 
-            border: none;
+    background: white;
 
-            background: #9333ea;
+    padding: 30px;
 
-            color: white;
+    border-radius: 18px;
 
-            padding: 12px 22px;
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
 
-            border-radius: 22px;
+    color: #667085;
 
-            font-weight: bold;
+    font-size: 16px;
 
-            cursor: pointer;
+    margin-top: 25px;
+}
 
-        }
 
+/* =========================================
+   MESSAGE
+========================================= */
 
+.message {
 
-        /* =========================================
-           FOOTER
-        ========================================= */
+    text-align: center;
 
-        footer {
+    background: white;
 
-            text-align: center;
+    padding: 30px;
 
-            padding: 35px;
+    border-radius: 18px;
 
-            color: #718077;
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
+}
 
-            font-size: 14px;
 
-        }
+.message h2 {
 
+    color: #9333ea;
 
+    margin-bottom: 10px;
+}
 
-        /* =========================================
-           MOBILE
-        ========================================= */
 
-        @media (max-width: 700px) {
+.message p {
 
-            .header-content {
+    color: #667085;
+}
 
-                flex-direction: column;
 
-                text-align: center;
+/* =========================================
+   ERROR
+========================================= */
 
-            }
+.error {
 
+    display: none;
 
-            .actions {
+    background: white;
 
-                grid-template-columns: 1fr;
+    padding: 35px;
 
-            }
+    border-radius: 18px;
 
+    text-align: center;
 
-            #noteSection {
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.07);
+}
 
-                padding: 22px 18px;
 
-            }
+.error h2 {
 
+    color: #dc3545;
 
-            .topic-header h1 {
+    margin-bottom: 10px;
+}
 
-                font-size: 25px;
 
-            }
+.error p {
 
+    color: #667085;
 
-            .note-content {
+    line-height: 1.6;
+}
 
-                font-size: 15px;
 
-            }
+.error button {
 
-        }
+    margin-top: 20px;
 
-    </style>
+    border: none;
+
+    background: #9333ea;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #718077;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+
+    .actions {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    #noteSection {
+
+        padding: 22px 18px;
+    }
+
+
+    .topic-header h1 {
+
+        font-size: 25px;
+    }
+
+
+    .note-content {
+
+        font-size: 15px;
+    }
+
+
+    /*
+        The designed note is NOT changed here.
+        JavaScript calculates the exact scale.
+    */
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 400px) {
+
+    #noteSection {
+
+        padding-left: 12px;
+
+        padding-right: 12px;
+    }
+
+}
+
+</style>
 
 </head>
 
 
 <body>
 
-
-<!-- =========================================
-     HEADER
-========================================= -->
 
 <header>
 
@@ -800,16 +988,8 @@
 
 
 
-<!-- =========================================
-     MAIN
-========================================= -->
-
 <div class="container">
 
-
-    <!-- ======================================
-         TOPIC HEADER
-    ======================================= -->
 
     <div class="topic-header">
 
@@ -839,14 +1019,8 @@
 
 
 
-    <!-- ======================================
-         ACTIONS
-    ======================================= -->
-
     <div class="actions">
 
-
-        <!-- READ NOTE -->
 
         <div class="action-card">
 
@@ -883,8 +1057,6 @@
         </div>
 
 
-
-        <!-- QUIZ -->
 
         <div class="action-card">
 
@@ -924,10 +1096,6 @@
 
 
 
-    <!-- ======================================
-         LOADING
-    ======================================= -->
-
     <div
         id="loading"
         class="loading">
@@ -937,10 +1105,6 @@
     </div>
 
 
-
-    <!-- ======================================
-         NOTE SECTION
-    ======================================= -->
 
     <div id="noteSection">
 
@@ -967,10 +1131,6 @@
 
 
 
-    <!-- ======================================
-         DEFAULT MESSAGE
-    ======================================= -->
-
     <div
         class="message"
         id="messageBox">
@@ -994,10 +1154,6 @@
     </div>
 
 
-
-    <!-- ======================================
-         ERROR
-    ======================================= -->
 
     <div
         class="error"
@@ -1045,7 +1201,6 @@
    SUPABASE
 ================================================== */
 
-
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
 
@@ -1061,21 +1216,17 @@ const supabaseClient =
     );
 
 
-
 /* ==================================================
    COURSE
 ================================================== */
-
 
 const COURSE =
     "Anatomy & Physiology";
 
 
-
 /* ==================================================
-   GET TOPIC FROM URL
+   GET TOPIC
 ================================================== */
-
 
 const urlParams =
     new URLSearchParams(
@@ -1087,11 +1238,9 @@ const topic =
     urlParams.get("topic");
 
 
-
 /* ==================================================
    ELEMENTS
 ================================================== */
-
 
 const topicTitle =
     document.getElementById(
@@ -1141,11 +1290,9 @@ const errorMessage =
     );
 
 
-
 /* ==================================================
    SHOW TOPIC
 ================================================== */
-
 
 if (topic) {
 
@@ -1155,20 +1302,16 @@ if (topic) {
 }
 
 
-
 /* ==================================================
    SELECTED NOTE
 ================================================== */
 
-
 let selectedNote = null;
-
 
 
 /* ==================================================
    NORMALIZE TEXT
 ================================================== */
-
 
 function normalizeText(value) {
 
@@ -1183,33 +1326,285 @@ function normalizeText(value) {
 
 
     return String(value)
-
         .trim()
-
-        .replace(
-            /\s+/g,
-            " "
-        )
-
+        .replace(/\s+/g, " ")
         .toLowerCase();
 
 }
 
 
-
 /* ==================================================
-   LOAD NOTE FROM SUPABASE
+   ESCAPE HTML
 ================================================== */
 
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==================================================
+   SCALE SAVED DESIGN
+================================================== */
+
+/*
+    THIS IS THE IMPORTANT FIX.
+
+    Admin design = 1000px wide.
+
+    We DO NOT change its internal width.
+
+    Instead we scale the entire design.
+
+    Example:
+
+    Laptop:
+        1000px design
+        scale = 1
+
+    Phone:
+        available width = 340px
+        scale = 0.34
+
+    Every object therefore moves together.
+*/
+
+function makeDesignResponsive() {
+
+    const canvases =
+        noteContent.querySelectorAll(
+            ".ogcons-note-canvas"
+        );
+
+
+    if (!canvases.length) {
+
+        return;
+
+    }
+
+
+    canvases.forEach(function(canvas) {
+
+        /*
+            Prevent double wrapping.
+        */
+
+        if (
+            canvas.parentElement &&
+            canvas.parentElement.classList.contains(
+                "note-design-viewport"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+            Read the original design dimensions.
+        */
+
+        const originalWidth =
+            parseFloat(
+                canvas.dataset.designWidth
+            ) ||
+            parseFloat(
+                canvas.style.width
+            ) ||
+            1000;
+
+
+        const originalHeight =
+            parseFloat(
+                canvas.dataset.designHeight
+            ) ||
+            parseFloat(
+                canvas.style.height
+            ) ||
+            canvas.scrollHeight ||
+            900;
+
+
+        /*
+            Create viewport.
+        */
+
+        const viewport =
+            document.createElement(
+                "div"
+            );
+
+        viewport.className =
+            "note-design-viewport";
+
+
+        /*
+            Create scaler.
+        */
+
+        const scaler =
+            document.createElement(
+                "div"
+            );
+
+        scaler.className =
+            "note-design-scaler";
+
+
+        /*
+            Put canvas inside scaler.
+        */
+
+        canvas.parentNode.insertBefore(
+            viewport,
+            canvas
+        );
+
+
+        viewport.appendChild(
+            scaler
+        );
+
+
+        scaler.appendChild(
+            canvas
+        );
+
+
+        /*
+            Keep the ORIGINAL design size.
+        */
+
+        scaler.style.width =
+            originalWidth + "px";
+
+
+        scaler.style.height =
+            originalHeight + "px";
+
+
+        canvas.style.width =
+            originalWidth + "px";
+
+
+        canvas.style.height =
+            originalHeight + "px";
+
+
+        canvas.style.minHeight =
+            originalHeight + "px";
+
+
+        /*
+            Calculate scale.
+        */
+
+        function resizeDesign() {
+
+            const availableWidth =
+                Math.max(
+                    viewport.clientWidth,
+                    1
+                );
+
+
+            const scale =
+                Math.min(
+                    availableWidth /
+                    originalWidth,
+                    1
+                );
+
+
+            scaler.style.transform =
+                "scale(" + scale + ")";
+
+
+            scaler.style.transformOrigin =
+                "top left";
+
+
+            scaler.style.width =
+                originalWidth + "px";
+
+
+            scaler.style.height =
+                originalHeight + "px";
+
+
+            viewport.style.height =
+                (
+                    originalHeight *
+                    scale
+                ) + "px";
+
+        }
+
+
+        resizeDesign();
+
+
+        /*
+            Recalculate whenever the
+            phone/window size changes.
+        */
+
+        if (
+            typeof ResizeObserver !==
+            "undefined"
+        ) {
+
+            const observer =
+                new ResizeObserver(
+                    resizeDesign
+                );
+
+
+            observer.observe(
+                viewport
+            );
+
+        }
+
+
+        window.addEventListener(
+            "resize",
+            resizeDesign
+        );
+
+    });
+
+}
+
+
+/* ==================================================
+   LOAD NOTE
+================================================== */
 
 async function loadNote() {
-
-
-    /*
-    ------------------------------------------
-    NO TOPIC SELECTED
-    ------------------------------------------
-    */
 
     if (!topic) {
 
@@ -1230,39 +1625,7 @@ async function loadNote() {
     }
 
 
-
-    console.log(
-        "================================="
-    );
-
-    console.log(
-        "ANATOMY & PHYSIOLOGY NOTE PAGE"
-    );
-
-    console.log(
-        "Selected topic:",
-        topic
-    );
-
-    console.log(
-        "Course:",
-        COURSE
-    );
-
-    console.log(
-        "================================="
-    );
-
-
-
     try {
-
-
-        /*
-        --------------------------------------
-        GET ALL NOTES FOR THIS COURSE
-        --------------------------------------
-        */
 
         const {
             data,
@@ -1281,13 +1644,6 @@ async function loadNote() {
                     COURSE
                 );
 
-
-
-        /*
-        --------------------------------------
-        SUPABASE ERROR
-        --------------------------------------
-        */
 
         if (error) {
 
@@ -1308,9 +1664,7 @@ async function loadNote() {
 
 
             errorMessage.innerHTML =
-
                 "Unable to load the Anatomy & Physiology notes.<br><br>" +
-
                 escapeHTML(
                     error.message
                 );
@@ -1320,22 +1674,10 @@ async function loadNote() {
         }
 
 
-
-        /*
-        --------------------------------------
-        NO NOTES
-        --------------------------------------
-        */
-
         if (
             !data ||
             data.length === 0
         ) {
-
-            console.log(
-                "No Anatomy & Physiology notes found."
-            );
-
 
             loading.style.display =
                 "none";
@@ -1348,7 +1690,6 @@ async function loadNote() {
 
 
             errorMessage.innerHTML =
-
                 "No Anatomy & Physiology notes have been added yet.";
 
             return;
@@ -1356,25 +1697,11 @@ async function loadNote() {
         }
 
 
-
-        /*
-        --------------------------------------
-        NORMALIZE SELECTED TOPIC
-        --------------------------------------
-        */
-
         const selectedTopic =
             normalizeText(
                 topic
             );
 
-
-
-        /*
-        --------------------------------------
-        FIND MATCHING NOTE
-        --------------------------------------
-        */
 
         selectedNote =
             data.find(
@@ -1392,30 +1719,7 @@ async function loadNote() {
             );
 
 
-
-        /*
-        --------------------------------------
-        NOTE NOT FOUND
-        --------------------------------------
-        */
-
         if (!selectedNote) {
-
-            console.error(
-                "Anatomy topic not found:",
-                topic
-            );
-
-
-            console.log(
-                "Available Anatomy & Physiology topics:",
-                data.map(
-                    function(note) {
-                        return note.topic;
-                    }
-                )
-            );
-
 
             loading.style.display =
                 "none";
@@ -1428,13 +1732,8 @@ async function loadNote() {
 
 
             errorMessage.innerHTML =
-
                 "The note for <strong>" +
-
-                escapeHTML(
-                    topic
-                ) +
-
+                escapeHTML(topic) +
                 "</strong> has not been added yet.";
 
             return;
@@ -1442,27 +1741,8 @@ async function loadNote() {
         }
 
 
-
-        /*
-        --------------------------------------
-        NOTE FOUND
-        --------------------------------------
-        */
-
-        console.log(
-            "Anatomy & Physiology note found:",
-            selectedNote
-        );
-
-
         loading.style.display =
             "none";
-
-
-        /*
-        Keep the note hidden until
-        the student clicks Read Note.
-        */
 
     }
 
@@ -1470,7 +1750,7 @@ async function loadNote() {
     catch (err) {
 
         console.error(
-            "Unexpected Anatomy & Physiology error:",
+            "Unexpected error:",
             err
         );
 
@@ -1486,9 +1766,7 @@ async function loadNote() {
 
 
         errorMessage.innerHTML =
-
             "An unexpected error occurred while loading the note.<br><br>" +
-
             escapeHTML(
                 err.message
             );
@@ -1498,20 +1776,11 @@ async function loadNote() {
 }
 
 
-
 /* ==================================================
    SHOW NOTE
 ================================================== */
 
-
 function showNote() {
-
-
-    /*
-    ------------------------------------------
-    CHECK NOTE
-    ------------------------------------------
-    */
 
     if (!selectedNote) {
 
@@ -1524,13 +1793,6 @@ function showNote() {
     }
 
 
-
-    /*
-    ------------------------------------------
-    NOTE TITLE
-    ------------------------------------------
-    */
-
     noteTitle.textContent =
 
         selectedNote.title ||
@@ -1540,24 +1802,9 @@ function showNote() {
         topic;
 
 
-
     /*
-    ------------------------------------------
-    NOTE CONTENT
-    ------------------------------------------
-    
-    Admin Notes can contain HTML such as:
-
-    <h2>
-    <h3>
-    <p>
-    <ul>
-    <li>
-    <strong>
-    <table>
-    <div>
-
-    Therefore innerHTML is used.
+        Insert the saved HTML exactly as
+        the admin saved it.
     */
 
     noteContent.innerHTML =
@@ -1567,12 +1814,17 @@ function showNote() {
         "<p>No note content has been added yet.</p>";
 
 
-
     /*
-    ------------------------------------------
-    SHOW NOTE SECTION
-    ------------------------------------------
+        NOW FIX THE DESIGN.
+
+        The complete saved canvas is treated
+        as ONE design instead of allowing
+        individual objects to participate
+        in normal page flow.
     */
+
+    makeDesignResponsive();
+
 
     noteSection.style.display =
         "block";
@@ -1586,13 +1838,6 @@ function showNote() {
         "none";
 
 
-
-    /*
-    ------------------------------------------
-    SCROLL TO NOTE
-    ------------------------------------------
-    */
-
     noteSection.scrollIntoView({
 
         behavior: "smooth",
@@ -1604,14 +1849,11 @@ function showNote() {
 }
 
 
-
 /* ==================================================
-   TAKE QUIZ
+   QUIZ
 ================================================== */
 
-
 function takeQuiz() {
-
 
     if (!topic) {
 
@@ -1639,11 +1881,9 @@ function takeQuiz() {
 }
 
 
-
 /* ==================================================
-   BACK TO TOPICS
+   BACK
 ================================================== */
-
 
 function goBack() {
 
@@ -1653,63 +1893,11 @@ function goBack() {
 }
 
 
-
-/* ==================================================
-   ESCAPE HTML
-================================================== */
-
-
-function escapeHTML(value) {
-
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-
 /* ==================================================
    START
 ================================================== */
 
-
 loadNote();
-
 
 </script>
 
