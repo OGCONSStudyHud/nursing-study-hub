@@ -1,1413 +1,1049 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OGCONS Study Hub - Anatomy & Physiology</title>
+<title>OGCONS Study Hub - Notes Admin</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
-/* =========================================================
-   GENERAL
-========================================================= */
-
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    width: 100%;
-    min-height: 100%;
 }
 
 body {
-
+    margin: 0;
     font-family: Arial, sans-serif;
-
-    width: 100%;
-    min-height: 100vh;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f5eaff,
-            #e8f4ff,
-            #e8fff2
-        );
-
-    color: #172033;
-
-    line-height: 1.7;
-
-    overflow-x: hidden;
+    background: #f4f7fb;
+    color: #1f2937;
 }
 
-
-/* =========================================================
+/* =========================
    HEADER
-========================================================= */
+========================= */
 
 header {
-
-    background:
-        linear-gradient(
-            135deg,
-            #9333ea,
-            #6366f1
-        );
-
+    background: linear-gradient(135deg, #064e3b, #0f766e);
     color: white;
-
-    padding: 22px 20px;
-
-    box-shadow:
-        0 4px 15px
-        rgba(0,0,0,0.10);
-}
-
-
-.header-content {
-
-    max-width: 1100px;
-
-    margin: auto;
-
+    padding: 20px;
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    gap: 15px;
 }
 
-
-.logo {
-
-    font-size: 22px;
-
-    font-weight: bold;
+header h1 {
+    margin: 0;
+    font-size: 25px;
 }
 
-
-.back-button {
-
+header button {
     border: none;
-
     background: white;
-
-    color: #9333ea;
-
-    padding: 10px 18px;
-
-    border-radius: 22px;
-
-    font-weight: bold;
-
+    color: #064e3b;
+    padding: 10px 16px;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 
-.back-button:hover {
-
-    background: #f3f3f3;
-}
-
-
-/* =========================================================
-   MAIN CONTAINER
-========================================================= */
+/* =========================
+   PAGE
+========================= */
 
 .container {
-
-    width: 100%;
-
-    max-width: 1000px;
-
-    margin: auto;
-
-    padding: 35px 20px;
+    width: 95%;
+    max-width: 1400px;
+    margin: 25px auto;
 }
 
 
-/* =========================================================
-   TOPIC HEADER
-========================================================= */
+/* =========================
+   CARD
+========================= */
 
-.topic-header {
-
+.card {
     background: white;
-
-    padding: 35px 25px;
-
-    border-radius: 20px;
-
-    text-align: center;
-
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.08);
-
+    border-radius: 14px;
+    padding: 22px;
     margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
 }
 
-
-.topic-icon {
-
-    font-size: 60px;
-
-    margin-bottom: 12px;
-}
-
-
-.topic-header h1 {
-
-    color: #9333ea;
-
-    font-size: 31px;
-
-    line-height: 1.3;
-
-    margin-bottom: 10px;
-
-    overflow-wrap: anywhere;
-}
-
-
-.topic-header p {
-
-    color: #667085;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   ACTIONS
-========================================================= */
-
-.actions {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 20px;
-
-    margin-bottom: 25px;
-}
-
-
-.action-card {
-
-    background: white;
-
-    padding: 28px 20px;
-
-    border-radius: 18px;
-
-    text-align: center;
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
-}
-
-
-.action-icon {
-
-    font-size: 43px;
-
-    margin-bottom: 12px;
-}
-
-
-.action-card h2 {
-
-    margin-bottom: 8px;
-
-    font-size: 20px;
-}
-
-
-.action-card p {
-
-    color: #667085;
-
-    line-height: 1.5;
-
-    margin-bottom: 18px;
-}
-
-
-.action-button {
-
-    border: none;
-
-    color: white;
-
-    padding: 12px 22px;
-
-    border-radius: 22px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    font-size: 15px;
-}
-
-
-.read-button {
-
-    background: #9333ea;
-}
-
-
-.read-button:hover {
-
-    background: #7e22ce;
-}
-
-
-.quiz-button {
-
-    background: #2563eb;
-}
-
-
-.quiz-button:hover {
-
-    background: #1d4ed8;
-}
-
-
-/* =========================================================
-   NOTE SECTION
-========================================================= */
-
-#noteSection {
-
-    display: none;
-
-    background: white;
-
-    padding: 35px;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,0.08);
-
-    margin-top: 25px;
-
-    /*
-       IMPORTANT:
-       Never hide the bottom of a long note.
-    */
-
-    overflow: visible;
-
-    width: 100%;
-}
-
-
-#noteSection > h2 {
-
-    color: #9333ea;
-
-    font-size: 27px;
-
-    margin-bottom: 25px;
-
-    padding-bottom: 15px;
-
-    border-bottom:
-        2px solid #eee;
-
-    overflow-wrap: anywhere;
-}
-
-
-/* =========================================================
-   NOTE CONTENT
-========================================================= */
-
-.note-content {
-
-    color: #263238;
-
-    font-size: 16px;
-
-    width: 100%;
-
-    /*
-       IMPORTANT FIX:
-       A long note must be allowed to
-       continue naturally.
-    */
-
-    overflow: visible;
-
-    height: auto;
-
-    max-height: none;
-
-    min-height: 0;
-
-    overflow-wrap: break-word;
-
-    word-wrap: break-word;
-}
-
-
-/* =========================================================
-   NORMAL NOTE CONTENT
-========================================================= */
-
-.note-content h1 {
-
-    color: #9333ea;
-
-    margin-top: 30px;
-
-    margin-bottom: 15px;
-
-    overflow-wrap: anywhere;
-}
-
-
-.note-content h2 {
-
-    color: #9333ea;
-
-    font-size: 25px;
-
-    margin-top: 35px;
-
-    margin-bottom: 15px;
-
-    padding-bottom: 8px;
-
-    border-bottom:
-        2px solid #eadcff;
-
-    overflow-wrap: anywhere;
-}
-
-
-.note-content h3 {
-
-    color: #6d28d9;
-
-    font-size: 20px;
-
-    margin-top: 27px;
-
-    margin-bottom: 10px;
-
-    overflow-wrap: anywhere;
-}
-
-
-.note-content h4 {
-
-    color: #4c1d95;
-
-    margin-top: 20px;
-
-    margin-bottom: 8px;
-
-    overflow-wrap: anywhere;
-}
-
-
-.note-content p {
-
-    margin-bottom: 15px;
-
-    overflow-wrap: break-word;
-}
-
-
-.note-content ul {
-
-    margin-left: 25px;
-
-    margin-bottom: 18px;
-}
-
-
-.note-content ol {
-
-    margin-left: 25px;
-
-    margin-bottom: 18px;
-}
-
-
-.note-content li {
-
-    margin-bottom: 8px;
-
-    overflow-wrap: break-word;
-}
-
-
-.note-content strong {
-
-    color: #312e81;
-}
-
-
-/* =========================================================
-   SPECIAL BOXES
-========================================================= */
-
-.definition {
-
-    background: #f5eaff;
-
-    border-left:
-        5px solid #9333ea;
-
-    padding: 16px;
-
-    margin: 18px 0;
-
-    border-radius: 8px;
-
-    overflow-wrap: break-word;
-}
-
-
-.important {
-
-    background: #fff8e1;
-
-    border-left:
-        5px solid #f59e0b;
-
-    padding: 16px;
-
-    margin: 18px 0;
-
-    border-radius: 8px;
-
-    overflow-wrap: break-word;
-}
-
-
-.clinical {
-
-    background: #e8f4ff;
-
-    border-left:
-        5px solid #2563eb;
-
-    padding: 16px;
-
-    margin: 18px 0;
-
-    border-radius: 8px;
-
-    overflow-wrap: break-word;
-}
-
-
-.summary {
-
-    background: #e8fff2;
-
-    border-left:
-        5px solid #18a058;
-
-    padding: 18px;
-
-    margin-top: 25px;
-
-    border-radius: 8px;
-
-    overflow-wrap: break-word;
-}
-
-
-.summary h3 {
-
-    color: #168a4b;
-
+.card h2 {
     margin-top: 0;
 }
 
 
-/* =========================================================
-   NORMAL TABLES
-========================================================= */
-
-.table-wrapper {
-
-    width: 100%;
-
-    overflow-x: auto;
-
-    margin: 20px 0;
-
-    -webkit-overflow-scrolling: touch;
-}
-
-
-.note-table {
-
-    width: 100%;
-
-    border-collapse: collapse;
-
-    min-width: 600px;
-}
-
-
-.note-table th,
-.note-table td {
-
-    border:
-        1px solid #ddd;
-
-    padding: 12px;
-
-    text-align: left;
-}
-
-
-.note-table th {
-
-    background: #9333ea;
-
-    color: white;
-}
-
-
-.note-table tr:nth-child(even) {
-
-    background: #fafafa;
-}
-
-
-/* =========================================================
-   CANVA-STYLE SAVED NOTE
-========================================================= */
-
-/*
-   The admin editor uses a 1000px design.
-
-   We keep the original design coordinate system,
-   then scale the COMPLETE design to fit the student's
-   phone.
-
-   The important difference from the old code is:
-
-   - NO fixed clipping
-   - NO hidden bottom content
-   - Canvas can expand vertically
-   - Long text remains visible
-*/
-
-
-.note-design-viewport {
-
-    width: 100%;
-
-    max-width: 100%;
-
-    position: relative;
-
-    overflow: visible;
-
-    margin: 0 auto;
-}
-
-
-.note-design-scaler {
-
-    position: relative;
-
-    width: 1000px;
-
-    transform-origin: top left;
-
-    overflow: visible;
-}
-
-
-/*
-   IMPORTANT:
-   Do not use overflow:hidden here.
-   It can cut off a long design.
-*/
-
-.ogcons-note-canvas {
-
-    position: relative !important;
-
-    width: 1000px !important;
-
-    max-width: none !important;
-
-    margin: 0 !important;
-
-    padding: 0 !important;
-
-    /*
-       IMPORTANT FIX
-    */
-
-    overflow: visible !important;
-
-    height: auto !important;
-
-    min-height: 100px;
-}
-
-
-/* =========================================================
-   WRITING LAYER
-========================================================= */
-
-.ogcons-writing-layer {
-
-    position: absolute !important;
-
-    left: 0 !important;
-
-    top: 0 !important;
-
-    width: 1000px !important;
-
-    min-height: 100%;
-
-    z-index: 1;
-
-    overflow: visible !important;
-}
-
-
-/* =========================================================
-   OBJECT LAYER
-========================================================= */
-
-.ogcons-objects-layer {
-
-    position: absolute !important;
-
-    left: 0 !important;
-
-    top: 0 !important;
-
-    width: 1000px !important;
-
-    min-height: 100%;
-
-    height: auto !important;
-
-    z-index: 10;
-
-    pointer-events: none;
-
-    overflow: visible !important;
-}
-
-
-.ogcons-objects-layer .design-object {
-
-    pointer-events: none !important;
-}
-
-
-/* =========================================================
-   SAVED IMAGES
-========================================================= */
-
-.ogcons-note-canvas img {
-
-    max-width: none;
-
-    height: auto;
-}
-
-
-.ogcons-note-canvas .image-object {
-
-    position: absolute !important;
-
+/* =========================
+   FORM
+========================= */
+
+label {
     display: block;
-
-    object-fit: contain;
-
-    max-width: none !important;
-
-    margin: 0 !important;
-}
-
-
-/* =========================================================
-   SAVED TEXT BOXES
-========================================================= */
-
-.ogcons-note-canvas .text-object {
-
-    position: absolute !important;
-
-    margin: 0 !important;
-
-    padding: 0 !important;
-
-    background: transparent;
-
-    overflow: visible !important;
-}
-
-
-.ogcons-note-canvas .text-content {
-
-    width: 100%;
-
-    height: auto;
-
-    min-height: 100%;
-
-    overflow-wrap: break-word;
-
-    word-wrap: break-word;
-
-    white-space: normal;
-
-    overflow: visible;
-}
-
-
-/* =========================================================
-   SAVED SHAPES
-========================================================= */
-
-.ogcons-note-canvas .shape-object {
-
-    position: absolute !important;
-
-    margin: 0 !important;
-
-    pointer-events: none !important;
-}
-
-
-/* =========================================================
-   SAVED TABLES
-========================================================= */
-
-.ogcons-note-canvas table {
-
-    max-width: none;
-
-    border-collapse: collapse;
-}
-
-
-.ogcons-note-canvas td,
-.ogcons-note-canvas th {
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   REMOVE ADMIN CONTROLS
-========================================================= */
-
-.ogcons-note-canvas .object-controls,
-.ogcons-note-canvas .resize-handle,
-.ogcons-note-canvas .rotate-handle,
-.ogcons-note-canvas .selection-box {
-
-    display: none !important;
-}
-
-
-/* =========================================================
-   IMPORTANT:
-   PREVENT SAVED HTML FROM CREATING
-   UNEXPECTED FIXED HEIGHTS
-========================================================= */
-
-.note-content [style*="max-height"] {
-
-    max-height: none !important;
-}
-
-
-.note-content [style*="height: 100%"] {
-
-    min-height: 0;
-}
-
-
-/* =========================================================
-   IMAGES THAT ARE NOT PART OF CANVA DESIGN
-========================================================= */
-
-.note-content > img,
-.note-content p > img,
-.note-content div > img {
-
-    max-width: 100%;
-
-    height: auto;
-
-    display: block;
-
-    margin: 15px auto;
-}
-
-
-/* =========================================================
-   VIDEO / IFRAME RESPONSIVENESS
-========================================================= */
-
-.note-content iframe {
-
-    max-width: 100%;
-
-    border: none;
-}
-
-
-/* =========================================================
-   CODE / PRE
-========================================================= */
-
-.note-content pre {
-
-    max-width: 100%;
-
-    overflow-x: auto;
-
-    white-space: pre-wrap;
-
-    word-break: break-word;
-
-    padding: 15px;
-
-    background: #f5f5f5;
-
-    border-radius: 8px;
-}
-
-
-.note-content code {
-
-    word-break: break-word;
-}
-
-
-/* =========================================================
-   BLOCKQUOTE
-========================================================= */
-
-.note-content blockquote {
-
-    margin: 20px 0;
-
-    padding: 15px 20px;
-
-    border-left: 5px solid #9333ea;
-
-    background: #f8f5ff;
-
-    color: #555;
-
-    border-radius: 5px;
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading {
-
-    text-align: center;
-
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
-
-    color: #667085;
-
-    font-size: 16px;
-
-    margin-top: 25px;
-}
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-.message {
-
-    text-align: center;
-
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
-}
-
-
-.message h2 {
-
-    color: #9333ea;
-
-    margin-bottom: 10px;
-}
-
-
-.message p {
-
-    color: #667085;
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-.error {
-
-    display: none;
-
-    background: white;
-
-    padding: 35px;
-
-    border-radius: 18px;
-
-    text-align: center;
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,0.07);
-}
-
-
-.error h2 {
-
-    color: #dc3545;
-
-    margin-bottom: 10px;
-}
-
-
-.error p {
-
-    color: #667085;
-
-    line-height: 1.6;
-}
-
-
-.error button {
-
-    margin-top: 20px;
-
-    border: none;
-
-    background: #9333ea;
-
-    color: white;
-
-    padding: 12px 22px;
-
-    border-radius: 22px;
-
     font-weight: bold;
+    margin-bottom: 7px;
+}
 
-    cursor: pointer;
+select,
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
 
-/* =========================================================
-   FOOTER
-========================================================= */
+/* =========================
+   SEARCH
+========================= */
 
-footer {
+.search-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-    text-align: center;
+.search-area input {
+    flex: 1;
+    margin: 0;
+}
 
-    padding: 35px;
+.search-btn {
+    border: none;
+    background: #0f766e;
+    color: white;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-    color: #718077;
+.search-btn:hover {
+    background: #115e59;
+}
 
+.clear-search-btn {
+    border: none;
+    background: #64748b;
+    color: white;
+    padding: 0 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-search-btn:hover {
+    background: #475569;
+}
+
+.search-info {
+    margin-bottom: 15px;
+    color: #64748b;
     font-size: 14px;
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* =========================
+   TOOLBAR
+========================= */
 
-@media (max-width: 700px) {
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    background: #eef2f7;
+    border: 1px solid #d1d5db;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
 
-    .header-content {
+.toolbar button,
+.toolbar select {
+    width: auto;
+    margin: 0;
+    padding: 7px 9px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
 
-        flex-direction: column;
+.toolbar button:hover {
+    background: #e5e7eb;
+}
 
-        text-align: center;
-    }
-
-
-    .actions {
-
-        grid-template-columns: 1fr;
-    }
-
-
-    #noteSection {
-
-        padding: 22px 18px;
-    }
-
-
-    .topic-header h1 {
-
-        font-size: 25px;
-    }
-
-
-    .note-content {
-
-        font-size: 15px;
-    }
-
-
-    .note-content h2 {
-
-        font-size: 22px;
-    }
-
-
-    .note-content h3 {
-
-        font-size: 19px;
-    }
-
-
-    .definition,
-    .important,
-    .clinical,
-    .summary {
-
-        padding: 14px;
-    }
+.toolbar-separator {
+    width: 1px;
+    background: #cbd5e1;
+    margin: 0 3px;
 }
 
 
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
+/* =========================
+   RICH EDITOR
+========================= */
 
-@media (max-width: 400px) {
+.rich-editor {
+    position: relative;
+    min-height: 650px;
+    border: 1px solid #d1d5db;
+    border-radius: 0 0 10px 10px;
+    padding: 25px;
+    background: white;
+    overflow: hidden;
+    outline: none;
+    line-height: 1.6;
+}
 
-    #noteSection {
+.rich-editor:focus {
+    border-color: #0f766e;
+}
 
-        padding-left: 12px;
+.rich-editor > p {
+    margin: 10px 0;
+}
 
-        padding-right: 12px;
+
+/* =========================
+   DESIGN OBJECT
+========================= */
+
+.design-object {
+    position: absolute;
+    user-select: none;
+    z-index: 10;
+}
+
+.design-object.selected {
+    outline: 2px dashed #0f766e;
+}
+
+.design-object.editing {
+    outline: 2px solid #0f766e;
+}
+
+
+/* =========================
+   TEXT OBJECT
+========================= */
+
+.text-object {
+    width: 280px;
+    min-height: 55px;
+    padding: 0;
+    background: transparent;
+    cursor: move;
+    transform-origin: center center;
+}
+
+.text-object .text-content {
+    width: 100%;
+    min-height: 55px;
+    padding: 8px 10px;
+    outline: none;
+    border: none;
+    background: transparent;
+    white-space: pre-wrap;
+    word-break: break-word;
+    cursor: move;
+    user-select: none;
+}
+
+.text-object.editing .text-content {
+    cursor: text;
+    user-select: text;
+    background: rgba(255,255,255,0.35);
+}
+
+.text-object .text-content:focus {
+    outline: none;
+}
+
+
+/* =========================
+   IMAGE OBJECT
+========================= */
+
+.image-object {
+    cursor: move;
+    transform-origin: center center;
+}
+
+.image-object img {
+    display: block;
+    max-width: 100%;
+    width: 250px;
+    height: auto;
+    pointer-events: none;
+}
+
+
+/* =========================
+   SHAPES
+========================= */
+
+.shape-object {
+    cursor: move;
+    transform-origin: center center;
+}
+
+.shape-rectangle {
+    width: 180px;
+    height: 100px;
+    border: 3px solid #0f766e;
+    background: rgba(15,118,110,0.08);
+}
+
+.shape-circle {
+    width: 130px;
+    height: 130px;
+    border: 3px solid #0f766e;
+    border-radius: 50%;
+    background: rgba(15,118,110,0.08);
+}
+
+.shape-line {
+    width: 180px;
+    height: 4px;
+    background: #111827;
+    transform-origin: left center;
+}
+
+.shape-arrow {
+    width: 180px;
+    height: 4px;
+    background: #111827;
+    position: relative;
+    transform-origin: left center;
+}
+
+.shape-arrow::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    top: -7px;
+    width: 15px;
+    height: 15px;
+    border-top: 4px solid #111827;
+    border-right: 4px solid #111827;
+    transform: rotate(45deg);
+}
+
+
+/* =========================
+   OBJECT CONTROLS
+========================= */
+
+.object-controls {
+    position: absolute;
+    top: -35px;
+    left: 0;
+    display: none;
+    gap: 4px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    z-index: 100;
+}
+
+.design-object.selected .object-controls {
+    display: flex;
+}
+
+.object-controls button {
+    border: none;
+    background: #f8fafc;
+    padding: 4px 7px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.object-controls button:hover {
+    background: #e2e8f0;
+}
+
+
+/* =========================
+   ROTATE HANDLE
+========================= */
+
+.rotate-handle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #0f766e;
+    border: 2px solid white;
+    top: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: grab;
+    display: none;
+    z-index: 101;
+}
+
+.design-object.selected .rotate-handle {
+    display: block;
+}
+
+
+/* =========================
+   RESIZE HANDLE
+========================= */
+
+.resize-handle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    right: -7px;
+    bottom: -7px;
+    background: #0f766e;
+    border: 2px solid white;
+    border-radius: 3px;
+    cursor: nwse-resize;
+    display: none;
+    z-index: 101;
+}
+
+.design-object.selected .resize-handle {
+    display: block;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-btn {
+    border: none;
+    background: #0f766e;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    background: #115e59;
+}
+
+.secondary-btn {
+    border: none;
+    background: #475569;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    border: none;
+    background: #dc2626;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+
+/* =========================
+   NOTE LIST
+========================= */
+
+.note-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.note-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 15px;
+    background: white;
+}
+
+.note-card h3 {
+    margin-top: 0;
+    color: #064e3b;
+}
+
+.note-course {
+    font-weight: bold;
+    color: #0f766e;
+    margin-bottom: 5px;
+}
+
+.note-topic {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.note-preview {
+    max-height: 180px;
+    overflow: hidden;
+    font-size: 14px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 10px;
+}
+
+.note-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.note-actions button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.edit-note {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.edit-note:hover {
+    background: #bfdbfe;
+}
+
+.delete-note {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.delete-note:hover {
+    background: #fecaca;
+}
+
+
+/* =========================
+   PREVIEW
+========================= */
+
+.preview-box {
+    display: none;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.preview-box.show {
+    display: block;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.rich-editor table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.rich-editor table td,
+.rich-editor table th {
+    border: 1px solid #94a3b8;
+    padding: 8px;
+    min-width: 50px;
+}
+
+
+/* =========================
+   BLOCKQUOTE
+========================= */
+
+.rich-editor blockquote {
+    border-left: 5px solid #0f766e;
+    margin: 15px 0;
+    padding-left: 15px;
+    color: #475569;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+#status {
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.success {
+    color: #15803d;
+}
+
+.error {
+    color: #b91c1c;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 700px) {
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 
+    .search-area {
+        flex-direction: column;
+    }
 
-    .note-content {
+    .search-btn,
+    .clear-search-btn {
+        height: 45px;
+    }
 
-        font-size: 14.5px;
+    header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .rich-editor {
+        min-height: 500px;
+        padding: 15px;
     }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header>
 
-    <div class="header-content">
+    <h1>OGCONS Study Hub — Notes Admin</h1>
 
-        <div class="logo">
-
-            🫀 OGCONS Study Hub
-
-        </div>
-
-
-        <button
-            class="back-button"
-            onclick="goBack()">
-
-            ← Back to Topics
-
-        </button>
-
-    </div>
+    <button onclick="window.location.href='admin.html'">
+        Back to Admin
+    </button>
 
 </header>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
 <div class="container">
 
 
-    <!-- TOPIC HEADER -->
+<!-- =====================================================
+     NOTE EDITOR
+====================================================== -->
 
-    <div class="topic-header">
+<div class="card">
 
-        <div class="topic-icon">
-
-            🫀
-
-        </div>
-
-
-        <h1 id="topicTitle">
-
-            Anatomy & Physiology
-
-        </h1>
+    <h2 id="editorTitle">
+        Create New Note
+    </h2>
 
 
-        <p>
+    <div class="form-row">
 
-            Study the structure and functions
-            of the human body and test your
-            understanding with a quiz.
+        <div>
 
-        </p>
+            <label>
+                Course
+            </label>
 
-    </div>
+            <select id="course">
 
+                <option value="">
+                    Select Course
+                </option>
 
-    <!-- ACTIONS -->
+                <option value="Foundations of Nursing">
+                    Foundations of Nursing
+                </option>
 
-    <div class="actions">
+                <option value="Anatomy & Physiology">
+                    Anatomy & Physiology
+                </option>
 
+                <option value="Pharmacology">
+                    Pharmacology
+                </option>
 
-        <!-- READ -->
+                <option value="Primary Health Care">
+                    Primary Health Care
+                </option>
 
-        <div class="action-card">
+                <option value="Medical/Surgical Nursing">
+                    Medical/Surgical Nursing
+                </option>
 
-            <div class="action-icon">
+                <option value="Microbiology">
+                    Microbiology
+                </option>
 
-                📖
-
-            </div>
-
-
-            <h2>
-
-                Read Note
-
-            </h2>
-
-
-            <p>
-
-                Study the full and detailed
-                note for the selected topic.
-
-            </p>
-
-
-            <button
-                class="action-button read-button"
-                onclick="showNote()">
-
-                📖 Read Note
-
-            </button>
+            </select>
 
         </div>
 
 
-        <!-- QUIZ -->
+        <div>
 
-        <div class="action-card">
+            <label>
+                Topic
+            </label>
 
-            <div class="action-icon">
+            <select id="topic">
 
-                📝
+                <option value="">
+                    Select Topic
+                </option>
 
-            </div>
-
-
-            <h2>
-
-                Take Quiz
-
-            </h2>
-
-
-            <p>
-
-                Test your knowledge of this
-                Anatomy & Physiology topic.
-
-            </p>
-
-
-            <button
-                class="action-button quiz-button"
-                onclick="takeQuiz()">
-
-                📝 Take Quiz
-
-            </button>
+            </select>
 
         </div>
 
     </div>
 
 
-    <!-- LOADING -->
+    <label>
+        Note Title
+    </label>
 
-    <div
-        id="loading"
-        class="loading">
-
-        🔄 Checking for your note...
-
-    </div>
-
-
-    <!-- NOTE -->
-
-    <div id="noteSection">
-
-        <h2>
-
-            📖
-
-            <span id="noteTitle">
-
-                Topic Note
-
-            </span>
-
-        </h2>
+    <input
+        type="text"
+        id="title"
+        placeholder="Enter note title"
+    >
 
 
-        <div
-            class="note-content"
-            id="noteContent">
+    <!-- =================================================
+         TOOLBAR
+    ================================================== -->
 
-        </div>
+    <div class="toolbar">
 
-    </div>
+        <button onclick="formatText('bold')">
+            <b>B</b>
+        </button>
 
+        <button onclick="formatText('italic')">
+            <i>I</i>
+        </button>
 
-    <!-- MESSAGE -->
+        <button onclick="formatText('underline')">
+            <u>U</u>
+        </button>
 
-    <div
-        class="message"
-        id="messageBox">
-
-        <h2>
-
-            📚 Ready to Study?
-
-        </h2>
-
-
-        <p>
-
-            Select <strong>Read Note</strong>
-            to study the topic or
-            <strong>Take Quiz</strong>
-            to test your knowledge.
-
-        </p>
-
-    </div>
+        <span class="toolbar-separator"></span>
 
 
-    <!-- ERROR -->
+        <select
+            onchange="formatBlock(this.value); this.value=''"
+        >
 
-    <div
-        class="error"
-        id="errorBox">
+            <option value="">
+                Heading
+            </option>
 
-        <h2>
+            <option value="h1">
+                Heading 1
+            </option>
 
-            📚 Note Not Available Yet
+            <option value="h2">
+                Heading 2
+            </option>
 
-        </h2>
+            <option value="h3">
+                Heading 3
+            </option>
+
+            <option value="p">
+                Normal
+            </option>
+
+        </select>
 
 
-        <p
-            id="errorMessage">
+        <select
+            onchange="changeFontSize(this.value); this.value=''"
+        >
 
-        </p>
+            <option value="">
+                Font Size
+            </option>
+
+            <option value="1">
+                Small
+            </option>
+
+            <option value="3">
+                Normal
+            </option>
+
+            <option value="5">
+                Large
+            </option>
+
+            <option value="7">
+                Very Large
+            </option>
+
+        </select>
 
 
-        <button
-            onclick="goBack()">
+        <span class="toolbar-separator"></span>
 
-            ← Back to Anatomy & Physiology Topics
 
+        <button onclick="formatText('justifyLeft')">
+            Left
+        </button>
+
+        <button onclick="formatText('justifyCenter')">
+            Center
+        </button>
+
+        <button onclick="formatText('justifyRight')">
+            Right
+        </button>
+
+
+        <span class="toolbar-separator"></span>
+
+
+        <button onclick="formatText('insertUnorderedList')">
+            • List
+        </button>
+
+        <button onclick="formatText('insertOrderedList')">
+            1. List
+        </button>
+
+
+        <span class="toolbar-separator"></span>
+
+
+        <button onclick="changeTextColor()">
+            Text Color
+        </button>
+
+        <button onclick="changeHighlightColor()">
+            Highlight
+        </button>
+
+
+        <span class="toolbar-separator"></span>
+
+
+        <button onclick="insertTable()">
+            Table
+        </button>
+
+        <button onclick="insertImage()">
+            Image
+        </button>
+
+        <button onclick="insertImageURL()">
+            Image URL
+        </button>
+
+
+        <span class="toolbar-separator"></span>
+
+
+        <button onclick="addTextBox()">
+            Text Box
+        </button>
+
+        <button onclick="addShape('arrow')">
+            Arrow
+        </button>
+
+        <button onclick="addShape('line')">
+            Line
+        </button>
+
+        <button onclick="addShape('rectangle')">
+            Rectangle
+        </button>
+
+        <button onclick="addShape('circle')">
+            Circle
+        </button>
+
+
+        <span class="toolbar-separator"></span>
+
+
+        <button onclick="insertLink()">
+            Link
+        </button>
+
+        <button onclick="formatText('insertHorizontalRule')">
+            HR
+        </button>
+
+        <button onclick="formatBlock('blockquote')">
+            Quote
+        </button>
+
+
+        <span class="toolbar-separator"></span>
+
+
+        <button onclick="undoAction()">
+            Undo
+        </button>
+
+        <button onclick="redoAction()">
+            Redo
+        </button>
+
+        <button onclick="togglePreview()">
+            Preview
         </button>
 
     </div>
+
+
+    <!-- =================================================
+         EDITOR
+    ================================================== -->
+
+    <div
+        id="content"
+        class="rich-editor"
+        contenteditable="true"
+        spellcheck="true"
+    ></div>
+
+
+    <div
+        id="previewBox"
+        class="preview-box"
+    ></div>
+
+
+    <div
+        style="
+            margin-top:20px;
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+        "
+    >
+
+        <button
+            class="primary-btn"
+            onclick="saveNote()"
+        >
+            Save Note
+        </button>
+
+
+        <button
+            class="secondary-btn"
+            onclick="clearEditor()"
+        >
+            Clear
+        </button>
+
+    </div>
+
+
+    <div id="status"></div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SEARCH NOTES
+====================================================== -->
+
+<div class="card">
+
+    <h2>
+        Search Notes
+    </h2>
+
+
+    <div class="search-area">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by note title, course or topic..."
+            autocomplete="off"
+        >
+
+
+        <button
+            class="search-btn"
+            onclick="searchNotes()"
+        >
+            Search
+        </button>
+
+
+        <button
+            class="clear-search-btn"
+            onclick="clearSearch()"
+        >
+            Clear
+        </button>
+
+    </div>
+
+
+    <div
+        id="searchInfo"
+        class="search-info"
+    >
+        Showing all notes.
+    </div>
+
+
+    <div
+        id="notesList"
+        class="note-list"
+    ></div>
+
+</div>
 
 
 </div>
 
 
-<footer>
-
-    OGCONS Study Hub © 2026
-
-</footer>
-
 
 <script>
+
 
 /* =========================================================
    SUPABASE
@@ -1416,134 +1052,3318 @@ footer {
 const SUPABASE_URL =
     "https://bvetmmvpdotifusjkywd.supabase.co";
 
-
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
     "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
-
 
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+        SUPABASE_KEY
     );
 
 
 /* =========================================================
-   COURSE
+   COURSE TOPICS
 ========================================================= */
 
-const COURSE =
-    "Anatomy & Physiology";
+const courseTopics = {
+
+    "Foundations of Nursing": [
+
+        "Introduction to Nursing",
+        "Health Care Institutions",
+        "Ethico-Legal Issues in Nursing",
+        "Tools of Nursing",
+        "Comfort and Safety Measures",
+        "Emergency Care",
+        "Administration of Drugs",
+        "Diagnostic Investigation",
+        "Aseptic Techniques",
+        "Unsafe Injection Safety",
+        "Introduction to Healthcare Waste",
+        "Legal Aspects of Nursing",
+        "Nursing Care of Patients with Feeding/Elimination Problems",
+        "Basic Life Support"
+
+    ],
+
+
+    "Anatomy & Physiology": [
+
+        "Introduction to Anatomy",
+        "The Musculoskeletal System",
+        "Blood and Cardiovascular System",
+        "The Respiratory System",
+        "The Digestive System",
+        "The Integumentary System",
+        "The Excretory System",
+        "The Endocrine System",
+        "The Female Reproductive System",
+        "The Male Reproductive System",
+        "Foetal Development"
+
+    ],
+
+
+    "Pharmacology": [
+
+        "Introduction",
+        "Sources and Classification of Drugs",
+        "Preparation of Drugs",
+        "Routes of Drug Administration",
+        "Mechanism of Drug Action",
+        "National Drug Policy",
+        "Drugs Used in Management of Other Health Conditions",
+        "Patient Education and Counseling"
+
+    ],
+
+
+    "Primary Health Care": [
+
+        "Introduction to Primary Health Care",
+        "The Community",
+        "Cadre of Health Workers in PHC",
+        "Community Mobilization",
+        "Community Diagnosis",
+        "Health Education",
+        "Components of Primary Health Care",
+        "Immunization Against Major Communicable Diseases",
+        "Prevention and Control of Locally Endemic and Epidemic Diseases",
+        "Promotion of Mental Health",
+        "Maternal and Child Health Services",
+        "Provision of Essential Drugs and Supplies",
+        "Oral Hygiene and Eye Care",
+        "Adolescence and Their Problems",
+        "Referral System in PHC",
+        "Care of the Aged in the Community",
+        "Management of Occupational Health",
+        "Management in Primary Health Care"
+
+    ],
+
+
+    "Medical/Surgical Nursing": [
+
+        "Concepts and Terms in Medical-Surgical Nursing",
+        "Management of Patients with Medical/Surgical Conditions",
+        "Management of Patients with Medical/Surgical Conditions 2",
+        "Common Situations That Threaten Adaptation",
+        "Body Defense Mechanisms",
+        "Diagnostic Measures",
+        "Principles of Operating Room Nursing"
+
+    ],
+
+
+    "Microbiology": [
+
+        "Introduction to Microbiology",
+        "Bacteria",
+        "Viruses",
+        "Fungi",
+        "Parasites",
+        "Immunology",
+        "Sterilization & Disinfection",
+        "Healthcare-Associated Infections"
+
+    ]
+
+};
 
 
 /* =========================================================
-   GET TOPIC
+   GLOBAL VARIABLES
 ========================================================= */
 
-const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
+let editingNoteId = null;
 
+let selectedObject = null;
 
-const topic =
-    urlParams.get("topic");
+let savedSelection = null;
+
+let dragData = null;
+
+let resizeData = null;
+
+let rotateData = null;
+
+let allNotes = [];
 
 
 /* =========================================================
-   ELEMENTS
+   COURSE CHANGE
 ========================================================= */
 
-const topicTitle =
-    document.getElementById(
-        "topicTitle"
-    );
+document
+.getElementById("course")
+.addEventListener(
+    "change",
+    function() {
+
+        const course =
+            this.value;
+
+        const topicSelect =
+            document.getElementById(
+                "topic"
+            );
+
+        topicSelect.innerHTML =
+            '<option value="">Select Topic</option>';
 
 
-const noteTitle =
-    document.getElementById(
-        "noteTitle"
-    );
+        if (
+            !course ||
+            !courseTopics[course]
+        ) {
+            return;
+        }
 
 
-const noteContent =
-    document.getElementById(
-        "noteContent"
-    );
+        courseTopics[course]
+        .forEach(function(topic) {
 
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-const noteSection =
-    document.getElementById(
-        "noteSection"
-    );
+            option.value =
+                topic;
 
+            option.textContent =
+                topic;
 
-const loading =
-    document.getElementById(
-        "loading"
-    );
+            topicSelect.appendChild(
+                option
+            );
 
+        });
 
-const messageBox =
-    document.getElementById(
-        "messageBox"
-    );
-
-
-const errorBox =
-    document.getElementById(
-        "errorBox"
-    );
-
-
-const errorMessage =
-    document.getElementById(
-        "errorMessage"
-    );
+    }
+);
 
 
 /* =========================================================
-   SHOW TOPIC
+   NORMALIZE
 ========================================================= */
 
-if (topic) {
+function normalizeTopic(value) {
 
-    topicTitle.textContent =
-        topic;
+    return String(value || "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
 
 }
 
 
 /* =========================================================
-   SELECTED NOTE
+   SAVE SELECTION
 ========================================================= */
 
-let selectedNote = null;
+function saveSelection() {
+
+    const selection =
+        window.getSelection();
+
+    if (
+        !selection.rangeCount
+    ) {
+        return;
+    }
+
+
+    const range =
+        selection.getRangeAt(0);
+
+
+    if (
+        document
+        .getElementById("content")
+        .contains(
+            range.commonAncestorContainer
+        )
+    ) {
+
+        savedSelection =
+            range.cloneRange();
+
+    }
+
+}
 
 
 /* =========================================================
-   NORMALIZE TEXT
+   RESTORE SELECTION
 ========================================================= */
 
-function normalizeText(value) {
+function restoreSelection() {
 
     if (
-        value === null ||
-        value === undefined
+        !savedSelection
+    ) {
+        return;
+    }
+
+
+    const selection =
+        window.getSelection();
+
+    selection.removeAllRanges();
+
+    selection.addRange(
+        savedSelection
+    );
+
+}
+
+
+/* =========================================================
+   EDITOR EVENTS
+========================================================= */
+
+document
+.getElementById("content")
+.addEventListener(
+    "keyup",
+    saveSelection
+);
+
+document
+.getElementById("content")
+.addEventListener(
+    "mouseup",
+    saveSelection
+);
+
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+function formatText(
+    command,
+    value = null
+) {
+
+    restoreSelection();
+
+    document.execCommand(
+        command,
+        false,
+        value
+    );
+
+    saveSelection();
+
+}
+
+
+/* =========================================================
+   FORMAT BLOCK
+========================================================= */
+
+function formatBlock(tag) {
+
+    if (!tag) return;
+
+    restoreSelection();
+
+    document.execCommand(
+        "formatBlock",
+        false,
+        tag
+    );
+
+    saveSelection();
+
+}
+
+
+/* =========================================================
+   FONT SIZE
+========================================================= */
+
+function changeFontSize(size) {
+
+    if (!size) return;
+
+    restoreSelection();
+
+    document.execCommand(
+        "fontSize",
+        false,
+        size
+    );
+
+    saveSelection();
+
+}
+
+
+/* =========================================================
+   TEXT COLOR
+========================================================= */
+
+function changeTextColor() {
+
+    const color =
+        prompt(
+            "Enter text color:\n\nExample: red, blue, #0f766e"
+        );
+
+    if (!color) return;
+
+    restoreSelection();
+
+    document.execCommand(
+        "foreColor",
+        false,
+        color
+    );
+
+    saveSelection();
+
+}
+
+
+/* =========================================================
+   HIGHLIGHT
+========================================================= */
+
+function changeHighlightColor() {
+
+    const color =
+        prompt(
+            "Enter highlight color:\n\nExample: yellow, #fef08a"
+        );
+
+    if (!color) return;
+
+    restoreSelection();
+
+    document.execCommand(
+        "hiliteColor",
+        false,
+        color
+    );
+
+    saveSelection();
+
+}
+
+
+/* =========================================================
+   LINK
+========================================================= */
+
+function insertLink() {
+
+    const url =
+        prompt(
+            "Enter URL:"
+        );
+
+    if (!url) return;
+
+    restoreSelection();
+
+    document.execCommand(
+        "createLink",
+        false,
+        url
+    );
+
+    saveSelection();
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+function insertTable() {
+
+    const rows =
+        parseInt(
+            prompt(
+                "Number of rows:",
+                "3"
+            )
+        );
+
+    const cols =
+        parseInt(
+            prompt(
+                "Number of columns:",
+                "3"
+            )
+        );
+
+
+    if (
+        !rows ||
+        !cols ||
+        rows < 1 ||
+        cols < 1
+    ) {
+        return;
+    }
+
+
+    let html =
+        "<table><tbody>";
+
+
+    for (
+        let r = 0;
+        r < rows;
+        r++
     ) {
 
-        return "";
+        html += "<tr>";
+
+
+        for (
+            let c = 0;
+            c < cols;
+            c++
+        ) {
+
+            html +=
+                "<td>&nbsp;</td>";
+
+        }
+
+
+        html += "</tr>";
 
     }
 
 
+    html +=
+        "</tbody></table><p><br></p>";
+
+
+    restoreSelection();
+
+
+    document.execCommand(
+        "insertHTML",
+        false,
+        html
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE FROM COMPUTER
+========================================================= */
+
+function insertImage() {
+
+    const input =
+        document.createElement(
+            "input"
+        );
+
+    input.type =
+        "file";
+
+    input.accept =
+        "image/*";
+
+
+    input.onchange =
+        function() {
+
+            const file =
+                input.files[0];
+
+            if (!file) return;
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event) {
+
+                    addImageObject(
+                        event.target.result
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        };
+
+
+    input.click();
+
+}
+
+
+/* =========================================================
+   IMAGE URL
+========================================================= */
+
+function insertImageURL() {
+
+    const url =
+        prompt(
+            "Enter image URL:"
+        );
+
+    if (!url) return;
+
+    addImageObject(
+        url
+    );
+
+}
+
+
+/* =========================================================
+   ADD IMAGE OBJECT
+========================================================= */
+
+function addImageObject(src) {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const object =
+        document.createElement(
+            "div"
+        );
+
+
+    object.className =
+        "design-object image-object";
+
+
+    object.dataset.objectType =
+        "image";
+
+
+    object.style.left =
+        "80px";
+
+    object.style.top =
+        "100px";
+
+
+    object.innerHTML = `
+
+        <img
+            src="${escapeAttribute(src)}"
+        >
+
+        ${objectControlsHTML()}
+
+        <div class="rotate-handle"></div>
+
+        <div class="resize-handle"></div>
+
+    `;
+
+
+    editor.appendChild(
+        object
+    );
+
+
+    makeObjectInteractive(
+        object
+    );
+
+
+    selectObject(
+        object
+    );
+
+}
+
+
+/* =========================================================
+   TEXT BOX
+========================================================= */
+
+function addTextBox() {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const object =
+        document.createElement(
+            "div"
+        );
+
+
+    object.className =
+        "design-object text-object editing";
+
+
+    object.dataset.objectType =
+        "text";
+
+
+    object.style.left =
+        "80px";
+
+    object.style.top =
+        "100px";
+
+
+    object.setAttribute(
+        "contenteditable",
+        "false"
+    );
+
+
+    object.innerHTML = `
+
+        <div
+            class="text-content"
+            contenteditable="true"
+        >Type your text here...</div>
+
+        ${objectControlsHTML()}
+
+        <div class="rotate-handle"></div>
+
+        <div class="resize-handle"></div>
+
+    `;
+
+
+    editor.appendChild(
+        object
+    );
+
+
+    makeObjectInteractive(
+        object
+    );
+
+
+    selectObject(
+        object
+    );
+
+
+    enterTextEdit(
+        object
+    );
+
+}
+
+
+/* =========================================================
+   ENTER TEXT EDIT
+========================================================= */
+
+function enterTextEdit(object) {
+
+    if (!object) return;
+
+
+    if (
+        !object.classList.contains(
+            "text-object"
+        )
+    ) {
+        return;
+    }
+
+
+    exitAllTextEditing(
+        object
+    );
+
+
+    object.classList.add(
+        "editing"
+    );
+
+
+    const text =
+        object.querySelector(
+            ".text-content"
+        );
+
+
+    if (!text) return;
+
+
+    text.setAttribute(
+        "contenteditable",
+        "true"
+    );
+
+
+    text.focus();
+
+
+    placeCaretAtEnd(
+        text
+    );
+
+}
+
+
+/* =========================================================
+   EXIT TEXT EDIT
+========================================================= */
+
+function exitTextEdit(object) {
+
+    if (!object) return;
+
+
+    object.classList.remove(
+        "editing"
+    );
+
+
+    const text =
+        object.querySelector(
+            ".text-content"
+        );
+
+
+    if (text) {
+
+        text.setAttribute(
+            "contenteditable",
+            "false"
+        );
+
+    }
+
+
+    savedSelection =
+        null;
+
+}
+
+
+/* =========================================================
+   EXIT ALL
+========================================================= */
+
+function exitAllTextEditing(
+    except = null
+) {
+
+    document
+    .querySelectorAll(
+        ".text-object.editing"
+    )
+    .forEach(
+        function(object) {
+
+            if (
+                object !== except
+            ) {
+
+                exitTextEdit(
+                    object
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CARET
+========================================================= */
+
+function placeCaretAtEnd(
+    element
+) {
+
+    const range =
+        document.createRange();
+
+    range.selectNodeContents(
+        element
+    );
+
+    range.collapse(
+        false
+    );
+
+
+    const selection =
+        window.getSelection();
+
+    selection.removeAllRanges();
+
+    selection.addRange(
+        range
+    );
+
+}
+
+
+/* =========================================================
+   OBJECT CONTROLS
+========================================================= */
+
+function objectControlsHTML() {
+
+    return `
+
+        <div class="object-controls">
+
+            <button
+                type="button"
+                onclick="moveObjectLeft(event)"
+            >
+                ←
+            </button>
+
+            <button
+                type="button"
+                onclick="moveObjectCenter(event)"
+            >
+                ↔
+            </button>
+
+            <button
+                type="button"
+                onclick="moveObjectRight(event)"
+            >
+                →
+            </button>
+
+            <button
+                type="button"
+                onclick="rotateObjectLeft(event)"
+            >
+                ↶
+            </button>
+
+            <button
+                type="button"
+                onclick="rotateObjectRight(event)"
+            >
+                ↷
+            </button>
+
+            <button
+                type="button"
+                onclick="deleteSelectedObject(event)"
+            >
+                🗑
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SELECT OBJECT
+========================================================= */
+
+function selectObject(object) {
+
+    if (!object) return;
+
+
+    document
+    .querySelectorAll(
+        ".design-object.selected"
+    )
+    .forEach(
+        function(item) {
+
+            item.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    selectedObject =
+        object;
+
+
+    object.classList.add(
+        "selected"
+    );
+
+}
+
+
+/* =========================================================
+   DESELECT
+========================================================= */
+
+function deselectAll() {
+
+    document
+    .querySelectorAll(
+        ".design-object.selected"
+    )
+    .forEach(
+        function(object) {
+
+            object.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    selectedObject =
+        null;
+
+}
+
+
+/* =========================================================
+   OBJECT INTERACTION
+========================================================= */
+
+function makeObjectInteractive(
+    object
+) {
+
+    object.addEventListener(
+        "pointerdown",
+        function(e) {
+
+            if (
+                e.target.closest(
+                    ".object-controls"
+                )
+            ) {
+                return;
+            }
+
+
+            if (
+                e.target.closest(
+                    ".rotate-handle"
+                )
+            ) {
+                return;
+            }
+
+
+            if (
+                e.target.closest(
+                    ".resize-handle"
+                )
+            ) {
+                return;
+            }
+
+
+            selectObject(
+                object
+            );
+
+
+            if (
+                object.classList.contains(
+                    "text-object"
+                )
+            ) {
+
+                if (
+                    object.classList.contains(
+                        "editing"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                beginDrag(
+                    e,
+                    object
+                );
+
+                return;
+
+            }
+
+
+            beginDrag(
+                e,
+                object
+            );
+
+        }
+    );
+
+
+    if (
+        object.classList.contains(
+            "text-object"
+        )
+    ) {
+
+        object.addEventListener(
+            "dblclick",
+            function(e) {
+
+                if (
+                    e.target.closest(
+                        ".object-controls"
+                    )
+                ) {
+                    return;
+                }
+
+
+                if (
+                    e.target.closest(
+                        ".rotate-handle"
+                    )
+                ) {
+                    return;
+                }
+
+
+                if (
+                    e.target.closest(
+                        ".resize-handle"
+                    )
+                ) {
+                    return;
+                }
+
+
+                enterTextEdit(
+                    object
+                );
+
+            }
+        );
+
+    }
+
+
+    const rotateHandle =
+        object.querySelector(
+            ".rotate-handle"
+        );
+
+
+    if (rotateHandle) {
+
+        rotateHandle.addEventListener(
+            "pointerdown",
+            function(e) {
+
+                e.stopPropagation();
+
+                selectObject(
+                    object
+                );
+
+                beginRotate(
+                    e,
+                    object
+                );
+
+            }
+        );
+
+    }
+
+
+    const resizeHandle =
+        object.querySelector(
+            ".resize-handle"
+        );
+
+
+    if (resizeHandle) {
+
+        resizeHandle.addEventListener(
+            "pointerdown",
+            function(e) {
+
+                e.stopPropagation();
+
+                selectObject(
+                    object
+                );
+
+                beginResize(
+                    e,
+                    object
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DRAG
+========================================================= */
+
+function beginDrag(
+    e,
+    object
+) {
+
+    e.preventDefault();
+
+
+    dragData = {
+
+        object,
+
+        startX:
+            e.clientX,
+
+        startY:
+            e.clientY,
+
+        startLeft:
+            object.offsetLeft,
+
+        startTop:
+            object.offsetTop
+
+    };
+
+
+    document.addEventListener(
+        "pointermove",
+        dragMove
+    );
+
+
+    document.addEventListener(
+        "pointerup",
+        endDrag,
+        {
+            once: true
+        }
+    );
+
+}
+
+
+function dragMove(e) {
+
+    if (!dragData) return;
+
+
+    const dx =
+        e.clientX -
+        dragData.startX;
+
+
+    const dy =
+        e.clientY -
+        dragData.startY;
+
+
+    let newLeft =
+        dragData.startLeft +
+        dx;
+
+
+    let newTop =
+        dragData.startTop +
+        dy;
+
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const maxLeft =
+        editor.scrollWidth -
+        dragData.object.offsetWidth -
+        5;
+
+
+    const maxTop =
+        Math.max(
+            editor.scrollHeight,
+            editor.clientHeight
+        ) -
+        dragData.object.offsetHeight -
+        5;
+
+
+    newLeft =
+        Math.max(
+            0,
+            Math.min(
+                newLeft,
+                Math.max(
+                    0,
+                    maxLeft
+                )
+            )
+        );
+
+
+    newTop =
+        Math.max(
+            0,
+            Math.min(
+                newTop,
+                Math.max(
+                    0,
+                    maxTop
+                )
+            )
+        );
+
+
+    dragData.object.style.left =
+        newLeft + "px";
+
+
+    dragData.object.style.top =
+        newTop + "px";
+
+}
+
+
+function endDrag() {
+
+    document.removeEventListener(
+        "pointermove",
+        dragMove
+    );
+
+    dragData =
+        null;
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+function beginResize(
+    e,
+    object
+) {
+
+    e.preventDefault();
+
+
+    resizeData = {
+
+        object,
+
+        startX:
+            e.clientX,
+
+        startY:
+            e.clientY,
+
+        startWidth:
+            object.offsetWidth,
+
+        startHeight:
+            object.offsetHeight
+
+    };
+
+
+    document.addEventListener(
+        "pointermove",
+        resizeMove
+    );
+
+
+    document.addEventListener(
+        "pointerup",
+        endResize,
+        {
+            once: true
+        }
+    );
+
+}
+
+
+function resizeMove(e) {
+
+    if (!resizeData) return;
+
+
+    const dx =
+        e.clientX -
+        resizeData.startX;
+
+
+    const dy =
+        e.clientY -
+        resizeData.startY;
+
+
+    const object =
+        resizeData.object;
+
+
+    let newWidth =
+        Math.max(
+            60,
+            resizeData.startWidth + dx
+        );
+
+
+    let newHeight =
+        Math.max(
+            40,
+            resizeData.startHeight + dy
+        );
+
+
+    object.style.width =
+        newWidth + "px";
+
+
+    if (
+        object.classList.contains(
+            "text-object"
+        )
+    ) {
+
+        object.style.minHeight =
+            newHeight + "px";
+
+    }
+
+    else if (
+        object.classList.contains(
+            "image-object"
+        )
+    ) {
+
+        const img =
+            object.querySelector(
+                "img"
+            );
+
+        if (img) {
+
+            img.style.width =
+                newWidth + "px";
+
+        }
+
+    }
+
+    else {
+
+        object.style.width =
+            newWidth + "px";
+
+        object.style.height =
+            newHeight + "px";
+
+    }
+
+}
+
+
+function endResize() {
+
+    document.removeEventListener(
+        "pointermove",
+        resizeMove
+    );
+
+    resizeData =
+        null;
+
+}
+
+
+/* =========================================================
+   ROTATE
+========================================================= */
+
+function beginRotate(
+    e,
+    object
+) {
+
+    e.preventDefault();
+
+
+    const rect =
+        object.getBoundingClientRect();
+
+
+    const centerX =
+        rect.left +
+        rect.width / 2;
+
+
+    const centerY =
+        rect.top +
+        rect.height / 2;
+
+
+    const startAngle =
+        Math.atan2(
+            e.clientY - centerY,
+            e.clientX - centerX
+        ) *
+        180 /
+        Math.PI;
+
+
+    const currentRotation =
+        getRotation(
+            object
+        );
+
+
+    rotateData = {
+
+        object,
+
+        centerX,
+
+        centerY,
+
+        startAngle,
+
+        currentRotation
+
+    };
+
+
+    document.addEventListener(
+        "pointermove",
+        rotateMove
+    );
+
+
+    document.addEventListener(
+        "pointerup",
+        endRotate,
+        {
+            once: true
+        }
+    );
+
+}
+
+
+function rotateMove(e) {
+
+    if (!rotateData) return;
+
+
+    const angle =
+        Math.atan2(
+            e.clientY -
+                rotateData.centerY,
+
+            e.clientX -
+                rotateData.centerX
+        ) *
+        180 /
+        Math.PI;
+
+
+    const rotation =
+        rotateData.currentRotation +
+        (
+            angle -
+            rotateData.startAngle
+        );
+
+
+    rotateData.object.style.transform =
+        `rotate(${rotation}deg)`;
+
+}
+
+
+function endRotate() {
+
+    document.removeEventListener(
+        "pointermove",
+        rotateMove
+    );
+
+    rotateData =
+        null;
+
+}
+
+
+function getRotation(object) {
+
+    const transform =
+        window.getComputedStyle(
+            object
+        ).transform;
+
+
+    if (
+        !transform ||
+        transform === "none"
+    ) {
+        return 0;
+    }
+
+
+    const values =
+        transform.match(
+            /matrix\(([^)]+)\)/
+        );
+
+
+    if (!values) {
+        return 0;
+    }
+
+
+    const parts =
+        values[1]
+        .split(",")
+        .map(Number);
+
+
+    const a =
+        parts[0];
+
+    const b =
+        parts[1];
+
+
+    return Math.round(
+        Math.atan2(
+            b,
+            a
+        ) *
+        180 /
+        Math.PI
+    );
+
+}
+
+
+/* =========================================================
+   OBJECT MOVEMENT
+========================================================= */
+
+function moveObjectLeft(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+
+    selectedObject.style.left =
+        Math.max(
+            0,
+            selectedObject.offsetLeft - 10
+        ) + "px";
+
+}
+
+
+function moveObjectCenter(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const left =
+        (
+            editor.clientWidth -
+            selectedObject.offsetWidth
+        ) / 2;
+
+
+    selectedObject.style.left =
+        Math.max(
+            0,
+            left
+        ) + "px";
+
+}
+
+
+function moveObjectRight(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const left =
+        editor.clientWidth -
+        selectedObject.offsetWidth -
+        10;
+
+
+    selectedObject.style.left =
+        Math.max(
+            0,
+            left
+        ) + "px";
+
+}
+
+
+/* =========================================================
+   ROTATION BUTTONS
+========================================================= */
+
+function rotateObjectLeft(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+
+    const rotation =
+        getRotation(
+            selectedObject
+        );
+
+
+    selectedObject.style.transform =
+        `rotate(${rotation - 15}deg)`;
+
+}
+
+
+function rotateObjectRight(e) {
+
+    e.stopPropagation();
+
+    if (!selectedObject) return;
+
+
+    const rotation =
+        getRotation(
+            selectedObject
+        );
+
+
+    selectedObject.style.transform =
+        `rotate(${rotation + 15}deg)`;
+
+}
+
+
+/* =========================================================
+   DELETE OBJECT
+========================================================= */
+
+function deleteSelectedObject(e) {
+
+    if (e) {
+        e.stopPropagation();
+    }
+
+
+    if (!selectedObject) return;
+
+
+    selectedObject.remove();
+
+    selectedObject =
+        null;
+
+}
+
+
+/* =========================================================
+   SHAPES
+========================================================= */
+
+function addShape(type) {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const object =
+        document.createElement(
+            "div"
+        );
+
+
+    object.className =
+        "design-object shape-object";
+
+
+    object.dataset.objectType =
+        "shape";
+
+
+    object.dataset.shape =
+        type;
+
+
+    object.style.left =
+        "100px";
+
+    object.style.top =
+        "150px";
+
+
+    if (
+        type === "arrow"
+    ) {
+
+        object.classList.add(
+            "shape-arrow"
+        );
+
+    }
+
+    else if (
+        type === "line"
+    ) {
+
+        object.classList.add(
+            "shape-line"
+        );
+
+    }
+
+    else if (
+        type === "rectangle"
+    ) {
+
+        object.classList.add(
+            "shape-rectangle"
+        );
+
+    }
+
+    else if (
+        type === "circle"
+    ) {
+
+        object.classList.add(
+            "shape-circle"
+        );
+
+    }
+
+
+    object.innerHTML +=
+        objectControlsHTML();
+
+
+    object.innerHTML +=
+        '<div class="rotate-handle"></div>';
+
+
+    object.innerHTML +=
+        '<div class="resize-handle"></div>';
+
+
+    editor.appendChild(
+        object
+    );
+
+
+    makeObjectInteractive(
+        object
+    );
+
+
+    selectObject(
+        object
+    );
+
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "pointerdown",
+    function(e) {
+
+        const editingObject =
+            document.querySelector(
+                ".text-object.editing"
+            );
+
+
+        if (
+            editingObject &&
+            !editingObject.contains(
+                e.target
+            )
+        ) {
+
+            exitTextEdit(
+                editingObject
+            );
+
+        }
+
+
+        if (
+            !e.target.closest(
+                ".design-object"
+            )
+        ) {
+
+            deselectAll();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function togglePreview() {
+
+    const preview =
+        document.getElementById(
+            "previewBox"
+        );
+
+
+    if (
+        preview.classList.contains(
+            "show"
+        )
+    ) {
+
+        preview.classList.remove(
+            "show"
+        );
+
+        preview.innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    preview.innerHTML =
+        prepareHTMLForSaving(
+            false
+        );
+
+
+    preview.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   UNDO / REDO
+========================================================= */
+
+function undoAction() {
+
+    document.execCommand(
+        "undo"
+    );
+
+}
+
+
+function redoAction() {
+
+    document.execCommand(
+        "redo"
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttribute(value) {
+
     return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        );
 
+}
+
+
+/* =========================================================
+   PREPARE HTML
+========================================================= */
+
+function prepareHTMLForSaving(
+    wrapCanvas = true
+) {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    const clone =
+        editor.cloneNode(
+            true
+        );
+
+
+    clone
+    .querySelectorAll(
+        ".object-controls, .rotate-handle, .resize-handle"
+    )
+    .forEach(
+        function(element) {
+
+            element.remove();
+
+        }
+    );
+
+
+    clone
+    .querySelectorAll(
+        ".text-object"
+    )
+    .forEach(
+        function(object) {
+
+            object.classList.remove(
+                "selected"
+            );
+
+            object.classList.remove(
+                "editing"
+            );
+
+            object.removeAttribute(
+                "contenteditable"
+            );
+
+
+            const text =
+                object.querySelector(
+                    ".text-content"
+                );
+
+
+            if (text) {
+
+                text.removeAttribute(
+                    "contenteditable"
+                );
+
+                text.style.userSelect =
+                    "";
+
+            }
+
+        }
+    );
+
+
+    clone
+    .querySelectorAll(
+        ".selected"
+    )
+    .forEach(
+        function(element) {
+
+            element.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    const html =
+        clone.innerHTML.trim();
+
+
+    if (!wrapCanvas) {
+
+        return html;
+
+    }
+
+
+    const hasObjects =
+        clone.querySelector(
+            ".design-object"
+        );
+
+
+    if (!hasObjects) {
+
+        return html;
+
+    }
+
+
+    let maxBottom =
+        0;
+
+
+    clone
+    .querySelectorAll(
+        ".design-object"
+    )
+    .forEach(
+        function(object) {
+
+            const top =
+                parseFloat(
+                    object.style.top
+                ) || 0;
+
+
+            const height =
+                object.offsetHeight ||
+                parseFloat(
+                    object.style.height
+                ) ||
+                100;
+
+
+            maxBottom =
+                Math.max(
+                    maxBottom,
+                    top + height
+                );
+
+        }
+    );
+
+
+    const canvasHeight =
+        Math.max(
+            500,
+            maxBottom + 80
+        );
+
+
+    return `
+
+        <div
+            class="ogcons-note-canvas"
+            style="
+                position:relative;
+                min-height:${canvasHeight}px;
+                width:100%;
+            "
+        >
+
+            ${html}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   LOAD EDITOR CONTENT
+========================================================= */
+
+function loadEditorContent(html) {
+
+    const editor =
+        document.getElementById(
+            "content"
+        );
+
+
+    editor.innerHTML =
+        html || "";
+
+
+    const canvas =
+        editor.querySelector(
+            ":scope > .ogcons-note-canvas"
+        );
+
+
+    if (canvas) {
+
+        editor.innerHTML =
+            canvas.innerHTML;
+
+    }
+
+
+    editor
+    .querySelectorAll(
+        ".text-object"
+    )
+    .forEach(
+        function(object) {
+
+            convertOldTextObject(
+                object
+            );
+
+            addControlsIfMissing(
+                object
+            );
+
+            makeObjectInteractive(
+                object
+            );
+
+        }
+    );
+
+
+    editor
+    .querySelectorAll(
+        ".image-object"
+    )
+    .forEach(
+        function(object) {
+
+            addControlsIfMissing(
+                object
+            );
+
+            makeObjectInteractive(
+                object
+            );
+
+        }
+    );
+
+
+    editor
+    .querySelectorAll(
+        ".shape-object"
+    )
+    .forEach(
+        function(object) {
+
+            addControlsIfMissing(
+                object
+            );
+
+            makeObjectInteractive(
+                object
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   OLD TEXT OBJECT CONVERSION
+========================================================= */
+
+function convertOldTextObject(
+    object
+) {
+
+    if (
+        object.querySelector(
+            ".text-content"
+        )
+    ) {
+
+        object.setAttribute(
+            "contenteditable",
+            "false"
+        );
+
+        return;
+
+    }
+
+
+    const children =
+        Array.from(
+            object.childNodes
+        );
+
+
+    let oldHTML =
+        "";
+
+
+    children.forEach(
+        function(node) {
+
+            if (
+                node.nodeType ===
+                Node.TEXT_NODE
+            ) {
+
+                oldHTML +=
+                    node.textContent;
+
+            }
+
+            else if (
+                node.nodeType ===
+                Node.ELEMENT_NODE
+            ) {
+
+                if (
+                    !node.classList.contains(
+                        "object-controls"
+                    ) &&
+                    !node.classList.contains(
+                        "rotate-handle"
+                    ) &&
+                    !node.classList.contains(
+                        "resize-handle"
+                    )
+                ) {
+
+                    oldHTML +=
+                        node.outerHTML;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    object.innerHTML = `
+
+        <div
+            class="text-content"
+            contenteditable="false"
+        >
+            ${
+                oldHTML ||
+                "Type your text here..."
+            }
+        </div>
+
+        ${objectControlsHTML()}
+
+        <div class="rotate-handle"></div>
+
+        <div class="resize-handle"></div>
+
+    `;
+
+
+    object.setAttribute(
+        "contenteditable",
+        "false"
+    );
+
+}
+
+
+/* =========================================================
+   ADD CONTROLS
+========================================================= */
+
+function addControlsIfMissing(
+    object
+) {
+
+    if (
+        !object.querySelector(
+            ".object-controls"
+        )
+    ) {
+
+        object.insertAdjacentHTML(
+            "beforeend",
+            objectControlsHTML()
+        );
+
+    }
+
+
+    if (
+        !object.querySelector(
+            ".rotate-handle"
+        )
+    ) {
+
+        object.insertAdjacentHTML(
+            "beforeend",
+            '<div class="rotate-handle"></div>'
+        );
+
+    }
+
+
+    if (
+        !object.querySelector(
+            ".resize-handle"
+        )
+    ) {
+
+        object.insertAdjacentHTML(
+            "beforeend",
+            '<div class="resize-handle"></div>'
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE NOTE
+========================================================= */
+
+async function saveNote() {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        "Saving...";
+
+    status.className =
+        "";
+
+
+    exitAllTextEditing();
+
+
+    const course =
+        document.getElementById(
+            "course"
+        ).value;
+
+
+    const topic =
+        document.getElementById(
+            "topic"
+        ).value;
+
+
+    const title =
+        document.getElementById(
+            "title"
+        ).value.trim();
+
+
+    if (!course) {
+
+        status.textContent =
+            "Please select a course.";
+
+        status.className =
+            "error";
+
+        return;
+
+    }
+
+
+    if (!topic) {
+
+        status.textContent =
+            "Please select a topic.";
+
+        status.className =
+            "error";
+
+        return;
+
+    }
+
+
+    if (!title) {
+
+        status.textContent =
+            "Please enter a note title.";
+
+        status.className =
+            "error";
+
+        return;
+
+    }
+
+
+    const content =
+        prepareHTMLForSaving(
+            true
+        );
+
+
+    if (!content.trim()) {
+
+        status.textContent =
+            "Please enter some note content.";
+
+        status.className =
+            "error";
+
+        return;
+
+    }
+
+
+    try {
+
+        let result;
+
+
+        if (editingNoteId) {
+
+            result =
+                await supabaseClient
+                .from("notes")
+                .update({
+
+                    course:
+                        course,
+
+                    topic:
+                        topic,
+
+                    title:
+                        title,
+
+                    content:
+                        content,
+
+                    updated_at:
+                        new Date().toISOString()
+
+                })
+                .eq(
+                    "id",
+                    editingNoteId
+                );
+
+        }
+
+        else {
+
+            result =
+                await supabaseClient
+                .from("notes")
+                .insert({
+
+                    course:
+                        course,
+
+                    topic:
+                        topic,
+
+                    title:
+                        title,
+
+                    content:
+                        content
+
+                });
+
+        }
+
+
+        if (result.error) {
+
+            throw result.error;
+
+        }
+
+
+        status.textContent =
+            editingNoteId
+                ? "Note updated successfully."
+                : "Note saved successfully.";
+
+
+        status.className =
+            "success";
+
+
+        await loadNotes();
+
+
+        clearEditor();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+
+        status.textContent =
+            "Error: " +
+            error.message;
+
+
+        status.className =
+            "error";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD ALL NOTES
+========================================================= */
+
+async function loadNotes() {
+
+    const list =
+        document.getElementById(
+            "notesList"
+        );
+
+
+    list.innerHTML =
+        "<p>Loading notes...</p>";
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .from("notes")
+            .select(
+                "id, course, topic, title, content, created_at, updated_at"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        allNotes =
+            data || [];
+
+
+        displayNotes(
+            allNotes
+        );
+
+
+        updateSearchInfo(
+            allNotes.length,
+            ""
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+
+        list.innerHTML =
+            `<p class="error">
+                ${escapeHTML(
+                    error.message
+                )}
+            </p>`;
+
+    }
+
+}
+
+
+/* =========================================================
+   DISPLAY NOTES
+========================================================= */
+
+function displayNotes(
+    notes
+) {
+
+    const list =
+        document.getElementById(
+            "notesList"
+        );
+
+
+    list.innerHTML =
+        "";
+
+
+    if (
+        !notes ||
+        notes.length === 0
+    ) {
+
+        list.innerHTML =
+            "<p>No notes found.</p>";
+
+        return;
+
+    }
+
+
+    notes.forEach(
+        function(note) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "note-card";
+
+
+            const preview =
+                note.content || "";
+
+
+            card.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(
+                        note.title
+                    )}
+                </h3>
+
+                <div class="note-course">
+                    ${escapeHTML(
+                        note.course
+                    )}
+                </div>
+
+                <div class="note-topic">
+                    ${escapeHTML(
+                        note.topic
+                    )}
+                </div>
+
+                <div class="note-preview">
+                    ${preview}
+                </div>
+
+                <div class="note-actions">
+
+                    <button
+                        class="edit-note"
+                        onclick="editNote('${note.id}')"
+                    >
+                        ✏️ Edit
+                    </button>
+
+                    <button
+                        class="delete-note"
+                        onclick="deleteNote('${note.id}')"
+                    >
+                        🗑 Delete
+                    </button>
+
+                </div>
+
+            `;
+
+
+            list.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH NOTES
+========================================================= */
+
+function searchNotes() {
+
+    const searchInput =
+        document.getElementById(
+            "searchInput"
+        );
+
+
+    const search =
+        searchInput.value
         .trim()
-
-        .replace(/\s+/g, " ")
-
         .toLowerCase();
+
+
+    if (!search) {
+
+        displayNotes(
+            allNotes
+        );
+
+
+        updateSearchInfo(
+            allNotes.length,
+            ""
+        );
+
+
+        return;
+
+    }
+
+
+    const filtered =
+        allNotes.filter(
+            function(note) {
+
+                const title =
+                    String(
+                        note.title || ""
+                    ).toLowerCase();
+
+
+                const course =
+                    String(
+                        note.course || ""
+                    ).toLowerCase();
+
+
+                const topic =
+                    String(
+                        note.topic || ""
+                    ).toLowerCase();
+
+
+                return (
+                    title.includes(search) ||
+                    course.includes(search) ||
+                    topic.includes(search)
+                );
+
+            }
+        );
+
+
+    displayNotes(
+        filtered
+    );
+
+
+    updateSearchInfo(
+        filtered.length,
+        search
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH AS YOU TYPE
+========================================================= */
+
+document
+.getElementById(
+    "searchInput"
+)
+.addEventListener(
+    "input",
+    function() {
+
+        searchNotes();
+
+    }
+);
+
+
+/* =========================================================
+   ENTER TO SEARCH
+========================================================= */
+
+document
+.getElementById(
+    "searchInput"
+)
+.addEventListener(
+    "keydown",
+    function(e) {
+
+        if (
+            e.key === "Enter"
+        ) {
+
+            e.preventDefault();
+
+            searchNotes();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SEARCH INFORMATION
+========================================================= */
+
+function updateSearchInfo(
+    count,
+    search
+) {
+
+    const info =
+        document.getElementById(
+            "searchInfo"
+        );
+
+
+    if (search) {
+
+        info.textContent =
+            `${count} note${
+                count === 1
+                    ? ""
+                    : "s"
+            } found for "${search}".`;
+
+    }
+
+    else {
+
+        info.textContent =
+            `Showing ${count} note${
+                count === 1
+                    ? ""
+                    : "s"
+            }.`;
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR SEARCH
+========================================================= */
+
+function clearSearch() {
+
+    document.getElementById(
+        "searchInput"
+    ).value =
+        "";
+
+
+    displayNotes(
+        allNotes
+    );
+
+
+    updateSearchInfo(
+        allNotes.length,
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   EDIT NOTE
+========================================================= */
+
+async function editNote(
+    id
+) {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+            .from("notes")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        editingNoteId =
+            data.id;
+
+
+        document.getElementById(
+            "editorTitle"
+        ).textContent =
+            "Edit Note";
+
+
+        document.getElementById(
+            "course"
+        ).value =
+            data.course;
+
+
+        document
+        .getElementById(
+            "course"
+        )
+        .dispatchEvent(
+            new Event(
+                "change"
+            )
+        );
+
+
+        const foundTopic =
+            courseTopics[
+                data.course
+            ]?.find(
+                function(topic) {
+
+                    return normalizeTopic(
+                        topic
+                    ) ===
+                    normalizeTopic(
+                        data.topic
+                    );
+
+                }
+            );
+
+
+        document.getElementById(
+            "topic"
+        ).value =
+            foundTopic ||
+            data.topic;
+
+
+        document.getElementById(
+            "title"
+        ).value =
+            data.title || "";
+
+
+        loadEditorContent(
+            data.content || ""
+        );
+
+
+        document.getElementById(
+            "status"
+        ).textContent =
+            "Editing selected note.";
+
+
+        document.getElementById(
+            "status"
+        ).className =
+            "";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Error loading note: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE NOTE
+========================================================= */
+
+async function deleteNote(
+    id
+) {
+
+    const note =
+        allNotes.find(
+            function(item) {
+
+                return item.id === id;
+
+            }
+        );
+
+
+    const noteName =
+        note
+            ? note.title
+            : "this note";
+
+
+    const confirmed =
+        confirm(
+            `Are you sure you want to delete "${noteName}"?`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const {
+            error
+        } =
+            await supabaseClient
+            .from("notes")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        /*
+           If the deleted note is currently
+           being edited, clear the editor.
+        */
+
+        if (
+            editingNoteId === id
+        ) {
+
+            clearEditor();
+
+        }
+
+
+        await loadNotes();
+
+
+        const currentSearch =
+            document.getElementById(
+                "searchInput"
+            ).value.trim();
+
+
+        if (currentSearch) {
+
+            searchNotes();
+
+        }
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Error deleting note: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR EDITOR
+========================================================= */
+
+function clearEditor() {
+
+    editingNoteId =
+        null;
+
+
+    document.getElementById(
+        "editorTitle"
+    ).textContent =
+        "Create New Note";
+
+
+    document.getElementById(
+        "course"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "topic"
+    ).innerHTML =
+        '<option value="">Select Topic</option>';
+
+
+    document.getElementById(
+        "title"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "content"
+    ).innerHTML =
+        "";
+
+
+    document.getElementById(
+        "previewBox"
+    ).classList.remove(
+        "show"
+    );
+
+
+    document.getElementById(
+        "previewBox"
+    ).innerHTML =
+        "";
+
+
+    document.getElementById(
+        "status"
+    ).textContent =
+        "";
+
+
+    selectedObject =
+        null;
+
+
+    savedSelection =
+        null;
 
 }
 
@@ -1554,898 +4374,77 @@ function normalizeText(value) {
 
 function escapeHTML(value) {
 
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
-   GET NUMERIC STYLE VALUE
-========================================================= */
-
-function getNumericStyleValue(
-    element,
-    property,
-    fallback = 0
-) {
-
-    if (!element) {
-
-        return fallback;
-
-    }
-
-
-    const inlineValue =
-        parseFloat(
-            element.style[property]
-        );
-
-
-    if (
-        Number.isFinite(
-            inlineValue
-        )
-    ) {
-
-        return inlineValue;
-
-    }
-
-
-    const computed =
-        window.getComputedStyle(
-            element
-        );
-
-
-    const computedValue =
-        parseFloat(
-            computed[property]
-        );
-
-
-    if (
-        Number.isFinite(
-            computedValue
-        )
-    ) {
-
-        return computedValue;
-
-    }
-
-
-    return fallback;
-
-}
-
-
-/* =========================================================
-   FIND REAL DESIGN HEIGHT
-========================================================= */
-
-/*
-    This is another important fix.
-
-    A long Anatomy note should not be trapped
-    inside a short fixed canvas.
-
-    We look at all saved objects and calculate
-    how far down the design actually goes.
-*/
-
-function calculateDesignHeight(canvas) {
-
-    if (!canvas) {
-
-        return 900;
-
-    }
-
-
-    let requiredHeight = 900;
-
-
-    /*
-       First use any saved design height.
-    */
-
-    const savedHeight =
-        parseFloat(
-            canvas.dataset.designHeight
-        );
-
-
-    if (
-        Number.isFinite(savedHeight) &&
-        savedHeight > requiredHeight
-    ) {
-
-        requiredHeight =
-            savedHeight;
-
-    }
-
-
-    /*
-       Check the actual canvas content.
-    */
-
-    const scrollHeight =
-        canvas.scrollHeight;
-
-
-    if (
-        Number.isFinite(scrollHeight) &&
-        scrollHeight > requiredHeight
-    ) {
-
-        requiredHeight =
-            scrollHeight;
-
-    }
-
-
-    /*
-       Check all positioned objects.
-    */
-
-    const objects =
-        canvas.querySelectorAll(
-            ".design-object, .image-object, .text-object, .shape-object"
-        );
-
-
-    objects.forEach(
-        function(object) {
-
-            const top =
-                getNumericStyleValue(
-                    object,
-                    "top",
-                    0
-                );
-
-
-            const height =
-                object.offsetHeight ||
-                getNumericStyleValue(
-                    object,
-                    "height",
-                    0
-                );
-
-
-            const bottom =
-                top + height;
-
-
-            if (
-                bottom + 50 >
-                requiredHeight
-            ) {
-
-                requiredHeight =
-                    bottom + 50;
-
-            }
-
-        }
-    );
-
-
-    /*
-       Extra space at the bottom makes
-       long notes easier to read.
-    */
-
-    return Math.max(
-        requiredHeight,
-        900
+    return String(
+        value || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
     );
 
 }
 
 
 /* =========================================================
-   MAKE SAVED DESIGN RESPONSIVE
+   INITIAL LOAD
 ========================================================= */
 
-function makeDesignResponsive() {
-
-    const canvases =
-        noteContent.querySelectorAll(
-            ".ogcons-note-canvas"
-        );
-
-
-    if (!canvases.length) {
-
-        return;
-
-    }
-
-
-    canvases.forEach(
-        function(canvas) {
-
-            /*
-                If already wrapped, don't wrap
-                it again.
-            */
-
-            if (
-                canvas.parentElement &&
-                canvas.parentElement.classList.contains(
-                    "note-design-viewport"
-                )
-            ) {
-
-                return;
-
-            }
-
-
-            /*
-                Original design width.
-            */
-
-            const originalWidth =
-                parseFloat(
-                    canvas.dataset.designWidth
-                ) ||
-                parseFloat(
-                    canvas.style.width
-                ) ||
-                1000;
-
-
-            /*
-                IMPORTANT:
-                Calculate the actual required
-                height instead of blindly using
-                a short fixed height.
-            */
-
-            const originalHeight =
-                calculateDesignHeight(
-                    canvas
-                );
-
-
-            /*
-                Create viewport.
-            */
-
-            const viewport =
-                document.createElement(
-                    "div"
-                );
-
-            viewport.className =
-                "note-design-viewport";
-
-
-            /*
-                Create scaler.
-            */
-
-            const scaler =
-                document.createElement(
-                    "div"
-                );
-
-            scaler.className =
-                "note-design-scaler";
-
-
-            /*
-                Insert viewport.
-            */
-
-            canvas.parentNode.insertBefore(
-                viewport,
-                canvas
-            );
-
-
-            viewport.appendChild(
-                scaler
-            );
-
-
-            scaler.appendChild(
-                canvas
-            );
-
-
-            /*
-                Keep the original design
-                coordinate system.
-            */
-
-            scaler.style.width =
-                originalWidth + "px";
-
-
-            scaler.style.height =
-                originalHeight + "px";
-
-
-            canvas.style.width =
-                originalWidth + "px";
-
-
-            canvas.style.height =
-                originalHeight + "px";
-
-
-            canvas.style.minHeight =
-                originalHeight + "px";
-
-
-            /*
-                Resize function.
-            */
-
-            function resizeDesign() {
-
-                const availableWidth =
-                    Math.max(
-                        viewport.clientWidth,
-                        1
-                    );
-
-
-                /*
-                    Never enlarge the design
-                    beyond its original size.
-                */
-
-                const scale =
-                    Math.min(
-                        availableWidth /
-                        originalWidth,
-                        1
-                    );
-
-
-                scaler.style.transform =
-                    "scale(" +
-                    scale +
-                    ")";
-
-
-                scaler.style.transformOrigin =
-                    "top left";
-
-
-                /*
-                    Keep scaler's real dimensions.
-                */
-
-                scaler.style.width =
-                    originalWidth + "px";
-
-
-                scaler.style.height =
-                    originalHeight + "px";
-
-
-                /*
-                    This is very important.
-
-                    The viewport gets the scaled
-                    height, so the content below
-                    the design appears normally.
-                */
-
-                viewport.style.height =
-                    (
-                        originalHeight *
-                        scale
-                    ) + "px";
-
-            }
-
-
-            /*
-                Initial resize.
-            */
-
-            resizeDesign();
-
-
-            /*
-                Watch width changes.
-            */
-
-            if (
-                typeof ResizeObserver !==
-                "undefined"
-            ) {
-
-                const observer =
-                    new ResizeObserver(
-                        resizeDesign
-                    );
-
-
-                observer.observe(
-                    viewport
-                );
-
-            }
-
-
-            window.addEventListener(
-                "resize",
-                resizeDesign
-            );
-
-        }
-    );
-
-}
+loadNotes();
 
 
 /* =========================================================
-   LOAD NOTE
+   KEYBOARD
 ========================================================= */
 
-async function loadNote() {
-
-    if (!topic) {
-
-        loading.style.display =
-            "none";
-
-        messageBox.style.display =
-            "none";
-
-        errorBox.style.display =
-            "block";
-
-        errorMessage.innerHTML =
-            "No topic was selected. Please return to Anatomy & Physiology Topics and select a topic.";
-
-        return;
-
-    }
-
-
-    try {
-
-        /*
-            Get all Anatomy & Physiology
-            notes.
-
-            We do NOT limit the content of
-            the note here.
-        */
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-
-                .from("notes")
-
-                .select(
-                    "course, topic, title, content"
-                )
-
-                .eq(
-                    "course",
-                    COURSE
-                );
-
-
-        if (error) {
-
-            console.error(
-                "Supabase note error:",
-                error
-            );
-
-
-            loading.style.display =
-                "none";
-
-            messageBox.style.display =
-                "none";
-
-            errorBox.style.display =
-                "block";
-
-
-            errorMessage.innerHTML =
-                "Unable to load the Anatomy & Physiology notes.<br><br>" +
-                escapeHTML(
-                    error.message
-                );
-
-            return;
-
-        }
-
+document.addEventListener(
+    "keydown",
+    function(e) {
 
         if (
-            !data ||
-            data.length === 0
+            e.key === "Escape"
         ) {
 
-            loading.style.display =
-                "none";
-
-            messageBox.style.display =
-                "none";
-
-            errorBox.style.display =
-                "block";
+            const editingObject =
+                document.querySelector(
+                    ".text-object.editing"
+                );
 
 
-            errorMessage.innerHTML =
-                "No Anatomy & Physiology notes have been added yet.";
+            if (editingObject) {
 
-            return;
-
-        }
-
-
-        const selectedTopic =
-            normalizeText(
-                topic
-            );
+                exitTextEdit(
+                    editingObject
+                );
 
 
-        selectedNote =
-            data.find(
-                function(note) {
+                selectObject(
+                    editingObject
+                );
 
-                    return (
-                        normalizeText(
-                            note.topic
-                        )
-                        ===
-                        selectedTopic
-                    );
-
-                }
-            );
-
-
-        if (!selectedNote) {
-
-            loading.style.display =
-                "none";
-
-            messageBox.style.display =
-                "none";
-
-            errorBox.style.display =
-                "block";
-
-
-            errorMessage.innerHTML =
-                "The note for <strong>" +
-                escapeHTML(topic) +
-                "</strong> has not been added yet.";
-
-            return;
+            }
 
         }
 
-
-        loading.style.display =
-            "none";
-
     }
-
-
-    catch (err) {
-
-        console.error(
-            "Unexpected error:",
-            err
-        );
-
-
-        loading.style.display =
-            "none";
-
-        messageBox.style.display =
-            "none";
-
-        errorBox.style.display =
-            "block";
-
-
-        errorMessage.innerHTML =
-            "An unexpected error occurred while loading the note.<br><br>" +
-            escapeHTML(
-                err.message
-            );
-
-    }
-
-}
-
-
-/* =========================================================
-   SHOW NOTE
-========================================================= */
-
-function showNote() {
-
-    if (!selectedNote) {
-
-        alert(
-            "This note is not available yet."
-        );
-
-        return;
-
-    }
-
-
-    noteTitle.textContent =
-
-        selectedNote.title ||
-
-        selectedNote.topic ||
-
-        topic;
-
-
-    /*
-        IMPORTANT:
-
-        Put the COMPLETE HTML from Supabase
-        into the page.
-
-        Nothing is shortened.
-        Nothing is sliced.
-        Nothing is truncated.
-    */
-
-    noteContent.innerHTML =
-
-        selectedNote.content ||
-
-        "<p>No note content has been added yet.</p>";
-
-
-    /*
-        Fix any saved Canva-style designs.
-    */
-
-    makeDesignResponsive();
-
-
-    /*
-        Show note.
-    */
-
-    noteSection.style.display =
-        "block";
-
-
-    messageBox.style.display =
-        "none";
-
-
-    errorBox.style.display =
-        "none";
-
-
-    /*
-        Force the browser to recalculate
-        the complete height after rendering.
-    */
-
-    requestAnimationFrame(
-        function() {
-
-            requestAnimationFrame(
-                function() {
-
-                    /*
-                        Re-run responsive
-                        design calculation.
-                    */
-
-                    const canvases =
-                        noteContent.querySelectorAll(
-                            ".ogcons-note-canvas"
-                        );
-
-
-                    canvases.forEach(
-                        function(canvas) {
-
-                            /*
-                                If the design is already
-                                inside a viewport, update
-                                its height.
-                            */
-
-                            const viewport =
-                                canvas.closest(
-                                    ".note-design-viewport"
-                                );
-
-
-                            const scaler =
-                                canvas.closest(
-                                    ".note-design-scaler"
-                                );
-
-
-                            if (
-                                !viewport ||
-                                !scaler
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            const width =
-                                parseFloat(
-                                    canvas.dataset.designWidth
-                                ) ||
-                                1000;
-
-
-                            const height =
-                                calculateDesignHeight(
-                                    canvas
-                                );
-
-
-                            canvas.style.height =
-                                height + "px";
-
-
-                            canvas.style.minHeight =
-                                height + "px";
-
-
-                            scaler.style.height =
-                                height + "px";
-
-
-                            const scale =
-                                Math.min(
-                                    viewport.clientWidth /
-                                    width,
-                                    1
-                                );
-
-
-                            viewport.style.height =
-                                (
-                                    height *
-                                    scale
-                                ) + "px";
-
-                        }
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /*
-        Scroll to the beginning of the note.
-    */
-
-    noteSection.scrollIntoView({
-
-        behavior: "smooth",
-
-        block: "start"
-
-    });
-
-}
-
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-function takeQuiz() {
-
-    if (!topic) {
-
-        alert(
-            "No topic was selected. Please return to Anatomy & Physiology Topics and select a topic."
-        );
-
-        return;
-
-    }
-
-
-    const quizURL =
-
-        "anatomy-quiz.html?topic=" +
-
-        encodeURIComponent(
-            topic
-        );
-
-
-    window.location.href =
-        quizURL;
-
-}
-
-
-/* =========================================================
-   BACK
-========================================================= */
-
-function goBack() {
-
-    window.location.href =
-        "anatomy-topics.html";
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-loadNote();
+);
 
 </script>
 
-
 </body>
-
 </html>
