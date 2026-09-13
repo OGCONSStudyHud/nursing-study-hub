@@ -2,28 +2,27 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        content="width=device-width, initial-scale=1.0">
 
     <title>OGCONS Study Hub - Foundations of Nursing</title>
 
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
             color: #222;
         }
 
@@ -31,48 +30,24 @@
            HEADER
         ========================= */
 
-        header {
-            background: linear-gradient(
-                135deg,
-                #0066cc,
-                #00a86b
-            );
-
+        .header {
+            background: #0066cc;
             color: white;
-
-            padding: 18px 25px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            gap: 15px;
-
-            flex-wrap: wrap;
+            padding: 18px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
-        header h1 {
+        .header h1 {
             margin: 0;
-
-            font-size: 22px;
+            font-size: 25px;
+            font-weight: 700;
         }
 
-        .back-btn {
-            background: white;
-
-            color: #0066cc;
-
-            border: none;
-
-            padding: 10px 16px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            font-weight: bold;
+        .header p {
+            margin: 6px 0 0;
+            font-size: 14px;
+            opacity: 0.95;
         }
 
         /* =========================
@@ -80,282 +55,289 @@
         ========================= */
 
         .container {
-            width: 100%;
-
-            max-width: 1000px;
-
-            margin: auto;
-
-            padding: 25px 20px 50px;
+            width: 95%;
+            max-width: 1100px;
+            margin: 25px auto 50px;
         }
 
         /* =========================
-           NOTE CARD
+           TOP BAR
         ========================= */
 
-        .note-card {
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .topic-title {
+            margin: 0;
+            color: #0066cc;
+            font-size: 25px;
+            line-height: 1.3;
+        }
+
+        .back-btn {
+            border: none;
+            background: #555;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: #333;
+        }
+
+        /* =========================
+           NOTE AREA
+        ========================= */
+
+        .note-box {
             background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
 
-            border-radius: 14px;
-
-            padding: 30px;
-
-            box-shadow:
-                0 4px 18px
-                rgba(0, 0, 0, 0.08);
-
-            overflow: hidden;
+            /*
+             * IMPORTANT:
+             * Do not give this container a fixed height.
+             * This allows long notes to display completely.
+             */
+            height: auto;
+            min-height: 300px;
+            overflow: visible;
         }
 
-        .course-name {
-            color: #00a86b;
+        /* =========================
+           LOADING
+        ========================= */
 
-            font-size: 15px;
-
-            font-weight: bold;
-
-            text-transform: uppercase;
-
-            margin-bottom: 8px;
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            font-size: 16px;
         }
 
-        .topic-name {
-            color: #667085;
-
-            font-size: 15px;
-
-            margin-bottom: 18px;
+        .spinner {
+            width: 35px;
+            height: 35px;
+            border: 4px solid #ddd;
+            border-top: 4px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
         }
 
-        .note-title {
-            font-size: 28px;
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-            margin: 0 0 25px;
+        /* =========================
+           ERROR / EMPTY MESSAGE
+        ========================= */
 
-            color: #111827;
+        .message {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
 
-            line-height: 1.25;
+        .message h2 {
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .message p {
+            margin: 0;
+            line-height: 1.6;
         }
 
         /* =========================
            NOTE CONTENT
         ========================= */
 
-        .note-content {
+        #noteContent {
             width: 100%;
-
-            max-width: 100%;
-
-            overflow-x: hidden;
-
-            overflow-wrap: anywhere;
-
-            word-wrap: break-word;
-
-            line-height: 1.6;
-
-            font-size: 16px;
-        }
-
-        .note-content img {
-            max-width: 100% !important;
-
-            width: auto;
-
-            height: auto !important;
-
-            display: block;
-
-            margin: 15px auto;
-
-            object-fit: contain;
-        }
-
-        .note-content table {
-            width: 100% !important;
-
-            max-width: 100% !important;
-
-            border-collapse: collapse;
-
-            margin: 15px 0;
-
-            display: table;
-
-            table-layout: fixed;
-
-            overflow-wrap: anywhere;
-        }
-
-        .note-content td,
-        .note-content th {
-            border: 1px solid #ccc;
-
-            padding: 8px;
-
-            word-break: break-word;
-
-            overflow-wrap: anywhere;
-        }
-
-        .note-content iframe,
-        .note-content video {
-            max-width: 100% !important;
-
             height: auto;
+            min-height: 100px;
+
+            /*
+             * VERY IMPORTANT:
+             * Render saved HTML normally.
+             * Do not use overflow:hidden here.
+             */
+            overflow: visible;
+
+            overflow-wrap: anywhere;
+            word-wrap: break-word;
         }
 
-        .note-content pre {
+        #noteContent img {
             max-width: 100%;
-
-            overflow-x: auto;
-
-            white-space: pre-wrap;
-
-            word-break: break-word;
+            height: auto;
+            display: block;
         }
 
-        .note-content blockquote {
-            border-left: 4px solid #0066cc;
-
-            margin: 15px 0;
-
-            padding: 10px 15px;
-
-            background: #f5f8fc;
+        #noteContent video,
+        #noteContent iframe {
+            max-width: 100%;
         }
 
-        .note-content hr {
-            border: none;
+        #noteContent table {
+            max-width: 100%;
+            border-collapse: collapse;
+        }
 
-            border-top: 1px solid #ddd;
+        #noteContent th,
+        #noteContent td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
 
-            margin: 25px 0;
+        #noteContent p {
+            line-height: 1.7;
+        }
+
+        #noteContent ul,
+        #noteContent ol {
+            line-height: 1.7;
+        }
+
+        #noteContent h1,
+        #noteContent h2,
+        #noteContent h3,
+        #noteContent h4,
+        #noteContent h5,
+        #noteContent h6 {
+            overflow-wrap: anywhere;
         }
 
         /* =========================
-           RESPONSIVE CANVAS
+           CANVA-STYLE NOTE CANVAS
         ========================= */
 
         .ogcons-note-canvas {
-
-            position: relative;
-
+            position: relative !important;
             width: 100% !important;
-
             max-width: 100% !important;
 
-            box-sizing: border-box;
-
-            overflow: visible;
-
-            min-height: 0;
-
-        }
-
-        .ogcons-note-canvas img {
-
-            max-width: 100% !important;
-
+            /*
+             * Do not force a height.
+             * The saved min-height can still work.
+             */
             height: auto !important;
 
-        }
-
-        .ogcons-note-canvas .image-object {
-
-            position: absolute;
-
-            max-width: 100%;
+            min-height: 300px;
 
             box-sizing: border-box;
 
-        }
-
-        .ogcons-note-canvas .image-object img {
-
-            width: 100% !important;
-
-            max-width: 100% !important;
-
-            height: auto !important;
-
-            display: block;
-
-        }
-
-        .ogcons-note-canvas .text-object {
-
-            position: absolute;
-
-            max-width: 90%;
-
-            box-sizing: border-box;
+            overflow: visible !important;
 
             overflow-wrap: anywhere;
-
-            word-break: break-word;
-
-        }
-
-        .ogcons-note-canvas .shape-object {
-
-            position: absolute;
-
-            box-sizing: border-box;
-
-        }
-
-        .ogcons-note-canvas .object-controls,
-        .ogcons-note-canvas .resize-handle,
-        .ogcons-note-canvas .rotation-handle,
-        .ogcons-note-canvas .rotation-line {
-
-            display: none !important;
-
-        }
-
-        .ogcons-note-canvas table {
-
-            max-width: 100% !important;
-
-            width: 100% !important;
-
-            border-collapse: collapse;
-
+            word-wrap: break-word;
         }
 
         /* =========================
-           STATUS
+           SAVED DESIGN OBJECTS
         ========================= */
 
-        .loading {
-            text-align: center;
-
-            padding: 50px 20px;
-
-            color: #667085;
-
-            font-size: 16px;
+        .ogcons-note-canvas .design-object {
+            box-sizing: border-box;
         }
 
-        .error {
-            background: #fdecec;
+        .ogcons-note-canvas .text-object {
+            position: absolute;
+            box-sizing: border-box;
 
-            color: #a4161a;
+            max-width: 92%;
 
-            padding: 15px;
+            overflow-wrap: anywhere;
+            word-wrap: break-word;
 
+            white-space: normal;
+        }
+
+        .ogcons-note-canvas .text-content {
+            overflow-wrap: anywhere;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .ogcons-note-canvas .image-object {
+            position: absolute;
+            box-sizing: border-box;
+
+            max-width: 100%;
+        }
+
+        .ogcons-note-canvas .image-object img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ogcons-note-canvas .shape-object {
+            box-sizing: border-box;
+        }
+
+        /* Hide editor controls if any accidentally remain */
+        .ogcons-note-canvas .object-controls,
+        .ogcons-note-canvas .resize-handle,
+        .ogcons-note-canvas .rotate-handle {
+            display: none !important;
+        }
+
+        /* =========================
+           TABLE RESPONSIVENESS
+        ========================= */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        #noteContent table {
+            width: auto;
+            min-width: 100%;
+        }
+
+        /* =========================
+           QUIZ BUTTON
+        ========================= */
+
+        .quiz-button-container {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+        }
+
+        .quiz-btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 14px 28px;
             border-radius: 8px;
-
-            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
         }
 
-        .empty {
-            text-align: center;
-
-            padding: 50px 20px;
-
-            color: #667085;
+        .quiz-btn:hover {
+            background: #0052a3;
+            transform: translateY(-1px);
         }
 
         /* =========================
@@ -364,413 +346,518 @@
 
         @media (max-width: 700px) {
 
-            header {
+            .header {
                 padding: 15px;
             }
 
-            header h1 {
-                font-size: 18px;
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .header p {
+                font-size: 13px;
             }
 
             .container {
-                padding: 12px;
+                width: 94%;
+                margin-top: 18px;
             }
 
-            .note-card {
-                padding: 18px;
-
-                border-radius: 10px;
+            .top-bar {
+                align-items: stretch;
             }
 
-            .note-title {
-                font-size: 23px;
-
-                margin-bottom: 20px;
+            .topic-title {
+                font-size: 21px;
             }
 
-            .note-content {
-                font-size: 15px;
-
-                line-height: 1.55;
-
+            .back-btn {
                 width: 100%;
-
-                max-width: 100%;
-
-                overflow-x: hidden;
             }
 
-            .note-content img {
-
-                max-width: 100% !important;
-
-                width: auto !important;
-
-                height: auto !important;
-
-                margin: 12px auto;
-
+            .note-box {
+                padding: 15px;
+                border-radius: 9px;
             }
 
-            .note-content table {
-
-                width: 100% !important;
-
-                max-width: 100% !important;
-
-                table-layout: fixed;
-
-                font-size: 13px;
-
+            .quiz-btn {
+                width: 100%;
+                padding: 14px 18px;
             }
 
-            .note-content td,
-            .note-content th {
-
-                padding: 6px;
-
-                word-break: break-word;
-
+            #noteContent {
+                font-size: 15px;
             }
 
             .ogcons-note-canvas {
-
-                width: 100% !important;
-
-                max-width: 100% !important;
-
+                min-height: 250px !important;
             }
 
             .ogcons-note-canvas .text-object {
+                max-width: 90%;
+            }
 
-                max-width: 92% !important;
+            #noteContent table {
+                font-size: 14px;
+            }
+
+            #noteContent th,
+            #noteContent td {
+                padding: 6px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .topic-title {
+                font-size: 19px;
+            }
+
+            .note-box {
+                padding: 12px;
+            }
+
+            #noteContent {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <h1>FOUNDATIONS OF NURSING</h1>
+
+        <p>OGCONS Study Hub</p>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+        <div class="top-bar">
+
+            <h2
+                class="topic-title"
+                id="topicTitle">
+                Loading topic...
+            </h2>
+
+            <button
+                class="back-btn"
+                onclick="goBack()">
+                ← Back to Topics
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             NOTE
+        ========================= -->
+
+        <section class="note-box">
+
+            <div
+                id="loading"
+                class="loading">
+
+                <div class="spinner"></div>
+
+                Loading note...
+
+            </div>
+
+
+            <div
+                id="message"
+                class="message"
+                style="display: none;">
+
+                <h2 id="messageTitle">
+                    Note Not Found
+                </h2>
+
+                <p id="messageText">
+                    No note was found for this topic.
+                </p>
+
+            </div>
+
+
+            <!--
+                NOTE CONTENT
+
+                IMPORTANT:
+                The content from Supabase is inserted using
+                innerHTML because your admin editor saves HTML.
+            -->
+
+            <div
+                id="noteContent"
+                style="display: none;">
+            </div>
+
+
+            <!-- =========================
+                 TAKE QUIZ BUTTON
+            ========================= -->
+
+            <div
+                id="quizButtonContainer"
+                class="quiz-button-container"
+                style="display: none;">
+
+                <button
+                    class="quiz-btn"
+                    onclick="takeQuiz()">
+
+                    📝 Take Quiz
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* ==========================================
+           SUPABASE CONFIGURATION
+        ========================================== */
+
+        const SUPABASE_URL =
+            "https://bvetmmvpdotifusjkywd.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* ==========================================
+           COURSE
+        ========================================== */
+
+        const COURSE =
+            "Foundations of Nursing";
+
+
+        /* ==========================================
+           GET TOPIC FROM URL
+           
+           Example:
+           
+           fon-note.html?topic=Introduction%20to%20Nursing
+        ========================================== */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const topic =
+            params.get("topic");
+
+
+        /* ==========================================
+           ELEMENTS
+        ========================================== */
+
+        const topicTitle =
+            document.getElementById("topicTitle");
+
+        const loading =
+            document.getElementById("loading");
+
+        const message =
+            document.getElementById("message");
+
+        const messageTitle =
+            document.getElementById("messageTitle");
+
+        const messageText =
+            document.getElementById("messageText");
+
+        const noteContent =
+            document.getElementById("noteContent");
+
+        const quizButtonContainer =
+            document.getElementById(
+                "quizButtonContainer"
+            );
+
+
+        /* ==========================================
+           NORMALIZE TEXT
+           
+           This prevents problems caused by:
+           - extra spaces
+           - different capitalization
+           - accidental line breaks
+        ========================================== */
+
+        function normalizeText(value) {
+
+            return String(value || "")
+                .trim()
+                .replace(/\s+/g, " ")
+                .toLowerCase();
+
+        }
+
+
+        /* ==========================================
+           LOAD NOTE
+        ========================================== */
+
+        async function loadNote() {
+
+            try {
+
+                /* ----------------------------------
+                   Check topic
+                ---------------------------------- */
+
+                if (!topic) {
+
+                    showMessage(
+                        "Topic Not Found",
+                        "No topic was provided in the page URL."
+                    );
+
+                    return;
+
+                }
+
+
+                /* ----------------------------------
+                   Show topic
+                ---------------------------------- */
+
+                topicTitle.textContent =
+                    topic;
+
+
+                /* ----------------------------------
+                   Get all notes for this course
+                   
+                   We deliberately load the course notes
+                   and match the topic ourselves.
+                   
+                   This is more reliable if there are
+                   spaces/capitalization differences.
+                ---------------------------------- */
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient
+
+                    .from("notes")
+
+                    .select(
+                        "id, course, topic, title, content, created_at, updated_at"
+                    )
+
+                    .eq(
+                        "course",
+                        COURSE
+                    )
+
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+                /* ----------------------------------
+                   Database error
+                ---------------------------------- */
+
+                if (error) {
+
+                    console.error(
+                        "Supabase error:",
+                        error
+                    );
+
+                    showMessage(
+                        "Unable to Load Note",
+                        "There was a problem connecting to the study notes. Please try again."
+                    );
+
+                    return;
+
+                }
+
+
+                /* ----------------------------------
+                   No notes
+                ---------------------------------- */
+
+                if (!data || data.length === 0) {
+
+                    showMessage(
+                        "Note Not Found",
+                        "There is currently no note available for this topic."
+                    );
+
+                    return;
+
+                }
+
+
+                /* ----------------------------------
+                   Normalize requested topic
+                ---------------------------------- */
+
+                const requestedTopic =
+                    normalizeText(topic);
+
+
+                /* ----------------------------------
+                   Find matching note
+                ---------------------------------- */
+
+                const selectedNote =
+                    data.find(
+                        function(note) {
+
+                            return (
+                                normalizeText(
+                                    note.topic
+                                ) === requestedTopic
+                            );
+
+                        }
+                    );
+
+
+                /* ----------------------------------
+                   No matching topic
+                ---------------------------------- */
+
+                if (!selectedNote) {
+
+                    showMessage(
+                        "Note Not Found",
+                        "There is currently no note available for \"" +
+                        topic +
+                        "\"."
+                    );
+
+                    return;
+
+                }
+
+
+                /* ==================================
+                   DISPLAY NOTE
+                   
+                   IMPORTANT:
+                   
+                   DO NOT use textContent here.
+                   
+                   DO NOT use escapeHTML here.
+                   
+                   Your admin editor saves HTML such as:
+                   
+                   <div class="ogcons-note-canvas">
+                       ...
+                   </div>
+                   
+                   Therefore we must render it with innerHTML.
+                ================================== */
+
+                noteContent.innerHTML =
+                    selectedNote.content || "";
+
+
+                /* ----------------------------------
+                   Show title from saved note if available
+                ---------------------------------- */
+
+                if (
+                    selectedNote.title &&
+                    selectedNote.title.trim() !== ""
+                ) {
+
+                    topicTitle.textContent =
+                        selectedNote.title;
+
+                }
+
+
+                /* ----------------------------------
+                   Make tables responsive
+                ---------------------------------- */
+
+                makeTablesResponsive();
+
+
+                /* ----------------------------------
+                   Show content
+                ---------------------------------- */
+
+                loading.style.display =
+                    "none";
+
+                message.style.display =
+                    "none";
+
+                noteContent.style.display =
+                    "block";
+
+                quizButtonContainer.style.display =
+                    "block";
 
             }
 
-            .ogcons-note-canvas .image-object {
+            catch (err) {
 
-                max-width: 100% !important;
+                console.error(
+                    "Unexpected error:",
+                    err
+                );
 
-            }
-
-            .ogcons-note-canvas .image-object img {
-
-                max-width: 100% !important;
-
-                height: auto !important;
+                showMessage(
+                    "Something Went Wrong",
+                    "An unexpected error occurred while loading the note. Please try again."
+                );
 
             }
 
         }
 
-    </style>
 
-</head>
+        /* ==========================================
+           MAKE TABLES RESPONSIVE
+        ========================================== */
 
-
-<body>
-
-
-<header>
-
-    <h1>
-        OGCONS Study Hub
-    </h1>
-
-    <button
-        class="back-btn"
-        onclick="goBack()"
-    >
-        ← Back to Topics
-    </button>
-
-</header>
-
-
-<div class="container">
-
-    <div class="note-card">
-
-        <div
-            id="courseName"
-            class="course-name"
-        >
-            FOUNDATIONS OF NURSING
-        </div>
-
-        <div
-            id="topicName"
-            class="topic-name"
-        >
-            Loading topic...
-        </div>
-
-        <h2
-            id="noteTitle"
-            class="note-title"
-        >
-            Loading note...
-        </h2>
-
-        <div
-            id="noteContent"
-            class="note-content"
-        >
-
-            <div class="loading">
-                Loading note...
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<script>
-
-    /* =====================================================
-       SUPABASE
-    ===================================================== */
-
-    const SUPABASE_URL =
-        "https://bvetmmvpdotifusjkywd.supabase.co";
-
-    const SUPABASE_KEY =
-        "sb_publishable_1bssTw_8JM3HtHD3KoaL5w_iCwaLMYS";
-
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
-
-
-    /* =====================================================
-       COURSE
-    ===================================================== */
-
-    const COURSE =
-        "Foundations of Nursing";
-
-
-    /* =====================================================
-       GET TOPIC FROM URL
-    ===================================================== */
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    const selectedTopic =
-        params.get("topic") || "";
-
-
-    /* =====================================================
-       NORMALIZE TEXT
-    ===================================================== */
-
-    function normalize(value) {
-
-        return String(value || "")
-            .trim()
-            .replace(/\s+/g, " ")
-            .toLowerCase();
-
-    }
-
-
-    /* =====================================================
-       DISPLAY TOPIC
-    ===================================================== */
-
-    document.getElementById(
-        "topicName"
-    ).textContent =
-        selectedTopic ||
-        "Topic";
-
-
-    /* =====================================================
-       BACK BUTTON
-    ===================================================== */
-
-    function goBack() {
-
-        window.location.href =
-            "foundations-topics.html";
-
-    }
-
-
-    /* =====================================================
-       LOAD NOTE
-    ===================================================== */
-
-    async function loadNote() {
-
-        const contentElement =
-            document.getElementById(
-                "noteContent"
-            );
-
-        try {
-
-            if (!selectedTopic) {
-
-                contentElement.innerHTML = `
-                    <div class="error">
-                        No topic was selected.
-                    </div>
-                `;
-
-                return;
-
-            }
-
-
-            /*
-                Load all Foundations of Nursing
-                notes.
-
-                We match the topic ourselves so
-                spacing/capitalization differences
-                do not cause a failure.
-            */
-
-            const {
-                data,
-                error
-            } =
-                await supabaseClient
-                    .from("notes")
-                    .select(
-                        "course, topic, title, content"
-                    )
-                    .eq(
-                        "course",
-                        COURSE
-                    );
-
-
-            if (error) {
-
-                throw error;
-
-            }
-
-
-            const notes =
-                data || [];
-
-
-            const selectedNote =
-                notes.find(
-                    function(note) {
-
-                        return (
-                            normalize(
-                                note.topic
-                            ) ===
-                            normalize(
-                                selectedTopic
-                            )
-                        );
-
-                    }
-                );
-
-
-            if (!selectedNote) {
-
-                document.getElementById(
-                    "noteTitle"
-                ).textContent =
-                    "Note Not Found";
-
-
-                contentElement.innerHTML = `
-                    <div class="empty">
-                        <p>
-                            No note has been added for this topic yet.
-                        </p>
-                    </div>
-                `;
-
-                return;
-
-            }
-
-
-            /* =========================
-               TITLE
-            ========================= */
-
-            document.getElementById(
-                "noteTitle"
-            ).textContent =
-                selectedNote.title ||
-                selectedTopic;
-
-
-            /* =========================
-               TOPIC
-            ========================= */
-
-            document.getElementById(
-                "topicName"
-            ).textContent =
-                selectedNote.topic;
-
-
-            /* =================================================
-               IMPORTANT FIX
-               
-               DO NOT USE escapeHTML() HERE.
-
-               The Admin Notes page saves formatted HTML.
-
-               innerHTML allows the student's browser to
-               render the formatting, images, text boxes,
-               tables, headings, etc.
-            ================================================= */
-
-            contentElement.innerHTML =
-                selectedNote.content ||
-                "<p>No content available.</p>";
-
-
-            /*
-                Make images responsive after loading.
-            */
-
-            const images =
-                contentElement.querySelectorAll(
-                    "img"
-                );
-
-
-            images.forEach(
-                function(img) {
-
-                    img.style.maxWidth =
-                        "100%";
-
-                    img.style.height =
-                        "auto";
-
-                }
-            );
-
-
-            /*
-                Make tables responsive.
-            */
+        function makeTablesResponsive() {
 
             const tables =
-                contentElement.querySelectorAll(
+                noteContent.querySelectorAll(
                     "table"
                 );
 
@@ -778,74 +865,128 @@
             tables.forEach(
                 function(table) {
 
-                    table.style.maxWidth =
-                        "100%";
+                    /*
+                     * Avoid wrapping the same table
+                     * more than once.
+                     */
 
-                    table.style.width =
-                        "100%";
+                    if (
+                        table.parentElement &&
+                        table.parentElement.classList.contains(
+                            "table-wrapper"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const wrapper =
+                        document.createElement(
+                            "div"
+                        );
+
+                    wrapper.className =
+                        "table-wrapper";
+
+
+                    table.parentNode.insertBefore(
+                        wrapper,
+                        table
+                    );
+
+                    wrapper.appendChild(
+                        table
+                    );
 
                 }
             );
 
         }
-        catch(error) {
-
-            console.error(
-                "Error loading note:",
-                error
-            );
 
 
-            contentElement.innerHTML = `
+        /* ==========================================
+           SHOW MESSAGE
+        ========================================== */
 
-                <div class="error">
+        function showMessage(
+            title,
+            text
+        ) {
 
-                    Unable to load this note.
+            loading.style.display =
+                "none";
 
-                    <br><br>
+            noteContent.style.display =
+                "none";
 
-                    ${escapeText(
-                        error.message
-                    )}
+            quizButtonContainer.style.display =
+                "none";
 
-                </div>
+            message.style.display =
+                "block";
 
-            `;
+            messageTitle.textContent =
+                title;
+
+            messageText.textContent =
+                text;
 
         }
 
-    }
+
+        /* ==========================================
+           TAKE QUIZ
+           
+           Sends the SAME topic to the quiz page.
+           
+           Example:
+           
+           foundations-quiz.html?topic=Introduction%20to%20Nursing
+        ========================================== */
+
+        function takeQuiz() {
+
+            if (!topic) {
+
+                alert(
+                    "Topic not found."
+                );
+
+                return;
+
+            }
 
 
-    /* =====================================================
-       ESCAPE ONLY ERROR TEXT
-       
-       We DO NOT use this on note.content.
-    ===================================================== */
+            window.location.href =
+                "foundations-quiz.html?topic=" +
+                encodeURIComponent(
+                    topic
+                );
 
-    function escapeText(text) {
-
-        const div =
-            document.createElement(
-                "div"
-            );
-
-        div.textContent =
-            text;
-
-        return div.innerHTML;
-
-    }
+        }
 
 
-    /* =====================================================
-       START
-    ===================================================== */
+        /* ==========================================
+           BACK TO TOPICS
+        ========================================== */
 
-    loadNote();
+        function goBack() {
 
-</script>
+            window.location.href =
+                "foundations-topics.html";
 
+        }
+
+
+        /* ==========================================
+           START
+        ========================================== */
+
+        loadNote();
+
+    </script>
 
 </body>
 
