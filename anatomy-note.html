@@ -16,7 +16,7 @@
 <style>
 
 /* =========================================================
-   RESET
+   GENERAL
 ========================================================= */
 
 * {
@@ -25,8 +25,7 @@
     padding: 0;
 }
 
-html,
-body {
+html {
     width: 100%;
     min-height: 100%;
 }
@@ -35,6 +34,7 @@ body {
 
     font-family: Arial, sans-serif;
 
+    width: 100%;
     min-height: 100vh;
 
     background:
@@ -77,8 +77,6 @@ header {
 
 
 .header-content {
-
-    width: 100%;
 
     max-width: 1100px;
 
@@ -148,8 +146,6 @@ header {
 
 .topic-header {
 
-    width: 100%;
-
     background: white;
 
     padding: 35px 25px;
@@ -202,8 +198,6 @@ header {
 
 .actions {
 
-    width: 100%;
-
     display: grid;
 
     grid-template-columns:
@@ -228,8 +222,6 @@ header {
     box-shadow:
         0 8px 20px
         rgba(0,0,0,0.07);
-
-    min-width: 0;
 }
 
 
@@ -309,8 +301,6 @@ header {
 
     display: none;
 
-    width: 100%;
-
     background: white;
 
     padding: 35px;
@@ -324,12 +314,13 @@ header {
     margin-top: 25px;
 
     /*
-       DO NOT HIDE LONG CONTENT.
+       IMPORTANT:
+       Never hide the bottom of a long note.
     */
 
     overflow: visible;
 
-    min-width: 0;
+    width: 100%;
 }
 
 
@@ -351,20 +342,22 @@ header {
 
 
 /* =========================================================
-   NORMAL NOTE CONTENT
+   NOTE CONTENT
 ========================================================= */
 
 .note-content {
 
-    width: 100%;
-
-    max-width: 100%;
-
-    min-width: 0;
-
     color: #263238;
 
     font-size: 16px;
+
+    width: 100%;
+
+    /*
+       IMPORTANT FIX:
+       A long note must be allowed to
+       continue naturally.
+    */
 
     overflow: visible;
 
@@ -372,29 +365,16 @@ header {
 
     max-height: none;
 
+    min-height: 0;
+
     overflow-wrap: break-word;
 
     word-wrap: break-word;
-
-    word-break: normal;
-}
-
-
-/*
-   Every normal direct element must remain
-   inside the reading area.
-*/
-
-.note-content > * {
-
-    max-width: 100%;
-
-    min-width: 0;
 }
 
 
 /* =========================================================
-   HEADINGS
+   NORMAL NOTE CONTENT
 ========================================================= */
 
 .note-content h1 {
@@ -404,8 +384,6 @@ header {
     margin-top: 30px;
 
     margin-bottom: 15px;
-
-    max-width: 100%;
 
     overflow-wrap: anywhere;
 }
@@ -426,8 +404,6 @@ header {
     border-bottom:
         2px solid #eadcff;
 
-    max-width: 100%;
-
     overflow-wrap: anywhere;
 }
 
@@ -442,8 +418,6 @@ header {
 
     margin-bottom: 10px;
 
-    max-width: 100%;
-
     overflow-wrap: anywhere;
 }
 
@@ -456,72 +430,39 @@ header {
 
     margin-bottom: 8px;
 
-    max-width: 100%;
-
     overflow-wrap: anywhere;
 }
 
 
-/* =========================================================
-   PARAGRAPHS
-========================================================= */
-
 .note-content p {
-
-    width: 100%;
-
-    max-width: 100%;
 
     margin-bottom: 15px;
 
     overflow-wrap: break-word;
-
-    word-wrap: break-word;
 }
 
 
-/* =========================================================
-   LISTS
-========================================================= */
+.note-content ul {
 
-.note-content ul,
-.note-content ol {
-
-    max-width: 100%;
-
-    margin-top: 10px;
+    margin-left: 25px;
 
     margin-bottom: 18px;
+}
 
-    /*
-       Keep bullets/numbers INSIDE
-       the normal reading area.
-    */
 
-    padding-left: 28px;
+.note-content ol {
 
-    margin-left: 0;
+    margin-left: 25px;
 
-    overflow-wrap: break-word;
+    margin-bottom: 18px;
 }
 
 
 .note-content li {
 
-    max-width: 100%;
-
     margin-bottom: 8px;
 
     overflow-wrap: break-word;
-
-    word-wrap: break-word;
-}
-
-
-.note-content ul li,
-.note-content ol li {
-
-    padding-left: 3px;
 }
 
 
@@ -537,10 +478,6 @@ header {
 
 .definition {
 
-    width: 100%;
-
-    max-width: 100%;
-
     background: #f5eaff;
 
     border-left:
@@ -553,16 +490,10 @@ header {
     border-radius: 8px;
 
     overflow-wrap: break-word;
-
-    word-wrap: break-word;
 }
 
 
 .important {
-
-    width: 100%;
-
-    max-width: 100%;
 
     background: #fff8e1;
 
@@ -576,16 +507,10 @@ header {
     border-radius: 8px;
 
     overflow-wrap: break-word;
-
-    word-wrap: break-word;
 }
 
 
 .clinical {
-
-    width: 100%;
-
-    max-width: 100%;
 
     background: #e8f4ff;
 
@@ -599,16 +524,10 @@ header {
     border-radius: 8px;
 
     overflow-wrap: break-word;
-
-    word-wrap: break-word;
 }
 
 
 .summary {
-
-    width: 100%;
-
-    max-width: 100%;
 
     background: #e8fff2;
 
@@ -622,8 +541,6 @@ header {
     border-radius: 8px;
 
     overflow-wrap: break-word;
-
-    word-wrap: break-word;
 }
 
 
@@ -642,8 +559,6 @@ header {
 .table-wrapper {
 
     width: 100%;
-
-    max-width: 100%;
 
     overflow-x: auto;
 
@@ -690,8 +605,24 @@ header {
 
 
 /* =========================================================
-   CANVA DESIGN VIEWPORT
+   CANVA-STYLE SAVED NOTE
 ========================================================= */
+
+/*
+   The admin editor uses a 1000px design.
+
+   We keep the original design coordinate system,
+   then scale the COMPLETE design to fit the student's
+   phone.
+
+   The important difference from the old code is:
+
+   - NO fixed clipping
+   - NO hidden bottom content
+   - Canvas can expand vertically
+   - Long text remains visible
+*/
+
 
 .note-design-viewport {
 
@@ -701,11 +632,9 @@ header {
 
     position: relative;
 
-    overflow: hidden;
+    overflow: visible;
 
     margin: 0 auto;
-
-    min-width: 0;
 }
 
 
@@ -721,9 +650,11 @@ header {
 }
 
 
-/* =========================================================
-   CANVA CANVAS
-========================================================= */
+/*
+   IMPORTANT:
+   Do not use overflow:hidden here.
+   It can cut off a long design.
+*/
 
 .ogcons-note-canvas {
 
@@ -738,11 +669,10 @@ header {
     padding: 0 !important;
 
     /*
-       Keep the internal design from
-       horizontally escaping.
+       IMPORTANT FIX
     */
 
-    overflow: hidden !important;
+    overflow: visible !important;
 
     height: auto !important;
 
@@ -794,7 +724,7 @@ header {
 
     pointer-events: none;
 
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 
@@ -913,7 +843,25 @@ header {
 
 
 /* =========================================================
-   NORMAL IMAGES
+   IMPORTANT:
+   PREVENT SAVED HTML FROM CREATING
+   UNEXPECTED FIXED HEIGHTS
+========================================================= */
+
+.note-content [style*="max-height"] {
+
+    max-height: none !important;
+}
+
+
+.note-content [style*="height: 100%"] {
+
+    min-height: 0;
+}
+
+
+/* =========================================================
+   IMAGES THAT ARE NOT PART OF CANVA DESIGN
 ========================================================= */
 
 .note-content > img,
@@ -931,19 +879,19 @@ header {
 
 
 /* =========================================================
-   IFRAMES
+   VIDEO / IFRAME RESPONSIVENESS
 ========================================================= */
 
 .note-content iframe {
 
     max-width: 100%;
 
-    width: 100%;
+    border: none;
 }
 
 
 /* =========================================================
-   PRE / CODE
+   CODE / PRE
 ========================================================= */
 
 .note-content pre {
@@ -976,22 +924,17 @@ header {
 
 .note-content blockquote {
 
-    max-width: 100%;
-
     margin: 20px 0;
 
     padding: 15px 20px;
 
-    border-left:
-        5px solid #9333ea;
+    border-left: 5px solid #9333ea;
 
     background: #f8f5ff;
 
     color: #555;
 
     border-radius: 5px;
-
-    overflow-wrap: break-word;
 }
 
 
@@ -1135,12 +1078,6 @@ footer {
 
 @media (max-width: 700px) {
 
-    .container {
-
-        padding: 25px 12px;
-    }
-
-
     .header-content {
 
         flex-direction: column;
@@ -1157,13 +1094,7 @@ footer {
 
     #noteSection {
 
-        padding: 22px 16px;
-    }
-
-
-    .topic-header {
-
-        padding: 28px 18px;
+        padding: 22px 18px;
     }
 
 
@@ -1207,14 +1138,6 @@ footer {
 
 @media (max-width: 400px) {
 
-    .container {
-
-        padding-left: 8px;
-
-        padding-right: 8px;
-    }
-
-
     #noteSection {
 
         padding-left: 12px;
@@ -1226,13 +1149,6 @@ footer {
     .note-content {
 
         font-size: 14.5px;
-    }
-
-
-    .note-content ul,
-    .note-content ol {
-
-        padding-left: 24px;
     }
 
 }
@@ -1280,9 +1196,7 @@ footer {
 <div class="container">
 
 
-    <!-- =================================================
-         TOPIC HEADER
-    ================================================== -->
+    <!-- TOPIC HEADER -->
 
     <div class="topic-header">
 
@@ -1311,12 +1225,12 @@ footer {
     </div>
 
 
-    <!-- =================================================
-         ACTIONS
-    ================================================== -->
+    <!-- ACTIONS -->
 
     <div class="actions">
 
+
+        <!-- READ -->
 
         <div class="action-card">
 
@@ -1352,6 +1266,8 @@ footer {
 
         </div>
 
+
+        <!-- QUIZ -->
 
         <div class="action-card">
 
@@ -1390,9 +1306,7 @@ footer {
     </div>
 
 
-    <!-- =================================================
-         LOADING
-    ================================================== -->
+    <!-- LOADING -->
 
     <div
         id="loading"
@@ -1403,9 +1317,7 @@ footer {
     </div>
 
 
-    <!-- =================================================
-         NOTE SECTION
-    ================================================== -->
+    <!-- NOTE -->
 
     <div id="noteSection">
 
@@ -1431,9 +1343,7 @@ footer {
     </div>
 
 
-    <!-- =================================================
-         MESSAGE
-    ================================================== -->
+    <!-- MESSAGE -->
 
     <div
         class="message"
@@ -1458,9 +1368,7 @@ footer {
     </div>
 
 
-    <!-- =================================================
-         ERROR
-    ================================================== -->
+    <!-- ERROR -->
 
     <div
         class="error"
@@ -1491,10 +1399,6 @@ footer {
 
 </div>
 
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
 
 <footer>
 
@@ -1691,7 +1595,7 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   NUMERIC STYLE VALUE
+   GET NUMERIC STYLE VALUE
 ========================================================= */
 
 function getNumericStyleValue(
@@ -1753,8 +1657,18 @@ function getNumericStyleValue(
 
 
 /* =========================================================
-   CALCULATE DESIGN HEIGHT
+   FIND REAL DESIGN HEIGHT
 ========================================================= */
+
+/*
+    This is another important fix.
+
+    A long Anatomy note should not be trapped
+    inside a short fixed canvas.
+
+    We look at all saved objects and calculate
+    how far down the design actually goes.
+*/
 
 function calculateDesignHeight(canvas) {
 
@@ -1769,7 +1683,7 @@ function calculateDesignHeight(canvas) {
 
 
     /*
-       Saved height.
+       First use any saved design height.
     */
 
     const savedHeight =
@@ -1779,43 +1693,42 @@ function calculateDesignHeight(canvas) {
 
 
     if (
-        Number.isFinite(savedHeight)
+        Number.isFinite(savedHeight) &&
+        savedHeight > requiredHeight
     ) {
 
         requiredHeight =
-            Math.max(
-                requiredHeight,
-                savedHeight
-            );
+            savedHeight;
 
     }
 
 
     /*
-       Scroll height.
+       Check the actual canvas content.
     */
 
+    const scrollHeight =
+        canvas.scrollHeight;
+
+
     if (
-        canvas.scrollHeight >
-        requiredHeight
+        Number.isFinite(scrollHeight) &&
+        scrollHeight > requiredHeight
     ) {
 
         requiredHeight =
-            canvas.scrollHeight;
+            scrollHeight;
 
     }
 
 
     /*
-       Look at positioned objects.
+       Check all positioned objects.
     */
 
     const objects =
         canvas.querySelectorAll(
-            ".design-object, " +
-            ".image-object, " +
-            ".text-object, " +
-            ".shape-object"
+            ".design-object, .image-object, .text-object, .shape-object"
         );
 
 
@@ -1857,6 +1770,11 @@ function calculateDesignHeight(canvas) {
     );
 
 
+    /*
+       Extra space at the bottom makes
+       long notes easier to read.
+    */
+
     return Math.max(
         requiredHeight,
         900
@@ -1866,7 +1784,7 @@ function calculateDesignHeight(canvas) {
 
 
 /* =========================================================
-   MAKE DESIGN RESPONSIVE
+   MAKE SAVED DESIGN RESPONSIVE
 ========================================================= */
 
 function makeDesignResponsive() {
@@ -1888,7 +1806,8 @@ function makeDesignResponsive() {
         function(canvas) {
 
             /*
-                Already responsive?
+                If already wrapped, don't wrap
+                it again.
             */
 
             if (
@@ -1903,6 +1822,10 @@ function makeDesignResponsive() {
             }
 
 
+            /*
+                Original design width.
+            */
+
             const originalWidth =
                 parseFloat(
                     canvas.dataset.designWidth
@@ -1913,6 +1836,13 @@ function makeDesignResponsive() {
                 1000;
 
 
+            /*
+                IMPORTANT:
+                Calculate the actual required
+                height instead of blindly using
+                a short fixed height.
+            */
+
             const originalHeight =
                 calculateDesignHeight(
                     canvas
@@ -1920,7 +1850,7 @@ function makeDesignResponsive() {
 
 
             /*
-                Viewport
+                Create viewport.
             */
 
             const viewport =
@@ -1933,7 +1863,7 @@ function makeDesignResponsive() {
 
 
             /*
-                Scaler
+                Create scaler.
             */
 
             const scaler =
@@ -1946,7 +1876,7 @@ function makeDesignResponsive() {
 
 
             /*
-                Insert wrapper
+                Insert viewport.
             */
 
             canvas.parentNode.insertBefore(
@@ -1966,7 +1896,8 @@ function makeDesignResponsive() {
 
 
             /*
-                Original dimensions
+                Keep the original design
+                coordinate system.
             */
 
             scaler.style.width =
@@ -1990,7 +1921,7 @@ function makeDesignResponsive() {
 
 
             /*
-                Responsive scaling
+                Resize function.
             */
 
             function resizeDesign() {
@@ -2001,6 +1932,11 @@ function makeDesignResponsive() {
                         1
                     );
 
+
+                /*
+                    Never enlarge the design
+                    beyond its original size.
+                */
 
                 const scale =
                     Math.min(
@@ -2020,6 +1956,26 @@ function makeDesignResponsive() {
                     "top left";
 
 
+                /*
+                    Keep scaler's real dimensions.
+                */
+
+                scaler.style.width =
+                    originalWidth + "px";
+
+
+                scaler.style.height =
+                    originalHeight + "px";
+
+
+                /*
+                    This is very important.
+
+                    The viewport gets the scaled
+                    height, so the content below
+                    the design appears normally.
+                */
+
                 viewport.style.height =
                     (
                         originalHeight *
@@ -2029,11 +1985,15 @@ function makeDesignResponsive() {
             }
 
 
+            /*
+                Initial resize.
+            */
+
             resizeDesign();
 
 
             /*
-                Observe changes.
+                Watch width changes.
             */
 
             if (
@@ -2093,11 +2053,11 @@ async function loadNote() {
     try {
 
         /*
-            Load the complete note record.
+            Get all Anatomy & Physiology
+            notes.
 
-            No limit.
-            No range.
-            No truncation.
+            We do NOT limit the content of
+            the note here.
         */
 
         const {
@@ -2276,7 +2236,14 @@ function showNote() {
 
 
     /*
-        Display the complete saved HTML.
+        IMPORTANT:
+
+        Put the COMPLETE HTML from Supabase
+        into the page.
+
+        Nothing is shortened.
+        Nothing is sliced.
+        Nothing is truncated.
     */
 
     noteContent.innerHTML =
@@ -2287,11 +2254,15 @@ function showNote() {
 
 
     /*
-        Make Canva designs responsive.
+        Fix any saved Canva-style designs.
     */
 
     makeDesignResponsive();
 
+
+    /*
+        Show note.
+    */
 
     noteSection.style.display =
         "block";
@@ -2306,9 +2277,8 @@ function showNote() {
 
 
     /*
-        Give the browser time to render
-        all content before recalculating
-        the design.
+        Force the browser to recalculate
+        the complete height after rendering.
     */
 
     requestAnimationFrame(
@@ -2316,6 +2286,11 @@ function showNote() {
 
             requestAnimationFrame(
                 function() {
+
+                    /*
+                        Re-run responsive
+                        design calculation.
+                    */
 
                     const canvases =
                         noteContent.querySelectorAll(
@@ -2325,6 +2300,12 @@ function showNote() {
 
                     canvases.forEach(
                         function(canvas) {
+
+                            /*
+                                If the design is already
+                                inside a viewport, update
+                                its height.
+                            */
 
                             const viewport =
                                 canvas.closest(
@@ -2398,7 +2379,7 @@ function showNote() {
 
 
     /*
-        Scroll to note.
+        Scroll to the beginning of the note.
     */
 
     noteSection.scrollIntoView({
